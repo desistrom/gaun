@@ -74,22 +74,22 @@
                 <div class="line"></div>
             <div class="col-md-12 search-img">
                 <div>
-                    <input type="search" class="input-search" name="search" id="search-video">
+                    <input type="search" class="input-search" name="search" id="search">
                     <button class="btn btn-primary btn-search" type="button">Cari </button>
                 </div>
             </div>
             <div class="replace-content">
         <?php foreach ($foto as $key => $value) :  ?>
         <div class="col-lg-4 col-md-4 col-xs-6 filter-img">
-            <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="<?php echo $value['judul']; ?>" data-caption="<?php echo $value['deskripsi']; ?>" data-image="<?=base_url();?>assets/media/<?php echo $value['file_name'] ?>" data-target="#image-gallery" data-date="<?php echo $value['tgl_upload']; ?> " style="padding: 0;">
+            <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="<?php echo $value['title']; ?>" data-caption="<?php echo $value['keterangan']; ?>" data-image="<?=base_url();?>assets/media/<?php echo $value['file'] ?>" data-target="#image-gallery" data-date="<?php echo $value['modify_date']; ?> " style="padding: 0;">
                 <div class="box">
-                    <h3 class="text-title" style="width: 100%;text-align: center;}"><?php echo $value['judul']; ?></h3>
+                    <h3 class="text-title" style="width: 100%;text-align: center;}"><?php echo $value['title']; ?></h3>
                     <div class="sub-box">
                         <div class="filter-image">
                             
                             <i class="glyphicon glyphicon-zoom-in"></i>
                         </div>
-                        <img src="<?=base_url();?>assets/media/<?php echo $value['file_name'] ?>" class="image-gallery" id="myImg">
+                        <img src="<?=base_url();?>assets/media/<?php echo $value['file'] ?>" class="image-gallery" id="myImg">
                     </div>
                 </div>
             </a>
@@ -132,7 +132,7 @@
 <script type="text/javascript">
     $(document).ready(function(){
         $('body').on('click','.btn-search',function(){
-            var data = $('#search-video').val();
+            var data = $('#search').val();
             if (data != '') {
                 // window.location.href = '<?=base_url();?>web/galery/search_foto?data='+data;
                 $.ajax({

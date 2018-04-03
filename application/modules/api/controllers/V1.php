@@ -66,7 +66,7 @@ class V1 extends REST_Controller {
 
     function _galery(){
     	$galery = $this->v1_model->getAllGalery();
-		
+		$retData['code'] = '200';
 		$retData['status'] = 'success';
 		$retData['data'] = $galery;
 		$this->response($retData,200);
@@ -77,13 +77,13 @@ class V1 extends REST_Controller {
     	$galery = $this->v1_model->getTypeGalery($type);
 		
 		if ($galery == '') {
-            $retData['status'] = 'Failed';
-			$retData['data'] = 'data not found';
             $retData['code'] = '500';
+            $retData['status'] = 'Failed';
+            $retData['data'] = 'data not found';
 		}else{
-            $retData['status'] = 'success';
-			$retData['data'] = $galery;
             $retData['code'] = '200';
+            $retData['status'] = 'success';
+            $retData['data'] = $galery;
 		}
 		$this->response($retData,200);
     }
@@ -93,13 +93,13 @@ class V1 extends REST_Controller {
     	$galery = $this->v1_model->getTypeGalery($type);
 		
 		if ($galery == '') {
-            $retData['status'] = 'Failed';
-			$retData['data'] = 'data not found';
             $retData['code'] = '500';
+            $retData['status'] = 'Failed';
+            $retData['data'] = 'data not found';
 		}else{
-            $retData['status'] = 'success';
-			$retData['data'] = $galery;
             $retData['code'] = '200';
+            $retData['status'] = 'success';
+            $retData['data'] = $galery;
 		}
 		$this->response($retData,200);
     }
@@ -109,13 +109,13 @@ class V1 extends REST_Controller {
     	$galery = $this->v1_model->selectGalery($param);
 		
 		if ($galery == '') {
-            $retData['status'] = 'Failed';
-			$retData['data'] = 'data not found';
             $retData['code'] = '500';
+            $retData['status'] = 'Failed';
+            $retData['data'] = 'data not found';
 		}else{
-            $retData['status'] = 'success';
-			$retData['data'] = $galery;
             $retData['code'] = '200';
+            $retData['status'] = 'success';
+            $retData['data'] = $galery;
 		}
 		$this->response($retData,200);
     }
@@ -125,13 +125,13 @@ class V1 extends REST_Controller {
     	$galery = $this->v1_model->searchGaleryImage($param);
 		
 		if ($galery == '') {
-            $retData['status'] = 'Failed';
-			$retData['data'] = 'data not found';
             $retData['code'] = '500';
+            $retData['status'] = 'Failed';
+            $retData['data'] = 'data not found';
 		}else{
-            $retData['status'] = 'success';
-			$retData['data'] = $galery;
             $retData['code'] = '200';
+            $retData['status'] = 'success';
+            $retData['data'] = $galery;
 		}
 		$this->response($retData,200);
     }
@@ -141,13 +141,13 @@ class V1 extends REST_Controller {
     	$galery = $this->v1_model->searchGaleryVideo($param);
 		
         if ($galery == '') {
-            $retData['status'] = 'Failed';
-			$retData['data'] = 'data not found';
             $retData['code'] = '500';
+            $retData['status'] = 'Failed';
+            $retData['data'] = 'data not found';
 		}else{
-            $retData['status'] = 'success';
-			$retData['data'] = $galery;
             $retData['code'] = '200';
+            $retData['status'] = 'success';
+            $retData['data'] = $galery;
 		}
 		$this->response($retData,200);
     }
@@ -156,8 +156,8 @@ class V1 extends REST_Controller {
 
     function _about(){
         $about = $this->v1_model->about();
-        $retData['status'] = 'success';
         $retData['code'] = '200';
+        $retData['status'] = 'success';
         $retData['data'] = $about;
         $this->response($retData,200);
     }

@@ -8,7 +8,7 @@
 			  <thead>
 			  	<th>No</th>
 			  	<th>judul</th>
-			  	<th>Deskribsi</th>
+			  	<th>Deskripsi</th>
 			  	<th>Aksi</th>
 			  </thead>
 			  <tbody>

@@ -38,28 +38,33 @@ class Galery extends CI_Controller  {
     }
 
       function search_foto() {
-    	$url= "http://localhost/idren/api/v1/search_galery_image";
+    	$url= "http://192.168.88.138/idren/api/v1/search_galery_image";
     	$search['search'] = $_GET['data'];
     	$methode = 'POST';
     	$app_data = json_decode($this->api($url,$methode,json_encode($search)),true);
         $html = '';
-        foreach ($app_data['data'] as $key => $value) :
+        if ($app_data['data']!="") {
+            foreach ($app_data['data'] as $key => $value) :
             $html .= '<div class="col-lg-4 col-md-4 col-xs-6 filter-img">
             <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="';
-            $html .= $value['judul'];
-            $html .='" data-caption="'. $value['deskripsi'] .'" data-image="'.base_url().'assets/media/'. $value['file_name'] .'" data-target="#image-gallery" data-date="'. $value['tgl_upload'] .'" style="padding: 0;">
+            $html .= $value['title'];
+            $html .='" data-caption="'. $value['keterangan'] .'" data-image="'.base_url().'assets/media/'. $value['file'] .'" data-target="#image-gallery" data-date="'. $value['modify_date'] .'" style="padding: 0;">
                 <div class="box">
-                 <h3 class="text-title" style="width: 100%;text-align: center;}">'. $value['judul'].'</h3>
+                 <h3 class="text-title" style="width: 100%;text-align: center;}">'. $value['title'].'</h3>
                     <div class="sub-box">
                         <div class="filter-image">
                             <i class="glyphicon glyphicon-zoom-in"></i>
                         </div>
-                        <img src="'.base_url().'assets/media/'. $value['file_name'] .'" class="image-gallery" id="myImg">
+                        <img src="'.base_url().'assets/media/'. $value['file'] .'" class="image-gallery" id="myImg">
                     </div>
                 </div>
             </a>
         </div>';
         endforeach;
+        }else{
+            $html.='data not found';
+        }
+        
         echo json_encode($html);
 
     }
@@ -73,14 +78,14 @@ class Galery extends CI_Controller  {
         foreach ($app_data['data'] as $key => $value) :
             $html .= '<div class="col-lg-4 col-md-4 col-xs-6 filter-img">
             <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="';
-            $html .= $value['judul'];
-            $html .='" data-caption="'. $value['deskripsi'] .'" data-image="'.base_url().'assets/media/'. $value['file_name'] .'" data-target="#image-gallery" data-date="'. $value['tgl_upload'] .'" style="padding: 0;">
+            $html .= $value['title'];
+            $html .='" data-caption="'. $value['keterangan'] .'" data-image="'.base_url().'assets/media/'. $value['file'] .'" data-target="#image-gallery" data-date="'. $value['modify_date'] .'" style="padding: 0;">
                 <div class="box">
                     <div class="sub-box">
                         <div class="filter-image">
                             <i class="glyphicon glyphicon-zoom-in"></i>
                         </div>
-                        <iframe class="video-up"  src="'. $value['file_name'] .'" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                        <iframe class="video-up"  src="'. $value['file'] .'" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                     </div>
                 </div>
             </a>

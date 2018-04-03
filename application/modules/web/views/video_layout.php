@@ -71,13 +71,13 @@
        <div class="replace-content">
             <?php foreach ($video as $key => $value) :  ?>
         <div class="col-lg-4 col-md-4 col-xs-6 filter-img">
-            <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="<?php echo $value['judul']; ?>" data-caption="<?php echo $value['deskripsi']; ?>" data-image="<?=base_url();?>assets/media/<?php echo $value['file_name'] ?>" data-target="#image-gallery" data-date="<?php echo $value['tgl_upload']; ?> " style="padding: 0;">
+            <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="<?php echo $value['title']; ?>" data-caption="<?php echo $value['keterangan']; ?>" data-image="<?=base_url();?>assets/media/<?php echo $value['title'] ?>" data-target="#image-gallery" data-date="<?php echo $value['modify_date']; ?> " style="padding: 0;">
                 <div class="box">
                     <div class="sub-box">
                         <div class="filter-image">
                             <i class="glyphicon glyphicon-zoom-in"></i>
                         </div>
-                        <iframe class="video-up"  src="<?php echo $value['file_name'] ?>" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                        <iframe class="video-up"  src="<?php echo $value['file'] ?>" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                         
                     </div>
                 </div>

@@ -48,7 +48,7 @@ class Galery extends CI_Controller  {
             $html .= '<div class="col-lg-4 col-md-4 col-xs-6 filter-img">
             <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="';
             $html .= $value['title'];
-            $html .='" data-caption="'. $value['keterangan'] .'" data-image="'.base_url().'assets/media/'. $value['file'] .'" data-target="#image-gallery" data-date="'. $value['modify_date'] .'" style="padding: 0;">
+            $html .='" data-caption="'. $value['keterangan'] .'" data-image="'.base_url().'assets/media/'. $value['file'] .'" data-target="#image-gallery" data-date="'. $value['modify_date'] .'" data-user="by : '. $value['nama_user'] .'  style="padding: 0;">
                 <div class="box">
                  <h3 class="text-title" style="width: 100%;text-align: center;}">'. $value['title'].'</h3>
                     <div class="sub-box">
@@ -79,8 +79,9 @@ class Galery extends CI_Controller  {
             $html .= '<div class="col-lg-4 col-md-4 col-xs-6 filter-img">
             <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="';
             $html .= $value['title'];
-            $html .='" data-caption="'. $value['keterangan'] .'" data-image="'.base_url().'assets/media/'. $value['file'] .'" data-target="#image-gallery" data-date="'. $value['modify_date'] .'" style="padding: 0;">
+            $html .='" data-caption="'. $value['keterangan'] .'" data-image="'.base_url().'assets/media/'. $value['file'] .'" data-target="#image-gallery" data-date="'. $value['modify_date'] .'" data-user="by : '. $value['nama_user'] .'  style="padding: 0;">
                 <div class="box">
+                <h3 class="text-title" style="width: 100%;text-align: left;}">'. $value['title'] .'</h3>
                     <div class="sub-box">
                         <div class="filter-image">
                             <i class="glyphicon glyphicon-zoom-in"></i>

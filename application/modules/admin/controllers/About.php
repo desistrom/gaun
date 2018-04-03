@@ -10,7 +10,7 @@
 class About extends MX_Controller  {
 	var $data = array();
 	function __construct(){
-
+		$this->load->module('login');
 	}
 
 	public function index(){
@@ -31,6 +31,14 @@ class About extends MX_Controller  {
 			echo json_encode($ret);
 			exit();
 		}
+		$this->load->library('ckeditor');
+		$this->ckeditor->basePath = base_url().'assets/ckeditor/';
+		$this->ckeditor->config['toolbar'] = array(
+		                array( 'Source', '-', 'Bold', 'Italic', 'Underline', '-','Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo','-','NumberedList','BulletedList' )
+		                                                    );
+		$this->ckeditor->config['language'] = 'it';
+		$this->ckeditor->config['width'] = '1024px';
+		$this->ckeditor->config['height'] = '300px';  
 		$this->data['about'] = $this->db->get('tb_about')->row_array();
 		$this->ciparser->new_parse('template_admin','modules_admin', 'about/about_layout',$this->data);
 	}

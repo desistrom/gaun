@@ -59,8 +59,8 @@ class Login extends MX_Controller
         // $this->set_response($output, REST_Controller::HTTP_OK);
         return $output['token'];
     }
-    public function token_post(){
-        $headers = $this->input->request_headers();
+    public function token_check(){
+        $headers = $this->session->userdata('token');
         if (array_key_exists('Authorization', $headers) && !empty($headers['Authorization'])) {
             //TODO: Change 'token_timeout' in application\config\jwt.php
             $decodedToken = AUTHORIZATION::validateTimestamp($headers['Authorization']);

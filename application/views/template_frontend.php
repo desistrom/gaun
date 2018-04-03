@@ -194,7 +194,7 @@ h5.text-date{
 
                     </ul>
                   </li>
-                <li role="presentation" class=""><a href="practice-areas.html">News</a></li>\
+                <li role="presentation" class=""><a href="practice-areas.html">News</a></li>
 
                 <li role="presentation" class="active"><a href="practice-areas.html">Keanggotaan</a></li>
 

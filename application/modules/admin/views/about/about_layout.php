@@ -13,7 +13,9 @@
       <!-- textarea -->
       <div class="form-group">
         <label>About</label>
-        <textarea class="form-control" name="content" id="content" placeholder="Enter About Content . .. " ><?php if(isset($about)){ echo $about['content']; } ?></textarea>
+        <?php echo $this->ckeditor->editor("content", $about['content'] ); ?>
+        <!-- <textarea class="form-control" name="content" id="content" placeholder="Enter About Content . .. " ><?php if(isset($about)){ echo $about['content']; } ?></textarea> -->
+        <input type="hidden" name="content" value="<?php if(isset($about)){ echo $about['content']; } ?>" id="content">
         <div class="error" id="ntf_content"></div>
       </div>
       <input type="hidden" name="id" value="<?php if(isset($about)){ echo $about['id_about']; } ?>">
@@ -25,9 +27,13 @@
   <!-- /.box-body -->
 </div>
 <script src="<?=base_url().'assets/js/jquery-3.2.1.min.js';?>"></script>
+<script type="text/javascript" src="<?=base_url();?>assets/ckeditor/ckeditor.js"></script>
 <script type="text/javascript">
   $(document).ready(function () {
     $('body').on('click','#submit', function(){
+      // console.log($('form').val());
+      $('#content').val(CKEDITOR.instances.content.getData());
+      // return false;
       $.ajax({
           url : window.location.href,
           dataType : 'json',

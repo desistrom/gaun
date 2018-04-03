@@ -40,6 +40,7 @@ jQuery(document).ready(function($){
             $('#image-gallery-title').text($sel.data('title'));
             $('#image-gallery-image').attr('src', $sel.data('image'));
             $('#image-gallery-date').text( $sel.data('date'));
+            $('#image-gallery-user').text( $sel.data('user'));
             disableButtons(counter, $sel.data('image-id'));
         }
 

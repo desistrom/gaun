@@ -21,52 +21,12 @@
     div.box:active .text-title,
     div.box:focus .text-title
     {
-        padding-bottom: 50%;
+        margin-bottom: 50%;
         color: white;
 
     }
 </style>
-<!--     <div class="container content-foto">
-        <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12 text-center">
-                <h2>Gallery Foto</h2></div>
-            <div class="col-md-12 search-img">
-                <div>
-                    <input type="search" class="input-search" name="search" id="search">
-                    <button class="btn btn-primary btn-search" type="button">Cari </button>
-                </div>
-            </div>
 
-            <?php foreach ($foto as $key => $value) :  ?>
-            <div class="col-md-4 col-sm-4 col-xs-4 filter-img">
-                <div class="box">
-                    <div class="sub-box">
-                        <div class="filter-image"></div><img src="<?=base_url();?>assets/media/<?php echo $value['file_name'] ?>" class="image-gallery"></div>
-                </div>
-                <div class="col col-md-12 col-sm-12 col-xs-12">
-                    <div class="col col-md-6 col-sm-6 col-xs-6 none-padding">
-                        <h5 class="date-upload"><?php echo $value['tgl_upload']; ?></h5></div>
-                    <div class="col col-md-6 col-sm-6 col-xs-6 none-padding">
-                        <h5 class="author text-right">by : <?php echo $value['name']; ?></h5></div>
-                    <div class="col col-md-12 col-sm-12 col-xs-12 none-padding">
-                        <p><?php echo $value['deskripsi']; ?></p>
-                    </div>
-                </div>
-            </div>
-        <?php endforeach ?>
-        </div>
-    </div>
-    <script src="<?=base_url().'assets/js/jquery-3.2.1.min.js';?>"></script>
-<script type="text/javascript">
-    $(document).ready(function(){
-        $('body').on('click','.btn-search',function(){
-            var data = $('#search').val();
-            if (data != '') {
-                window.location.href = '<?=base_url();?>web/galery/search_foto?data='+data;
-            }
-        });
-    });
-</script> -->
     <div class="container content-foto">
         <div class="row">
            <div class="col-md-12 col-sm-12 col-xs-12 text-center">
@@ -81,7 +41,7 @@
             <div class="replace-content">
         <?php foreach ($foto as $key => $value) :  ?>
         <div class="col-lg-4 col-md-4 col-xs-6 filter-img">
-            <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="<?php echo $value['title']; ?>" data-caption="<?php echo $value['keterangan']; ?>" data-image="<?=base_url();?>assets/media/<?php echo $value['file'] ?>" data-target="#image-gallery" data-date="<?php echo $value['modify_date']; ?> " style="padding: 0;">
+            <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="<?php echo $value['title']; ?>" data-caption="<?php echo $value['keterangan']; ?>" data-image="<?=base_url();?>assets/media/<?php echo $value['title'] ?>" data-target="#image-gallery" data-date="<?php echo $value['modify_date']; ?> " data-user="by : <?php echo $value['nama_user']; ?>" style="padding: 0;">
                 <div class="box">
                     <h3 class="text-title" style="width: 100%;text-align: center;}"><?php echo $value['title']; ?></h3>
                     <div class="sub-box">
@@ -104,7 +64,7 @@
         </div>
     </div>
 
-<div class="modal fade" id="image-gallery" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="image-gallery" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
     <div class="modal-dialog">
         <div class="modal-content">
             <button class="close" type="button" data-dismiss="modal" style="">×</button>
@@ -120,13 +80,14 @@
 
                     <p id="image-gallery-caption"></p>
                 </div>
+                <p id="image-gallery-user" style="text-align: right;"></p>
             </div>
           </div>
         </div>
     </div>
 </div>
     <script src="<?=base_url().'assets/js/jquery-v1.11.3.min.js';?>"></script>
-
+    <script src="<?=base_url();?>assets/js/modal-custom.js"></script>
 <!--  <script src="<?=base_url().'assets/js/modal-custom.js' ;?>"></script> -->
 
 <script type="text/javascript">

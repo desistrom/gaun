@@ -1,0 +1,83 @@
+.logo{
+  width:150px;
+}
+
+.navbar-brand{
+  padding:0;
+}
+
+.navbar{
+  padding:15px 0 15px 15px;
+}
+
+.search-img{
+  text-align:right;
+}
+
+input.input-search{
+  height:35px;
+  width:300px;
+}
+
+.btn-search{
+  height:35px;
+  border-radius:0;
+  margin-top:-2px;
+}
+
+div.box{
+  position:relative;
+  width:100%;
+  height:240px;
+  overflow:hidden;
+}
+
+div.box{
+  position:relative;
+  width:100%;
+  height:240px;
+  overflow:hidden;
+  cursor:pointer;
+}
+
+.filter-img{
+  padding:15px;
+}
+
+div.sub-box{
+  top:0;
+  position:absolute;
+  left:0;
+}
+
+img.image-gallery{
+  -webkit-transition:0.4s ease;
+  transition:0.4s ease;
+  width:380px;
+}
+
+div.box:hover img.image-gallery{
+  -webkit-transform:scale(2);
+  transform:scale(2);
+}
+
+div.box:hover .sub-box{
+  z-index:1000;
+}
+
+.date-upload{
+  font-weight:bold;
+}
+
+.none-padding{
+  padding:0;
+}
+
+.author{
+}
+
+h5.text-date{
+  color:black;
+  transition:0.5s;
+}
+

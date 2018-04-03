@@ -11,9 +11,13 @@ class About extends MX_Controller  {
 	var $data = array();
 	function __construct(){
 		$this->load->module('login');
+		if ($this->login->token_check() == 0) {
+			// redirect('login');
+		}
 	}
 
 	public function index(){
+		// print_r($this->session->userdata('token'));
 		if ($this->input->server('REQUEST_METHOD') == 'POST') {
 			$ret['state'] = 0;
 			$ret['status'] = 0;

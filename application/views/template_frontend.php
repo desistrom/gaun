@@ -177,31 +177,33 @@ h5.text-date{
 
 <body>
     <nav class="navbar navbar-fixed-top" id="main-navigation">
-    <div class="container-fluid">
-        <div class="navbar-header"><a href="index.html" class="navbar-brand navbar-link"><img class="logo" src="<?=base_url();?>assets/images/logo/IDREN-2.png" /> </a>
-            <button data-toggle="collapse" data-target="#navcol-1" class="navbar-toggle collapsed"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
-        </div>
-        <div class="collapse navbar-collapse" id="navcol-1">
-            <ul class="nav navbar-nav hidden-xs hidden-sm navbar-left">
-                <li role="presentation" class="active"><a href="#" data-change="boxed" data-toggle="tooltip" data-placement="bottom" title="Toggle boxed version"><i class="fa fa-arrows-alt"></i></a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li role="presentation" class="active"><a href="<?php echo site_url('web/home') ?>">Home</a></li>
-                <li class="dropdown"><a data-toggle="dropdown" aria-expanded="false" href="#" class="dropdown-toggle">Galery <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="<?php echo site_url('web/galery') ?>">foto</a></li>
-                        <li><a href="<?php echo site_url('web/galery/video') ?>">Video</a></li>
+      <div class="container">
+            <div class="container-fluid">
+              <div class="navbar-header"><a href="index.html" class="navbar-brand navbar-link"><img class="logo" src="<?=base_url();?>assets/images/logo/IDREN-2.png" /> </a>
+                  <button data-toggle="collapse" data-target="#navcol-1" class="navbar-toggle collapsed"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+              </div>
+              <div class="collapse navbar-collapse" id="navcol-1">
+                  <ul class="nav navbar-nav hidden-xs hidden-sm navbar-left">
+                      <li role="presentation" class="active"><a href="#" data-change="boxed" data-toggle="tooltip" data-placement="bottom" title="Toggle boxed version"><i class="fa fa-arrows-alt"></i></a></li>
+                  </ul>
+                  <ul class="nav navbar-nav navbar-right">
+                      <li role="presentation" class="active"><a href="<?php echo site_url('web/home') ?>">Home</a></li>
+                      <li class="dropdown"><a data-toggle="dropdown" aria-expanded="false" href="#" class="dropdown-toggle">Galery <span class="caret"></span></a>
+                          <ul class="dropdown-menu" role="menu">
+                              <li><a href="<?php echo site_url('web/galery') ?>">foto</a></li>
+                              <li><a href="<?php echo site_url('web/galery/video') ?>">Video</a></li>
 
-                    </ul>
-                  </li>
-                <li role="presentation" class=""><a href="practice-areas.html">News</a></li>
+                          </ul>
+                        </li>
+                      <li role="presentation" class=""><a href="#">News</a></li>
 
-                <li role="presentation" class="active"><a href="practice-areas.html">Keanggotaan</a></li>
+                      <li role="presentation" class="active"><a href="#">Keanggotaan</a></li>
 
-            </ul>
-        </div>
-    </div>
-</nav>
+                  </ul>
+              </div>
+          </div>
+      </div>
+  </nav>
 
           <ci:doc type="modules"/>
 

@@ -39,22 +39,28 @@
                 </div>
             </div>
        <div class="replace-content">
-            <?php foreach ($video as $key => $value) :  ?>
-        <div class="col-lg-4 col-md-4 col-xs-6 filter-img">
-            <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="<?php echo $value['title']; ?>" data-caption="<?php echo $value['keterangan']; ?>" data-image="<?=base_url();?>assets/media/<?php echo $value['title'] ?>" data-target="#image-gallery" data-date="<?php echo $value['modify_date']; ?> " data-user="by : <?php echo $value['nama_user']; ?>"  style="padding: 0;">
-                <div class="box">
-                    <h3 class="text-title" style="width: 100%;text-align: left;}"><?php echo $value['title']; ?></h3>
-                    <div class="sub-box">
-                        <div class="filter-image">
-                            <i class="glyphicon glyphicon-zoom-in"></i>
+
+            <?php 
+                if (is_array($video)) {
+
+ 
+            foreach ($video as $key => $value) :  ?>
+                <div class="col-lg-4 col-md-4 col-xs-6 filter-img">
+                    <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="<?php echo $value['title']; ?>" data-caption="<?php echo $value['keterangan']; ?>" data-image="<?=base_url();?>assets/media/<?php echo $value['title'] ?>" data-target="#image-gallery" data-date="<?php echo $value['modify_date']; ?> " data-user="by : <?php echo $value['nama_user']; ?>"  style="padding: 0;">
+                        <div class="box">
+                            <h3 class="text-title" style="width: 100%;text-align: left;}"><?php echo $value['title']; ?></h3>
+                            <div class="sub-box">
+                                <div class="filter-image">
+                                    <i class="glyphicon glyphicon-zoom-in"></i>
+                                </div>
+                                <iframe class="video-up"  src="<?php echo $value['file'] ?>" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                
+                            </div>
                         </div>
-                        <iframe class="video-up"  src="<?php echo $value['file'] ?>" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                        
-                    </div>
+                    </a>
                 </div>
-            </a>
-        </div>
-                <?php endforeach ?>
+            <?php endforeach; 
+        }?>
        </div>
 
 

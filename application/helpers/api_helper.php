@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
 if (!function_exists('api_helper')) {
-	function api_helper($data,$url,$methode)
+	function api_helper($data,$url,$methode,$token)
 	{
 		$curl = curl_init();
 		curl_setopt_array($curl, array(
@@ -17,7 +17,7 @@ if (!function_exists('api_helper')) {
 		  CURLOPT_CUSTOMREQUEST => $methode,
 		  CURLOPT_POSTFIELDS => $data,
 		  CURLOPT_HTTPHEADER => array(
-		    "authorization: Basic U0ItTWlkLXNlcnZlci04ZHR3SHZCRWdaM1NrU2xQdnVWa2dReUk=",
+		    "authorization:".$token,
 		    "cache-control: no-cache",
 		    "accept: application/json",
 		    "content-type: application/json",

@@ -39,22 +39,29 @@
                 </div>
             </div>
             <div class="replace-content">
-        <?php foreach ($foto as $key => $value) :  ?>
-        <div class="col-lg-4 col-md-4 col-xs-6 filter-img">
-            <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="<?php echo $value['title']; ?>" data-caption="<?php echo $value['keterangan']; ?>" data-image="<?=base_url();?>assets/media/<?php echo $value['title'] ?>" data-target="#image-gallery" data-date="<?php echo $value['modify_date']; ?> " data-user="by : <?php echo $value['nama_user']; ?>" style="padding: 0;">
-                <div class="box">
-                    <h3 class="text-title" style="width: 100%;text-align: center;}"><?php echo $value['title']; ?></h3>
-                    <div class="sub-box">
-                        <div class="filter-image">
-                            
-                            <i class="glyphicon glyphicon-zoom-in"></i>
+
+        <?php
+        if (is_array($foto)) {
+            foreach ($foto as $key => $value) :  ?>
+                <div class="col-lg-4 col-md-4 col-xs-6 filter-img">
+                    <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="<?php echo $value['title']; ?>" data-caption="<?php echo $value['keterangan']; ?>" data-image="<?=base_url();?>assets/media/<?php echo $value['title'] ?>" data-target="#image-gallery" data-date="<?php echo $value['modify_date']; ?> " data-user="by : <?php echo $value['nama_user']; ?>" style="padding: 0;">
+                        <div class="box">
+                            <h3 class="text-title" style="width: 100%;text-align: center;}"><?php echo $value['title']; ?></h3>
+                            <div class="sub-box">
+                                <div class="filter-image">
+                                    
+                                    <i class="glyphicon glyphicon-zoom-in"></i>
+                                </div>
+                                <img src="<?=base_url();?>assets/media/<?php echo $value['file'] ?>" class="image-gallery" id="myImg">
+                            </div>
                         </div>
-                        <img src="<?=base_url();?>assets/media/<?php echo $value['file'] ?>" class="image-gallery" id="myImg">
-                    </div>
+                    </a>
                 </div>
-            </a>
-        </div>
-                <?php endforeach ?>
+            <?php endforeach;
+        }else{
+            echo "Data Not Found";
+        }
+                 ?>
             </div>
 
 

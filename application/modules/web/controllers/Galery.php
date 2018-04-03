@@ -43,7 +43,8 @@ class Galery extends CI_Controller  {
     	$methode = 'POST';
     	$app_data = json_decode($this->api($url,$methode,json_encode($search)),true);
         $html = '';
-        if ($app_data['data']!="") {
+        if (is_array($app_data['data']) !="") {
+
             foreach ($app_data['data'] as $key => $value) :
             $html .= '<div class="col-lg-4 col-md-4 col-xs-6 filter-img">
             <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="';
@@ -62,7 +63,7 @@ class Galery extends CI_Controller  {
         </div>';
         endforeach;
         }else{
-            $html.='data not found';
+            $html.='<h3 style="margin-top:2em;">Data Not Found</h3>';
         }
         
         echo json_encode($html);
@@ -75,7 +76,11 @@ class Galery extends CI_Controller  {
         $app_data = json_decode($this->api($url,$methode,json_encode($search)),true);
         // print_r($app_data);
         $html = '';
-        foreach ($app_data['data'] as $key => $value) :
+
+
+        if (is_array($app_data['data']) !="") {
+
+            foreach ($app_data['data'] as $key => $value) :
             $html .= '<div class="col-lg-4 col-md-4 col-xs-6 filter-img">
             <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="';
             $html .= $value['title'];
@@ -92,6 +97,26 @@ class Galery extends CI_Controller  {
             </a>
         </div>';
         endforeach;
+        }else{
+            $html.='<h3 style="margin-top:2em;text-align:center;">Data Not Found</h3>';
+        }
+        // foreach ($app_data['data'] as $key => $value) :
+        //     $html .= '<div class="col-lg-4 col-md-4 col-xs-6 filter-img">
+        //     <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="';
+        //     $html .= $value['title'];
+        //     $html .='" data-caption="'. $value['keterangan'] .'" data-image="'.base_url().'assets/media/'. $value['file'] .'" data-target="#image-gallery" data-date="'. $value['modify_date'] .'" data-user="by : '. $value['nama_user'] .'  style="padding: 0;">
+        //         <div class="box">
+        //         <h3 class="text-title" style="width: 100%;text-align: left;}">'. $value['title'] .'</h3>
+        //             <div class="sub-box">
+        //                 <div class="filter-image">
+        //                     <i class="glyphicon glyphicon-zoom-in"></i>
+        //                 </div>
+        //                 <iframe class="video-up"  src="'. $value['file'] .'" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        //             </div>
+        //         </div>
+        //     </a>
+        // </div>';
+        // endforeach;
         echo json_encode($html);
 
     }

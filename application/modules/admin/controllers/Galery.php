@@ -16,13 +16,13 @@ class Galery extends MX_Controller  {
 	}
 
 	public function list_image(){
-		$this->data['galery'] = $this->galery_model->getTypeGalery(1);
+		$this->data['galery'] = $this->galery_model->getTypeGalery("image");
 		// print_r($this->data['galery']);
 		 $this->ciparser->new_parse('template_admin','modules_admin', 'galery/list_image_layout',$this->data);
 	}
 
 	public function list_video(){
-		$this->data['galery'] = $this->galery_model->getTypeGalery(2);
+		$this->data['galery'] = $this->galery_model->getTypeGalery("video");
 		// print_r($this->data['galery']);
 		 $this->ciparser->new_parse('template_admin','modules_admin', 'galery/list_video_layout',$this->data);
 	}

@@ -68,7 +68,8 @@
                     <button class="btn btn-primary btn-search" type="button">Cari </button>
                 </div>
             </div>
-        <?php foreach ($video as $key => $value) :  ?>
+       <div class="replace-content">
+            <?php foreach ($video as $key => $value) :  ?>
         <div class="col-lg-4 col-md-4 col-xs-6 filter-img">
             <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="<?php echo $value['judul']; ?>" data-caption="<?php echo $value['deskripsi']; ?>" data-image="<?=base_url();?>assets/media/<?php echo $value['file_name'] ?>" data-target="#image-gallery" data-date="<?php echo $value['tgl_upload']; ?> " style="padding: 0;">
                 <div class="box">
@@ -83,6 +84,7 @@
             </a>
         </div>
                 <?php endforeach ?>
+       </div>
 
 
                     
@@ -121,8 +123,35 @@
         $('body').on('click','.btn-search',function(){
             var data = $('#search').val();
             if (data != '') {
-                window.location.href = '<?=base_url();?>web/galery/search_video?data='+data;
+                // window.location.href = '<?=base_url();?>web/galery/search_video?data='+data;
+                $.ajax({
+                url : '<?=base_url();?>web/galery/search_video?data='+data,
+                type : 'POST',
+                dataType : 'json',
+                data :""
+            }).done(function(data){
+                console.log(data);
+                $('.replace-content').html(data);
+            });
+
             }
         });
     });
+    //  $(document).ready(function(){
+    //     $('body').on('click','.btn-search',function(){
+    //         var data = $('#search').val();
+    //         if (data != '') {
+    //             // window.location.href = '<?=base_url();?>web/galery/search_foto?data='+data;
+    //             $.ajax({
+    //             url : '<?=base_url();?>web/galery/search_foto?data='+data,
+    //             type : 'POST',
+    //             dataType : 'json',
+    //             data :""
+    //         }).done(function(data){
+    //             console.log(data);
+    //             $('.replace-content').html(data);
+    //         });
+    //         }
+    //     });
+    // });
 </script>

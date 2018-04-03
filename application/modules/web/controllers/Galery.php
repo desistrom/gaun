@@ -49,6 +49,7 @@ class Galery extends CI_Controller  {
             $html .= $value['judul'];
             $html .='" data-caption="'. $value['deskripsi'] .'" data-image="'.base_url().'assets/media/'. $value['file_name'] .'" data-target="#image-gallery" data-date="'. $value['tgl_upload'] .'" style="padding: 0;">
                 <div class="box">
+                 <h3 class="text-title" style="width: 100%;text-align: center;}">'. $value['judul'].'</h3>
                     <div class="sub-box">
                         <div class="filter-image">
                             <i class="glyphicon glyphicon-zoom-in"></i>
@@ -79,7 +80,7 @@ class Galery extends CI_Controller  {
                         <div class="filter-image">
                             <i class="glyphicon glyphicon-zoom-in"></i>
                         </div>
-                        <img src="'.base_url().'assets/media/'. $value['file_name'] .'" class="image-gallery" id="myImg">
+                        <iframe class="video-up"  src="'. $value['file_name'] .'" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                     </div>
                 </div>
             </a>

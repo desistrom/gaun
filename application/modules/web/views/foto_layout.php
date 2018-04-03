@@ -9,6 +9,22 @@
         background-color:#BD0E0E;
         display: inline-table; 
     }
+    .text-title{
+            position: absolute;
+    z-index: 10;
+    bottom: 0;
+    font-weight: bold;
+    color: #E91515;
+    transition: 0.8s;
+    }
+    div.box:hover .text-title,
+    div.box:active .text-title,
+    div.box:focus .text-title
+    {
+        padding-bottom: 50%;
+        color: white;
+
+    }
 </style>
 <!--     <div class="container content-foto">
         <div class="row">
@@ -58,7 +74,7 @@
                 <div class="line"></div>
             <div class="col-md-12 search-img">
                 <div>
-                    <input type="search" class="input-search" name="search" id="search">
+                    <input type="search" class="input-search" name="search" id="search-video">
                     <button class="btn btn-primary btn-search" type="button">Cari </button>
                 </div>
             </div>
@@ -67,8 +83,10 @@
         <div class="col-lg-4 col-md-4 col-xs-6 filter-img">
             <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="<?php echo $value['judul']; ?>" data-caption="<?php echo $value['deskripsi']; ?>" data-image="<?=base_url();?>assets/media/<?php echo $value['file_name'] ?>" data-target="#image-gallery" data-date="<?php echo $value['tgl_upload']; ?> " style="padding: 0;">
                 <div class="box">
+                    <h3 class="text-title" style="width: 100%;text-align: center;}"><?php echo $value['judul']; ?></h3>
                     <div class="sub-box">
                         <div class="filter-image">
+                            
                             <i class="glyphicon glyphicon-zoom-in"></i>
                         </div>
                         <img src="<?=base_url();?>assets/media/<?php echo $value['file_name'] ?>" class="image-gallery" id="myImg">
@@ -114,7 +132,7 @@
 <script type="text/javascript">
     $(document).ready(function(){
         $('body').on('click','.btn-search',function(){
-            var data = $('#search').val();
+            var data = $('#search-video').val();
             if (data != '') {
                 // window.location.href = '<?=base_url();?>web/galery/search_foto?data='+data;
                 $.ajax({

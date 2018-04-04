@@ -49,7 +49,7 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+              <!-- <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image"> -->
               <span class="hidden-xs">Alexander Pierce</span>
             </a>
           </li>
@@ -111,26 +111,16 @@
         </li>
         <li class=" treeview">
           <a href="#">
-            <i class="fa fa-users"></i> <span>Keanggotaan</span>
+            <i class="fa fa-users"></i>  <span>Keanggotaan</span>
             <span class="pull-right-container">
 
+              <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
-        </li>
-<!--         <li class="active treeview">
-          <a href="#">
-            <i class="fa fa-files-o"></i>
-            <span>Lay out Options</span>
-            <span class="pull-right-container">
-              <span class="label label-primary pull-right">4</span>
-            </span>
-          </a> -->
-<!--           <ul class="treeview-menu">
-            <li><a href="pages/layout/top-nav.html"><i class="fa fa-circle-o"></i> Top Navigation</a></li>
-            <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i> Boxed</a></li>
-            <li><a href="pages/layout/fixed.html"><i class="fa fa-circle-o"></i> Fixed</a></li>
-            <li><a href="pages/layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
-          </ul> -->
+          <ul class="treeview-menu">
+            <li class="active"><a href="<?=site_url('admin/keanggotaan/index');?>"><i class="fa fa-users"></i> List Anggota</a></li>
+            <li><a href="<?=site_url('admin/keanggotaan/setting');?>"><i class="fa fa-gear"></i>Setting</a></li>
+          </ul>
         </li>
         
       </ul>

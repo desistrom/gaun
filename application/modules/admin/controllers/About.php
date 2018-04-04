@@ -11,9 +11,9 @@ class About extends MX_Controller  {
 	var $data = array();
 	function __construct(){
 		$this->load->module('login');
-		if ($this->login->token_check() == 0) {
-			// redirect('login');
-		}
+		// if ($this->login->token_check() == 0) {
+		// 	// redirect('login');
+		// }
 	}
 
 	public function index(){

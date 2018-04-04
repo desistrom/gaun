@@ -7,6 +7,8 @@
     <title>Untitled</title>
     <link rel="stylesheet" href="<?=base_url();?>assets/css/bootstrap.min.css">
 <!--     <link rel="stylesheet" href="<?=base_url();?>assets/css/styles1.css"> -->
+    <link rel="stylesheet" href="<?=base_url();?>assets/css/owl.transitions.css">
+    <link rel="stylesheet" href="<?=base_url();?>assets/css/owl.carousel.css">
     <link rel="stylesheet" href="<?=base_url();?>assets/css/Navbar-with-mega-menu.css">
     <style type="text/css">
     .navbar{
@@ -197,7 +199,8 @@ h5.text-date{
                         </li>
                       <li role="presentation" class=""><a href="#">News</a></li>
 
-                      <li role="presentation" class="active"><a href="#">Keanggotaan</a></li>
+                      <li role="presentation" class="active"><a href="<?php echo site_url('web/keanggotaan') ?>">Keanggotaan</a></li>
+                      <li role="presentation" class="active"><a href="#" data-toggle="modal" data-target="#myModal">Register</a></li>
 
                   </ul>
               </div>
@@ -208,9 +211,118 @@ h5.text-date{
           <ci:doc type="modules"/>
 
 
-    <script src="<?=base_url();?>assets/js/jquery.min.js"></script>
-    <script src="<?=base_url();?>assets/js/bootstrap.min.js"></script>
-        <script src="<?=base_url();?>assets/js/modal-custom.js"></script>
+
+
+
+
+        <!-- Modal -->
+          <div class="modal fade modal-notif" id="myModal" role="dialog" data-keyboard="false" data-backdrop="static">
+            <div class="modal-dialog modal-md">
+              <div class="modal-content">
+                <!-- <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Modal Header</h4>
+                </div> -->
+                <div class="modal-body" style="height: auto;overflow: hidden;"">
+                  <h2 class="text-center" style="padding: 0 0 15px 0">Register</h2>
+                  <div class="">
+                    <form method="post" action="" id="form-register"> 
+                      <div class="form-group"> 
+                        <label for="exampleInputEmail1">Nama Institusi</label> 
+                        <!-- <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Nama Institusi">  -->
+                        <select class="form-control" name="name_institusi">
+                          <option>Kampus</option>
+                          <option>SMK</option>
+                        </select>
+                      </div> 
+                      <div class="form-group"> 
+                        <label for="">Alamat</label> 
+                        <input type="text" class="form-control" id="alamat" placeholder="Alamat" name="alamat"> 
+                      </div>
+                      <div class="form-group"> 
+                        <label for="">Email</label> 
+                        <input type="email" class="form-control" id="email" placeholder="Email" name="email"> 
+                      </div>
+                      <div class="form-group"> 
+                        <label for="">No Telp.</label> 
+                        <input type="text" class="form-control" id="no" placeholder="No Telephone" name="no_telp"> 
+                      </div>
+                      <div class="form-group"> 
+                        <div class="col col-md-6 col-sm-6 col-xs-12" style="padding-left: 0;">
+                          <label for="">Password</label> 
+                          <input type="password" class="form-control" id="pass" placeholder="Password" name="password">
+                        </div> 
+<!--                          <div class="col col-md-6 col-sm-6 col-xs-12" style="padding-right: 0;">
+                          <label for="">Confirm Password</label> 
+                          <input type="password" class="form-control" id="confirm_pass" placeholder="Password">
+                        </div> -->
+                      </div>  
+                        <div class="col col-md-12 col-sm-12 col-xs-12 text-right" style="padding-right: 0;">
+                          <button  class="btn btn-default " data-dismiss="modal" style="margin-top:15px;">Batal</button>
+                          <button type="submit" class="btn btn-register btn-primary" id="register" data-toggle="modal" data-dismiss="modal" style="margin-top:15px;">Register</button>
+                        </div> 
+                      </form>
+                  </div>
+
+                </div>
+                <!-- <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div> -->
+              </div>
+            </div>
+          </div>
+
+
+        <!-- Modal berhasil -->
+          <div class="modal fade modal-notif-berhasil" id="myModal-berhasil" role="dialog" >
+            <div class="modal-dialog modal-md">
+              <div class="modal-content">
+                <!-- <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Modal Header</h4>
+                </div> -->
+                <div class="modal-body" style="height: auto;overflow: hidden;"">
+                  <h2 class="text-center" style="padding: 0 0 15px 0">Register Berhasil</h2>
+                  </div>
+
+                </div>
+                <!-- <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div> -->
+              </div>
+            </div>
+          </div>
+  
+<script src="<?=base_url();?>assets/js/jquery.min.js"></script>
+<script src="<?=base_url();?>assets/js/owl.carousel.min.js"></script>
+<script src="<?=base_url();?>assets/js/main-owl.js"></script>
+<script src="<?=base_url();?>assets/js/bootstrap.min.js"></script>
+<script src="<?=base_url();?>assets/js/modal-custom.js"></script>
+<script type="text/javascript">
+
+    $(document).ready(function(){
+
+        $("#register").click(function(){
+        $("#myModal-berhasil").modal();
+        });
+        // $('body').on('click','.btn-register',function(){
+        //     var data = $('#form-register').serialize();
+            
+        //         // window.location.href = '<?=base_url();?>web/galery/search_foto?data='+data;
+        //         $.ajax({
+        //         url : '<?=base_url();?>web/keanggotaan/insert_user',
+        //         type : 'POST',
+        //         dataType : 'json',
+        //         data :data
+        //     }).done(function(data){
+        //         console.log(data);
+        //         $('.replace-content').html(data);
+        //     });
+           
+        // });
+    });
+</script>
+</script>
 
 </body>
 

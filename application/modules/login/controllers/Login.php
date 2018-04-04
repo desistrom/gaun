@@ -34,7 +34,7 @@ class Login extends MX_Controller
                     $this->session->set_userdata('is_login', true);
                     $data_token['username'] = $username;
                     $data_token['password'] = $password;
-                    $url = site_url('jwt/authtimeout/token');
+                    $url = site_url('api/v1/token');
                     $method = 'POST';
                     $token = "";
                     $result = api_helper(json_encode($data_token),$url,$method,$token);
@@ -58,28 +58,5 @@ class Login extends MX_Controller
     public function logout(){
     	$this->session->sess_destroy();
     	redirect(site_url('login'));
-    }
-    function token($id)
-    {
-        $tokenData = array();
-        $tokenData['id'] = $id;
-        $tokenData['timestamp'] = now();
-        $output['token'] = AUTHORIZATION::generateToken($tokenData);
-        // $this->set_response($output, REST_Controller::HTTP_OK);
-        return $output['token'];
-    }
-    public function token_check(){
-        $headers = $this->session->userdata('token');
-        // if (array_key_exists('Authorization', $headers) && !empty($headers['Authorization'])) {
-            //TODO: Change 'token_timeout' in application\config\jwt.php
-            $decodedToken = AUTHORIZATION::validateTimestamp($headers);
-            // return response if token is valid
-            if ($decodedToken != false) {
-                return 1;
-            }else{
-                return 0;
-            }
-        // }
-        // $this->set_response("Unauthorised", REST_Controller::HTTP_UNAUTHORIZED);
     }
 }

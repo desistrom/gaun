@@ -48,4 +48,48 @@ class V1_model extends CI_Model{
 	public function about(){
 		return $this->db->get('tb_about')->row_array();
 	}
+
+	public function user_setting(){
+		$sql = "SELECT profit as benefit, cara as step FROM tb_setting_user";
+		if ($this->db->query($sql)->num_rows() > 0) {
+			return $this->db->query($sql)->row_array();
+			exit();
+		}
+		return false;
+	}
+
+	public function getInstansi(){
+		$sql = "SELECT nm_instansi as instansi, id_instansi as id FROM tb_instansi";
+		if ($this->db->query($sql)->num_rows() > 0) {
+			return $this->db->query($sql)->result_array();
+			exit();
+		}
+		return false;
+	}
+
+	public function getUser(){
+		$sql = "SELECT name as user_nama, email as user_email, phone as user_phone FROM tb_user u join tb_instansi i on u.id_instansi_ref = id_instansi";
+		if ($this->db->query($sql)->num_rows() > 0) {
+			return $this->db->query($sql)->result_array();
+			exit();
+		}
+		return false;
+	}
+
+	public function insertUser($data){
+		if ($this->db->insert('tb_user',$data)) {
+			return true;
+			exit();
+		}
+		return false;
+	}
+
+	public function searchUser($data){
+		$sql = "SELECT u.name as user_nama, u.email as user_email, u.phone as user_phone, i.nm_instansi as instansi FROM tb_user u join tb_instansi i on u.id_instansi_ref = i.id_instansi WHERE u.name LIKE '%".$data."%' OR i.nm_instansi like '%".$data."%'";
+		if ($this->db->query($sql)->num_rows() > 0) {
+			return $this->db->query($sql)->result_array();
+			exit();
+		}
+		return false;
+	}
 }

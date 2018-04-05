@@ -164,6 +164,23 @@ class V1 extends REST_Controller {
         $this->_search_user($param);
     }
 
+    public function news_get(){
+        header('Content-Type: application/json');
+        $this->_getnews();
+    }
+
+    public function search_news_post(){
+        header('Content-Type: application/json');
+        $param = json_decode(file_get_contents('php://input'), true);
+        if(!isset($param['search']) || $param['search'] == ''){
+            $retData['code'] = '500';
+            $retData['status'] = 'failed';
+            $retData['error'] = 'Your parameter is invalid';
+            $this->response($retData,400);
+        }
+        $this->_search_news($param);
+    }
+
 
     function _galery(){
     	$galery = $this->v1_model->getAllGalery();
@@ -334,6 +351,30 @@ class V1 extends REST_Controller {
             $retData['code'] = '200';
             $retData['status'] = 'success';
             $retData['data'] = $user;
+        }
+        $this->response($retData,200);
+    }
+
+    function _getnews(){
+        $news = $this->v1_model->news();
+        $retData['code'] = '200';
+        $retData['status'] = 'success';
+        $retData['data'] = $news;
+        $this->response($retData,200);
+    }
+
+    function _search_news($data){
+        $param = $data['search'];
+        $news = $this->v1_model->searchNews($param);
+        
+        if ($news == '') {
+            $retData['code'] = '500';
+            $retData['status'] = 'Failed';
+            $retData['data'] = 'data not found';
+        }else{
+            $retData['code'] = '200';
+            $retData['status'] = 'success';
+            $retData['data'] = $news;
         }
         $this->response($retData,200);
     }

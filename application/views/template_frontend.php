@@ -59,14 +59,14 @@ input.input-search{
   margin-top:-2px;
 }
 
-div.box{
+.filter-img div.box{
   position:relative;
   width:100%;
   height:240px;
   overflow:hidden;
 }
 
-div.box{
+.filter-img div.box{
   position:relative;
   width:100%;
   height: auto;
@@ -80,7 +80,7 @@ div.box{
   padding:15px;
 }
 
-div.sub-box{
+.filter-img div.sub-box{
   top:0;
 /*  position:absolute;*/
   left:0;
@@ -93,16 +93,16 @@ img.image-gallery{
 
 }
 
-div.box:hover img.image-gallery{
+.filter-img div.box:hover img.image-gallery{
   -webkit-transform:scale(2);
   transform:scale(2);
 
 }
-.box .thumbnail{
+..filter-img box .thumbnail{
   padding: 0;
   border-radius: 5px;
 }
-.box .thumbnail:hover{
+.filter-img .box .thumbnail:hover{
 border-color: white !important;
 }
 .filter-image{

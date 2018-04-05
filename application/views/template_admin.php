@@ -102,7 +102,7 @@
           </a>
         </li>
         <li class=" treeview">
-          <a href="#">
+          <a href="<?=site_url('admin/news/index');?>">
             <i class="fa fa-newspaper-o"></i> <span>News</span>
             <span class="pull-right-container">
 

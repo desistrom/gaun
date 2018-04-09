@@ -181,6 +181,18 @@ class V1 extends REST_Controller {
         $this->_search_news($param);
     }
 
+    public function get_news_byid_post(){
+        header('Content-Type: application/json');
+        $param = json_decode(file_get_contents('php://input'), true);
+        if(!isset($param['data']) || $param['data'] == ''){
+            $retData['code'] = '500';
+            $retData['status'] = 'failed';
+            $retData['error'] = 'Your parameter is invalid';
+            $this->response($retData,400);
+        }
+        $this->_get_news_by_id($param);
+    }
+
 
     function _galery(){
     	$galery = $this->v1_model->getAllGalery();
@@ -359,6 +371,11 @@ class V1 extends REST_Controller {
         $news = $this->v1_model->news();
         $retData['code'] = '200';
         $retData['status'] = 'success';
+        foreach ($news as $key => $value) {
+            if ($value['gambar'] == '') {
+                $news[$key]['gambar']=base_url().'assets/images/logo/IDREN-2.png';
+            }
+        }
         $retData['data'] = $news;
         $this->response($retData,200);
     }
@@ -366,6 +383,22 @@ class V1 extends REST_Controller {
     function _search_news($data){
         $param = $data['search'];
         $news = $this->v1_model->searchNews($param);
+        
+        if ($news == '') {
+            $retData['code'] = '500';
+            $retData['status'] = 'Failed';
+            $retData['data'] = 'data not found';
+        }else{
+            $retData['code'] = '200';
+            $retData['status'] = 'success';
+            $retData['data'] = $news;
+        }
+        $this->response($retData,200);
+    }
+
+    function _get_news_by_id($data){
+        $param = $data['data'];
+        $news = $this->v1_model->rowNews($param);
         
         if ($news == '') {
             $retData['code'] = '500';

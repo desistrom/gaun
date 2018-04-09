@@ -124,6 +124,56 @@ class Keanggotaan extends MX_Controller  {
 	}
 
 	public function instansi(){
+		$this->data['view'] = 'list';
+		$this->data['instansi'] = $this->db->get('tb_instansi')->result_array();
+		$this->ciparser->new_parse('template_admin','modules_admin', 'keanggotaan/master_instansi_layout',$this->data);
+	}
 
+	public function add_instansi(){
+		if ($this->input->server('REQUEST_METHOD') == 'POST') {
+			$ret['state'] = 0;
+			$ret['status'] = 0;
+			$this->form_validation->set_error_delimiters('','');
+			$this->form_validation->set_rules('nama', 'Nama Instransi', 'trim|required');
+			if ($this->form_validation->run() == true) {
+				$ret['state'] = 1;
+				$data_instansi['nm_instansi'] = $this->input->post('nama');
+				if ($this->db->insert('tb_instansi',$data_instansi)) {
+					$ret['status'] = 1;
+					$ret['url'] = site_url('admin/keanggotaan/instansi');
+				}
+			}
+			$ret['notif']['nama'] = form_error('nama');
+			echo json_encode($ret);
+			exit();
+		}
+		$this->data['view'] = 'add';
+		$this->data['instansi'] = $this->db->get('tb_instansi')->result_array();
+		$this->ciparser->new_parse('template_admin','modules_admin', 'keanggotaan/master_instansi_layout',$this->data);
+	}
+
+	public function edit_instansi(){
+		$url = $this->uri->segment_array();
+		$id = end($url);
+		if ($this->input->server('REQUEST_METHOD') == 'POST') {
+			$ret['state'] = 0;
+			$ret['status'] = 0;
+			$this->form_validation->set_error_delimiters('','');
+			$this->form_validation->set_rules('nama', 'Nama Instransi', 'trim|required');
+			if ($this->form_validation->run() == true) {
+				$ret['state'] = 1;
+				$data_instansi['nm_instansi'] = $this->input->post('nama');
+				if ($this->db->update('tb_instansi',$data_instansi,array('id_instansi'=>$id))) {
+					$ret['status'] = 1;
+					$ret['url'] = site_url('admin/keanggotaan/instansi');
+				}
+			}
+			$ret['notif']['nama'] = form_error('nama');
+			echo json_encode($ret);
+			exit();
+		}
+		$this->data['view'] = 'edit';
+		$this->data['instansi'] = $this->db->get_where('tb_instansi',array('id_instansi'=>$id))->row_array();
+		$this->ciparser->new_parse('template_admin','modules_admin', 'keanggotaan/master_instansi_layout',$this->data);
 	}
 }

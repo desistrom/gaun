@@ -18,7 +18,7 @@
 					<tr>
 						<td><?=($key+1);?></td>
 						<td><?=$value['judul'];?></td>
-						<td><?=$value['content'];?></td>
+						<td><?=word_limiter($value['content'], 12);?></td>
 						<td><?=$value['nm_kategori'];?></td>
 						<td><?=$value['created'];?></td>
 						<td>

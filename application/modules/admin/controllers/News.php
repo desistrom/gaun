@@ -10,7 +10,6 @@
 class News extends MX_Controller  {
 	var $data = array();
 	function __construct(){
-
 	}
 	public function index(){
 		// $rss = file_get_contents('https://rss.kontan.co.id/news/analisis');
@@ -104,12 +103,12 @@ class News extends MX_Controller  {
 			// print_r($rss->items);
 			foreach ($rss->items as $key => $value) {
 				$data_news['judul'] =  $value['title'];
-				$data_news['content'] =  $value['description'];
+				$data_news['img'] =  $this->get_img($value['description']);
 				$data_news['id_kategori_ref'] =  3;
 				$data_news['id_user_ref'] = $this->session->userdata('data_user')['id_user'];
 				$data_news['kategori_rss'] = $value['category'];
 				$data_news['link'] = $value['link'];
-				$data_news['guid'] = $value['guid'];
+				$data_news['content'] = $this->get_detail($data_news['link']);
 				if ($this->db->get_where('tb_news',array('link'=>$value['link']))->num_rows() == 0) {
 					$this->db->insert('tb_news',$data_news);
 						
@@ -118,11 +117,25 @@ class News extends MX_Controller  {
 			
 				$ret['url'] = site_url('admin/news');
 		}
-		echo json_encode($ret);
+		redirect(site_url('admin/news'));
 	}
 	public function get_data_rss(){
 		$rss = file_get_contents('https://rss.kontan.co.id/news/analisis');
 		echo $rss;
+	}
+
+	public function get_detail($data){
+		$rss = file_get_contents($data);
+		$data = explode("<body>", $rss);
+		$detail = explode('articleBody">', $data[1]);
+		$detail1 = explode('<script', $detail[1]);
+		return $detail1[0];
+	}
+
+	function get_img($data){
+		$a = explode('src="', $data);
+		$b = explode('" >', $a[1]);
+		return $b[0];
 	}
 	
 }

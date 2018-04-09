@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Untitled</title>
     <link rel="stylesheet" href="<?=base_url();?>assets/css/bootstrap.min.css">
+    <style type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" ></style>
 <!--     <link rel="stylesheet" href="<?=base_url();?>assets/css/styles1.css"> -->
     <link rel="stylesheet" href="<?=base_url();?>assets/css/owl.transitions.css">
     <link rel="stylesheet" href="<?=base_url();?>assets/css/owl.carousel.css">
@@ -197,11 +198,11 @@ h5.text-date{
 
                           </ul>
                         </li>
-                      <li role="presentation" class=""><a href="#">News</a></li>
+                      <li role="presentation" class=""><a href="<?php echo site_url('web/news') ?>">News</a></li>
 
                       <li role="presentation" class="active"><a href="<?php echo site_url('web/keanggotaan') ?>">Keanggotaan</a></li>
-                      <li role="presentation" class="active"><a href="#" data-toggle="modal" data-target="#myModal">Register</a></li>
-
+                <!--       <li role="presentation" class="active"><a href="#" data-toggle="modal" data-target="#myModal">Register</a></li>
+ -->
                   </ul>
               </div>
           </div>

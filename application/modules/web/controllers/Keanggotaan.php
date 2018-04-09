@@ -10,57 +10,53 @@
 class Keanggotaan extends MX_Controller  {
 	var $data = array();
 	function __construct(){
+		$this->load->helper('api');
 
 	}
     function index() {
 
     	$url = "http://192.168.88.138/idren/api/v1/profit";
-        $a = json_decode($this->api_keanggotaan($url),true);
+        // $a = json_decode($this->api_helper($url),true);
+        $methode = 'GET';
+        $token = '';
+        $a = api_helper('',$url,$methode,$token);
         $this->data['keanggotaan']=$a['data'];
 
     	$this->ciparser->new_parse('template_frontend','modules_web', 'keanggotaan_layout',$this->data);
     }
-        function insert_user() {
 
-    	$url = "http://192.168.88.138/idren/api/v1/profit";
-        $a = json_decode($this->api_keanggotaan($url),true);
-        $this->data['keanggotaan']=$a['data'];
-
-    	$this->ciparser->new_parse('template_frontend','modules_web', 'keanggotaan_layout',$this->data);
-    }
-    
-    function api_keanggotaan($url) {
+  //   function api_keanggotaan($url) {
 
 
 
-		$curl = curl_init();
+		// $curl = curl_init();
 
-		curl_setopt_array($curl, array(
-		  CURLOPT_URL => $url,
-		  CURLOPT_RETURNTRANSFER => true,
-		  CURLOPT_ENCODING => "",
-		  CURLOPT_MAXREDIRS => 10,
-		  CURLOPT_TIMEOUT => 30,
-		  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-		  CURLOPT_CUSTOMREQUEST => "GET",
-		  CURLOPT_POSTFIELDS => "{\n\t\"search\" : \"develop\"\n}",
-		  CURLOPT_HTTPHEADER => array(
-		    "Cache-Control: no-cache",
-		    "Content-Type: application/json",
-		    "Postman-Token: 747ab98d-4536-4b63-8c80-788088b23a88"
-		  ),
-		));
+		// curl_setopt_array($curl, array(
+		//   CURLOPT_URL => $url,
+		//   CURLOPT_RETURNTRANSFER => true,
+		//   CURLOPT_ENCODING => "",
+		//   CURLOPT_MAXREDIRS => 10,
+		//   CURLOPT_TIMEOUT => 30,
+		//   CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+		//   CURLOPT_CUSTOMREQUEST => "GET",
+		//   CURLOPT_POSTFIELDS => "{\n\t\"search\" : \"develop\"\n}",
+		//   CURLOPT_HTTPHEADER => array(
+		//     "Cache-Control: no-cache",
+		//     "Content-Type: application/json",
+		//     "Postman-Token: 747ab98d-4536-4b63-8c80-788088b23a88"
+		//   ),
+		// ));
 
-		$response = curl_exec($curl);
-		$err = curl_error($curl);
+		// $response = curl_exec($curl);
+		// $err = curl_error($curl);
 
-		curl_close($curl);
+		// curl_close($curl);
 
-		if ($err) {
-		  echo "cURL Error #:" . $err;
-		} else {
-		  return $response;
-		}
-    }
+		// if ($err) {
+		//   echo "cURL Error #:" . $err;
+		// } else {
+		//   return $response;
+		// }
+  //   }
 
 }

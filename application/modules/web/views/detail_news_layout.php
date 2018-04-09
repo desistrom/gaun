@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style type="text/css"><
 
   /* detail artikel */
@@ -84,7 +85,7 @@
         color: #E72A2A;
       }
      .sidebar .sidebar-top ul h4{
-        border-bottom: solid #5D9CEC 3px;
+        border-bottom: solid #B7090A  3px;
         color: black;
         padding: 15px 0;
       }
@@ -98,7 +99,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 col-sm-12 top" style="margin-top: 6em;">
-    <h2> <span>News</span></b></h2>
+  
     
 </div>
 <div class="col col-md-3 col-sm-3 sidebar">

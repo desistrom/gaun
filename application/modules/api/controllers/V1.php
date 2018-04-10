@@ -125,6 +125,18 @@ class V1 extends REST_Controller {
         $this->_getuser();
     }
 
+    public function user_by_id_post(){
+        header('Content-Type: application/json');
+        $param = json_decode(file_get_contents('php://input'), true);
+        if(!isset($param['data']) || $param['data'] == ''){
+            $retData['code'] = '500';
+            $retData['status'] = 'failed';
+            $retData['error'] = 'Your parameter is invalid';
+            $this->response($retData,400);
+        }
+        $this->_select_user($param);
+    }
+
     public function insert_user_post(){
         header('Content-Type: application/json');
         $param = json_decode(file_get_contents('php://input'), true);
@@ -191,6 +203,13 @@ class V1 extends REST_Controller {
             $this->response($retData,400);
         }
         $this->_get_news_by_id($param);
+    }
+
+    //untuk testimoni
+
+    public function gettestimoni_get(){
+        header('Content-Type: application/json');
+        $this->_getTestimoni();
     }
 
 
@@ -325,6 +344,22 @@ class V1 extends REST_Controller {
         $this->response($retData,200);
     }
 
+    function _select_user($data){
+        $param = $data['data'];
+        $user = $this->v1_model->rowUser($param);
+        
+        if ($user == '') {
+            $retData['code'] = '500';
+            $retData['status'] = 'Failed';
+            $retData['data'] = 'data not found';
+        }else{
+            $retData['code'] = '200';
+            $retData['status'] = 'success';
+            $retData['data'] = $user;
+        }
+        $this->response($retData,200);
+    }
+
     function _register($data){
         $data_register['username'] = $data['username'];
         $data_register['password'] = sha1($data['password']);
@@ -409,6 +444,14 @@ class V1 extends REST_Controller {
             $retData['status'] = 'success';
             $retData['data'] = $news;
         }
+        $this->response($retData,200);
+    }
+
+    function _getTestimoni(){
+        $user = $this->v1_model->getTestimoni();
+        $retData['code'] = '200';
+        $retData['status'] = 'Success';
+        $retData['data'] = $user;
         $this->response($retData,200);
     }
 

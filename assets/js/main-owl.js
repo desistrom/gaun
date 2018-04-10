@@ -18,22 +18,24 @@ jQuery(document).ready(function($){
   //         nav.removeClass("f-navigation");
   //       }
   //     });
-   $(".testimonial #owl-demo").owlCarousel({
- 
-           autoPlay: 5000, //Set AutoPlay to 3 seconds
- 
-            items : 3,
-            itemsDesktop : [1199,3],
-            itemsDesktopSmall : [979,3]
- 
-        });
-      $(".logo-comp #owl-demo").owlCarousel({
+   $(".client #owl-demo").owlCarousel({
  
            autoPlay: 2000, //Set AutoPlay to 3 seconds
  
-            items : 6,
+            items : 8,
             itemsDesktop : [1199,6],
-            itemsDesktopSmall : [979,6]
+            itemsDesktopSmall : [979,4]
+ 
+        });
+      $(".testimonial #owl-demo").owlCarousel({
+ 
+           autoPlay: 5000, //Set AutoPlay to 3 seconds
+ 
+            items : 1,
+            itemsDesktop : [1199,1],
+            itemsDesktopSmall : [979,1],
+             itemsTablet : [768, 1],
+            itemsMobile : [479, 1]
  
         });
 

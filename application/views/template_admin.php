@@ -138,6 +138,22 @@
             <li><a href="<?=site_url('admin/email/kategori');?>"><i class="fa fa-boxes"></i>kategori Email</a></li>
           </ul>
         </li>
+
+        <li class=" treeview">
+          <a href="#">
+            <i class="fa fa-home"></i>  <span>Home Page</span>
+            <span class="pull-right-container">
+
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="active"><a href="<?=site_url('admin/home/logo');?>"><i class="fa fa-picture-o"></i> Logo IDREN</a></li>
+            <li><a href="<?=site_url('admin/home/testimoni');?>"><i class="fa fa-comment"></i>Testimony</a></li>
+            <li><a href="<?=site_url('admin/home/video');?>"><i class="fa fa-video-camera"></i>Hero</a></li>
+            <li><a href="<?=site_url('admin/home/Layanan');?>"><i class="fa fa-bullhorn"></i>Layanan</a></li>
+          </ul>
+        </li>
         
       </ul>
     </section>

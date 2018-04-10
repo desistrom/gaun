@@ -14,3 +14,8 @@ class Email extends MX_Controller  {
 	public function __construct(){
 		// $this->load->model('galery_model');
 	}
+
+	public function index(){
+		
+	}
+}

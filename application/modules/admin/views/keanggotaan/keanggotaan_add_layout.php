@@ -49,7 +49,7 @@
 
       <div class="form-group">
       <label>Instansi</label>
-        <select name="instansi" class="form-control">
+        <select name="instansi" class="form-control" id="instansi">
           <option value="">--- Select Instansi ---</option>
           <?php foreach ($instansi as $key => $value): ?>
             <option value="<?=$value['id_instansi'];?>"><?=$value['nm_instansi'];?></option>  
@@ -57,7 +57,12 @@
         </select>
         <div class="error" id="ntf_instansi"></div>
       </div>
-
+      <div class="form-group">
+      <label>Instansi</label>
+        <input type="file" class="form-control" name="userfile" id="userfile">
+        <div class="error" id="ntf_userfile"></div>
+        <div class="error" id="ntf_error"></div>
+      </div>
       <button type="button" class="btn btn-primary" id="submit">Submit</button>
 
     </form>
@@ -68,11 +73,25 @@
 <script type="text/javascript">
   $(document).ready(function () {
     $('body').on('click','#submit', function(){
+      var form_data = new FormData();
+      var data_file = $('#userfile').prop('files')[0];
+      form_data.append('userfile',data_file);
+      form_data.append('name',$('#name').val());
+      form_data.append('username',$('#username').val());
+      form_data.append('password',$('#password').val());
+      form_data.append('repassword',$('#repassword').val());
+      form_data.append('email',$('#email').val());
+      form_data.append('phone',$('#phone').val());
+      form_data.append('instansi',$('#instansi').val());
       $.ajax({
           url : window.location.href,
           dataType : 'json',
           type : 'POST',
-          data : $('form').serialize()
+          data : form_data,
+          async : false,
+          cache : false ,
+          contentType : false , 
+          processData : false
       }).done(function(data){
           console.log(data);
           if(data.state == 1){

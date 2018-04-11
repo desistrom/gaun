@@ -130,13 +130,13 @@ class V1_model extends CI_Model{
 			join tb_user u on n.id_user_ref = u.id_user where n.is_aktif = 1 AND n.id_news = '".$data."'";
 		if ($this->db->query($sql)->num_rows() > 0) {
 			return $this->db->query($sql)->result_array();
-			exit();
+			exit();	
 		}
 		return false;
 	}
 
 	public function getTestimoni(){
-		$sql = "SELECT t.content as testimoni, u.name as nama_user, email as email_user FROM tb_testimoni t join tb_user u on t.id_user_ref = u.id_user";
+		$sql = "SELECT t.content as testimoni, u.name as nama_user, email as email_user, gambar as image FROM tb_testimoni t join tb_user u on t.id_user_ref = u.id_user";
 		if ($this->db->query($sql)->num_rows() > 0) {
 			return $this->db->query($sql)->result_array();
 			exit();
@@ -147,7 +147,7 @@ class V1_model extends CI_Model{
 	public function getHero(){
 		$sql = "SELECT title as judul, link_video as video, content as deskripsi FROM tb_hero";
 		if ($this->db->query($sql)->num_rows() > 0) {
-			return $this->db->query($sql)->result_array();
+			return $this->db->query($sql)->row_array();
 			exit();
 		}
 		return false;
@@ -156,7 +156,7 @@ class V1_model extends CI_Model{
 	public function getLayanan(){
 		$sql = "SELECT title as judul, gambar as image, content as deskripsi FROM tb_layanan";
 		if ($this->db->query($sql)->num_rows() > 0) {
-			return $this->db->query($sql)->result_array();
+			return $this->db->query($sql)->row_array();
 			exit();
 		}
 		return false;

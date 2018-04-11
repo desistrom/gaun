@@ -5,14 +5,14 @@
                 <div class="col-md-6 col-sm-6 col-xs-12 hero-right">
                     <div class="sub-video">
                         <!-- <img class="img-responsive" src="assets/img/video.jpg"> -->
-                        <iframe class="hero-video" src="https://www.youtube.com/embed/rbvRXK9gMpc" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                        <iframe class="hero-video" src="<?php echo $hero['video']; ?>" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                     </div>
                 </div>
                     <div class="col-md-6 col-sm-6 col-xs-12 hero-left">
-                    <h1>Kolaborasi Mudah</h1>
-                    <h1>dengan <span style="color:#D10909; ">Jaringan Privat</span></h1>
-                    <p>Berbagi dan kolaborasi kini jadi lebih aman </p>
-                    <p>dengan akses jaringan privat. </p>
+                    <h1><?php echo $hero['judul']; ?></h1>
+                  <!--   <h1>dengan <span style="color:#D10909; ">Jaringan Privat</span></h1> -->
+                    <p> <?php echo $hero['deskripsi']; ?></p>
+                 
                     <button class="btn  btn-pelajari" type="button">Pelajari lebih lanjut <i class="fa fa-long-arrow-right"></i></button>
                 </div>
                 <div class="col-md-12 col-sm-12 col-xs-12">
@@ -45,7 +45,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-7 col-sm-8 col-xs-12 sub-service-left">
-                    <div class="filter-box"><img class="img-responsive" src="<?=base_url();?>assets/images/logo/Untitled-1.jpg"></div>
+                    <div class="filter-box"><img class="img-responsive" src="<?=base_url();?>media/<?php echo $layanan['image']; ?>"></div>
                     <div class="navigation">
                         <ul class="">
                             <li style="border-right: solid 1px #761919;"><a href="#" style="color:#421A1A; "><i class="fa fa-angle-left"></i></a></li>
@@ -56,7 +56,7 @@
                 <div class="col-md-5 col-sm-4 col-xs-12 sub-service-right">
                     <h3>Kemudahan Berbagi</h3>
                     <div class="line"></div>
-                    <p>Melalui jaringan privat, kolaborasi dan pengembangan kegiatan di perguruan tinggi semakin cepat dan nyaman. </p>
+                    <p><?php echo $layanan['deskripsi']; ?><!-- Melalui jaringan privat, kolaborasi dan pengembangan kegiatan di perguruan tinggi semakin cepat dan nyaman. --> </p>
                 </div>
                 <div class="col-md-12 col-sm-12 col-xs-12 text-right">
                     <div class="arrow-line">
@@ -83,10 +83,12 @@
                 <div class="col-md-12 col-sm-12 col-xs-12 top" >
                     <h3 class="text-center">Akademisi yang bergabung dengan kami</h3></div>
                 <div class="col-md-12 col-sm-12 col-xs-12 none-padding sub-client" id="owl-demo" >
+                    <?php foreach ($user as $key => $value) :  ?>
                     <div class="col col-md-12 col-sm-12 col-xs-12 text-center item">
-                        <div class="filter-img-client"><img src="<?=base_url();?>assets/images/logo/logo1.png"></div>
+                        <div class="filter-img-client "><img src="<?php echo $value['image_thumbnail']; ?>" class="img-responsive" ></div>
                     </div>
-                    <div class="col col-md-12 col-sm-12 col-xs-12 text-center item">
+                <?php endforeach ?>
+                    <!-- <div class="col col-md-12 col-sm-12 col-xs-12 text-center item">
                         <div class="filter-img-client"><img src="<?=base_url();?>assets/images/logo/logo2.png"></div>
                     </div>
                     <div class="col col-md-12 col-sm-12 col-xs12 text-center item">
@@ -118,7 +120,7 @@
                     </div>
                     <div class="col col-md-12 col-sm-12 col-xs-12 text-center item">
                         <div class="filter-img-client"><img src="<?=base_url();?>assets/images/logo/logo4.png"></div>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="col-md-6 col-sm-6 col-xs-6 none-padding">
                     <div class="arrow-line">
@@ -141,15 +143,17 @@
     <section class="testimonial" id="testimonial">
         <div class="container-fluid">
             <div class="row sub-testimoni" id="owl-demo">
+                <?php foreach ($testimoni as $key => $value) : ?>
                 <div class="col-md-12 col-sm-12 col-xs-12 text-center item" >
                     <div class="filter-img-testimoni"><img src="<?=base_url();?>assets/images/logo/user.jpg" class="img-testimoni"></div>
-                    <h2 class="name-testi">Muhammad Nasir</h2>
+                    <h2 class="name-testi"><?php echo $value['nama_user']; ?></h2>
                     <h3 class="job description">Menteri Riset, Teknologi dan Pendidikan Tinggi Republik Indonesia </h3><i class="fa fa-quote-left fa-2x"></i>
-                    <p>IDren memiliki sistem jaringan privat yang aman serta ditunjang dengan akses yang mudah bagi akademisi yang ingin melakukan segala kebutuhan kampus seperti live streaming,riset, atau menambah resource baru. Mari berkolaborasi bersama-sama
-                        dan dapatkan update terbaru setiap hari di website ini. </p>
+                    <p> <?php echo $value['testimoni']; ?><!-- IDren memiliki sistem jaringan privat yang aman serta ditunjang dengan akses yang mudah bagi akademisi yang ingin melakukan segala kebutuhan kampus seperti live streaming,riset, atau menambah resource baru. Mari berkolaborasi bersama-sama
+                        dan dapatkan update terbaru setiap hari di website ini. --> </p>
                     <button class="btn  btn-rekomendasi" type="button">Lihat Rekomendasi Lain</button>
                 </div>
-                <div class="col-md-12 col-sm-12 col-xs-12 text-center item" >
+            <?php endforeach ?>
+                <!-- <div class="col-md-12 col-sm-12 col-xs-12 text-center item" >
                     <div class="filter-img-testimoni"><img src="<?=base_url();?>assets/images/logo/user.jpg" class="img-testimoni"></div>
                     <h2 class="name-testi">Muhammad Nasir</h2>
                     <h3 class="job description">Menteri Riset, Teknologi dan Pendidikan Tinggi Republik Indonesia </h3><i class="fa fa-quote-left fa-2x"></i>
@@ -164,7 +168,7 @@
                     <p>IDren memiliki sistem jaringan privat yang aman serta ditunjang dengan akses yang mudah bagi akademisi yang ingin melakukan segala kebutuhan kampus seperti live streaming,riset, atau menambah resource baru. Mari berkolaborasi bersama-sama
                         dan dapatkan update terbaru setiap hari di website ini. </p>
                     <button class="btn btn-rekomendasi" type="button">Lihat Rekomendasi Lain</button>
-                </div>
+                </div> -->
             </div>
         </div>
     </section>

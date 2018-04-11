@@ -31,7 +31,7 @@
 
       <div class="form-group">
       <label>Instansi </label>
-        <select name="instansi" class="form-control">
+        <select name="instansi" id="instansi" class="form-control">
           <option value="">--- Select Instansi ---</option>
           <?php foreach ($instansi as $key => $value): ?>
             <option value="<?=$value['id_instansi'];?>" <?php if ($anggota['id_instansi_ref'] == $value['id_instansi']){ ?> selected <?php } ?> ><?=$value['nm_instansi'];?></option>  

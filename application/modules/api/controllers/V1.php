@@ -351,6 +351,14 @@ class V1 extends REST_Controller {
         $user = $this->v1_model->getUser();
         $retData['code'] = '200';
         $retData['status'] = 'Success';
+        foreach ($user as $key => $value) {
+            if ($value['image'] == '') {
+                $user[$key]['image_thumbnail']=base_url().'assets/images/logo/IDREN-2.png';
+            }else{
+                $user[$key]['image_large']=base_url().'media/'.$user[$key]['image'];
+                $user[$key]['image_thumbnail']=base_url().'media/thumbnail/'.$user[$key]['image'];
+            }                                                                                                                     
+        }
         $retData['data'] = $user;
         $this->response($retData,200);
     }

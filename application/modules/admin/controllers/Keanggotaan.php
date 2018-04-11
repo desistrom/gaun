@@ -87,20 +87,25 @@ class Keanggotaan extends MX_Controller  {
 				$data_user['phone'] = $this->input->post('phone');
 				$data_user['id_instansi_ref'] = $this->input->post('instansi');
 				if (isset($_FILES['userfile'])) {
-					$data_gambar = $this->upload_logo($_FILES);
-					$data_user['gambar'] = $data_gambar['asli'];
-					if (file_exists(FCPATH."media/".$this->data['anggota']['gambar'])) {
-            			chmod(FCPATH."media/".$this->data['anggota']['gambar'], 0777);
-            			unlink(FCPATH."media/".$this->data['anggota']['gambar']);
-            		}
-            		if (file_exists(FCPATH."media/thumbnail/".$this->data['anggota']['gambar'])) {
-            			chmod(FCPATH."media/thumbnail/".$this->data['anggota']['gambar'], 0777);
-            			unlink(FCPATH."media/thumbnail/".$this->data['anggota']['gambar']);
-            		}
-            		if (file_exists(FCPATH."media/crop/".$this->data['anggota']['gambar'])) {
-            			chmod(FCPATH."media/crop/".$this->data['anggota']['gambar'], 0777);
-            			unlink(FCPATH."media/crop/".$this->data['anggota']['gambar']);
-            		}
+					$image = $this->upload_logo($_FILES);
+					if (isset($image['error'])) {
+						$ret['notif'] = $image;
+					}else{
+						$data_gambar = $this->upload_logo($_FILES);
+						$data_user['gambar'] = $data_gambar['asli'];
+						if (file_exists(FCPATH."media/".$this->data['anggota']['gambar'])) {
+	            			@chmod(FCPATH."media/".$this->data['anggota']['gambar'], 0777);
+	            			unlink(FCPATH."media/".$this->data['anggota']['gambar']);
+	            		}
+	            		if (file_exists(FCPATH."media/thumbnail/".$this->data['anggota']['gambar'])) {
+	            			@chmod(FCPATH."media/thumbnail/".$this->data['anggota']['gambar'], 0777);
+	            			unlink(FCPATH."media/thumbnail/".$this->data['anggota']['gambar']);
+	            		}
+	            		if (file_exists(FCPATH."media/crop/".$this->data['anggota']['gambar'])) {
+	            			@chmod(FCPATH."media/crop/".$this->data['anggota']['gambar'], 0777);
+	            			unlink(FCPATH."media/crop/".$this->data['anggota']['gambar']);
+	            		}
+					}
 				}
 				if ($this->db->update('tb_user',$data_user,array('id_user'=>$id))) {
 					$ret['status'] = 1;

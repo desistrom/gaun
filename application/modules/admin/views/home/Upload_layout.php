@@ -4,7 +4,7 @@
     </div>
     <div class="box-body">
     <div class="form-group">
-      <label>Instansi</label>
+      <label>Logo</label>
         <input type="file" class="form-control" name="userfile" id="userfile">
         <div class="error" id="ntf_userfile"></div>
         <div class="error" id="ntf_error"></div>

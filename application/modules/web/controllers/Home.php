@@ -16,18 +16,44 @@ class Home extends CI_Controller  {
     }
 
     function index() {
-        $url = "http://192.168.88.138/idren/api/v1/about";
+        $url = "http://192.168.1.13/idren/api/v1/gethero";
         $methode = 'GET';
         $token = '';
         $a = api_helper('',$url,$methode,$token);
 
+        $url_layanan = "http://192.168.1.13/idren/api/v1/getlayanan";
+        $b = api_helper('',$url_layanan,$methode,$token);
+
+        $url_user = "http://192.168.1.13/idren/api/v1/alluser";
+        $c = api_helper('',$url_user,$methode,$token);
+        
+        $url_testi =  "http://192.168.1.13/idren/api/v1/gettestimoni";
+        $d = api_helper('',$url_testi,$methode,$token);
+
 
         // $url = "http://192.168.88.138/idren/api/v1/about";
         // $a = json_decode($this->hit_api($url),true);
-        $this->data['about']=$a['data'];
+        $this->data['hero']=$a['data'];
+        $this->data['layanan']=$b['data'];
+        $this->data['user']=$c['data'];
+        $this->data['testimoni']=$d['data'];
+
     	$this->ciparser->new_parse('template_frontend','modules_web', 'home_layout',$this->data);
     }
 
+
+    // function get_hero() {
+    //     $url = "http://192.168.1.13/idren/api/v1/gethero";
+    //     $methode = 'GET';
+    //     $token = '';
+    //     $a = api_helper('',$url,$methode,$token);
+
+
+    //     // $url = "http://192.168.88.138/idren/api/v1/about";
+    //     // $a = json_decode($this->hit_api($url),true);
+    //     $this->data['hero']=$a['data'];
+    //     $this->ciparser->new_parse('template_frontend','modules_web', 'home_layout',$this->data);
+    // }
 
     // function hit_api($url) {
 

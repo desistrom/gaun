@@ -150,7 +150,7 @@
           <ul class="treeview-menu">
             <li class="active"><a href="<?=site_url('admin/home/logo');?>"><i class="fa fa-picture-o"></i> Logo IDREN</a></li>
             <li><a href="<?=site_url('admin/home/testimoni');?>"><i class="fa fa-comment"></i>Testimony</a></li>
-            <li><a href="<?=site_url('admin/home/video');?>"><i class="fa fa-video-camera"></i>Hero</a></li>
+            <li><a href="<?=site_url('admin/home/hero');?>"><i class="fa fa-video-camera"></i>Hero</a></li>
             <li><a href="<?=site_url('admin/home/Layanan');?>"><i class="fa fa-bullhorn"></i>Layanan</a></li>
           </ul>
         </li>

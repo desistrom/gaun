@@ -42,26 +42,17 @@ class Galery extends MX_Controller  {
 				$media['type'] = 'image';
 				$media['id_user_ref'] = $this->session->userdata('data_user')['id_user'];
 				if (isset($_FILES['file_name'])) {
-					$imagename = $_FILES['file_name']['name'];
-                	$ext = strtolower($this->_getExtension($imagename));
-					$config['upload_path']          = FCPATH."assets/media/";
-	                $config['allowed_types']        = 'gif|jpg|png';
-	                $config['max_size']             = 400;
-	                $config['max_width']            = 2048;
-	                $config['min_width']            = 600;
-	                $config['file_name']            = time().".".$ext;
-	                $this->load->library('upload', $config);
-	                if ( ! $this->upload->do_upload('file_name')){
-	                	$error = $this->upload->display_errors();
-	                	$ret['notif']['file_name'] = $error;
-	                }else{
-	                	$upload_data = $this->upload->data();
-	                	$media['file_name'] = $upload_data['file_name'];
-	                	if ($this->galery_model->insertGalery($media) == true) {
+					$image = $this->upload_logo($_FILES);
+					if (isset($image['error'])) {
+						$ret['notif'] = $image;
+					}else{
+						$ret['state'] = 1;
+						$media['file_name'] = $image['asli'];
+						if ($this->galery_model->insertGalery($media) == true) {
 	                		$ret['status'] = 1;
 	                		$ret['url'] = site_url('admin/galery/list_image');
 	                	}
-	                }
+					}
 				}
 			}
 			$ret['notif']['judul'] = form_error('judul');
@@ -121,29 +112,30 @@ class Galery extends MX_Controller  {
 				$media['deskripsi'] = $this->input->post('deskripsi');
 				$media['tgl_upload'] = date('Y-m-d');
 				if (isset($_FILES['file_name'])) {
-					$imagename = $_FILES['file_name']['name'];
-                	$ext = strtolower($this->_getExtension($imagename));
-					$config['upload_path']          = FCPATH."assets/media/";
-	                $config['allowed_types']        = 'gif|jpg|png';
-	                $config['max_size']             = 400;
-	                $config['max_width']            = 2048;
-	                $config['min_width']            = 600;
-	                $config['file_name']            = time().".".$ext;
-	                $this->load->library('upload', $config);
-	                if ( ! $this->upload->do_upload('file_name')){
-	                	$error = array('error' => $this->upload->display_errors());
-	                }else{
-	                	$upload_data = $this->upload->data();
-	                	$media['file_name'] = $upload_data['file_name'];
-	                	if ($this->galery_model->editGalery($media,$id) == true) {
-	                		$ret['status'] = 1;
-	                		if (file_exists(FCPATH."assets/media/".$this->data['galery']['file_name'])) {
-	                			chmod(FCPATH."assets/media/".$this->data['galery']['file_name'], 0777);
-	                			unlink(FCPATH."assets/media/".$this->data['galery']['file_name']);
-	                		}
-	                		$ret['url'] = site_url('admin/galery/list_image');
-	                	}
-	                }
+					$image = $this->upload_logo($_FILES);
+	    			if (isset($image['error'])) {
+						$ret['notif'] = $image;
+					}else{
+						$media['file_name'] = $image['asli'];
+		    			if ($this->db->get('tb_layanan')->num_rows() > 0) {
+		    				if ($this->galery_model->editGalery($media,$id) == true) {
+		    					if (file_exists(FCPATH."assets/media/".$this->data['galery']['file_name'])) {
+			            			@chmod(FCPATH."assets/media/".$this->data['galery']['file_name'], 0777);
+			            			unlink(FCPATH."assets/media/".$this->data['galery']['file_name']);
+			            		}
+			            		if (file_exists(FCPATH."assets/media/thumbnail/".$this->data['galery']['file_name'])) {
+			            			@chmod(FCPATH."assets/media/thumbnail/".$this->data['galery']['file_name'], 0777);
+			            			unlink(FCPATH."assets/media/thumbnail/".$this->data['galery']['file_name']);
+			            		}
+			            		if (file_exists(FCPATH."assets/media/crop/".$this->data['galery']['file_name'])) {
+			            			@chmod(FCPATH."assets/media/crop/".$this->data['galery']['file_name'], 0777);
+			            			unlink(FCPATH."assets/media/crop/".$this->data['galery']['file_name']);
+			            		}
+		    					$ret['status'] = 1;
+		    					$ret['url'] = site_url('admin/galery/list_image');
+		    				}
+		    			}
+					}
 				}else{
 					if ($this->galery_model->editGalery($media,$id) == true) {
                 		$ret['status'] = 1;
@@ -207,6 +199,69 @@ class Galery extends MX_Controller  {
 			echo json_encode($ret);
 		}
 	}
+
+	public function upload_logo($logo){	    		
+    	
+        $imagename = $logo['file_name']['name'];
+        $ext = strtolower($this->_getExtension($imagename));
+        $config['upload_path']          = FCPATH."assets/media/";
+        $config['allowed_types']        = 'gif|jpg|png';
+        $config['max_size']             = 400;
+        $config['max_width']            = 2048;
+        $config['min_width']            = 600;
+        $config['file_name']            = time().".".$ext;
+
+        $this->load->library('upload', $config);
+
+        if ( ! $this->upload->do_upload('file_name'))
+        {
+            $data_upload['error'] = $this->upload->display_errors();
+        }
+        else
+        {
+            $upload_data = $this->upload->data();
+
+            if ($upload_data['image_width'] > 768 ) {
+                $data = array('upload_data' => $this->upload->data());
+                $config_r['image_library'] = 'GD2';
+                $config_r['source_image'] = FCPATH."assets/media/".$upload_data['file_name'];
+                // $config_r['create_thumb'] = TRUE;
+                $config_r['maintain_ratio'] = TRUE;
+                $config_r['width']         = 150;
+                $config_r['new_image'] = FCPATH."assets/media/thumbnail/".$upload_data['file_name'];
+
+                $this->load->library('image_lib', $config_r);
+
+                $this->image_lib->resize();
+                if ( ! $this->image_lib->resize())
+                {
+                        $data_upload['error'] = $this->image_lib->display_errors();
+                }else{
+                        // echo "berhasil resize";
+                        $data_upload['resize'] = site_url('assets/media/thumbnail/')."/".$upload_data['file_name'];
+                        $data_upload['asli'] = $upload_data['file_name'];
+                }
+            }
+            if ($upload_data['image_width'] > 768) {
+                $config_c['image_library'] = 'GD2';
+                $config_c['new_image'] = FCPATH."assets/media/crop/".$upload_data['file_name'];
+                $config_c['source_image'] = FCPATH."assets/media/".$upload_data['file_name'];
+                $config_c['x_axis'] = 100;
+                $config_c['y_axis'] = 60;
+
+                $this->image_lib->initialize($config_c);
+
+                if ( ! $this->image_lib->crop())
+                {
+                        $data_upload['error'] = $this->image_lib->display_errors();
+                }else{
+                        // echo "berhasil Crop";
+                        $data_upload['crop'] = site_url('assets/media/crop/')."/".$upload_data['file_name'];
+                }
+            }
+        }
+        return $data_upload;
+    }
 
 	function _getExtension($str){
         $i = strrpos($str,".");

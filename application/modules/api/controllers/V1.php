@@ -212,6 +212,17 @@ class V1 extends REST_Controller {
         $this->_getTestimoni();
     }
 
+    //hero
+    public function gethero_get(){
+        header('Content-Type: application/json');
+        $this->_getHero();
+    }
+
+    public function getlayanan_get(){
+        header('Content-Type: application/json');
+        $this->_getLayanan();
+    }
+
 
     function _galery(){
     	$galery = $this->v1_model->getAllGalery();
@@ -449,6 +460,24 @@ class V1 extends REST_Controller {
 
     function _getTestimoni(){
         $user = $this->v1_model->getTestimoni();
+        $retData['code'] = '200';
+        $retData['status'] = 'Success';
+        $retData['data'] = $user;
+        $this->response($retData,200);
+    }
+
+    //hero
+    function _getHero(){
+        $user = $this->v1_model->getHero();
+        $retData['code'] = '200';
+        $retData['status'] = 'Success';
+        $retData['data'] = $user;
+        $this->response($retData,200);
+    }
+
+    //layanan
+    function _getLayanan(){
+        $user = $this->v1_model->getLayanan();
         $retData['code'] = '200';
         $retData['status'] = 'Success';
         $retData['data'] = $user;

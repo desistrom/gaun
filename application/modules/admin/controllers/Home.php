@@ -218,6 +218,118 @@ class Home extends CI_Controller  {
 		redirect(site_url('admin/home/testimoni'));
     }
 
+    public function hero(){
+    	$this->data['hero'] = $this->db->get('tb_hero')->row_array();
+    	if ($this->input->server('REQUEST_METHOD') == 'POST') {
+    		$ret['state'] = 0;
+    		$ret['status'] = 0;
+    		$this->form_validation->set_error_delimiters('','');
+    		$this->form_validation->set_rules('link','Video','trim|required');
+    		$this->form_validation->set_rules('judul','Judul Hero','trim|required');
+    		$this->form_validation->set_rules('content','Description','trim|required');
+    		if ($this->form_validation->run() == true) {
+    			$ret['state'] = 1;
+    			$dt_hero['link_video'] = $this->input->post('link');
+    			$dt_hero['title'] = $this->input->post('judul');
+    			$dt_hero['content'] = $this->input->post('content');
+    			if ($this->db->get('tb_hero')->num_rows() > 0) {
+    				if ($this->db->update('tb_hero',$dt_hero,array('id_hero'=>$this->data['hero']['id_hero']))) {
+    					$ret['status'] = 1;
+    				}
+    			}else{
+    				if ($this->db->insert('tb_hero',$dt_hero)) {
+    					$ret['status'] = 1;
+    				}
+    			}
+    		}
+    		$ret['notif']['link'] = form_error('link');
+    		$ret['notif']['judul'] = form_error('judul');
+    		$ret['notif']['content'] = form_error('content');
+    		echo json_encode($ret);
+    		exit();
+    	}
+    	$this->load->library('ckeditor');
+		$this->ckeditor->basePath = base_url().'assets/ckeditor/';
+		$this->ckeditor->config['toolbar'] = array(
+		                array( 'Source', '-', 'Bold', 'Italic', 'Underline', '-','Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo','-','NumberedList','BulletedList' )
+		                                                    );
+		$this->ckeditor->config['language'] = 'it';
+		$this->ckeditor->config['width'] = '1024px';
+		$this->ckeditor->config['height'] = '300px'; 
+		$this->ciparser->new_parse('template_admin','modules_admin', 'home/hero_layout',$this->data);
+    }
+
+    public function layanan(){
+    	$this->data['layanan'] = $this->db->get('tb_layanan')->row_array();
+    	if ($this->input->server('REQUEST_METHOD') == 'POST') {
+    		$ret['state'] = 0;
+    		$ret['status'] = 0;
+    		$this->form_validation->set_error_delimiters('','');
+    		// $this->form_validation->set_rules('link','Video','trim|required');
+    		$this->form_validation->set_rules('judul','Judul Hero','trim|required');
+    		$this->form_validation->set_rules('content','Description','trim|required');
+    		if ($this->form_validation->run() == true) {
+    			$ret['state'] = 1;
+    			$dt_hero['title'] = $this->input->post('judul');
+    			$dt_hero['content'] = $this->input->post('content');
+    			if (isset($_FILES['userfile'])) {
+    				$image = $this->upload_logo($_FILES);
+	    			if (isset($image['error'])) {
+						$ret['notif'] = $image;
+					}else{
+						$dt_hero['gambar'] = $image['asli'];
+		    			if ($this->db->get('tb_layanan')->num_rows() > 0) {
+		    				if ($this->db->update('tb_layanan',$dt_hero,array('id_layanan'=>$this->data['layanan']['id_layanan']))) {
+		    					if (file_exists(FCPATH."media/".$this->data['layanan']['gambar'])) {
+			            			@chmod(FCPATH."media/".$this->data['layanan']['gambar'], 0777);
+			            			unlink(FCPATH."media/".$this->data['layanan']['gambar']);
+			            		}
+			            		if (file_exists(FCPATH."media/thumbnail/".$this->data['layanan']['gambar'])) {
+			            			@chmod(FCPATH."media/thumbnail/".$this->data['layanan']['gambar'], 0777);
+			            			unlink(FCPATH."media/thumbnail/".$this->data['layanan']['gambar']);
+			            		}
+			            		if (file_exists(FCPATH."media/crop/".$this->data['layanan']['gambar'])) {
+			            			@chmod(FCPATH."media/crop/".$this->data['layanan']['gambar'], 0777);
+			            			unlink(FCPATH."media/crop/".$this->data['layanan']['gambar']);
+			            		}
+		    					$ret['status'] = 1;
+		    				}
+		    			}else{
+		    				if ($this->db->insert('tb_layanan',$dt_hero)) {
+		    					$ret['status'] = 1;
+		    				}
+		    			}
+					}
+    			}else{
+    				if ($this->db->get('tb_layanan')->num_rows() > 0) {
+	    				if ($this->db->update('tb_layanan',$dt_hero,array('id_layanan'=>$this->data['layanan']['id_layanan']))) {
+	    					$ret['status'] = 1;
+	    				}
+	    			}else{
+	    				if ($this->db->insert('tb_layanan',$dt_hero)) {
+	    					$ret['status'] = 1;
+	    				}
+	    			}
+    			}
+    			
+    		}
+    		// $ret['notif']['link'] = form_error('link');
+    		$ret['notif']['judul'] = form_error('judul');
+    		$ret['notif']['content'] = form_error('content');
+    		echo json_encode($ret);
+    		exit();
+    	}
+    	$this->load->library('ckeditor');
+		$this->ckeditor->basePath = base_url().'assets/ckeditor/';
+		$this->ckeditor->config['toolbar'] = array(
+		                array( 'Source', '-', 'Bold', 'Italic', 'Underline', '-','Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo','-','NumberedList','BulletedList' )
+		                                                    );
+		$this->ckeditor->config['language'] = 'it';
+		$this->ckeditor->config['width'] = '1024px';
+		$this->ckeditor->config['height'] = '300px'; 
+		$this->ciparser->new_parse('template_admin','modules_admin', 'home/layanan_layout',$this->data);
+    }
+
     function _getExtension($str){
             $i = strrpos($str,".");
             if (!$i){

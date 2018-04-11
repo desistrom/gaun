@@ -58,7 +58,7 @@
         <div class="error" id="ntf_instansi"></div>
       </div>
       <div class="form-group">
-      <label>Instansi</label>
+      <label>Logo Instansi</label>
         <input type="file" class="form-control" name="userfile" id="userfile">
         <div class="error" id="ntf_userfile"></div>
         <div class="error" id="ntf_error"></div>

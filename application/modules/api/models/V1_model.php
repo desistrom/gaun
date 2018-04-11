@@ -143,4 +143,22 @@ class V1_model extends CI_Model{
 		}
 		return false;
 	}
+
+	public function getHero(){
+		$sql = "SELECT title as judul, link_video as video, content as deskripsi FROM tb_hero";
+		if ($this->db->query($sql)->num_rows() > 0) {
+			return $this->db->query($sql)->result_array();
+			exit();
+		}
+		return false;
+	}
+
+	public function getLayanan(){
+		$sql = "SELECT title as judul, gambar as image, content as deskripsi FROM tb_layanan";
+		if ($this->db->query($sql)->num_rows() > 0) {
+			return $this->db->query($sql)->result_array();
+			exit();
+		}
+		return false;
+	}
 }

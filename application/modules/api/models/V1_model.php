@@ -105,7 +105,7 @@ class V1_model extends CI_Model{
 	public function news(){
 		$sql = "SELECT n.id_news as newsId, n.created as tanggal,n.judul as title, n.content as news_content, u.name as author, k.nm_kategori as kategori, n.link as sumber, n.img as gambar
 			FROM tb_news n join tb_kategori_news k on n.id_kategori_ref = k.id_kategori_news 
-			join tb_user u on n.id_user_ref = u.id_user where n.is_aktif = 1";
+			join tb_user u on n.id_user_ref = u.id_user where n.is_aktif = 1 ORDER BY n.id_news ASC";
 		if ($this->db->query($sql)->num_rows() > 0) {
 			return $this->db->query($sql)->result_array();
 			exit();
@@ -128,6 +128,17 @@ class V1_model extends CI_Model{
 		$sql = "SELECT n.id_news as newsId, n.created as tanggal, n.judul as title, n.content as news_content, u.name as author, k.nm_kategori as kategori, n.link as sumber, n.img as gambar 
 			FROM tb_news n join tb_kategori_news k on n.id_kategori_ref = k.id_kategori_news 
 			join tb_user u on n.id_user_ref = u.id_user where n.is_aktif = 1 AND n.id_news = '".$data."'";
+		if ($this->db->query($sql)->num_rows() > 0) {
+			return $this->db->query($sql)->result_array();
+			exit();	
+		}
+		return false;
+	}
+
+	public function slugNews($data){
+		$sql = "SELECT n.id_news as newsId, n.created as tanggal, n.judul as title, n.content as news_content, u.name as author, k.nm_kategori as kategori, n.link as sumber, n.img as gambar 
+			FROM tb_news n join tb_kategori_news k on n.id_kategori_ref = k.id_kategori_news 
+			join tb_user u on n.id_user_ref = u.id_user where n.is_aktif = 1 AND n.link = '".$data."'";
 		if ($this->db->query($sql)->num_rows() > 0) {
 			return $this->db->query($sql)->result_array();
 			exit();	

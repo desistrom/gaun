@@ -43,6 +43,11 @@
         <input type="text" name="judul" class="form-control" id="judul" placeholder="Enter Judul Berita ..." value="">
         <div class="error" id="ntf_judul"></div>
       </div>
+      <div class="form-group">
+        <label>Gambar Berita</label>
+        <input type="file" name="file_name" class="form-control" id="file_name">
+        <div class="error" id="ntf_file_name"></div>
+      </div>
       <!-- textarea -->
       <div class="form-group">
         <label>Kategori Berita</label>
@@ -76,16 +81,21 @@
       <!-- text input -->
       <div class="form-group">
         <label>Judul Berita</label>
-        <input type="text" name="judul" class="form-control" id="judul" placeholder="Enter Judul Berita ..." value="">
+        <input type="text" name="judul" class="form-control" id="judul" placeholder="Enter Judul Berita ..." value="<?=$news['judul'];?>">
         <div class="error" id="ntf_judul"></div>
+      </div>
+      <div class="form-group">
+        <label>Gambar Berita</label>
+        <input type="file" name="file_name" class="form-control" id="file_name">
+        <div class="error" id="ntf_file_name"></div>
       </div>
       <!-- textarea -->
       <div class="form-group">
         <label>Kategori Berita</label>
         <select class="form-control" name="kategori" id="kategori" >
         	<option value="">-- Pilih Kategori --</option>
-        	<?php foreach ($variable as $key => $value): ?>
-        		<option value="<?=$value['id_ketegori_news'];?>"><?=$value['nm_kategori'];?></option>
+        	<?php foreach ($kategori as $key => $value): ?>
+        		<option <?php if ($news['id_kategori_ref'] == $value['id_kategori_news']){ ?> selected <?php } ?> value="<?=$value['id_kategori_news'];?>"><?=$value['nm_kategori'];?></option>
         	<?php endforeach ?>
         </select>
         <div class="error" id="ntf_kategori"></div>
@@ -93,7 +103,7 @@
 
       <div class="form-group">
       <label>Content News</label>
-      <?php echo $this->ckeditor->editor("content", "" ); ?>
+      <?php echo $this->ckeditor->editor("content", $news['content'] ); ?>
         <input type="hidden" name="content" id="content">
         <div class="error" id="ntf_content"></div>
       </div>
@@ -109,12 +119,22 @@
 <script type="text/javascript">
   $(document).ready(function () {
     $('body').on('click','#submit', function(){
-    	$('#content').val(CKEDITOR.instances.content.getData());
+      var form_data = new FormData();
+      var file_data = $('#file_name').prop('files')[0];
+      $('#content').val(CKEDITOR.instances.content.getData());
+      form_data.append('judul', $('#judul').val());
+      form_data.append('kategori', $('#kategori').val());
+      form_data.append('content', $('#content').val());
+      form_data.append('file_name', file_data);
       $.ajax({
           url : window.location.href,
           dataType : 'json',
           type : 'POST',
-          data : $('form').serialize()
+          data : form_data,
+          async : false,
+          cache : false ,
+          contentType : false , 
+          processData : false
       }).done(function(data){
           console.log(data);
           if(data.state == 1){

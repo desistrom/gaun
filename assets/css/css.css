@@ -462,6 +462,160 @@ section.client div.arrow-line{
 div.row.sub-testimoni{
   margin-top:-8em;
 }
+
+
+/*style news*/
+.news .content-right{
+  float:right;
+  padding-left:40px;
+  border-left:solid 1px #9E9E9E;
+}
+
+.list-artikel{
+  box-shadow:0px 0px 48px 0px #bdbdbd;
+  background-color:white;
+  margin-bottom:3em;
+}
+
+.title-news{
+  padding:5px 0;
+  font-weight:bold;
+  color:#545E5D;
+  text-align:justify;
+  text-justify:newspaper;
+}
+
+p.isi-news{
+  color:#9E9E9E;
+  padding-bottom:15px;
+}
+
+ul.list-inline.date_event{
+  border-left:solid 3px #D10909;
+  padding-left:15px;
+  color:#9E9E9E;
+}
+
+.btn-read-more{
+  color:white;
+  background-color:#CF0909;
+  right:15px;
+  position:absolute;
+  bottom:0;
+}
+
+.desrip-news{
+  height:100%;
+  padding-bottom:3.5em;
+}
+
+div.line-category-title{
+  height:3px;
+  width:80px;
+  background-color:#CF0909;
+}
+
+.content-left{
+  padding-right:inherit;
+  padding-right:3em;
+  margin-top:-11em;
+}
+
+ul.list-unstyled.list-category li{
+  padding:7px 0;
+}
+
+ul.list-unstyled.list-category li a{
+  text-decoration:none;
+  color:#9E9E9E;
+}
+
+ul.list-unstyled.list-category li a.active{
+  text-decoration:none;
+  color:#D10909;
+  font-weight:600;
+}
+
+ul.list-unstyled.list-category li a:hover{
+  text-decoration:none;
+  color:#D10909;
+}
+
+ul.list-unstyled.list-category{
+  padding-top:10px;
+}
+
+div.filter-side-bar{
+  margin-bottom:3em;
+}
+
+h3.categoery{
+  color:#545E5D;
+  font-weight:600;
+}
+
+div.row.content-news{
+  background-color:white;
+  padding:3em 0;
+}
+
+.line-news, .header-title{
+  display:inline-block;
+}
+
+.title-page-news .line-news div{
+  width:50px;
+  height:3px;
+  background-color:#D10909;
+  margin-right:2em;
+  margin-top:-16px;
+}
+
+.title-page-news{
+  background-color:#F2F2F2;
+  padding:2em 0 10em 0;
+}
+
+div.container-fluid.none-padding.filter-title-page-news{
+  padding-left:0;
+  padding-right:0;
+}
+
+div.header-title h1{
+  font-size:66px;
+}
+
+ul.list-inline.list-pagination{
+  background-color:white;
+  padding:20px;
+}
+
+ul.list-inline.list-pagination li{
+  padding:15px;
+  margin:0 5px;
+  color:#9E9E9E;
+}
+
+ul.list-inline.list-pagination li:hover{
+  padding:15px;
+  color:#D10909;
+  text-align:center;
+  cursor:pointer;
+}
+
+ul.list-inline.list-pagination li.active{
+  padding:10px 13px;
+  color:white;
+  background-color:#D10909;
+  border-radius:6px;
+}
+
+div.container-fluid.section-pagination{
+  margin-top:-13em;
+  padding-bottom:2em;
+  background-color:#F2F2F2;
+}
+
 @media(max-width:1300px){
   .hero-left h1{
     font-size: 36px;

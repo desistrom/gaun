@@ -46,12 +46,12 @@
             <div class="row">
                 <div class="col-md-7 col-sm-8 col-xs-12 sub-service-left">
                     <div class="filter-box"><img class="img-responsive" src="<?=base_url();?>media/<?php echo $layanan['image']; ?>"></div>
-                    <div class="navigation">
+                    <!-- <div class="navigation">
                         <ul class="">
                             <li style="border-right: solid 1px #761919;"><a href="#" style="color:#421A1A; "><i class="fa fa-angle-left"></i></a></li>
                             <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
                         </ul>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="col-md-5 col-sm-4 col-xs-12 sub-service-right">
                     <h3>Kemudahan Berbagi</h3>

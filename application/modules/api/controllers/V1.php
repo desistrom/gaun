@@ -205,6 +205,18 @@ class V1 extends REST_Controller {
         $this->_get_news_by_id($param);
     }
 
+    public function get_news_byslug_get(){
+        header('Content-Type: application/json');
+        $param['news'] = $_GET['news'];
+        if(!isset($param['news']) || $param['news'] == ''){
+            $retData['code'] = '500';
+            $retData['status'] = 'failed';
+            $retData['error'] = 'Your parameter is invalid';
+            $this->response($retData,400);
+        }
+        $this->_get_news_by_slug($param);
+    }
+
     //untuk testimoni
 
     public function gettestimoni_get(){
@@ -426,9 +438,13 @@ class V1 extends REST_Controller {
         $retData['code'] = '200';
         $retData['status'] = 'success';
         foreach ($news as $key => $value) {
+            if ($value['sumber'] == '' && $value['gambar'] != '') {
+                $news[$key]['gambar'] = base_url().'assets/media/'.$news[$key]['gambar'];
+            }
             if ($value['gambar'] == '') {
                 $news[$key]['gambar']=base_url().'assets/images/logo/IDREN-2.png';
             }
+
         }
         $retData['data'] = $news;
         $this->response($retData,200);
@@ -453,6 +469,22 @@ class V1 extends REST_Controller {
     function _get_news_by_id($data){
         $param = $data['data'];
         $news = $this->v1_model->rowNews($param);
+        
+        if ($news == '') {
+            $retData['code'] = '500';
+            $retData['status'] = 'Failed';
+            $retData['data'] = 'data not found';
+        }else{
+            $retData['code'] = '200';
+            $retData['status'] = 'success';
+            $retData['data'] = $news;
+        }
+        $this->response($retData,200);
+    }
+
+    function _get_news_by_slug($data){
+        $param = $data['news'];
+        $news = $this->v1_model->slugNews($param);
         
         if ($news == '') {
             $retData['code'] = '500';

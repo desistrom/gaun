@@ -27,6 +27,27 @@
 				</div>
 			</div>
 		</div>
+		<?php if ($this->session->flashdata('notif') != '') { ?>
+		<div class="modal" tabindex="-1" role="dialog" id="modalSuccess">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h3 class="modal-title">Success</h3>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body">
+		        <p><?=$this->session->flashdata('notif');?></p>
+		      </div>
+		      <div class="modal-footer">
+		        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		<?php } ?>
 		<?php }elseif($view == 'add'){ ?>
 		<div class="box-header with-border">
 			<h3 class="box-title">Add Instansi</h3>
@@ -37,9 +58,31 @@
 				<!-- text input -->
 				<div class="form-group">
 					<label>Nama Instansi</label>
-					<input type="text" name="nama" class="form-control" id="name" placeholder="Masukan Nama Instansi ..." value="">
-					<div class="error" id="ntf_nama"></div>
+					<input type="text" name="name" class="form-control" id="name" placeholder="Masukan Nama Instansi ..." value="">
+					<div class="error" id="ntf_name"></div>
 				</div>
+				<div class="form-group">
+			      <label>website</label>
+			        <input type="text" class="form-control" name="website" id="website" value="" placeholder="Enter Link Website ...">
+			        <div class="error" id="ntf_website"></div>
+			      </div>
+
+			      <div class="form-group">
+			      <label>Phone Number</label>
+			        <input type="text" class="form-control" name="phone" id="phone" value="" placeholder="Enter Phone Number ...">
+			        <div class="error" id="ntf_phone"></div>
+			      </div>
+			      <div class="form-group">
+			      	<label>Alamat Instansi</label>
+			      	<textarea class="form-control" id="alamat" name="alamat" placeholder="Masukan Alamat ...."></textarea>
+			      	<div class="error" id="ntf_alamat"></div>
+			      </div>
+			      <div class="form-group">
+			      <label>Logo Instansi</label>
+			        <input type="file" class="form-control" name="userfile" id="userfile">
+			        <div class="error" id="ntf_userfile"></div>
+			        <div class="error" id="ntf_error"></div>
+			      </div>
 				<button type="button" class="btn btn-primary" id="submit">Submit</button>
 			</form>
 		</div>
@@ -53,9 +96,31 @@
 				<!-- text input -->
 				<div class="form-group">
 					<label>Nama Instansi</label>
-					<input type="text" name="nama" class="form-control" id="name" placeholder="Masukan Nama Instansi ..." value="<?=$instansi['nm_instansi'];?>">
-					<div class="error" id="ntf_nama"></div>
+					<input type="text" name="name" class="form-control" id="name" placeholder="Masukan Nama Instansi ..." value="<?=$instansi['nm_instansi'];?>">
+					<div class="error" id="ntf_name"></div>
 				</div>
+				<div class="form-group">
+			      <label>website</label>
+			        <input type="text" class="form-control" name="website" id="website" value="<?=$instansi['website'];?>" placeholder="Enter Link Website ...">
+			        <div class="error" id="ntf_website"></div>
+			      </div>
+
+			      <div class="form-group">
+			      <label>Phone Number</label>
+			        <input type="text" class="form-control" name="phone" id="phone" value="<?=$instansi['phone'];?>" placeholder="Enter Phone Number ...">
+			        <div class="error" id="ntf_phone"></div>
+			      </div>
+			      <div class="form-group">
+			      	<label>Alamat Instansi</label>
+			      	<textarea class="form-control" id="alamat" name="alamat"><?=$instansi['alamat'];?></textarea>
+			      	<div class="error" id="ntf_alamat"></div>
+			      </div>
+			      <div class="form-group">
+			      <label>Logo Instansi</label>
+			        <input type="file" class="form-control" name="userfile" id="userfile">
+			        <div class="error" id="ntf_userfile"></div>
+			        <div class="error" id="ntf_error"></div>
+			      </div>
 				<button type="button" class="btn btn-primary" id="submit">Submit</button>
 			</form>
 		</div>
@@ -65,11 +130,22 @@
 <script type="text/javascript">
   $(document).ready(function () {
     $('body').on('click','#submit', function(){
+      var form_data = new FormData();
+      var data_file = $('#userfile').prop('files')[0];
+      form_data.append('userfile',data_file);
+      form_data.append('name',$('#name').val());
+      form_data.append('website',$('#website').val());
+      form_data.append('phone',$('#phone').val());
+      form_data.append('alamat',$('#alamat').val());
       $.ajax({
           url : window.location.href,
           dataType : 'json',
           type : 'POST',
-          data : $('form').serialize()
+          data : form_data,
+          async : false,
+          cache : false ,
+          contentType : false , 
+          processData : false
       }).done(function(data){
           console.log(data);
           if(data.state == 1){
@@ -89,5 +165,6 @@
             });
       });
     });
+    $('#modalSuccess').modal('show');
   });
 </script>

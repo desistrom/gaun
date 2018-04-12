@@ -59,7 +59,7 @@ class V1_model extends CI_Model{
 	}
 
 	public function getInstansi(){
-		$sql = "SELECT nm_instansi as instansi, id_instansi as id FROM tb_instansi";
+		$sql = "SELECT nm_instansi as instansi, id_instansi as id, phone as number_phone, website as link, alamat as address, gambar as image FROM tb_instansi";
 		if ($this->db->query($sql)->num_rows() > 0) {
 			return $this->db->query($sql)->result_array();
 			exit();
@@ -147,7 +147,7 @@ class V1_model extends CI_Model{
 	}
 
 	public function getTestimoni(){
-		$sql = "SELECT t.content as testimoni, u.name as nama_user, email as email_user, gambar as image FROM tb_testimoni t join tb_user u on t.id_user_ref = u.id_user";
+		$sql = "SELECT content as testimoni, gambar as image, id_testimoni as testimoniId, nama_user as user, jabatan as sebagai  FROM tb_testimoni";
 		if ($this->db->query($sql)->num_rows() > 0) {
 			return $this->db->query($sql)->result_array();
 			exit();
@@ -165,6 +165,15 @@ class V1_model extends CI_Model{
 	}
 
 	public function getLayanan(){
+		$sql = "SELECT title as judul, gambar as image, content as deskripsi FROM tb_layanan";
+		if ($this->db->query($sql)->num_rows() > 0) {
+			return $this->db->query($sql)->row_array();
+			exit();
+		}
+		return false;
+	}
+
+	public function getLogo(){
 		$sql = "SELECT title as judul, gambar as image, content as deskripsi FROM tb_layanan";
 		if ($this->db->query($sql)->num_rows() > 0) {
 			return $this->db->query($sql)->row_array();

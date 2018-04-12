@@ -9,10 +9,8 @@
                     </div>
                 </div>
                     <div class="col-md-6 col-sm-6 col-xs-12 hero-left">
-                    <h1><?php $ex = explode(" ", $hero['judul']); $numb = count($ex); for ($i=0; $i < $numb-1 ; $i++) { 
-                        echo $ex[$i]." ";
-                    } ?>
-                    <span style="color:#D10909; "><?php echo end($ex); ?></span></h1>
+                    <h1><?php echo $hero['judul']; ?></h1>
+                  <!--   <h1>dengan <span style="color:#D10909; ">Jaringan Privat</span></h1> -->
                     <p> <?php echo $hero['deskripsi']; ?></p>
                  
                     <button class="btn  btn-pelajari" type="button">Pelajari lebih lanjut <i class="fa fa-long-arrow-right"></i></button>
@@ -20,17 +18,7 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="arrow-line">
                         <div class="line-left"><a class="js-scroll-trigger" href="#layanan"><i class="glyphicon glyphicon-arrow-down"></i></a></div>
-                        <div class="line-right">
-                            <ul class="list-unstyled">
-                                <li> </li>
-                                <li> </li>
-                                <li> </li>
-                                <li> </li>
-                             <!--    <li> </li>
-                                <li> </li>
-                                <li> </li> -->
-                            </ul>
-                        </div>
+                       
                     </div>
                 </div>
             </div>
@@ -62,18 +50,8 @@
                 </div>
                 <div class="col-md-12 col-sm-12 col-xs-12 text-right">
                     <div class="arrow-line">
-                        <div class="line-left"><a class="js-scroll-trigger" href="#arrow-client"><i class="glyphicon glyphicon-arrow-down"></i></a></div>
-                        <div class="line-right">
-                            <ul class="list-unstyled">
-                                <li> </li>
-                                <li> </li>
-                                <li> </li>
-                                <li> </li>
-                                <li> </li>
-                                <li id="arrow-client"> </li>
-                                <li> </li>
-                            </ul>
-                        </div>
+                        <div class="line-left"><a class="js-scroll-trigger" href="#client"><i class="glyphicon glyphicon-arrow-down"></i></a></div>
+                        
                     </div>
                 </div>
             </div>
@@ -85,58 +63,16 @@
                 <div class="col-md-12 col-sm-12 col-xs-12 top" >
                     <h3 class="text-center">Akademisi yang bergabung dengan kami</h3></div>
                 <div class="col-md-12 col-sm-12 col-xs-12 none-padding sub-client" id="owl-demo" >
-                    <?php foreach ($user as $key => $value) :  ?>
+                    <?php foreach ($instansi as $key => $value) :  ?>
                     <div class="col col-md-12 col-sm-12 col-xs-12 text-center item">
                         <div class="filter-img-client "><img src="<?php echo $value['image_thumbnail']; ?>" class="img-responsive" ></div>
                     </div>
                 <?php endforeach ?>
-                    <!-- <div class="col col-md-12 col-sm-12 col-xs-12 text-center item">
-                        <div class="filter-img-client"><img src="<?=base_url();?>assets/images/logo/logo2.png"></div>
-                    </div>
-                    <div class="col col-md-12 col-sm-12 col-xs12 text-center item">
-                        <div class="filter-img-client"><img src="<?=base_url();?>assets/images/logo/logo3.png"></div>
-                    </div>
-                    <div class="col col-md-12 col-sm-12 col-xs-12 text-center item">
-                        <div class="filter-img-client"><img src="<?=base_url();?>assets/images/logo/logo4.png"></div>
-                    </div>
-                    <div class="col col-md-12 col-sm-12 col-xs-12 text-center item">
-                        <div class="filter-img-client"><img src="<?=base_url();?>assets/images/logo/logo5.png"></div>
-                    </div>
-                    <div class="col col-md-12 col-sm-12 col-xs-12 text-center item">
-                        <div class="filter-img-client"><img src="<?=base_url();?>assets/images/logo/logo6.png"></div>
-                    </div>
-                    <div class="col col-md-12 col-sm-12 col-xs-12 text-center item">
-                        <div class="filter-img-client"><img src="<?=base_url();?>assets/images/logo/logo7.png"></div>
-                    </div>
-                    <div class="col col-md-12 col-sm-12 col-xs-12 text-center item">
-                        <div class="filter-img-client"><img src="<?=base_url();?>assets/images/logo/logo8.png"></div>
-                    </div>
-                    <div class="col col-md-12 col-sm-12 col-xs-12 text-center item">
-                        <div class="filter-img-client"><img src="<?=base_url();?>assets/images/logo/logo1.png"></div>
-                    </div>
-                    <div class="col col-md-12 col-sm-12 col-xs-12 text-center item">
-                        <div class="filter-img-client"><img src="<?=base_url();?>assets/images/logo/logo2.png"></div>
-                    </div>
-                    <div class="col col-md-12 col-sm-12 col-xs12 text-center item">
-                        <div class="filter-img-client"><img src="<?=base_url();?>assets/images/logo/logo3.png"></div>
-                    </div>
-                    <div class="col col-md-12 col-sm-12 col-xs-12 text-center item">
-                        <div class="filter-img-client"><img src="<?=base_url();?>assets/images/logo/logo4.png"></div>
-                    </div> -->
+            
                 </div>
                 <div class="col-md-6 col-sm-6 col-xs-6 none-padding">
                     <div class="arrow-line">
-                        <div class="line-left"><a class="js-scroll-trigger" href="#arrow-testimoni"><i class="glyphicon glyphicon-arrow-down"></i></a></div>
-                        <div class="line-right">
-                            <ul class="list-unstyled" >
-                                <li> </li>
-                                <li> </li>
-                                <li > </li>
-                                <li > </li>
-                                <li id="arrow-testimoni"> </li>
-
-                            </ul>
-                        </div>
+                        <div class="line-left"><a class="js-scroll-trigger" href="#testimonial"><i class="glyphicon glyphicon-arrow-down"></i></a></div>
                     </div>
                 </div>
             </div>
@@ -147,30 +83,14 @@
             <div class="row sub-testimoni" id="owl-demo">
                 <?php foreach ($testimoni as $key => $value) : ?>
                 <div class="col-md-12 col-sm-12 col-xs-12 text-center item" >
-                    <div class="filter-img-testimoni"><img src="<?=base_url();?>assets/images/logo/user.jpg" class="img-testimoni"></div>
-                    <h2 class="name-testi"><?php echo $value['nama_user']; ?></h2>
-                    <h3 class="job description">Menteri Riset, Teknologi dan Pendidikan Tinggi Republik Indonesia </h3><i class="fa fa-quote-left fa-2x"></i>
-                    <p> <?php echo $value['testimoni']; ?><!-- IDren memiliki sistem jaringan privat yang aman serta ditunjang dengan akses yang mudah bagi akademisi yang ingin melakukan segala kebutuhan kampus seperti live streaming,riset, atau menambah resource baru. Mari berkolaborasi bersama-sama
-                        dan dapatkan update terbaru setiap hari di website ini. --> </p>
+                    <div class="filter-img-testimoni"><img src="<?php echo $value['image']; ?>" class="img-testimoni"></div>
+                    <h2 class="name-testi"><?php echo $value['user']; ?></h2>
+                    <h3 class="job description"><?php echo $value['sebagai']; ?> </h3><i class="fa fa-quote-left fa-2x"></i>
+                    <p> <?php echo $value['testimoni']; ?></p>
                     <button class="btn  btn-rekomendasi" type="button">Lihat Rekomendasi Lain</button>
                 </div>
             <?php endforeach ?>
-                <!-- <div class="col-md-12 col-sm-12 col-xs-12 text-center item" >
-                    <div class="filter-img-testimoni"><img src="<?=base_url();?>assets/images/logo/user.jpg" class="img-testimoni"></div>
-                    <h2 class="name-testi">Muhammad Nasir</h2>
-                    <h3 class="job description">Menteri Riset, Teknologi dan Pendidikan Tinggi Republik Indonesia </h3><i class="fa fa-quote-left fa-2x"></i>
-                    <p>IDren memiliki sistem jaringan privat yang aman serta ditunjang dengan akses yang mudah bagi akademisi yang ingin melakukan segala kebutuhan kampus seperti live streaming,riset, atau menambah resource baru. Mari berkolaborasi bersama-sama
-                        dan dapatkan update terbaru setiap hari di website ini. </p>
-                    <button class="btn  btn-rekomendasi" type="button">Lihat Rekomendasi Lain</button>
-                </div>
-                <div class="col-md-12 col-sm-12 col-xs-12 text-center item" >
-                    <div class="filter-img-testimoni"><img src="<?=base_url();?>assets/images/logo/user.jpg" class="img-testimoni"></div>
-                    <h2 class="name-testi">Muhammad Nasir</h2>
-                    <h3 class="job description">Menteri Riset, Teknologi dan Pendidikan Tinggi Republik Indonesia </h3><i class="fa fa-quote-left fa-2x"></i>
-                    <p>IDren memiliki sistem jaringan privat yang aman serta ditunjang dengan akses yang mudah bagi akademisi yang ingin melakukan segala kebutuhan kampus seperti live streaming,riset, atau menambah resource baru. Mari berkolaborasi bersama-sama
-                        dan dapatkan update terbaru setiap hari di website ini. </p>
-                    <button class="btn btn-rekomendasi" type="button">Lihat Rekomendasi Lain</button>
-                </div> -->
+             
             </div>
         </div>
     </section>

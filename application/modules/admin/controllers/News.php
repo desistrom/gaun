@@ -46,6 +46,7 @@ class News extends MX_Controller  {
 						if ($this->db->insert('tb_news',$data_news)) {
 							$ret['status'] = 1;
 							$ret['url'] = site_url('admin/news');
+							$this->session->set_flashdata("notif","Data Berhasil di Masukan");
 						}
 					}
 				}
@@ -114,6 +115,7 @@ class News extends MX_Controller  {
 				if ($this->db->update('tb_news',$data_news,array('id_news'=>$id))) {
 					$ret['status'] = 1;
 					$ret['url'] = site_url('admin/news');
+					$this->session->set_flashdata("notif","Data Berhasil di Masukan");
 				}
 				
 			
@@ -163,6 +165,7 @@ class News extends MX_Controller  {
 			}
 			
 				$ret['url'] = site_url('admin/news');
+				$this->session->set_flashdata("notif","Data Berhasil di Masukan");
 		}
 		redirect(site_url('admin/news'));
 	}
@@ -252,7 +255,7 @@ class News extends MX_Controller  {
         else
         {
             $upload_data = $this->upload->data();
-
+            $data_upload['asli'] = $upload_data['file_name'];
             if ($upload_data['image_width'] > 768 ) {
                 $data = array('upload_data' => $this->upload->data());
                 $config_r['image_library'] = 'GD2';
@@ -271,7 +274,7 @@ class News extends MX_Controller  {
                 }else{
                         // echo "berhasil resize";
                         $data_upload['resize'] = site_url('assets/media/thumbnail/')."/".$upload_data['file_name'];
-                        $data_upload['asli'] = $upload_data['file_name'];
+                        
                 }
             }
             if ($upload_data['image_width'] > 768) {

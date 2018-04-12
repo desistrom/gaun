@@ -15,15 +15,15 @@
     <tr>
       <th>No</th>
       <th>Nama User</th>
-      <th>Email</th>
+      <th>Jabatan</th>
       <th>Content</th>
       <th>aksi</th>
     </tr>
     <?php foreach ($testimoni as $key => $value): ?>
       <tr>
         <td><?=($key+1);?></td>
-        <td><?=$value['name'];?></td>
-        <td><?=$value['email'];?></td>
+        <td><?=$value['nama_user'];?></td>
+        <td><?=$value['jabatan'];?></td>
         <td><?=$value['content'];?></td>
         <td>
           <!-- <button class="btn btn-default">disable</button> -->
@@ -40,7 +40,27 @@
   </div>
 </div>
 
-
+<?php if ($this->session->flashdata('notif') != '') { ?>
+    <div class="modal" tabindex="-1" role="dialog" id="modalSuccess">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title">Success</h3>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p><?=$this->session->flashdata('notif');?></p>
+          </div>
+          <div class="modal-footer">
+            <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  <?php } ?>
 <?php }elseif($view == 'add'){ ?>
   <div class="box-header with-border">
     <h3 class="box-title">General Elements</h3>
@@ -49,6 +69,25 @@
   <div class="box-body">
     <form role="form">
       <!-- textarea -->
+      <div class="form-group">
+        <label>Nama User</label>
+        <input type="text" name="name" class="form-control" value="" id="name">
+        <div class="error" id="ntf_name"></div>
+      </div>
+
+      <div class="form-group">
+        <label>Jabatan</label>
+        <input type="text" name="jabatan" class="form-control" value="" id="jabatan">
+        <div class="error" id="ntf_jabatan"></div>
+      </div>
+
+      <div class="form-group">
+      <label>Gambar User</label>
+        <input type="file" class="form-control" name="userfile" id="userfile">
+        <div class="error" id="ntf_userfile"></div>
+        <div class="error" id="ntf_error"></div>
+      </div>
+
       <div class="form-group">
         <label>Testimoni</label>
         <?php echo $this->ckeditor->editor("content", ''); ?>
@@ -66,14 +105,36 @@
   <!-- /.box-header -->
   <div class="box-body">
     <form role="form">
-      <!-- textarea -->
+
+      <div class="form-group">
+        <label>Nama User</label>
+        <input type="text" name="name" class="form-control" value="<?=$testimoni['nama_user'];?>" id="name">
+        <div class="error" id="ntf_name"></div>
+      </div>
+
+      <div class="form-group">
+        <label>Jabatan</label>
+        <input type="text" name="jabatan" class="form-control" value="<?=$testimoni['jabatan'];?>" id="jabatan">
+        <div class="error" id="ntf_jabatan"></div>
+      </div>
+
+      <div class="form-group">
+      <label>Gambar User</label>
+        <input type="file" class="form-control" name="userfile" id="userfile">
+        <div class="error" id="ntf_userfile"></div>
+        <div class="error" id="ntf_error"></div>
+      </div>
+      <div class="form-group">
+        <img src="<?=base_url();?>media/<?=$testimoni['gambar'];?>" width="50%">
+      </div>
+      
       <div class="form-group">
         <label>testimoni</label>
         <?php echo $this->ckeditor->editor("content", $testimoni['content'] ); ?>
         <input type="hidden" name="content" value="<?php if(isset($testimoni)){ echo $testimoni['content']; } ?>" id="content">
         <div class="error" id="ntf_content"></div>
       </div>
-      <input type="hidden" name="id" value="<?php if(isset($testimoni)){ echo $testimoni['id_testimoni']; } ?>">
+      <input type="hidden" name="id" id="id" value="<?php if(isset($testimoni)){ echo $testimoni['id_testimoni']; } ?>">
 
       <button type="button" class="btn btn-primary" id="submit">Submit</button>
 
@@ -86,14 +147,22 @@
 <script type="text/javascript">
   $(document).ready(function () {
     $('body').on('click','#submit', function(){
-      // console.log($('form').val());
+      var form_data = new FormData();
+      var data_file = $('#userfile').prop('files')[0];
+      form_data.append('userfile',data_file);
+      form_data.append('jabatan',$('#jabatan').val());
+      form_data.append('name',$('#name').val());
       $('#content').val(CKEDITOR.instances.content.getData());
-      // return false;
+      form_data.append('content',$('#content').val());
       $.ajax({
           url : window.location.href,
           dataType : 'json',
           type : 'POST',
-          data : $('form').serialize()
+          data : form_data,
+          async : false,
+          cache : false ,
+          contentType : false , 
+          processData : false
       }).done(function(data){
           console.log(data);
           if(data.state == 1){
@@ -113,5 +182,6 @@
             });
       });
     });
+    $('#modalSuccess').modal('show');
   });
 </script>

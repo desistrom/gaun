@@ -29,6 +29,7 @@ class About extends MX_Controller  {
 				$id['id_about'] = $this->input->post('id');
 				if ($this->db->update('tb_about',$about,$id)) {
 					$ret['status'] = 1;
+					$this->session->set_flashdata("notif","Data Berhasil di Masukan");
 				}
 			}
 			$ret['notif']['content'] = form_error('content');

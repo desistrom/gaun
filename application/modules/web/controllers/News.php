@@ -16,27 +16,26 @@ class News extends CI_Controller  {
     }
 
     function index() {
-        $url = "http://192.168.88.138/idren/api/v1/news";
+        $url = site_url('api/v1/news');
         $methode = 'GET';
         $token = '';
-        $a = api_helper('',$url,$methode,$token);
+        $a = api_helper($token,$url,$methode,$token);
 
-
-        // $url = "http://192.168.88.138/idren/api/v1/about";
-        // $a = json_decode($this->hit_api($url),true);
         $this->data['news']=$a['data'];
     	$this->ciparser->new_parse('template_frontend','modules_web', 'news_layout',$this->data);
     }
         function get_news() {
-        $url = "http://192.168.88.138/idren/api/v1/get_news_byid";
-        $methode = 'GET';
+        $id=$_GET['data'];
+
+        $url = site_url('api/v1/get_news_byid');
+        $methode = 'POST';
         $token = '';
-        $a = api_helper('',$url,$methode,$token);
+        $data['data']=$id;
+        $a = api_helper(json_encode($data),$url,$methode,$token);
 
 
-        $url = "http://192.168.88.138/idren/api/v1/about";
         $a = json_decode($this->hit_api($url),true);
-        $this->data['news']=$a['data'];
+        $this->data['detail_news']=$a['data'];
         $this->ciparser->new_parse('template_frontend','modules_web', 'detail_news_layout',$this->data);
     }
     

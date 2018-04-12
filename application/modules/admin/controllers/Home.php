@@ -64,6 +64,7 @@ class Home extends CI_Controller  {
 	            			unlink(FCPATH."media/crop/".$this->data['image']['logo']);
 	            		}
 						$ret['url'] = current_url();
+						$this->session->set_flashdata("notif","Data Berhasil di Masukan");
 					}
 				}
 			}
@@ -86,17 +87,34 @@ class Home extends CI_Controller  {
 			$ret['status'] = 0;
 			$this->form_validation->set_error_delimiters('','');
 			$this->form_validation->set_rules('content','Content','trim|required');
+			$this->form_validation->set_rules('name','Nama User','trim|required');
+			$this->form_validation->set_rules('jabatan','Jabatan','trim|required');
 			if ($this->form_validation->run() == true) {
 				$ret['state'] = 1;
 				$testimoni['content'] = $this->input->post('content');
-				$testimoni['id_user_ref'] = $this->session->userdata('data_user')['id_user'];
-				// $id['id_about'] = $this->input->post('id');
-				if ($this->db->insert('tb_testimoni',$testimoni)) {
-					$ret['status'] = 1;
-					$ret['url'] = site_url('admin/home/testimoni');
+				$testimoni['nama_user'] = $this->input->post('name');
+				$testimoni['jabatan'] = $this->input->post('jabatan');
+				if (isset($_FILES['userfile'])) {
+					$image = $this->upload_logo($_FILES);
+					if (isset($image['error'])) {
+						$ret['notif'] = $image;
+					}else{
+						$ret['state'] = 1;
+						$testimoni['gambar'] = $image['asli'];
+						if ($this->db->insert('tb_testimoni',$testimoni)) {
+							$ret['status'] = 1;
+							$ret['url'] = site_url('admin/home/testimoni');
+							$this->session->set_flashdata("notif","Data Berhasil di Masukan");
+						}
+					}
 				}
 			}
 			$ret['notif']['content'] = form_error('content');
+			$ret['notif']['name'] = form_error('name');
+			$ret['notif']['jabatan'] = form_error('jabatan');
+			if (!isset($_FILES['userfile'])) {
+				$ret['notif']['userfile'] = "Please Select File";
+			}
 			echo json_encode($ret);
 			exit();
 		}
@@ -115,21 +133,63 @@ class Home extends CI_Controller  {
 	public function edit_testimoni(){
 		$url = $this->uri->segment_array();
 		$id = end($url);
+		$this->data['testimoni'] = $this->db->get_where('tb_testimoni',array('id_testimoni'=>$id))->row_array();
+		/*print_r($this->input->post());
+		return false;*/
 		if ($this->input->server('REQUEST_METHOD') == 'POST') {
 			$ret['state'] = 0;
 			$ret['status'] = 0;
 			$this->form_validation->set_error_delimiters('','');
 			$this->form_validation->set_rules('content','Content','trim|required');
+			$this->form_validation->set_rules('name','Nama User','trim|required');
+			$this->form_validation->set_rules('jabatan','Jabatan','trim|required');
 			if ($this->form_validation->run() == true) {
 				$ret['state'] = 1;
 				$testimoni['content'] = $this->input->post('content');
 				// $testimoni['id_user_ref'] = $this->session->userdata('data_user')['id_user'];
-				$id_testimoni['id_testimoni'] = $this->input->post('id');
+				$testimoni['nama_user'] = $this->input->post('name');
+				$testimoni['jabatan'] = $this->input->post('jabatan');
+				$id_testimoni['id_testimoni'] = $id;
+				if (isset($_FILES['userfile'])) {
+					$image = $this->upload_logo($_FILES);
+	    			if (isset($image['error'])) {
+						$ret['notif'] = $image;
+					}else{
+						$testimoni['gambar'] = $image['asli'];
+		    			if ($this->db->get('tb_layanan')->num_rows() > 0) {
+		    				if ($this->db->update('tb_testimoni',$testimoni,$id_testimoni)) {
+		    					if (file_exists(FCPATH."media/".$this->data['testimoni']['gambar'])) {
+			            			@chmod(FCPATH."media/".$this->data['testimoni']['gambar'], 0777);
+			            			@unlink(FCPATH."media/".$this->data['testimoni']['gambar']);
+			            		}
+			            		if (file_exists(FCPATH."media/thumbnail/".$this->data['testimoni']['gambar'])) {
+			            			@chmod(FCPATH."media/thumbnail/".$this->data['testimoni']['gambar'], 0777);
+			            			@unlink(FCPATH."media/thumbnail/".$this->data['testimoni']['gambar']);
+			            		}
+			            		if (file_exists(FCPATH."media/crop/".$this->data['testimoni']['gambar'])) {
+			            			@chmod(FCPATH."media/crop/".$this->data['testimoni']['gambar'], 0777);
+			            			@unlink(FCPATH."media/crop/".$this->data['testimoni']['gambar']);
+			            		}
+		    					$ret['status'] = 1;
+		    					$ret['url'] = site_url('admin/home/testimoni');
+		    					$this->session->set_flashdata("notif","Data Berhasil di Masukan");
+		    				}
+		    			}
+					}
+				}else{
+					if ($this->db->update('tb_testimoni',$testimoni,$id_testimoni)) {
+						$ret['status'] = 1;
+						$ret['url'] = site_url('admin/home/testimoni');
+						$this->session->set_flashdata("notif","Data Berhasil di Masukan");
+					}
+				}/*
 				if ($this->db->update('tb_testimoni',$testimoni,$id_testimoni)) {
 					$ret['status'] = 1;
 					$ret['url'] = site_url('admin/home/testimoni');
-				}
+				}*/
 			}
+			$ret['notif']['name'] = form_error('name');
+			$ret['notif']['jabatan'] = form_error('jabatan');
 			$ret['notif']['content'] = form_error('content');
 			echo json_encode($ret);
 			exit();
@@ -143,7 +203,7 @@ class Home extends CI_Controller  {
 		$this->ckeditor->config['width'] = '1024px';
 		$this->ckeditor->config['height'] = '300px';  
 		$this->data['view'] = 'edit';
-		$this->data['testimoni'] = $this->db->get_where('tb_testimoni',array('id_testimoni'=>$id))->row_array();
+		
 		$this->ciparser->new_parse('template_admin','modules_admin', 'home/master_testimoni_layout',$this->data);
 	}
 
@@ -153,9 +213,9 @@ class Home extends CI_Controller  {
         $ext = strtolower($this->_getExtension($imagename));
         $config['upload_path']          = FCPATH."media/";
         $config['allowed_types']        = 'gif|jpg|png';
-        $config['max_size']             = 400;
+        $config['max_size']             = 4000;
         $config['max_width']            = 2048;
-        $config['min_width']            = 600;
+        $config['min_width']            = 200;
         $config['file_name']            = time().".".$ext;
 
         $this->load->library('upload', $config);
@@ -167,6 +227,7 @@ class Home extends CI_Controller  {
         else
         {
             $upload_data = $this->upload->data();
+            $data_upload['asli'] = $upload_data['file_name'];
 
             if ($upload_data['image_width'] > 768 ) {
                 $data = array('upload_data' => $this->upload->data());
@@ -186,7 +247,7 @@ class Home extends CI_Controller  {
                 }else{
                         // echo "berhasil resize";
                         $data_upload['resize'] = site_url('media/thumbnail/')."/".$upload_data['file_name'];
-                        $data_upload['asli'] = $upload_data['file_name'];
+                        
                 }
             }
             if ($upload_data['image_width'] > 768) {

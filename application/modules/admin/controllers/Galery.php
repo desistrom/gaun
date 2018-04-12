@@ -51,6 +51,7 @@ class Galery extends MX_Controller  {
 						if ($this->galery_model->insertGalery($media) == true) {
 	                		$ret['status'] = 1;
 	                		$ret['url'] = site_url('admin/galery/list_image');
+	                		$this->session->set_flashdata("notif","Data Berhasil di Masukan");
 	                	}
 					}
 				}
@@ -85,6 +86,7 @@ class Galery extends MX_Controller  {
 				if ($this->galery_model->insertGalery($media) == true) {
             		$ret['status'] = 1;
             		$ret['url'] = site_url('admin/galery/list_video');
+            		$this->session->set_flashdata("notif","Data Berhasil di Masukan");
             	}
 			}
 			$ret['notif']['judul'] = form_error('judul');
@@ -133,6 +135,7 @@ class Galery extends MX_Controller  {
 			            		}
 		    					$ret['status'] = 1;
 		    					$ret['url'] = site_url('admin/galery/list_image');
+		    					$this->session->set_flashdata("notif","Data Berhasil di Masukan");
 		    				}
 		    			}
 					}
@@ -140,6 +143,7 @@ class Galery extends MX_Controller  {
 					if ($this->galery_model->editGalery($media,$id) == true) {
                 		$ret['status'] = 1;
                 		$ret['url'] = site_url('admin/galery/list_image');
+                		$this->session->set_flashdata("notif","Data Berhasil di Masukan");
                 	}
 				}
 			}
@@ -170,6 +174,7 @@ class Galery extends MX_Controller  {
 				if ($this->galery_model->editGalery($media,$id) == true) {
             		$ret['status'] = 1;
             		$ret['url'] = site_url('admin/galery/list_video');
+            		$this->session->set_flashdata("notif","Data Berhasil di Masukan");
             	}
 			}
 			$ret['notif']['judul'] = form_error('judul');
@@ -196,6 +201,7 @@ class Galery extends MX_Controller  {
 		}
 		if($this->db->delete('tb_galery',array('id_galery'=>$id))){
 			$ret = 1;
+			$this->session->set_flashdata("notif","Data Berhasil di Masukan");
 			echo json_encode($ret);
 		}
 	}

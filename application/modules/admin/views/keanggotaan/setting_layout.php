@@ -32,6 +32,27 @@
   </div>
   <!-- /.box-body -->
 </div>
+<?php if ($this->session->flashdata('notif') != '') { ?>
+    <div class="modal" tabindex="-1" role="dialog" id="modalSuccess">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title">Success</h3>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p><?=$this->session->flashdata('notif');?></p>
+          </div>
+          <div class="modal-footer">
+            <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <?php } ?>
 <script src="<?=base_url().'assets/js/jquery-3.2.1.min.js';?>"></script>
 <script type="text/javascript" src="<?=base_url();?>assets/ckeditor/ckeditor.js"></script>
 <script type="text/javascript">
@@ -64,6 +85,9 @@
             $('#ntf_'+ key).css({'color':'red', 'font-style':'italic'});
             });
       });
+    });
+    $(document).ready(function () {
+      $('#modalSuccess').modal('show');
     });
   });
 </script>

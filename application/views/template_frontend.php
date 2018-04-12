@@ -20,14 +20,14 @@
         <nav class="navbar navbar-fixed-top " id="main-navigation">
       <div class="">
             <div class="container-fluid">
-              <div class="navbar-header"><a href="index.html" class="navbar-brand navbar-link"><img class="logo" src="<?=base_url();?>assets/images/logo/IDREN-2.png" /> </a>
+              <div class="navbar-header"><a href="<?php echo site_url('web/home'); ?>" class="navbar-brand navbar-link"><img class="logo" src="<?=base_url();?>assets/images/logo/IDREN-2.png" /> </a>
                   <button data-toggle="collapse" data-target="#navcol-1" class="navbar-toggle collapsed"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
               </div>
               <div class="collapse navbar-collapse" id="navcol-1">
 
                   <ul class="nav navbar-nav navbar-right">
-                      <li role="presentation" class="active"><a href="#">Home</a></li>
-                      <li class="dropdown"><a data-toggle="dropdown" aria-expanded="false" href="#" class="dropdown-toggle">Layanan <span class="fa fa-angle-down"></span></a>
+                      <li role="presentation" ><a <?php if(current_url() == site_url('web/home') || current_url() == site_url()){ ?> class="active" <?php } ?> href="<?php echo site_url('web/home'); ?>">Home</a></li>
+                      <li class="dropdown"><a data-toggle="dropdown" aria-expanded="false" href="#" class="dropdown-toggle <?php if(current_url() == site_url('web/a')){ ?> active <?php } ?>">Layanan <span class="fa fa-angle-down"></span></a>
                           <ul class="dropdown-menu" role="menu">
                               <li><a href="#">foto</a></li>
                               <li><a href="#">Video</a></li>
@@ -47,7 +47,7 @@
 
                           </ul>
                         </li>
-                      <li role="presentation" class=""><a href="#">Berita</a></li>
+                      <li role="presentation" class=""><a <?php if(current_url() == site_url('web/news')){ ?> class="active" <?php } ?> href="<?php echo site_url('web/news'); ?>">Berita</a></li>
 
                       <li role="presentation" class="active"><a href="#">Masuk</a></li>
                       <li role="presentation" class="active"><a href="#" data-toggle="modal" data-target="#myModal">Gabung</a></li>

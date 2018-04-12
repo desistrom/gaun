@@ -30,6 +30,27 @@
 			</table>
 		</div>
 	</div>
+  <?php if ($this->session->flashdata('notif') != '') { ?>
+    <div class="modal" tabindex="-1" role="dialog" id="modalSuccess">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title">Success</h3>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p><?=$this->session->flashdata('notif');?></p>
+          </div>
+          <div class="modal-footer">
+            <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  <?php } ?>
 <?php }elseif ($view == 'add') { ?>
 	<div class="box-header with-border">
     <h3 class="box-title">Add News</h3>
@@ -154,5 +175,6 @@
             });
       });
     });
+    $('#modalSuccess').modal('show');
   });
 </script>

@@ -235,6 +235,11 @@ class V1 extends REST_Controller {
         $this->_getLayanan();
     }
 
+    public function getogo_get(){
+        header('Content-Type: application/json');
+        $this->_getLogo();
+    }
+
 
     function _galery(){
     	$galery = $this->v1_model->getAllGalery();
@@ -355,6 +360,14 @@ class V1 extends REST_Controller {
         $user = $this->v1_model->getInstansi();
         $retData['code'] = '200';
         $retData['status'] = 'Success';
+        foreach ($user as $key => $value) {
+            if ($value['image'] == '') {
+                $user[$key]['image_thumbnail']=base_url().'assets/images/logo/IDREN-2.png';
+            }else{
+                $user[$key]['image_large']=base_url().'media/'.$user[$key]['image'];
+                $user[$key]['image_thumbnail']=base_url().'media/'.$user[$key]['image'];
+            }                                                                                                                     
+        }
         $retData['data'] = $user;
         $this->response($retData,200);
     }   
@@ -502,6 +515,14 @@ class V1 extends REST_Controller {
         $user = $this->v1_model->getTestimoni();
         $retData['code'] = '200';
         $retData['status'] = 'Success';
+        foreach ($user as $key => $value) {
+            if ($value['image'] == '') {
+                $user[$key]['image']=base_url().'assets/images/logo/IDREN-2.png';
+            }else{
+                $user[$key]['image'] = base_url().'media/'.$value['image'];
+            }
+
+        }
         $retData['data'] = $user;
         $this->response($retData,200);
     }
@@ -518,6 +539,14 @@ class V1 extends REST_Controller {
     //layanan
     function _getLayanan(){
         $user = $this->v1_model->getLayanan();
+        $retData['code'] = '200';
+        $retData['status'] = 'Success';
+        $retData['data'] = $user;
+        $this->response($retData,200);
+    }
+
+    function _getLogo(){
+        $user = $this->v1_model->getLogo();
         $retData['code'] = '200';
         $retData['status'] = 'Success';
         $retData['data'] = $user;

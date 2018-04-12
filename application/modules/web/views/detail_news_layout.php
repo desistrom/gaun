@@ -1,158 +1,117 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style type="text/css"><
-
-  /* detail artikel */
-      .content-artikel .image-artikel img{
-        width: 950px;
-        height: 400px;
-      }
-      .content-artikel .judul-artikel{
-        padding-left: 20px;
-      }
-      .content-artikel .posted {
-        padding-left: 20px;
-      }
-      .content-artikel .posted div {
-        display: inline-table;
-        color: #A5A5A5;
-        padding: 0 5px;
-  
-      }
-      .content-artikel .posted div span{
-        color: #5D9CEC;
-      }
-      .content-artikel .isi-artikel{
-        padding-top: 30px;
-        color: #A5A5A5;
-      }
-      .content-artikel .share div{
-        display: inline-table;
-        padding: 30px 5px 10px 5px;
-      }
-      .content-artikel .share div a{
-        text-decoration: none;
-      }
-      .content-artikel .share div i{
-        padding: 10px 15px;
-        border-radius: 5px;
-      }
-      .content-artikel .share .fa-facebook{
-        background-color: #365A8A;
-        color: white;
-        padding: 10px 18px;
-      }
-      .content-artikel .share .fa-twitter{
-        background-color: #5CB1FF;
-        color: white;
-      }
-      .content-artikel .share .fa-google-plus{
-        background-color: #9D0E10;
-        color: white;
-      }
-
-
-      /*end style artikel*/
-
-
-                /*style artikel*/
-        .detail-artikel {
-    background-color: #FFFFFF;
-    height: auto;
-    overflow: hidden;
-    /*padding: 0 30px 0 15px;*/
-  }
-  
-     .sidebar{
-        background-color: #FFFFFF;
-        height: auto;
-        overflow: hidden;
-        float: left;
-      }
-    .sidebar .sidebar-top ul{
-        padding: 0;
-      }
- .sidebar .sidebar-top ul a{
-         text-decoration: none;
-      }
-     .sidebar .sidebar-top ul li{
-        list-style: none;
-        padding: 15px 5px;
-        color: #A5A5A5;
-        border-bottom: dashed #A5A5A5 1px;
-      }
-    .sidebar .sidebar-top ul li:hover{
-        background-color: ;
-        color: #E72A2A;
-      }
-     .sidebar .sidebar-top ul h4{
-        border-bottom: solid #B7090A  3px;
-        color: black;
-        padding: 15px 0;
-      }
-
-
-
-
-
-</style>
-<section> 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 col-sm-12 top" style="margin-top: 6em;">
-  
-    
-</div>
-<div class="col col-md-3 col-sm-3 sidebar">
-    <div class="sidebar-top">
-      <ul>
-       <h4><b>Categoris</b></h4>
-        <a href="#"><li>Creative(19)</li></a>
-        <a href="#"><li>Potfolio(21)</li></a>
-        <a href="#"><li>Fitness(15)</li></a>
-        <a href="#"><li>Gym(35)</li></a>
-        <a href="#"><li>Personal(16)</li></a>
-      </ul>
-    </div>
-        <div class="sidebar-top">
-      <ul>
-       <h4><b>Lates Post</b></h4>
-        <a href="#"><li>Creative(19)</li></a>
-        <a href="#"><li>Potfolio(21)</li></a>
-        <a href="#"><li>Fitness(15)</li></a>
-        <a href="#"><li>Gym(35)</li></a>
-        <a href="#"><li>Personal(16)</li></a>
-      </ul>
-    </div>
-</div> 
-<div class=" col col-md-9 col-sm-9 col-xs-12 recent-news content-artikel" id="blog">
-    <div class="container-fluid">
-        <div class="image-artikel">
-            <img src="">
+<section class="detail_news" style="margin-top: 6em;">
+        <div class="container-fluid none-padding filter-title-page-news">
+            <div class="col-md-12 col-sm-12 col-xs-12 none-padding title-page-news">
+                <div class="line-news">
+                    <div></div>
+                </div>
+                <div class="header-title">
+                    <h1>Blog </h1></div>
+            </div>
         </div>
-        <div class="judul-artikel"><h3><b>THE FAMILY HANDYMAN : AUTOMOTIVE</b></h3></div>
-        <div class="posted">
-          <div class="date-posted"> Posted : <span>2/11/2017 </span></div>
-          <div class="admin">By : <span>Admin </span></div>
-          <div class="comment"><span><i class="fa fa-weixin" aria-hidden="true"></i></span>   5 Comment</div>
+        <div class="container-fluid">
+            <div class="row content-news">
+                <div class="col-md-3 col-sm-4 col-xs-12 content-right">
+                    <div class="filter-side-bar">
+                        <h3 class="categoery">Recent News</h3>
+                        <div class="line-category-title"></div>
+                        <ul class="list-unstyled list-category">
+                            <li class="active"><a href="#" class="active">Nota Kesepahaman </a></li>
+                            <li class="active"><a href="#">Bertemu dengan kemenristekdikti</a></li>
+                            <li class="active"><a href="#">Membahas Arsitektur dan tata kelola</a></li>
+                            <li class="active"><a href="#">Pertemuan Awal Menggagas IDren</a></li>
+                        </ul>
+                    </div>
+                    <div class="filter-side-bar">
+                        <h3 class="categoery">Recent Comment</h3>
+                        <div class="line-category-title"></div>
+                        <ul class="list-unstyled list-category">
+                            <li><a href="#">Wahyu IS On Nota Kesepahaman</a></li>
+                        </ul>
+                    </div>
+                    <div class="filter-side-bar">
+                        <h3 class="categoery">Archieve </h3>
+                        <div class="line-category-title"></div>
+                        <ul class="list-unstyled list-category">
+                            <li><a href="#">11 April 2018</a></li>
+                            <li><a href="#">11 April 2018</a></li>
+                            <li><a href="#">11 April 2018</a></li>
+                            <li><a href="#">11 April 2018</a></li>
+                        </ul>
+                    </div>
+                    <div class="filter-side-bar">
+                        <h3 class="categoery">Category </h3>
+                        <div class="line-category-title"></div>
+                        <ul class="list-unstyled list-category">
+                            <li><a href="#">Event </a></li>
+                            <li><a href="#">Rapat </a></li>
+                        </ul>
+                    </div>
+                    <div class="filter-side-bar">
+                        <h3 class="categoery">Category </h3>
+                        <div class="line-category-title"></div>
+                        <ul class="list-unstyled list-category">
+                            <li><a href="#">Login </a></li>
+                            <li><a href="#">Entries RSS</a></li>
+                            <li><a href="#">Comments RSS</a></li>
+                            <li><a href="#">WordPress.org </a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-8 col-xs-12 content-left">
+                    <div class="col col-md-12 col-sm-12 col-xs-12 none-padding list-artikel">
+                        <div class="col col-md-12 col-sm-12 col-xs-12 none-padding img-news"><img class="img-responsive" src="<?php echo $detail_news['gambar']; ?>"
+                        <div class="col col-md-12 col-sm-12 col-xs-12 desrip-news">
+                            <h4 class="title-news"><?php echo $detail_news['title']; ?></h4>
+                            <p class="isi-news">Pada 13/05/16 Ditjen Belmawa Kemenristekdikti menandatangani nota kesepahaman (MoU) tentang kerja sama penyediaan fasilitas telekomunikasi untuk Indonesian Research and Education Network (IdREN) dengan PT Telkom Indonesia (Persero)
+                                Tbk (Telkom).&nbsp; </p>
+                            <div class="col col-md-12 col-sm-12 col-xs-12 filter-date-event">
+                                <ul class="list-inline date_event">
+                                    <li><i class="glyphicon glyphicon-calendar"></i> 17 Agustus 1945</li>
+                                    <li><i class="glyphicon glyphicon-briefcase"></i> Rapat</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="isi-artikel">
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum consectetur sit ullam perspiciatis, deserunt adipisicing elit. Cum consectetur sit ullam perspiciatis, deserunt.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum consectetur sit ullam perspiciatis, deserunt adipisicing elit. Cum consectetur sit ullam perspiciatis, deserunt.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum consectetur sit ullam perspiciatis, deserunt adipisicing elit. Cum consectetur sit ullam perspiciatis, deserunt.
-          </p>
-         
-        </div>
-        <div class="share">
-          <div><h4><b>Share:</b></h4></div>
-          <div class="fb"><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></div>
-          <div class="twitter"><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></div>
-          <div class="google"><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></div>
-          
-        </div>
-
-
-
+    </section>
+    <div class="container-fluid content-comment">
+        <div class="row sub-content-comment">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <h2>Comment </h2></div>
+            <div class="col-md-5 col-sm-5 col-xs-12 sub-comment">
+                <div class="col col-md-12 col-sm-12 col-xs-12 none-padding filter-comment">
+                    <div class="comment-left col col-md-2 col-sm-2 col-xs-2 none-padding">
+                        <div class="user text-center"><i class="fa fa-user"></i></div>
+                    </div>
+                    <div class="comment-right col col-md-10 col-sm-10 col-xs-10">
+                        <h4>Wahyu Kurniawan<span class="date-comment">11 Apri 2018</span></h4>
+                        <p>Mohon info untuk tergabung dengan IDren,tx</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-7 col-sm-7 col-xs-12 right-comment">
+                <div class="sub-comment-right">
+                    <div class="form-group">
+                        <h2>Leave a Comment</h2>
+                        <p>Yout email address will not be published . Required fields are marked*</p>
+                        <div class="text-input">
+                            <input type="text" placeholder="Name" class="input-comment">
+                        </div>
+                        <div class="text-input">
+                            <input type="text" placeholder="Email" class="input-comment">
+                        </div>
+                        <div class="text-input">
+                            <input type="text" placeholder="Website" class="input-comment">
+                        </div>
+                        <div class="text-input">
+                            <p>Paragraph</p>
+                            <textarea></textarea>
+                        </div>
+                        <div class="text-right"><a href="#" class="btn btn-post">Post Comment</a></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
-        </div>
-    </div>
-</section>

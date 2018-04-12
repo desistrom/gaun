@@ -14,6 +14,9 @@ class Home extends CI_Controller  {
         parent::__construct();
         $this->load->helper(array('form', 'url'));
         $this->load->model('home_model');
+        if ($this->session->userdata('is_login') == false) {
+        	redirect(site_url('login'));
+        }
     }
 
     function index() {

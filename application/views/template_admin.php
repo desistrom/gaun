@@ -151,7 +151,8 @@
             <li class="active"><a href="<?=site_url('admin/home/logo');?>"><i class="fa fa-picture-o"></i> Logo IDREN</a></li>
             <li><a href="<?=site_url('admin/home/testimoni');?>"><i class="fa fa-comment"></i>Testimony</a></li>
             <li><a href="<?=site_url('admin/home/hero');?>"><i class="fa fa-video-camera"></i>Hero</a></li>
-            <li><a href="<?=site_url('admin/home/Layanan');?>"><i class="fa fa-bullhorn"></i>Layanan</a></li>
+            <li><a href="<?=site_url('admin/home/Layanan_idroam');?>"><i class="fa fa-bullhorn"></i>Layanan ID Roam</a></li>
+            <li><a href="<?=site_url('admin/home/Layanan_cloud');?>"><i class="fa fa-bullhorn"></i>Layanan Cloud Federation</a></li>
           </ul>
         </li>
         

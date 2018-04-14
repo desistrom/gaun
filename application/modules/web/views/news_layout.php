@@ -15,7 +15,7 @@
                     <div></div>
                 </div>
                 <div class="header-title">
-                    <h1>Blog </h1></div>
+                    <h1 style="">Berita </h1></div>
             </div>
         </div>
         <div class="container-fluid">
@@ -25,20 +25,19 @@
                         <h3 class="categoery">Recent News</h3>
                         <div class="line-category-title"></div>
                         <ul class="list-unstyled list-category">
-                            <li class="active"><a href="#" class="active">Nota Kesepahaman </a></li>
-                            <li class="active"><a href="#">Bertemu dengan kemenristekdikti</a></li>
-                            <li class="active"><a href="#">Membahas Arsitektur dan tata kelola</a></li>
-                            <li class="active"><a href="#">Pertemuan Awal Menggagas IDren</a></li>
+                        <?php for ($i=0; $i < 5 ; $i++) { ?>
+                            <li class=""><a href="<?php echo site_url('web/news/get_news').'?data='.$news[$i]['newsId']; ?>"> <?php echo $news[$i]['title']; ?> </a></li>
+                        <?php } ?>
                         </ul>
                     </div>
-                    <div class="filter-side-bar">
+           <!--          <div class="filter-side-bar">
                         <h3 class="categoery">Recent Comment</h3>
                         <div class="line-category-title"></div>
                         <ul class="list-unstyled list-category">
                             <li><a href="#">Wahyu IS On Nota Kesepahaman</a></li>
                         </ul>
-                    </div>
-                    <div class="filter-side-bar">
+                    </div> -->
+               <!--      <div class="filter-side-bar">
                         <h3 class="categoery">Archieve </h3>
                         <div class="line-category-title"></div>
                         <ul class="list-unstyled list-category">
@@ -47,17 +46,17 @@
                             <li><a href="#">11 April 2018</a></li>
                             <li><a href="#">11 April 2018</a></li>
                         </ul>
-                    </div>
-                    <div class="filter-side-bar">
+                    </div> -->
+              <!--       <div class="filter-side-bar">
                         <h3 class="categoery">Category </h3>
                         <div class="line-category-title"></div>
                         <ul class="list-unstyled list-category">
                             <li><a href="#">Event </a></li>
                             <li><a href="#">Rapat </a></li>
                         </ul>
-                    </div>
+                    </div> -->
                     <div class="filter-side-bar">
-                        <h3 class="categoery">Category </h3>
+                        <h3 class="categoery">Meta </h3>
                         <div class="line-category-title"></div>
                         <ul class="list-unstyled list-category">
                             <li><a href="#">Login </a></li>

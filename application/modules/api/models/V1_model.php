@@ -68,7 +68,7 @@ class V1_model extends CI_Model{
 	}
 
 	public function getUser(){
-		$sql = "SELECT id_user as UserId, name as user_nama, email as user_email, phone as user_phone, gambar as image FROM tb_user u join tb_instansi i on u.id_instansi_ref = id_instansi where u.is_aktif = 1";
+		$sql = "SELECT u.id_user as UserId, u.name as user_nama, u.email as user_email, u.phone as user_phone, u.gambar as image FROM tb_user u join tb_instansi i on u.id_instansi_ref = id_instansi where u.is_aktif = 1";
 		if ($this->db->query($sql)->num_rows() > 0) {
 			return $this->db->query($sql)->result_array();
 			exit();
@@ -77,7 +77,7 @@ class V1_model extends CI_Model{
 	}
 
 	public function rowUser($id){
-		$sql = "SELECT id_user as UserId, name as user_nama, email as user_email, phone as user_phone, gambar as image FROM tb_user u join tb_instansi i on u.id_instansi_ref = id_instansi where u.id_user = ".$id;
+		$sql = "SELECT u.id_user as UserId, u.name as user_nama, u.email as user_email, u.phone as user_phone, u.gambar as image FROM tb_user u join tb_instansi i on u.id_instansi_ref = id_instansi where u.id_user = ".$id;
 		if ($this->db->query($sql)->num_rows() > 0) {
 			return $this->db->query($sql)->result_array();
 			exit();
@@ -105,7 +105,7 @@ class V1_model extends CI_Model{
 	public function news(){
 		$sql = "SELECT n.id_news as newsId, n.created as tanggal,n.judul as title, n.content as news_content, u.name as author, k.nm_kategori as kategori, n.link as sumber, n.img as gambar
 			FROM tb_news n join tb_kategori_news k on n.id_kategori_ref = k.id_kategori_news 
-			join tb_user u on n.id_user_ref = u.id_user where n.is_aktif = 1 ORDER BY n.id_news ASC";
+			join tb_user u on n.id_user_ref = u.id_user where n.is_aktif = 1 ORDER BY n.id_news DESC";
 		if ($this->db->query($sql)->num_rows() > 0) {
 			return $this->db->query($sql)->result_array();
 			exit();
@@ -129,7 +129,7 @@ class V1_model extends CI_Model{
 			FROM tb_news n join tb_kategori_news k on n.id_kategori_ref = k.id_kategori_news 
 			join tb_user u on n.id_user_ref = u.id_user where n.is_aktif = 1 AND n.id_news = '".$data."'";
 		if ($this->db->query($sql)->num_rows() > 0) {
-			return $this->db->query($sql)->result_array();
+			return $this->db->query($sql)->row_array();
 			exit();	
 		}
 		return false;
@@ -164,8 +164,8 @@ class V1_model extends CI_Model{
 		return false;
 	}
 
-	public function getLayanan(){
-		$sql = "SELECT title as judul, gambar as image, content as deskripsi FROM tb_layanan";
+	public function getLayanan($id){
+		$sql = "SELECT title as judul, gambar as image, content as deskripsi FROM tb_layanan WHERE kategori = ".$id;
 		if ($this->db->query($sql)->num_rows() > 0) {
 			return $this->db->query($sql)->row_array();
 			exit();
@@ -173,8 +173,8 @@ class V1_model extends CI_Model{
 		return false;
 	}
 
-	public function getLogo(){
-		$sql = "SELECT title as judul, gambar as image, content as deskripsi FROM tb_layanan";
+	public function getLogo($id){
+		$sql = "SELECT logo as image FROM tb_logo where status = ".$id;
 		if ($this->db->query($sql)->num_rows() > 0) {
 			return $this->db->query($sql)->row_array();
 			exit();

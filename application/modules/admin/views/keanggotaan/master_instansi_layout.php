@@ -16,7 +16,7 @@
 							<td><?=($key+1);?></td>
 							<td><?=$value['nm_instansi'];?></td>
 							<td>
-								<button class="btn btn-default btn_delete">disable</button>
+								<!-- <button class="btn btn-default btn_delete">disable</button> -->
 								<a href="<?=site_url('admin/keanggotaan/edit_instansi/'.$value['id_instansi']);?>"><button class="btn btn-primary" id="edit">Edit</button></a>
 							</td>
 						</tr>

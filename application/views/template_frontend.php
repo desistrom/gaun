@@ -20,7 +20,7 @@
         <nav class="navbar navbar-fixed-top " id="main-navigation">
       <div class="">
             <div class="container-fluid">
-              <div class="navbar-header"><a href="<?php echo site_url('web/home'); ?>" class="navbar-brand navbar-link"><img class="logo" src="<?=base_url();?>assets/images/logo/IDREN-2.png" /> </a>
+              <div class="navbar-header"><a href="<?php echo site_url('web/home'); ?>" class="navbar-brand navbar-link"><img class="logo" src="<?=base_url()."media/".logo_helper()['data']['image'];?>" /> </a>
                   <button data-toggle="collapse" data-target="#navcol-1" class="navbar-toggle collapsed"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
               </div>
               <div class="collapse navbar-collapse" id="navcol-1">
@@ -29,27 +29,35 @@
                       <li role="presentation" ><a <?php if(current_url() == site_url('web/home') || current_url() == site_url()){ ?> class="active" <?php } ?> href="<?php echo site_url('web/home'); ?>">Home</a></li>
                       <li class="dropdown"><a data-toggle="dropdown" aria-expanded="false" href="#" class="dropdown-toggle <?php if(current_url() == site_url('web/a')){ ?> active <?php } ?>">Layanan <span class="fa fa-angle-down"></span></a>
                           <ul class="dropdown-menu" role="menu">
-                              <li><a href="#">foto</a></li>
-                              <li><a href="#">Video</a></li>
+                              <li><a href="<?php echo site_url('web/layanan/idroam') ?>">IDROAM</a></li>
+                              <li><a href="<?php echo site_url('web/layanan/cloud_federation') ?>">Cloud Federation</a></li>
 
                           </ul>
                         </li>
                     <li class="dropdown"><a data-toggle="dropdown" aria-expanded="false" href="#" class="dropdown-toggle">Tentang <span class="fa fa-angle-down"></span></a>
                           <ul class="dropdown-menu" role="menu">
+                              <li><a href="#">Contact Us</a></li>
+                              <li><a href="#">Tentang IDren</a></li>
+
+                          </ul>
+                        </li>
+                        <li class="dropdown"><a data-toggle="dropdown" aria-expanded="false" href="#" class="dropdown-toggle">Galery <span class="fa fa-angle-down"></span></a>
+                          <ul class="dropdown-menu" role="menu">
                               <li><a href="#">foto</a></li>
                               <li><a href="#">Video</a></li>
 
                           </ul>
                         </li>
-                        <li class="dropdown"><a data-toggle="dropdown" aria-expanded="false" href="#" class="dropdown-toggle">Konektifitas <span class="fa fa-angle-down"></span></a>
+                        <li class="dropdown"><a data-toggle="dropdown" aria-expanded="false" href="#" class="dropdown-toggle">Konektivitas <span class="fa fa-angle-down"></span></a>
                           <ul class="dropdown-menu" role="menu">
-                              <li><a href="#">Topologi</a></li>
+                              <li><a href="<?php echo site_url('web/konektivitas') ?>">Topologi</a></li>
 
                           </ul>
                         </li>
+                        <li role="presentation" class=""><a <?php if(current_url() == site_url('web/keanggotaan')){ ?> class="active" <?php } ?> href="<?php echo site_url('web/keanggotaan'); ?>">Keanggotaan</a></li>
                       <li role="presentation" class=""><a <?php if(current_url() == site_url('web/news')){ ?> class="active" <?php } ?> href="<?php echo site_url('web/news'); ?>">Berita</a></li>
 
-                      <li role="presentation" class="active"><a href="#">Masuk</a></li>
+                      <!-- <li role="presentation" class="active"><a href="#">Masuk</a></li> -->
                       <li role="presentation" class="active"><a href="#" data-toggle="modal" data-target="#myModal">Gabung</a></li>
 
                   </ul>

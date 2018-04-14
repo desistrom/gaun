@@ -26,7 +26,7 @@ class Home extends CI_Controller  {
 
     public function logo(){
 
-		$this->data['image'] = $this->db->get('tb_logo')->row_array();
+		$this->data['image'] = $this->db->get_where('tb_logo',array('status'=>1))->row_array();
 		if (isset($_FILES['userfile'])){
 			$ret['state'] = 0;
 			$ret['status'] = 0;
@@ -37,9 +37,11 @@ class Home extends CI_Controller  {
 				}else{
 					$ret['state'] = 1;
 					$data_image['logo'] = $image['asli'];
+					$data_image['status'] = 1;
 					if ($this->db->insert('tb_logo',$data_image)) {
 						$ret['status'] = 1;
 						$ret['url'] = current_url();
+						$this->session->set_flashdata("notif","Data Berhasil di Masukan");
 					}
 				}
 			}else{
@@ -49,6 +51,60 @@ class Home extends CI_Controller  {
 				}else{
 					$ret['state'] = 1;
 					$data_image['logo'] = $image['asli'];
+					$data_image['status'] = 1;
+					if ($this->db->update('tb_logo',$data_image,array('id_logo'=>$this->data['image']['id_logo']))) {
+						$ret['status'] = 1;
+						if (file_exists(FCPATH."media/".$this->data['image']['logo'])) {
+	            			chmod(FCPATH."media/".$this->data['image']['logo'], 0777);
+	            			unlink(FCPATH."media/".$this->data['image']['logo']);
+	            		}
+	            		if (file_exists(FCPATH."media/thumbnail/".$this->data['image']['logo'])) {
+	            			chmod(FCPATH."media/thumbnail/".$this->data['image']['logo'], 0777);
+	            			unlink(FCPATH."media/thumbnail/".$this->data['image']['logo']);
+	            		}
+	            		if (file_exists(FCPATH."media/crop/".$this->data['image']['logo'])) {
+	            			chmod(FCPATH."media/crop/".$this->data['image']['logo'], 0777);
+	            			unlink(FCPATH."media/crop/".$this->data['image']['logo']);
+	            		}
+						$ret['url'] = current_url();
+						$this->session->set_flashdata("notif","Data Berhasil di Masukan");
+					}
+				}
+			}
+		echo json_encode($ret);
+		exit();
+		}
+		$this->ciparser->new_parse('template_admin','modules_admin', 'home/Upload_layout',$this->data);
+	}
+
+	public function topologi(){
+
+		$this->data['image'] = $this->db->get_where('tb_logo',array('status'=>2))->row_array();
+		if (isset($_FILES['userfile'])){
+			$ret['state'] = 0;
+			$ret['status'] = 0;
+			if ($this->data['image'] == '') {
+				$image = $this->upload_logo($_FILES);
+				if (isset($image['error'])) {
+					$ret['notif'] = $image;
+				}else{
+					$ret['state'] = 1;
+					$data_image['logo'] = $image['asli'];
+					$data_image['status'] = 2;
+					if ($this->db->insert('tb_logo',$data_image)) {
+						$ret['status'] = 1;
+						$ret['url'] = current_url();
+						$this->session->set_flashdata("notif","Data Berhasil di Masukan");
+					}
+				}
+			}else{
+				$image = $this->upload_logo($_FILES);
+				if (isset($image['error'])) {
+					$ret['notif'] = $image;
+				}else{
+					$ret['state'] = 1;
+					$data_image['logo'] = $image['asli'];
+					$data_image['status'] = 2;
 					if ($this->db->update('tb_logo',$data_image,array('id_logo'=>$this->data['image']['id_logo']))) {
 						$ret['status'] = 1;
 						if (file_exists(FCPATH."media/".$this->data['image']['logo'])) {
@@ -279,6 +335,7 @@ class Home extends CI_Controller  {
 		}else{
 			$this->db->update('tb_testimoni',array('is_aktif'=>1),array('id_testimoni'=>$id));
 		}
+		$this->session->set_flashdata("notif","Data Berhasil di Ubah");
 		redirect(site_url('admin/home/testimoni'));
     }
 
@@ -299,10 +356,12 @@ class Home extends CI_Controller  {
     			if ($this->db->get('tb_hero')->num_rows() > 0) {
     				if ($this->db->update('tb_hero',$dt_hero,array('id_hero'=>$this->data['hero']['id_hero']))) {
     					$ret['status'] = 1;
+    					$this->session->set_flashdata("notif","Data Berhasil di Masukan");
     				}
     			}else{
     				if ($this->db->insert('tb_hero',$dt_hero)) {
     					$ret['status'] = 1;
+    					$this->session->set_flashdata("notif","Data Berhasil di Masukan");
     				}
     			}
     		}
@@ -323,8 +382,8 @@ class Home extends CI_Controller  {
 		$this->ciparser->new_parse('template_admin','modules_admin', 'home/hero_layout',$this->data);
     }
 
-    public function layanan(){
-    	$this->data['layanan'] = $this->db->get('tb_layanan')->row_array();
+    public function layanan_idroam(){
+    	$this->data['layanan'] = $this->db->get_where('tb_layanan',array('kategori'=>1))->row_array();
     	if ($this->input->server('REQUEST_METHOD') == 'POST') {
     		$ret['state'] = 0;
     		$ret['status'] = 0;
@@ -336,13 +395,14 @@ class Home extends CI_Controller  {
     			$ret['state'] = 1;
     			$dt_hero['title'] = $this->input->post('judul');
     			$dt_hero['content'] = $this->input->post('content');
+    			$dt_hero['kategori'] = 1;
     			if (isset($_FILES['userfile'])) {
     				$image = $this->upload_logo($_FILES);
 	    			if (isset($image['error'])) {
 						$ret['notif'] = $image;
 					}else{
 						$dt_hero['gambar'] = $image['asli'];
-		    			if ($this->db->get('tb_layanan')->num_rows() > 0) {
+		    			if ($this->db->get_where('tb_layanan',array('kategori'=>1))->num_rows() > 0) {
 		    				if ($this->db->update('tb_layanan',$dt_hero,array('id_layanan'=>$this->data['layanan']['id_layanan']))) {
 		    					if (file_exists(FCPATH."media/".$this->data['layanan']['gambar'])) {
 			            			@chmod(FCPATH."media/".$this->data['layanan']['gambar'], 0777);
@@ -360,6 +420,82 @@ class Home extends CI_Controller  {
 		    				}
 		    			}else{
 		    				if ($this->db->insert('tb_layanan',$dt_hero)) {
+		    					$this->session->set_flashdata("notif","Data Berhasil di Masukan");
+		    					$ret['status'] = 1;
+		    				}
+		    			}
+					}
+    			}else{
+    				if ($this->db->get('tb_layanan')->num_rows() > 0) {
+	    				if ($this->db->update('tb_layanan',$dt_hero,array('id_layanan'=>$this->data['layanan']['id_layanan']))) {
+	    					$ret['status'] = 1;
+	    					$this->session->set_flashdata("notif","Data Berhasil di Masukan");
+	    				}
+	    			}else{
+	    				if ($this->db->insert('tb_layanan',$dt_hero)) {
+	    					$ret['status'] = 1;
+	    					$this->session->set_flashdata("notif","Data Berhasil di Masukan");
+	    				}
+	    			}
+    			}
+    			
+    		}
+    		// $ret['notif']['link'] = form_error('link');
+    		$ret['notif']['judul'] = form_error('judul');
+    		$ret['notif']['content'] = form_error('content');
+    		echo json_encode($ret);
+    		exit();
+    	}
+    	$this->load->library('ckeditor');
+		$this->ckeditor->basePath = base_url().'assets/ckeditor/';
+		$this->ckeditor->config['toolbar'] = array(
+		                array( 'Source', '-', 'Bold', 'Italic', 'Underline', '-','Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo','-','NumberedList','BulletedList' )
+		                                                    );
+		$this->ckeditor->config['language'] = 'it';
+		$this->ckeditor->config['width'] = '1024px';
+		$this->ckeditor->config['height'] = '300px'; 
+		$this->ciparser->new_parse('template_admin','modules_admin', 'home/layanan_layout',$this->data);
+    }
+
+    public function layanan_cloud(){
+    	$this->data['layanan'] = $this->db->get_where('tb_layanan',array('kategori'=>2))->row_array();
+    	if ($this->input->server('REQUEST_METHOD') == 'POST') {
+    		$ret['state'] = 0;
+    		$ret['status'] = 0;
+    		$this->form_validation->set_error_delimiters('','');
+    		// $this->form_validation->set_rules('link','Video','trim|required');
+    		$this->form_validation->set_rules('judul','Judul Hero','trim|required');
+    		$this->form_validation->set_rules('content','Description','trim|required');
+    		if ($this->form_validation->run() == true) {
+    			$ret['state'] = 1;
+    			$dt_hero['title'] = $this->input->post('judul');
+    			$dt_hero['content'] = $this->input->post('content');
+    			$dt_hero['kategori'] = 2;
+    			if (isset($_FILES['userfile'])) {
+    				$image = $this->upload_logo($_FILES);
+	    			if (isset($image['error'])) {
+						$ret['notif'] = $image;
+					}else{
+						$dt_hero['gambar'] = $image['asli'];
+		    			if ($this->db->get_where('tb_layanan',array('kategori'=>2))->num_rows() > 0) {
+		    				if ($this->db->update('tb_layanan',$dt_hero,array('id_layanan'=>$this->data['layanan']['id_layanan']))) {
+		    					if (file_exists(FCPATH."media/".$this->data['layanan']['gambar'])) {
+			            			@chmod(FCPATH."media/".$this->data['layanan']['gambar'], 0777);
+			            			unlink(FCPATH."media/".$this->data['layanan']['gambar']);
+			            		}
+			            		if (file_exists(FCPATH."media/thumbnail/".$this->data['layanan']['gambar'])) {
+			            			@chmod(FCPATH."media/thumbnail/".$this->data['layanan']['gambar'], 0777);
+			            			unlink(FCPATH."media/thumbnail/".$this->data['layanan']['gambar']);
+			            		}
+			            		if (file_exists(FCPATH."media/crop/".$this->data['layanan']['gambar'])) {
+			            			@chmod(FCPATH."media/crop/".$this->data['layanan']['gambar'], 0777);
+			            			unlink(FCPATH."media/crop/".$this->data['layanan']['gambar']);
+			            		}
+		    					$ret['status'] = 1;
+		    				}
+		    			}else{
+		    				if ($this->db->insert('tb_layanan',$dt_hero)) {
+		    					$this->session->set_flashdata("notif","Data Berhasil di Masukan");
 		    					$ret['status'] = 1;
 		    				}
 		    			}

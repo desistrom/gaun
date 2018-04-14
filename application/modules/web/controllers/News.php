@@ -33,9 +33,15 @@ class News extends CI_Controller  {
         $data['data']=$id;
         $a = api_helper(json_encode($data),$url,$methode,$token);
 
+        $methode = 'GET';
+        $url_allnews =  site_url('api/v1/news');
+        $b = api_helper($token,$url_allnews,$methode,$token);
 
-        $a = json_decode($this->hit_api($url),true);
         $this->data['detail_news']=$a['data'];
+        $this->data['news']=$b['data'];
+      
+       
+   
         $this->ciparser->new_parse('template_frontend','modules_web', 'detail_news_layout',$this->data);
     }
     

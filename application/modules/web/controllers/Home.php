@@ -19,17 +19,17 @@ class Home extends CI_Controller  {
         $url = site_url('api/v1/gethero') ;
         $methode = 'GET';
         $token = '';
-        $a = api_helper($token,$url,$methode,$token);
+        $a = api_helper('',$url,$methode,$token);
 
-        $url_layanan =  site_url('api/v1/getlayanan') ;
-        $b = api_helper($token,$url_layanan,$methode,$token);
+        $url_layanan =  site_url('api/v1/getlayanan_idroam') ;
+        $b = api_helper('',$url_layanan,$methode,$token);
 
         $url_instansi = site_url('api/v1/instansi') ;
-        $c = api_helper($token,$url_instansi,$methode,$token);
+        $c = api_helper('',$url_instansi,$methode,$token);
         
         
         $url_testi =site_url('api/v1/gettestimoni');
-        $d = api_helper($token,$url_testi,$methode,$token);
+        $d = api_helper('',$url_testi,$methode,$token);
 
 
         // $url = "http://192.168.88.138/idren/api/v1/about";

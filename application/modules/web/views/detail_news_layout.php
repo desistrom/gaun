@@ -5,7 +5,7 @@
                     <div></div>
                 </div>
                 <div class="header-title">
-                    <h1>Blog </h1></div>
+                    <h1>Berita </h1></div>
             </div>
         </div>
         <div class="container-fluid">
@@ -15,13 +15,13 @@
                         <h3 class="categoery">Recent News</h3>
                         <div class="line-category-title"></div>
                         <ul class="list-unstyled list-category">
-                            <li class="active"><a href="#" class="active">Nota Kesepahaman </a></li>
-                            <li class="active"><a href="#">Bertemu dengan kemenristekdikti</a></li>
-                            <li class="active"><a href="#">Membahas Arsitektur dan tata kelola</a></li>
-                            <li class="active"><a href="#">Pertemuan Awal Menggagas IDren</a></li>
+                            <?php for ($i=0; $i < 5 ; $i++) { ?>
+                            <li class="active"><a href="<?php echo site_url('web/news/get_news').'?data='.$news[$i]['newsId']; ?>"> <?php echo $news[$i]['title']; ?> </a></li>
+                        <?php } ?>
                         </ul>
+                         
                     </div>
-                    <div class="filter-side-bar">
+                   <!--  <div class="filter-side-bar">
                         <h3 class="categoery">Recent Comment</h3>
                         <div class="line-category-title"></div>
                         <ul class="list-unstyled list-category">
@@ -45,9 +45,9 @@
                             <li><a href="#">Event </a></li>
                             <li><a href="#">Rapat </a></li>
                         </ul>
-                    </div>
+                    </div> -->
                     <div class="filter-side-bar">
-                        <h3 class="categoery">Category </h3>
+                        <h3 class="categoery">Meta </h3>
                         <div class="line-category-title"></div>
                         <ul class="list-unstyled list-category">
                             <li><a href="#">Login </a></li>
@@ -59,15 +59,14 @@
                 </div>
                 <div class="col-md-9 col-sm-8 col-xs-12 content-left">
                     <div class="col col-md-12 col-sm-12 col-xs-12 none-padding list-artikel">
-                        <div class="col col-md-12 col-sm-12 col-xs-12 none-padding img-news"><img class="img-responsive" src="<?php echo $detail_news['gambar']; ?>"
+                        <div class="col col-md-12 col-sm-12 col-xs-12 none-padding img-news"><img class="img-responsive" src="<?php echo $detail_news['gambar']; ?>">
                         <div class="col col-md-12 col-sm-12 col-xs-12 desrip-news">
                             <h4 class="title-news"><?php echo $detail_news['title']; ?></h4>
-                            <p class="isi-news">Pada 13/05/16 Ditjen Belmawa Kemenristekdikti menandatangani nota kesepahaman (MoU) tentang kerja sama penyediaan fasilitas telekomunikasi untuk Indonesian Research and Education Network (IdREN) dengan PT Telkom Indonesia (Persero)
-                                Tbk (Telkom).&nbsp; </p>
+                            <p class="isi-news"><?php echo $detail_news['news_content'] ?> </p>
                             <div class="col col-md-12 col-sm-12 col-xs-12 filter-date-event">
                                 <ul class="list-inline date_event">
-                                    <li><i class="glyphicon glyphicon-calendar"></i> 17 Agustus 1945</li>
-                                    <li><i class="glyphicon glyphicon-briefcase"></i> Rapat</li>
+                                    <li><i class="glyphicon glyphicon-calendar"></i><?php echo date('d m Y', strtotime($detail_news['tanggal'])); ?></li>
+                                    <li><i class="glyphicon glyphicon-briefcase"></i> <?php echo $detail_news['kategori'];?></li>
                                 </ul>
                             </div>
                         </div>

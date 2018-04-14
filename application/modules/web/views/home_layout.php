@@ -9,11 +9,11 @@
                     </div>
                 </div>
                     <div class="col-md-6 col-sm-6 col-xs-12 hero-left">
-                    <h1><?php echo $hero['judul']; ?></h1>
-                  <!--   <h1>dengan <span style="color:#D10909; ">Jaringan Privat</span></h1> -->
+                    <h1><?php $a=explode(" ", $hero['judul']); for ($i=0; $i < count($a)-1 ; $i++) { echo $a[$i]." "; } ?>
+                    <span style="color:#D10909; "><?php echo end($a); ?></span></h1>
                     <p> <?php echo $hero['deskripsi']; ?></p>
                  
-                    <button class="btn  btn-pelajari" type="button">Pelajari lebih lanjut <i class="fa fa-long-arrow-right"></i></button>
+                    <a href="<?php echo site_url('web/layanan'); ?>" class="btn  btn-pelajari" type="button">Pelajari lebih lanjut <i class="fa fa-long-arrow-right"></i></a>
                 </div>
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="arrow-line">
@@ -35,7 +35,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-7 col-sm-8 col-xs-12 sub-service-left">
-                    <div class="filter-box"><img class="img-responsive" src="<?=base_url();?>media/<?php echo $layanan['image']; ?>"></div>
+                    <div class="filter-box"><img class="img-responsive" src="<?php echo $layanan['image']; ?>"></div>
                     <!-- <div class="navigation">
                         <ul class="">
                             <li style="border-right: solid 1px #761919;"><a href="#" style="color:#421A1A; "><i class="fa fa-angle-left"></i></a></li>
@@ -70,14 +70,15 @@
                 <?php endforeach ?>
             
                 </div>
-                <div class="col-md-6 col-sm-6 col-xs-6 none-padding">
-                    <div class="arrow-line">
-                        <div class="line-left"><a class="js-scroll-trigger" href="#testimonial"><i class="glyphicon glyphicon-arrow-down"></i></a></div>
-                    </div>
-                </div>
+                
             </div>
         </div>
     </section>
+    <div class="col-md-12 col-sm-12 col-xs-12 none-padding text-center">
+                    <div class="arrow-line">
+                        <div class="line-left" style="padding-top: 5px;padding-right: 35px;"><a class="js-scroll-trigger" href="#testimonial"><i class="glyphicon glyphicon-arrow-down"></i></a></div>
+                    </div>
+                </div>
     <section class="testimonial" id="testimonial">
         <div class="container-fluid">
             <div class="row sub-testimoni" id="owl-demo">
@@ -87,7 +88,7 @@
                     <h2 class="name-testi"><?php echo $value['user']; ?></h2>
                     <h3 class="job description"><?php echo $value['sebagai']; ?> </h3><i class="fa fa-quote-left fa-2x"></i>
                     <p> <?php echo $value['testimoni']; ?></p>
-                    <button class="btn  btn-rekomendasi" type="button">Lihat Rekomendasi Lain</button>
+                    <a href="<?php echo site_url('web/testimoni'); ?>" class="btn  btn-rekomendasi" type="button">Lihat Rekomendasi Lain</a>
                 </div>
             <?php endforeach ?>
              

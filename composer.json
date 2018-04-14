@@ -3,6 +3,6 @@
 	"name" : "codeigniter/framework",
 	"license": "MIT",
 	"require": {
-    	"dompdf/dompdf" : "0.6.*"
+	    "sendgrid/sendgrid": "~6.0"
   	}
 }

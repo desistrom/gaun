@@ -14,12 +14,17 @@
       <div class="form-group">
         <label>About</label>
         <?php echo $this->ckeditor->editor("content", $about['content'] ); ?>
-        <!-- <textarea class="form-control" name="content" id="content" placeholder="Enter About Content . .. " ><?php if(isset($about)){ echo $about['content']; } ?></textarea> -->
         <input type="hidden" name="content" value="<?php if(isset($about)){ echo $about['content']; } ?>" id="content">
         <div class="error" id="ntf_content"></div>
       </div>
-      <input type="hidden" name="id" value="<?php if(isset($about)){ echo $about['id_about']; } ?>">
 
+      <div class="form-group">
+        <label>Contact</label>
+        <?php echo $this->ckeditor->editor("contact", $about['contact'] ); ?>
+        <input type="hidden" name="contact" value="<?php if(isset($about)){ echo $about['contact']; } ?>" id="contact">
+        <div class="error" id="ntf_contact"></div>
+      </div>
+      <input type="hidden" name="id" value="<?php if(isset($about)){ echo $about['id_about']; } ?>">
       <button type="button" class="btn btn-primary" id="submit">Submit</button>
 
     </form>
@@ -54,6 +59,7 @@
     $('body').on('click','#submit', function(){
       // console.log($('form').val());
       $('#content').val(CKEDITOR.instances.content.getData());
+      $('#contact').val(CKEDITOR.instances.contact.getData());
       // return false;
       $.ajax({
           url : window.location.href,

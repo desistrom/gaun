@@ -26,6 +26,7 @@ class About extends MX_Controller  {
 			if ($this->form_validation->run() == true) {
 				$ret['state'] = 1;
 				$about['content'] = $this->input->post('content');
+				$about['contact'] = $this->input->post('contact');
 				$id['id_about'] = $this->input->post('id');
 				if ($this->db->update('tb_about',$about,$id)) {
 					$ret['status'] = 1;
@@ -43,7 +44,7 @@ class About extends MX_Controller  {
 		                                                    );
 		$this->ckeditor->config['language'] = 'it';
 		$this->ckeditor->config['width'] = '1024px';
-		$this->ckeditor->config['height'] = '300px';  
+		$this->ckeditor->config['height'] = '300px';
 		$this->data['about'] = $this->db->get('tb_about')->row_array();
 		$this->ciparser->new_parse('template_admin','modules_admin', 'about/about_layout',$this->data);
 	}

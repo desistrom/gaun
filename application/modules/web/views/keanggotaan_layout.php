@@ -1,160 +1,254 @@
-<!-- <link rel="stylesheet" href="<?=base_url();?>assets/css/owl.transitions.css">
-<link rel="stylesheet" href="<?=base_url();?>assets/css/owl.carousel.css"> -->
-<!-- <link rel="stylesheet" href="<?=base_url();?>assets/css/main.css"> -->
-<style type="text/css">
-/*	div.col.col-md-12.col-sm-12.col-xs-12.testimoni-box{
-  background:rgba(200,200,200,0.4);
-
-  border-radius:10px;
+  <style type="text/css">
+  	.keanggotaan .box-keanggotaan-left{
+  background-color:white;
   padding:20px 15px;
-  height:auto;
-  max-height:150px;
-  color:white;
-
+  width:9em;
+  height:9em;
+  box-shadow:1px 1px 38px 4px #bdbdbd;
+  margin-left:-4.5em;
+  margin-top:1.1em;
+  text-align: center;
 }
 
-section.testimonial{
-  background-color:#4C0808;
-  background-image: url('<?=base_url();?>assets/images/logo/parallax-4-home-main.jpg'); 
-  background-attachment: fixed;
+section.keanggotaan{
+  background-color:#F2F2F2;
+  padding-bottom:0em;
+  margin-top: 6em;
 }
-.testimonial .client-box h3{
-	color: #ED0231;
-	font-weight: bold;
-	margin:  5px 0;
-}
-.testimonial .client-box h4{
-	color: white;
-	margin-top: 0;
-}
-.testimonial .triangle{
-	    width: 0;
-    height: 0;
-    border-left: 12px solid transparent;
-    border-right: 12px solid transparent;
-    border-top: 17px solid #E3E3E3;
-   margin-top: -0.51px;
-    right: 10px;
-    margin-bottom: 15px;
-    opacity: 0.4;
-}
-.line{
-	display: inline-table;
-	width: 100px;
-	height: 3px;
-	background-color: white;
-}*/
-.line{
-	display: inline-table;
-	width: 100px;
-	height: 3px;
-	background-color: white;
-	}
-.logo-comp{
-	padding: 20PX 0;
-}
-.cara-daftar{
-	margin-top: 8em;
-}
-.list-manfaat{
 
-	
+div.sub-box-keanggotaan{
+  background-color:white;
+  padding:2em 0;
+  max-height:21em;
+  height:15em;
+}
+.title-page-news{
+	padding-bottom: 0;
+}
+.keanggotaan .content-keanggotaan{
+  padding:1em 5em;
+}
 
+.text-bold{
+  font-weight:bold;
 }
-.list-manfaat .sub-list{
-	border:solid 1px #A5A5A5;
-	background-color:white; 
-	border-right:solid 10px #A5A5A5;
-	border-left:solid 10px #A5A5A5; 
-	padding: 0 15px;
-	transition: 0.8s;
-	height: 200px;
-	max-height: 
-}
-.list-manfaat .sub-list:hover{
-	border:solid 1px #ED0231;
-	background-color:white; 
-	border-right:solid 10px #ED0231;
-	border-left:solid 10px #ED0231; 
-	padding: 0 15px;
-	transition: 0.8s;
-	cursor: pointer;
-}
-.list-manfaat .sub-list h3{
-	color: black;
-	transition: 0.8s;
-}
-.list-manfaat .sub-list:hover h3{
-	color: #ED0231;
-}
-</style>
 
-	<section>
-		<div class="container">
-			
-		</div>
-	</section>
-	<section class="cara-daftar">
-		<div class="container">
-			<div class="col col-md-12 col-sm-12 col-xs-12">
-                <div class=" col col-md-12 col-sm-12 col-xs-12 text-center">
-                    <h2 class="text-center" style="color: #ED0231;font-weight: bold;">Anggota </h2>
-                    <div class="line" style="background-color: #ED0231;display: inline-block;margin-bottom: 15px;"></div>
+span.website-anggota{
+  color:#D10909;
+}
+
+.keanggotaan .box-keanggotaan-right ul li{
+  padding:5px 0;
+}
+
+.box-keanggotaan{
+  padding:15px 4em;
+}
+.filter-box-mg-keanggotaan{
+	text-align: center;
+	display: inline-block;
+}
+.keanggotaan .box-keanggotaan-right ul li ul li{
+    padding:0; 
+}
+
+
+  </style>
+
+   <section class="keanggotaan">
+        <div class="container-fluid none-padding filter-title-page-news">
+            <div class="col-md-12 col-sm-12 col-xs-12 none-padding title-page-news">
+                <div class="line-news">
+                    <div></div>
                 </div>
-				<p>
-					<?php echo $keanggotaan; ?><!-- Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent -->
-				</p>
-			
-				<div class=" col col-md12-col-sm-12 col-xs-12 img-keanggotaan text-center">
-					<img src="<?=base_url();?>assets/images/logo/keanggotaan.png" style="width: 720px;" >
-				</div>
-			</div>
-		</div>
-	</section>
-	<section class="Manfaat">
-		<div class="container">
-		     <div class=" col col-md-12 col-sm-12 col-xs-12 tex-left">
-                <h3 class="text-left" style="color: #ED0231;font-weight: bold;">Kenapa Harus Bergabung Dengan IDREN? </h3>
-                <div class="line" style="background-color: #ED0231;display: inline-block;"></div>
+                <div class="header-title">
+                    <h1>Keanggotaan </h1></div>
             </div>
-			<div class="col col-md-6 col-sm-6 col-xs-6 list-manfaat" style="margin: 20px 0;">
-				<div class="sub-list">
-				<h3><b>1. SMARTCONSYS</b></h3>
-				<p>
-					Adalah sistem computerize yang disusun dari beberapa elemen sistem konsultasi siswa terpadu yang tersedia dalam paket Layanan Siswa Primagama.
-				</p>
-				</div>
-			</div>
-			<div class="col col-md-6 col-sm-6 col-xs-6 list-manfaat" style="margin: 20px 0;">
-				<div class="sub-list">
-				<h3><b>2. EMS SYSTEM</b></h3>
-				<p>
-					Di Primagama, pengujian kemajuan siswa selain dilaksanakan dalam bentuk PBT (Paper Based Test) juga dalam format EMS System.
-				</p>
-				</div>
-			</div>
-			<div class="col col-md-6 col-sm-6 col-xs-7 list-manfaat" style="margin: 20px 0;">
-				<div class="sub-list">
-				<h3><b>3. FISITARU</b></h3>
-				<p>
-					Belajar menyelesaikan soal-soal fisika tanpa menggunakan rumus-rumus yang rumit.
-				</p>
-				</div>
-			</div>
-			<div class="col col-md-6 col-sm-6 col-xs-6 list-manfaat" style="margin: 20px 0;">
-				<div class="sub-list">
-				<h3><b>4. PELAYANAN</b></h3>
-				<p>
-					Primagama adalah bimbingan belajar yang selalu memberikan pelayanan yang prima agar para siswa dan siswi Primagama mencapai hasil yang optimal.
-				</p>
-				</div>
-			</div>
-		</div>
-	</section>
- 
-    </section>
+            <div class="col-md-12 col-sm-12 col-xs-12 content-keanggotaan">
+              
+              <?php foreach ($keanggotaan as $key => $value) : ?>
+                <div class="col col-md-6 col-sm-6 col-xs-6 box-keanggotaan">
+                    <div class="col col-md-12 col-sm-12 col-xs-12 none-padding sub-box-keanggotaan">
+                        <div class="col col-md-3 col-sm-3 col-xs-3">
+                            <div class="box-keanggotaan-left">
+                            	<div class="filter-box-mg-keanggotaan">
+                            		<img class="img-responsive" src="<?php echo $value['image_thumbnail']; ?>">
+                            	</div>
+                            </div>
+                        </div>
+                        <div class="col col-md-9 col-sm-9 col-xs-9 none-padding box-keanggotaan-right">
+                            <h4 class="text-bold title-box-keanggotaan"><?php echo $value['instansi']; ?></h4>
+                            <ul class="list-unstyled">
+                                <li>
+                                    <ul class="list-inline">
+                                        <li><i class="fa fa-map-marker"></i></li>
+                                        <li><?php echo $value['address']; ?></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <ul class="list-inline">
+                                        <li><i class="fa fa-phone"></i></li>
+                                        <li><?php echo $value['number_phone']; ?></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <ul class="list-inline">
+                                        <li><i class="fa fa-laptop"></i></li>
+                                        <li><span class="website-anggota"> <?php echo $value['number_phone']; ?> </span></li>
+                                    </ul>
 
-<script src="<?=base_url();?>assets/js/jquery.min.js"></script>
-<!-- <script src="<?=base_url();?>assets/js/owl.carousel.min.js"></script>
-<script src="<?=base_url();?>assets/js/main-owl.js"></script> -->
-<!-- <script src="<?=base_url();?>assets/js/bootstrap.min.js"></script> -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach ?>
+         <!--        <div class="col col-md-6 col-sm-6 col-xs-6 box-keanggotaan">
+                    <div class="col col-md-12 col-sm-12 col-xs-12 none-padding sub-box-keanggotaan">
+                        <div class="col col-md-3 col-sm-3 col-xs-3">
+                            <div class="box-keanggotaan-left">
+                            	<div class="filter-box-mg-keanggotaan">
+                            		<img class="img-responsive" src="<?=base_url();?>assets/images/logo/logo3.png">
+                            	</div>
+                            </div>
+                        </div>
+                        <div class="col col-md-9 col-sm-9 col-xs-9 none-padding box-keanggotaan-right">
+                            <h4 class="text-bold title-box-keanggotaan">Institut teknologi sepuluh Nopember</h4>
+                            <ul class="list-unstyled">
+                                <li><i class="fa fa-map-marker"></i> Jl. Airlangga No. 4 - 6, Airlangga, Gubeng, Airlangga,Gubeng, Kota SBY, Jawa Timur 60115</li>
+                                <li><i class="fa fa-phone"></i> Telp. (031) 5915551, 5914042 ext. 227</li>
+                                <li><i class="fa fa-laptop"></i><span class="website-anggota"> www.unair.ac.id </span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col col-md-6 col-sm-6 col-xs-6 box-keanggotaan">
+                    <div class="col col-md-12 col-sm-12 col-xs-12 none-padding sub-box-keanggotaan">
+                        <div class="col col-md-3 col-sm-3 col-xs-3">
+                            <div class="box-keanggotaan-left">
+                            	<div class="filter-box-mg-keanggotaan">
+                            		<img class="img-responsive" src="<?=base_url();?>assets/images/logo/logo4.png">
+                            	</div>
+                            </div>
+                        </div>
+                        <div class="col col-md-9 col-sm-9 col-xs-9 none-padding box-keanggotaan-right">
+                            <h4 class="text-bold title-box-keanggotaan">Institut teknologi sepuluh Nopember</h4>
+                            <ul class="list-unstyled">
+                                <li><i class="fa fa-map-marker"></i> Jl. Airlangga No. 4 - 6, Airlangga, Gubeng, Airlangga,Gubeng, Kota SBY, Jawa Timur 60115</li>
+                                <li><i class="fa fa-phone"></i> Telp. (031) 5915551, 5914042 ext. 227</li>
+                                <li><i class="fa fa-laptop"></i><span class="website-anggota"> www.unair.ac.id </span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col col-md-6 col-sm-6 col-xs-6 box-keanggotaan">
+                    <div class="col col-md-12 col-sm-12 col-xs-12 none-padding sub-box-keanggotaan">
+                        <div class="col col-md-3 col-sm-3 col-xs-3">
+                            <div class="box-keanggotaan-left">
+                            	<div class="filter-box-mg-keanggotaan">
+                            		<img class="img-responsive" src="<?=base_url();?>assets/images/logo/logo5.png">
+                            	</div>
+                            </div>
+                        </div>
+                        <div class="col col-md-9 col-sm-9 col-xs-9 none-padding box-keanggotaan-right">
+                            <h4 class="text-bold title-box-keanggotaan">Institut teknologi sepuluh Nopember</h4>
+                            <ul class="list-unstyled">
+                                <li><i class="fa fa-map-marker"></i> Jl. Airlangga No. 4 - 6, Airlangga, Gubeng, Airlangga,Gubeng, Kota SBY, Jawa Timur 60115</li>
+                                <li><i class="fa fa-phone"></i> Telp. (031) 5915551, 5914042 ext. 227</li>
+                                <li><i class="fa fa-laptop"></i><span class="website-anggota"> www.unair.ac.id </span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col col-md-6 col-sm-6 col-xs-6 box-keanggotaan">
+                    <div class="col col-md-12 col-sm-12 col-xs-12 none-padding sub-box-keanggotaan">
+                        <div class="col col-md-3 col-sm-3 col-xs-3">
+                            <div class="box-keanggotaan-left">
+                            	<div class="filter-box-mg-keanggotaan">
+                            		<img class="img-responsive" src="<?=base_url();?>assets/images/logo/logo6.png">
+                            	</div>
+                            </div>
+                        </div>
+                        <div class="col col-md-9 col-sm-9 col-xs-9 none-padding box-keanggotaan-right">
+                            <h4 class="text-bold title-box-keanggotaan">Institut teknologi sepuluh Nopember</h4>
+                            <ul class="list-unstyled">
+                                <li><i class="fa fa-map-marker"></i> Jl. Airlangga No. 4 - 6, Airlangga, Gubeng, Airlangga,Gubeng, Kota SBY, Jawa Timur 60115</li>
+                                <li><i class="fa fa-phone"></i> Telp. (031) 5915551, 5914042 ext. 227</li>
+                                <li><i class="fa fa-laptop"></i><span class="website-anggota"> www.unair.ac.id </span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col col-md-6 col-sm-6 col-xs-6 box-keanggotaan">
+                    <div class="col col-md-12 col-sm-12 col-xs-12 none-padding sub-box-keanggotaan">
+                        <div class="col col-md-3 col-sm-3 col-xs-3">
+                            <div class="box-keanggotaan-left">
+                            	<div class="filter-box-mg-keanggotaan">
+                            		<img class="img-responsive" src="<?=base_url();?>assets/images/logo/logo7.png">
+                            	</div>
+                            </div>
+                        </div>
+                        <div class="col col-md-9 col-sm-9 col-xs-9 none-padding box-keanggotaan-right">
+                            <h4 class="text-bold title-box-keanggotaan">Institut teknologi sepuluh Nopember</h4>
+                            <ul class="list-unstyled">
+                                <li><i class="fa fa-map-marker"></i> Jl. Airlangga No. 4 - 6, Airlangga, Gubeng, Airlangga,Gubeng, Kota SBY, Jawa Timur 60115</li>
+                                <li><i class="fa fa-phone"></i> Telp. (031) 5915551, 5914042 ext. 227</li>
+                                <li><i class="fa fa-laptop"></i><span class="website-anggota"> www.unair.ac.id </span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col col-md-6 col-sm-6 col-xs-6 box-keanggotaan">
+                    <div class="col col-md-12 col-sm-12 col-xs-12 none-padding sub-box-keanggotaan">
+                        <div class="col col-md-3 col-sm-3 col-xs-3">
+                            <div class="box-keanggotaan-left">
+                            	<div class="filter-box-mg-keanggotaan">
+                            		<img class="img-responsive" src="<?=base_url();?>assets/images/logo/logo8.png">
+                            	</div>
+                            </div>
+                        </div>
+                        <div class="col col-md-9 col-sm-9 col-xs-9 none-padding box-keanggotaan-right">
+                            <h4 class="text-bold title-box-keanggotaan">Institut teknologi sepuluh Nopember</h4>
+                            <ul class="list-unstyled">
+                                <li><i class="fa fa-map-marker"></i> Jl. Airlangga No. 4 - 6, Airlangga, Gubeng, Airlangga,Gubeng, Kota SBY, Jawa Timur 60115</li>
+                                <li><i class="fa fa-phone"></i> Telp. (031) 5915551, 5914042 ext. 227</li>
+                                <li><i class="fa fa-laptop"></i><span class="website-anggota"> www.unair.ac.id </span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col col-md-6 col-sm-6 col-xs-6 box-keanggotaan">
+                    <div class="col col-md-12 col-sm-12 col-xs-12 none-padding sub-box-keanggotaan">
+                        <div class="col col-md-3 col-sm-3 col-xs-3">
+                            <div class="box-keanggotaan-left">
+                            	<div class="filter-box-mg-keanggotaan">
+                            		<img class="img-responsive" src="<?=base_url();?>assets/images/logo/logo2.png">
+                            	</div>
+                            </div>
+                        </div>
+                        <div class="col col-md-9 col-sm-9 col-xs-9 none-padding box-keanggotaan-right">
+                            <h4 class="text-bold title-box-keanggotaan">Institut teknologi sepuluh Nopember</h4>
+                            <ul class="list-unstyled">
+                                <li><i class="fa fa-map-marker"></i> Jl. Airlangga No. 4 - 6, Airlangga, Gubeng, Airlangga,Gubeng, Kota SBY, Jawa Timur 60115</li>
+                                <li><i class="fa fa-phone"></i> Telp. (031) 5915551, 5914042 ext. 227</li>
+                                <li><i class="fa fa-laptop"></i><span class="website-anggota"> www.unair.ac.id </span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div> -->
+             
+            </div>
+            <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+                <ul class="list-inline pagination list-pagination">
+                    <li> <i class="fa fa-angle-left"></i> Prev</li>
+                    <li class="active">1 </li>
+                    <li>2 </li>
+                    <li>3 </li>
+                    <li>4 </li>
+                    <li>5 </li>
+                    <li>6 </li>
+                    <li>7 </li>
+                    <li>Next <i class="fa fa-angle-right"></i></li>
+                </ul>
+            </div>
+        </div>
+    </section>

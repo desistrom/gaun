@@ -58,7 +58,7 @@ ul.dropdown-menu li a:hover{
   left: 0;
 }
 .logo{
-  width:150px;
+  width:100px;
 }
 
 .navbar-brand{
@@ -101,7 +101,7 @@ h3.title-footer{
   text-align:center;
 }
 .footer-right ul li a:hover{
-  background-color: #747474;
+  background-color: #D10909;
 }
 
 
@@ -269,7 +269,7 @@ div.container-fluid{
 
 section.client{
   background-color:#F2F2F2;
-  height:500px;
+  height:400px;
 }
 
 .none-padding{
@@ -423,7 +423,7 @@ div.line-right ul li{
 }
 
 div.arrow-line{
-  margin-top:-2em;
+  
 }
 
 .glyphicon-arrow-down{
@@ -459,7 +459,8 @@ div.arrow-line{
   font-size: 24px;
 }
 .layanan div.arrow-line{
-  margin-top:-11em;
+  margin-top:-4em;
+  margin-bottom: 2em;
 }
 
 .layanan .arrow-line ul{
@@ -519,7 +520,7 @@ ul.list-inline.date_event{
 }
 
 .desrip-news{
-  height:100%;
+  
   padding-bottom:3.5em;
 }
 
@@ -598,7 +599,8 @@ div.container-fluid.none-padding.filter-title-page-news{
 }
 
 div.header-title h1{
-  font-size:66px;
+  font-size:50px;
+  color: #BDBDBD;
 }
 
 ul.list-inline.list-pagination{
@@ -652,8 +654,9 @@ div.container-fluid.section-pagination{
 
 div.container-fluid.content-comment{
   background-color:#F2F2F2;
-  padding-top:5em;
+  padding-top:7em;
   height:50em;
+  /*margin-top: -10em;*/
 }
 
 .content-comment .user{

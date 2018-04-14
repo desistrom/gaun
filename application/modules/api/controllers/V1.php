@@ -230,14 +230,24 @@ class V1 extends REST_Controller {
         $this->_getHero();
     }
 
-    public function getlayanan_get(){
+    public function getlayanan_idroam_get(){
         header('Content-Type: application/json');
-        $this->_getLayanan();
+        $this->_getLayanan_idroam();
     }
 
-    public function getogo_get(){
+    public function getlayanan_cloud_get(){
+        header('Content-Type: application/json');
+        $this->_getLayanan_cloud();
+    }
+
+    public function getlogo_get(){
         header('Content-Type: application/json');
         $this->_getLogo();
+    }
+
+    public function gettopologi_get(){
+        header('Content-Type: application/json');
+        $this->_getTopologi();
     }
 
 
@@ -260,6 +270,14 @@ class V1 extends REST_Controller {
 		}else{
             $retData['code'] = '200';
             $retData['status'] = 'success';
+            foreach ($galery as $key => $value) {
+            if ($value['file'] == '') {
+                $galery[$key]['file']=base_url().'assets/images/logo/IDREN-2.png';
+            }else{
+                $galery[$key]['file'] = base_url().'media/'.$value['file'];
+            }
+
+        }
             $retData['data'] = $galery;
 		}
 		$this->response($retData,200);
@@ -451,7 +469,7 @@ class V1 extends REST_Controller {
         $retData['code'] = '200';
         $retData['status'] = 'success';
         foreach ($news as $key => $value) {
-            if ($value['sumber'] == '' && $value['gambar'] != '') {
+            if ($value['kategori'] != 'rss' && $value['gambar'] != '') {
                 $news[$key]['gambar'] = base_url().'assets/media/'.$news[$key]['gambar'];
             }
             if ($value['gambar'] == '') {
@@ -490,6 +508,14 @@ class V1 extends REST_Controller {
         }else{
             $retData['code'] = '200';
             $retData['status'] = 'success';
+            
+            if ($news['gambar'] == '') {
+                $news['gambar']=base_url().'assets/images/logo/IDREN-2.png';
+            }else{
+                if ($news['kategori'] != 'rss') {
+                    $news['gambar'] = base_url().'assets/media/'.$news['gambar'];
+                }
+            }
             $retData['data'] = $news;
         }
         $this->response($retData,200);
@@ -537,18 +563,37 @@ class V1 extends REST_Controller {
     }
 
     //layanan
-    function _getLayanan(){
-        $user = $this->v1_model->getLayanan();
+    function _getLayanan_idroam(){
+        $user = $this->v1_model->getLayanan(1);
         $retData['code'] = '200';
         $retData['status'] = 'Success';
+        $user['image'] = base_url().'media/'.$user['image'];
+        $retData['data'] = $user;
+        $this->response($retData,200);
+    }
+
+    function _getLayanan_cloud(){
+        $user = $this->v1_model->getLayanan(2);
+        $retData['code'] = '200';
+        $user['image'] = base_url().'media/'.$user['image'];
         $retData['data'] = $user;
         $this->response($retData,200);
     }
 
     function _getLogo(){
-        $user = $this->v1_model->getLogo();
+        $user = $this->v1_model->getLogo(1);
         $retData['code'] = '200';
         $retData['status'] = 'Success';
+        $user['image'] = $user['image'];
+        $retData['data'] = $user;
+        $this->response($retData,200);
+    }
+
+    function _getTopologi(){
+        $user = $this->v1_model->getLogo(2);
+        $retData['code'] = '200';
+        $retData['status'] = 'Success';
+        $user['image'] = base_url()."media/".$user['image'];
         $retData['data'] = $user;
         $this->response($retData,200);
     }

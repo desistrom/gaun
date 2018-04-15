@@ -403,6 +403,18 @@
 <script src="<?=base_url();?>assets/js/app.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="<?=base_url();?>assets/js/bootstrap.min.js"></script>
+<script src="<?=base_url();?>assets/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="<?=base_url();?>assets/datatables/js/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript">
+  $('#example2').DataTable({
+      'paging'      : true,
+      'lengthChange': false,
+      'searching'   : true,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : false
+    });
+</script>
 
 </body>
 </html>

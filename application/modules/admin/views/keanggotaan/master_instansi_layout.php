@@ -1,26 +1,31 @@
 <div class="box">
 	<?php if($view == 'list'){ ?>
+		<link rel="stylesheet" href="<?=base_url();?>assets/datatables/css/dataTables.bootstrap.min.css">
 		<div class="box-body">
 			<div class="col col-md-12 col-sm-12 col-xs-12" style="padding-left: 0; margin-bottom: 15px;">
 				<a href="<?=site_url('admin/keanggotaan/add_instansi');?>" class="btn btn-success">Tambah Instansi</a>
 			</div>
 			<div class="col col-md-12 col-xs-12">
-				<table class="table table-bordered  dataTable">
-					<tr>
+				<table class="table table-bordered  dataTable" id="example2">
+					<thead>
 						<th>No</th>
 						<th>Nama Instansi</th>
+						<th>Image</th>
 						<th>Action</th>
-					</tr>
+					</thead>
+					<tbody>
 					<?php foreach ($instansi as $key => $value): ?>
 						<tr>
 							<td><?=($key+1);?></td>
 							<td><?=$value['nm_instansi'];?></td>
+							<td><img src="<?=base_url().'media/thumbnail/'.$value['gambar'];?>"></td>
 							<td>
 								<!-- <button class="btn btn-default btn_delete">disable</button> -->
 								<a href="<?=site_url('admin/keanggotaan/edit_instansi/'.$value['id_instansi']);?>"><button class="btn btn-primary" id="edit">Edit</button></a>
 							</td>
 						</tr>
-					<?php endforeach ?>
+					<?php endforeach; ?>
+					</tbody>
 				</table>
 				<div class="col col-md-12 col-xs-12 text-right">
 					<!-- <a href="#" class="btn btn-default">Setting</a> -->
@@ -127,6 +132,7 @@
 	<?php } ?>
 </div>
 <script src="<?=base_url().'assets/js/jquery-3.2.1.min.js';?>"></script>
+
 <script type="text/javascript">
   $(document).ready(function () {
     $('body').on('click','#submit', function(){
@@ -166,5 +172,6 @@
       });
     });
     $('#modalSuccess').modal('show');
+    
   });
 </script>

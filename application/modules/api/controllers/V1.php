@@ -238,7 +238,8 @@ class V1 extends REST_Controller {
 
     public function gettestimoni_pagging_get(){
         header('Content-Type: application/json');
-        $this->_getTestimoni();
+        $param = $_GET['data'];
+        $this->_getTestimoni_pagination($param);
     }
 
     //hero
@@ -265,6 +266,26 @@ class V1 extends REST_Controller {
     public function gettopologi_get(){
         header('Content-Type: application/json');
         $this->_getTopologi();
+    }
+
+    public function insert_contact_post(){
+        header('Content-Type: application/json');
+        $param = json_decode(file_get_contents('php://input'), true);
+        if (!isset($param['name']) || $param['name'] == '') {
+            $retData['name'] = 'Name is required, "name" : "Jhon Doe"';
+        }
+        if (!isset($param['emial']) || $param['email'] == '') {
+            $retData['email'] = 'Email is required, "email" : "example@example.com"';
+        }
+        if (!isset($param['pesan']) || $param['pesan'] == '') {
+            $retData['pesan'] = 'pesan is required, "pesan" : "example..."';
+        }
+        if (!isset($param['name']) || $param['name'] == '' || !isset($param['emial']) || $param['email'] == '' || !isset($param['pesan']) || $param['pesan'] == '') {
+            $retData['code'] = '500';
+            $retData['status'] = 'failed';
+            $retData['error'] = 'Your parameter is invalid';
+        }
+        $this->_insertContact($param);
     }
 
 
@@ -603,6 +624,22 @@ class V1 extends REST_Controller {
         $this->response($retData,200);
     }
 
+    function _getTestimoni_pagination($data){
+        $user = $this->v1_model->getTestimoni_paging($data);
+        $retData['code'] = '200';
+        $retData['status'] = 'Success';
+        foreach ($user as $key => $value) {
+            if ($value['image'] == '') {
+                $user[$key]['image']=base_url().'assets/images/logo/IDREN-2.png';
+            }else{
+                $user[$key]['image'] = base_url().'media/'.$value['image'];
+            }
+
+        }
+        $retData['data'] = $user;
+        $this->response($retData,200);
+    }
+
     //hero
     function _getHero(){
         $user = $this->v1_model->getHero();
@@ -647,6 +684,23 @@ class V1 extends REST_Controller {
         $retData['status'] = 'Success';
         $user['image'] = base_url()."media/".$user['image'];
         $retData['data'] = $user;
+        $this->response($retData,200);
+    }
+
+    function _insertContact($data){
+        $data_register['nama'] = $data['name'];
+        $data_register['email'] = $data['email'];
+        $data_register['pesan'] = $data['pesan'];
+        if ($this->v1_model->insertContact($data_register) == false) {
+            $retData['code'] = "500";
+            $retData['status'] = 'Failed';
+            $retData['data'] = "Can't add Message";
+            $this->response($retData,200);
+            exit();
+        }
+        $retData['code'] = '200';
+        $retData['status'] = 'Success';
+        $retData['data'] = 'Message Has been Send';
         $this->response($retData,200);
     }
 

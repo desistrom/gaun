@@ -47,4 +47,9 @@ class About extends MX_Controller  {
 		$this->data['about'] = $this->db->get('tb_about')->row_array();
 		$this->ciparser->new_parse('template_admin','modules_admin', 'about/about_layout',$this->data);
 	}
+
+	public function contact(){
+		$this->data['contact'] = $this->db->get('tb_contact')->result_array();
+		$this->ciparser->new_parse('template_admin','modules_admin', 'about/list_message_layout',$this->data);
+	}
 }

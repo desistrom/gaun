@@ -121,6 +121,9 @@ class Image extends CI_Controller  {
    		// redirect(site_url());
    	}
    	// echo email_send($data);
+    for ($i=0; $i < ; $i++) { 
+      echo "*";
+    }
    }
 
    

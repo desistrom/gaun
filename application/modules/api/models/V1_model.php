@@ -175,6 +175,15 @@ class V1_model extends CI_Model{
 		return false;
 	}
 
+	public function getTestimoni_paging($data){
+		$sql = "SELECT content as testimoni, gambar as image, id_testimoni as testimoniId, nama_user as user, jabatan as sebagai  FROM tb_testimoni where is_aktif = 1 LIMIT ".$data.",6";
+		if ($this->db->query($sql)->num_rows() > 0) {
+			return $this->db->query($sql)->result_array();
+			exit();
+		}
+		return false;
+	}
+
 	public function getHero(){
 		$sql = "SELECT title as judul, link_video as video, content as deskripsi FROM tb_hero";
 		if ($this->db->query($sql)->num_rows() > 0) {
@@ -197,6 +206,14 @@ class V1_model extends CI_Model{
 		$sql = "SELECT logo as image FROM tb_logo where status = ".$id;
 		if ($this->db->query($sql)->num_rows() > 0) {
 			return $this->db->query($sql)->row_array();
+			exit();
+		}
+		return false;
+	}
+
+	public function insertContact($data){
+		if ($this->db->insert('tb_contact',$data)) {
+			return true;
 			exit();
 		}
 		return false;

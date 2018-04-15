@@ -16,8 +16,7 @@ class Galery extends CI_Controller  {
     }
 
     function index() {
-
-    	$url="http://192.168.88.138/idren/api/v1/galery_image";
+        $url = site_url('api/v1/galery_image') ;
     	$data = '';
         $methode = 'GET';
         $token = '';
@@ -28,7 +27,7 @@ class Galery extends CI_Controller  {
     	$this->ciparser->new_parse('template_frontend','modules_web', 'foto_layout',$this->data);
     }
     function video() {
-    	$url= "http://192.168.88.138/idren/api/v1/galery_video";
+        $url = site_url('api/v1/galery_video') ;
     	$data = '';
     	$methode = 'GET';
         $token = '';

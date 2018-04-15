@@ -7,8 +7,12 @@
         .news{
             margin-top: 6em;
         }
+        #news .content-left{
+            font-style: normal;
+        }
+
     </style>
-    <section class="news">
+    <section class="news" id="news">
         <div class="container-fluid none-padding filter-title-page-news">
             <div class="col-md-12 col-sm-12 col-xs-12 none-padding title-page-news">
                 <div class="line-news">
@@ -26,7 +30,7 @@
                         <div class="line-category-title"></div>
                         <ul class="list-unstyled list-category">
                         <?php for ($i=0; $i < 5 ; $i++) { ?>
-                            <li class=""><a href="<?php echo site_url('web/news/get_news').'?data='.$news[$i]['newsId']; ?>"> <?php echo $news[$i]['title']; ?> </a></li>
+                            <li class=""><a href="<?php echo site_url('web/news/get_news').'?data='.$recent[$i]['newsId']; ?>"> <?php echo $recent[$i]['title']; ?> </a></li>
                         <?php } ?>
                         </ul>
                     </div>
@@ -90,17 +94,9 @@
         <div class="container-fluid section-pagination">
             <div class="row">
                 <div class="col-md-12 col-sm-12 col-xs-12 text-center">
-                    <ul class="list-inline pagination list-pagination">
-                        <li> <i class="fa fa-angle-left"></i> Prev</li>
-                        <li class="active">1 </li>
-                        <li>2 </li>
-                        <li>3 </li>
-                        <li>4 </li>
-                        <li>5 </li>
-                        <li>6 </li>
-                        <li>7 </li>
-                        <li>Next <i class="fa fa-angle-right"></i></li>
-                    </ul>
+                    <!-- <ul class="list-inline pagination list-pagination"> -->
+                        <?php echo $this->pagination->create_links(); ?>
+                    <!-- </ul> -->
                 </div>
             </div>
         </div>

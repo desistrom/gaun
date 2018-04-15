@@ -118,6 +118,12 @@ class V1 extends REST_Controller {
         $this->_getinstansi();
     }
 
+    public function instansi_pagging_get(){
+        header('Content-Type: application/json');
+        $param = $_GET['data'];
+        $this->_getinstansi_pagging($param);
+    }
+
     //User
 
     public function alluser_get(){
@@ -181,6 +187,12 @@ class V1 extends REST_Controller {
         $this->_getnews();
     }
 
+    public function pagging_news_get(){
+        header('Content-Type: application/json');
+        $param = $_GET['data'];
+        $this->_paggingnews($param);
+    }
+
     public function search_news_post(){
         header('Content-Type: application/json');
         $param = json_decode(file_get_contents('php://input'), true);
@@ -220,6 +232,11 @@ class V1 extends REST_Controller {
     //untuk testimoni
 
     public function gettestimoni_get(){
+        header('Content-Type: application/json');
+        $this->_getTestimoni();
+    }
+
+    public function gettestimoni_pagging_get(){
         header('Content-Type: application/json');
         $this->_getTestimoni();
     }
@@ -274,7 +291,7 @@ class V1 extends REST_Controller {
             if ($value['file'] == '') {
                 $galery[$key]['file']=base_url().'assets/images/logo/IDREN-2.png';
             }else{
-                $galery[$key]['file'] = base_url().'media/'.$value['file'];
+                $galery[$key]['file'] = base_url().'assets/media/'.$value['file'];
             }
 
         }
@@ -388,6 +405,22 @@ class V1 extends REST_Controller {
         }
         $retData['data'] = $user;
         $this->response($retData,200);
+    }
+
+    function _getinstansi_pagging($param){
+        $user = $this->v1_model->getInstansi_pagging($param);
+        $retData['code'] = '200';
+        $retData['status'] = 'Success';
+        foreach ($user as $key => $value) {
+            if ($value['image'] == '') {
+                $user[$key]['image_thumbnail']=base_url().'assets/images/logo/IDREN-2.png';
+            }else{
+                $user[$key]['image_large']=base_url().'media/'.$user[$key]['image'];
+                $user[$key]['image_thumbnail']=base_url().'media/'.$user[$key]['image'];
+            }                                                                                                                     
+        }
+        $retData['data'] = $user;
+        $this->response($retData,200);
     }   
 
     function _getuser(){
@@ -466,6 +499,23 @@ class V1 extends REST_Controller {
 
     function _getnews(){
         $news = $this->v1_model->news();
+        $retData['code'] = '200';
+        $retData['status'] = 'success';
+        foreach ($news as $key => $value) {
+            if ($value['kategori'] != 'rss' && $value['gambar'] != '') {
+                $news[$key]['gambar'] = base_url().'assets/media/'.$news[$key]['gambar'];
+            }
+            if ($value['gambar'] == '') {
+                $news[$key]['gambar']=base_url().'assets/images/logo/IDREN-2.png';
+            }
+
+        }
+        $retData['data'] = $news;
+        $this->response($retData,200);
+    }
+
+    function _paggingnews($param){
+        $news = $this->v1_model->newsPagging($param);
         $retData['code'] = '200';
         $retData['status'] = 'success';
         foreach ($news as $key => $value) {
@@ -584,7 +634,9 @@ class V1 extends REST_Controller {
         $user = $this->v1_model->getLogo(1);
         $retData['code'] = '200';
         $retData['status'] = 'Success';
-        $user['image'] = $user['image'];
+        if ($user['image'] == '') {
+                $user['image']=base_url().'assets/images/logo/IDREN-2.png';
+            }
         $retData['data'] = $user;
         $this->response($retData,200);
     }

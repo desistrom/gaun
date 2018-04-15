@@ -38,6 +38,15 @@ jQuery(document).ready(function($){
             itemsMobile : [479, 1]
  
         });
+         $(".album-galery #owl-demo").owlCarousel({
+ 
+           autoPlay: 2000, //Set AutoPlay to 3 seconds
+ 
+            items : 3,
+            itemsDesktop : [1199,3],
+            itemsDesktopSmall : [979,2]
+ 
+        });
 
 // var stickyNavTop = $('#nav-con').offset().top;
 

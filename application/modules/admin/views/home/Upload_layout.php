@@ -1,6 +1,6 @@
 <div class="box">
     <div class="box-header with-border">
-        <h3 class="box-title">General Elements</h3>
+        <h3 class="box-title">Logo Website</h3>
     </div>
     <div class="box-body">
     <div class="form-group">

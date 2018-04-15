@@ -179,7 +179,7 @@ class Home extends CI_Controller  {
 		$this->ckeditor->config['toolbar'] = array(
 		                array( 'Source', '-', 'Bold', 'Italic', 'Underline', '-','Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo','-','NumberedList','BulletedList' )
 		                                                    );
-		$this->ckeditor->config['language'] = 'it';
+		$this->ckeditor->config['language'] = 'eng';
 		$this->ckeditor->config['width'] = '1024px';
 		$this->ckeditor->config['height'] = '300px';  
 		$this->data['view'] = 'add';
@@ -255,7 +255,7 @@ class Home extends CI_Controller  {
 		$this->ckeditor->config['toolbar'] = array(
 		                array( 'Source', '-', 'Bold', 'Italic', 'Underline', '-','Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo','-','NumberedList','BulletedList' )
 		                                                    );
-		$this->ckeditor->config['language'] = 'it';
+		$this->ckeditor->config['language'] = 'eng';
 		$this->ckeditor->config['width'] = '1024px';
 		$this->ckeditor->config['height'] = '300px';  
 		$this->data['view'] = 'edit';
@@ -270,7 +270,7 @@ class Home extends CI_Controller  {
         $config['upload_path']          = FCPATH."media/";
         $config['allowed_types']        = 'gif|jpg|png';
         $config['max_size']             = 4000;
-        $config['max_width']            = 2048;
+        $config['max_width']            = 4056;
         $config['min_width']            = 200;
         $config['file_name']            = time().".".$ext;
 
@@ -376,7 +376,7 @@ class Home extends CI_Controller  {
 		$this->ckeditor->config['toolbar'] = array(
 		                array( 'Source', '-', 'Bold', 'Italic', 'Underline', '-','Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo','-','NumberedList','BulletedList' )
 		                                                    );
-		$this->ckeditor->config['language'] = 'it';
+		$this->ckeditor->config['language'] = 'eng';
 		$this->ckeditor->config['width'] = '1024px';
 		$this->ckeditor->config['height'] = '300px'; 
 		$this->ciparser->new_parse('template_admin','modules_admin', 'home/hero_layout',$this->data);
@@ -451,7 +451,7 @@ class Home extends CI_Controller  {
 		$this->ckeditor->config['toolbar'] = array(
 		                array( 'Source', '-', 'Bold', 'Italic', 'Underline', '-','Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo','-','NumberedList','BulletedList' )
 		                                                    );
-		$this->ckeditor->config['language'] = 'it';
+		$this->ckeditor->config['language'] = 'eng';
 		$this->ckeditor->config['width'] = '1024px';
 		$this->ckeditor->config['height'] = '300px'; 
 		$this->ciparser->new_parse('template_admin','modules_admin', 'home/layanan_layout',$this->data);
@@ -524,7 +524,7 @@ class Home extends CI_Controller  {
 		$this->ckeditor->config['toolbar'] = array(
 		                array( 'Source', '-', 'Bold', 'Italic', 'Underline', '-','Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo','-','NumberedList','BulletedList' )
 		                                                    );
-		$this->ckeditor->config['language'] = 'it';
+		$this->ckeditor->config['language'] = 'eng';
 		$this->ckeditor->config['width'] = '1024px';
 		$this->ckeditor->config['height'] = '300px'; 
 		$this->ciparser->new_parse('template_admin','modules_admin', 'home/layanan_layout',$this->data);

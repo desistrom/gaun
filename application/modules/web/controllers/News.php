@@ -13,15 +13,41 @@ class News extends CI_Controller  {
     function __construct() {
         parent::__construct();
          $this->load->helper('api');
+         $this->load->library('pagination');
     }
 
     function index() {
-        $url = site_url('api/v1/news');
+        $config['base_url'] = base_url().'web/news/index';
+        $url = base_url().'api/v1/news';
         $methode = 'GET';
+        $b = api_helper('',$url,$methode,'');
+        $config['total_rows'] = count($b['data']);
+        $config['per_page'] = 4;
+        $config['prev_tag_open'] = '<li>';
+        $config['prev_tag_close'] = '</li>';
+        $config['prev_link'] = 'Prev';
+        $config['next_tag_open'] = '<li>';
+        $config['next_tag_close'] = '</li>';
+        $config['next_link'] = 'Next';
+        $this->pagination->initialize($config);
+
+        
+        $url = $this->uri->segment_array();
+        $data = end($url);
+        if (!is_numeric($data)) {
+            $data = 0;
+        }
+        $url = base_url().'api/v1/pagging_news?data='.$data;
         $token = '';
-        $a = api_helper($token,$url,$methode,$token);
+        $a = api_helper('',$url,$methode,$token);
+        $url = base_url().'api/v1/news';
+        $b = api_helper('',$url,$methode,$token);
+
+        
+
 
         $this->data['news']=$a['data'];
+        $this->data['recent']=$b['data'];
     	$this->ciparser->new_parse('template_frontend','modules_web', 'news_layout',$this->data);
     }
         function get_news() {

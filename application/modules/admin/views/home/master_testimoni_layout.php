@@ -63,7 +63,7 @@
   <?php } ?>
 <?php }elseif($view == 'add'){ ?>
   <div class="box-header with-border">
-    <h3 class="box-title">General Elements</h3>
+    <h3 class="box-title">Add Testimoni</h3>
   </div>
   <!-- /.box-header -->
   <div class="box-body">
@@ -100,7 +100,7 @@
   </div>
   <?php }else{ ?>
   <div class="box-header with-border">
-    <h3 class="box-title">General Elements</h3>
+    <h3 class="box-title">Edit Testimoni</h3>
   </div>
   <!-- /.box-header -->
   <div class="box-body">

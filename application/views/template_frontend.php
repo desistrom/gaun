@@ -14,6 +14,11 @@
     <link rel="stylesheet" href="<?=base_url();?>assets/css/owl.transitions.css">
     <link rel="stylesheet" href="<?=base_url();?>assets/css/owl.carousel.css">
     <link rel="stylesheet" href="<?=base_url();?>assets/css/css.css">
+    <style type="text/css">
+      .modal .ntf_err{
+          color: red;
+      }
+    </style>
 </head>
 
 <body>
@@ -36,8 +41,8 @@
                         </li>
                     <li class="dropdown"><a data-toggle="dropdown" aria-expanded="false" href="#" class="dropdown-toggle">Tentang <span class="fa fa-angle-down"></span></a>
                           <ul class="dropdown-menu" role="menu">
-                              <li><a href="#">Contact Us</a></li>
-                              <li><a href="#">Tentang IDren</a></li>
+                              <li><a href="<?php echo site_url('web/tentang/contact') ?>">Contact Us</a></li>
+                              <li><a href="<?php echo site_url('web/tentang') ?>">Tentang IDren</a></li>
 
                           </ul>
                         </li>
@@ -58,7 +63,7 @@
                       <li role="presentation" class=""><a <?php if(current_url() == site_url('web/news')){ ?> class="active" <?php } ?> href="<?php echo site_url('web/news'); ?>">Berita</a></li>
 
                       <!-- <li role="presentation" class="active"><a href="#">Masuk</a></li> -->
-                      <li role="presentation" class="active"><a href="#" data-toggle="modal" data-target="#myModal">Gabung</a></li>
+                      <li role="presentation" class="active btn-gabung"><a href="#" data-toggle="modal" >Gabung</a></li>
 
                   </ul>
               </div>
@@ -121,6 +126,63 @@
             </div>
         </div>
     </div>
+
+
+
+
+<!-- Modal -->
+    <div id="myModal" class="modal fade modal-register" role="dialog" data-keyboard="false" data-backdrop="static">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title text-center">Registerr</h4>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                  <label for="name">Name</label>
+                  <input type="" class="form-control" id="name" placeholder="Name">
+                  <div class="ntf_err">harus diisi</div>
+                </div>
+                <div class="form-group">
+                  <label for="name_institusi"> Institusi Name</label>
+                  <input type="" class="form-control" id="name_institusi" placeholder="Institusi Name">
+                  <div class="ntf_err">harus diisi</div>
+                </div>
+                <div class="form-group">
+                  <label for="email">Email</label>
+                  <input type="email" class="form-control" id="email" placeholder="Email">
+                  <div class="ntf_err">harus diisi</div>
+                </div>
+                <div class="form-group">
+                  <label for="phone">Phone</label>
+                  <input type="" class="form-control" id="phone" placeholder="Phone">
+                  <div class="ntf_err">harus diisi</div>
+                </div>
+                <div class="form-group">
+                  <label for="username">username</label>
+                  <input type="username" class="form-control" id="username" placeholder="username">
+                  <div class="ntf_err">harus diisi</div>
+                </div>
+                <div class="form-group">
+                  <label for="password">Password</label>
+                  <input type="password" class="form-control" id="password" placeholder="Password">
+                  <div class="ntf_err">harus diisi</div>
+                </div>
+                <div class="text-right">
+                  <button type="submit" class="btn btn-danger btn-default">Simpan</button>
+                </div>
+              </form>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
     <script src="<?=base_url();?>assets/js/jquery.min.js"></script>
     <script src="<?=base_url();?>assets/js/bootstrap.min.js"></script>
    
@@ -128,6 +190,14 @@
     <script src="<?=base_url();?>assets/js/main-owl.js"></script>
       <script src="<?=base_url();?>assets/js/scrolling-nav.js"></script>
  <script src="<?=base_url();?>assets/js/jquery.easing.min.js"></script>
+ <script type="text/javascript">
+   
+    $(document).ready(function(){
+      $(".btn-gabung").click(function(){
+          $(".modal-register").modal();
+      });
+    });
+ </script>
 </body>
 
 </html>

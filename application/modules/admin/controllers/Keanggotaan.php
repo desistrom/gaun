@@ -153,7 +153,7 @@ class Keanggotaan extends MX_Controller  {
 		$this->ckeditor->config['toolbar'] = array(
 		                array( 'Source', '-', 'Bold', 'Italic', 'Underline', '-','Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo','-','NumberedList','BulletedList' )
 		                                                    );
-		$this->ckeditor->config['language'] = 'it';
+		$this->ckeditor->config['language'] = 'eng';
 		$this->ckeditor->config['width'] = '1024px';
 		$this->ckeditor->config['height'] = '300px';
 		$this->data['content'] = $this->db->get('tb_setting_user')->row_array();

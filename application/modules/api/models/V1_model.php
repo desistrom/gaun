@@ -67,6 +67,15 @@ class V1_model extends CI_Model{
 		return false;
 	}
 
+	public function getInstansi_pagging($data){
+		$sql = "SELECT nm_instansi as instansi, id_instansi as id, phone as number_phone, website as link, alamat as address, gambar as image FROM tb_instansi LIMIT ".$data.",8";
+		if ($this->db->query($sql)->num_rows() > 0) {
+			return $this->db->query($sql)->result_array();
+			exit();
+		}
+		return false;
+	}
+
 	public function getUser(){
 		$sql = "SELECT u.id_user as UserId, u.name as user_nama, u.email as user_email, u.phone as user_phone, u.gambar as image FROM tb_user u join tb_instansi i on u.id_instansi_ref = id_instansi where u.is_aktif = 1";
 		if ($this->db->query($sql)->num_rows() > 0) {
@@ -113,6 +122,17 @@ class V1_model extends CI_Model{
 		return false;
 	}
 
+	public function newsPagging($data){
+		$sql = "SELECT n.id_news as newsId, n.created as tanggal,n.judul as title, n.content as news_content, u.name as author, k.nm_kategori as kategori, n.link as sumber, n.img as gambar
+			FROM tb_news n join tb_kategori_news k on n.id_kategori_ref = k.id_kategori_news 
+			join tb_user u on n.id_user_ref = u.id_user where n.is_aktif = 1 ORDER BY n.id_news DESC  LIMIT ".$data.",4 ";
+		if ($this->db->query($sql)->num_rows() > 0) {
+			return $this->db->query($sql)->result_array();
+			exit();
+		}
+		return false;
+	}
+
 	public function searchNews($data){
 		$sql = "SELECT n.id_news as newsId, n.created as tanggal, n.judul as title, n.content as news_content, u.name as author, k.nm_kategori as kategori, n.link as sumber, n.img as gambar
 			FROM tb_news n join tb_kategori_news k on n.id_kategori_ref = k.id_kategori_news 
@@ -147,7 +167,7 @@ class V1_model extends CI_Model{
 	}
 
 	public function getTestimoni(){
-		$sql = "SELECT content as testimoni, gambar as image, id_testimoni as testimoniId, nama_user as user, jabatan as sebagai  FROM tb_testimoni";
+		$sql = "SELECT content as testimoni, gambar as image, id_testimoni as testimoniId, nama_user as user, jabatan as sebagai  FROM tb_testimoni where is_aktif = 1";
 		if ($this->db->query($sql)->num_rows() > 0) {
 			return $this->db->query($sql)->result_array();
 			exit();

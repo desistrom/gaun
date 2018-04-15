@@ -5,7 +5,7 @@
 </style>
 <div class="box ">
   <div class="box-header with-border">
-    <h3 class="box-title">General Elements</h3>
+    <h3 class="box-title">About Page</h3>
   </div>
   <!-- /.box-header -->
   <div class="box-body">
@@ -18,12 +18,6 @@
         <div class="error" id="ntf_content"></div>
       </div>
 
-      <div class="form-group">
-        <label>Contact</label>
-        <?php echo $this->ckeditor->editor("contact", $about['contact'] ); ?>
-        <input type="hidden" name="contact" value="<?php if(isset($about)){ echo $about['contact']; } ?>" id="contact">
-        <div class="error" id="ntf_contact"></div>
-      </div>
       <input type="hidden" name="id" value="<?php if(isset($about)){ echo $about['id_about']; } ?>">
       <button type="button" class="btn btn-primary" id="submit">Submit</button>
 
@@ -59,7 +53,6 @@
     $('body').on('click','#submit', function(){
       // console.log($('form').val());
       $('#content').val(CKEDITOR.instances.content.getData());
-      $('#contact').val(CKEDITOR.instances.contact.getData());
       // return false;
       $.ajax({
           url : window.location.href,

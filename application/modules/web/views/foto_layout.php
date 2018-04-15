@@ -101,193 +101,6 @@
 
          /* The Modal (background) */
 
-/* The Close Button */
-.close {
-  color: white;
-  position: absolute;
-  top: 10px;
-  right: 25px;
-  font-size: 35px;
-  font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-  color: #999;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-/* Hide the slides by default */
-.mySlides {
-  display: none;
-}
-
-/* Next & previous buttons */
-.prev,
-.next {
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  width: auto;
-  padding: 16px;
-  margin-top: -50px;
-  color: white;
-  font-weight: bold;
-  font-size: 20px;
-  transition: 0.6s ease;
-  border-radius: 0 3px 3px 0;
-  user-select: none;
-  -webkit-user-select: none;
-}
-
-/* Position the "next button" to the right */
-.next {
-  right: 0;
-  border-radius: 3px 0 0 3px;
-}
-
-/* On hover, add a black background color with a little bit see-through */
-.prev:hover,
-.next:hover {
-  background-color: rgba(0, 0, 0, 0.8);
-}
-
-/* Number text (1/3 etc) */
-.numbertext {
-  color: #f2f2f2;
-  font-size: 12px;
-  padding: 8px 12px;
-  position: absolute;
-  top: 0;
-}
-
-/* Caption text */
-.caption-container {
-  text-align: center;
-  background-color: black;
-  padding: 2px 16px;
-  color: white;
-}
-
-img.demo {
-  opacity: 0.6;
-}
-
-.active,
-.demo:hover {
-  opacity: 1;
-}
-
-img.hover-shadow {
-  transition: 0.3s
-}
-
-.hover-shadow:hover {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
-}
-      </style>
-        <div class="container-fluid none-padding filter-title-page-news">
-            <div class="col-md-12 col-sm-12 col-xs-12 none-padding title-page-news">
-                <div class="line-news">
-                    <div></div>
-                </div>
-                <div class="header-title">
-                    <h2 style="font-size: 50px;">PHOTO </h2></div>
-            </div>
-        </div>
-        <section id="img-page">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col col-md-12 col-sm-12 col-s-12 none-padding">
-              <div class="col col-md-5 col-sm-5 col-xs-5 content-img-top-left">
-                     <h2 class="text-img-page">Gathering bersama komunitas Startup Surabaya</h2>
-              </div>
-              <div class="col col-md-7 col-sm-7 col-xs-7 none-padding">
-                <div class="carousel-top">
-                      <div id="myCarousel" class="carousel slide col col-md-12 col-sm-12 col-xs-12 " data-ride="carousel">
-                     
-
-                          <!-- Wrapper for slides -->
-                          <div class="carousel-inner">
-                            <div class="item img-page active">
-                             
-                              <div class="col col-md-12 col-sm-12 col-xs-12 none-padding content-img-top-right">
-                                <img class="img-responsive img-slider" src="<?=base_url();?>assets/images/logo/nota-kesepahaman.jpg"  style="width:100%;">
-                              </div>   
-                            </div>
-                            <div class="item img-page ">
-                              
-                              <div class="col col-md-12 col-sm-12 col-xs-12 none-padding content-img-top-right">
-                                <img class="img-responsive img-slider" src="<?=base_url();?>assets/images/logo/nota-kesepahaman.jpg"  style="width:100%;">
-                              </div>   
-                            </div>
-                          </div>
-
-                     
-                         <!-- Indicators -->
-                          <ol class="carousel-indicators text-right col col-md-12 col-sm-12 col-xs-12">
-                            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                            <li data-target="#myCarousel" data-slide-to="1"></li>
-                            <li data-target="#myCarousel" data-slide-to="2"></li>
-                            <li data-target="#myCarousel" data-slide-to="3"></li>
-                          </ol>
-                     </div>
-                  </div>
-              </div>
-                   <!-- Left and right controls -->
-                        <a class="slide-control left " href="#myCarousel" data-slide="prev">
-                          <span class="fa fa-angle-left"></span>
-                          <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="slide-control right " href="#myCarousel" data-slide="next">
-                          <span class="fa fa-angle-right"></span>
-                          <span class="sr-only">Next</span>
-                        </a>  
-            
-            </div>
-          </div>
-        </div>
-        </section>
-
-        <div class="container-fluid album-galery" id="album-galery">
-          <div class="col col-md-12 col-sm-12 col-xs-12">
-            <h2>Album Galery</h2>
-            <div class="line-galery" style=""></div>
-          </div>
-            <div class="img-galery" id="owl-demo">
-             	<?php foreach ($foto as $key => $value) : ?>
-                <div class="col-md-12 col-sm-12 col-xs-12 text-center item" >
-                    <div class="box-img-galery">
-                      <a href="#" class="show-album" data-toggle="modal" onclick="openModal();currentSlide(1)">
-                      	<div class="filter-img-galery" >
-                        <img class="img-responsive" src="<?php echo $value['file']; ?>">
-                      </div>
-                      </a>
-                      <div class="galery-deskripsi text-left">
-                        <h3><?php echo $value['title']; ?></h3>
-                        <p><?php echo $value['modify_date']; ?></p>
-                      </div>
-                    </div>
-                </div>
-            <?php endforeach ?>
-              
-            </div>
-          
-        </div>
-
-
-
-</section>
-
-
-
-<!DOCTYPE html>
-<html>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-
-
 .row > .column {
   padding: 0 8px;
 }
@@ -419,16 +232,119 @@ img.hover-shadow {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
 }
 .img-show-album{
-	height: 400px;
-	width: 400px;
+  height: 400px;
+  width: 400px;
 
 }
 .modal-content{
 
 }
 .modal-album{
-	z-index: 100;
+  z-index: 100;
 }
+      </style>
+        <div class="container-fluid none-padding filter-title-page-news">
+            <div class="col-md-12 col-sm-12 col-xs-12 none-padding title-page-news">
+                <div class="line-news">
+                    <div></div>
+                </div>
+                <div class="header-title">
+                    <h2 style="font-size: 50px;">PHOTO </h2></div>
+            </div>
+        </div>
+        <section id="img-page">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col col-md-12 col-sm-12 col-s-12 none-padding">
+              <div class="col col-md-5 col-sm-5 col-xs-5 content-img-top-left">
+                     <h2 class="text-img-page">Gathering bersama komunitas Startup Surabaya</h2>
+              </div>
+              <div class="col col-md-7 col-sm-7 col-xs-7 none-padding">
+                <div class="carousel-top">
+                      <div id="myCarousel" class="carousel slide col col-md-12 col-sm-12 col-xs-12 " data-ride="carousel">
+                     
+
+                          <!-- Wrapper for slides -->
+                          <div class="carousel-inner">
+                            <div class="item img-page active">
+                             
+                              <div class="col col-md-12 col-sm-12 col-xs-12 none-padding content-img-top-right">
+                                <img class="img-responsive img-slider" src="<?=base_url();?>assets/images/logo/nota-kesepahaman.jpg"  style="width:100%;">
+                              </div>   
+                            </div>
+                            <div class="item img-page ">
+                              
+                              <div class="col col-md-12 col-sm-12 col-xs-12 none-padding content-img-top-right">
+                                <img class="img-responsive img-slider" src="<?=base_url();?>assets/images/logo/nota-kesepahaman.jpg"  style="width:100%;">
+                              </div>   
+                            </div>
+                          </div>
+
+                     
+                         <!-- Indicators -->
+                          <ol class="carousel-indicators text-right col col-md-12 col-sm-12 col-xs-12">
+                            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#myCarousel" data-slide-to="1"></li>
+                            <li data-target="#myCarousel" data-slide-to="2"></li>
+                            <li data-target="#myCarousel" data-slide-to="3"></li>
+                          </ol>
+                     </div>
+                  </div>
+              </div>
+                   <!-- Left and right controls -->
+                        <a class="slide-control left " href="#myCarousel" data-slide="prev">
+                          <span class="fa fa-angle-left"></span>
+                          <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="slide-control right " href="#myCarousel" data-slide="next">
+                          <span class="fa fa-angle-right"></span>
+                          <span class="sr-only">Next</span>
+                        </a>  
+            
+            </div>
+          </div>
+        </div>
+        </section>
+
+        <div class="container-fluid album-galery" id="album-galery">
+          <div class="col col-md-12 col-sm-12 col-xs-12">
+            <h2>Album Galery</h2>
+            <div class="line-galery" style=""></div>
+          </div>
+            <div class="img-galery" id="owl-demo">
+             	<?php foreach ($foto as $key => $value) : ?>
+                <div class="col-md-12 col-sm-12 col-xs-12 text-center item" >
+                    <div class="box-img-galery">
+                      <a href="#" class="show-album" data-toggle="modal" onclick="openModal();currentSlide(1)">
+                      	<div class="filter-img-galery" >
+                        <img class="img-responsive" src="<?php echo $value['file']; ?>">
+                      </div>
+                      </a>
+                      <div class="galery-deskripsi text-left">
+                        <h3><?php echo $value['title']; ?></h3>
+                        <p><?php echo $value['modify_date']; ?></p>
+                      </div>
+                    </div>
+                </div>
+            <?php endforeach ?>
+              
+            </div>
+          
+        </div>
+
+
+
+</section>
+
+
+
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+
+
+
 </style>
 <body>
 
@@ -443,12 +359,12 @@ img.hover-shadow {
    <div class="modal-dialog modal-md">
    	 <div class="mySlides">
       <div class="numbertext">1 / 4</div>
-      <img class="img-show-album" src="<?=base_url();?>assets/images/logo/logo1.png" style="width:100%">
+      <img class="img-show-album" src="<?=base_url();?>assets/images/logo/img-gl.jpg" style="width:100%">
     </div>
 
     <div class="mySlides">
       <div class="numbertext">2 / 4</div>
-      <img class="img-show-album" src="<?=base_url();?>assets/images/logo/nota-kesepahaman.jpg" style="width:100%">
+      <img class="img-show-album" src="<?=base_url();?>assets/images/logo/img-gl.jpg" style="width:100%">
     </div>
 
 
@@ -461,10 +377,10 @@ img.hover-shadow {
     </div>
 
     <div class="column">
-      <img class="demo cursor" src="<?=base_url();?>assets/images/logo/logo1.png" style="width:100%" onclick="currentSlide(1)" alt="Nature and sunrise">
+      <img class="demo cursor" src="<?=base_url();?>assets/images/logo/img-gl.jpg" style="width:100%" onclick="currentSlide(1)" alt="Nature and sunrise">
     </div>
     <div class="column">
-      <img class="demo cursor" src="<?=base_url();?>assets/images/logo/nota-kesepahaman.jpg" style="width:100%" onclick="currentSlide(2)" alt="Trolltunga, Norway">
+      <img class="demo cursor" src="<?=base_url();?>assets/images/logo/img-gl.jpg" style="width:100%" onclick="currentSlide(2)" alt="Trolltunga, Norway">
     </div>
    </div>
   
@@ -513,9 +429,9 @@ function showSlides(n) {
 </body>
 </html>
 
-
+<!-- 
  <script src="<?=base_url();?>assets/js/jquery.min.js"></script>
-    <script src="<?=base_url();?>assets/js/bootstrap.min.js"></script>
+    <script src="<?=base_url();?>assets/js/bootstrap.min.js"></script> -->
 
 
 

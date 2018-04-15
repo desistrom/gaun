@@ -46,7 +46,7 @@
                             <li><a href="#">Rapat </a></li>
                         </ul>
                     </div> -->
-                    <div class="filter-side-bar">
+                 <!--    <div class="filter-side-bar">
                         <h3 class="categoery">Meta </h3>
                         <div class="line-category-title"></div>
                         <ul class="list-unstyled list-category">
@@ -55,7 +55,7 @@
                             <li><a href="#">Comments RSS</a></li>
                             <li><a href="#">WordPress.org </a></li>
                         </ul>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="col-md-9 col-sm-8 col-xs-12 content-left">
                     <div class="col col-md-12 col-sm-12 col-xs-12 none-padding list-artikel">

@@ -51,6 +51,12 @@ span.website-anggota{
 .keanggotaan .box-keanggotaan-right ul li ul li{
     padding:0; 
 }
+.logo-instansi{
+    width: auto;
+    max-width: 85px;
+    height: auto;
+    max-height: 85px;
+}
 
 
   </style>
@@ -72,7 +78,7 @@ span.website-anggota{
                         <div class="col col-md-3 col-sm-3 col-xs-3">
                             <div class="box-keanggotaan-left">
                             	<div class="filter-box-mg-keanggotaan">
-                            		<img class="img-responsive" src="<?php echo $value['image_thumbnail']; ?>">
+                            		<img class="img-responsive logo-instansi" src="<?php echo $value['image_thumbnail']; ?>">
                             	</div>
                             </div>
                         </div>
@@ -94,7 +100,7 @@ span.website-anggota{
                                 <li>
                                     <ul class="list-inline">
                                         <li><i class="fa fa-laptop"></i></li>
-                                        <li><span class="website-anggota"> <?php echo $value['number_phone']; ?> </span></li>
+                                        <li><a href="<?php echo $value['link']; ?>" class="website-anggota" style="color:#CF090A;text-decoration:none; "> <?php echo $value['link']; ?> </a></li>
                                     </ul>
 
                             </ul>

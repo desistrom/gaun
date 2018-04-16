@@ -49,7 +49,7 @@
                         <li class="dropdown"><a data-toggle="dropdown" aria-expanded="false" href="#" class="dropdown-toggle">Galery <span class="fa fa-angle-down"></span></a>
                           <ul class="dropdown-menu" role="menu">
                               <li><a href="<?php echo site_url('web/galery') ?>">foto</a></li>
-                              <li><a href="#">Video</a></li>
+                              <li><a href="<?php echo site_url('web/galery/video') ?>">Video</a></li>
 
                           </ul>
                         </li>
@@ -184,18 +184,25 @@
     </div>
 
     <script src="<?=base_url();?>assets/js/jquery.min.js"></script>
+   
     <script src="<?=base_url();?>assets/js/bootstrap.min.js"></script>
    
     <script src="<?=base_url();?>assets/js/owl.carousel.min.js"></script>
     <script src="<?=base_url();?>assets/js/main-owl.js"></script>
       <script src="<?=base_url();?>assets/js/scrolling-nav.js"></script>
  <script src="<?=base_url();?>assets/js/jquery.easing.min.js"></script>
+<?php if(current_url() == site_url('web/galery/video')){ ?> 
+   <script type="text/javascript" src="<?=base_url();?>assets/js/jquery.waterwheelCarousel.js"></script>
+ <?php } ?>
+ 
  <script type="text/javascript">
    
     $(document).ready(function(){
       $(".btn-gabung").click(function(){
           $(".modal-register").modal();
       });
+
+
     });
  </script>
 </body>

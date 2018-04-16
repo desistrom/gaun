@@ -1,15 +1,16 @@
+   
+
 <style type="text/css">
-    .video-box{
-        width: 100%;
-    }
-    .video-box iframe{
-        width: 100%;
-        height: 250px;
-    }
-    .content-video{
+ .content-video{
+  background-color: #F2F2F2;
+}
+.title-page-news{
+  padding-bottom: 2em;
+}
+    .content-foto{
         margin-top: 6em;
     }
-    .line{
+        .line{
         width: 100px;
         height: 3px;
         background-color:#BD0E0E;
@@ -19,101 +20,258 @@
             position: absolute;
     z-index: 10;
     bottom: 0;
-    left: 15px;
     font-weight: bold;
     color: #E91515;
     transition: 0.8s;
     }
+    div.box:hover .text-title,
+    div.box:active .text-title,
+    div.box:focus .text-title
+    {
+        margin-bottom: 50%;
+        color: white;
+
+    }
 </style>
 
-<div class="container content-video">
-        <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12 text-center">
-                <h3 style="color: #BD0E0E;font-weight: bold;margin-bottom: 0;">Gallery Video</h3>
-                <div class="line"></div>
-            </div>
-            <div class="col-md-12 search-img" style="margin-bottom: 2em;">
-                <div>
-                    <input type="search" class="input-search" name="search" id="search">
-                    <button class="btn btn-primary btn-search" type="button">Cari </button>
-                </div>
-            </div>
-       <div class="replace-content">
+   <section class="detail_news">
+      <style type="text/css">
+     .filter-title-page-news{
+        margin-top: 5em;
+      }
 
-            <?php 
-                if (is_array($video)) {
+    .ktrv {
+       
+       
+        height: 500px;
+        position: relative;
+        clear: both;
+        overflow: hidden;
+     
+    }
+    .noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/*        .wwkt img {
+      display: inline-block;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+
+    }*/
+
+    .ktrv>div.wwkt>div:nth-child(2) {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: inherit;
+        display: table;
+        background-color: #0a3b52;
+        border-radius: 5px;
+    }
+    .ktrv>div.wwkt>div:last-child {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        display: table;
+    }
+    .ktrv > div.wwkt > div:first-child {
+
+    display: table-cell;
+    vertical-align: middle;
+    height: 100%;
+    width: 100%;
+
+}
+
+    h2 {
+
+        display: table-cell;
+        vertical-align: middle;
+        height: inherit;
+        width: 100%;
+        text-align: center;
+        color:black;
+    }
+
+
+    #callback-output {
+        height: 250px;
+        overflow: scroll;
+    }
+
+
+
+    .ktrv>div.wwkt {
+        display: inline-block;
+        cursor: pointer;
+    }
+    #wwcp-2{
+    
+    }
+    #wwcp-3{
+      
+    }
+
+    .list-video{
+      padding: 2em 15px;
+      margin: 1.5em 0;
+      background-color: white;
+    }
+    .list-video .line-list{
+      width: 150px;
+      height: 3px;
+      background-color: #CF090A;
+      margin-bottom: 2em;
+    }
+    
+         /* The Modal (background) */
+
+
+      </style>
+        <div class="container-fluid none-padding filter-title-page-news">
+            <div class="col-md-12 col-sm-12 col-xs-12 none-padding title-page-news">
+                <div class="line-news">
+                    <div></div>
+                </div>
+                <div class="header-title">
+                    <h2 style="font-size: 50px;color: #BDBDBD;margin-bottom: 1em;">PHOTO </h2></div>
+            </div>
+        </div>
+        <section class="content-video">
+          <div class="container-fluid ">
+            <div class="row">
+              <div class="col col-md-12 col-sm-12 col-xs-12">
+                
+
+
+
+
+                <div class="ktrv col col-md-12 col-sm-12 col-xs-12">
+                    <div class="wwkt" id="wwcp-1">
+                        <div>
+                        </div>
+                        <div>
+                            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/rbvRXK9gMpc" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                        </div>
+                        <div>
+                        </div>
+                    </div>
+                    <div class="wwkt" id="wwcp-2">
+                        <div>
+                        </div>
+                        <div>
+                             <iframe width="100%" height="100%" src="https://www.youtube.com/embed/rbvRXK9gMpc" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                        </div>
+                        <div>
+                        </div>
+                    </div>
+                    <div class="wwkt" id="wwcp-3">
+                       <div>
+                        </div>
+                        <div>
+                             <iframe width="100%" height="100%" src="https://www.youtube.com/embed/rbvRXK9gMpc" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                        </div>
+                        <div>
+                        </div>
+                    </div>
+               
+                    <!--img src="images/4.jpg" id="wwcp-4" />
+                  <img src="images/5.jpg" id="wwcp-5" />
+                  <img src="images/6.jpg" id="wwcp-6" />
+                  <img src="images/7.jpg" id="wwcp-7" />
+                  <img src="images/8.jpg" id="wwcp-8" />
+                  <img src="images/9.jpg" id="wwcp-9" /-->
+                </div>
+                   <a href="{{data.url}}">
+                 </a>
 
  
-            foreach ($video as $key => $value) :  ?>
-                <div class="col-lg-4 col-md-4 col-xs-6 filter-img">
-                    <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="<?php echo $value['title']; ?>" data-caption="<?php echo $value['keterangan']; ?>" data-image="<?=base_url();?>assets/media/<?php echo $value['title'] ?>" data-target="#image-gallery" data-date="<?php echo $value['modify_date']; ?> " data-user="by : <?php echo $value['nama_user']; ?>"  style="padding: 0;">
-                        <div class="box">
-                            <h3 class="text-title" style="width: 100%;text-align: left;}"><?php echo $value['title']; ?></h3>
-                            <div class="sub-box">
-                                <div class="filter-image">
-                                    <i class="glyphicon glyphicon-zoom-in"></i>
-                                </div>
-                                <iframe class="video-up"  src="<?php echo $value['file'] ?>" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                                
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            <?php endforeach; 
-        }?>
-       </div>
 
 
-                    
 
 
-        </div>
-    </div>
-
-<div class="modal fade" id="image-gallery" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <button class="close" type="button" data-dismiss="modal" style="">×</button>
-              <div class="modal-body-gallery">                
               </div>
-            <div class="modal-footer" style="padding: 0 15px;">
-              <div class="col col-md-12 col-sm-12 col-xs-12 none-padding">
-                <div class="col col-md-6 col-sm-6 col-xs-6 none-padding">
-                    <h5 class="date-upload text-left" id="image-gallery-title"></h5></div>
-                <div class="col col-md-6 col-sm-6 col-xs-6 none-padding">
-                    <h5 class="author text-right" id="image-gallery-date" ></h5></div>
-                <div class="col col-md-12 col-sm-12 col-xs-12 none-padding text-left">
-
-                    <p id="image-gallery-caption"></p>
+              <div class="col col-md-12 col-sm-12 col-xs-12 none-padding list-video">
+                <div class="col col-sm-12 col-sm-12 col-xs-12 none-padding">
+                  <div class="col-md-6 col-sm-6 col-xs-6">
+                  <h3>Lastest Video</h3>
+                  <div class="line-list"></div>
                 </div>
-                <p id="image-gallery-user" style="text-align: right;"></p>
+                <div class="col-md-6 col-sm-6 col-xs-6 text-right">
+                  <a href="#" class="btn btn-danger">View All</a>
+                </div>
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-4 text-center item" >
+                    <div class="box-img-galery">
+                      <a href="#" class="show-album" data-toggle="modal" ">
+                        <div class="filter-img-galery" >
+                           <iframe width="100%" height="270px" src="https://www.youtube.com/embed/rbvRXK9gMpc" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                      </div>
+                      </a>
+                      <div class="galery-deskripsi text-left">
+                        <h3>Variasi makanan </h3>
+                        <ul class="list-inline">
+                          <li>12 april 2018</li>
+                          <li>100 views</li>
+                        </ul>
+                      </div>
+                    </div>
+                </div>
+              </div>
+              <div class="col col-md-12 col-sm-12 col-xs-12 none-padding list-video">
+                <div class="col col-sm-12 col-sm-12 col-xs-12 none-padding">
+                  <div class="col-md-6 col-sm-6 col-xs-6">
+                  <h3>Most Watchet</h3>
+                  <div class="line-list"></div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-6 text-right">
+                  <a href="#" class="btn btn-danger">View All</a>
+                </div>
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-4 text-center item" >
+                    <div class="box-img-galery">
+                      <a href="#" class="show-album" data-toggle="modal" ">
+                        <div class="filter-img-galery" >
+                           <iframe width="100%" height="270px" src="https://www.youtube.com/embed/rbvRXK9gMpc" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                      </div>
+                      </a>
+                      <div class="galery-deskripsi text-left">
+                        <h3>Variasi makanan </h3>
+                        <ul class="list-inline">
+                          <li>12 april 2018</li>
+                          <li>100 views</li>
+                        </ul>
+                      </div>
+                    </div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-    </div>
-</div>
-    <script src="<?=base_url().'assets/js/jquery-v1.11.3.min.js';?>"></script>
+        </section>
+        
+             <script type="text/javascript">
 
-<!--  <script src="<?=base_url().'assets/js/modal-custom.js' ;?>"></script> -->
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36251023-1']);
+  _gaq.push(['_setDomainName', 'jqueryscript.net']);
+  _gaq.push(['_trackPageview']);
 
-<script type="text/javascript">
-    $(document).ready(function(){
-        $('body').on('click','.btn-search',function(){
-            var data = $('#search').val();
-            if (data != '') {
-                // window.location.href = '<?=base_url();?>web/galery/search_video?data='+data;
-                $.ajax({
-                url : '<?=base_url();?>web/galery/search_video?data='+data,
-                type : 'POST',
-                dataType : 'json',
-                data :""
-            }).done(function(data){
-                console.log(data);
-                $('.replace-content').html(data);
-            });
-
-            }
-        });
-    });
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
 
 </script>
+
+
+
+   

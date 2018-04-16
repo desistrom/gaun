@@ -35,6 +35,15 @@ class Galery extends CI_Controller  {
     	$this->data['video']=$a['data'];	
     	$this->ciparser->new_parse('template_frontend','modules_web', 'video_layout',$this->data);
     }
+     function list_video() {
+        $url = site_url('api/v1/galery_video') ;
+        $data = '';
+        $methode = 'GET';
+        $token = '';
+        $a = api_helper('',$url,$methode,$token);
+        $this->data['video']=$a['data'];    
+        $this->ciparser->new_parse('template_frontend','modules_web', 'list_video_layout',$this->data);
+    }
 
       function search_foto() {
         $search['search'] = $_GET['data'];

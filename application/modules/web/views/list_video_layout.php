@@ -50,6 +50,10 @@
       height: 100%;
       position: absolute;
     }
+    .modal iframe{
+      width: 100%;
+      height: 480px;
+    }
     
          /* The Modal (background) */
 
@@ -68,19 +72,19 @@
           <div class="container-fluid ">
             <div class="row">
               <div class="col col-md-12 col-sm-12 col-xs-12 none-padding list-video">
-                <<?php foreach ($video as $key => $value): ?>
+                <?php foreach ($video as $key => $value): ?>
                   
                 
                 <div class="col-md-4 col-sm-4 col-xs-4 text-center" style="height: auto;overflow: hidden;">
                     <div class="box-img-galery "> 
                         <div class="filter-img-galery" >
-                          <a href="#" class="show-video" data-toggle="modal" ></a>
-                           <iframe width="100%" height="270px" src="https://www.youtube.com/embed/rbvRXK9gMpc" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                          <a href="#" class="show-video" id="<?php echo $value['file'] ?>" ></a>
+                           <iframe  width="100%" height="270px" src="<?php echo $value['file'] ?>" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                       </div>
                       <div class="galery-deskripsi text-left">
-                        <h3>Variasi makanan </h3>
+                        <h3><?php echo $value['title']; ?> </h3>
                         <ul class="list-inline">
-                          <li>12 april 2018</li>
+                          <li><?php echo $value['modify_date']; ?></li>
                           <li>100 views</li>
                         </ul>
                       </div>
@@ -94,11 +98,12 @@
         </section>
 
 
-    <div class="modal fade modal-list-video" id="list-video" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
-    <div class="modal-dialog">
+        <div class="modal fade modal-list-video" id="list-video" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <button class="close" type="button" data-dismiss="modal" style="">×</button>
-              <div class="modal-body-gallery">                
+              <div class="modal-body-gallery"> 
+              <iframe src="" id="tampil-video"></iframe>               
               </div>
             <div class="modal-footer" style="padding: 0 15px;">
               <div class="col col-md-12 col-sm-12 col-xs-12 none-padding">
@@ -117,9 +122,12 @@
     </div>
 </div>
 <script src="<?=base_url();?>assets/js/jquery.min.js"></script>
+<script src="<?=base_url();?>assets/js/modal-custom.js"></script>
 <script type="text/javascript">
     $(document).ready(function(){
       $(".show-video").click(function(){
+        var file = $(this).attr('id');
+          $('#list-video iframe').attr('src',file);
           $(".modal-list-video").modal();
       });
     });

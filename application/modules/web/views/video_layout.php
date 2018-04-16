@@ -155,33 +155,21 @@
 
 
                 <div class="ktrv col col-md-12 col-sm-12 col-xs-12">
-                    <div class="wwkt" id="wwcp-1">
+
+                      <?php for ($i=0; $i < 3 ; $i++) { ?>
+                  <?php if (isset($video[$i]['title'])) { ?>
+                  <div class="wwkt" id="wwcp-1">
                         <div>
                         </div>
                         <div>
-                            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/rbvRXK9gMpc" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                        </div>
-                        <div>
-                        </div>
-                    </div>
-                    <div class="wwkt" id="wwcp-2">
-                        <div>
-                        </div>
-                        <div>
-                             <iframe width="100%" height="100%" src="https://www.youtube.com/embed/rbvRXK9gMpc" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                            <iframe width="100%" height="100%" src="<?php echo $video[$i]['file'] ?> " frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                         </div>
                         <div>
                         </div>
                     </div>
-                    <div class="wwkt" id="wwcp-3">
-                       <div>
-                        </div>
-                        <div>
-                             <iframe width="100%" height="100%" src="https://www.youtube.com/embed/rbvRXK9gMpc" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                        </div>
-                        <div>
-                        </div>
-                    </div>
+
+                 <?php } } ?>
+
                
                     <!--img src="images/4.jpg" id="wwcp-4" />
                   <img src="images/5.jpg" id="wwcp-5" />
@@ -206,57 +194,34 @@
                   <div class="line-list"></div>
                 </div>
                 <div class="col-md-6 col-sm-6 col-xs-6 text-right">
-                  <a href="#" class="btn btn-danger">View All</a>
+                  <a href="<?php echo site_url('web/galery/list_video') ?>" class="btn btn-danger">View All</a>
                 </div>
                 </div>
+                  <?php for ($i=0; $i < 3 ; $i++) { ?>
+                  <?php if (isset($video[$i]['title'])) { ?>
                 <div class="col-md-4 col-sm-4 col-xs-4 text-center item" >
                     <div class="box-img-galery">
                       <a href="#" class="show-album" data-toggle="modal" ">
                         <div class="filter-img-galery" >
-                           <iframe width="100%" height="270px" src="https://www.youtube.com/embed/rbvRXK9gMpc" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                           <iframe width="100%" height="270px" src="<?php echo $video[$i]['file'] ?> " frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                       </div>
                       </a>
                       <div class="galery-deskripsi text-left">
-                        <h3>Variasi makanan </h3>
+                        <h3><?php echo $video[$i]['title']; ?></h3>
                         <ul class="list-inline">
-                          <li>12 april 2018</li>
+                          <li><?php echo $video[$i]['modify_date']; ?></li>
                           <li>100 views</li>
                         </ul>
                       </div>
                     </div>
                 </div>
+                 <?php } } ?>
               </div>
-              <div class="col col-md-12 col-sm-12 col-xs-12 none-padding list-video">
-                <div class="col col-sm-12 col-sm-12 col-xs-12 none-padding">
-                  <div class="col-md-6 col-sm-6 col-xs-6">
-                  <h3>Most Watchet</h3>
-                  <div class="line-list"></div>
-                </div>
-                <div class="col-md-6 col-sm-6 col-xs-6 text-right">
-                  <a href="#" class="btn btn-danger">View All</a>
-                </div>
-                </div>
-                <div class="col-md-4 col-sm-4 col-xs-4 text-center item" >
-                    <div class="box-img-galery">
-                      <a href="#" class="show-album" data-toggle="modal" ">
-                        <div class="filter-img-galery" >
-                           <iframe width="100%" height="270px" src="https://www.youtube.com/embed/rbvRXK9gMpc" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                      </div>
-                      </a>
-                      <div class="galery-deskripsi text-left">
-                        <h3>Variasi makanan </h3>
-                        <ul class="list-inline">
-                          <li>12 april 2018</li>
-                          <li>100 views</li>
-                        </ul>
-                      </div>
-                    </div>
-                </div>
-              </div>
+         
             </div>
           </div>
         </section>
-        
+
              <script type="text/javascript">
 
   var _gaq = _gaq || [];

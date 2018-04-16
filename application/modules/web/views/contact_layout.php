@@ -48,25 +48,28 @@
                     <div class="col col-md-12 col-sm-12 col-xs-12 none-padding list-artikel">
                         <!-- h2 class="text-center" style="font-weight: bold;color: #9E9E9E;">Tentang IDren</h2> -->
                         <div class="col col-md-12 col-sm-12 col-xs-12 desrip-news">
-                            <form>
+                            <form class="form_contact">
                                 
                                 <p style="color: white;text-align: center;">Isilah form dibawah untuk mendapatkan info seputar IDren atau subyek lainnya. Pastikan Anda mengisi alamat email Anda dengan benar sehingga kami dapat membalas pesan Anda.</p>
                                 <div class="text-input">
                                     <label style="color: white;">Name</label>
-                                    <input class="form-control" type="text" placeholder="Name" class="input-comment">
+                                    <input class="form-control" type="text" name="name" placeholder="Name" class="input-comment">
+                                    <div class="error" id="ntf_name"></div>
                                 </div>
                                 <div class="text-input">
                                     <label style="color: white;">Email</label>
-                                    <input class="form-control" type="text" placeholder="Email" class="input-comment">
+                                    <input class="form-control" type="text" name="email" placeholder="Email" class="input-comment">
+                                    <div class="error" id="ntf_email"></div>
                                 </div>
                                 <!-- <div class="text-input">
                                     <input class="form-control" type="text" placeholder="Website" class="input-comment">
                                 </div> -->
                                 <div class="text-input">
-                                    <p style="color: white;">Paragraph</p>
-                                    <textarea class="form-control" style="height: 15em;"></textarea>
+                                    <p style="color: white;">Pesan</p>
+                                    <textarea class="form-control" name="pesan" style="height: 15em;"></textarea>
+                                    <div class="error" id="ntf_pesan"></div>
                                 </div>
-                                <div class="text-right"><a href="#" class="btn btn-send">Send</a></div>
+                                <div class="text-right"><a class="btn btn-send">Send</a></div>
                             </div>
                             </form>
                             
@@ -80,3 +83,36 @@
         </div>
 
     </section>
+<script src="<?=base_url().'assets/js/jquery-3.2.1.min.js';?>"></script>
+<script type="text/javascript">
+   var base_url = "<?=base_url();?>"
+    $(document).ready(function(){
+
+      $('body').on('click','.btn-send', function(){
+      $.ajax({
+          url : base_url+"web/tentang/add_contact",
+          dataType : 'json',
+          type : 'POST',
+          data : $('.form_contact').serialize()
+      }).done(function(data){
+          console.log(data);
+          if(data.state == 1){
+            if (data.status == 1) {
+              $('#regSukses').modal('show');
+            }else{
+              $('.error_pass').show();
+              $('.error_pass').css({'color':'red', 'font-style':'italic', 'text-align':'center'});
+              console.log(data);
+              $('.error_pass').html(data.error);
+            }
+          }
+            $.each(data.notif,function(key,value){
+            $('.error').show();
+            $('#ntf_'+ key).html(value);
+            $('#ntf_'+ key).css({'color':'red', 'font-style':'italic'});
+            });
+      });
+    });
+
+    });
+ </script>

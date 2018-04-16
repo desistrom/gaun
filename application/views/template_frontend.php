@@ -141,39 +141,55 @@
             <h2 class="modal-title text-center" style="color:#CF090A; ">Registrasi</h2>
           </div>
           <div class="modal-body">
-            <form>
+            <form id="register_form">
               <div class="form-group">
-                  <label for="name">Name*</label>
-                  <input type="" class="form-control" id="name" placeholder="Name">
-                  <div class="ntf_err"></div>
-                </div>
-                <div class="form-group">
-                  <label for="name_institusi"> Institusi Name*</label>
-                  <input type="" class="form-control" id="name_institusi" placeholder="Institusi Name">
-                  <div class="ntf_err"></div>
-                </div>
-                <div class="form-group">
-                  <label for="email">Email*</label>
-                  <input type="email" class="form-control" id="email" placeholder="Email">
-                  <div class="ntf_err"></div>
-                </div>
-                <div class="form-group">
-                  <label for="phone">Phone*</label>
-                  <input type="" class="form-control" id="phone" placeholder="Phone">
-                  <div class="ntf_err"></div>
-                </div>
-                <div class="form-group">
-                  <label for="username">username*</label>
-                  <input type="username" class="form-control" id="username" placeholder="username">
-                  <div class="ntf_err"></div>
-                </div>
-                <div class="form-group">
-                  <label for="password">Password*</label>
-                  <input type="password" class="form-control" id="password" placeholder="Password">
-                  <div class="ntf_err"></div>
-                </div>
+                <label>Nama Lengkap</label>
+                <input type="text" name="name" class="form-control" id="name" placeholder="Enter Name ..." value="">
+                <div class="error" id="ntf_name"></div>
+              </div>
+              <!-- textarea -->
+              <div class="form-group">
+                <label>Username</label>
+                <input type="texr" class="form-control" name="username" id="username" rows="3" placeholder="Enter Username ..." >
+                <div class="error" id="ntf_username"></div>
+              </div>
+
+              <div class="form-group">
+              <label>Password</label>
+                <input type="password" class="form-control" name="password" id="password" value="" placeholder="Enter Password ...">
+                <div class="error" id="ntf_password"></div>
+              </div>
+
+              <div class="form-group">
+              <label>Re type Password</label>
+                <input type="password" class="form-control" name="repassword" id="repassword" value="" placeholder="Enter Re type Password ...">
+                <div class="error" id="ntf_repassword"></div>
+              </div>
+
+              <div class="form-group">
+              <label>E - Mail</label>
+                <input type="text" class="form-control" name="email" id="email" value="" placeholder="Enter E-mail ...">
+                <div class="error" id="ntf_email"></div>
+              </div>
+
+              <div class="form-group">
+              <label>Phone Number</label>
+                <input type="text" class="form-control" name="phone" id="phone" value="" placeholder="Enter Phone Number ...">
+                <div class="error" id="ntf_phone"></div>
+              </div>
+
+              <div class="form-group">
+              <label>Instansi</label>
+                <select name="instansi" class="form-control" id="instansi">
+                  <option value="">--- Select Instansi ---</option>
+                  <?php foreach (instansi_helper()['data'] as $key => $value): ?>
+                    <option value="<?=$value['id'];?>"><?=$value['instansi'];?></option>  
+                  <?php endforeach ?>
+                </select>
+                <div class="error" id="ntf_instansi"></div>
+              </div>
                 <div class="text-right">
-                  <button type="submit" class="btn btn-danger btn-default">Simpan</button>
+                  <button type="button" id="btn_register" class="btn btn-danger btn-default">Simpan</button>
                 </div>
               </form>
           </div>
@@ -183,6 +199,22 @@
       </div>
     </div>
 
+    <div id="regSukses" class="modal fade modal-register" role="dialog" data-keyboard="false" data-backdrop="static">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h2 class="modal-title text-center" style="color:#CF090A; ">Registrasi Berhasil</h2>
+          </div>
+          <div class="modal-body">
+          </div>
+
+        </div>
+
+      </div>
+    </div>
     <script src="<?=base_url();?>assets/js/jquery.min.js"></script>
    
     <script src="<?=base_url();?>assets/js/bootstrap.min.js"></script>
@@ -196,12 +228,40 @@
  <?php } ?>
  
  <script type="text/javascript">
-   
+   var base_url = "<?=base_url();?>"
     $(document).ready(function(){
       $(".btn-gabung").click(function(){
-          $(".modal-register").modal();
+          $("#myModal").modal();
       });
 
+      $('body').on('click','#btn_register', function(){
+      // console.log($('form').val());
+      // $('#content').val(CKEDITOR.instances.content.getData());
+      // return false;
+      $.ajax({
+          url : base_url+"web/home/insert_user",
+          dataType : 'json',
+          type : 'POST',
+          data : $('#register_form').serialize()
+      }).done(function(data){
+          console.log(data);
+          if(data.state == 1){
+            if (data.status == 1) {
+              $('#regSukses').modal('show');
+            }else{
+              $('.error_pass').show();
+              $('.error_pass').css({'color':'red', 'font-style':'italic', 'text-align':'center'});
+              console.log(data);
+              $('.error_pass').html(data.error);
+            }
+          }
+            $.each(data.notif,function(key,value){
+            $('.error').show();
+            $('#ntf_'+ key).html(value);
+            $('#ntf_'+ key).css({'color':'red', 'font-style':'italic'});
+            });
+      });
+    });
 
     });
  </script>

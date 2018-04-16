@@ -303,14 +303,20 @@ class V1 extends REST_Controller {
         $galery = $this->v1_model->getAllAlbum();
         $retData['code'] = '200';
         $retData['status'] = 'success';
-        foreach ($galery as $key => $value) {
-            $galery[$key]['date_album'] = date("d M Y", strtotime($value['date_album']));
-            if ($value['file'] == '') {
-                $galery[$key]['image']=base_url().'assets/images/logo/IDREN-2.png';
-            }else{
-                $galery[$key]['image'] = base_url().'assets/media/'.$value['image'];
-            }
+        if ($galery == '') {
+            $retData['code'] = '500';
+            $retData['status'] = 'Failed';
+            $retData['data'] = 'data not found';
+        }else{
+            foreach ($galery as $key => $value) {
+                $galery[$key]['date_album'] = date("d M Y", strtotime($value['date_album']));
+                if ($value['file'] == '') {
+                    $galery[$key]['image']=base_url().'assets/images/logo/IDREN-2.png';
+                }else{
+                    $galery[$key]['image'] = base_url().'assets/media/'.$value['image'];
+                }
 
+            }
         }
         $retData['data'] = $galery;
         $this->response($retData,200);

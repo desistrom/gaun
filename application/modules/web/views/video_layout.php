@@ -142,7 +142,7 @@
                     <div></div>
                 </div>
                 <div class="header-title">
-                    <h2 style="font-size: 50px;color: #BDBDBD;margin-bottom: 1em;">PHOTO </h2></div>
+                    <h2 style="font-size: 50px;color: #BDBDBD;margin-bottom: 1em;">Video </h2></div>
             </div>
         </div>
         <section class="content-video">

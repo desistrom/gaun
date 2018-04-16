@@ -32,4 +32,20 @@ class Galery_model extends CI_Model{
 		}
 		return false;
 	}
+
+	public function insertAlbum($data){
+		if ($this->db->insert('tb_album_galery',$data)) {
+			return true;
+			exit();
+		}
+		return false;
+	}
+
+	public function updateAlbum($data,$id){
+		if ($this->db->update('tb_album_galery',$data,array('id_album'=>$id))) {
+			return true;
+			exit();
+		}
+		return false;
+	}
 }

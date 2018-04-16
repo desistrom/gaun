@@ -24,6 +24,17 @@
       </div>
 
       <div class="form-group">
+        <label>Album</label>
+        <select class="form-control" name="album" id="album">
+          <option value="">--- Select Album ---</option>
+          <?php foreach ($album as $key => $value): ?>
+            <option <?php if(isset($galery)){ if($galery['id_album'] == $value['id_album']){ echo " selected "; } } ?> value="<?=$value['id_album'];?>"><?=$value['judul_album'];?></option>
+          <?php endforeach ?>
+        </select>
+        <div class="error" id="ntf_album"></div>
+      </div>
+
+      <div class="form-group">
       <label>File</label>
         <input type="file" class="form-control" name="file_name" id="file_name">
         <div class="error" id="ntf_file_name"></div>
@@ -43,6 +54,7 @@
       var file_data = $('#file_name').prop('files')[0];
       form_data.append('judul', $('#judul').val());
       form_data.append('deskripsi', $('#deskripsi').val());
+      form_data.append('album', $('#album').val());
       form_data.append('file_name', file_data);
       $.ajax({
           url : window.location.href,

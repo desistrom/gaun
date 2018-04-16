@@ -9,6 +9,24 @@ class V1_model extends CI_Model{
 		return $this->db->get('tb_galery')->result_array();
 	}
 
+	public function getAllAlbum(){
+		$sql = "SELECT a.id_album as albumId, a.judul_album as title, a.tgl_kegiatan as date_album, g.file_name as image FROM tb_album_galery a join tb_galery g on a.id_album = g.id_album where g.status = 1 group by a.id_album";
+		if ($this->db->query($sql)->num_rows() > 0) {
+			return $this->db->query($sql)->result_array();
+			exit();
+		}
+		return false;
+	}
+
+	public function getAlbumById($param){
+		$sql = "SELECT a.id_album as albumId, a.judul_album as title, a.tgl_kegiatan as date_album, g.file_name as image FROM tb_album_galery a join tb_galery g on a.id_album = g.id_album where g.status = 1 AND a.id_album = ".$param;
+		if ($this->db->query($sql)->num_rows() > 0) {
+			return $this->db->query($sql)->result_array();
+			exit();
+		}
+		return false;
+	}
+
 	public function getTypeGalery($type){
 		$sql = "select u.name as nama_user, g.id_galery as galeryId, g.file_name as file, g.judul as title, g.deskripsi as keterangan, g.tgl_upload as modify_date, g.type as jenis from tb_galery g join tb_user u on g.id_user_ref = u.id_user where g.type = ? and g.status = 1";
 		if ($this->db->query($sql,$type)->num_rows() > 0) {

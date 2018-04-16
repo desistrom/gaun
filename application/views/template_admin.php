@@ -91,6 +91,7 @@
           <ul class="treeview-menu">
             <li class="active"><a href="<?=site_url('admin/galery/list_image');?>"><i class="fa fa-picture-o"></i> Foto</a></li>
             <li><a href="<?=site_url('admin/galery/list_video');?>"><i class="fa fa-film"></i></i>Video</a></li>
+            <li><a href="<?=site_url('admin/galery/album');?>"><i class="fa fa-folder"></i></i>Album</a></li>
           </ul>
         </li>
         <li class=" treeview">

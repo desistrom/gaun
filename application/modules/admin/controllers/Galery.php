@@ -27,6 +27,69 @@ class Galery extends MX_Controller  {
 		 $this->ciparser->new_parse('template_admin','modules_admin', 'galery/list_video_layout',$this->data);
 	}
 
+	public function album(){
+		$this->data['album'] = $this->db->get('tb_album_galery')->result_array();
+		$this->data['view'] = 'list';
+		$this->ciparser->new_parse('template_admin','modules_admin', 'galery/album_master_layout',$this->data);
+	}
+
+	public function add_album(){
+		if ($this->input->server('REQUEST_METHOD') == 'POST') {
+			$ret['state'] = 0;
+			$ret['status'] = 0;
+			$this->form_validation->set_error_delimiters('','');
+			$this->form_validation->set_rules('name','Judul Album','trim|required');
+			$this->form_validation->set_rules('tgl','Tanggal Album','trim|required');
+			if ($this->form_validation->run() == true) {
+				$ret['state'] = 1;
+				$media['judul_album'] = $this->input->post('name');
+				$media['tgl_kegiatan'] = $this->input->post('tgl');
+				// $media['tgl_upload'] = date("D m Y", strtotime($this->input->post('tgl')));
+				if ($this->galery_model->insertAlbum($media) == true) {
+            		$ret['status'] = 1;
+            		$ret['url'] = site_url('admin/galery/album');
+            		$this->session->set_flashdata("notif","Data Berhasil di Masukan");
+            	}
+			}
+			$ret['notif']['name'] = form_error('name');
+			$ret['notif']['tgl'] = form_error('tgl');
+			echo json_encode($ret);
+			exit();
+		}
+		$this->data['view'] = 'add';
+		$this->ciparser->new_parse('template_admin','modules_admin', 'galery/album_master_layout',$this->data);
+	}
+
+	public function edit_album(){
+		$url = $this->uri->segment_array();
+		$id = end($url);
+		if ($this->input->server('REQUEST_METHOD') == 'POST') {
+			$ret['state'] = 0;
+			$ret['status'] = 0;
+			$this->form_validation->set_error_delimiters('','');
+			$this->form_validation->set_rules('name','Judul Album','trim|required');
+			$this->form_validation->set_rules('tgl','Tanggal Album','trim|required');
+			if ($this->form_validation->run() == true) {
+				$ret['state'] = 1;
+				$media['judul_album'] = $this->input->post('name');
+				$media['tgl_kegiatan'] = $this->input->post('tgl');
+				// $media['tgl_upload'] = date("D m Y", strtotime($this->input->post('tgl')));
+				if ($this->galery_model->updateAlbum($media,$id) == true) {
+            		$ret['status'] = 1;
+            		$ret['url'] = site_url('admin/galery/album');
+            		$this->session->set_flashdata("notif","Data Berhasil di Masukan");
+            	}
+			}
+			$ret['notif']['name'] = form_error('name');
+			$ret['notif']['tgl'] = form_error('tgl');
+			echo json_encode($ret);
+			exit();
+		}
+		$this->data['view'] = 'edit';
+		$this->data['content'] = $this->db->get_where('tb_album_galery',array('id_album'=>$id))->row_array();
+		$this->ciparser->new_parse('template_admin','modules_admin', 'galery/album_master_layout',$this->data);
+	}
+
 	public function add_image(){
 		if ($this->input->server('REQUEST_METHOD') == 'POST') {
 			$ret['state'] = 0;
@@ -34,10 +97,12 @@ class Galery extends MX_Controller  {
 			$this->form_validation->set_error_delimiters('','');
 			$this->form_validation->set_rules('judul','Judul','trim|required');
 			$this->form_validation->set_rules('deskripsi','deskripsi','trim|required');
+			$this->form_validation->set_rules('album','Album','trim|required');
 			if ($this->form_validation->run() == true) {
 				$ret['state'] = 1;
 				$media['judul'] = $this->input->post('judul');
 				$media['deskripsi'] = $this->input->post('deskripsi');
+				$media['id_album'] = $this->input->post('album');
 				$media['tgl_upload'] = date('Y-m-d');
 				$media['type'] = 'image';
 				$media['id_user_ref'] = $this->session->userdata('data_user')['id_user'];
@@ -57,6 +122,7 @@ class Galery extends MX_Controller  {
 				}
 			}
 			$ret['notif']['judul'] = form_error('judul');
+			$ret['notif']['album'] = form_error('album');
 			$ret['notif']['deskripsi'] = form_error('deskripsi');
 			if (!isset($_FILES['file_name'])) {
 				$ret['notif']['file_name'] = "Please Select File";
@@ -64,6 +130,7 @@ class Galery extends MX_Controller  {
 			echo json_encode($ret);
 			exit();
 		}
+		$this->data['album'] = $this->db->get('tb_album_galery')->result_array();
 		$this->ciparser->new_parse('template_admin','modules_admin', 'galery/image_layout',$this->data);
 	}
 
@@ -108,10 +175,12 @@ class Galery extends MX_Controller  {
 			$this->form_validation->set_error_delimiters('','');
 			$this->form_validation->set_rules('judul','Judul','trim|required');
 			$this->form_validation->set_rules('deskripsi','deskripsi','trim|required');
+			$this->form_validation->set_rules('album','Album','trim|required');
 			if ($this->form_validation->run() == true) {
 				$ret['state'] = 1;
 				$media['judul'] = $this->input->post('judul');
 				$media['deskripsi'] = $this->input->post('deskripsi');
+				$media['id_album'] = $this->input->post('album');
 				$media['tgl_upload'] = date('Y-m-d');
 				if (isset($_FILES['file_name'])) {
 					$image = $this->upload_logo($_FILES);
@@ -149,10 +218,11 @@ class Galery extends MX_Controller  {
 			}
 			$ret['notif']['judul'] = form_error('judul');
 			$ret['notif']['deskripsi'] = form_error('deskripsi');
+			$ret['notif']['album'] = form_error('album');
 			echo json_encode($ret);
 			exit();
 		}
-		
+		$this->data['album'] = $this->db->get('tb_album_galery')->result_array();
 		$this->ciparser->new_parse('template_admin','modules_admin', 'galery/image_layout',$this->data);
 	}
 

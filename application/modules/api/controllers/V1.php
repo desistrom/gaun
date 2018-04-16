@@ -43,11 +43,22 @@ class V1 extends REST_Controller {
         $this->set_response("Unauthorised", REST_Controller::HTTP_UNAUTHORIZED);
     }
 
+    public function albumAll_get(){
+        header('Content-Type: application/json');
+        $this->_albumAll();
+    }
+
+    public function getAlbumById_get(){
+        header('Content-Type: application/json');
+        $param = $_GET['data'];
+        $this->_getAlbumById($param);
+    }
 
     public function galery_get(){
-    	header('Content-Type: application/json');
-    	$this->_galery();
+        header('Content-Type: application/json');
+        $this->_galery();
     }
+
 
     public function galery_image_get(){
     	header('Content-Type: application/json');
@@ -288,6 +299,37 @@ class V1 extends REST_Controller {
         $this->_insertContact($param);
     }
 
+    function _albumAll(){
+        $galery = $this->v1_model->getAllAlbum();
+        $retData['code'] = '200';
+        $retData['status'] = 'success';
+        foreach ($galery as $key => $value) {
+            if ($value['file'] == '') {
+                $galery[$key]['image']=base_url().'assets/images/logo/IDREN-2.png';
+            }else{
+                $galery[$key]['image'] = base_url().'assets/media/'.$value['image'];
+            }
+
+        }
+        $retData['data'] = $galery;
+        $this->response($retData,200);
+    }
+
+    function _getAlbumById($param){
+        $galery = $this->v1_model->getAlbumById($param);
+        $retData['code'] = '200';
+        $retData['status'] = 'success';
+        foreach ($galery as $key => $value) {
+            if ($value['file'] == '') {
+                $galery[$key]['image']=base_url().'assets/images/logo/IDREN-2.png';
+            }else{
+                $galery[$key]['image'] = base_url().'assets/media/'.$value['image'];
+            }
+
+        }
+        $retData['data'] = $galery;
+        $this->response($retData,200);
+    }
 
     function _galery(){
     	$galery = $this->v1_model->getAllGalery();
@@ -309,13 +351,13 @@ class V1 extends REST_Controller {
             $retData['code'] = '200';
             $retData['status'] = 'success';
             foreach ($galery as $key => $value) {
-            if ($value['file'] == '') {
-                $galery[$key]['file']=base_url().'assets/images/logo/IDREN-2.png';
-            }else{
-                $galery[$key]['file'] = base_url().'assets/media/'.$value['file'];
-            }
+                if ($value['file'] == '') {
+                    $galery[$key]['file']=base_url().'assets/images/logo/IDREN-2.png';
+                }else{
+                    $galery[$key]['file'] = base_url().'assets/media/'.$value['file'];
+                }
 
-        }
+            }
             $retData['data'] = $galery;
 		}
 		$this->response($retData,200);

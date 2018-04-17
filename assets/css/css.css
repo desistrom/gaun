@@ -870,5 +870,123 @@ img.logo-sponsor.logo2 {
   text-align: center;
 }
 }
+@media(max-width:400px){
+
+div.container-fluid{
+  padding: 0 1em;
+}
+.logo{
+  width: 80px;
+}
+.navbar-brand {
+    padding-top: 10px;
+    padding-left: 15px;
+}
+.hero-left h1{
+  font-size: 24px;
+
+}
+.hero-right{
+  float: none;
+}
+.hero-left{
+  float: none;
+  text-align: center;
+  padding-top: 2em;
+}
+.hero-left p{
+  padding: 3px 0;
+  font-size: 14px;
+}
+.hero{
+  height: auto;
+}
+.hero .arrow-line{
+  text-align: center;
+  padding-top: 10px;
+}
+.layanan{
+  height: auto;
+  padding: 2em 0;
+  margin-top: 0;
+}
+.layanan .line, .layanan .title h2{
+  font-size: 26px;
+}
+.layanan div.arrow-line {
+    margin-top: -1em;
+    position: absolute;
+    right: 0;
+    display: none;
+}
+section.testimonial{
+  padding: 2em 0;
+}
+div.row.sub-testimoni{
+  margin: 0;
+
+}
+h2.name-testi{
+  font-size: 24px;
+}
+section.testimonial p{
+  font-size: 14px;
+}
+section.footer-top .title{
+  font-size: 24px;
+}
+section.footer-top .sub-footer-top{
+  padding: 2em 0;
+}
+.wraper{
+  padding-top: 2em;
+}
+section.client .top h3{
+  font-size: 24px;
+}
+.arrow-line{
+  display: none;
+}
+section.client{
+  height: auto;
+  padding: 2em 0;
+}
+.sub-client{
+  padding: 1em 0;
+}
+section.testimonial p{
+  padding: 0;
+}
+img.logo-sponsor{
+  width: 100px;
+}
+img.logo-sponsor.logo2 {
+    width: 50px;
+}
+.footer-left,
+.footer-center,
+.footer-right{
+  text-align: center;
+}
+
+/*idroam*/
+.content-left{
+  padding: 15px;
+}
+div.header-title h1{
+  font-size: 28px;
+}
+
+/*topo;ogi*/
+.content-topologi{
+  padding: 15px;
+}
+
+/*news*/
+.title-page-news{
+  
+}
+}
+
 
 

@@ -24,6 +24,18 @@ section.topologi{
 .content-topologi img{
     width: 100%;
 }
+@media(max-width:900px){
+.content-topologi{
+    text-align: center;
+    padding: 0 2em 2em 2em;
+}
+}
+@media(max-width:400px){
+.content-topologi{
+    text-align: center;
+    padding: 0 15px 2em 15px;
+}
+}
 
   </style>
 

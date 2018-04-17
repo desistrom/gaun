@@ -198,8 +198,8 @@
           <div class="row">
             <div class="col col-md-12 col-sm-12 col-s-12 none-padding">
               <div class="col col-md-5 col-sm-5 col-xs-5 content-img-top-left">
-                     <h2 class="text-img-page" style="color: #747474;">Gathering bersama komunitas Startup Surabaya</h2>
-                     <h4 style="margin-top: 2em;color: #BDBDBD">14 April 2018</h4>
+                     <h2 class="text-img-page" style="color: #747474;"><?php echo $album_id[0]['title']; ?></h2>
+                     <h4 style="margin-top: 2em;color: #BDBDBD"><?php echo $album_id[0]['date_album']; ?></h4>
               </div>
               <div class="col col-md-7 col-sm-7 col-xs-7 none-padding">
                 <div class="carousel-top">
@@ -208,27 +208,25 @@
 
                           <!-- Wrapper for slides -->
                           <div class="carousel-inner">
-                            <div class="item img-page active">
+                            <?php foreach ($album_id as $key => $value) : ?>
+
+                              <div class="item img-page <?php if ($key==0): ?>active
+                                
+                              <?php endif ?>">
                              
                               <div class="col col-md-12 col-sm-12 col-xs-12 none-padding content-img-top-right">
-                                <img class="img-responsive img-slider" src="<?=base_url();?>assets/images/logo/nota-kesepahaman.jpg"  style="width:100%;">
+                                <img class="img-responsive img-slider" src="<?php echo $value['image']; ?>"  style="width:100%;">
                               </div>   
                             </div>
-                            <div class="item img-page ">
-                              
-                              <div class="col col-md-12 col-sm-12 col-xs-12 none-padding content-img-top-right">
-                                <img class="img-responsive img-slider" src="<?=base_url();?>assets/images/logo/nota-kesepahaman.jpg"  style="width:100%;">
-                              </div>   
-                            </div>
+                            <?php endforeach ?>
                           </div>
 
                      
                          <!-- Indicators -->
                           <ol class="carousel-indicators text-right col col-md-12 col-sm-12 col-xs-12">
-                            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                            <li data-target="#myCarousel" data-slide-to="1"></li>
-                            <li data-target="#myCarousel" data-slide-to="2"></li>
-                            <li data-target="#myCarousel" data-slide-to="3"></li>
+                            <?php foreach ($album_id as $key => $value) : ?>
+                            <li data-target="#myCarousel" data-slide-to="<?php echo $key; ?>" class="<?php if ($key==0): ?>active <?php endif ?>"></li>
+                           <?php endforeach ?>
                           </ol>
                      </div>
                   </div>
@@ -257,14 +255,14 @@
               <?php foreach ($foto as $key => $value) : ?>
                 <div class="col-md-12 col-sm-12 col-xs-12 text-center item" >
                     <div class="box-img-galery">
-                      <a href="#" class="show-album" data-toggle="modal" onclick="openModal();currentSlide(1)">
+                      <a href="#" class="show-album" id="<?php echo $value['albumId'] ?>" data-toggle="modal" >
                         <div class="filter-img-galery" >
-                        <img class="img-responsive" src="<?php echo $value['file']; ?>">
+                        <img class="img-responsive" src="<?php echo $value['image']; ?>">
                       </div>
                       </a>
                       <div class="galery-deskripsi text-left">
                         <h3><?php echo $value['title']; ?></h3>
-                        <p><?php echo $value['modify_date']; ?></p>
+                        <p><?php echo $value['date_album']; ?></p>
                       </div>
                     </div>
                 </div>
@@ -292,10 +290,11 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">
-          <h2>Entrepeneur class berbasis IT</h2>
-          <p>14 april 2018</p>
-        </h4>
+
+        <div class="">
+          <h2 class="replace-title">Entrepeneur class berbasis IT</h2>
+          <p class="replace-date">14 april 2018</p>
+        </div>
       </div>
       <div class="modal-body">
           
@@ -303,8 +302,9 @@
              
 
               <!-- Wrapper for slides -->
-              <div class="carousel-inner">
-                <div class="item active">
+              <div class="carousel-inner carousel-replace">
+
+                <!-- <div class="item active">
                   <img width="100%" src="<?=base_url();?>assets/images/logo/nota-kesepahaman.jpg" alt="Los Angeles">
                 </div>
 
@@ -314,7 +314,7 @@
 
                 <div class="item">
                   <img width="100%" src="<?=base_url();?>assets/images/logo/nota-kesepahaman.jpg"" alt="New York">
-                </div>
+                </div> -->
               </div>
 
               <!-- Left and right controls -->
@@ -331,8 +331,8 @@
       </div>
       <div class="modal-footer">
          <!-- Indicators -->
-              <ol class="carousel-indicators col col-md-12 col-sm-12 col-xs-12">
-                <li class="thumbnail-indicator" data-target="#myCarousel-pop" data-slide-to="0" class="active">
+              <ol class="carousel-indicators col col-md-12 col-sm-12 col-xs-12 carousel-indicators-replace">
+                <!-- <li class="thumbnail-indicator" data-target="#myCarousel-pop" data-slide-to="0" class="active">
                    <img class="img-responsive" src="<?=base_url();?>assets/images/logo/nota-kesepahaman.jpg">
                 </li>
                 <li class="thumbnail-indicator" data-target="#myCarousel-pop" data-slide-to="1">
@@ -340,7 +340,7 @@
                 </li>
                 <li class="thumbnail-indicator" data-target="#myCarousel-pop" data-slide-to="2">
                    <img class="img-responsive" src="<?=base_url();?>assets/images/logo/nota-kesepahaman.jpg">
-                </li>
+                </li> -->
               </ol>
       </div>
     </div>
@@ -353,90 +353,32 @@
       $(".show-album").click(function(){
           $(".modal-album").modal();
       });
+
+
+      $('body').on('click','.show-album',function(){
+            var data = $(this).attr('id');
+            console.log(data);
+            if (data != '') {
+                // window.location.href = '<?=base_url();?>web/galery/search_video?data='+data;
+                $.ajax({
+                url : '<?=base_url();?>web/galery/detail_album?data='+data,
+                type : 'GET',
+                dataType : 'json',
+                data :""
+            }).done(function(data){
+                console.log(data);
+                $('.replace-title').html(data.judul);
+                $('.replace-date').html(data.tanggal);
+                $('.carousel-replace').html(data.slideshow);
+                $('.carousel-indicators-replace').html(data.thumbnail_album);
+            });
+
+            }
+        });
     });
      </script>
 
-<!-- <div id="myModal" class="modal  modal-album" role="dialog">
-  <span class="close cursor" onclick="closeModal()">&times;</span>
 
-  <div class="modal-content">
-    <div class="modal-header" style="padding-left:2em; ">
-      <h2>Entrepeneur class berbasis IT</h2>
-      <p>14 april 2018</p>
-    </div>
-   <div class="modal-dialog modal-md">
-     <div class="mySlides">
-      <img class="img-show-album" src="<?=base_url();?>assets/images/logo/img-gl.jpg" style="width:100%">
-    </div>
-
-    <div class="mySlides">
-      <img class="img-show-album" src="<?=base_url();?>assets/images/logo/img-gl.jpg" style="width:100%">
-    </div>
-
-
-    
-    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-    <a class="next" onclick="plusSlides(1)">&#10095;</a>
-
-    <div class="caption-container">
-      <p id="caption"></p>
-    </div>
-
-    <div class="column">
-      <img class="demo cursor" src="<?=base_url();?>assets/images/logo/img-gl.jpg" style="width:100%" onclick="currentSlide(1)" >
-    </div>
-    <div class="column">
-      <img class="demo cursor" src="<?=base_url();?>assets/images/logo/img-gl.jpg" style="width:100%" onclick="currentSlide(2)" >
-    </div>
-   </div>
-  
-  </div>
-</div> -->
-
-<!-- <script>
-function openModal() {
-  document.getElementById('myModal').style.display = "block";
-}
-
-function closeModal() {
-  document.getElementById('myModal').style.display = "none";
-}
-
-var slideIndex = 1;
-showSlides(slideIndex);
-
-function plusSlides(n) {
-  showSlides(slideIndex += n);
-}
-
-function currentSlide(n) {
-  showSlides(slideIndex = n);
-}
-
-function showSlides(n) {
-  var i;
-  var slides = document.getElementsByClassName("mySlides");
-  var dots = document.getElementsByClassName("demo");
-  var captionText = document.getElementById("caption");
-  if (n > slides.length) {slideIndex = 1}
-  if (n < 1) {slideIndex = slides.length}
-  for (i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";
-  }
-  for (i = 0; i < dots.length; i++) {
-      dots[i].className = dots[i].className.replace(" active", "");
-  }
-  slides[slideIndex-1].style.display = "block";
-  dots[slideIndex-1].className += " active";
-  captionText.innerHTML = dots[slideIndex-1].alt;
-}
-</script> -->
-    
-
-<!-- 
-
- <script src="<?=base_url();?>assets/js/jquery.min.js"></script>
-    <script src="<?=base_url();?>assets/js/bootstrap.min.js"></script> -->
 
 
 

@@ -67,6 +67,8 @@
                                 <ul class="list-inline date_event">
                                     <li><i class="glyphicon glyphicon-calendar"></i><?php echo date('d m Y', strtotime($detail_news['tanggal'])); ?></li>
                                     <li><i class="glyphicon glyphicon-briefcase"></i> <?php echo $detail_news['kategori'];?></li>
+                                    <li><i class="fa fa-link"></i> <?php echo $detail_news['sumber'];?></li>
+
                                 </ul>
                             </div>
                         </div>

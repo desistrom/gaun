@@ -16,15 +16,52 @@ class Galery extends CI_Controller  {
     }
 
     function index() {
-        $url = site_url('api/v1/galery_image') ;
+        $url = site_url('api/v1/albumAll') ;
     	$data = '';
         $methode = 'GET';
         $token = '';
         $a = api_helper('',$url,$methode,$token);
 
+        $id=$a['data'][0]['albumId'];
 
-    	$this->data['foto']=$a['data'];
+        $url_album_id =  base_url().'api/v1/getAlbumById?data='.$id ;
+        $b = api_helper('',$url_album_id,$methode,$token);
+
+
+
+        $this->data['foto']=$a['data'];
+    	$this->data['album_id']=$b['data'];
     	$this->ciparser->new_parse('template_frontend','modules_web', 'foto_layout',$this->data);
+    }
+
+    function detail_album() {
+        $id = $_GET['data'];
+        $url =  base_url().'api/v1/getAlbumById?data='.$id ;
+        $data = '';
+        $methode = 'GET';
+        $token = '';
+        $app_data = api_helper(json_encode($id),$url,$methode,$token);
+        $html['judul'] = $app_data['data'][0]['title'];
+        $html['tanggal'] = $app_data['data'][0]['date_album'];
+        $html['slideshow']='';
+        $html['thumbnail_album']='';
+        foreach ($app_data['data'] as $key => $value) :
+            $html['slideshow'].='<div class="item ';
+            if($key==0){ $html['slideshow'] .= 'active';} 
+            $html['slideshow'] .= '"><img width="100%" src="'. $value['image'] .'" ></div>';
+        endforeach;
+
+        $hmtl['thumbnail_album']='';
+        foreach ($app_data['data'] as $key => $value) :
+            $html['thumbnail_album'].='<li class="thumbnail-indicator" data-target="#myCarousel-pop" data-slide-to="'.$key.'" class="' ;
+             if($key==0){ $html['thumbnail_album'] .= 'active';} 
+            $html['thumbnail_album'].='"><img class="img-responsive" src="'. $value['image'] .'">
+                </li>';
+        endforeach;
+
+        echo json_encode($html);
+
+        
     }
     function video() {
         $url = site_url('api/v1/galery_video') ;

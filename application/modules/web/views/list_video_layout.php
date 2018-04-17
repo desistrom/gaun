@@ -128,6 +128,7 @@
       $(".show-video").click(function(){
         var file = $(this).attr('id');
           $('#list-video iframe').attr('src',file);
+          
           $(".modal-list-video").modal();
       });
     });

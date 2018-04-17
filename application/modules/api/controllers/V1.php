@@ -328,7 +328,7 @@ class V1 extends REST_Controller {
         $retData['status'] = 'success';
         foreach ($galery as $key => $value) {
             $galery[$key]['date_album'] = date("d M Y", strtotime($value['date_album']));
-            if ($value['file'] == '') {
+            if ($value['image'] == '') {
                 $galery[$key]['image']=base_url().'assets/images/logo/IDREN-2.png';
             }else{
                 $galery[$key]['image'] = base_url().'assets/media/'.$value['image'];

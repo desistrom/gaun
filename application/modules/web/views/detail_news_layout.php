@@ -81,18 +81,18 @@
         <div class="row sub-content-comment">
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <h2>Comment </h2></div>
-            <div class="col-md-5 col-sm-5 col-xs-12 sub-comment">
+            <div class="col-md-5 col-sm-12 col-xs-12 sub-comment">
                 <div class="col col-md-12 col-sm-12 col-xs-12 none-padding filter-comment">
                     <div class="comment-left col col-md-2 col-sm-2 col-xs-2 none-padding">
                         <div class="user text-center"><i class="fa fa-user"></i></div>
                     </div>
-                    <div class="comment-right col col-md-10 col-sm-10 col-xs-10">
+                    <div class="comment-right col col-md-10 col-sm-12 col-xs-12">
                         <h4>Wahyu Kurniawan<span class="date-comment">11 Apri 2018</span></h4>
                         <p>Mohon info untuk tergabung dengan IDren,tx</p>
                     </div>
                 </div>
             </div>
-            <div class="col-md-7 col-sm-7 col-xs-12 right-comment">
+            <div class="col-md-7 col-sm-12 col-xs-12 right-comment">
                 <div class="sub-comment-right">
                     <div class="form-group">
                         <h2>Leave a Comment</h2>

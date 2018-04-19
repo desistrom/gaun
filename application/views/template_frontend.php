@@ -63,7 +63,7 @@
                       <li role="presentation" class=""><a <?php if(current_url() == site_url('web/news')){ ?> class="active" <?php } ?> href="<?php echo site_url('web/news'); ?>">Berita</a></li>
 
                       <!-- <li role="presentation" class="active"><a href="#">Masuk</a></li> -->
-                      <li role="presentation" class=""><a class="active btn-gabung" href="#" data-toggle="modal" >Gabung</a></li>
+                      <li role="presentation" class=""><a class="active btn-gabung" href="<?php echo site_url('web/gabung') ?>" data-toggle="modal" >Gabung</a></li>
 
                   </ul>
               </div>
@@ -227,7 +227,7 @@
    <script type="text/javascript" src="<?=base_url();?>assets/js/jquery.waterwheelCarousel.js"></script>
  <?php } ?>
  
- <script type="text/javascript">
+<!--  <script type="text/javascript">
    var base_url = "<?=base_url();?>"
     $(document).ready(function(){
       $(".btn-gabung").click(function(){
@@ -264,7 +264,7 @@
     });
 
     });
- </script>
+ </script> -->
 </body>
 
 </html>

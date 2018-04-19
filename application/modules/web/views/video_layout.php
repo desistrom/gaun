@@ -5,7 +5,7 @@
   background-color: #F2F2F2;
 }
 .title-page-news{
-  padding-bottom: 2em;
+  padding-bottom: 0;
 }
     .content-foto{
         margin-top: 6em;
@@ -32,93 +32,12 @@
         color: white;
 
     }
-</style>
 
-   <section class="detail_news">
-      <style type="text/css">
      .filter-title-page-news{
         margin-top: 5em;
       }
 
-    .ktrv {
-       
-       
-        height: 500px;
-        position: relative;
-        clear: both;
-        overflow: hidden;
-     
-    }
-    .noselect {
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
 
-/*        .wwkt img {
-      display: inline-block;
-      width: 100%;
-      height: 100%;
-      opacity: 0;
-
-    }*/
-
-    .ktrv>div.wwkt>div:nth-child(2) {
-        position: absolute;
-        top: 0;
-        width: 100%;
-        height: inherit;
-        display: table;
-        background-color: #0a3b52;
-        border-radius: 5px;
-    }
-    .ktrv>div.wwkt>div:last-child {
-        position: absolute;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        display: table;
-    }
-    .ktrv > div.wwkt > div:first-child {
-
-    display: table-cell;
-    vertical-align: middle;
-    height: 100%;
-    width: 100%;
-
-}
-
-    h2 {
-
-        display: table-cell;
-        vertical-align: middle;
-        height: inherit;
-        width: 100%;
-        text-align: center;
-        color:black;
-    }
-
-
-    #callback-output {
-        height: 250px;
-        overflow: scroll;
-    }
-
-
-
-    .ktrv>div.wwkt {
-        display: inline-block;
-        cursor: pointer;
-    }
-    #wwcp-2{
-    
-    }
-    #wwcp-3{
-      
-    }
 
     .list-video{
       padding: 2em 15px;
@@ -131,7 +50,56 @@
       background-color: #CF090A;
       margin-bottom: 2em;
     }
+          .example-desc {
+        margin:3px 0;
+        padding:5px;
+      }
+
+      #carousel {
+        width:100%;
+        height:400px;
+     
+        position:relative;
+        clear:both;
     
+      
+      }
+      #carousel img {
+        visibility:hidden; /* hide images until carousel can handle them */
+        cursor:pointer; /* otherwise it's not as obvious items can be clicked */
+      }
+      .btn-nav-video{
+        position: absolute;
+        font-size: 80px;
+        font-weight: 700;
+        color: #747474;
+      }
+      .btn-nav-video:hover{
+         color: #747474;
+      }
+      .btn-nav-video i:hover{
+       
+        color: black;
+      }
+      .btn-nav-video.button-right{
+        right: 0;
+        padding: 160px 0 160px 3.5em;
+        z-index: 100;
+        background-color: transparent;
+           margin-right: -10px;
+      }
+       .btn-nav-video.button-left{
+        left: 0;
+        padding: 160px 3.5em 160px 0;
+        z-index: 100;
+        background-color: transparent;
+        margin-left: -10px;
+
+      }
+      .slider-waterwheel{
+        box-shadow:0px 0px 28px 0px #000000;
+      }
+
          /* The Modal (background) */
 
 
@@ -142,7 +110,7 @@
                     <div></div>
                 </div>
                 <div class="header-title">
-                    <h2 style="font-size: 50px;color: #BDBDBD;margin-bottom: 1em;">Video </h2></div>
+                    <h2 style="font-size: 50px;color: #BDBDBD;">Video </h2></div>
             </div>
         </div>
         <section class="content-video">
@@ -154,32 +122,21 @@
 
 
 
-                <div class="ktrv col col-md-12 col-sm-12 col-xs-12">
+                <div  id="carousel">
 
                       <?php for ($i=0; $i < 3 ; $i++) { ?>
                   <?php if (isset($video[$i]['title'])) { ?>
-                  <div class="wwkt" id="wwcp-1">
-                        <div>
-                        </div>
-                        <div>
-                            <iframe width="100%" height="100%" src="<?php echo $video[$i]['file'] ?> " frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                        </div>
-                        <div>
-                        </div>
-                    </div>
+                
+                            <iframe class="slider-waterwheel" width="640px" height="360px" src="<?php echo $video[$i]['file'] ?> " frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            
 
                  <?php } } ?>
 
-               
-                    <!--img src="images/4.jpg" id="wwcp-4" />
-                  <img src="images/5.jpg" id="wwcp-5" />
-                  <img src="images/6.jpg" id="wwcp-6" />
-                  <img src="images/7.jpg" id="wwcp-7" />
-                  <img src="images/8.jpg" id="wwcp-8" />
-                  <img src="images/9.jpg" id="wwcp-9" /-->
+                 <a href="#" class="btn-nav-video button-left"><i class="fa fa-angle-left" id="prev"></i></a>  <a href="#" class="btn-nav-video button-right" ><i class="fa fa-angle-right" id="next"></i></a>
                 </div>
-                   <a href="{{data.url}}">
-                 </a>
+
+                
+
 
  
 
@@ -199,7 +156,7 @@
                 </div>
                   <?php for ($i=0; $i < 3 ; $i++) { ?>
                   <?php if (isset($video[$i]['title'])) { ?>
-                <div class="col-md-4 col-sm-4 col-xs-4 text-center item" >
+                <div class="col-md-4 col-sm-6 col-xs-12 text-center item" >
                     <div class="box-img-galery">
                       <a href="#" class="show-album" data-toggle="modal" ">
                         <div class="filter-img-galery" >
@@ -221,22 +178,46 @@
             </div>
           </div>
         </section>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        var carousel = $("#carousel").waterwheelCarousel({
+          flankingItems: 1,
+          movingToCenter: function ($item) {
+            $('#callback-output').prepend('movingToCenter: ' + $item.attr('id') + '<br/>');
+          },
+          movedToCenter: function ($item) {
+            $('#callback-output').prepend('movedToCenter: ' + $item.attr('id') + '<br/>');
+          },
+          movingFromCenter: function ($item) {
+            $('#callback-output').prepend('movingFromCenter: ' + $item.attr('id') + '<br/>');
+          },
+          movedFromCenter: function ($item) {
+            $('#callback-output').prepend('movedFromCenter: ' + $item.attr('id') + '<br/>');
+          },
+          clickedCenter: function ($item) {
+            $('#callback-output').prepend('clickedCenter: ' + $item.attr('id') + '<br/>');
+          }
+        });
 
-             <script type="text/javascript">
+        $('#prev').bind('click', function () {
+          carousel.prev();
+          return false
+        });
 
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-36251023-1']);
-  _gaq.push(['_setDomainName', 'jqueryscript.net']);
-  _gaq.push(['_trackPageview']);
+        $('#next').bind('click', function () {
+          carousel.next();
+          return false;
+        });
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
+        $('#reload').bind('click', function () {
+          newOptions = eval("(" + $('#newoptions').val() + ")");
+          carousel.reload(newOptions);
+          return false;
+        });
 
-</script>
-
+      });
+    </script>
 
 
    

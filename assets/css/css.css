@@ -824,9 +824,9 @@ div.container-fluid{
 div.container-fluid{
   padding: 0 5em;
 }
-.hero-right{
+/*.hero-right{
   float: none;
-}
+}*/
 .hero-left{
   float: none;
   text-align: center;
@@ -855,6 +855,19 @@ section.client{
 .sub-client{
   padding: 1em 0;
 }
+.detail_news  .content-left{
+  margin-top: 0;
+
+}
+.detail_news .content-right{
+  float: none;
+  padding: 15px 0;
+  border-left: none;
+  border-bottom: solid 1px #9E9E9E;
+  margin-bottom: 2em;
+
+}
+
 section.testimonial p{
   padding: 0;
 }
@@ -868,6 +881,34 @@ img.logo-sponsor.logo2 {
 .footer-center,
 .footer-right{
   text-align: center;
+}
+.title-page-news{
+  padding-bottom:0; 
+}
+
+
+#news .content-left{
+  margin-top: 0;
+
+}
+.news .content-right{
+  float: none;
+  padding: 15px 0;
+  border-left: none;
+  border-bottom: solid 1px #9E9E9E;
+  margin-bottom: 2em;
+
+}
+
+.news .content-left{
+  float: none;
+  padding: 15px 0;
+
+  margin-bottom: 2em;
+
+}
+.content-comment .sub-comment-right{
+  margin-top: 1em;
 }
 }
 @media(max-width:400px){
@@ -918,6 +959,21 @@ div.container-fluid{
     position: absolute;
     right: 0;
     display: none;
+}
+.news .content-right{
+  float: none;
+  padding: 15px ;
+  border-left: none;
+  border-bottom: solid 1px #9E9E9E;
+  margin-bottom: 2em;
+
+}
+.news .content-left{
+  float: none;
+  padding: 15px ;
+
+  margin-bottom: 2em;
+
 }
 section.testimonial{
   padding: 2em 0;
@@ -986,7 +1042,17 @@ div.header-title h1{
 .title-page-news{
   
 }
+.detail_news .content-right{
+  padding: 15px;
+}
+.content-comment .right-comment{
+  padding: 15px;
+}
+.content-comment .sub-comment-right{
+  padding: 2em 1em  1em 1em;
+}
 }
 
+/*foto*/
 
 

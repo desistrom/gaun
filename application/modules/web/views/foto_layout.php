@@ -180,6 +180,105 @@
           width: 24em;
           height: auto;
          }
+         @media(max-width:1110px){
+           .modal-album .modal-dialog{
+          width: 900px;
+          margin-top: 10px;
+         }
+               .modal-album .modal-footer .carousel-indicators{
+                position:relative; 
+                bottom: 10px;
+                left: 0;
+                z-index: 15;
+                width: 100%;
+                padding-left: 15px;
+                margin-left: 0;
+                text-align: center;
+                list-style: none;
+         }
+          .modal-album .modal-footer .carousel-indicators .thumbnail-indicator{
+          width: 19em;
+          height: auto;
+         }
+         }
+           @media(max-width:1000px){
+           .modal-album .modal-dialog{
+          width: 600px;
+          margin-top: 10px;
+         }
+               .modal-album .modal-footer .carousel-indicators{
+                position:relative; 
+                bottom: 10px;
+                left: 0;
+                z-index: 15;
+                width: 100%;
+                padding-left: 15px;
+                margin-left: 0;
+                text-align: center;
+                list-style: none;
+         }
+          .modal-album .modal-footer .carousel-indicators .thumbnail-indicator{
+          width: 15em;
+          height: auto;
+         }
+         .modal-album .modal-body{
+          padding: 30px 5em;
+         }
+         #img-page .carousel-top .carousel{
+          margin-top: 0;
+         }
+         #img-page .content-img-top-left{
+          padding: 25px;
+         }
+          #img-page .slide-control.left{
+          top: 60%;
+         }
+          #img-page .slide-control.right{
+          top: 60%;
+         }
+         }
+          @media(max-width:500px){
+           .modal-album .modal-dialog{
+          width: 400px;
+          margin-top: 10px;
+         }
+               .modal-album .modal-footer .carousel-indicators{
+                position:relative; 
+                bottom: 10px;
+                left: 0;
+                z-index: 15;
+                width: 100%;
+                padding-left: 15px;
+                margin-left: 0;
+                text-align: center;
+                list-style: none;
+         }
+          .modal-album .modal-footer .carousel-indicators .thumbnail-indicator{
+          width: 10em;
+          height: auto;
+         }
+         .modal-album .modal-body{
+          padding: 30px 15px;
+         }
+         #img-page .slide-control.left{
+          top: 60%;
+         }
+          #img-page .slide-control.right{
+          top: 60%;
+         }
+         .img-galery .owl-buttons .owl-next{
+          margin-right: 0;
+         }
+         .img-galery .owl-buttons .owl-prev{
+          margin-left: 0;
+         }
+         #img-page .slide-control.left{
+          margin-left: 10px;
+         }
+          #img-page .slide-control.right{
+          margin-right: 10px;
+         }
+         }
          /* The Modal (background) */
 
 
@@ -196,12 +295,12 @@
         <section id="img-page">
         <div class="container-fluid">
           <div class="row">
-            <div class="col col-md-12 col-sm-12 col-s-12 none-padding">
-              <div class="col col-md-5 col-sm-5 col-xs-5 content-img-top-left">
+            <div class="col col-md-12 col-sm-12 col-xs-12 none-padding">
+              <div class="col col-md-5 col-sm-12 col-xs-12 content-img-top-left">
                      <h2 class="text-img-page" style="color: #747474;"><?php echo $album_id[0]['title']; ?></h2>
                      <h4 style="margin-top: 2em;color: #BDBDBD"><?php echo $album_id[0]['date_album']; ?></h4>
               </div>
-              <div class="col col-md-7 col-sm-7 col-xs-7 none-padding">
+              <div class="col col-md-7 col-sm-12 col-xs-12 none-padding">
                 <div class="carousel-top">
                       <div id="myCarousel" class="carousel slide col col-md-12 col-sm-12 col-xs-12 " data-ride="carousel">
                      
@@ -284,7 +383,7 @@
 
 <!-- Modal -->
 <div id="myModal" class="modal fade modal-album" role="dialog">
-  <div class="modal-dialog modal-lg">
+  <div class="modal-dialog modal-lg modal-md modal-sm modal-xs">
 
     <!-- Modal content-->
     <div class="modal-content">

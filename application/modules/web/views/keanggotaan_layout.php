@@ -62,7 +62,27 @@ span.website-anggota{
     padding: 5px 2em;
 }
 .box-keanggotaan{
+    padding: 0 7px !important;
+}
+.keanggotaan .content-keanggotaan{
+    padding: 15px;
+}
+.box-keanggotaan{
     padding: 0;
+    margin: 15px 0;
+}
+div.sub-box-keanggotaan{
+    height: auto;
+    max-height: none;
+    text-align: center;
+    padding-bottom: 15px;
+}
+.box-keanggotaan-right{
+    margin-top: 20px;
+}
+.keanggotaan .box-keanggotaan-left{
+    margin-left: 0;
+    display: inline-block;
 }
 }
 @media(max-width:400px){
@@ -104,14 +124,14 @@ div.sub-box-keanggotaan{
               <?php foreach ($keanggotaan as $key => $value) : ?>
                 <div class="col col-md-6 col-sm-6 col-xs-12 box-keanggotaan">
                     <div class="col col-md-12 col-sm-12 col-xs-12 none-padding sub-box-keanggotaan">
-                        <div class="col col-md-3 col-sm-3 col-xs-12">
+                        <div class="col col-md-3 col-sm-12 col-xs-12">
                             <div class="box-keanggotaan-left">
                             	<div class="filter-box-mg-keanggotaan">
                             		<img class="img-responsive logo-instansi" src="<?php echo $value['image_thumbnail']; ?>">
                             	</div>
                             </div>
                         </div>
-                        <div class="col col-md-9 col-sm-9 col-xs-12 none-padding box-keanggotaan-right">
+                        <div class="col col-md-9 col-sm-12 col-xs-12 none-padding box-keanggotaan-right">
                             <h4 class="text-bold title-box-keanggotaan"><?php echo $value['instansi']; ?></h4>
                             <ul class="list-unstyled">
                                 <li>

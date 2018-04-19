@@ -11,7 +11,23 @@
             background-color: #F2F2F2;
         }
         .list-artikel{
-            padding: 3em 15px;
+            padding: 0 15px;
+        }
+        .detail_layanan .desrip-news{
+            padding: 2em;
+        }
+        .detail_layanan .desrip-news p{
+            font-size: 18px;
+        }
+        .detail_layanan .content-left{
+            padding: 0 4em;
+        }
+        .detail_layanan .list-artikel,
+        .detail_layanan .descrip-img{
+            padding-right: 0;
+        }
+        .detail_layanan .descrip-img img{
+            width: 100%;
         }
     </style>
     <section class="detail_layanan">
@@ -26,19 +42,21 @@
         </div>
         <div class="container-fluid">
             <div class="row content-news">
-                <div class="col col-md-2 col-sm-2 col-xs-2"></div>
-                <div class="col-md-8 col-sm-8 col-xs-12 content-left">
+               
+                <div class="col-md-12 col-sm-12 col-xs-12 content-left">
                     <div class="col col-md-12 col-sm-12 col-xs-12 none-padding list-artikel">
-                        <h2 class="text-center" style="font-weight: bold;color: #9E9E9E;"> IDren</h2>
-                        <div class="col col-md-12 col-sm-12 col-xs-12 desrip-news">
+                        <div class="col col-md-5 col-sm-5 col-xs-12 desrip-news">
                             
                             <div class="isi-news" style="padding: 0 15px;color: #919191;"><?php echo $about['content']; ?></div>
                             
                             
                         </div>
+                        <div class="col col-md-7 col-sm-7 col-xs-12 descrip-img">
+                            <img class="img-responsive" width="100%" src="<?=base_url();?>assets/images/logo/ttg.png">
+                        </div>
                     </div>
                 </div>
-                <div class="col col-md-2 col-sm-2 col-xs-2"></div>
+            
             </div>
         </div>
 

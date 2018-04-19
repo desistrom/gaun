@@ -342,6 +342,8 @@ class Home extends CI_Controller  {
     public function hero(){
     	$this->data['hero'] = $this->db->get('tb_hero')->row_array();
     	if ($this->input->server('REQUEST_METHOD') == 'POST') {
+    		// print_r($this->input->post('judul'));
+    		// return false;
     		$ret['state'] = 0;
     		$ret['status'] = 0;
     		$this->form_validation->set_error_delimiters('','');
@@ -351,7 +353,9 @@ class Home extends CI_Controller  {
     		if ($this->form_validation->run() == true) {
     			$ret['state'] = 1;
     			$dt_hero['link_video'] = $this->input->post('link');
-    			$dt_hero['title'] = $this->input->post('judul');
+    			$j1 = str_replace("<p>", "", $this->input->post('judul'));
+    			$j2 = str_replace("</p>", "", $j1);
+    			$dt_hero['title'] = $j2;
     			$dt_hero['content'] = $this->input->post('content');
     			if ($this->db->get('tb_hero')->num_rows() > 0) {
     				if ($this->db->update('tb_hero',$dt_hero,array('id_hero'=>$this->data['hero']['id_hero']))) {
@@ -374,7 +378,7 @@ class Home extends CI_Controller  {
     	$this->load->library('ckeditor');
 		$this->ckeditor->basePath = base_url().'assets/ckeditor/';
 		$this->ckeditor->config['toolbar'] = array(
-		                array( 'Source', '-', 'Bold', 'Italic', 'Underline', '-','Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo','-','NumberedList','BulletedList' )
+		                array( 'Source', '-', 'Bold', 'Italic', 'Underline', '-','Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo','-','NumberedList','BulletedList','-','Styles' )
 		                                                    );
 		$this->ckeditor->config['language'] = 'eng';
 		$this->ckeditor->config['width'] = '1024px';

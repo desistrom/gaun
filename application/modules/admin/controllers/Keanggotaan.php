@@ -175,12 +175,16 @@ class Keanggotaan extends MX_Controller  {
 			$this->form_validation->set_rules('website','Website','trim|required');
 			$this->form_validation->set_rules('alamat','Alamat','trim|required');
 			$this->form_validation->set_rules('phone','phone','trim|required');
+			$this->form_validation->set_rules('username','Username','trim|required');
+			$this->form_validation->set_rules('password','Passowrd','trim|required');
 			if ($this->form_validation->run() == true && isset($_FILES['userfile'])) {
 				$ret['state'] = 1;
 				$data_instansi['nm_instansi'] = $this->input->post('name');
 				$data_instansi['website'] = $this->input->post('website');
 				$data_instansi['phone'] = $this->input->post('phone');
 				$data_instansi['alamat'] = $this->input->post('alamat');
+				$data_instansi['username'] = $this->input->post('username');
+				$data_instansi['password'] = $this->input->post('password');
 				$data_gambar = $this->upload_logo($_FILES);
 				if (isset($data_gambar['error'])) {
 					$ret['notif'] = $data_gambar;
@@ -197,6 +201,8 @@ class Keanggotaan extends MX_Controller  {
 			$ret['notif']['website'] = form_error('website');
 			$ret['notif']['phone'] = form_error('phone');
 			$ret['notif']['alamat'] = form_error('alamat');
+			$ret['notif']['username'] = form_error('username');
+			$ret['notif']['password'] = form_error('password');
 			if (!isset($_FILES['userfile'])) {
 				$ret['notif']['userfile'] = "Please Select File";
 			}

@@ -38,9 +38,10 @@ class Email extends MX_Controller  {
 				$final = str_replace("Email_User", $this->input->post('subject'), $template);
 				$final = str_replace("subject_email", $this->input->post('title'), $final);
 				// str_replace("content_email", $this->input->post('content'), $template);
+				$sender = $this->db->get('tb_setting_email')->row_array();
 				$this->load->helper('email_send_helper');
-			   	$data['email_from'] = "junaedi@presiden.com";
-			   	$data['name_from'] = "Presiden Junaedi";
+			   	$data['email_from'] = $sender['email'];
+			   	$data['name_from'] = $sender['nama_user'];
 			   	$data['email_to'] = $this->input->post('subject');
 			   	$data['subject'] = $this->input->post('title');
 			   	$data['content'] = str_replace("content_email", $this->input->post('content'), $final);
@@ -89,7 +90,7 @@ class Email extends MX_Controller  {
 			if ($this->form_validation->run() == true) {
 				$ret['state'] = 1;
 				$data_email['nm_kategori'] = $this->input->post('kategori');
-				if ($this->db->update('tb_kategori_email',$data_email)) {
+				if ($this->db->insert('tb_kategori_email',$data_email)) {
 					$ret['status'] = 1;
 					$this->session->set_flashdata("notif","Data Berhasil di Masukan");
 					$ret['url'] = site_url('admin/email/kategori');
@@ -121,6 +122,7 @@ class Email extends MX_Controller  {
 					$ret['url'] = site_url('admin/email/kategori');
 				}
 			}
+			$ret['notif']['kategori'] = form_error('kategori');
 			$ret['notif']['kategori'] = form_error('kategori');
 
 			echo json_encode($ret);
@@ -185,4 +187,40 @@ class Email extends MX_Controller  {
 		}
 		$this->ciparser->new_parse('template_admin','modules_admin', 'email/master_template_layout',$this->data);
 	}
+
+	public function setting_email(){
+		$this->data['email'] = $this->db->get('tb_setting_email')->row_array();
+		if ($this->input->server('REQUEST_METHOD') == 'POST') {
+			$ret['state'] = 0;
+			$ret['status'] = 0;
+			$this->form_validation->set_error_delimiters('','');
+			$this->form_validation->set_rules('email','Email Pengirim', 'trim|required');
+			$this->form_validation->set_rules('nama','Nama Pengirim', 'trim|required');
+			if ($this->form_validation->run() == true) {
+				$ret['state'] = 1;
+				$data_email['email'] = $this->input->post('email');
+				$data_email['nama_user'] = $this->input->post('nama');
+				if ($this->data['email'] != '') {
+					$id['id_setting_email'] = $this->data['email']['id_setting_email'];
+					if ($this->db->update('tb_setting_email',$data_email,$id)) {
+					$ret['status'] = 1;
+					$this->session->set_flashdata("notif","Data Berhasil di Masukan");
+					// $ret['url'] = site_url('admin/email/kategori');
+				}
+				}
+				if ($this->db->insert('tb_setting_email',$data_email)) {
+					$ret['status'] = 1;
+					$this->session->set_flashdata("notif","Data Berhasil di Masukan");
+					// $ret['url'] = site_url('admin/email/kategori');
+				}
+			}
+			$ret['notif']['email'] = form_error('email');
+			$ret['notif']['nama'] = form_error('nama');
+
+			echo json_encode($ret);
+			exit();
+		}
+		$this->ciparser->new_parse('template_admin','modules_admin', 'email/setting_email_layout',$this->data);
+	}
+
 }

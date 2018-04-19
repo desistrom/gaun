@@ -57,7 +57,7 @@ CKEDITOR.stylesSet.add( 'default', [
 	{ name: 'Superscript',		element: 'sup' },
 	*/
 
-	{ name: 'Marker',			element: 'span', attributes: { 'class': 'marker' } },
+	/*{ name: 'Marker',			element: 'span', attributes: { 'class': 'marker' } },
 
 	{ name: 'Big',				element: 'big' },
 	{ name: 'Small',			element: 'small' },
@@ -72,14 +72,20 @@ CKEDITOR.stylesSet.add( 'default', [
 	{ name: 'Inserted Text',	element: 'ins' },
 
 	{ name: 'Cited Work',		element: 'cite' },
-	{ name: 'Inline Quotation',	element: 'q' },
+	{ name: 'Inline Quotation',	element: 'q' },*/
+	{ name: 'Font Color red',	element: 'span', attributes : {'class' : 'text-danger'}},
+	{ name: 'Font Color green',	element: 'span', attributes : {'class' : 'text-success'}},
+	{ name: 'Font Color aqua',	element: 'span', attributes : {'class' : 'text-info'}},
+	{ name: 'Font Color blue',	element: 'span', attributes : {'class' : 'text-primary'}},
+	{ name: 'Font Color yellow',	element: 'span', attributes : {'class' : 'text-warning'}},
+	{ name: 'Font Color muted',	element: 'span', attributes : {'class' : 'text-secondary'}},
 
-	{ name: 'Language: RTL',	element: 'span', attributes: { 'dir': 'rtl' } },
-	{ name: 'Language: LTR',	element: 'span', attributes: { 'dir': 'ltr' } },
+	/*{ name: 'Language: RTL',	element: 'span', attributes: { 'dir': 'rtl' } },
+	{ name: 'Language: LTR',	element: 'span', attributes: { 'dir': 'ltr' } },*/
 
 	/* Object Styles */
 
-	{
+	/*{
 		name: 'Styled image (left)',
 		element: 'img',
 		attributes: { 'class': 'left' }
@@ -106,7 +112,7 @@ CKEDITOR.stylesSet.add( 'default', [
 	},
 
 	{ name: 'Borderless Table',		element: 'table',	styles: { 'border-style': 'hidden', 'background-color': '#E6E6FA' } },
-	{ name: 'Square Bulleted List',	element: 'ul',		styles: { 'list-style-type': 'square' } }
+	{ name: 'Square Bulleted List',	element: 'ul',		styles: { 'list-style-type': 'square' } }*/
 ] );
 
 // %LEAVE_UNMINIFIED% %REMOVE_LINE%

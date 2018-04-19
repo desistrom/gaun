@@ -9,8 +9,7 @@
                     </div>
                 </div>
                     <div class="col-md-6 col-sm-6 col-xs-12 hero-left">
-                    <h1><?php $a=explode(" ", $hero['judul']); for ($i=0; $i < count($a)-1 ; $i++) { echo $a[$i]." "; } ?>
-                    <span style="color:#D10909; "><?php echo end($a); ?></span></h1>
+                    <h1><?php echo $hero['judul']; ?></h1>
                     <p> <?php echo $hero['deskripsi']; ?></p>
                  
                     <a href="<?php echo site_url('web/layanan'); ?>" class="btn  btn-pelajari" type="button">Pelajari lebih lanjut <i class="fa fa-long-arrow-right"></i></a>

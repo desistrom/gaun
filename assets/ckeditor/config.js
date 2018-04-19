@@ -40,6 +40,8 @@ CKEDITOR.editorConfig = function( config ) {
 	// Set the most common block elements.
 	config.format_tags = 'p;h1;h2;h3;pre';
 
+	config.colorButton_colors = 'CF5D4E,454545,FFF,CCC,DDD,CCEAEE,66AB16';
+
 	// Simplify the dialog windows.
 	config.removeDialogTabs = 'image:advanced;link:advanced';
 };

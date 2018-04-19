@@ -120,6 +120,14 @@ class V1_model extends CI_Model{
 		return false;
 	}
 
+	public function insertInstansi($data){
+		if ($this->db->insert('tb_instansi',$data)) {
+			return true;
+			exit();
+		}
+		return false;
+	}
+
 	public function searchUser($data){
 		$sql = "SELECT u.name as user_nama, u.email as user_email, u.phone as user_phone, i.nm_instansi as instansi FROM tb_user u join tb_instansi i on u.id_instansi_ref = i.id_instansi WHERE u.name LIKE '%".$data."%' OR i.nm_instansi like '%".$data."%'";
 		if ($this->db->query($sql)->num_rows() > 0) {

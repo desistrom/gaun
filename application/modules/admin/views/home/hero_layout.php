@@ -17,7 +17,8 @@
       </div>
       <div class="form-group">
         <label>Judul Hero</label>
-        <input type="text" name="judul" class="form-control" id="judul" placeholder="Enter judul Hero ..." value="<?=$hero['title'];?>">
+        <?php echo $this->ckeditor->editor("judul", $hero['title'] ); ?>
+        <input type="hidden" name="judul" class="form-control" id="judul" placeholder="Enter judul Hero ..." >
         <div class="error" id="ntf_judul"></div>
       </div>
       <div class="form-group">
@@ -62,6 +63,8 @@
     $('body').on('click','#submit', function(){
       // console.log($('form').val());
       $('#content').val(CKEDITOR.instances.content.getData());
+      $('#judul').val(CKEDITOR.instances.judul.getData());
+      console.log($('#judul').val());
       // return false;
       $.ajax({
           url : window.location.href,

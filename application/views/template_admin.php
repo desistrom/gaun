@@ -137,6 +137,7 @@
             <li class="active"><a href="<?=site_url('admin/email/index');?>"><i class="fa fa-bars"></i> List Email</a></li>
             <li><a href="<?=site_url('admin/email/template');?>"><i class="fa fa-columns"></i>Template</a></li>
             <li><a href="<?=site_url('admin/email/kategori');?>"><i class="fa fa-boxes"></i>kategori Email</a></li>
+            <li><a href="<?=site_url('admin/email/setting_email');?>"><i class="fa fa-boxes"></i>Setting Email</a></li>
           </ul>
         </li>
 

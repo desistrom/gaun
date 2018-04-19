@@ -181,6 +181,39 @@ class V1 extends REST_Controller {
         $this->_register($param);
     }
 
+    public function insert_instansi_post(){
+        header('Content-Type: application/json');
+        $param = json_decode(file_get_contents('php://input'), true);
+        if ($param['username'] == '' || !isset($param['username'])) {
+            $retData['username'] = 'username is required, "username" : "example"';
+        }
+        if ($param['password'] == '' || !isset($param['password'])) {
+            $retData['password'] = 'password is required, "password" : "example"';
+        }
+        if ($param['instansi'] == '' || !isset($param['instansi'])) {
+            $retData['name'] = 'name is required, "name" : "example"';
+        }
+        if ($param['email'] == '' || !isset($param['email'])) {
+            $retData['email'] = 'Email is required, "email" : "example@ex.com"';
+        }
+        if ($param['number_phone'] == '' || !isset($param['number_phone'])) {
+            $retData['number_phone'] = 'number_phone is required, "number_phone" : "08xxx"';
+        }
+        if ($param['address'] == '' || !isset($param['address'])) {
+            $retData['address'] = 'Address is required, "address" : "Region ...."';
+        }
+        if ($param['website'] == '' || !isset($param['website'])) {
+            $retData['website'] = 'Website Address is required, "website" : "www.example.com"';
+        }
+        if ($param['username'] == '' || !isset($param['username']) || $param['password'] == '' || !isset($param['password']) || $param['instansi'] == '' || !isset($param['instansi']) || $param['email'] == '' || !isset($param['email']) || $param['number_phone'] == '' || !isset($param['number_phone']) || $param['address'] == '' || !isset($param['address']) || $param['website'] == '' || !isset($param['website'])) {
+            $retData['code'] = '500';
+            $retData['status'] = 'failed';
+            $retData['error'] = 'Your parameter is invalid';
+            $this->response($retData,200);
+        }
+        $this->_register_instansi($param);
+    }
+
     public function search_user_post(){
         header('Content-Type: application/json');
         $param = json_decode(file_get_contents('php://input'), true);
@@ -540,6 +573,34 @@ class V1 extends REST_Controller {
             exit();
         }
         if ($this->v1_model->insertUser($data_register) == false) {
+            $retData['code'] = "500";
+            $retData['status'] = 'Failed';
+            $retData['data'] = "Can't add user";
+            $this->response($retData,200);
+            exit();
+        }
+        $retData['code'] = '200';
+        $retData['status'] = 'Success';
+        $retData['data'] = 'User Has been inserted';
+        $this->response($retData,200);
+    }
+
+    function _register_instansi($data){
+        $data_register['username'] = $data['username'];
+        $data_register['password'] = sha1($data['password']);
+        $data_register['nm_instansi'] = $data['instansi'];
+        $data_register['phone'] = $data['number_phone'];
+        $data_register['alamat'] = $data['address'];
+        $data_register['website'] = $data['website'];
+        $data_register['email'] = $data['email'];
+        if ($this->db->get_where('tb_instansi',array('username'=>$data['username']))->num_rows() > 0) {
+            $retData['code'] = "500";
+            $retData['status'] = 'Failed';
+            $retData['data'] = "Username alredy exist";
+            $this->response($retData,200);
+            exit();
+        }
+        if ($this->v1_model->insertInstansi($data_register) == false) {
             $retData['code'] = "500";
             $retData['status'] = 'Failed';
             $retData['data'] = "Can't add user";

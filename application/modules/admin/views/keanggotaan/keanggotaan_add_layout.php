@@ -45,7 +45,7 @@
       <label>Phone Number</label>
         <input type="text" class="form-control" name="phone" id="phone" value="" placeholder="Enter Phone Number ...">
         <div class="error" id="ntf_phone"></div>
-      </div>
+      </div>z
 
       <div class="form-group">
       <label>Instansi</label>

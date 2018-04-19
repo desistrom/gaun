@@ -607,9 +607,32 @@ class V1 extends REST_Controller {
             $this->response($retData,200);
             exit();
         }
-        $retData['code'] = '200';
-        $retData['status'] = 'Success';
-        $retData['data'] = 'User Has been inserted';
+        $template = $this->db->get_where('tb_template_email',array('id_kategori_email_ref'=>1,'status'=>1))->row_array()['source_code'];
+        $final = str_replace("Email_User", $data['email'], $template);
+        $final = str_replace("subject_email", "Registrasi", $final);
+        $sender = $this->db->get('tb_setting_email')->row_array();
+        $this->load->helper('email_send_helper');
+        $data_email['email_from'] = $sender['email'];
+        $data_email['name_from'] = $sender['nama_user'];
+        $data_email['email_to'] = $data['email'];
+        $data_email['subject'] = "Registerasi";
+        $content = '';
+        $content .= "<li>Username : ".$data['username']."</li>";
+        $content .= "<li>Password : ".$data['password']."</li>";
+        $content .= "<li>Email : ".$data['email']."</li>";
+        $content .= "<li>Website : ".$data['website']."</li>";
+        $content .= "<li>Alamat : ".$data['address']."</li>";
+        $data_email['content'] = str_replace("content_email", $content, $final);
+        if (email_send($data_email) == true) {
+            $retData['code'] = '200';
+            $retData['status'] = 'Success';
+            $retData['data'] = 'User Has been inserted';
+            $retData['data'] = $template;
+        }else{
+            $retData['code'] = '500';
+            $retData['status'] = 'failed';
+            $retData['data'] = 'Email Not Send';
+        }
         $this->response($retData,200);
     }
 

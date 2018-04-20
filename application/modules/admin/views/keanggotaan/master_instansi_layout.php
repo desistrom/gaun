@@ -96,7 +96,7 @@
 
 			     <div class="form-group">
 			      <label>Emial</label>
-			        <input type="text" class="form-control" name="email" id="website" value="" placeholder="Enter Link Website ...">
+			        <input type="text" class="form-control" name="email" id="email" value="" placeholder="Enter Link Website ...">
 			        <div class="error" id="ntf_email"></div>
 			      </div>
 
@@ -157,7 +157,7 @@
 
 			      <div class="form-group">
 			      <label>Email</label>
-			        <input type="text" class="form-control" name="email" id="website" value="<?=$instansi['email'];?>" placeholder="Enter Link Website ...">
+			        <input type="text" class="form-control" name="email" id="email" value="<?=$instansi['email'];?>" placeholder="Enter Link Website ...">
 			        <div class="error" id="ntf_email"></div>
 			      </div>
 

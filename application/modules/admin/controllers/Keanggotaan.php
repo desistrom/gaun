@@ -260,13 +260,21 @@ class Keanggotaan extends MX_Controller  {
 	            			@chmod(FCPATH."media/crop/".$this->data['instansi']['gambar'], 0777);
 	            			@unlink(FCPATH."media/crop/".$this->data['instansi']['gambar']);
 	            		}
+
+	            		if ($this->db->update('tb_instansi',$data_instansi,array('id_instansi'=>$id))) {
+							$ret['status'] = 1;
+							$ret['url'] = site_url('admin/keanggotaan/instansi');
+							$this->session->set_flashdata("notif","Data Berhasil di Masukan");
+						}
+					}
+				}else{
+					if ($this->db->update('tb_instansi',$data_instansi,array('id_instansi'=>$id))) {
+						$ret['status'] = 1;
+						$ret['url'] = site_url('admin/keanggotaan/instansi');
+						$this->session->set_flashdata("notif","Data Berhasil di Masukan");
 					}
 				}
-				if ($this->db->update('tb_instansi',$data_instansi,array('id_instansi'=>$id))) {
-					$ret['status'] = 1;
-					$ret['url'] = site_url('admin/keanggotaan/instansi');
-					$this->session->set_flashdata("notif","Data Berhasil di Masukan");
-				}
+				
 			}
 			$ret['notif']['name'] = form_error('name');
 			$ret['notif']['website'] = form_error('website');

@@ -198,7 +198,7 @@ class V1_model extends CI_Model{
 			return $this->db->query($sql)->result_array();
 			exit();
 		}
-		return false;
+		return array();
 	}
 
 	public function getTestimoni_paging($data){

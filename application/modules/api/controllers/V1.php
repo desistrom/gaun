@@ -744,15 +744,22 @@ class V1 extends REST_Controller {
 
     function _getTestimoni(){
         $user = $this->v1_model->getTestimoni();
-        $retData['code'] = '200';
-        $retData['status'] = 'Success';
-        foreach ($user as $key => $value) {
-            if ($value['image'] == '') {
-                $user[$key]['image']=base_url().'assets/images/logo/IDREN-2.png';
-            }else{
-                $user[$key]['image'] = base_url().'media/'.$value['image'];
-            }
+        if ($user == '') {
+            $retData['code'] = '500';
+            $retData['status'] = 'Failed';
+            $retData['data'] = 'data not found';
+        }else{
+            $retData['code'] = '200';
+            $retData['status'] = 'success';
+            foreach ($user as $key => $value) {
+                if ($value['image'] == '') {
+                    $user[$key]['image']=base_url().'assets/images/logo/IDREN-2.png';
+                }else{
+                    $user[$key]['image'] = base_url().'media/'.$value['image'];
+                }
 
+            }
+            $retData['data'] = $user;
         }
         $retData['data'] = $user;
         $this->response($retData,200);

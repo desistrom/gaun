@@ -175,6 +175,7 @@ class Keanggotaan extends MX_Controller  {
 			$this->form_validation->set_rules('website','Website','trim|required');
 			$this->form_validation->set_rules('alamat','Alamat','trim|required');
 			$this->form_validation->set_rules('phone','phone','trim|required');
+			$this->form_validation->set_rules('email','Email','trim|required');
 			$this->form_validation->set_rules('username','Username','trim|required');
 			$this->form_validation->set_rules('password','Passowrd','trim|required');
 			if ($this->form_validation->run() == true && isset($_FILES['userfile'])) {
@@ -184,6 +185,7 @@ class Keanggotaan extends MX_Controller  {
 				$data_instansi['phone'] = $this->input->post('phone');
 				$data_instansi['alamat'] = $this->input->post('alamat');
 				$data_instansi['username'] = $this->input->post('username');
+				$data_instansi['email'] = $this->input->post('email');
 				$data_instansi['password'] = $this->input->post('password');
 				$data_gambar = $this->upload_logo($_FILES);
 				if (isset($data_gambar['error'])) {
@@ -202,6 +204,7 @@ class Keanggotaan extends MX_Controller  {
 			$ret['notif']['phone'] = form_error('phone');
 			$ret['notif']['alamat'] = form_error('alamat');
 			$ret['notif']['username'] = form_error('username');
+			$ret['notif']['email'] = form_error('email');
 			$ret['notif']['password'] = form_error('password');
 			if (!isset($_FILES['userfile'])) {
 				$ret['notif']['userfile'] = "Please Select File";
@@ -226,12 +229,18 @@ class Keanggotaan extends MX_Controller  {
 			$this->form_validation->set_rules('website','Website','trim|required');
 			$this->form_validation->set_rules('alamat','Alamat','trim|required');
 			$this->form_validation->set_rules('phone','phone','trim|required');
+			$this->form_validation->set_rules('email','Email','trim|required');
+			$this->form_validation->set_rules('username','Username','trim|required');
+			$this->form_validation->set_rules('password','Passowrd','trim|required');
 			if ($this->form_validation->run() == true) {
 				$ret['state'] = 1;
 				$data_instansi['nm_instansi'] = $this->input->post('name');
 				$data_instansi['website'] = $this->input->post('website');
 				$data_instansi['phone'] = $this->input->post('phone');
 				$data_instansi['alamat'] = $this->input->post('alamat');
+				$data_instansi['username'] = $this->input->post('username');
+				$data_instansi['email'] = $this->input->post('email');
+				$data_instansi['password'] = $this->input->post('password');
 				if (isset($_FILES['userfile'])) {
 					$image = $this->upload_logo($_FILES);
 					if (isset($image['error'])) {
@@ -263,6 +272,9 @@ class Keanggotaan extends MX_Controller  {
 			$ret['notif']['website'] = form_error('website');
 			$ret['notif']['phone'] = form_error('phone');
 			$ret['notif']['alamat'] = form_error('alamat');
+			$ret['notif']['username'] = form_error('username');
+			$ret['notif']['email'] = form_error('email');
+			$ret['notif']['password'] = form_error('password');
 			echo json_encode($ret);
 			exit();
 		}
@@ -346,6 +358,63 @@ class Keanggotaan extends MX_Controller  {
 		}
 		redirect(site_url('admin/keanggotaan'));
     }
+
+    public function status_instansi(){
+    	$url = explode("##", $this->input->post('id'));
+		$id = end($url);
+		$status = $url[0];
+		$data = $this->db->get_where('tb_instansi',array('id_instansi'=>$id))->row_array();
+    	if($status==0){
+    		$template = $this->db->get_where('tb_template_email',array('id_kategori_email_ref'=>2,'status'=>1))->row_array()['source_code'];
+	        $final = str_replace("Email_User", $data['email'], $template);
+	        $final = str_replace("subject_email", "On Process", $final);
+	        $sender = $this->db->get('tb_setting_email')->row_array();
+	        $this->load->helper('email_send_helper');
+	        $data_email['email_from'] = $sender['email'];
+	        $data_email['name_from'] = $sender['nama_user'];
+	        $data_email['email_to'] = $data['email'];
+	        $data_email['subject'] = "Permintaan Sedang di Proces";
+	        $content = '';
+	        $content .= "<li>Nama Instansi : ".$data['nm_instansi']."</li>";
+	        $content .= "<li>Username : ".$data['username']."</li>";
+	        // $content .= "<li>Password : ".$data['password']."</li>";
+	        $content .= "<li>Email : ".$data['email']."</li>";
+	        $content .= "<li>Website : ".$data['website']."</li>";
+	        $content .= "<li>Alamat : ".$data['alamat']."</li>";
+	        $data_email['content'] = str_replace("content_email", $content, $final);
+	        if (email_send($data_email) == true) {
+    			$this->db->update('tb_instansi',array('status'=>1),array('id_instansi'=>$id));
+	    		$this->session->set_flashdata("notif","Data Berhasil di Ubah, Email berhasil di Kirim");
+	    		$ret['url'] = site_url('admin/keanggotaan/instansi');
+	        }
+    	}elseif($status==1){
+    		$template = $this->db->get_where('tb_template_email',array('id_kategori_email_ref'=>2,'status'=>1))->row_array()['source_code'];
+	        $final = str_replace("Email_User", $data['email'], $template);
+	        $final = str_replace("subject_email", "Done", $final);
+	        $sender = $this->db->get('tb_setting_email')->row_array();
+	        $this->load->helper('email_send_helper');
+	        $data_email['email_from'] = $sender['email'];
+	        $data_email['name_from'] = $sender['nama_user'];
+	        $data_email['email_to'] = $data['email'];
+	        $data_email['subject'] = "Permintaan Sudah di Proces";
+	        $content = '';
+	        $content .= "<li>Nama Instansi : ".$data['nm_instansi']."</li>";
+	        $content .= "<li>Username : ".$data['username']."</li>";
+	        // $content .= "<li>Password : ".$data['password']."</li>";
+	        $content .= "<li>Email : ".$data['email']."</li>";
+	        $content .= "<li>Website : ".$data['website']."</li>";
+	        $content .= "<li>Alamat : ".$data['alamat']."</li>";
+	        $data_email['content'] = str_replace("content_email", $content, $final);
+	        if (email_send($data_email) == true) {
+	    		$this->db->update('tb_instansi',array('status'=>2),array('id_instansi'=>$id));
+	    		$ret['url'] = site_url('admin/keanggotaan/instansi');
+	    		$this->session->set_flashdata("notif","Data Berhasil di Ubah, Email berhasil di Kirim");
+	    	}
+    	}
+    	echo json_encode($ret);
+    	exit();
+    }
+
     function _getExtension($str){
             $i = strrpos($str,".");
             if (!$i){

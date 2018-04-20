@@ -50,7 +50,7 @@ class Tentang extends MX_Controller  {
                 $methode = "POST";
                 if (api_helper(json_encode($data_user),$url,$methode,'')) {
                     $ret['status'] = 1;
-                    $ret['url'] = site_url('admin/keanggotaan');
+                    $ret['url'] = site_url('web/Tentang/contact');
                     $this->session->set_flashdata("notif","Data Berhasil di Masukan");
                 }
             }

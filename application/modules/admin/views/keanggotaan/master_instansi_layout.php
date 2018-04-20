@@ -11,6 +11,7 @@
 						<th>No</th>
 						<th>Nama Instansi</th>
 						<th>Image</th>
+						<th>status</th>
 						<th>Action</th>
 					</thead>
 					<tbody>
@@ -19,9 +20,10 @@
 							<td><?=($key+1);?></td>
 							<td><?=$value['nm_instansi'];?></td>
 							<td><img src="<?=base_url().'media/thumbnail/'.$value['gambar'];?>"></td>
+							<td><?php if($value['status'] == 0){ ?> <span class="text-info">Not Actived</span> <?php }elseif($value['status']==1){ ?> <span class="text-primary">On Proces</span> <?php }else{ ?> <span class="text-success">Active</span> <?php } ?></td>
 							<td>
 								<!-- <button class="btn btn-default btn_delete">disable</button> -->
-								<a href="<?=site_url('admin/keanggotaan/edit_instansi/'.$value['id_instansi']);?>"><button class="btn btn-primary" id="edit">Edit</button></a>
+								<a href="<?=site_url('admin/keanggotaan/edit_instansi/'.$value['id_instansi']);?>"><button class="btn btn-primary" id="edit">Edit</button></a> | <a href="#"><button class="btn btn-info status" id="<?=$value['status'];?>##<?=$value['id_instansi'];?>"><?php if($value['status'] == 0){ ?> Proses <?php }elseif($value['status']==1){ ?> Done <?php }else{ ?> Active <?php } ?></button></a>
 							</td>
 						</tr>
 					<?php endforeach; ?>
@@ -70,6 +72,12 @@
 			      <label>website</label>
 			        <input type="text" class="form-control" name="website" id="website" value="" placeholder="Enter Link Website ...">
 			        <div class="error" id="ntf_website"></div>
+			      </div>
+
+			     <div class="form-group">
+			      <label>Emial</label>
+			        <input type="text" class="form-control" name="email" id="website" value="" placeholder="Enter Link Website ...">
+			        <div class="error" id="ntf_email"></div>
 			      </div>
 
 			      <div class="form-group">
@@ -128,6 +136,12 @@
 			      </div>
 
 			      <div class="form-group">
+			      <label>Email</label>
+			        <input type="text" class="form-control" name="email" id="website" value="<?=$instansi['email'];?>" placeholder="Enter Link Website ...">
+			        <div class="error" id="ntf_email"></div>
+			      </div>
+
+			      <div class="form-group">
 			      <label>Phone Number</label>
 			        <input type="text" class="form-control" name="phone" id="phone" value="<?=$instansi['phone'];?>" placeholder="Enter Phone Number ...">
 			        <div class="error" id="ntf_phone"></div>
@@ -176,6 +190,7 @@
       form_data.append('website',$('#website').val());
       form_data.append('phone',$('#phone').val());
       form_data.append('alamat',$('#alamat').val());
+      form_data.append('email',$('#email').val());
       form_data.append('username',$('#username').val());
       form_data.append('password',$('#password').val());
       form_data.append('repassword',$('#repassword').val());
@@ -207,6 +222,22 @@
             });
       });
     });
+
+    $('body').on('click','.status', function(){
+    	var id = $(this).attr('id');
+    	console.log(id);
+    	$.ajax({
+          url : base_url+"admin/keanggotaan/status_instansi",
+          dataType : 'json',
+          type : 'POST',
+          data : {'id' : id},
+          async : true
+      }).done(function(data){
+      	console.log(data);
+        window.location.href = data.url;
+      });
+    });
+
     $('#modalSuccess').modal('show');
     
   });

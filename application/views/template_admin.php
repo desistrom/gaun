@@ -22,6 +22,10 @@
   <!-- Morris chart -->
   <link rel="stylesheet" href="<?=base_url();?>assets/css/morris.css">
   <link rel="stylesheet" href="<?=base_url();?>assets/css/bootstrap3-wysihtml5.min.css">
+  
+    <script type="text/javascript">
+      var base_url = "<?=base_url();?>";
+    </script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -105,6 +109,14 @@
         <li class=" treeview">
           <a href="<?=site_url('admin/news/index');?>">
             <i class="fa fa-newspaper-o"></i> <span>News</span>
+            <span class="pull-right-container">
+
+            </span>
+          </a>
+        </li>
+        <li class=" treeview">
+          <a href="<?=site_url('admin/about/contact');?>">
+            <i class="fa fa-newspaper-o"></i> <span>Contact Us</span>
             <span class="pull-right-container">
 
             </span>
@@ -399,11 +411,6 @@
 <script src="<?=base_url();?>assets/js/jquery-2.2.3.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="<?=base_url();?>assets/js/jquery-ui.min.js"></script>
-<script>
-  $.widget.bridge('uibutton', $.ui.button);
-</script>
-<script src="<?=base_url();?>assets/js/app.min.js"></script>
-<!-- Bootstrap 3.3.7 -->
 <script src="<?=base_url();?>assets/js/bootstrap.min.js"></script>
 <script src="<?=base_url();?>assets/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?=base_url();?>assets/datatables/js/dataTables.bootstrap.min.js"></script>
@@ -417,6 +424,11 @@
       'autoWidth'   : false
     });
 </script>
+<script>
+  $.widget.bridge('uibutton', $.ui.button);
+</script>
+<script src="<?=base_url();?>assets/js/app.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
 
 </body>
 </html>

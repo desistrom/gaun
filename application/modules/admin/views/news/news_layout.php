@@ -5,17 +5,17 @@
 			<a href="<?=site_url('admin/news/add');?>" class="btn btn-success">Tambah News</a> | <a href="<?=site_url('admin/news/get_rss');?>" class="btn btn-info">Get rss</a>
 		</div>
 		<div class="col col-md-12 col-xs-12">
-			<table class="table table-bordered  dataTable">
-				<tr>
+			<table class="table table-bordered  dataTable" id="example2">
+				<thead>
 					<th>No</th>
 					<th>Judul</th>
 					<th>Content</th>
 					<th>Kategori</th>
 					<th>Create Date</th>
 					<th>Opsi</th>
-				</tr>
+				</thead>
 				<?php foreach ($news as $key => $value): ?>
-					<tr>
+					<tbody>
 						<td><?=($key+1);?></td>
 						<td><?=$value['judul'];?></td>
 						<td><?=word_limiter($value['content'], 12);?></td>
@@ -25,7 +25,7 @@
 							<!-- <button class="btn btn-default">disable</button> -->
 							<a href="<?=site_url('admin/news/edit/'.$value['id_news']);?>"><button class="btn btn-primary" id="edit">Edit</button></a>
 						</td>
-					</tr>
+					</tbody>
 				<?php endforeach ?>
 			</table>
 		</div>

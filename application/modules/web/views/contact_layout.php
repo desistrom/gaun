@@ -69,6 +69,9 @@
                                     <textarea class="form-control" name="pesan" style="height: 15em;"></textarea>
                                     <div class="error" id="ntf_pesan"></div>
                                 </div>
+                                <div class="form-group">
+                                  <?php echo $captcha // tampilkan recaptcha ?>
+                                  <div cla
                                 <div class="text-right"><a class="btn btn-send">Send</a></div>
                             </div>
                             </form>
@@ -133,3 +136,4 @@
 
     });
  </script>
+ <script src='https://www.google.com/recaptcha/api.js'></script>

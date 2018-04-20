@@ -11,27 +11,31 @@
       <a href="<?=site_url('admin/home/add_testimoni');?>" class="btn btn-success">Tambah Testimoni</a>
     </div>
     <div class="col col-md-12 col-xs-12">
-  <table class="table table-bordered  dataTable">
-    <tr>
+  <table class="table table-bordered  dataTable" id="example2">
+    <thead>
       <th>No</th>
       <th>Nama User</th>
       <th>Jabatan</th>
       <th>Content</th>
+      <th>Keterangan</th>
       <th>aksi</th>
-    </tr>
+    </thead>
+    <tbody>
     <?php foreach ($testimoni as $key => $value): ?>
       <tr>
         <td><?=($key+1);?></td>
         <td><?=$value['nama_user'];?></td>
         <td><?=$value['jabatan'];?></td>
-        <td><?=$value['content'];?></td>
+        <td><?=word_limiter($value['content'],10);?></td>
+        <td><?php if($value['is_aktif'] == 1){ ?> Enable <?php }else{ ?> Disable <?php } ?></td>
         <td>
           <!-- <button class="btn btn-default">disable</button> -->
           <a href="<?=site_url('admin/home/edit_testimoni/'.$value['id_testimoni']);?>"><button class="btn btn-primary" id="edit">Edit</button></a>
-          <a href="<?=site_url('admin/home/status_testimoni/'.$value['id_testimoni']);?>"><button class="btn btn-info" id="edit"><?php if($value['is_aktif'] == 1){ ?> Enable <?php }else{ ?> Disable <?php } ?></button></a>
+          <a href="<?=site_url('admin/home/status_testimoni/'.$value['id_testimoni']);?>"><button class="btn btn-info" id="edit"><?php if($value['is_aktif'] == 1){ ?> Disable <?php }else{ ?> Enable <?php } ?></button></a>
         </td>
       </tr>
     <?php endforeach ?>
+    </tbody>
   </table>
   <div class="col col-md-12 col-xs-12 text-right">
     <!-- <a href="#" class="btn btn-default">Setting</a> -->

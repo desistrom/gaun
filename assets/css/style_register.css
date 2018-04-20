@@ -11,7 +11,7 @@ h1, h2, h3, h4, h5, h6{
 }
 
 section.page_gabung{
-  background-image:url(../images/logo/bg-gabung.jpg);
+  background-image:url(../images/logo/bg-gabung.min.jpg);
   height:400px;
   font-family: 'Roboto', sans-serif;
   margin-bottom: 7em;
@@ -86,7 +86,7 @@ padding: 3em 2em;
 
 /*style page registrasi*/
 section.page_register{
-  background-image:url(../images/logo/bg-register.jpg);
+  background-image:url(../images/logo/bg-register.min.jpg);
   height:600px;
   font-family: 'Roboto', sans-serif;
       background-position: -40em -4.5em;

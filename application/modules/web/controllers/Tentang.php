@@ -11,6 +11,7 @@ class Tentang extends MX_Controller  {
 	var $data = array();
 	function __construct(){
 		$this->load->helper('api');
+        $this->load->library('Recaptcha');
 
 	}
         function index() {
@@ -28,6 +29,11 @@ class Tentang extends MX_Controller  {
         $token = '';
         $a = api_helper('',$url,$methode,$token);
         $this->data['about']=$a['data'];
+        $this->data = array(
+            'action' => site_url('web/tentang/add_contact'),
+            'captcha' => $this->recaptcha->getWidget(), // menampilkan recaptcha
+            'script_captcha' => $this->recaptcha->getScriptTag(), // javascript recaptcha ditaruh di head
+        );
 
         $this->ciparser->new_parse('template_frontend','modules_web', 'contact_layout',$this->data);
     }
@@ -40,7 +46,9 @@ class Tentang extends MX_Controller  {
             $this->form_validation->set_rules('name','Nama Lengkap','trim|required');
             $this->form_validation->set_rules('pesan','Pesan','trim|required');
             $this->form_validation->set_rules('email','email','trim|required');
-            if ($this->form_validation->run() == true) {
+            $recaptcha = $this->input->post('g-recaptcha-response');
+            $response = $this->recaptcha->verifyResponse($recaptcha);
+            if ($this->form_validation->run() == true && isset($response['success'])) {
                 $ret['state'] = 1;
                 $data_input = $this->input->post();
                 $data_user['name'] = $data_input['name'];

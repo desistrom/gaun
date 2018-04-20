@@ -15,7 +15,7 @@ class V1_model extends CI_Model{
 			return $this->db->query($sql)->result_array();
 			exit();
 		}
-		return false;
+		return array();
 	}
 
 	public function getAlbumById($param){
@@ -24,7 +24,7 @@ class V1_model extends CI_Model{
 			return $this->db->query($sql)->result_array();
 			exit();
 		}
-		return false;
+		return array();
 	}
 
 	public function getTypeGalery($type){

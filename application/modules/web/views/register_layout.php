@@ -187,51 +187,64 @@
                             <img src="<?=base_url();?>assets/images/logo/Asset_16@4x.png" >
                         </div>
                         <h2 class="title-form bold">REGISTER</h2>
-                        <form id="#register_form">
+                        <form id="register_form">
                             <div class="content">
                                 <span class="input input--hoshi">
-                                    <input class="input__field input__field--hoshi" type="text" id="input-4" />
-                                    <label class="input__label input__label--hoshi input__label--hoshi-color-1" for="input-4" name="institue_name" >
+                                    <input class="input__field input__field--hoshi" type="text" id="input-4 instansi" name="instansi" />
+                                    <label class="input__label input__label--hoshi input__label--hoshi-color-1" for="input-4"  >
                                         <span class="input__label-content input__label-content--hoshi">Institute Name</span>
                                     </label>
-                                    <div class="error">aasdd</div>
+                                    <div class="error" id="ntf_instansi"></div>
                                 </span>
                                 <span class="input input--hoshi">
-                                    <input class="input__field input__field--hoshi" type="text" id="input-4" name="addres" />
+                                    <input class="input__field input__field--hoshi" type="text" id="input-4 address" name="address" />
                                     <label class="input__label input__label--hoshi input__label--hoshi-color-1" for="input-4">
                                         <span class="input__label-content input__label-content--hoshi">Address</span>
                                     </label>
+                                    <div class="error" id="ntf_address"></div>
                                 </span>
 
                                 <span class="input input--hoshi">
-                                    <input class="input__field input__field--hoshi" type="email" id="input-4" name="email" />
+                                    <input class="input__field input__field--hoshi" type="email" id="input-4 email" name="email" />
                                     <label class="input__label input__label--hoshi input__label--hoshi-color-1" for="input-4">
                                         <span class="input__label-content input__label-content--hoshi">Email </span>
                                     </label>
+                                    <div class="error" id="ntf_email"></div>
                                 </span>
                                 <span class="input input--hoshi">
-                                    <input class="input__field input__field--hoshi" type="text" id="input-4" name="phone" />
+                                    <input class="input__field input__field--hoshi" type="text" id="input-4 phone" name="phone" />
                                     <label class="input__label input__label--hoshi input__label--hoshi-color-1" for="input-4">
                                         <span class="input__label-content input__label-content--hoshi">Phone</span>
                                     </label>
+                                    <div class="error" id="ntf_phone"></div>
                                 </span>
                                  <span class="input input--hoshi">
-                                    <input class="input__field input__field--hoshi" type="text" id="input-4" name="website" />
+                                    <input class="input__field input__field--hoshi" type="text" id="input-4 website" name="website" />
                                     <label class="input__label input__label--hoshi input__label--hoshi-color-1" for="input-4">
                                         <span class="input__label-content input__label-content--hoshi">Website</span>
                                     </label>
+                                    <div class="error" id="ntf_website"></div>
                                 </span>
                                 <span class="input input--hoshi">
-                                    <input class="input__field input__field--hoshi" type="text" id="input-4" name="username" />
+                                    <input class="input__field input__field--hoshi" type="text" id="input-4 username" name="username" />
                                     <label class="input__label input__label--hoshi input__label--hoshi-color-1" for="input-4">
                                         <span class="input__label-content input__label-content--hoshi">Username</span>
                                     </label>
+                                    <div class="error" id="ntf_username"></div>
                                 </span>
                                 <span class="input input--hoshi">
-                                    <input class="input__field input__field--hoshi" type="password" id="input-4 " name="password" />
+                                    <input class="input__field input__field--hoshi" type="password" id="input-4 password" name="password" />
                                     <label class="input__label input__label--hoshi input__label--hoshi-color-1" for="input-4">
                                         <span class="input__label-content input__label-content--hoshi">Password</span>
                                     </label>
+                                    <div class="error" id="ntf_password"></div>
+                                </span>
+                                <span class="input input--hoshi">
+                                    <input class="input__field input__field--hoshi" type="password" id="input-4 repassword" name="repassword" />
+                                    <label class="input__label input__label--hoshi input__label--hoshi-color-1" for="input-4">
+                                        <span class="input__label-content input__label-content--hoshi">Confirm Password</span>
+                                    </label>
+                                    <div class="error" id="ntf_repassword"></div>
                                 </span>
                     
                              </div>
@@ -239,7 +252,7 @@
                                  <a href="#" style="color: #989898;">Forgot Password?</a>
                              </div>
                              <div class="col col-md-6 col-sm-6 col-xs-6 text-right action-footer">
-                                 <button type="Submit" class="btn btn-danger btn-submit">Submit</button>
+                                 <button type="button" id="btn_register" class="btn btn-danger btn-submit">Register</button>
                              </div>
                         </form>
                     </div>
@@ -252,7 +265,7 @@
         </div>
     </section>
     <div class="container-fluid bg-white" style="margin-bottom: 4em;"></div>
-
+<script src="<?=base_url();?>assets/js/jquery.min.js"></script>
  <script src="<?=base_url();?>assets/js/classie.js"></script>
     <script>
             (function() {
@@ -288,4 +301,46 @@
                     }
                 }
             })();
+
+
+
+
+
         </script>
+
+
+         <script type="text/javascript">
+   var base_url = "<?=base_url();?>"
+    $(document).ready(function(){
+
+      $('body').on('click','#btn_register', function(){
+      console.log($('form').val());
+      // $('#content').val(CKEDITOR.instances.content.getData());
+      // return false;
+      $.ajax({
+          url : base_url+"web/gabung/insert_user",
+          dataType : 'json',
+          type : 'POST',
+          data : $('#register_form').serialize()
+      }).done(function(data){
+          console.log(data);
+          if(data.state == 1){
+            if (data.status == 1) {
+              $('#regSukses').modal('show');
+            }else{
+              $('.error_pass').show();
+              $('.error_pass').css({'color':'red', 'font-style':'italic', 'text-align':'center'});
+              console.log(data);
+              $('.error_pass').html(data.error);
+            }
+          }
+            $.each(data.notif,function(key,value){
+            $('.error').show();
+            $('#ntf_'+ key).html(value);
+            $('#ntf_'+ key).css({'color':'red', 'font-style':'italic'});
+            });
+      });
+    });
+
+    });
+ </script>

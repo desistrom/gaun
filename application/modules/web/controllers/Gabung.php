@@ -24,42 +24,53 @@ class Gabung extends MX_Controller  {
 
         $this->ciparser->new_parse('template_frontend','modules_web', 'register_layout');
     }
+
      public function insert_user(){
         if ($this->input->server('REQUEST_METHOD') == 'POST') {
             $ret['state'] = 0;
             $ret['status'] = 0;
             $this->form_validation->set_error_delimiters('','');
-            $this->form_validation->set_rules('name','Nama Lengkap','trim|required');
+            $this->form_validation->set_rules('instansi','Institute Name','trim|required');
+            $this->form_validation->set_rules('address','Address Name','trim|required');
+            $this->form_validation->set_rules('email','Email','trim|required');
+            $this->form_validation->set_rules('phone','Phone','trim|required');
+            $this->form_validation->set_rules('website','Website','trim|required');
             $this->form_validation->set_rules('username','Username','trim|required');
             $this->form_validation->set_rules('password','Passowrd','trim|required');
             $this->form_validation->set_rules('repassword','Re - Passowrd','trim|required|matches[password]');
-            $this->form_validation->set_rules('email','email','trim|required');
-            $this->form_validation->set_rules('phone','phone','trim|required');
-            $this->form_validation->set_rules('instansi','Instansi','trim|required');
-            if ($this->form_validation->run() == true) {
+    
+            if ($this->form_validation->run()) {
                 $ret['state'] = 1;
                 $data_input = $this->input->post();
-                $data_user['name'] = $data_input['name'];
-                $data_user['username'] = $data_input['username'];
-                $data_user['password'] = sha1($data_input['password']);
+                $data_user['instansi'] = $data_input['instansi'];
+                $data_user['address'] = $data_input['address'];
                 $data_user['email'] = $data_input['email'];
                 $data_user['number_phone'] = $data_input['phone'];
-                $data_user['institusi'] = $data_input['instansi'];
-                $url = base_url()."/api/v1/insert_user";
+                $data_user['website'] = $data_input['website'];
+                $data_user['username'] = $data_input['username'];
+                $data_user['password'] = sha1($data_input['password']);
+            
+                $url = site_url('api/v1/insert_instansi') ;
+
+                
                 $methode = "POST";
+                 $ret['cek']=api_helper(json_encode($data_user),$url,$methode,'');
                 if (api_helper(json_encode($data_user),$url,$methode,'')) {
                     $ret['status'] = 1;
                     $ret['url'] = site_url('admin/keanggotaan');
+
                     $this->session->set_flashdata("notif","Data Berhasil di Masukan");
                 }
             }
-            $ret['notif']['name'] = form_error('name');
+            $ret['notif']['instansi'] = form_error('instansi');
+            $ret['notif']['address'] = form_error('address');
+            $ret['notif']['email'] = form_error('email');
+            $ret['notif']['phone'] = form_error('phone');
+            $ret['notif']['website'] = form_error('website');
             $ret['notif']['username'] = form_error('username');
             $ret['notif']['password'] = form_error('password');
             $ret['notif']['repassword'] = form_error('repassword');
-            $ret['notif']['email'] = form_error('email');
-            $ret['notif']['phone'] = form_error('phone');
-            $ret['notif']['instansi'] = form_error('instansi');
+    
             echo json_encode($ret);
             exit();
         }

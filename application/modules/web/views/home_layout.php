@@ -99,7 +99,7 @@
             <div class="col-md-12 text-center">
                 <h3 class="title">Kolaborasi, tanpa batas</h3>
                 <p>Terhubung dengan mudah keseluruh akademi Indonesia</p>
-                <button class="btn  btn-gabung" type="button">Gabung Sekarang</button>
+                <a href="<?php echo site_url('web/gabung/register') ?>" class="btn  btn-gabung" type="button">Gabung Sekarang</a>
             </div>
         </div>
     </section>

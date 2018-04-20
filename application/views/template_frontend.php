@@ -63,7 +63,7 @@
                       <li role="presentation" class=""><a <?php if(current_url() == site_url('web/news')){ ?> class="active" <?php } ?> href="<?php echo site_url('web/news'); ?>">Berita</a></li>
 
                       <!-- <li role="presentation" class="active"><a href="#">Masuk</a></li> -->
-                      <li role="presentation" class=""><a class="active btn-gabung" href="<?php echo site_url('web/gabung') ?>" data-toggle="modal" >Gabung</a></li>
+                      <li role="presentation" class=""><a class="active btn-gabung" href="<?php echo site_url('web/gabung/register') ?>" data-toggle="modal" >Gabung</a></li>
 
                   </ul>
               </div>
@@ -140,7 +140,7 @@
             <button type="button" class="close" data-dismiss="modal">&times;</button>
             <h2 class="modal-title text-center" style="color:#CF090A; ">Registrasi</h2>
           </div>
-          <div class="modal-body">
+          <div class="modal-body" methode="POST" >
             <form id="register_form">
               <div class="form-group">
                 <label>Nama Lengkap</label>
@@ -265,7 +265,7 @@
 
     });
  </script> -->
-  <script type="text/javascript">
+ <!--  <script type="text/javascript">
    var base_url = "<?=base_url();?>"
     $(document).ready(function(){
 
@@ -299,7 +299,7 @@
     });
 
     });
- </script>
+ </script> -->
 </body>
 
 </html>

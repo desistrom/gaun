@@ -410,7 +410,7 @@ section.footer-top{
   color:white;
 }
 
-button.btn-gabung{
+.sub-footer-top .btn-gabung{
   background-color:white;
   padding:13px 35px;
   margin-top:25px;
@@ -420,10 +420,10 @@ button.btn-gabung{
   font-family: 'Nunito Sans', sans-serif;
 
 }
-button.btn-gabung:hover,
-button.btn-gabung:active,
-button.btn-gabung:focus,
-button.btn-gabung:active:focus{
+.sub-footer-top .btn-gabung:hover,
+.sub-footer-top .btn-gabung:active,
+.sub-footer-top .btn-gabung:focus,
+.sub-footer-top .btn-gabung:active:focus{
   background-color:#EEEEEE;
 
   color: #CF0909;

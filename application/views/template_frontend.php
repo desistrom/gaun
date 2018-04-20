@@ -265,6 +265,41 @@
 
     });
  </script> -->
+  <script type="text/javascript">
+   var base_url = "<?=base_url();?>"
+    $(document).ready(function(){
+
+      $('body').on('click','#btn_register', function(){
+      // console.log($('form').val());
+      // $('#content').val(CKEDITOR.instances.content.getData());
+      // return false;
+      $.ajax({
+          url : base_url+"web/gabung/insert_user",
+          dataType : 'json',
+          type : 'POST',
+          data : $('#register_form').serialize()
+      }).done(function(data){
+          console.log(data);
+          if(data.state == 1){
+            if (data.status == 1) {
+              $('#regSukses').modal('show');
+            }else{
+              $('.error_pass').show();
+              $('.error_pass').css({'color':'red', 'font-style':'italic', 'text-align':'center'});
+              console.log(data);
+              $('.error_pass').html(data.error);
+            }
+          }
+            $.each(data.notif,function(key,value){
+            $('.error').show();
+            $('#ntf_'+ key).html(value);
+            $('#ntf_'+ key).css({'color':'red', 'font-style':'italic'});
+            });
+      });
+    });
+
+    });
+ </script>
 </body>
 
 </html>

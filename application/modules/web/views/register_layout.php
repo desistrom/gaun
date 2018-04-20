@@ -135,6 +135,7 @@
     animation: anim-1 0.3s forwards;
 }
 
+
 @-webkit-keyframes anim-1 {
     50% {
         opacity: 0;
@@ -169,6 +170,7 @@
         -webkit-transform: translate3d(0, -40%, 0);
         transform: translate3d(0, -40%, 0);
     }
+
 }
 
     </style>
@@ -185,47 +187,48 @@
                             <img src="<?=base_url();?>assets/images/logo/Asset_16@4x.png" >
                         </div>
                         <h2 class="title-form bold">REGISTER</h2>
-                        <form>
+                        <form id="#register_form">
                             <div class="content">
                                 <span class="input input--hoshi">
                                     <input class="input__field input__field--hoshi" type="text" id="input-4" />
-                                    <label class="input__label input__label--hoshi input__label--hoshi-color-1" for="input-4">
+                                    <label class="input__label input__label--hoshi input__label--hoshi-color-1" for="input-4" name="institue_name" >
                                         <span class="input__label-content input__label-content--hoshi">Institute Name</span>
                                     </label>
+                                    <div class="error">aasdd</div>
                                 </span>
                                 <span class="input input--hoshi">
-                                    <input class="input__field input__field--hoshi" type="text" id="input-4" />
+                                    <input class="input__field input__field--hoshi" type="text" id="input-4" name="addres" />
                                     <label class="input__label input__label--hoshi input__label--hoshi-color-1" for="input-4">
                                         <span class="input__label-content input__label-content--hoshi">Address</span>
                                     </label>
                                 </span>
 
                                 <span class="input input--hoshi">
-                                    <input class="input__field input__field--hoshi" type="email" id="input-4" />
+                                    <input class="input__field input__field--hoshi" type="email" id="input-4" name="email" />
                                     <label class="input__label input__label--hoshi input__label--hoshi-color-1" for="input-4">
                                         <span class="input__label-content input__label-content--hoshi">Email </span>
                                     </label>
                                 </span>
                                 <span class="input input--hoshi">
-                                    <input class="input__field input__field--hoshi" type="text" id="input-4" />
+                                    <input class="input__field input__field--hoshi" type="text" id="input-4" name="phone" />
                                     <label class="input__label input__label--hoshi input__label--hoshi-color-1" for="input-4">
                                         <span class="input__label-content input__label-content--hoshi">Phone</span>
                                     </label>
                                 </span>
                                  <span class="input input--hoshi">
-                                    <input class="input__field input__field--hoshi" type="text" id="input-4" />
+                                    <input class="input__field input__field--hoshi" type="text" id="input-4" name="website" />
                                     <label class="input__label input__label--hoshi input__label--hoshi-color-1" for="input-4">
                                         <span class="input__label-content input__label-content--hoshi">Website</span>
                                     </label>
                                 </span>
                                 <span class="input input--hoshi">
-                                    <input class="input__field input__field--hoshi" type="text" id="input-4" />
+                                    <input class="input__field input__field--hoshi" type="text" id="input-4" name="username" />
                                     <label class="input__label input__label--hoshi input__label--hoshi-color-1" for="input-4">
                                         <span class="input__label-content input__label-content--hoshi">Username</span>
                                     </label>
                                 </span>
                                 <span class="input input--hoshi">
-                                    <input class="input__field input__field--hoshi" type="password" id="input-4" />
+                                    <input class="input__field input__field--hoshi" type="password" id="input-4 " name="password" />
                                     <label class="input__label input__label--hoshi input__label--hoshi-color-1" for="input-4">
                                         <span class="input__label-content input__label-content--hoshi">Password</span>
                                     </label>

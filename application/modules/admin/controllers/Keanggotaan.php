@@ -366,8 +366,8 @@ class Keanggotaan extends MX_Controller  {
 		$data = $this->db->get_where('tb_instansi',array('id_instansi'=>$id))->row_array();
     	if($status==0){
     		$template = $this->db->get_where('tb_template_email',array('id_kategori_email_ref'=>2,'status'=>1))->row_array()['source_code'];
-	        $final = str_replace("Email_User", $data['email'], $template);
-	        $final = str_replace("subject_email", "On Process", $final);
+	        $final = str_replace("Email_User", $data['username'], $template);
+	        // $final = str_replace("subject_email", "On Process", $final);
 	        $sender = $this->db->get('tb_setting_email')->row_array();
 	        $this->load->helper('email_send_helper');
 	        $data_email['email_from'] = $sender['email'];
@@ -375,12 +375,12 @@ class Keanggotaan extends MX_Controller  {
 	        $data_email['email_to'] = $data['email'];
 	        $data_email['subject'] = "Permintaan Sedang di Proces";
 	        $content = '';
-	        $content .= "<li>Nama Instansi : ".$data['nm_instansi']."</li>";
-	        $content .= "<li>Username : ".$data['username']."</li>";
-	        // $content .= "<li>Password : ".$data['password']."</li>";
-	        $content .= "<li>Email : ".$data['email']."</li>";
-	        $content .= "<li>Website : ".$data['website']."</li>";
-	        $content .= "<li>Alamat : ".$data['alamat']."</li>";
+	        $content .= "<td>Nama Instansi </td><td>:</td> ".$data['nm_instansi']."</td>";
+	        $content .= "<td>Username </td><td>:</td> ".$data['username']."</td>";
+	        // $content .= "<td>Password</td><td>:</td> ".$data['password']."</td>";
+	        $content .= "<td>Email</td><td>:</td> ".$data['email']."</td>";
+	        $content .= "<td>Website</td><td>:</td> ".$data['website']."</td>";
+	        $content .= "<td>Alamat</td><td>:</td> ".$data['alamat']."</td>";
 	        $data_email['content'] = str_replace("content_email", $content, $final);
 	        if (email_send($data_email) == true) {
     			$this->db->update('tb_instansi',array('status'=>1),array('id_instansi'=>$id));
@@ -389,8 +389,8 @@ class Keanggotaan extends MX_Controller  {
 	        }
     	}elseif($status==1){
     		$template = $this->db->get_where('tb_template_email',array('id_kategori_email_ref'=>2,'status'=>1))->row_array()['source_code'];
-	        $final = str_replace("Email_User", $data['email'], $template);
-	        $final = str_replace("subject_email", "Done", $final);
+	        $final = str_replace("Email_User", $data['username'], $template);
+	        // $final = str_replace("subject_email", "Done", $final);
 	        $sender = $this->db->get('tb_setting_email')->row_array();
 	        $this->load->helper('email_send_helper');
 	        $data_email['email_from'] = $sender['email'];
@@ -398,17 +398,19 @@ class Keanggotaan extends MX_Controller  {
 	        $data_email['email_to'] = $data['email'];
 	        $data_email['subject'] = "Permintaan Sudah di Proces";
 	        $content = '';
-	        $content .= "<li>Nama Instansi : ".$data['nm_instansi']."</li>";
-	        $content .= "<li>Username : ".$data['username']."</li>";
-	        // $content .= "<li>Password : ".$data['password']."</li>";
-	        $content .= "<li>Email : ".$data['email']."</li>";
-	        $content .= "<li>Website : ".$data['website']."</li>";
-	        $content .= "<li>Alamat : ".$data['alamat']."</li>";
+	        $content .= "<td>Nama Instansi</td><td>:</td> ".$data['nm_instansi']."</td>";
+	        $content .= "<td>Username</td><td>:</td> ".$data['username']."</td>";
+	        // $content .= "<td>Password</td><td>:</td> ".$data['password']."</td>";
+	        $content .= "<td>Email</td><td>:</td> ".$data['email']."</td>";
+	        $content .= "<td>Website</td><td>:</td> ".$data['website']."</td>";
+	        $content .= "<td>Alamat</td><td>:</td> ".$data['alamat']."</td>";
 	        $data_email['content'] = str_replace("content_email", $content, $final);
 	        if (email_send($data_email) == true) {
 	    		$this->db->update('tb_instansi',array('status'=>2),array('id_instansi'=>$id));
 	    		$ret['url'] = site_url('admin/keanggotaan/instansi');
 	    		$this->session->set_flashdata("notif","Data Berhasil di Ubah, Email berhasil di Kirim");
+	    	}else{
+	    		$ret['status'] = "false";
 	    	}
     	}
     	echo json_encode($ret);

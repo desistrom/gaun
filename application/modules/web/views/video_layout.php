@@ -83,14 +83,14 @@
       }
       .btn-nav-video.button-right{
         right: 0;
-        padding: 160px 0 160px 3.5em;
+        padding: 160px 0 ;
         z-index: 100;
         background-color: transparent;
            margin-right: -10px;
       }
        .btn-nav-video.button-left{
         left: 0;
-        padding: 160px 3.5em 160px 0;
+        padding: 160px 0;
         z-index: 100;
         background-color: transparent;
         margin-left: -10px;
@@ -98,6 +98,10 @@
       }
       .slider-waterwheel{
         box-shadow:0px 0px 28px 0px #000000;
+        pointer-events: none;
+      }
+      .carousel-center{
+        pointer-events: visible;
       }
 
          /* The Modal (background) */
@@ -144,7 +148,7 @@
 
 
               </div>
-              <div class="col col-md-12 col-sm-12 col-xs-12 none-padding list-video">
+              <div class="col col-md-12 col-sm-12 col-xs-12 none-padding list-video" id="list-video">
                 <div class="col col-sm-12 col-sm-12 col-xs-12 none-padding">
                   <div class="col-md-6 col-sm-6 col-xs-6">
                   <h3>Lastest Video</h3>
@@ -158,9 +162,9 @@
                   <?php if (isset($video[$i]['title'])) { ?>
                 <div class="col-md-4 col-sm-6 col-xs-12 text-center item" >
                     <div class="box-img-galery">
-                      <a href="#" class="show-album" data-toggle="modal" ">
+                      <a href="#" class="show-album show-video" data-toggle="modal" id="<?php echo $video[$i]['file'] ?>">
                         <div class="filter-img-galery" >
-                           <iframe width="100%" height="270px" src="<?php echo $video[$i]['file'] ?> " frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                           <iframe style="pointer-events: none;" width="100%" height="270px" src="<?php echo $video[$i]['file'] ?> " frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                       </div>
                       </a>
                       <div class="galery-deskripsi text-left">
@@ -178,6 +182,29 @@
             </div>
           </div>
         </section>
+      <div class="modal fade modal-list-video" id="list-video" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <button class="close" type="button" data-dismiss="modal" style="">×</button>
+              <div class="modal-body-gallery"> 
+              <iframe style="width: 100%; height: 480px;" src="" id="tampil-video"></iframe>               
+              </div>
+            <div class="modal-footer" style="padding: 0 15px;">
+              <div class="col col-md-12 col-sm-12 col-xs-12 none-padding">
+                <div class="col col-md-6 col-sm-6 col-xs-6 none-padding">
+                    <h5 class="date-upload text-left" id="image-gallery-title"></h5></div>
+                <div class="col col-md-6 col-sm-6 col-xs-6 none-padding">
+                    <h5 class="author text-right" id="image-gallery-date" ></h5></div>
+                <div class="col col-md-12 col-sm-12 col-xs-12 none-padding text-left">
+
+                    <p id="image-gallery-caption"></p>
+                </div>
+                <p id="image-gallery-user" style="text-align: right;"></p>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script type="text/javascript">
       $(document).ready(function () {
@@ -215,6 +242,14 @@
           carousel.reload(newOptions);
           return false;
         });
+
+
+        $(".show-video").click(function(){
+        var file = $(this).attr('id');
+          $('#list-video iframe').attr('src',file);
+          
+          $(".modal-list-video").modal();
+      });
 
       });
     </script>

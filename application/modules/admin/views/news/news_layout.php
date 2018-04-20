@@ -14,8 +14,9 @@
 					<th>Create Date</th>
 					<th>Opsi</th>
 				</thead>
-				<?php foreach ($news as $key => $value): ?>
-					<tbody>
+				<tbody>
+        <?php foreach ($news as $key => $value): ?>
+          <tr>
 						<td><?=($key+1);?></td>
 						<td><?=$value['judul'];?></td>
 						<td><?=word_limiter($value['content'], 12);?></td>
@@ -25,8 +26,9 @@
 							<!-- <button class="btn btn-default">disable</button> -->
 							<a href="<?=site_url('admin/news/edit/'.$value['id_news']);?>"><button class="btn btn-primary" id="edit">Edit</button></a>
 						</td>
-					</tbody>
-				<?php endforeach ?>
+          </tr>
+        <?php endforeach; ?>
+				</tbody>
 			</table>
 		</div>
 	</div>

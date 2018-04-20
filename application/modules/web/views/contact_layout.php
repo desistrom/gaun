@@ -83,6 +83,22 @@
         </div>
 
     </section>
+
+     <div id="regSukses" class="modal fade modal-register" role="dialog" data-keyboard="false" data-backdrop="static">
+      <div class="modal-dialog">
+
+
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h2 class="modal-title text-center" style="color:#CF090A; ">Pesan Berhasil terkirim</h2>
+          </div>
+
+
+        </div>
+
+      </div>
+    </div>
 <script src="<?=base_url().'assets/js/jquery-3.2.1.min.js';?>"></script>
 <script type="text/javascript">
    var base_url = "<?=base_url();?>"
@@ -99,9 +115,10 @@
           if(data.state == 1){
             if (data.status == 1) {
               $('#regSukses').modal('show');
+              $('#form_contact')[0].reset();
             }else{
               $('.error_pass').show();
-              $('.error_pass').css({'color':'red', 'font-style':'italic', 'text-align':'center'});
+              $('.error_pass').css({'color':'white', 'font-style':'italic', 'text-align':'center'});
               console.log(data);
               $('.error_pass').html(data.error);
             }
@@ -109,7 +126,7 @@
             $.each(data.notif,function(key,value){
             $('.error').show();
             $('#ntf_'+ key).html(value);
-            $('#ntf_'+ key).css({'color':'red', 'font-style':'italic'});
+            $('#ntf_'+ key).css({'color':'white', 'font-style':'italic'});
             });
       });
     });

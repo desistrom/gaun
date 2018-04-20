@@ -199,10 +199,10 @@
       </div>
     </div>
 
-    <div id="regSukses" class="modal fade modal-register" role="dialog" data-keyboard="false" data-backdrop="static">
+<!--     <div id="regSukses" class="modal fade modal-register" role="dialog" data-keyboard="false" data-backdrop="static">
       <div class="modal-dialog">
 
-        <!-- Modal content-->
+
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -214,7 +214,7 @@
         </div>
 
       </div>
-    </div>
+    </div> -->
     <script src="<?=base_url();?>assets/js/jquery.min.js"></script>
    
     <script src="<?=base_url();?>assets/js/bootstrap.min.js"></script>

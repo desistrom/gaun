@@ -5,15 +5,16 @@
 				<a href="<?=site_url('admin/email/add_email');?>" class="btn btn-success">Tambah Notifikasi Email</a>
 			</div>
 			<div class="col col-md-12 col-xs-12">
-				<table class="table table-bordered  dataTable">
-					<tr>
+				<table class="table table-bordered  dataTable" id="example2">
+					<thead>
 						<th>No</th>
 						<th>Kategori</th>
 						<th>Subject</th>
 						<th>Title</th>
 						<th>Content</th>
 						<th>Action</th>
-					</tr>
+					</thead>
+					<tbody>
 					<?php foreach ($email as $key => $value): ?>
 						<tr>
 							<td><?=($key+1);?></td>
@@ -27,6 +28,7 @@
 							</td>
 						</tr>
 					<?php endforeach ?>
+					</tbody>
 				</table>
 				<div class="col col-md-12 col-xs-12 text-right">
 					<!-- <a href="#" class="btn btn-default">Setting</a> -->

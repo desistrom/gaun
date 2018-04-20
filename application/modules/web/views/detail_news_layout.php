@@ -1,3 +1,19 @@
+<style type="text/css">
+    .box-news{
+        padding: 0 6em;
+    }
+    @media (max-width: 991px)
+    {
+         .box-news{
+        padding: 0 4em;
+    }
+    }
+    @media (max-width: 767px){
+         .box-news{
+        padding: 0 ;
+    }
+    }
+</style>
 <section class="detail_news" style="margin-top: 6em;">
         <div class="container-fluid none-padding filter-title-page-news">
             <div class="col-md-12 col-sm-12 col-xs-12 none-padding title-page-news">
@@ -57,7 +73,7 @@
                         </ul>
                     </div> -->
                 </div>
-                <div class="col-md-9 col-sm-8 col-xs-12 content-left">
+                <div class="col-md-9 col-sm-8 col-xs-12 content-left box-news">
                     <div class="col col-md-12 col-sm-12 col-xs-12 none-padding list-artikel">
                         <div class="col col-md-12 col-sm-12 col-xs-12 none-padding img-news"><img class="img-responsive" src="<?php echo $detail_news['gambar']; ?>">
                         <div class="col col-md-12 col-sm-12 col-xs-12 desrip-news">

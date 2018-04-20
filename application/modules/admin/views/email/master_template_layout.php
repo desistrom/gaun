@@ -59,7 +59,7 @@
 
 		      <div class="form-group">
 		        <label>Kategori</label>
-		        <textarea class="form-control" name="template" id="template"><?php if ($kategori['source_code'] != '') {
+		        <textarea class="form-control" name="template" id="template" rows="20"><?php if ($kategori['source_code'] != '') {
 		        	echo $kategori['source_code'];
 		        } ?></textarea>
 		      </div>

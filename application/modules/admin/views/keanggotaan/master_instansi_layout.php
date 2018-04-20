@@ -55,6 +55,26 @@
 		  </div>
 		</div>
 		<?php } ?>
+<div class="modal fade" id="progresLoading" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center">
+            <div class="modal-content">
+                <div class="modal-body">
+                  <div class="box box-danger">
+                      <div class="box-header">
+                      </div>
+                      <div class="box-body">
+                      </div>
+                      <div class="overlay">
+                        <i class="fa fa-refresh fa-spin"></i>
+                      </div>
+                  </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
 		<?php }elseif($view == 'add'){ ?>
 		<div class="box-header with-border">
 			<h3 class="box-title">Add Instansi</h3>
@@ -225,14 +245,16 @@
 
     $('body').on('click','.status', function(){
     	var id = $(this).attr('id');
+    	$('#progresLoading').modal('show');
     	console.log(id);
     	$.ajax({
           url : base_url+"admin/keanggotaan/status_instansi",
           dataType : 'json',
           type : 'POST',
           data : {'id' : id},
-          async : true
+          async : false
       }).done(function(data){
+      	$('#progresLoading').modal('hide');
       	console.log(data);
         window.location.href = data.url;
       });

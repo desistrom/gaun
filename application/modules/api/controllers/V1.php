@@ -608,8 +608,8 @@ class V1 extends REST_Controller {
             exit();
         }
         $template = $this->db->get_where('tb_template_email',array('id_kategori_email_ref'=>1,'status'=>1))->row_array()['source_code'];
-        $final = str_replace("Email_User", $data['email'], $template);
-        $final = str_replace("subject_email", "Registrasi", $final);
+        $final = str_replace("Email_User", $data['username'], $template);
+        // $final = str_replace("subject_email", "Registrasi", $final);
         $sender = $this->db->get('tb_setting_email')->row_array();
         $this->load->helper('email_send_helper');
         $data_email['email_from'] = $sender['email'];
@@ -617,11 +617,11 @@ class V1 extends REST_Controller {
         $data_email['email_to'] = $data['email'];
         $data_email['subject'] = "Registerasi";
         $content = '';
-        $content .= "<li>Username : ".$data['username']."</li>";
-        $content .= "<li>Password : ".$data['password']."</li>";
-        $content .= "<li>Email : ".$data['email']."</li>";
-        $content .= "<li>Website : ".$data['website']."</li>";
-        $content .= "<li>Alamat : ".$data['address']."</li>";
+        $content .= "<tr><td>Username </td><td>:</td> ".$data['username']."</td></tr>";
+        $content .= "<tr><td>Password </td><td>:</td> ".$data['password']."</td></tr>";
+        $content .= "<tr><td>Email </td><td>:</td> ".$data['email']."</td></tr>";
+        $content .= "<tr><td>Website </td><td>:</td> ".$data['website']."</td></tr>";
+        $content .= "<tr><td>Alamat </td><td>:</td> ".$data['address']."</td></tr>";
         $data_email['content'] = str_replace("content_email", $content, $final);
         if (email_send($data_email) == true) {
             $retData['code'] = '200';

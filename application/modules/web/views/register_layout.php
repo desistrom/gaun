@@ -42,7 +42,7 @@
     width: 40%;
     color: #6a7989;
     font-weight: bold;
-    font-size: 100%;
+    font-size: 90%;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     -webkit-touch-callout: none;
@@ -134,6 +134,10 @@
     -webkit-animation: anim-1 0.3s forwards;
     animation: anim-1 0.3s forwards;
 }
+.error{
+    position: absolute;
+    bottom: -3px;
+}
 
 
 @-webkit-keyframes anim-1 {
@@ -194,14 +198,14 @@
                                     <label class="input__label input__label--hoshi input__label--hoshi-color-1" for="input-4"  >
                                         <span class="input__label-content input__label-content--hoshi">Institute Name</span>
                                     </label>
-                                    <div class="error" id="ntf_instansi"></div>
+                                    <span class="error" id="ntf_instansi"></span>
                                 </span>
                                 <span class="input input--hoshi">
                                     <input class="input__field input__field--hoshi" type="text" id="input-4 address" name="address" />
                                     <label class="input__label input__label--hoshi input__label--hoshi-color-1" for="input-4">
                                         <span class="input__label-content input__label-content--hoshi">Address</span>
                                     </label>
-                                    <div class="error" id="ntf_address"></div>
+                                    <span class="error" id="ntf_address"></span>
                                 </span>
 
                                 <span class="input input--hoshi">
@@ -209,42 +213,42 @@
                                     <label class="input__label input__label--hoshi input__label--hoshi-color-1" for="input-4">
                                         <span class="input__label-content input__label-content--hoshi">Email </span>
                                     </label>
-                                    <div class="error" id="ntf_email"></div>
+                                    <span class="error" id="ntf_email"></span>
                                 </span>
                                 <span class="input input--hoshi">
                                     <input class="input__field input__field--hoshi" type="text" id="input-4 phone" name="phone" />
                                     <label class="input__label input__label--hoshi input__label--hoshi-color-1" for="input-4">
                                         <span class="input__label-content input__label-content--hoshi">Phone</span>
                                     </label>
-                                    <div class="error" id="ntf_phone"></div>
+                                    <span class="error" id="ntf_phone"></span>
                                 </span>
                                  <span class="input input--hoshi">
                                     <input class="input__field input__field--hoshi" type="text" id="input-4 website" name="website" />
                                     <label class="input__label input__label--hoshi input__label--hoshi-color-1" for="input-4">
                                         <span class="input__label-content input__label-content--hoshi">Website</span>
                                     </label>
-                                    <div class="error" id="ntf_website"></div>
+                                    <span class="error" id="ntf_website"></span>
                                 </span>
                                 <span class="input input--hoshi">
                                     <input class="input__field input__field--hoshi" type="text" id="input-4 username" name="username" />
                                     <label class="input__label input__label--hoshi input__label--hoshi-color-1" for="input-4">
                                         <span class="input__label-content input__label-content--hoshi">Username</span>
                                     </label>
-                                    <div class="error" id="ntf_username"></div>
+                                    <span class="error" id="ntf_username"></span>
                                 </span>
                                 <span class="input input--hoshi">
                                     <input class="input__field input__field--hoshi" type="password" id="input-4 password" name="password" />
                                     <label class="input__label input__label--hoshi input__label--hoshi-color-1" for="input-4">
                                         <span class="input__label-content input__label-content--hoshi">Password</span>
                                     </label>
-                                    <div class="error" id="ntf_password"></div>
+                                    <span class="error" id="ntf_password"></span>
                                 </span>
                                 <span class="input input--hoshi">
                                     <input class="input__field input__field--hoshi" type="password" id="input-4 repassword" name="repassword" />
                                     <label class="input__label input__label--hoshi input__label--hoshi-color-1" for="input-4">
                                         <span class="input__label-content input__label-content--hoshi">Confirm Password</span>
                                     </label>
-                                    <div class="error" id="ntf_repassword"></div>
+                                    <span class="error" id="ntf_repassword"></span>
                                 </span>
                     
                              </div>
@@ -264,7 +268,28 @@
             </div>
         </div>
     </section>
-    <div class="container-fluid bg-white" style="margin-bottom: 4em;"></div>
+    <div class="container-fluid bg-white" style="margin-bottom: 12em;"></div>
+
+
+
+    <div id="regSukses" class="modal fade modal-register" role="dialog" data-keyboard="false" data-backdrop="static">
+      <div class="modal-dialog">
+
+
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h2 class="modal-title text-center" style="color:#CF090A; ">Registrasi Berhasil</h2>
+          </div>
+          <div class="modal-body">
+            <p class="text-center">Registrasi Anda sedang kami Proses, tunggu konfirmasi selanjutnya dari Admin</p>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+    
 <script src="<?=base_url();?>assets/js/jquery.min.js"></script>
  <script src="<?=base_url();?>assets/js/classie.js"></script>
     <script>
@@ -327,6 +352,7 @@
           if(data.state == 1){
             if (data.status == 1) {
               $('#regSukses').modal('show');
+              $('#register_form')[0].reset();
             }else{
               $('.error_pass').show();
               $('.error_pass').css({'color':'red', 'font-style':'italic', 'text-align':'center'});

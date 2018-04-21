@@ -97,7 +97,7 @@ class Galery extends CI_Controller  {
         if (!is_numeric($data)) {
             $data = 0;
         }
-        $url = base_url().'api/v1/galery_video?data='.$data;
+        $url = base_url().'api/v1/galery_video_pagging?data='.$data;
         $token = '';
         $this->data['video']=$a['data'];    
         $this->ciparser->new_parse('template_frontend','modules_web', 'list_video_layout',$this->data);

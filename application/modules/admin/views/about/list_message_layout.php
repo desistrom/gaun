@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="<?=base_url();?>assets/datatables/css/dataTables.bootstrap.min.css">
+		<div class="box">
 		<div class="box-body">
 			<div class="col col-md-12 col-sm-12 col-xs-12" style="padding-left: 0; margin-bottom: 15px;">
 				<!-- <a href="<?=site_url('admin/keanggotaan/add_instansi');?>" class="btn btn-success">Tambah Instansi</a> -->
@@ -26,4 +27,5 @@
 					<!-- <a href="#" class="btn btn-default">Setting</a> -->
 				</div>
 			</div>
+		</div>
 		</div>

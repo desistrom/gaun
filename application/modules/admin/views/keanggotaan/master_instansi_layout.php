@@ -10,7 +10,7 @@
 					<thead>
 						<th>No</th>
 						<th>Nama Instansi</th>
-						<th>Image</th>
+						<th>email</th>
 						<th>status</th>
 						<th>Action</th>
 					</thead>
@@ -19,11 +19,11 @@
 						<tr>
 							<td><?=($key+1);?></td>
 							<td><?=$value['nm_instansi'];?></td>
-							<td><img src="<?=base_url().'media/thumbnail/'.$value['gambar'];?>"></td>
+							<td><?=$value['email'];?></td>
 							<td><?php if($value['status'] == 0){ ?> <span class="text-info">Not Actived</span> <?php }elseif($value['status']==1){ ?> <span class="text-primary">On Proces</span> <?php }else{ ?> <span class="text-success">Active</span> <?php } ?></td>
 							<td>
 								<!-- <button class="btn btn-default btn_delete">disable</button> -->
-								<a href="<?=site_url('admin/keanggotaan/edit_instansi/'.$value['id_instansi']);?>"><button class="btn btn-primary" id="edit">Edit</button></a> | <a href="#"><button class="btn btn-info status" id="<?=$value['status'];?>##<?=$value['id_instansi'];?>"><?php if($value['status'] == 0){ ?> Proses <?php }elseif($value['status']==1){ ?> Done <?php }else{ ?> Active <?php } ?></button></a> | <button class="btn btn-info btn_detail" id="<?=$value['id_instansi'];?>"> Detail </button>
+								<a href="<?=site_url('admin/keanggotaan/edit_instansi/'.$value['id_instansi']);?>"><button class="btn btn-primary btn-sm" id="edit">Edit</button></a> <a href="#"><button class="btn btn-info status btn-sm" id="<?=$value['status'];?>##<?=$value['id_instansi'];?>"><?php if($value['status'] == 0){ ?> Proses <?php }elseif($value['status']==1){ ?> Done <?php }else{ ?> Active <?php } ?></button></a> <button class="btn btn-info btn_detail btn-sm" id="<?=$value['id_instansi'];?>"> Detail </button>
 							</td>
 						</tr>
 					<?php endforeach; ?>

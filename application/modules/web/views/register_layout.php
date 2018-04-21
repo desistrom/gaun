@@ -315,6 +315,23 @@
 
       </div>
     </div>
+    <div id="username-already" class="modal fade modal-register" role="dialog" >
+      <div class="modal-dialog">
+
+
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h2 class="modal-title text-center" style="color:#CF090A; ">Registrasi Gagal</h2>
+          </div>
+          <div class="modal-body">
+            <p class="text-center">username sudah terdaftar, ganti unername anda</p>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
     
 <script src="<?=base_url();?>assets/js/jquery.min.js"></script>
  <script src="<?=base_url();?>assets/js/classie.js"></script>
@@ -387,10 +404,8 @@
              
               
                     }else{
-                      $('.error_pass').show();
-                      $('.error_pass').css({'color':'red', 'font-style':'italic', 'text-align':'center'});
-                      console.log(data);
-                      $('.error_pass').html(data.error);
+                      $('#username-already').modal('show');
+                      console.log(data.cek)
                     }
                   }
              },3000);

@@ -70,6 +70,18 @@ class V1 extends REST_Controller {
     	$this->_galery_video();
     }
 
+    public function galery_video_pagging_get(){
+        header('Content-Type: application/json');
+        $param = $_GET['data'];
+        if(!isset($param) || $param == ''){
+            $retData['code'] = '500';
+            $retData['status'] = 'failed';
+            $retData['error'] = 'Your parameter is invalid';
+            $this->response($retData,400);
+        }
+        $this->_galery_video_pagging($param);
+    }
+
     public function search_galery_image_post(){
     	header('Content-Type: application/json');
     	$param = json_decode(file_get_contents('php://input'), true);
@@ -418,6 +430,22 @@ class V1 extends REST_Controller {
             $retData['data'] = $galery;
 		}
 		$this->response($retData,200);
+    }
+
+    function _galery_video_pagging($param){
+        $type = 'video';
+        $galery = $this->v1_model->getTypeGaleryPagging($type,$param);
+        
+        if ($galery == '') {
+            $retData['code'] = '500';
+            $retData['status'] = 'Failed';
+            $retData['data'] = 'data not found';
+        }else{
+            $retData['code'] = '200';
+            $retData['status'] = 'success';
+            $retData['data'] = $galery;
+        }
+        $this->response($retData,200);
     }
 
     function _select_galery($data){

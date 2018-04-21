@@ -3,6 +3,7 @@
     width: 50%;
   }
 </style>
+<link rel="stylesheet" href="<?=base_url();?>assets/datatables/css/dataTables.bootstrap.min.css">
 <div class="box ">
 <?php if($view == 'list'){ ?>
 <div class="box">

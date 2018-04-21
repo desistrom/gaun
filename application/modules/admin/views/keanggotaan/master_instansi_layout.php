@@ -23,7 +23,7 @@
 							<td><?php if($value['status'] == 0){ ?> <span class="text-info">Not Actived</span> <?php }elseif($value['status']==1){ ?> <span class="text-primary">On Proces</span> <?php }else{ ?> <span class="text-success">Active</span> <?php } ?></td>
 							<td>
 								<!-- <button class="btn btn-default btn_delete">disable</button> -->
-								<a href="<?=site_url('admin/keanggotaan/edit_instansi/'.$value['id_instansi']);?>"><button class="btn btn-primary" id="edit">Edit</button></a> | <a href="#"><button class="btn btn-info status" id="<?=$value['status'];?>##<?=$value['id_instansi'];?>"><?php if($value['status'] == 0){ ?> Proses <?php }elseif($value['status']==1){ ?> Done <?php }else{ ?> Active <?php } ?></button></a>
+								<a href="<?=site_url('admin/keanggotaan/edit_instansi/'.$value['id_instansi']);?>"><button class="btn btn-primary" id="edit">Edit</button></a> | <a href="#"><button class="btn btn-info status" id="<?=$value['status'];?>##<?=$value['id_instansi'];?>"><?php if($value['status'] == 0){ ?> Proses <?php }elseif($value['status']==1){ ?> Done <?php }else{ ?> Active <?php } ?></button></a> | <button class="btn btn-info btn_detail" id="<?=$value['id_instansi'];?>"> Detail </button>
 							</td>
 						</tr>
 					<?php endforeach; ?>
@@ -74,6 +74,21 @@
             </div>
         </div>
     </div>
+</div>
+<div class="modal" tabindex="-1" role="dialog" id="detail_modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Detail Instansi</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+      </div>
+    </div>
+  </div>
 </div>
 		<?php }elseif($view == 'add'){ ?>
 		<div class="box-header with-border">
@@ -171,23 +186,6 @@
 			      	<textarea class="form-control" id="alamat" name="alamat"><?=$instansi['alamat'];?></textarea>
 			      	<div class="error" id="ntf_alamat"></div>
 			      </div>
-			      <div class="form-group">
-			        <label>Username</label>
-			        <input type="texr" class="form-control" name="username" id="username" rows="3" placeholder="Enter Username ..." value="<?=$instansi['username'];?>"  >
-			        <div class="error" id="ntf_username"></div>
-			      </div>
-
-			      <div class="form-group">
-			      <label>Password</label>
-			        <input type="password" class="form-control" name="password" id="password" value="" placeholder="Enter Password ..." value="<?=$instansi['password'];?>">
-			        <div class="error" id="ntf_password"></div>
-			      </div>
-
-			      <div class="form-group">
-			      <label>Re type Password</label>
-			        <input type="password" class="form-control" name="repassword" id="repassword" value="" placeholder="Enter Re type Password ..." value="<?=$instansi['password'];?>">
-			        <div class="error" id="ntf_repassword"></div>
-			      <div class="form-group">
 			      <label>Logo Instansi</label>
 			        <input type="file" class="form-control" name="userfile" id="userfile">
 			        <div class="error" id="ntf_userfile"></div>
@@ -254,9 +252,30 @@
           data : {'id' : id},
           async : false
       }).done(function(data){
-      	$('#progresLoading').modal('hide');
-      	console.log(data);
-        window.location.href = data.url;
+      	setTimeout(function(){  
+	      	$('#progresLoading').modal('hide');
+	      	console.log(data);
+	        window.location.href = data.url;
+        }, 3000);
+      });
+    });
+
+    $('body').on('click','.btn_detail',function(){
+    	var id = $(this).attr("id");
+    	$('#progresLoading').modal('show');
+    	$.ajax({
+          url : base_url+"admin/keanggotaan/detail_instansi",
+          dataType : 'json',
+          type : 'POST',
+          data : {'id' : id}
+      }).done(function(data){
+    	setTimeout(function(){  
+	      	$('#progresLoading').modal('hide');
+	      	console.log(data);
+	      	$('#detail_modal .modal-body').html(data);
+	      	$('#detail_modal').modal('show');
+      	}, 3000);
+        // window.location.href = data.url;
       });
     });
 

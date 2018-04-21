@@ -98,7 +98,7 @@
             <li><a href="<?=site_url('admin/galery/album');?>"><i class="fa fa-folder"></i></i>Album</a></li>
           </ul>
         </li>
-        <li class=" treeview">
+        <li class="treeview <?php if(current_url() == site_url('admin/about')){ ?> <?php } ?>">
           <a href="<?=site_url('admin/about');?>">
             <i class="fa fa-exclamation"></i> <span>About</span>
             <span class="pull-right-container">

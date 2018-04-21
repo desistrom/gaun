@@ -184,7 +184,7 @@
         </section>
       <div class="modal fade modal-list-video" id="list-video" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
     <div class="modal-dialog modal-lg">
-        <div class="modal-content">
+        <div class="modal-content" >
             <button class="close" type="button" data-dismiss="modal" style="">×</button>
               <div class="modal-body-gallery"> 
               <iframe style="width: 100%; height: 480px;" src="" id="tampil-video"></iframe>               
@@ -246,13 +246,14 @@
 
         $(".show-video").click(function(){
         var file = $(this).attr('id');
-          $('#list-video iframe').attr('src',file);
+          $('.modal-content iframe').attr('src',file);
           
           $(".modal-list-video").modal();
       });
 
       });
     </script>
+
 
 
    

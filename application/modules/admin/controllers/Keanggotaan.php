@@ -230,17 +230,13 @@ class Keanggotaan extends MX_Controller  {
 			$this->form_validation->set_rules('alamat','Alamat','trim|required');
 			$this->form_validation->set_rules('phone','phone','trim|required');
 			$this->form_validation->set_rules('email','Email','trim|required');
-			$this->form_validation->set_rules('username','Username','trim|required');
-			$this->form_validation->set_rules('password','Passowrd','trim|required');
 			if ($this->form_validation->run() == true) {
 				$ret['state'] = 1;
 				$data_instansi['nm_instansi'] = $this->input->post('name');
 				$data_instansi['website'] = $this->input->post('website');
 				$data_instansi['phone'] = $this->input->post('phone');
 				$data_instansi['alamat'] = $this->input->post('alamat');
-				$data_instansi['username'] = $this->input->post('username');
 				$data_instansi['email'] = $this->input->post('email');
-				$data_instansi['password'] = $this->input->post('password');
 				if (isset($_FILES['userfile'])) {
 					$image = $this->upload_logo($_FILES);
 					if (isset($image['error'])) {
@@ -280,15 +276,27 @@ class Keanggotaan extends MX_Controller  {
 			$ret['notif']['website'] = form_error('website');
 			$ret['notif']['phone'] = form_error('phone');
 			$ret['notif']['alamat'] = form_error('alamat');
-			$ret['notif']['username'] = form_error('username');
 			$ret['notif']['email'] = form_error('email');
-			$ret['notif']['password'] = form_error('password');
 			echo json_encode($ret);
 			exit();
 		}
 		$this->data['view'] = 'edit';
 		
 		$this->ciparser->new_parse('template_admin','modules_admin', 'keanggotaan/master_instansi_layout',$this->data);
+	}
+
+	public function detail_instansi(){
+		$id = $this->input->post('id');
+		$data = $this->db->get_where('tb_instansi',array('id_instansi'=>$id))->row_array();
+		$html = '';
+		$html .= '<li> Nama : '.$data['nm_instansi'].'</li>';
+		$html .= '<li> E-mail : '.$data['email'].'</li>';
+		$html .= '<li> Alamat : '.$data['alamat'].'</li>';
+		$html .= '<li> Phone : '.$data['phone'].'</li>';
+		$html .= '<li> Website : '.$data['website'].'</li>';
+		$html .= '<li> Logo : <img src="'.$data['website'].'" width="120px" /></li>';
+		echo json_encode($html);
+		exit();
 	}
 
 	

@@ -1,5 +1,6 @@
 <div class="box">
 <?php if ($view == 'list') { ?>
+<link rel="stylesheet" href="<?=base_url();?>assets/datatables/css/dataTables.bootstrap.min.css">
 	<div class="box-body">
 		<div class="col col-md-12 col-sm-12 col-xs-12" style="padding-left: 0; margin-bottom: 15px;">
 			<a href="<?=site_url('admin/news/add');?>" class="btn btn-success">Tambah News</a> | <a href="<?=site_url('admin/news/get_rss');?>" class="btn btn-info">Get rss</a>
@@ -19,7 +20,7 @@
           <tr>
 						<td><?=($key+1);?></td>
 						<td><?=$value['judul'];?></td>
-						<td><?=word_limiter($value['content'], 12);?></td>
+						<td><?=word_limiter($value['content'], 5);?></td>
 						<td><?=$value['nm_kategori'];?></td>
 						<td><?=$value['created'];?></td>
 						<td>

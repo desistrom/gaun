@@ -25,8 +25,7 @@
     border: none;
     border-radius: 0;
     background: #f0f0f0;
-    color: #aaa;
-    font-weight: bold;
+
     
     -webkit-appearance: none; /* for box shadows to show on iOS */
 }
@@ -176,6 +175,14 @@
     }
 
 }
+.box-danger{
+    text-align: center;
+    padding: 1em 0;
+    border-top: solid 4px red;
+}
+.box-danger i{
+    font-size: 36px;
+}
 
     </style>
 </head>
@@ -253,7 +260,7 @@
                     
                              </div>
                              <div class="col col-md-6 col-sm-6 col-xs-6 action-footer">
-                                 <a href="#" style="color: #989898;">Forgot Password?</a>
+                                 <!-- <a href="#" style="color: #989898;">Forgot Password?</a> -->
                              </div>
                              <div class="col col-md-6 col-sm-6 col-xs-6 text-right action-footer">
                                  <button type="button" id="btn_register" class="btn btn-danger btn-submit">Register</button>
@@ -271,8 +278,27 @@
     <div class="container-fluid bg-white" style="margin-bottom: 12em;"></div>
 
 
+    <div class="modal fade" id="progresLoading" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center">
+            <div class="modal-content">
+                <div class="modal-body">
+                  <div class="box box-danger">
+                      <div class="box-header">
+                      </div>
+                      <div class="box-body">
+                      </div>
+                      <div class="overlay">
+                        <i class="fa fa-refresh fa-spin"></i>
+                      </div>
+                  </div>
+                </div>
 
-    <div id="regSukses" class="modal fade modal-register" role="dialog" data-keyboard="false" data-backdrop="static">
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="regSukses" class="modal fade modal-register" role="dialog" >
       <div class="modal-dialog">
 
 
@@ -339,6 +365,7 @@
     $(document).ready(function(){
 
       $('body').on('click','#btn_register', function(){
+        $('#progresLoading').modal('show');
       console.log($('form').val());
       // $('#content').val(CKEDITOR.instances.content.getData());
       // return false;
@@ -349,17 +376,24 @@
           data : $('#register_form').serialize()
       }).done(function(data){
           console.log(data);
-          if(data.state == 1){
-            if (data.status == 1) {
-              $('#regSukses').modal('show');
-              $('#register_form')[0].reset();
-            }else{
-              $('.error_pass').show();
-              $('.error_pass').css({'color':'red', 'font-style':'italic', 'text-align':'center'});
-              console.log(data);
-              $('.error_pass').html(data.error);
-            }
-          }
+          setTimeout(function(){
+            $('#progresLoading').modal('hide');
+              if(data.state == 1){
+                if (data.status == 1) {
+                
+                    console.log(data);
+                    $('#regSukses').modal('show');
+                    $('#register_form')[0].reset();
+             
+              
+                    }else{
+                      $('.error_pass').show();
+                      $('.error_pass').css({'color':'red', 'font-style':'italic', 'text-align':'center'});
+                      console.log(data);
+                      $('.error_pass').html(data.error);
+                    }
+                  }
+             },3000);
             $.each(data.notif,function(key,value){
             $('.error').show();
             $('#ntf_'+ key).html(value);

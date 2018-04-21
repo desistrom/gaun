@@ -36,6 +36,15 @@ class V1_model extends CI_Model{
 		return false;
 	}
 
+	public function getTypeGaleryPagging($type,$param){
+		$sql = "select u.name as nama_user, g.id_galery as galeryId, g.file_name as file, g.judul as title, g.deskripsi as keterangan, g.tgl_upload as modify_date, g.type as jenis from tb_galery g join tb_user u on g.id_user_ref = u.id_user where g.type = ? and g.status = 1 LIMIT ".$param.",9";
+		if ($this->db->query($sql,$type)->num_rows() > 0) {
+			return $this->db->query($sql,$type)->result_array();
+			exit();
+		}
+		return false;
+	}
+
 	public function selectGalery($id){
 		$sql = "select u.name as nama_user, g.id_galery as galeryId, g.file_name as file, g.judul as title, g.deskripsi as keterangan, g.tgl_upload as modify_date, g.type as jenis from tb_galery g join tb_user u on g.id_user_ref = u.id_user where g.id_galery = ?";
 		if ($this->db->query($sql,$id)->num_rows() > 0) {

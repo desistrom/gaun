@@ -9,11 +9,11 @@
     <link rel="stylesheet" href="<?=base_url();?>assets/fonts/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800,900" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Crimson+Text:400,600,700" rel="stylesheet">
-    <link rel="stylesheet" href="<?=base_url();?>assets/css/Navbar-with-mega-menu.css">
+    <link rel="stylesheet" href="<?=base_url();?>assets/css/Navbar-with-mega-menu.min.css">
 
-    <link rel="stylesheet" href="<?=base_url();?>assets/css/owl.transitions.css">
-    <link rel="stylesheet" href="<?=base_url();?>assets/css/owl.carousel.css">
-    <link rel="stylesheet" href="<?=base_url();?>assets/css/css.css">
+    <link rel="stylesheet" href="<?=base_url();?>assets/css/owl.transitions.min.css">
+    <link rel="stylesheet" href="<?=base_url();?>assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="<?=base_url();?>assets/css/css.min.css">
     <style type="text/css">
       .modal .ntf_err{
           color: red;
@@ -220,11 +220,11 @@
     <script src="<?=base_url();?>assets/js/bootstrap.min.js"></script>
    
     <script src="<?=base_url();?>assets/js/owl.carousel.min.js"></script>
-    <script src="<?=base_url();?>assets/js/main-owl.js"></script>
-      <script src="<?=base_url();?>assets/js/scrolling-nav.js"></script>
+    <script src="<?=base_url();?>assets/js/main-owl.min.js"></script>
+      <script src="<?=base_url();?>assets/js/scrolling-nav.min.js"></script>
  <script src="<?=base_url();?>assets/js/jquery.easing.min.js"></script>
 <?php if(current_url() == site_url('web/galery/video')){ ?> 
-   <script type="text/javascript" src="<?=base_url();?>assets/js/jquery.waterwheelCarousel.js"></script>
+   <script type="text/javascript" src="<?=base_url();?>assets/js/jquery.waterwheelCarousel.miny.js"></script>
  <?php } ?>
  
 <!--  <script type="text/javascript">

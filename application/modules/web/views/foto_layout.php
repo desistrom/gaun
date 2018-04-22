@@ -237,6 +237,11 @@
           top: 60%;
          }
          }
+          @media(max-width:600px){
+           .modal-album .modal-dialog{
+          width: 450px;
+          margin-top: 10px;
+         }}
           @media(max-width:500px){
            .modal-album .modal-dialog{
           width: 400px;
@@ -279,6 +284,22 @@
           margin-right: 10px;
          }
          }
+        @media(max-width:400px){
+           .modal-album .modal-dialog{
+          width: 350px;
+          margin-top: 10px;
+         }
+         .modal-album .modal-footer .carousel-indicators .thumbnail-indicator{
+          width: 6em;
+          }}
+           @media(max-width:360px){
+           .modal-album .modal-dialog{
+          width: 340px;
+          margin-top: 10px;
+         }
+       .modal-album .modal-footer .carousel-indicators .thumbnail-indicator{
+          width: 8em;
+          }}
          /* The Modal (background) */
 
 

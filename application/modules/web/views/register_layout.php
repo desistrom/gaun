@@ -2,7 +2,7 @@
 <meta name="keywords" content="input, text, effect, focus, transition, interaction, inspiration, web design" />
 <meta name="author" content="Codrops" />
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
-<link rel="stylesheet" href="<?=base_url();?>assets/css/style_register.css">
+<link rel="stylesheet" href="<?=base_url();?>assets/css/style_register.min.css">
     <style type="text/css">
         /* Hoshi */
         .input {
@@ -192,7 +192,11 @@
     <section class="page_register" style="margin-top: 6em;">
         <div class="container">
             <div class="row">
-                <div class="col-md-6 col-sm-6 col-xs-6 content-left-register">
+                <div class="col-md-6 col-sm-6 col-xs-12 content-right-register text-center">
+                    <h1 class="title-content">Register right now <br>and <span class="bold">lets collaborate </span></h1>
+                
+                </div>
+                <div class="col-md-6 col-sm- col-xs-12 content-left-register">
                     <div class="form-group filter-form ">
                         <div class="logo-login text-center">
                             <img src="<?=base_url();?>assets/images/logo/Asset_16@4x.png" >
@@ -268,10 +272,7 @@
                         </form>
                     </div>
                 </div>
-                <div class="col-md-6 col-sm-6 col-xs-6 content-right-register text-center">
-                    <h1 class="title-content">Register right now <br>and <span class="bold">lets collaborate </span></h1>
                 
-                </div>
             </div>
         </div>
     </section>

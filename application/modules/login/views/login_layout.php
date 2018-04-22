@@ -31,7 +31,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="../../index2.html"><img style="width: 100px;" src="<?=base_url();?>assets/images/logo/Asset_16@4x.png"></a>
+    <a href="../../index2.html"><img style="width: 200px;" src="<?=base_url();?>assets/images/logo/Asset_16@4x.png"></a>
   </div>
     <p class="login-box-msg">Sign in to start your session</p>
   <!-- /.login-logo -->

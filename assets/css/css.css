@@ -885,6 +885,7 @@ section.client{
 .sub-client{
   padding: 1em 0;
 }
+
 .detail_news  .content-left{
   margin-top: 0;
 
@@ -937,14 +938,23 @@ img.logo-sponsor.logo2 {
   margin-bottom: 2em;
 
 }
+.detail_layanan .content-left{
+  margin-top: 0;
+
+}
 .content-comment .sub-comment-right{
   margin-top: 1em;
 }
 
 }
-@media(max-width:400px){
+@media(max-width:500px){
+
 
 div.container-fluid{
+  padding: 0 1em;
+}
+
+.container-fluid{
   padding: 0 1em;
 }
 .logo{

@@ -57,6 +57,23 @@
     .box-img-galery{
       padding-top: 15px;
     }
+    .modal .close{
+        font-size: 36px;
+        padding-right: 15px;
+      }
+       }
+    @media(max-width:500px){
+      .modal iframe{
+      width: 100%;
+      height: 360px;
+    }
+    }
+    @media(max-width:400px){
+      .modal iframe{
+      width: 100%;
+      height: 270px;
+    }
+    }
     
          /* The Modal (background) */
 

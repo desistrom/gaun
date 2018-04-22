@@ -99,10 +99,64 @@
       .slider-waterwheel{
         box-shadow:0px 0px 28px 0px #000000;
         pointer-events: none;
+        width:640px; 
+        height:360px; 
       }
       .carousel-center{
         pointer-events: visible;
       }
+      .modal .close{
+        font-size: 36px;
+        padding-right: 15px;
+      }
+      .modal iframe{
+        height: 480px;
+      }
+       }
+        @media(max-width:1300px){
+          .slider-waterwheel{
+          
+          width:480px; 
+          height:320px; 
+        }
+        }
+         @media(max-width:1200px){
+          .slider-waterwheel{
+          
+          width:360px; 
+          height:270px; 
+        }
+        .carousel-center{
+        display: block !important;
+        left: 180;
+        }
+         @media(max-width:1100px){
+          .slider-waterwheel{
+           width:480px; 
+          height:360px;
+          display: none !important; 
+        }
+        .carousel-center{
+        display: block !important;
+        left: 50% !important;
+        margin-left: -240px;
+      }
+        }
+       @media(max-width:500px){
+        .modal  iframe{
+          height: 270px !important;
+        }
+          .slider-waterwheel{
+           width:360px !important; 
+          height:270px !important;
+          display: none !important; 
+        }
+        .carousel-center{
+        display: block !important;
+        left: 50% !important;
+        margin-left: -180px;
+      }
+        }
 
          /* The Modal (background) */
 
@@ -131,7 +185,7 @@
                       <?php for ($i=0; $i < 3 ; $i++) { ?>
                   <?php if (isset($video[$i]['title'])) { ?>
                 
-                            <iframe class="slider-waterwheel" width="640px" height="360px" src="<?php echo $video[$i]['file'] ?> " frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                            <iframe class="slider-waterwheel"  src="<?php echo $video[$i]['file'] ?> " frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
             
 
                  <?php } } ?>
@@ -187,7 +241,7 @@
         <div class="modal-content" >
             <button class="close" type="button" data-dismiss="modal" style="">×</button>
               <div class="modal-body-gallery"> 
-              <iframe style="width: 100%; height: 480px;" src="" id="tampil-video"></iframe>               
+              <iframe style="width: 100%; " src="" id="tampil-video"></iframe>               
               </div>
             <div class="modal-footer" style="padding: 0 15px;">
               <div class="col col-md-12 col-sm-12 col-xs-12 none-padding">

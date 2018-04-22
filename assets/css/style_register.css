@@ -94,6 +94,7 @@ section.page_register{
 }
 .page_register .content-left-register{
   padding:4em 1em;
+  float: left;
 }
 .page_register .logo-login img{
   width: 150px;
@@ -101,6 +102,7 @@ section.page_register{
 
 .page_register .content-right-register{
   color:white;
+  float: right;
   padding-top: 3.5em;
 }
 
@@ -157,5 +159,37 @@ section.page_register{
  }
  .page_register .action-footer{
   margin-top: 2.5em;
+ }
+  @media(max-width:991px){
+    .page_register h1.title-content {
+    font-size: 40px;
+    font-weight: 300;
+    }
+  }
+ @media(max-width:767px){
+  .page_register .content-right-register{
+    float: none;
+  }
+  .page_register .content-left-register{
+    float: none;
+  }
+  .page_register h1.title-content{
+  font-size:46px;
+  font-weight:300;
+  margin-top: 1em;
+
+}
+
+element.style {
+}
+.page_register h1.title-content {
+    font-size: 36px;
+    font-weight: 300;
+    }
+section.page_register{
+  height: auto;
+}
+
+
  }
 

@@ -37,6 +37,7 @@
       <div class="form-group">
       <label>File</label>
         <input type="file" class="form-control" name="file_name" id="file_name">
+        <div style="font-style: italic;">*for best result use 450x240 px</div>
         <div class="error" id="ntf_file_name"></div>
         <div class="error" id="ntf_error"></div>
       </div>

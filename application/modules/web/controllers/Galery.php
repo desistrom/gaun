@@ -82,7 +82,7 @@ class Galery extends CI_Controller  {
         
         $a = api_helper('',$url,$methode,'');
         $config['total_rows'] = count($a['data']);
-        $config['per_page'] = 4;
+        $config['per_page'] = 9;
         $config['prev_tag_open'] = '<li>';
         $config['prev_tag_close'] = '</li>';
         $config['prev_link'] = 'Prev';
@@ -99,7 +99,8 @@ class Galery extends CI_Controller  {
         }
         $url = base_url().'api/v1/galery_video_pagging?data='.$data;
         $token = '';
-        $this->data['video']=$a['data'];    
+        $b = api_helper('',$url,$methode,'');
+        $this->data['video']=$b['data'];    
         $this->ciparser->new_parse('template_frontend','modules_web', 'list_video_layout',$this->data);
     }
 

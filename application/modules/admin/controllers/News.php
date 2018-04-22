@@ -141,6 +141,21 @@ class News extends MX_Controller  {
 		$this->ciparser->new_parse('template_admin','modules_admin', 'news/news_layout',$this->data);
 	}
 
+	public function status(){
+		if ($this->input->server('REQUEST_METHOD') == 'POST') {
+			$id = $this->input->post('id');
+			if ($this->db->get_where('tb_news',array('id_news'=>$id))->row_array()['is_aktif'] == 1) {
+				$this->db->update('tb_news',array('is_aktif'=>0),array('id_news'=>$id));
+				$this->session->set_flashdata("notif","Berita Berhasil di Non Aktifkan");
+			}else{
+				$this->db->update('tb_news',array('is_aktif'=>1),array('id_news'=>$id));
+				$this->session->set_flashdata("notif","Berita Berhasil di Aktifkan");
+			}
+			echo json_encode("finish");
+			exit();
+		}
+	}
+
 	public function get_rss(){
 		$ret['state'] = 0;
 		$ret['status'] = 0;

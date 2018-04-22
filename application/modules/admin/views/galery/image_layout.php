@@ -38,6 +38,7 @@
       <label>File</label>
         <input type="file" class="form-control" name="file_name" id="file_name">
         <div class="error" id="ntf_file_name"></div>
+        <div class="error" id="ntf_error"></div>
       </div>
 
       <button type="button" class="btn btn-primary" id="submit">Submit</button>

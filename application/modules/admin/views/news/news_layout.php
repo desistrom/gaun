@@ -12,7 +12,8 @@
 					<th>Judul</th>
 					<th>Content</th>
 					<th>Kategori</th>
-					<th>Create Date</th>
+          <th>Create Date</th>
+					<th>Status</th>
 					<th>Opsi</th>
 				</thead>
 				<tbody>
@@ -22,10 +23,11 @@
 						<td><?=$value['judul'];?></td>
 						<td><?=word_limiter($value['content'], 5);?></td>
 						<td><?=$value['nm_kategori'];?></td>
-						<td><?=$value['created'];?></td>
+            <td><?=$value['created'];?></td>
+						<td><?php if($value['is_aktif'] == 1){ ?> <span class="text-success">Enable</span> <?php }else{ ?> <span class="text-danger">Disabled</span> <?php } ?></td>
 						<td>
-							<!-- <button class="btn btn-default">disable</button> -->
-							<a href="<?=site_url('admin/news/edit/'.$value['id_news']);?>"><button class="btn btn-primary" id="edit">Edit</button></a>
+							<button class="btn btn-default btn-sm btn_status" id="<?=$value['id_news'];?>"><?php if($value['is_aktif'] == 0){ ?> <span class="text-success">Enable</span> <?php }else{ ?> <span class="text-danger">Disabled</span> <?php } ?></button>
+							<a href="<?=site_url('admin/news/edit/'.$value['id_news']);?>"><button class="btn btn-primary btn-sm" id="edit">Edit</button></a>
 						</td>
           </tr>
         <?php endforeach; ?>
@@ -176,6 +178,18 @@
             $('#ntf_'+ key).html(value);
             $('#ntf_'+ key).css({'color':'red', 'font-style':'italic'});
             });
+      });
+    });
+    $('body').on('click','.btn_status', function(){
+      var id = $(this).attr('id');
+      $.ajax({
+          url : base_url+'admin/news/status',
+          dataType : 'json',
+          type : 'POST',
+          data : {'id' : id}
+      }).done(function(data){
+        console.log(data);
+        window.location.href = window.location.href;
       });
     });
     $('#modalSuccess').modal('show');

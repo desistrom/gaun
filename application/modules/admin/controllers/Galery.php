@@ -297,6 +297,7 @@ class Galery extends MX_Controller  {
         {
             $upload_data = $this->upload->data();
 
+            $data_upload['asli'] = $upload_data['file_name'];
             if ($upload_data['image_width'] > 768 ) {
                 $data = array('upload_data' => $this->upload->data());
                 $config_r['image_library'] = 'GD2';
@@ -315,7 +316,6 @@ class Galery extends MX_Controller  {
                 }else{
                         // echo "berhasil resize";
                         $data_upload['resize'] = site_url('assets/media/thumbnail/')."/".$upload_data['file_name'];
-                        $data_upload['asli'] = $upload_data['file_name'];
                 }
             }
             if ($upload_data['image_width'] > 768) {

@@ -299,6 +299,29 @@ class Keanggotaan extends MX_Controller  {
 		exit();
 	}
 
+	public function delete_instansi(){
+		if ($this->input->server('REQUEST_METHOD') == 'POST') {
+			$id['id_instansi'] = $this->input->post('id');
+			$file_name = $this->db->get_where('tb_instansi',$id)->row_array()['gambar'];
+			if (file_exists(FCPATH."media/".$file_name)) {
+    			@chmod(FCPATH."media/".$file_name, 0777);
+    			@unlink(FCPATH."media/".$file_name);
+    		}
+    		if (file_exists(FCPATH."media/thumbnail/".$file_name)) {
+    			@chmod(FCPATH."media/thumbnail/".$file_name, 0777);
+    			@unlink(FCPATH."media/thumbnail/".$file_name);
+    		}
+    		if (file_exists(FCPATH."media/crop/".$file_name)) {
+    			@chmod(FCPATH."media/crop/".$file_name, 0777);
+    			@unlink(FCPATH."media/crop/".$file_name);
+    		}
+    		$this->db->delete('tb_instansi',$id);
+    		$this->session->set_flashdata("notif","Data Berhasil di Hapus");
+    		echo json_encode("finish");
+    		exit();
+		}
+	}
+
 	
 
 	public function upload_logo($logo){	    		

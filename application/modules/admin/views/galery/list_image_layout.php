@@ -9,6 +9,7 @@
 			  	<th>No</th>
 			  	<th>judul</th>
 			  	<th>Deskripsi</th>
+			  	<th>Gambar</th>
 			  	<th>Aksi</th>
 			  </thead>
 			  <tbody>
@@ -18,6 +19,7 @@
 				  	<td><?=($key+1);?></td>
 				  	<td><?=$value['judul'];?></td>
 				  	<td><?=$value['deskripsi'];?></td>
+				  	<td><img src="<?=base_url().'assets/media/'.$value['file_name'];?>" width="144px" /></td>
 				  	<td>
 				  		<!-- <a href="<?=site_url('admin/galery/preview');?>"><button class="btn btn-default">Preview</button></a> -->
 				  		<a href="<?=site_url('admin/galery/edit_image').'/'.$value['id_galery'];?>"><button class="btn btn-primary">Edit</button></a>

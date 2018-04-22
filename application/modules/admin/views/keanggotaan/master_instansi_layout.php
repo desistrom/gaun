@@ -22,8 +22,8 @@
 							<td><?=$value['email'];?></td>
 							<td><?php if($value['status'] == 0){ ?> <span class="text-info">Not Actived</span> <?php }elseif($value['status']==1){ ?> <span class="text-primary">On Proces</span> <?php }else{ ?> <span class="text-success">Active</span> <?php } ?></td>
 							<td>
-								<!-- <button class="btn btn-default btn_delete">disable</button> -->
 								<a href="<?=site_url('admin/keanggotaan/edit_instansi/'.$value['id_instansi']);?>"><button class="btn btn-primary btn-sm" id="edit">Edit</button></a> <a href="#"><button class="btn btn-info status btn-sm" id="<?=$value['status'];?>##<?=$value['id_instansi'];?>"><?php if($value['status'] == 0){ ?> Proses <?php }elseif($value['status']==1){ ?> Done <?php }else{ ?> Active <?php } ?></button></a> <button class="btn btn-info btn_detail btn-sm" id="<?=$value['id_instansi'];?>"> Detail </button>
+								<button class="btn btn-danger btn-sm btn_delete" id="<?=$value['id_instansi'];?>"> Delete </button>
 							</td>
 						</tr>
 					<?php endforeach; ?>
@@ -276,6 +276,25 @@
 	      	$('#detail_modal').modal('show');
       	}, 3000);
         // window.location.href = data.url;
+      });
+    });
+
+    $('body').on('click','.btn_delete', function(){
+    	var id = $(this).attr('id');
+    	$('#progresLoading').modal('show');
+    	console.log(id);
+    	$.ajax({
+          url : base_url+"admin/keanggotaan/delete_instansi",
+          dataType : 'json',
+          type : 'POST',
+          data : {'id' : id},
+          async : false
+      }).done(function(data){
+      	setTimeout(function(){  
+	      	$('#progresLoading').modal('hide');
+	      	console.log(data);
+	        window.location.href = window.location.href;
+        }, 3000);
       });
     });
 

@@ -85,6 +85,15 @@ class V1_model extends CI_Model{
 		return false;
 	}
 
+	public function getFooter(){
+		$sql = "SELECT alamat as address, facebook as FacebookLink, twitter as TwitterLink, instagram as InstagramLink FROM tb_footer";
+		if ($this->db->query($sql)->num_rows() > 0) {
+			return $this->db->query($sql)->row_array();
+			exit();
+		}
+		return false;
+	}
+
 	public function getInstansi(){
 		$sql = "SELECT nm_instansi as instansi, id_instansi as id, phone as number_phone, website as link, alamat as address, gambar as image FROM tb_instansi";
 		if ($this->db->query($sql)->num_rows() > 0) {

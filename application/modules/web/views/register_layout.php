@@ -2,7 +2,7 @@
 <meta name="keywords" content="input, text, effect, focus, transition, interaction, inspiration, web design" />
 <meta name="author" content="Codrops" />
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
-<link rel="stylesheet" href="<?=base_url();?>assets/css/style_register.min.css">
+<link rel="stylesheet" href="<?=base_url();?>assets/css/style_register.css">
     <style type="text/css">
         /* Hoshi */
         .input {
@@ -276,7 +276,7 @@
             </div>
         </div>
     </section>
-    <div class="container-fluid bg-white" style="margin-bottom: 12em;"></div>
+    <div class="container-fluid bg-white bg-white-none" style="margin-bottom: 12em;"></div>
 
 
     <div class="modal fade" id="progresLoading" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">

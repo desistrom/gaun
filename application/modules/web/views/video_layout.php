@@ -156,6 +156,25 @@
         left: 50% !important;
         margin-left: -180px;
       }
+      .btn-nav-video.button-left {
+        padding: 150px 0 0 0;
+        z-index: 200;
+
+      }
+       .btn-nav-video.button-right {
+        padding: 150px 0 0  0;
+        z-index: 200;
+
+      }
+      .btn-nav-video.button-left i{
+        padding: 0 50px 0 0;
+        z-index: 2100;
+
+      }
+       .btn-nav-video.button-right i{
+        padding: 0  0 0 50px;
+        z-index: 2100;
+      }
         }
 
          /* The Modal (background) */

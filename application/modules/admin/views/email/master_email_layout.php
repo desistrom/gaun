@@ -22,7 +22,7 @@
 							<td><?=$value['nm_kategori'];?></td>
 							<td><?=$value['subject'];?></td>
 							<td><?=$value['title'];?></td>
-							<td><?=$value['content'];?></td>
+							<td><?=word_limiter($value['content'],5);?></td>
 							<td>
 								<!-- <button class="btn btn-default">disable</button> -->
 								<a href="<?=site_url('admin/email/edit/'.$value['id_notifikasi_email']);?>"><button class="btn btn-primary" id="edit">Edit</button></a>

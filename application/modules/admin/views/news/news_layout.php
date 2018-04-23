@@ -70,6 +70,11 @@
         <div class="error" id="ntf_judul"></div>
       </div>
       <div class="form-group">
+        <label>Slug Berita</label>
+        <input type="text" name="slug" class="form-control" id="slug" disabled="true" value="">
+        <div class="error" id="ntf_judul"></div>
+      </div>
+      <div class="form-group">
         <label>Gambar Berita</label>
         <input type="file" name="file_name" class="form-control" id="file_name">
         <div class="error" id="ntf_file_name"></div>
@@ -142,6 +147,7 @@
 	
 </div>
 <script src="<?=base_url().'assets/js/jquery-3.2.1.min.js';?>"></script>
+<script src="<?=base_url().'assets/js/jquery.slugify.js';?>"></script>
 <script type="text/javascript">
   $(document).ready(function () {
     $('body').on('click','#submit', function(){
@@ -191,6 +197,19 @@
         console.log(data);
         window.location.href = window.location.href;
       });
+    });
+    function slugify(text)
+    {
+      return text.toString().toLowerCase()
+        .replace(/\s+/g, '-')           // Replace spaces with -
+        .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+        .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+        .replace(/^-+/, '')             // Trim - from start of text
+        .replace(/-+$/, '');            // Trim - from end of text
+    }
+    $('#judul').keyup(function () {
+      var slug = slugify($('#judul').val());
+      $('#slug').val(slug);
     });
     $('#modalSuccess').modal('show');
   });

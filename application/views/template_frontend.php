@@ -13,7 +13,7 @@
 
     <link rel="stylesheet" href="<?=base_url();?>assets/css/owl.transitions.min.css">
     <link rel="stylesheet" href="<?=base_url();?>assets/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="<?=base_url();?>assets/css/css.min.css">
+    <link rel="stylesheet" href="<?=base_url();?>assets/css/css.css">
     <style type="text/css">
       .modal .ntf_err{
           color: red;
@@ -34,15 +34,31 @@
                       <li role="presentation" ><a <?php if(current_url() == site_url('web/home') || current_url() == site_url()){ ?> class="active" <?php } ?> href="<?php echo site_url('web/home'); ?>">Home</a></li>
                       <li class="dropdown"><a data-toggle="dropdown" aria-expanded="false" href="#" class="dropdown-toggle <?php if(current_url() == site_url('web/a')){ ?> active <?php } ?>">Layanan <span class="fa fa-angle-down"></span></a>
                           <ul class="dropdown-menu" role="menu">
-                              <li><a href="<?php echo site_url('web/layanan/idroam') ?>">IDROAM</a></li>
-                              <li><a href="<?php echo site_url('web/layanan/cloud_federation') ?>">Cloud Federation</a></li>
+                              <!-- <li><a href="<?php echo site_url('web/layanan/idroam') ?>">IDROAM</a></li>
+                              <li><a href="<?php echo site_url('web/layanan/cloud_federation') ?>">Cloud Federation</a></li> -->
+                              <li><a href="<?php echo site_url('web/layanan/id_book') ?>">ID-BOOK</a></li>
+                              <li><a href="<?php echo site_url('web/layanan/id_journal') ?>">ID-JOURNAL</a></li>
+                              <li><a href="<?php echo site_url('web/layanan/id_tube') ?>">ID-TUBE</a></li>
+                              <li><a href="<?php echo site_url('web/layanan/id_mail') ?>">ID-MAaIL</a></li>
+                              <li><a href="<?php echo site_url('web/layanan/id_research') ?>">ID-RESEARCH</a></li>
+                              <li><a href="<?php echo site_url('web/layanan/id_link') ?>">ID-LINKS</a></li>
+                              <li><a href="<?php echo site_url('web/layanan/id_rank') ?>">ID-RANK</a></li>
 
                           </ul>
                         </li>
-                    <li class="dropdown"><a data-toggle="dropdown" aria-expanded="false" href="#" class="dropdown-toggle">Tentang <span class="fa fa-angle-down"></span></a>
+                        <li class="dropdown"><a data-toggle="dropdown" aria-expanded="false" href="#" class="dropdown-toggle">Konektivitas <span class="fa fa-angle-down"></span></a>
                           <ul class="dropdown-menu" role="menu">
-                              <li><a href="<?php echo site_url('web/tentang/contact') ?>">Contact Us</a></li>
-                              <li><a href="<?php echo site_url('web/tentang') ?>">Tentang IDren</a></li>
+                              <li><a href="<?php echo site_url('web/konektivitas') ?>">Topologi</a></li>
+                              <li><a href="<?php echo site_url('web/layanan/monitoring') ?>">Monitoring Graph</a></li>
+
+                          </ul>
+                        </li>
+                        <!-- <li role="presentation" class=""><a <?php if(current_url() == site_url('web/keanggotaan')){ ?> class="active" <?php } ?> href="<?php echo site_url('web/keanggotaan'); ?>">Keanggotaan</a></li> -->
+                        <li class="dropdown"><a data-toggle="dropdown" aria-expanded="false" href="#" class="dropdown-toggle">Keanggotaan <span class="fa fa-angle-down"></span></a>
+                          <ul class="dropdown-menu" role="menu">
+                              <li><a href="<?php echo site_url('web/gabung/register') ?>">Pendaftaran</a></li>
+                              <li><a href="<?php echo site_url('web/keanggotaan') ?>">Member</a></li>
+                              <li><a href="#">Benefit</a></li>
 
                           </ul>
                         </li>
@@ -53,17 +69,22 @@
 
                           </ul>
                         </li>
-                        <li class="dropdown"><a data-toggle="dropdown" aria-expanded="false" href="#" class="dropdown-toggle">Konektivitas <span class="fa fa-angle-down"></span></a>
+                        <li role="presentation" class=""><a <?php if(current_url() == site_url('web/news')){ ?> class="active" <?php } ?> href="<?php echo site_url('web/news'); ?>">Berita</a></li>
+                        <li role="presentation" class=""><a <?php if(current_url() == site_url('web/news')){ ?> class="active" <?php } ?> href="<?php echo site_url('web/tentang') ?>">Tentang</a></li>
+                  <!--   <li class="dropdown"><a data-toggle="dropdown" aria-expanded="false" href="#" class="dropdown-toggle">Tentang <span class="fa fa-angle-down"></span></a>
                           <ul class="dropdown-menu" role="menu">
-                              <li><a href="<?php echo site_url('web/konektivitas') ?>">Topologi</a></li>
+                              <li><a href="<?php echo site_url('web/tentang/contact') ?>">Contact Us</a></li>
+                              <li><a href="<?php echo site_url('web/tentang') ?>">Tentang IDren</a></li>
 
                           </ul>
-                        </li>
-                        <li role="presentation" class=""><a <?php if(current_url() == site_url('web/keanggotaan')){ ?> class="active" <?php } ?> href="<?php echo site_url('web/keanggotaan'); ?>">Keanggotaan</a></li>
-                      <li role="presentation" class=""><a <?php if(current_url() == site_url('web/news')){ ?> class="active" <?php } ?> href="<?php echo site_url('web/news'); ?>">Berita</a></li>
+                        </li> -->
+                        
+                        
+                        
+                      
 
                       <!-- <li role="presentation" class="active"><a href="#">Masuk</a></li> -->
-                      <li role="presentation" class=""><a class="active btn-gabung" href="<?php echo site_url('web/gabung/register') ?>" data-toggle="modal" >Gabung</a></li>
+                   <!--    <li role="presentation" class=""><a class="active btn-gabung" href="<?php echo site_url('web/gabung/register') ?>" data-toggle="modal" >Gabung</a></li> -->
 
                   </ul>
               </div>
@@ -92,22 +113,23 @@
                 <div class="col-md-4 col-sm-4 col-xs-12 footer-center text-center">
                     <h3 class="title-footer">Kantor Pusat</h3>
                     <ul class="list-unstyled">
-                        <li>Gedung Alfamidi Lt.4</li>
+                        <li><?php echo footer_helper()['data']['address']; ?></li>
+                        <!-- <li>Gedung Alfamidi Lt.4</li>
                         <li>Jl. Budi Utomo No. 3 Kav.56</li>
-                        <li>Sukun Jota Malang</li>
+                        <li>Sukun Jota Malang</li> -->
                     </ul>
                 </div>
                 <div class="col-md-4 col-sm-4 col-xs-12 footer-right text-right">
                     <h3 class="title-footer">Sosial Media</h3>
                     <ul class="list-inline">
                         <li>
-                            <a href="#" class="facebook"> <i class="fa fa-facebook"></i></a>
+                            <a href="<?php echo footer_helper()['data']['FacebookLink']; ?>" class="facebook" target="blank" > <i class="fa fa-facebook"></i></a>
                         </li>
                         <li class="text-left">
-                            <a href="#"> <i class="fa fa-twitter"></i></a>
+                            <a href="<?php echo footer_helper()['data']['TwitterLink']; ?>" target="blank" > <i class="fa fa-twitter"></i></a>
                         </li>
                         <li>
-                            <a href="#"> <i class="fa fa-instagram"></i></a>
+                            <a href="<?php echo footer_helper()['data']['InstagramLink']; ?>" target="blank" > <i class="fa fa-instagram"></i></a>
                         </li>
                     </ul>
                 </div>

@@ -179,6 +179,9 @@ section.page_register{
   margin-top: 1em;
 
 }
+.bg-white-none{
+  display: none !important;
+}
 
 element.style {
 }

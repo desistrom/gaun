@@ -59,7 +59,7 @@
           </li>
           <!-- Control Sidebar Toggle Button -->
           <li>
-            <a href="btn">LogOut</a>
+            <a href="<?=site_url("login/logout");?>">LogOut</a>
           </li>
         </ul>
       </div>

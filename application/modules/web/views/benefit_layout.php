@@ -58,7 +58,7 @@
                     <div></div>
                 </div>
                 <div class="header-title">
-                    <h1 style="">Tentang IDren </h1></div>
+                    <h1 style="">Benefit </h1></div>
             </div>
         </div>
         <div class="container-fluid">
@@ -66,15 +66,9 @@
                
                 <div class="col-md-12 col-sm-12 col-xs-12 content-left">
                     <div class="col col-md-12 col-sm-12 col-xs-12 none-padding list-artikel">
-                        <div class="col col-md-5 col-sm-12 col-xs-12 desrip-news">
+                        <div class="col col-md-12 col-sm-12 col-xs-12 desrip-news">
                             
-                            <div class="isi-news" style="padding: 0 15px;color: #919191;"><?php echo $about['content']; ?></div>
-                            
-                            
-                        </div>
-                        <div class="col col-md-7 col-sm-12 col-xs-12 descrip-img">
-                            <img class="img-responsive" width="100%" src="<?=base_url();?>assets/images/logo/ttg.png">
-                        </div>
+                            <div class="isi-news" style="padding: 0 15px;color: #919191;"><?php echo $benefit; ?></div>
                     </div>
                 </div>
             

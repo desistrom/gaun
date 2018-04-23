@@ -11,11 +11,7 @@
   <div class="box-body">
     <form role="form">
       <!-- textarea -->
-        <div class="form-group">
-          <label>Tata cara</label>
-          <?php echo $this->ckeditor->editor("cara", $content['cara'] ); ?>
-          <input type="hidden" name="cara" value="<?php if(isset($content)){ echo $content['cara']; } ?>" id="cara">
-        </div>
+        
 
       <!-- <button type="button" class="btn btn-primary" id="submit">Submit</button> -->
       <div class="form-group">
@@ -59,7 +55,7 @@
   $(document).ready(function () {
     $('body').on('click','#submit', function(){
       // console.log($('form').val());
-      $('#cara').val(CKEDITOR.instances.cara.getData());
+      // $('#cara').val(CKEDITOR.instances.cara.getData());
       $('#benefit').val(CKEDITOR.instances.benefit.getData());
       // return false;
       $.ajax({

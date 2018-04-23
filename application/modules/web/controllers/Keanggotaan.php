@@ -42,6 +42,15 @@ class Keanggotaan extends MX_Controller  {
 
     	$this->ciparser->new_parse('template_frontend','modules_web', 'keanggotaan_layout',$this->data);
     }
+     function benefit() {
+        $url = site_url('api/v1/profit') ;
+        // $a = json_decode($this->api_helper($url),true);
+        $methode = 'GET';
+        $token = '';
+        $a = api_helper('',$url,$methode,$token);
+        $this->data['benefit']=$a['data'];
+        $this->ciparser->new_parse('template_frontend','modules_web', 'benefit_layout',$this->data);
+     }
 
 
 

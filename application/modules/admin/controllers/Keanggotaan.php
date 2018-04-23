@@ -131,19 +131,19 @@ class Keanggotaan extends MX_Controller  {
 			$ret['state'] = 0;
 			$ret['status'] = 0;
 			$this->form_validation->set_error_delimiters('','');
-			$this->form_validation->set_rules('cara','Tata Cara','trim|required');
+			// $this->form_validation->set_rules('cara','Tata Cara','trim|required');
 			$this->form_validation->set_rules('benefit','Benefit','trim|required');
 			if ($this->form_validation->run() == true) {
 				$ret['state'] = 1;
 				$about['profit'] = $this->input->post('benefit');
-				$about['cara'] = $this->input->post('cara');
+				// $about['cara'] = $this->input->post('cara');
 				$id['id_setting'] = $this->input->post('id');
 				if ($this->db->update('tb_setting_user',$about,$id)) {
 					$ret['status'] = 1;
 					$this->session->set_flashdata("notif","Data Berhasil di Masukan");
 				}
 			}
-			$ret['notif']['cara'] = form_error('cara');
+			// $ret['notif']['cara'] = form_error('cara');
 			$ret['notif']['benefit'] = form_error('benefit');
 			echo json_encode($ret);
 			exit();

@@ -32,7 +32,7 @@
                         <div class="line-category-title"></div>
                         <ul class="list-unstyled list-category">
                             <?php for ($i=0; $i < 5 ; $i++) { ?>
-                            <li class="active"><a href="<?php echo site_url('web/news/get_news').'?data='.$news[$i]['newsId']; ?>"> <?php echo $news[$i]['title']; ?> </a></li>
+                            <li class="active"><a href="<?php if(isset($news[$i])){ echo site_url('web/news/get_news').'?data='.$news[$i]['newsId']; } ?>"> <?php if(isset($recent[$i])){ echo $news[$i]['title']; } ?> </a></li>
                         <?php } ?>
                         </ul>
                          

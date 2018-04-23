@@ -58,7 +58,7 @@
                           <ul class="dropdown-menu" role="menu">
                               <li><a href="<?php echo site_url('web/gabung/register') ?>">Pendaftaran</a></li>
                               <li><a href="<?php echo site_url('web/keanggotaan') ?>">Member</a></li>
-                              <li><a href="#">Benefit</a></li>
+                              <li><a href="<?php echo site_url('web/keanggotaan/benefit') ?>">Benefit</a></li>
 
                           </ul>
                         </li>
@@ -70,7 +70,7 @@
                           </ul>
                         </li>
                         <li role="presentation" class=""><a <?php if(current_url() == site_url('web/news')){ ?> class="active" <?php } ?> href="<?php echo site_url('web/news'); ?>">Berita</a></li>
-                        <li role="presentation" class=""><a <?php if(current_url() == site_url('web/news')){ ?> class="active" <?php } ?> href="<?php echo site_url('web/tentang') ?>">Tentang</a></li>
+                        <li role="presentation" class=""><a <?php if(current_url() == site_url('web/tentang')){ ?> class="active" <?php } ?> href="<?php echo site_url('web/tentang') ?>">Tentang</a></li>
                   <!--   <li class="dropdown"><a data-toggle="dropdown" aria-expanded="false" href="#" class="dropdown-toggle">Tentang <span class="fa fa-angle-down"></span></a>
                           <ul class="dropdown-menu" role="menu">
                               <li><a href="<?php echo site_url('web/tentang/contact') ?>">Contact Us</a></li>

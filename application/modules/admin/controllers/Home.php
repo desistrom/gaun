@@ -543,7 +543,48 @@ class Home extends CI_Controller  {
             $ext = substr($str,$i+1,$l);
             return $ext;
     }
-
+    public function kolaborasi()
+    {
+    	if ($this->input->server('REQUEST_METHOD') == 'POST') {
+			$ret['state'] = 0;
+			$ret['status'] = 0;
+			$this->form_validation->set_error_delimiters('','');
+			$this->form_validation->set_rules('judul','Judul Page','trim|required');
+			$this->form_validation->set_rules('content','Content','trim|required');
+			if ($this->form_validation->run() == true) {
+				$ret['state'] = 1;
+				$layanan['content'] = $this->input->post('content');
+				$layanan['title'] = $this->input->post('judul');
+				$layanan['gambar'] = "dumy";
+				$layanan['kategori'] = 3;
+				if ($this->db->get_where('tb_layanan',array('kategori'=>3))->num_rows() == 0) {
+					if($this->db->insert('tb_layanan',$layanan)){
+						$ret['status'] = 1;
+						$this->session->set_flashdata("notif","Data Berhasil di Masukan");
+					}
+				}else{
+					if($this->db->update('tb_layanan',$layanan,array('kategori'=>3))){
+						$ret['status'] = 1;
+						$this->session->set_flashdata("notif","Data Berhasil di Masukan");
+					}
+				}
+			}
+			$ret['notif']['content'] = form_error('content');
+			$ret['notif']['title'] = form_error('judul');
+			echo json_encode($ret);
+			exit();
+		}
+		$this->load->library('ckeditor');
+		$this->ckeditor->basePath = base_url().'assets/ckeditor/';
+		$this->ckeditor->config['toolbar'] = array(
+		                array( 'Source', '-', 'Bold', 'Italic', 'Underline', '-','Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo','-','NumberedList','BulletedList' )
+		                                                    );
+		$this->ckeditor->config['language'] = 'eng';
+		$this->ckeditor->config['width'] = '1024px';
+		$this->ckeditor->config['height'] = '300px';
+		$this->data['kolaborasi'] = $this->db->get_where('tb_layanan',array('kategori'=>3))->row_array();
+		$this->ciparser->new_parse('template_admin','modules_admin', 'home/kolaborasi_layout',$this->data);
+    }
 
 
    

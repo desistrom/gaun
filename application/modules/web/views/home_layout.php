@@ -97,8 +97,8 @@
     <section class="footer-top">
         <div class="container-fluid sub-footer-top">
             <div class="col-md-12 text-center">
-                <h3 class="title">Kolaborasi, tanpa batas</h3>
-                <p>Terhubung dengan mudah keseluruh akademi Indonesia</p>
+                <h3 class="title"><?=$kolaborasi['title'];?></h3>
+                <p><?=$kolaborasi['content'];?></p>
                 <a href="<?php echo site_url('web/gabung/register') ?>" class="btn  btn-gabung" type="button">Gabung Sekarang</a>
             </div>
         </div>

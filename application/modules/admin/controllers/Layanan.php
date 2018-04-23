@@ -663,6 +663,8 @@ class Layanan extends CI_Controller  {
 		$this->ciparser->new_parse('template_admin','modules_admin', 'about/layanan_layout',$this->data);
     }
 
+    
+
     public function upload_logo($logo){	    		
     	
         $imagename = $logo['userfile']['name'];

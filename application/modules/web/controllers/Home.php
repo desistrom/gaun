@@ -39,6 +39,8 @@ class Home extends CI_Controller  {
         $this->data['instansi']=$c['data'];
         $this->data['testimoni']=$d['data'];
 
+        $this->data['kolaborasi'] = $this->db->get_where('tb_layanan',array('kategori'=>3))->row_array();
+
     	$this->ciparser->new_parse('template_frontend','modules_web', 'home_layout',$this->data);
     }
 

@@ -19,7 +19,7 @@
         <div class="error" id="ntf_error"></div>
       </div>
 
-      <?php if($about['image'] != ''){ ?><img src="<?=base_url();?>media/<?=$about['image'];?>" width="250px"><? } ?>
+      <?php if($about['image'] != ''){ ?><img src="<?=base_url();?>media/<?=$about['image'];?>" width="250px"><?php } ?>
 
       <div class="form-group">
         <label>Layanan Content</label>

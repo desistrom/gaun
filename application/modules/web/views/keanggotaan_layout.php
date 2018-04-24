@@ -159,7 +159,8 @@ div.sub-box-keanggotaan{
                 
                     console.log(data);
                     if(data == "null"){
-                        $('.ajax-load').html("No more Data found");
+                        $('.ajax-load').html("<span class='btn btn-danger'>No more Data found</span>");
+                        $('.loadmore').css({'display' : 'none'});
                         return;
                     }
                     $('.ajax-load').hide();

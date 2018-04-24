@@ -24,6 +24,7 @@
       .jsCalendar tbody td.jsCalendar-current{
          background-color: #D10909 !important;
          border-radius: 0;
+         transition: 0;
       }
       .jsCalendar tbody{
         margin: 0 !important;
@@ -146,9 +147,10 @@
                 </div>
                 <div class="col-md-4 col-sm-4 col-xs-12 footer-right text-right">
                   <h3 class="title-footer">Kalender dan Visitor</h3>
-                    <ul class="list-unstyled">
-                      <li><div class="auto-jsCalendar material-theme"></div></li>\
+                    <ul class="list-unstyled" style="float: right;">
                       <li><div id="_wau4yv"></div></li>
+                      <li><div class="auto-jsCalendar material-theme"></div></li>
+                      
                         <!-- <li>
                             <a href="<?php echo footer_helper()['data']['FacebookLink']; ?>" class="facebook" target="blank" > <i class="fa fa-facebook"></i></a>
                         </li>

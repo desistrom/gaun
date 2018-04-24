@@ -79,49 +79,14 @@
         <div class="ajax-load text-center" style="display:none">
             <p><img src="http://demo.itsolutionstuff.com/plugin/loader.gif">Loading More post</p>
         </div>
-        <!-- <div class="container-fluid section-pagination">
+        <div class="container-fluid section-pagination">
             <div class="row">
-                <div class="col-md-12 col-sm-12 col-xs-12 text-center"> -->
+                <div class="col-md-12 col-sm-12 col-xs-12 text-center">
                     <!-- <ul class="list-inline pagination list-pagination"> -->
-                        <?php //echo $this->pagination->create_links(); ?>
+                        <?php echo $this->pagination->create_links(); ?>
                     <!-- </ul> -->
-                <!-- </div>
+                </div>
             </div>
-        </div> -->
+        </div>
     </section>
     <script src="<?=base_url().'assets/js/jquery-3.2.1.min.js';?>"></script>
-    <script type="text/javascript">
-        var page = 1;
-        $(window).scroll(function() {
-            if($(window).scrollTop() + $(window).height() >= $(document).height()) {
-                page++;
-                loadMoreData(page);
-            }
-        });
-
-
-        function loadMoreData(page){
-          $.ajax(
-                {
-                    url: '?page=' + page,
-                    type: "get",
-                    beforeSend: function()
-                    {
-                        $('.ajax-load').show();
-                    }
-                })
-                .done(function(data)
-                {
-                    if(data == null){
-                        $('.ajax-load').html("No more records found");
-                        return;
-                    }
-                    $('.ajax-load').hide();
-                    $(".content-left").append(data);
-                })
-                .fail(function(jqXHR, ajaxOptions, thrownError)
-                {
-                      alert('server not responding...');
-                });
-        }
-    </script>

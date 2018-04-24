@@ -113,13 +113,13 @@ h3.title-footer{
   font-weight: 600;
 }
 
-.footer-right ul li a{
+/*.footer-right ul li a{
   padding:15px 18px;
   background-color:#959595;
   color:white;
-  border-radius:50%;
+ 
   text-align:center;
-}
+}*/
 .footer-right ul li a:hover{
   background-color: #D10909;
 }

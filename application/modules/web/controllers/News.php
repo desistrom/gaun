@@ -17,10 +17,10 @@ class News extends CI_Controller  {
     }
 
     function index() {
-        /*$config['base_url'] = base_url().'web/news/index';
-        $url = base_url().'api/v1/news';*/
+        $config['base_url'] = base_url().'web/news/index';
+        $url = base_url().'api/v1/news';
         $methode = 'GET';
-        /*$b = api_helper('',$url,$methode,'');
+        $b = api_helper('',$url,$methode,'');
         $config['total_rows'] = count($b['data']);
         $config['per_page'] = 4;
         $config['prev_tag_open'] = '<li>';
@@ -37,13 +37,13 @@ class News extends CI_Controller  {
         if (!is_numeric($data)) {
             $data = 0;
         }
-        $url = base_url().'api/v1/pagging_news?data='.$data;*/
+        $url = base_url().'api/v1/pagging_news?data='.$data;
         $token = '';
-        // $a = api_helper('',$url,$methode,$token);
+        $a = api_helper('',$url,$methode,$token);
         $url = base_url().'api/v1/news';
         $b = api_helper('',$url,$methode,$token);
         $this->data['recent']=$b['data'];
-        if (!empty($this->input->get('page'))) {
+        /*if (!empty($this->input->get('page'))) {
             $start = ceil($this->input->get('page') * 4);
             $url = base_url().'api/v1/pagging_news?data='.$start;
             $a = api_helper('',$url,$methode,$token);
@@ -55,11 +55,11 @@ class News extends CI_Controller  {
             $a = api_helper('',$url,$methode,$token);
             $this->data['news']=$a['data'];
             $this->ciparser->new_parse('template_frontend','modules_web', 'news_layout',$this->data);
-        }
+        }*/
 
-        /*$this->data['news']=$a['data'];
+        $this->data['news']=$a['data'];
         $this->data['recent']=$b['data'];
-    	$this->ciparser->new_parse('template_frontend','modules_web', 'news_layout',$this->data);*/
+    	$this->ciparser->new_parse('template_frontend','modules_web', 'news_layout',$this->data);
     }
         function get_news() {
         $id=$_GET['data'];

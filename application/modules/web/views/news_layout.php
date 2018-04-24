@@ -112,7 +112,7 @@
                 })
                 .done(function(data)
                 {
-                    if(data == " "){
+                    if(data == null){
                         $('.ajax-load').html("No more records found");
                         return;
                     }

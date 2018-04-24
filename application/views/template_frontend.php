@@ -40,9 +40,12 @@
         width: 35px;
       }
       .jsCalendar tbody td:hover{
-  background-color: #EFDBDB;
-  border-radius: 0;
-}
+        background-color: #EFDBDB;
+        border-radius: 0;
+      }
+      .waubutton.wau.push{
+         width: 100% !important;
+          }
     </style>
 </head>
 

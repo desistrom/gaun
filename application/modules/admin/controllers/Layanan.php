@@ -239,7 +239,7 @@ class Layanan extends CI_Controller  {
 				$media['file_name'] = $this->input->post('file_name');
 				if ($this->db->update('tb_tube',$media,array('id_galery'=>$id)) == true) {
             		$ret['status'] = 1;
-            		$ret['url'] = site_url('admin/galery/list_video');
+            		$ret['url'] = site_url('admin/layanan/id_tube');
             		$this->session->set_flashdata("notif","Data Berhasil di Masukan");
             	}
 			}

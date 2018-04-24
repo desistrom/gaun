@@ -25,7 +25,7 @@
 							<td><?=word_limiter($value['content'],5);?></td>
 							<td>
 								<!-- <button class="btn btn-default">disable</button> -->
-								<a href="<?=site_url('admin/email/edit/'.$value['id_notifikasi_email']);?>"><button class="btn btn-primary" id="edit">Edit</button></a>
+								<a href="<?=site_url('admin/email/edit/'.$value['id_notifikasi_email']);?>"><button class="btn btn-primary btn-sm" id="edit">Edit</button></a>
 							</td>
 						</tr>
 					<?php endforeach ?>

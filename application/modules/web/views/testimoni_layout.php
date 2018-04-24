@@ -54,6 +54,20 @@ span.website-testimoni{
 	text-align: center;
 	display: inline-block;
 }
+@media(max-width:767px){
+  .testimoni .content-testimoni{
+  padding:1em;
+}
+
+}
+@media(max-width:500px){
+  .testimoni .content-testimoni{
+  padding:1em 0;
+}
+.box-testimoni{
+  padding:15px 1em;
+}
+}
 
 
   </style>
@@ -70,7 +84,7 @@ span.website-testimoni{
             <div class="col-md-12 col-sm-12 col-xs-12 content-testimoni">
               
               <?php foreach ($testimoni as $key => $value) : ?>
-                <div class="col col-md-6 col-sm-6 col-xs-6 box-testimoni">
+                <div class="col col-md-6 col-sm-6 col-xs-12 box-testimoni">
                     <div class="col col-md-12 col-sm-12 col-xs-12 none-padding sub-box-testimoni">
                         <div class="col col-md-12 col-sm-12 col-xs-12 text-center">
                             <div class="box-testimoni-left ">

@@ -231,7 +231,7 @@ div.sub-video{
 .layanan{
   margin-top:3em;
   padding-top: 2em;
-  height:400px;
+  height:auto;
   background-color:white;
 }
 
@@ -392,6 +392,8 @@ i.fa.fa-quote-left.fa-2x{
 section.footer-top .sub-footer-top{
   background-image:url(../../assets/images/logo/bg-foot.jpg);
   padding:7em 0 9em 0;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 section.footer-top .title{
@@ -974,6 +976,9 @@ div.container-fluid{
 .hero-right{
   float: none;
 }
+.hero-video{
+  height: 270px;
+}
 .hero-left{
   float: none;
   text-align: center;
@@ -1042,7 +1047,7 @@ section.footer-top .sub-footer-top{
   padding-top: 2em;
 }
 section.client .top h3{
-  font-size: 24px;
+  font-size: 19px;
 }
 .arrow-line{
   display: none;

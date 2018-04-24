@@ -39,7 +39,7 @@
                               <li><a href="<?php echo site_url('web/layanan/id_book') ?>">ID-BOOK</a></li>
                               <li><a href="<?php echo site_url('web/layanan/id_journal') ?>">ID-JOURNAL</a></li>
                               <li><a href="<?php echo site_url('web/layanan/id_tube') ?>">ID-TUBE</a></li>
-                              <li><a href="<?php echo site_url('web/layanan/id_mail') ?>">ID-MAaIL</a></li>
+                              <li><a href="<?php echo site_url('web/layanan/id_mail') ?>">ID-MAIL</a></li>
                               <li><a href="<?php echo site_url('web/layanan/id_research') ?>">ID-RESEARCH</a></li>
                               <li><a href="<?php echo site_url('web/layanan/id_link') ?>">ID-LINKS</a></li>
                               <li><a href="<?php echo site_url('web/layanan/id_rank') ?>">ID-RANK</a></li>

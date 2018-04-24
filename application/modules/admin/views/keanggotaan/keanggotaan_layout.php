@@ -20,8 +20,8 @@
 				<td><?=$value['phone'];?></td>
 				<td>
 					<!-- <button class="btn btn-default">disable</button> -->
-					<a href="<?=site_url('admin/keanggotaan/edit/'.$value['id_user']);?>"><button class="btn btn-primary" id="edit">Edit</button></a>
-					<a href="<?=site_url('admin/keanggotaan/status/'.$value['id_user']);?>"><button class="btn btn-info" id="edit"><?php if($value['is_aktif'] == 1){ ?> Enable <?php }else{ ?> Disable<?php } ?></button></a>
+					<a href="<?=site_url('admin/keanggotaan/edit/'.$value['id_user']);?>"><button class="btn btn-primary btn-sm" id="edit">Edit</button></a>
+					<a href="<?=site_url('admin/keanggotaan/status/'.$value['id_user']);?>"><button class="btn btn-info btn-sm" id="edit"><?php if($value['is_aktif'] == 1){ ?> Enable <?php }else{ ?> Disable<?php } ?></button></a>
 				</td>
 			</tr>
 		<?php endforeach ?>

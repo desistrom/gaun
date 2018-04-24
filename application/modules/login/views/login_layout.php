@@ -39,7 +39,7 @@
 
     <form>
       <div class="form-group has-feedback">
-        <input type="email" class="form-control" placeholder="Username" name="username">
+        <input type="text" class="form-control" placeholder="Username" name="username">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
         <div class="error" id="ntf_username"></div>
       </div>
@@ -105,6 +105,38 @@
                 }).fail(function(xhr, status, error){
                     alert(xhr.responseText);
                 });
+            });
+
+            $('form').keypress(function(){
+              if (event.which == 13) {
+                $.ajax({
+                    url: window.location.href,
+                    type : 'POST',
+                    dataType : 'json',
+                    data : $('form').serializeArray(),
+                    async : false,
+                    cache : false ,
+                }).done(function(data){
+                    console.log(data);
+                    if(data.state == 1){
+                        if (data.status == 1) {
+                            window.location = data.url;
+                        }else{
+                            $('.error_pass').show();
+                            $('.error_pass').css({'color':'red', 'font-style':'italic', 'text-align':'center'});
+                            console.log(data);
+                            $('.error_pass').html(data.error);
+                        }
+                    }
+                        $.each(data.notif,function(key,value){
+                        $('.error').show();
+                        $('#ntf_'+ key).html(value);
+                        $('#ntf_'+ key).css({'color':'red', 'font-style':'italic'});
+                        });
+                }).fail(function(xhr, status, error){
+                    alert(xhr.responseText);
+                });
+              }
             });
         });
     </script>

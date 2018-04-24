@@ -281,21 +281,23 @@
 
     $('body').on('click','.btn_delete', function(){
     	var id = $(this).attr('id');
-    	$('#progresLoading').modal('show');
     	console.log(id);
-    	$.ajax({
-          url : base_url+"admin/keanggotaan/delete_instansi",
-          dataType : 'json',
-          type : 'POST',
-          data : {'id' : id},
-          async : false
-      }).done(function(data){
-      	setTimeout(function(){  
-	      	$('#progresLoading').modal('hide');
-	      	console.log(data);
-	        window.location.href = window.location.href;
-        }, 3000);
-      });
+    	if (confirm("Ingin menhapus data ini ?")) {
+    		$('#progresLoading').modal('show');
+	    	$.ajax({
+	          url : base_url+"admin/keanggotaan/delete_instansi",
+	          dataType : 'json',
+	          type : 'POST',
+	          data : {'id' : id},
+	          async : false
+	      	}).done(function(data){
+	      	setTimeout(function(){  
+		      	$('#progresLoading').modal('hide');
+		      	console.log(data);
+		        window.location.href = window.location.href;
+	        }, 3000);
+	      });
+  		}
     });
 
     $('#modalSuccess').modal('show');

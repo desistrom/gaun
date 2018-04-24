@@ -16,7 +16,7 @@
 							<td><?=$value['nm_kategori'];?></td>
 							<td>
 								<!-- <button class="btn btn-default">disable</button> -->
-								<a href="<?=site_url('admin/email/edit_kategori/'.$value['id_kategori_email']);?>"><button class="btn btn-primary" id="edit">Edit</button></a> | <a href="<?=site_url('admin/email/delete_kategori/'.$value['id_kategori_email']);?>"><button class="btn btn-danger" id="delete">Delete</button></a>
+								<a href="<?=site_url('admin/email/edit_kategori/'.$value['id_kategori_email']);?>"><button class="btn btn-primary btn-sm" id="edit">Edit</button></a> <button class="btn btn-danger btn-sm btn_delete" id="<?=$value['id_kategori_email'];?>">Delete</button>
 							</td>
 						</tr>
 					<?php endforeach ?>
@@ -94,9 +94,6 @@
 <script type="text/javascript">
   $(document).ready(function () {
     $('body').on('click','#submit', function(){
-      // console.log($('form').val());
-      // $('#content').val(CKEDITOR.instances.content.getData());
-      // return false;
       $.ajax({
           url : window.location.href,
           dataType : 'json',
@@ -120,6 +117,27 @@
             $('#ntf_'+ key).css({'color':'red', 'font-style':'italic'});
             });
       });
+    });
+
+    $('body').on('click','.btn_delete', function(){
+    	var id = $(this).attr('id');
+    	console.log(id);
+    	if (confirm("Ingin menhapus data ini ?")) {
+    		$('#progresLoading').modal('show');
+	    	$.ajax({
+	          url : base_url+"admin/email/delete_kategori/"+id,
+	          dataType : 'json',
+	          type : 'GET',
+	          data : {'id' : id},
+	          async : false
+	      	}).done(function(data){
+	      	setTimeout(function(){  
+		      	$('#progresLoading').modal('hide');
+		      	console.log(data);
+		        window.location.href = window.location.href;
+	        }, 3000);
+	      });
+  		}
     });
     $('#modalSuccess').modal('show');
   });

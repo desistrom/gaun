@@ -29,10 +29,10 @@
         color: white;
 
     }
-</style>
 
-   <section class="detail_news">
-      <style type="text/css">
+      .header-title{
+        font-size: 50px;color: #BDBDBD;margin-bottom: 1em;
+      }
      .filter-title-page-news{
         margin-top: 5em;
       }
@@ -285,6 +285,9 @@
          }
          }
         @media(max-width:400px){
+          .header-title{
+        font-size: 24px;color: #BDBDBD;margin-bottom: 1em;
+      }
            .modal-album .modal-dialog{
           width: 350px;
           margin-top: 10px;
@@ -310,7 +313,7 @@
                     <div></div>
                 </div>
                 <div class="header-title">
-                    <h2 style="font-size: 50px;color: #BDBDBD;margin-bottom: 1em;">PHOTO </h2></div>
+                    <h2 style="">PHOTO </h2></div>
             </div>
         </div>
         <section id="img-page">

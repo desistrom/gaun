@@ -4,6 +4,9 @@
  .content-video{
   background-color: #F2F2F2;
 }
+      .header-title{
+        font-size: 50px;color: #BDBDBD;margin-bottom: 1em;
+      }
 .title-page-news{
   padding-bottom: 0;
 }
@@ -143,6 +146,9 @@
       }
         }
        @media(max-width:500px){
+              .header-title{
+        font-size: 24px;color: #BDBDBD;margin-bottom: 1em;
+      }
         .modal  iframe{
           height: 270px !important;
         }
@@ -187,7 +193,7 @@
                     <div></div>
                 </div>
                 <div class="header-title">
-                    <h2 style="font-size: 50px;color: #BDBDBD;">Video </h2></div>
+                    <h2 style="">Video </h2></div>
             </div>
         </div>
         <section class="content-video">

@@ -114,6 +114,7 @@
                     <h3 class="title-footer">Kantor Pusat</h3>
                     <ul class="list-unstyled">
                         <li><?php echo footer_helper()['data']['address']; ?></li>
+                        <li><?php echo footer_helper()['data']['address2']; ?></li>
                         <!-- <li>Gedung Alfamidi Lt.4</li>
                         <li>Jl. Budi Utomo No. 3 Kav.56</li>
                         <li>Sukun Jota Malang</li> -->

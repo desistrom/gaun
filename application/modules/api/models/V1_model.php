@@ -86,7 +86,16 @@ class V1_model extends CI_Model{
 	}
 
 	public function getFooter(){
-		$sql = "SELECT alamat as address, facebook as FacebookLink, twitter as TwitterLink, instagram as InstagramLink FROM tb_footer";
+		$sql = "SELECT alamat as address, alamat2 as address2, facebook as FacebookLink, twitter as TwitterLink, instagram as InstagramLink FROM tb_footer";
+		if ($this->db->query($sql)->num_rows() > 0) {
+			return $this->db->query($sql)->row_array();
+			exit();
+		}
+		return false;
+	}
+
+	public function getSlider(){
+		$sql = "SELECT content as title FROM tb_layanan WHERE kategori = 4";
 		if ($this->db->query($sql)->num_rows() > 0) {
 			return $this->db->query($sql)->row_array();
 			exit();

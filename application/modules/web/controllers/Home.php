@@ -31,6 +31,9 @@ class Home extends CI_Controller  {
         $url_testi =site_url('api/v1/gettestimoni');
         $d = api_helper('',$url_testi,$methode,$token);
 
+         $url_titleslider =site_url('api/v1/gettitleslider');
+        $e = api_helper('',$url_titleslider,$methode,$token);
+
 
         // $url = "http://192.168.88.138/idren/api/v1/about";
         // $a = json_decode($this->hit_api($url),true);
@@ -38,6 +41,7 @@ class Home extends CI_Controller  {
         $this->data['layanan']=$b['data'];
         $this->data['instansi']=$c['data'];
         $this->data['testimoni']=$d['data'];
+        $this->data['title_slider']=$e['data'];
 
         $this->data['kolaborasi'] = $this->db->get_where('tb_layanan',array('kategori'=>3))->row_array();
 

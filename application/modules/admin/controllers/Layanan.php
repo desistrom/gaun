@@ -97,7 +97,7 @@ class Layanan extends CI_Controller  {
 		$this->ckeditor->config['language'] = 'eng';
 		$this->ckeditor->config['width'] = '1024px';
 		$this->ckeditor->config['height'] = '300px';
-		
+		$this->data['breadcumb'] = 'ID-BOOK';
 		$this->ciparser->new_parse('template_admin','modules_admin', 'about/layanan_layout',$this->data);
     }
 
@@ -178,6 +178,7 @@ class Layanan extends CI_Controller  {
 		$this->ckeditor->config['language'] = 'eng';
 		$this->ckeditor->config['width'] = '1024px';
 		$this->ckeditor->config['height'] = '300px';
+		$this->data['breadcumb'] = 'ID-JOURNAL';
 		$this->ciparser->new_parse('template_admin','modules_admin', 'about/layanan_layout',$this->data);
     }
 
@@ -258,6 +259,7 @@ class Layanan extends CI_Controller  {
 		$this->ckeditor->config['language'] = 'eng';
 		$this->ckeditor->config['width'] = '1024px';
 		$this->ckeditor->config['height'] = '300px';
+		$this->data['breadcumb'] = 'ID-TUBE';
 		$this->ciparser->new_parse('template_admin','modules_admin', 'about/layanan_layout',$this->data);
     }
 
@@ -339,6 +341,7 @@ class Layanan extends CI_Controller  {
 		$this->ckeditor->config['language'] = 'eng';
 		$this->ckeditor->config['width'] = '1024px';
 		$this->ckeditor->config['height'] = '300px';
+		$this->data['breadcumb'] = 'ID-MAIL';
 		$this->ciparser->new_parse('template_admin','modules_admin', 'about/layanan_layout',$this->data);
     }
 
@@ -420,6 +423,7 @@ class Layanan extends CI_Controller  {
 		$this->ckeditor->config['language'] = 'eng';
 		$this->ckeditor->config['width'] = '1024px';
 		$this->ckeditor->config['height'] = '300px';
+		$this->data['breadcumb'] = 'ID-RESEARCH';
 		$this->ciparser->new_parse('template_admin','modules_admin', 'about/layanan_layout',$this->data);
     }
 
@@ -500,6 +504,7 @@ class Layanan extends CI_Controller  {
 		$this->ckeditor->config['language'] = 'eng';
 		$this->ckeditor->config['width'] = '1024px';
 		$this->ckeditor->config['height'] = '300px';
+		$this->data['breadcumb'] = 'ID-LINKS';
 		$this->ciparser->new_parse('template_admin','modules_admin', 'about/layanan_layout',$this->data);
     }
 
@@ -580,6 +585,7 @@ class Layanan extends CI_Controller  {
 		$this->ckeditor->config['language'] = 'eng';
 		$this->ckeditor->config['width'] = '1024px';
 		$this->ckeditor->config['height'] = '300px';
+		$this->data['breadcumb'] = 'ID-RANK';
 		$this->ciparser->new_parse('template_admin','modules_admin', 'about/layanan_layout',$this->data);
     }
 
@@ -660,6 +666,7 @@ class Layanan extends CI_Controller  {
 		$this->ckeditor->config['language'] = 'eng';
 		$this->ckeditor->config['width'] = '1024px';
 		$this->ckeditor->config['height'] = '300px';
+		$this->data['breadcumb'] = 'MONITORING GRAPH';
 		$this->ciparser->new_parse('template_admin','modules_admin', 'about/layanan_layout',$this->data);
     }
 

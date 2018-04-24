@@ -1,3 +1,8 @@
+<style type="text/css">
+  #cke_content{
+    width: 100% !important;
+  }
+</style>
 <div class="box">
 <?php if ($view == 'list') { ?>
 <link rel="stylesheet" href="<?=base_url();?>assets/datatables/css/dataTables.bootstrap.min.css">
@@ -57,12 +62,17 @@
     </div>
   <?php } ?>
 <?php }elseif ($view == 'add') { ?>
-	<div class="box-header with-border">
-    <h3 class="box-title">Add News</h3>
+<form role="form">
+<div class="col col-md-8 col-sm-8 col-xs-12" style="padding-top: 1em;">
+  <div class="panel">
+    <div class="panel-header" style="background-color:  #F5F5F5;">
+        <div class="box-header with-border">
+    <h3 class="box-title"> News Content</h3>
   </div>
-  <!-- /.box-header -->
+    </div>
+    <div class="panel-body"><!-- /.box-header -->
   <div class="box-body">
-    <form role="form">
+    
       <!-- text input -->
       <div class="form-group">
         <label>Judul Berita</label>
@@ -74,22 +84,8 @@
         <input type="text" name="slug" class="form-control" id="slug" disabled="true" value="">
         <div class="error" id="ntf_judul"></div>
       </div>
-      <div class="form-group">
-        <label>Gambar Berita</label>
-        <input type="file" name="file_name" class="form-control" id="file_name">
-        <div class="error" id="ntf_file_name"></div>
-      </div>
-      <!-- textarea -->
-      <div class="form-group">
-        <label>Kategori Berita</label>
-        <select class="form-control" name="kategori" id="kategori" >
-        	<option value="">-- Pilih Kategori --</option>
-        	<?php foreach ($kategori as $key => $value): ?>
-        		<option value="<?=$value['id_kategori_news'];?>"><?=$value['nm_kategori'];?></option>
-        	<?php endforeach ?>
-        </select>
-        <div class="error" id="ntf_kategori"></div>
-      </div>
+      
+      
 
       <div class="form-group">
       <label>Content News</label>
@@ -98,10 +94,55 @@
         <div class="error" id="ntf_content"></div>
       </div>
 
-      <button type="button" class="btn btn-primary" id="submit">Submit</button>
+     
 
-    </form>
+  
+  </div></div>
+
   </div>
+
+</div>
+<div class="col col-md-4 col-sm-4 col-xs-12" style="padding-top: 1em;">
+  <div class="panel ">
+
+      <div class="panel-header" style="background-color:  #F5F5F5;">
+        <div class="box-header with-border">
+        <h3 class="box-title">News Setting</h3>
+      </div>
+    </div>
+    <div class="panel-body">
+      <!-- textarea -->
+      <div class="form-group">
+        <label>Kategori Berita</label>
+        <select class="form-control" name="kategori" id="kategori" >
+          <option value="">-- Pilih Kategori --</option>
+          <?php foreach ($kategori as $key => $value): ?>
+            <option value="<?=$value['id_kategori_news'];?>"><?=$value['nm_kategori'];?></option>
+          <?php endforeach ?>
+        </select>
+        <div class="error" id="ntf_kategori"></div>
+      </div>
+      <div class="form-group">
+        <label>Post Status</label>
+        <select class="form-control" name="kategori" id="kategori" >
+          <option>Publish</option>
+          <option>Private</option>
+        </select>
+        <div class="error" id="ntf_kategori"></div>
+      </div>
+      <div class="form-group">
+        <label>Gambar Berita</label>
+        <input type="file" name="file_name" class="form-control" id="file_name">
+        <div class="error" id="ntf_file_name"></div>
+      </div>
+       <button type="button" class="btn btn-primary" id="submit">Submit</button>
+    </div>
+
+
+</div>
+</div>
+  </form>
+  
 <?php }else{ ?>
 	<div class="box-header with-border">
     <h3 class="box-title">Edit News</h3>

@@ -349,6 +349,11 @@ class V1 extends REST_Controller {
         $this->_getFooter();
     }
 
+    public function gettitleslider_get(){
+        header('Content-Type: application/json');
+        $this->_getSlider();
+    }
+
     function _albumAll(){
         $galery = $this->v1_model->getAllAlbum();
         $retData['code'] = '200';
@@ -880,6 +885,14 @@ class V1 extends REST_Controller {
 
     function _getFooter(){
         $user = $this->v1_model->getFooter();
+        $retData['code'] = '200';
+        $retData['status'] = 'Success';
+        $retData['data'] = $user;
+        $this->response($retData,200);
+    }
+
+    function _getSlider(){
+        $user = $this->v1_model->getSlider();
         $retData['code'] = '200';
         $retData['status'] = 'Success';
         $retData['data'] = $user;

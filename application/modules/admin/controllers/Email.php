@@ -18,6 +18,7 @@ class Email extends MX_Controller  {
 	public function index(){
 		$this->data['email'] = $this->home_model->getemail();
 		$this->data['view'] = 'list';
+		$this->data['breadcumb'] = 'List Email';
 		$this->ciparser->new_parse('template_admin','modules_admin', 'email/master_email_layout',$this->data);
 	}
 
@@ -72,10 +73,12 @@ class Email extends MX_Controller  {
 		$this->ckeditor->config['height'] = '300px';
 		$this->data['view'] = 'add';
 		$this->data['kategori'] = $this->db->get('tb_kategori_email')->result_array();
+		$this->data['breadcumb'] = 'Add Email';
 		$this->ciparser->new_parse('template_admin','modules_admin', 'email/master_email_layout',$this->data);
 	}
 
 	public function kategori(){
+		$this->data['breadcumb'] = 'Kategori Email';
 		$this->data['kategori'] = $this->db->get('tb_kategori_email')->result_array();
 		$this->data['view'] = 'list';
 		$this->ciparser->new_parse('template_admin','modules_admin', 'email/master_kategori_email_layout',$this->data);
@@ -101,6 +104,7 @@ class Email extends MX_Controller  {
 			echo json_encode($ret);
 			exit();
 		}
+		$this->data['breadcumb'] = 'Add Kategori Email';
 		$this->data['view'] = 'add';
 		$this->ciparser->new_parse('template_admin','modules_admin', 'email/master_kategori_email_layout',$this->data);
 	}
@@ -128,6 +132,7 @@ class Email extends MX_Controller  {
 			echo json_encode($ret);
 			exit();
 		}
+		$this->data['breadcumb'] = 'Edit Kategori Email';
 		$this->data['view'] = 'edit';
 		$this->data['kategori'] = $this->db->get_where('tb_kategori_email',array('id_kategori_email'=>$id))->row_array();
 		$this->ciparser->new_parse('template_admin','modules_admin', 'email/master_kategori_email_layout',$this->data);
@@ -144,6 +149,7 @@ class Email extends MX_Controller  {
 	}
 
 	public function template(){
+		$this->data['breadcumb'] = 'List Tempalte';
 		$this->data['kategori'] = $this->db->get('tb_kategori_email')->result_array();
 		$this->data['view'] = 'list';
 		$this->ciparser->new_parse('template_admin','modules_admin', 'email/master_template_layout',$this->data);
@@ -185,6 +191,7 @@ class Email extends MX_Controller  {
 			echo json_encode($ret);
 			exit();
 		}
+		$this->data['breadcumb'] = 'Edit Template';
 		$this->ciparser->new_parse('template_admin','modules_admin', 'email/master_template_layout',$this->data);
 	}
 
@@ -220,6 +227,7 @@ class Email extends MX_Controller  {
 			echo json_encode($ret);
 			exit();
 		}
+		$this->data['breadcumb'] = 'Setting Email';
 		$this->ciparser->new_parse('template_admin','modules_admin', 'email/setting_email_layout',$this->data);
 	}
 

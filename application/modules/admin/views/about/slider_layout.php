@@ -6,33 +6,9 @@
 	<div class="box-body">
 	    <form role="form">
 		    <div class="form-group">
-		        <label>Alamat</label>
-		        <textarea class="form-control" id="alamat" name="alamat"><?=$footer['alamat'];?></textarea>
-		        <div class="error" id="ntf_alamat"></div>
-		    </div>
-
-		    <div class="form-group">
-		        <label>Alamat Ke - 2</label>
-		        <textarea class="form-control" id="alamat2" name="alamat2"><?=$footer['alamat2'];?></textarea>
-		        <div class="error" id="ntf_alamat"></div>
-		    </div>
-
-		    <div class="form-group">
-		        <label>Link Facebook</label>
-		        <input type="text" name="facebook" class="form-control" id="facebook" placeholder="Enter Link Facebook ..." value="<?=$footer['facebook'];?>">
-		        <div class="error" id="ntf_facebook"></div>
-		    </div>
-
-		    <div class="form-group">
-		        <label>Link Twitter</label>
-		        <input type="text" name="twitter" class="form-control" id="twitter" placeholder="Enter Link Twitter ..." value="<?=$footer['twitter'];?>">
-		        <div class="error" id="ntf_twitter"></div>
-		    </div>
-
-		    <div class="form-group">
-		        <label>Link Instagram</label>
-		        <input type="text" name="instagram" class="form-control" id="instagram" placeholder="Enter Link Instagram ..." value="<?=$footer['instagram'];?>">
-		        <div class="error" id="ntf_instagram"></div>
+		        <label>Title Slider</label>
+		        <textarea class="form-control" id="content" name="content"><?=$slider['content'];?></textarea>
+		        <div class="error" id="ntf_content"></div>
 		    </div>
 
 		    <button type="button" class="btn btn-primary" id="submit">Submit</button>

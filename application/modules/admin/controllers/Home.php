@@ -21,7 +21,10 @@ class Home extends CI_Controller  {
 
     function index() {
     // print_r($this->session->userdata('token'));
-    $this->ciparser->new_parse('template_admin','modules_admin', 'home/home_layout');
+    	$this->data['breadcumb'] = 'Dashboard';
+    	$this->data['user'] = $this->db->get('tb_instansi')->num_rows();
+    	$this->data['news'] = $this->db->get('tb_news')->num_rows();
+    	$this->ciparser->new_parse('template_admin','modules_admin', 'home/home_layout',$this->data);
     }
 
     public function logo(){
@@ -74,6 +77,7 @@ class Home extends CI_Controller  {
 		echo json_encode($ret);
 		exit();
 		}
+		$this->data['breadcumb'] = 'Logo';
 		$this->ciparser->new_parse('template_admin','modules_admin', 'home/Upload_layout',$this->data);
 	}
 
@@ -127,12 +131,14 @@ class Home extends CI_Controller  {
 		echo json_encode($ret);
 		exit();
 		}
+		$this->data['breadcumb'] = 'Topologi';
 		$this->ciparser->new_parse('template_admin','modules_admin', 'home/Upload_layout',$this->data);
 	}
 
 	public function testimoni(){
 		$this->data['view'] = 'list';
 		// print_r($this->home_model->getTestimoni());
+		$this->data['breadcumb'] = 'Testimoni';
 		$this->data['testimoni'] = $this->home_model->getTestimoni();
 		$this->ciparser->new_parse('template_admin','modules_admin', 'home/master_testimoni_layout',$this->data);
 	}
@@ -183,6 +189,7 @@ class Home extends CI_Controller  {
 		$this->ckeditor->config['width'] = '1024px';
 		$this->ckeditor->config['height'] = '300px';  
 		$this->data['view'] = 'add';
+		$this->data['breadcumb'] = 'Add Testimoni';
 		$this->ciparser->new_parse('template_admin','modules_admin', 'home/master_testimoni_layout',$this->data);
 	}
 
@@ -259,7 +266,7 @@ class Home extends CI_Controller  {
 		$this->ckeditor->config['width'] = '1024px';
 		$this->ckeditor->config['height'] = '300px';  
 		$this->data['view'] = 'edit';
-		
+		$this->data['breadcumb'] = 'Edit Testimoni';
 		$this->ciparser->new_parse('template_admin','modules_admin', 'home/master_testimoni_layout',$this->data);
 	}
 
@@ -383,6 +390,7 @@ class Home extends CI_Controller  {
 		$this->ckeditor->config['language'] = 'eng';
 		$this->ckeditor->config['width'] = '1024px';
 		$this->ckeditor->config['height'] = '300px'; 
+		$this->data['breadcumb'] = 'Hero';
 		$this->ciparser->new_parse('template_admin','modules_admin', 'home/hero_layout',$this->data);
     }
 
@@ -458,6 +466,7 @@ class Home extends CI_Controller  {
 		$this->ckeditor->config['language'] = 'eng';
 		$this->ckeditor->config['width'] = '1024px';
 		$this->ckeditor->config['height'] = '300px'; 
+		$this->data['breadcumb'] = 'Layanan ID-ROAM';
 		$this->ciparser->new_parse('template_admin','modules_admin', 'home/layanan_layout',$this->data);
     }
 
@@ -531,6 +540,7 @@ class Home extends CI_Controller  {
 		$this->ckeditor->config['language'] = 'eng';
 		$this->ckeditor->config['width'] = '1024px';
 		$this->ckeditor->config['height'] = '300px'; 
+		$this->data['breadcumb'] = 'Layanan Cloud';
 		$this->ciparser->new_parse('template_admin','modules_admin', 'home/layanan_layout',$this->data);
     }
 
@@ -583,6 +593,7 @@ class Home extends CI_Controller  {
 		$this->ckeditor->config['width'] = '1024px';
 		$this->ckeditor->config['height'] = '300px';
 		$this->data['kolaborasi'] = $this->db->get_where('tb_layanan',array('kategori'=>3))->row_array();
+		$this->data['breadcumb'] = 'Kolaborasi';
 		$this->ciparser->new_parse('template_admin','modules_admin', 'home/kolaborasi_layout',$this->data);
     }
 

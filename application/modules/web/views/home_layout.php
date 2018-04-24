@@ -70,7 +70,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12 col-sm-12 col-xs-12 top" >
-                    <h3 class="text-center">Akademisi yang bergabung dengan IDren</h3></div>
+                    <h3 class="text-center"><?php echo $title_slider['title']; ?></h3></div>
                 <div class="col-md-12 col-sm-12 col-xs-12 none-padding sub-client" id="owl-demo" >
                     <?php foreach ($instansi as $key => $value) :  ?>
                     <div class="col col-md-12 col-sm-12 col-xs-12 text-center item">

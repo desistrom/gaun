@@ -14,6 +14,7 @@ class Keanggotaan extends MX_Controller  {
 	}
 	public function index(){
 		$this->data['anggota'] = $this->db->get('tb_user')->result_array();
+		$this->data['breadcumb'] = 'List User';
 		$this->ciparser->new_parse('template_admin','modules_admin', 'keanggotaan/keanggotaan_layout',$this->data);
 	}
 
@@ -65,6 +66,7 @@ class Keanggotaan extends MX_Controller  {
 			echo json_encode($ret);
 			exit();
 		}
+		$this->data['breadcumb'] = 'Add User';
 		$this->data['instansi'] = $this->db->get('tb_instansi')->result_array();
 		$this->ciparser->new_parse('template_admin','modules_admin', 'keanggotaan/keanggotaan_add_layout',$this->data);
 	}
@@ -122,7 +124,7 @@ class Keanggotaan extends MX_Controller  {
 			exit();
 		}
 		$this->data['instansi'] = $this->db->get('tb_instansi')->result_array();
-		
+		$this->data['breadcumb'] = 'Edit user';
 		$this->ciparser->new_parse('template_admin','modules_admin', 'keanggotaan/keanggotaan_edit_layout',$this->data);
 	}
 
@@ -156,12 +158,14 @@ class Keanggotaan extends MX_Controller  {
 		$this->ckeditor->config['language'] = 'eng';
 		$this->ckeditor->config['width'] = '1024px';
 		$this->ckeditor->config['height'] = '300px';
+		$this->data['breadcumb'] = 'Dashboard';
 		$this->data['content'] = $this->db->get('tb_setting_user')->row_array();
 		$this->ciparser->new_parse('template_admin','modules_admin', 'keanggotaan/setting_layout',$this->data);
 	}
 
 	public function instansi(){
 		$this->data['view'] = 'list';
+		$this->data['breadcumb'] = 'List Instransi';
 		$this->data['instansi'] = $this->db->get('tb_instansi')->result_array();
 		$this->ciparser->new_parse('template_admin','modules_admin', 'keanggotaan/master_instansi_layout',$this->data);
 	}
@@ -212,6 +216,7 @@ class Keanggotaan extends MX_Controller  {
 			echo json_encode($ret);
 			exit();
 		}
+		$this->data['breadcumb'] = 'Add Instansi';
 		$this->data['view'] = 'add';
 		$this->data['instansi'] = $this->db->get('tb_instansi')->result_array();
 		$this->ciparser->new_parse('template_admin','modules_admin', 'keanggotaan/master_instansi_layout',$this->data);
@@ -281,7 +286,7 @@ class Keanggotaan extends MX_Controller  {
 			exit();
 		}
 		$this->data['view'] = 'edit';
-		
+		$this->data['breadcumb'] = 'Edit Instansi';
 		$this->ciparser->new_parse('template_admin','modules_admin', 'keanggotaan/master_instansi_layout',$this->data);
 	}
 

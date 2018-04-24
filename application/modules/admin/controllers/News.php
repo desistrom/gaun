@@ -18,6 +18,7 @@ class News extends MX_Controller  {
 		$this->data['view'] = 'list';
 		$sql = "SELECT * FROM tb_news n join tb_kategori_news k on n.id_kategori_ref = k.id_kategori_news";
 		$this->data['news'] = $this->db->query($sql)->result_array();
+		$this->data['breadcumb'] = 'List News';
 		$this->ciparser->new_parse('template_admin','modules_admin', 'news/news_layout',$this->data);
 	}
 
@@ -71,6 +72,7 @@ class News extends MX_Controller  {
 		$this->data['view'] = 'add';
 		$this->data['kategori'] = $this->db->get('tb_kategori_news')->result_array();
 		$this->data['news'] = $this->db->get('tb_news')->result_array();
+		$this->data['breadcumb'] = 'Add News';
 		$this->ciparser->new_parse('template_admin','modules_admin', 'news/news_layout',$this->data);
 	}
 
@@ -136,6 +138,7 @@ class News extends MX_Controller  {
 		$this->ckeditor->config['width'] = '1024px';
 		$this->ckeditor->config['height'] = '300px'; 
 		$this->data['view'] = 'edit';
+		$this->data['breadcumb'] = 'Edit News';
 		$this->data['kategori'] = $this->db->get('tb_kategori_news')->result_array();
 		
 		$this->ciparser->new_parse('template_admin','modules_admin', 'news/news_layout',$this->data);

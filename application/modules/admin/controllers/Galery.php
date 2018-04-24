@@ -18,18 +18,21 @@ class Galery extends MX_Controller  {
 	public function list_image(){
 		$this->data['galery'] = $this->galery_model->getTypeGalery("image");
 		// print_r($this->data['galery']);
+		$this->data['breadcumb'] = 'List Image';
 		 $this->ciparser->new_parse('template_admin','modules_admin', 'galery/list_image_layout',$this->data);
 	}
 
 	public function list_video(){
 		$this->data['galery'] = $this->galery_model->getTypeGalery("video");
 		// print_r($this->data['galery']);
+		$this->data['breadcumb'] = 'List Video';
 		 $this->ciparser->new_parse('template_admin','modules_admin', 'galery/list_video_layout',$this->data);
 	}
 
 	public function album(){
 		$this->data['album'] = $this->db->get('tb_album_galery')->result_array();
 		$this->data['view'] = 'list';
+		$this->data['breadcumb'] = 'List Album';
 		$this->ciparser->new_parse('template_admin','modules_admin', 'galery/album_master_layout',$this->data);
 	}
 
@@ -57,6 +60,7 @@ class Galery extends MX_Controller  {
 			exit();
 		}
 		$this->data['view'] = 'add';
+		$this->data['breadcumb'] = 'Add Album';
 		$this->ciparser->new_parse('template_admin','modules_admin', 'galery/album_master_layout',$this->data);
 	}
 
@@ -86,6 +90,7 @@ class Galery extends MX_Controller  {
 			exit();
 		}
 		$this->data['view'] = 'edit';
+		$this->data['breadcumb'] = 'Edit Album';
 		$this->data['content'] = $this->db->get_where('tb_album_galery',array('id_album'=>$id))->row_array();
 		$this->ciparser->new_parse('template_admin','modules_admin', 'galery/album_master_layout',$this->data);
 	}
@@ -130,6 +135,7 @@ class Galery extends MX_Controller  {
 			echo json_encode($ret);
 			exit();
 		}
+		$this->data['breadcumb'] = 'Add Image';
 		$this->data['album'] = $this->db->get('tb_album_galery')->result_array();
 		$this->ciparser->new_parse('template_admin','modules_admin', 'galery/image_layout',$this->data);
 	}
@@ -162,6 +168,7 @@ class Galery extends MX_Controller  {
 			echo json_encode($ret);
 			exit();
 		}
+		$this->data['breadcumb'] = 'Add Video';
 		$this->ciparser->new_parse('template_admin','modules_admin', 'galery/video_layout',$this->data);
 	}
 
@@ -222,6 +229,7 @@ class Galery extends MX_Controller  {
 			echo json_encode($ret);
 			exit();
 		}
+		$this->data['breadcumb'] = 'Edit Image';
 		$this->data['album'] = $this->db->get('tb_album_galery')->result_array();
 		$this->ciparser->new_parse('template_admin','modules_admin', 'galery/image_layout',$this->data);
 	}
@@ -252,6 +260,7 @@ class Galery extends MX_Controller  {
 			echo json_encode($ret);
 			exit();
 		}
+		$this->data['breadcumb'] = 'Edit Video';
 		$this->data['galery'] = $this->galery_model->rowGalery($id);
 		$this->ciparser->new_parse('template_admin','modules_admin', 'galery/video_layout',$this->data);
 	}

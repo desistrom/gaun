@@ -77,7 +77,7 @@
       <ul class="sidebar-menu">
         <li class="header">MAIN NAVIGATION</li>
         <li class=" treeview <?php if(current_url() == site_url('admin/home')){ ?> active <?php } ?>">
-          <a href="#">
+          <a href="<?=site_url('admin');?>">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
             <span class="pull-right-container">
 
@@ -112,7 +112,7 @@
           </ul>
         </li>
 
-        <li class=" treeview <?php if(current_url() == site_url('admin/home/logo') || current_url() == site_url('admin/home/testimoni') || current_url() == site_url('admin/home/hero') || current_url() == site_url('admin/home/Layanan_idroam') || current_url() == site_url('admin/home/Layanan_cloud') || current_url() == site_url('admin/home/kolaborasi')){ ?>  active <?php } ?>">
+        <li class=" treeview <?php if(current_url() == site_url('admin/home/logo') || current_url() == site_url('admin/home/testimoni') || current_url() == site_url('admin/home/hero') || current_url() == site_url('admin/home/Layanan_idroam') || current_url() == site_url('admin/home/Layanan_cloud') || current_url() == site_url('admin/home/kolaborasi') || current_url() == site_url('admin/about/slider')){ ?>  active <?php } ?>">
           <a href="#">
             <i class="fa fa-home"></i>  <span>Home Page</span>
             <span class="pull-right-container">
@@ -127,6 +127,7 @@
             <li <?php if(current_url() == site_url('admin/home/Layanan_idroam')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/home/Layanan_idroam');?>"><i class="fa fa-bullhorn"></i>Layanan ID Roam</a></li>
             <li <?php if(current_url() == site_url('admin/home/Layanan_cloud')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/home/Layanan_cloud');?>"><i class="fa fa-bullhorn"></i>Layanan Cloud Federation</a></li>
             <li <?php if(current_url() == site_url('admin/home/kolaborasi')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/home/kolaborasi');?>"><i class="fa fa-bullhorn"></i>Kolaborasi</a></li>
+            <li <?php if(current_url() == site_url('admin/about/slider')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/about/slider');?>"><i class="fa fa-bullhorn"></i>Title Slider</a></li>
           </ul>
         </li>
 
@@ -230,11 +231,11 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Dashboard
+        <?=$breadcumb;?>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Dashboard</li>
+        <li><a href="#"><i class="fa fa-dashboard"></i> admin</a></li>
+        <li class="active"><?=$breadcumb;?></li>
       </ol>
     </section>
 

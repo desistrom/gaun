@@ -129,23 +129,29 @@ class Keanggotaan extends MX_Controller  {
 	}
 
 	public function setting(){
+		$this->data['content'] = $this->db->get('tb_setting_user')->row_array();
 		if ($this->input->server('REQUEST_METHOD') == 'POST') {
 			$ret['state'] = 0;
 			$ret['status'] = 0;
 			$this->form_validation->set_error_delimiters('','');
-			// $this->form_validation->set_rules('cara','Tata Cara','trim|required');
 			$this->form_validation->set_rules('benefit','Benefit','trim|required');
 			if ($this->form_validation->run() == true) {
 				$ret['state'] = 1;
 				$about['profit'] = $this->input->post('benefit');
-				// $about['cara'] = $this->input->post('cara');
 				$id['id_setting'] = $this->input->post('id');
-				if ($this->db->update('tb_setting_user',$about,$id)) {
-					$ret['status'] = 1;
-					$this->session->set_flashdata("notif","Data Berhasil di Masukan");
+				if ($this->input->post('id') == '') {
+					$about['cara'] = 'dumy';
+					if ($this->db->insert('tb_setting_user',$about)) {
+						$ret['status'] = 1;
+						$this->session->set_flashdata("notif","Data Berhasil di Masukan");
+					}
+				}else{
+					if ($this->db->update('tb_setting_user',$about,$id)) {
+						$ret['status'] = 1;
+						$this->session->set_flashdata("notif","Data Berhasil di Masukan");
+					}
 				}
 			}
-			// $ret['notif']['cara'] = form_error('cara');
 			$ret['notif']['benefit'] = form_error('benefit');
 			echo json_encode($ret);
 			exit();
@@ -153,13 +159,97 @@ class Keanggotaan extends MX_Controller  {
 		$this->load->library('ckeditor');
 		$this->ckeditor->basePath = base_url().'assets/ckeditor/';
 		$this->ckeditor->config['toolbar'] = array(
-		                array( 'Source', '-', 'Bold', 'Italic', 'Underline', '-','Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo','-','NumberedList','BulletedList' )
+		                array( 'Source', '-', 'Bold', 'Italic', 'Underline', '-','Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo','-','NumberedList','BulletedList','Link' )
+		                                                    );
+		$this->ckeditor->config['language'] = 'eng';
+		$this->ckeditor->config['width'] = '1024px';
+		$this->ckeditor->config['height'] = '300px';
+		$this->data['view'] = 'benefit';
+		$this->data['breadcumb'] = 'Dashboard';
+		$this->ciparser->new_parse('template_admin','modules_admin', 'keanggotaan/setting_layout',$this->data);
+	}
+
+	public function setting_reg(){
+		$this->data['content'] = $this->db->get('tb_setting_user')->row_array();
+		if ($this->input->server('REQUEST_METHOD') == 'POST') {
+			$ret['state'] = 0;
+			$ret['status'] = 0;
+			$this->form_validation->set_error_delimiters('','');
+			$this->form_validation->set_rules('cara','Tata Cara','trim|required');
+			if ($this->form_validation->run() == true) {
+				$ret['state'] = 1;
+				$about['cara'] = $this->input->post('cara');
+				$id['id_setting'] = $this->input->post('id');
+				// print_r($this->data['content']['image']);
+				// return false;
+				if(!is_null($this->data['content']['image'])){
+					if ($this->input->post('id') == '') {
+						// $about['profit'] = 'dumy';
+						$data_gambar = $this->upload_logo($_FILES);
+						if (isset($data_gambar['error'])) {
+							$ret['notif'] = $data_gambar;
+						}else{	
+							$about['image'] = $data_gambar['asli'];
+							if ($this->db->insert('tb_setting_user',$about)) {
+								$ret['status'] = 1;
+								$this->session->set_flashdata("notif","Data Berhasil di Masukan");
+							}
+						}					
+						
+					}else{
+						if (isset($_FILES['userfile'])) {
+							$image = $this->upload_logo($_FILES);
+							if (isset($image['error'])) {
+								$ret['notif'] = $image;
+							}else{
+								$data_gambar = $this->upload_logo($_FILES);
+								$about['image'] = $data_gambar['asli'];
+								if (file_exists(FCPATH."media/".$this->data['content']['image'])) {
+			            			@chmod(FCPATH."media/".$this->data['content']['image'], 0777);
+			            			@unlink(FCPATH."media/".$this->data['content']['image']);
+			            		}
+			            		if (file_exists(FCPATH."media/thumbnail/".$this->data['content']['image'])) {
+			            			@chmod(FCPATH."media/thumbnail/".$this->data['content']['image'], 0777);
+			            			@unlink(FCPATH."media/thumbnail/".$this->data['content']['image']);
+			            		}
+			            		if (file_exists(FCPATH."media/crop/".$this->data['content']['image'])) {
+			            			@chmod(FCPATH."media/crop/".$this->data['content']['image'], 0777);
+			            			@unlink(FCPATH."media/crop/".$this->data['content']['image']);
+			            		}
+
+			            		if ($this->db->update('tb_setting_user',$about,$id)) {
+									$ret['status'] = 1;
+									$this->session->set_flashdata("notif","Data Berhasil di Masukan");
+								}
+							}
+						}else{
+							if ($this->db->update('tb_setting_user',$about,$id)) {
+								$ret['status'] = 1;
+								$this->session->set_flashdata("notif","Data Berhasil di Masukan");
+							}
+						}
+						
+					}
+				}else{
+					if (!isset($_FILES['userfile'])) {
+						$ret['notif']['userfile'] = "Please Select File";
+					}
+				}
+			}
+			$ret['notif']['cara'] = form_error('cara');
+			echo json_encode($ret);
+			exit();
+		}
+		$this->load->library('ckeditor');
+		$this->ckeditor->basePath = base_url().'assets/ckeditor/';
+		$this->ckeditor->config['toolbar'] = array(
+		                array( 'Source', '-', 'Bold', 'Italic', 'Underline', '-','Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo','-','NumberedList','BulletedList','Link' )
 		                                                    );
 		$this->ckeditor->config['language'] = 'eng';
 		$this->ckeditor->config['width'] = '1024px';
 		$this->ckeditor->config['height'] = '300px';
 		$this->data['breadcumb'] = 'Dashboard';
-		$this->data['content'] = $this->db->get('tb_setting_user')->row_array();
+		$this->data['view'] = 'cara';
 		$this->ciparser->new_parse('template_admin','modules_admin', 'keanggotaan/setting_layout',$this->data);
 	}
 
@@ -299,7 +389,7 @@ class Keanggotaan extends MX_Controller  {
 		$html .= '<li> Alamat : '.$data['alamat'].'</li>';
 		$html .= '<li> Phone : '.$data['phone'].'</li>';
 		$html .= '<li> Website : '.$data['website'].'</li>';
-		$html .= '<li> Logo : <img src="'.$data['website'].'" width="120px" /></li>';
+		$html .= '<li> Logo : <img src="'.base_url().'media/'.$data['gambar'].'" width="120px" /></li>';
 		echo json_encode($html);
 		exit();
 	}
@@ -401,6 +491,18 @@ class Keanggotaan extends MX_Controller  {
 			$this->db->update('tb_user',array('is_aktif'=>1),array('id_user'=>$id));
 		}
 		redirect(site_url('admin/keanggotaan'));
+    }
+
+    public function active_instansi(){
+    	$url = $this->uri->segment_array();
+		$id = end($url);
+		if ($this->db->get_where('tb_instansi',array('id_instansi'=>$id))->row_array()['is_aktif'] == 1) {
+			$this->db->update('tb_instansi',array('is_aktif'=>0),array('id_instansi'=>$id));
+		}else{
+			$this->db->update('tb_instansi',array('is_aktif'=>1),array('id_instansi'=>$id));
+		}
+		$this->session->set_flashdata("notif","Data Berhasil di Ubah");
+		echo json_encode("berhasil");
     }
 
     public function status_instansi(){

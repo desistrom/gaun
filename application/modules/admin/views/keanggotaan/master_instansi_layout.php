@@ -12,17 +12,24 @@
 						<th>Nama Instansi</th>
 						<th>email</th>
 						<th>status</th>
+						<th>Visible</th>
 						<th>Action</th>
 					</thead>
 					<tbody>
 					<?php foreach ($instansi as $key => $value): ?>
 						<tr>
 							<td><?=($key+1);?></td>
-							<td><?=$value['nm_instansi'];?></td>
+							<td class="btn_detail" id="<?=$value['id_instansi'];?>" style="cursor: pointer;"><?=$value['nm_instansi'];?></td>
 							<td><?=$value['email'];?></td>
 							<td><?php if($value['status'] == 0){ ?> <span class="text-info">Not Actived</span> <?php }elseif($value['status']==1){ ?> <span class="text-primary">On Proces</span> <?php }else{ ?> <span class="text-success">Active</span> <?php } ?></td>
+							<td><?php if($value['is_aktif'] == 0){ ?> <span class="text-danger">NO</span> <?php  }else{ ?> <span class="text-success">YES</span> <?php } ?></td>
 							<td>
-								<a href="<?=site_url('admin/keanggotaan/edit_instansi/'.$value['id_instansi']);?>"><button class="btn btn-primary btn-sm" id="edit">Edit</button></a> <a href="#"><button class="btn btn-info status btn-sm" id="<?=$value['status'];?>##<?=$value['id_instansi'];?>"><?php if($value['status'] == 0){ ?> Proses <?php }elseif($value['status']==1){ ?> Done <?php }else{ ?> Active <?php } ?></button></a> <button class="btn btn-info btn_detail btn-sm" id="<?=$value['id_instansi'];?>"> Detail </button>
+								<a href="<?=site_url('admin/keanggotaan/edit_instansi/'.$value['id_instansi']);?>">
+									<button class="btn btn-primary btn-sm" id="edit">Edit</button></a> 
+								<a href="#">
+									<button class="btn btn-info status btn-sm" id="<?=$value['status'];?>##<?=$value['id_instansi'];?>"><?php if($value['status'] == 0){ ?> Proses <?php }elseif($value['status']==1){ ?> Done <?php }else{ ?> Active <?php } ?></button>
+								</a> 
+								<button class="btn btn-default btn_active btn-sm" id="<?=$value['id_instansi'];?>"> <?php if($value['is_aktif'] == 0){ ?> <span class="text-danger"><i class="fa fa-eye"></i></span> <?php  }else{ ?> <span class="text-success"><i class="fa fa-eye-slash"></i></span> <?php } ?> </button>
 								<button class="btn btn-danger btn-sm btn_delete" id="<?=$value['id_instansi'];?>"> Delete </button>
 							</td>
 						</tr>
@@ -256,6 +263,23 @@
 	      	$('#progresLoading').modal('hide');
 	      	console.log(data);
 	        window.location.href = data.url;
+        }, 3000);
+      });
+    });
+
+    $('body').on('click','.btn_active', function(){
+    	var id = $(this).attr('id');
+    	$('#progresLoading').modal('show');
+    	console.log(id);
+    	$.ajax({
+          url : base_url+"admin/keanggotaan/active_instansi/"+id,
+          dataType : 'json',
+          type : 'GET',
+      }).done(function(data){
+      	setTimeout(function(){  
+	      	$('#progresLoading').modal('hide');
+	      	console.log(data);
+	        window.location.href = window.location.href;
         }, 3000);
       });
     });

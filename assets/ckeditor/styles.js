@@ -73,6 +73,7 @@ CKEDITOR.stylesSet.add( 'default', [
 
 	{ name: 'Cited Work',		element: 'cite' },
 	{ name: 'Inline Quotation',	element: 'q' },*/
+	{ name: 'Add Link',			element: 'a', 	 attributes : {'href' : 'your_url'}},
 	{ name: 'Font Color red',	element: 'span', attributes : {'class' : 'text-danger'}},
 	{ name: 'Font Color green',	element: 'span', attributes : {'class' : 'text-success'}},
 	{ name: 'Font Color aqua',	element: 'span', attributes : {'class' : 'text-info'}},

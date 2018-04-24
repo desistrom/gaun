@@ -283,6 +283,24 @@
           #img-page .slide-control.right{
           margin-right: 10px;
          }
+         .replace-title{
+          font-size: 20px;
+         }
+         .galery-deskripsi h3{
+          font-size: 19px;
+         }
+         .text-img-page{
+          font-size: 21px;
+         }
+         div.header-title h1{
+          font-weight: bold;
+         }
+         .header-title h1{
+          margin-bottom: 0;
+         }
+         .modal-album .modal-header{
+          padding: 15px;
+         }
          }
         @media(max-width:400px){
           .header-title{
@@ -313,7 +331,7 @@
                     <div></div>
                 </div>
                 <div class="header-title">
-                    <h2 style="">PHOTO </h2></div>
+                    <h1 style="">PHOTO </h1></div>
             </div>
         </div>
         <section id="img-page">

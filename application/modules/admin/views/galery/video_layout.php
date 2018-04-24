@@ -26,6 +26,7 @@
       <div class="form-group">
       <label>Link</label>
         <input type="text" class="form-control" name="file_name" id="file_name" value="<?php if(isset($galery)){ echo $galery['file_name']; } ?>">
+        <span style="color: #3c8dbc;font-style: italic;">your link must be embed format like this : https://www.youtube.com/embed/-QhronPdyWM</span>
         <div class="error" id="ntf_file_name"></div>
       </div>
 

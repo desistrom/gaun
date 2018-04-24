@@ -14,12 +14,30 @@
         
 
       <!-- <button type="button" class="btn btn-primary" id="submit">Submit</button> -->
+      <?php if($view == 'cara'){ ?>
+      <div class="form-group">
+        <label>Image</label>
+        <input type="file" name="userfile" value="" class="form-control" id="userfile">
+        <div class="error" id="ntf_userfile"></div>
+      </div>
+
+      <img src="<?=base_url();?>media/<?=$content['image'];?>" width="450px">
+
+      <div class="form-group">
+        <label>Tata Cara</label>
+        <?php echo $this->ckeditor->editor("cara", $content['cara'] ); ?>
+        <input type="hidden" name="cara" value="<?php if(isset($content)){ echo $content['cara']; } ?>" id="cara">
+        <div class="error" id="ntf_cara"></div>
+      </div>
+      <?php }else{ ?>
       <div class="form-group">
         <label>Benefit</label>
         <?php echo $this->ckeditor->editor("benefit", $content['profit'] ); ?>
         <input type="hidden" name="benefit" value="<?php if(isset($content)){ echo $content['profit']; } ?>" id="benefit">
+        <div class="error" id="ntf_cara"></div>
       </div>
-      <input type="hidden" name="id" value="<?php if(isset($content)){ echo $content['id_setting']; } ?>">
+      <?php } ?>
+      <input type="hidden" name="id" id="id" value="<?php if(isset($content)){ echo $content['id_setting']; } ?>">
 
       <button type="button" class="btn btn-primary" id="submit">Submit</button>
       
@@ -55,14 +73,27 @@
   $(document).ready(function () {
     $('body').on('click','#submit', function(){
       // console.log($('form').val());
-      // $('#cara').val(CKEDITOR.instances.cara.getData());
+      var form_data = new FormData();
+      form_data.append('id',$('#id').val());
+      <?php if($view == 'cara'){ ?>
+      $('#cara').val(CKEDITOR.instances.cara.getData());
+      var data_file = $('#userfile').prop('files')[0];
+      form_data.append('userfile',data_file);
+      form_data.append('cara',$('#cara').val());
+      <?php }else{ ?>
       $('#benefit').val(CKEDITOR.instances.benefit.getData());
+      form_data.append('benefit',$('#benefit').val());
+      <?php } ?>
       // return false;
       $.ajax({
           url : window.location.href,
           dataType : 'json',
           type : 'POST',
-          data : $('form').serialize()
+          data : form_data,
+          async : false,
+          cache : false ,
+          contentType : false , 
+          processData : false
       }).done(function(data){
           console.log(data);
           if(data.state == 1){

@@ -10,13 +10,19 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800,900" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Crimson+Text:400,600,700" rel="stylesheet">
     <link rel="stylesheet" href="<?=base_url();?>assets/css/Navbar-with-mega-menu.min.css">
-
+    <link rel="stylesheet" type="text/css" href="<?=base_url();?>assets/css/jsCalendar.css">
     <link rel="stylesheet" href="<?=base_url();?>assets/css/owl.transitions.min.css">
     <link rel="stylesheet" href="<?=base_url();?>assets/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="<?=base_url();?>assets/css/css.css">
+    <link rel="stylesheet" href="<?=base_url();?>assets/css/css.css?t=<?=time();?>">
     <style type="text/css">
       .modal .ntf_err{
           color: red;
+      }
+      .jsCalendar.material-theme thead{
+        background-color: #D10909 !important;
+      }
+      .jsCalendar tbody td.jsCalendar-current{
+         background-color: #D10909 !important;
       }
     </style>
 </head>
@@ -56,13 +62,13 @@
                         <!-- <li role="presentation" class=""><a <?php if(current_url() == site_url('web/keanggotaan')){ ?> class="active" <?php } ?> href="<?php echo site_url('web/keanggotaan'); ?>">Keanggotaan</a></li> -->
                         <li class="dropdown"><a data-toggle="dropdown" aria-expanded="false" href="#" class="dropdown-toggle">Keanggotaan <span class="fa fa-angle-down"></span></a>
                           <ul class="dropdown-menu" role="menu">
-                              <li><a href="<?php echo site_url('web/gabung/register') ?>">Pendaftaran</a></li>
+                              <li><a href="<?php echo site_url('web/keanggotaan/pendaftaran') ?>">Pendaftaran</a></li>
                               <li><a href="<?php echo site_url('web/keanggotaan') ?>">Member</a></li>
                               <li><a href="<?php echo site_url('web/keanggotaan/benefit') ?>">Benefit</a></li>
 
                           </ul>
                         </li>
-                        <li class="dropdown"><a data-toggle="dropdown" aria-expanded="false" href="#" class="dropdown-toggle">Galery <span class="fa fa-angle-down"></span></a>
+                        <li class="dropdown"><a data-toggle="dropdown" aria-expanded="false" href="#" class="dropdown-toggle">Galeri <span class="fa fa-angle-down"></span></a>
                           <ul class="dropdown-menu" role="menu">
                               <li><a href="<?php echo site_url('web/galery') ?>">foto</a></li>
                               <li><a href="<?php echo site_url('web/galery/video') ?>">Video</a></li>
@@ -121,9 +127,12 @@
                     </ul>
                 </div>
                 <div class="col-md-4 col-sm-4 col-xs-12 footer-right text-right">
-                    <h3 class="title-footer">Sosial Media</h3>
+                  <h3 class="title-footer">Kalender dan Visitor</h3>
+                
                     <ul class="list-inline">
-                        <li>
+                      <li><div class="auto-jsCalendar material-theme"></div></li>\
+                      <li><div id="_wau4yv"></div></li>
+                        <!-- <li>
                             <a href="<?php echo footer_helper()['data']['FacebookLink']; ?>" class="facebook" target="blank" > <i class="fa fa-facebook"></i></a>
                         </li>
                         <li class="text-left">
@@ -131,7 +140,7 @@
                         </li>
                         <li>
                             <a href="<?php echo footer_helper()['data']['InstagramLink']; ?>" target="blank" > <i class="fa fa-instagram"></i></a>
-                        </li>
+                        </li> -->
                     </ul>
                 </div>
             </div>
@@ -245,8 +254,11 @@
     <script src="<?=base_url();?>assets/js/owl.carousel.min.js"></script>
     <script src="<?=base_url();?>assets/js/main-owl.min.js"></script>
       <script src="<?=base_url();?>assets/js/scrolling-nav.min.js"></script>
+      <script id="_wau4yv">var _wau = _wau || []; _wau.push(["dynamic", "tmevyyvsq3", "4yv", "c4302bffffff", "big"]);</script><script async src="//waust.at/d.js"></script>
+
+      <script type="text/javascript" src="<?=base_url();?>assets/js/jsCalendar.js"></script>
  <script src="<?=base_url();?>assets/js/jquery.easing.min.js"></script>
-<?php if(current_url() == site_url('web/galery/video')){ ?> 
+<?php if(current_url() == site_url('web/galery/video')||current_url() == site_url('web/layanan/id_tube')){ ?> 
    <script type="text/javascript" src="<?=base_url();?>assets/js/jquery.waterwheelCarousel.miny.js"></script>
  <?php } ?>
  
@@ -324,5 +336,4 @@
     });
  </script> -->
 </body>
-
 </html>

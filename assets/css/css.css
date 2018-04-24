@@ -617,7 +617,7 @@ div.row.content-news{
 
 .title-page-news{
   background-color:#F2F2F2;
-  padding:2em 0 10em 0;
+  padding:2em 0 15em 0;
 }
 
 div.container-fluid.none-padding.filter-title-page-news{
@@ -1099,6 +1099,10 @@ div.header-title h1{
 }
 .content-comment .sub-comment-right{
   padding: 2em 1em  1em 1em;
+}
+.detail_news .filter-date-event{
+  padding:2em 15px 1em 15px;
+  border-top:solid #9E9E9E 1px;
 }
 }
 

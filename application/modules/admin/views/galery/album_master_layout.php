@@ -3,6 +3,7 @@
     width: 50%;
   }
 </style>
+<link rel="stylesheet" href="<?=base_url();?>assets/datatables/css/dataTables.bootstrap.min.css">
 <div class="box ">
 <?php if($view == 'list'){ ?>
 <div class="box">
@@ -11,7 +12,7 @@
       <a href="<?=site_url('admin/galery/add_album');?>" class="btn btn-success">Tambah Album</a>
     </div>
     <div class="col col-md-12 col-xs-12">
-  <table class="table table-bordered  dataTable">
+  <table class="table table-bordered  dataTable" id="example2">
     <tr>
       <th>No</th>
       <th>Nama alnum</th>

@@ -41,7 +41,7 @@ class Keanggotaan extends MX_Controller  {
         $this->data['keanggotaan']=$a['data'];*/
 
         if (!empty($this->input->get('page'))) {
-            $start = ceil($this->input->get('page') * 8);
+            $start = ceil($this->input->get('page') * 10);
             $url = base_url().'api/v1/instansi_pagging?data='.$start;
             $a = api_helper('',$url,$methode,$token);
             $this->data['keanggotaan']=$a['data'];
@@ -64,6 +64,15 @@ class Keanggotaan extends MX_Controller  {
         $a = api_helper('',$url,$methode,$token);
         $this->data['benefit']=$a['data'];
         $this->ciparser->new_parse('template_frontend','modules_web', 'benefit_layout',$this->data);
+     }
+     function pendaftaran() {
+        $url = site_url('api/v1/step') ;
+        // $a = json_decode($this->api_helper($url),true);
+        $methode = 'GET';
+        $token = '';
+        $a = api_helper('',$url,$methode,$token);
+        $this->data['step']=$a['data'];
+        $this->ciparser->new_parse('template_frontend','modules_web', 'pendaftaran_layout',$this->data);
      }
 
 

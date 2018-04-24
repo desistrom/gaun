@@ -12,6 +12,7 @@ class Layanan extends MX_Controller  {
 
     function __construct(){
         $this->load->helper('api');
+            $this->load->library('pagination');
 
     }
     function index() {
@@ -60,8 +61,46 @@ class Layanan extends MX_Controller  {
     }
 
     public function id_tube(){
-        $this->data['layanan'] = $this->db->get_where('tb_page_layanan',array('nama_page'=>'ID-TUBE'))->row_array();
-        $this->ciparser->new_parse('template_frontend','modules_web', 'general_layout',$this->data);
+          $url = site_url('api/v1/tube_video') ;
+        $data = '';
+        $methode = 'GET';
+        $token = '';
+        $a = api_helper('',$url,$methode,$token);
+        $this->data['id_tube']=$a['data'];    
+
+        $this->ciparser->new_parse('template_frontend','modules_web', 'general_video',$this->data);
+/*        $this->data['layanan'] = $this->db->get_where('tb_page_layanan',array('nama_page'=>'ID-TUBE'))->row_array();
+        $this->ciparser->new_parse('template_frontend','modules_web', 'general_layout',$this->data);*/
+    }
+     function list_idtube() {
+        $config['base_url'] = base_url().'web/layanan/list_idtube';
+        $url = base_url().'api/v1/tube_video';
+        // $url = site_url('api/v1/galery_video') ;
+        $data = '';
+        $methode = 'GET';
+        
+        $a = api_helper('',$url,$methode,'');
+        $config['total_rows'] = count($a['data']);
+        $config['per_page'] = 9;
+        $config['prev_tag_open'] = '<li>';
+        $config['prev_tag_close'] = '</li>';
+        $config['prev_link'] = 'Prev';
+        $config['next_tag_open'] = '<li>';
+        $config['next_tag_close'] = '</li>';
+        $config['next_link'] = 'Next';
+        $this->pagination->initialize($config);
+
+        
+        $url = $this->uri->segment_array();
+        $data = end($url);
+        if (!is_numeric($data)) {
+            $data = 0;
+        }
+        $url = base_url().'api/v1/tube_video_pagging?data='.$data;
+        $token = '';
+        $b = api_helper('',$url,$methode,'');
+        $this->data['id_tube']=$b['data'];    
+        $this->ciparser->new_parse('template_frontend','modules_web', 'list_generalvideo_layout',$this->data);
     }
 
     public function id_mail(){

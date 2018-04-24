@@ -45,6 +45,24 @@ class V1_model extends CI_Model{
 		return false;
 	}
 
+	public function getTypeTube($type){
+		$sql = "select u.name as nama_user, g.id_galery as galeryId, g.file_name as file, g.judul as title, g.deskripsi as keterangan, g.tgl_upload as modify_date, g.type as jenis from tb_tube g join tb_user u on g.id_user_ref = u.id_user where g.type = ? and g.status = 1";
+		if ($this->db->query($sql,$type)->num_rows() > 0) {
+			return $this->db->query($sql,$type)->result_array();
+			exit();
+		}
+		return false;
+	}
+
+	public function getTypeTubePagging($type,$param){
+		$sql = "select u.name as nama_user, g.id_galery as galeryId, g.file_name as file, g.judul as title, g.deskripsi as keterangan, g.tgl_upload as modify_date, g.type as jenis from tb_tube g join tb_user u on g.id_user_ref = u.id_user where g.type = ? and g.status = 1 LIMIT ".$param.",9";
+		if ($this->db->query($sql,$type)->num_rows() > 0) {
+			return $this->db->query($sql,$type)->result_array();
+			exit();
+		}
+		return false;
+	}
+
 	public function selectGalery($id){
 		$sql = "select u.name as nama_user, g.id_galery as galeryId, g.file_name as file, g.judul as title, g.deskripsi as keterangan, g.tgl_upload as modify_date, g.type as jenis from tb_galery g join tb_user u on g.id_user_ref = u.id_user where g.id_galery = ?";
 		if ($this->db->query($sql,$id)->num_rows() > 0) {
@@ -77,7 +95,7 @@ class V1_model extends CI_Model{
 	}
 
 	public function user_setting(){
-		$sql = "SELECT profit as benefit, cara as step FROM tb_setting_user";
+		$sql = "SELECT profit as benefit, cara as step, image as picture FROM tb_setting_user";
 		if ($this->db->query($sql)->num_rows() > 0) {
 			return $this->db->query($sql)->row_array();
 			exit();
@@ -104,7 +122,7 @@ class V1_model extends CI_Model{
 	}
 
 	public function getInstansi(){
-		$sql = "SELECT nm_instansi as instansi, id_instansi as id, phone as number_phone, website as link, alamat as address, gambar as image FROM tb_instansi";
+		$sql = "SELECT nm_instansi as instansi, id_instansi as id, phone as number_phone, website as link, alamat as address, gambar as image FROM tb_instansi where is_aktif = 1";
 		if ($this->db->query($sql)->num_rows() > 0) {
 			return $this->db->query($sql)->result_array();
 			exit();
@@ -113,7 +131,7 @@ class V1_model extends CI_Model{
 	}
 
 	public function getInstansi_pagging($data){
-		$sql = "SELECT nm_instansi as instansi, id_instansi as id, phone as number_phone, website as link, alamat as address, gambar as image FROM tb_instansi where status = 2 LIMIT ".$data.",8";
+		$sql = "SELECT nm_instansi as instansi, id_instansi as id, phone as number_phone, website as link, alamat as address, gambar as image FROM tb_instansi where status = 2 AND is_aktif = 1 LIMIT ".$data.",10";
 		if ($this->db->query($sql)->num_rows() > 0) {
 			return $this->db->query($sql)->result_array();
 			exit();

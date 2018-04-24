@@ -161,15 +161,14 @@
         display: block !important;
         left: 50% !important;
         margin-left: -180px;
-        top: 0 !important;
       }
       .btn-nav-video.button-left {
-        padding: 80px 0 0 0;
+        padding: 150px 0 0 0;
         z-index: 200;
 
       }
        .btn-nav-video.button-right {
-        padding: 80px 0 0  0;
+        padding: 150px 0 0  0;
         z-index: 200;
 
       }
@@ -194,7 +193,7 @@
                     <div></div>
                 </div>
                 <div class="header-title">
-                    <h1 style="">Video </h1></div>
+                    <h2 style="">ID-TUBE </h2></div>
             </div>
         </div>
         <section class="content-video">
@@ -209,9 +208,9 @@
                 <div  id="carousel">
 
                       <?php for ($i=0; $i < 3 ; $i++) { ?>
-                  <?php if (isset($video[$i]['title'])) { ?>
+                  <?php if (isset($id_tube[$i]['title'])) { ?>
                 
-                            <iframe class="slider-waterwheel"  src="<?php echo $video[$i]['file'] ?> " frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                            <iframe class="slider-waterwheel"  src="<?php echo $id_tube[$i]['file'] ?> " frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
             
 
                  <?php } } ?>
@@ -230,27 +229,27 @@
               </div>
               <div class="col col-md-12 col-sm-12 col-xs-12 none-padding list-video" id="list-video">
                 <div class="col col-sm-12 col-sm-12 col-xs-12 none-padding">
-                  <div class="col-md-6 col-sm-6 col-xs-8">
+                  <div class="col-md-6 col-sm-6 col-xs-6">
                   <h3>Lastest Video</h3>
                   <div class="line-list"></div>
                 </div>
-                <div class="col-md-6 col-sm-6 col-xs-4 text-right">
-                  <a href="<?php echo site_url('web/galery/list_video') ?>" class="btn btn-danger">View All</a>
+                <div class="col-md-6 col-sm-6 col-xs-6 text-right">
+                  <a href="<?php echo site_url('web/layanan/list_idtube') ?>" class="btn btn-danger">View All</a>
                 </div>
                 </div>
                   <?php for ($i=0; $i < 3 ; $i++) { ?>
-                  <?php if (isset($video[$i]['title'])) { ?>
+                  <?php if (isset($id_tube[$i]['title'])) { ?>
                 <div class="col-md-4 col-sm-6 col-xs-12 text-center item" >
                     <div class="box-img-galery">
-                      <a href="#" class="show-album show-video" data-toggle="modal" id="<?php echo $video[$i]['file'] ?>">
+                      <a href="#" class="show-album show-video" data-toggle="modal" id="<?php echo $id_tube[$i]['file'] ?>">
                         <div class="filter-img-galery" >
-                           <iframe style="pointer-events: none;" width="100%" height="270px" src="<?php echo $video[$i]['file'] ?> " frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                           <iframe style="pointer-events: none;" width="100%" height="270px" src="<?php echo $id_tube[$i]['file'] ?> " frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                       </div>
                       </a>
                       <div class="galery-deskripsi text-left">
-                        <h3><?php echo $video[$i]['title']; ?></h3>
+                        <h3><?php echo $id_tube[$i]['title']; ?></h3>
                         <ul class="list-inline">
-                          <li><?php echo $video[$i]['modify_date']; ?></li>
+                          <li><?php echo $id_tube[$i]['modify_date']; ?></li>
                           <li>100 views</li>
                         </ul>
                       </div>
@@ -331,11 +330,6 @@
           $(".modal-list-video").modal();
       });
 
-      });
-
-      $('#stop').on('click', function() {
-    //$('#popup-youtube-player').stopVideo();
-      $('#popup-youtube-player')[0].contentWindow.postMessage('{"event":"command","func":"' + 'stopVideo' + '","args":""}', '*');    
       });
     </script>
 

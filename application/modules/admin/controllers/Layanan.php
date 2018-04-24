@@ -92,7 +92,7 @@ class Layanan extends CI_Controller  {
 		$this->load->library('ckeditor');
 		$this->ckeditor->basePath = base_url().'assets/ckeditor/';
 		$this->ckeditor->config['toolbar'] = array(
-		                array( 'Source', '-', 'Bold', 'Italic', 'Underline', '-','Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo','-','NumberedList','BulletedList' )
+		                array( 'Source', '-', 'Bold', 'Italic', 'Underline', '-','Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo','-','NumberedList','BulletedList','Link' )
 		                                                    );
 		$this->ckeditor->config['language'] = 'eng';
 		$this->ckeditor->config['width'] = '1024px';
@@ -173,7 +173,7 @@ class Layanan extends CI_Controller  {
 		$this->load->library('ckeditor');
 		$this->ckeditor->basePath = base_url().'assets/ckeditor/';
 		$this->ckeditor->config['toolbar'] = array(
-		                array( 'Source', '-', 'Bold', 'Italic', 'Underline', '-','Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo','-','NumberedList','BulletedList' )
+		                array( 'Source', '-', 'Bold', 'Italic', 'Underline', '-','Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo','-','NumberedList','BulletedList','Link' )
 		                                                    );
 		$this->ckeditor->config['language'] = 'eng';
 		$this->ckeditor->config['width'] = '1024px';
@@ -184,84 +184,74 @@ class Layanan extends CI_Controller  {
 
     public function id_tube()
     {
-		$this->data['about'] = $this->db->get_where('tb_page_layanan',array('nama_page'=>'ID-TUBE'))->row_array();
-    	if ($this->input->server('REQUEST_METHOD') == 'POST') {
+		$this->data['galery'] = $this->db->get('tb_tube')->result_array();
+		// print_r($this->data['galery']);
+		$this->data['breadcumb'] = 'List ID Tube';
+		$this->ciparser->new_parse('template_admin','modules_admin', 'about/tube_layout',$this->data);
+    }
+
+    public function add_tube(){
+		if ($this->input->server('REQUEST_METHOD') == 'POST') {
 			$ret['state'] = 0;
 			$ret['status'] = 0;
 			$this->form_validation->set_error_delimiters('','');
-			$this->form_validation->set_rules('content','Content','trim|required');
+			$this->form_validation->set_rules('judul','Judul','trim|required');
+			$this->form_validation->set_rules('deskripsi','deskripsi','trim|required');
+			$this->form_validation->set_rules('file_name','Link Video','trim|required');
 			if ($this->form_validation->run() == true) {
 				$ret['state'] = 1;
-				$layanan['content'] = $this->input->post('content');
-				$layanan['nama_page'] = 'ID-TUBE';
-				if ($this->db->get_where('tb_page_layanan',array('nama_page'=>'ID-TUBE'))->num_rows() == 0) {
-					if (isset($_FILES['userfile'])) {
-						$image = $this->upload_logo($_FILES);
-						if (isset($image['error'])) {
-							$ret['notif'] = $image;
-						}else{
-							$layanan['image'] = $image['asli'];
-							if($this->db->insert('tb_page_layanan',$layanan)){
-								$ret['status'] = 1;
-								$this->session->set_flashdata("notif","Data Berhasil di Masukan");
-							}
-						}
-					}else{
-						$ret['notif']['error'] = "Please Choose file";
-					}
-				}else{
-					if (isset($_FILES['userfile'])) {
-						$image = $this->upload_logo($_FILES);
-						if (isset($image['error'])) {
-							$ret['notif'] = $image;
-						}else{
-							$layanan['image'] = $image['asli'];
-							
-							if($this->db->update('tb_page_layanan',$layanan,array('nama_page'=>'ID-TUBE'))){
-								$ret['status'] = 1;
-								if (file_exists(FCPATH."media/".$this->data['about']['image'])) {
-			            			chmod(FCPATH."media/".$this->data['about']['image'], 0777);
-			            			unlink(FCPATH."media/".$this->data['about']['image']);
-			            		}
-			            		if (file_exists(FCPATH."media/thumbnail/".$this->data['about']['image'])) {
-			            			chmod(FCPATH."media/thumbnail/".$this->data['about']['image'], 0777);
-			            			unlink(FCPATH."media/thumbnail/".$this->data['about']['image']);
-			            		}
-			            		if (file_exists(FCPATH."media/crop/".$this->data['about']['image'])) {
-			            			chmod(FCPATH."media/crop/".$this->data['about']['image'], 0777);
-			            			unlink(FCPATH."media/crop/".$this->data['about']['image']);
-			            		}
-								$this->session->set_flashdata("notif","Data Berhasil di Masukan");
-							}
-						}
-					}else{
-						if($this->db->update('tb_page_layanan',$layanan,array('nama_page'=>'ID-TUBE'))){
-							$ret['status'] = 1;
-							$this->session->set_flashdata("notif","Data Berhasil di Masukan");
-						}
-					}
-				}
+				$media['judul'] = $this->input->post('judul');
+				$media['deskripsi'] = $this->input->post('deskripsi');
+				$media['tgl_upload'] = date('Y-m-d');
+				$media['type'] = 'video';
+				$media['id_user_ref'] = $this->session->userdata('data_user')['id_user'];
+				$media['file_name'] = $this->input->post('file_name');
+				if ($this->db->insert('tb_tube',$media) == true) {
+            		$ret['status'] = 1;
+            		$ret['url'] = site_url('admin/layanan/id_tube');
+            		$this->session->set_flashdata("notif","Data Berhasil di Masukan");
+            	}
 			}
-			$ret['notif']['content'] = form_error('content');
-			if ($this->db->get_where('tb_page_layanan',array('nama_page'=>'ID-TUBE'))->num_rows() == 0) {
-				if (!isset($_FILES['userfile'])) {
-					$ret['notif']['error'] = "Please Choose file";
-				}
-			}
+			$ret['notif']['judul'] = form_error('judul');
+			$ret['notif']['deskripsi'] = form_error('deskripsi');
+			$ret['notif']['file_name'] = form_error('file_name');
 			echo json_encode($ret);
 			exit();
 		}
-		$this->load->library('ckeditor');
-		$this->ckeditor->basePath = base_url().'assets/ckeditor/';
-		$this->ckeditor->config['toolbar'] = array(
-		                array( 'Source', '-', 'Bold', 'Italic', 'Underline', '-','Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo','-','NumberedList','BulletedList' )
-		                                                    );
-		$this->ckeditor->config['language'] = 'eng';
-		$this->ckeditor->config['width'] = '1024px';
-		$this->ckeditor->config['height'] = '300px';
-		$this->data['breadcumb'] = 'ID-TUBE';
-		$this->ciparser->new_parse('template_admin','modules_admin', 'about/layanan_layout',$this->data);
-    }
+		$this->data['breadcumb'] = 'Add Video';
+		$this->ciparser->new_parse('template_admin','modules_admin', 'galery/video_layout',$this->data);
+	}
+
+	public function edit_tube(){
+		$url = $this->uri->segment_array();
+		$id = end($url);
+		if ($this->input->server('REQUEST_METHOD') == 'POST') {
+			$ret['state'] = 0;
+			$ret['status'] = 0;
+			$this->form_validation->set_error_delimiters('','');
+			$this->form_validation->set_rules('judul','Judul','trim|required');
+			$this->form_validation->set_rules('deskripsi','deskripsi','trim|required');
+			if ($this->form_validation->run() == true) {
+				$ret['state'] = 1;
+				$media['judul'] = $this->input->post('judul');
+				$media['deskripsi'] = $this->input->post('deskripsi');
+				$media['tgl_upload'] = date('Y-m-d');
+				$media['file_name'] = $this->input->post('file_name');
+				if ($this->db->update('tb_tube',$media,array('id_galery'=>$id)) == true) {
+            		$ret['status'] = 1;
+            		$ret['url'] = site_url('admin/galery/list_video');
+            		$this->session->set_flashdata("notif","Data Berhasil di Masukan");
+            	}
+			}
+			$ret['notif']['judul'] = form_error('judul');
+			$ret['notif']['deskripsi'] = form_error('deskripsi');
+			echo json_encode($ret);
+			exit();
+		}
+		$this->data['breadcumb'] = 'Edit Video';
+		$this->data['galery'] = $this->db->get_where('tb_tube',array('id_galery'=>$id))->row_array();
+		$this->ciparser->new_parse('template_admin','modules_admin', 'galery/video_layout',$this->data);
+	}
 
     public function id_mail()
     {
@@ -336,7 +326,7 @@ class Layanan extends CI_Controller  {
 		$this->load->library('ckeditor');
 		$this->ckeditor->basePath = base_url().'assets/ckeditor/';
 		$this->ckeditor->config['toolbar'] = array(
-		                array( 'Source', '-', 'Bold', 'Italic', 'Underline', '-','Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo','-','NumberedList','BulletedList' )
+		                array( 'Source', '-', 'Bold', 'Italic', 'Underline', '-','Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo','-','NumberedList','BulletedList','Link' )
 		                                                    );
 		$this->ckeditor->config['language'] = 'eng';
 		$this->ckeditor->config['width'] = '1024px';
@@ -418,7 +408,7 @@ class Layanan extends CI_Controller  {
 		$this->load->library('ckeditor');
 		$this->ckeditor->basePath = base_url().'assets/ckeditor/';
 		$this->ckeditor->config['toolbar'] = array(
-		                array( 'Source', '-', 'Bold', 'Italic', 'Underline', '-','Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo','-','NumberedList','BulletedList' )
+		                array( 'Source', '-', 'Bold', 'Italic', 'Underline', '-','Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo','-','NumberedList','BulletedList','Link' )
 		                                                    );
 		$this->ckeditor->config['language'] = 'eng';
 		$this->ckeditor->config['width'] = '1024px';
@@ -499,7 +489,7 @@ class Layanan extends CI_Controller  {
 		$this->load->library('ckeditor');
 		$this->ckeditor->basePath = base_url().'assets/ckeditor/';
 		$this->ckeditor->config['toolbar'] = array(
-		                array( 'Source', '-', 'Bold', 'Italic', 'Underline', '-','Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo','-','NumberedList','BulletedList' )
+		                array( 'Source', '-', 'Bold', 'Italic', 'Underline', '-','Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo','-','NumberedList','BulletedList','Link' )
 		                                                    );
 		$this->ckeditor->config['language'] = 'eng';
 		$this->ckeditor->config['width'] = '1024px';
@@ -580,7 +570,7 @@ class Layanan extends CI_Controller  {
 		$this->load->library('ckeditor');
 		$this->ckeditor->basePath = base_url().'assets/ckeditor/';
 		$this->ckeditor->config['toolbar'] = array(
-		                array( 'Source', '-', 'Bold', 'Italic', 'Underline', '-','Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo','-','NumberedList','BulletedList' )
+		                array( 'Source', '-', 'Bold', 'Italic', 'Underline', '-','Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo','-','NumberedList','BulletedList','Link' )
 		                                                    );
 		$this->ckeditor->config['language'] = 'eng';
 		$this->ckeditor->config['width'] = '1024px';
@@ -661,7 +651,7 @@ class Layanan extends CI_Controller  {
 		$this->load->library('ckeditor');
 		$this->ckeditor->basePath = base_url().'assets/ckeditor/';
 		$this->ckeditor->config['toolbar'] = array(
-		                array( 'Source', '-', 'Bold', 'Italic', 'Underline', '-','Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo','-','NumberedList','BulletedList' )
+		                array( 'Source', '-', 'Bold', 'Italic', 'Underline', '-','Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo','-','NumberedList','BulletedList','Link' )
 		                                                    );
 		$this->ckeditor->config['language'] = 'eng';
 		$this->ckeditor->config['width'] = '1024px';

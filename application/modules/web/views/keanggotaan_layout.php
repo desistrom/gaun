@@ -120,163 +120,34 @@ div.sub-box-keanggotaan{
                     <h1>Keanggotaan </h1></div>
             </div>
             <div class="col-md-12 col-sm-12 col-xs-12 content-keanggotaan">
-              
               <?php $this->load->view('keanggotaan_looping', $keanggotaan); ?>
-         <!--        <div class="col col-md-6 col-sm-6 col-xs-6 box-keanggotaan">
-                    <div class="col col-md-12 col-sm-12 col-xs-12 none-padding sub-box-keanggotaan">
-                        <div class="col col-md-3 col-sm-3 col-xs-3">
-                            <div class="box-keanggotaan-left">
-                            	<div class="filter-box-mg-keanggotaan">
-                            		<img class="img-responsive" src="<?=base_url();?>assets/images/logo/logo3.png">
-                            	</div>
-                            </div>
-                        </div>
-                        <div class="col col-md-9 col-sm-9 col-xs-9 none-padding box-keanggotaan-right">
-                            <h4 class="text-bold title-box-keanggotaan">Institut teknologi sepuluh Nopember</h4>
-                            <ul class="list-unstyled">
-                                <li><i class="fa fa-map-marker"></i> Jl. Airlangga No. 4 - 6, Airlangga, Gubeng, Airlangga,Gubeng, Kota SBY, Jawa Timur 60115</li>
-                                <li><i class="fa fa-phone"></i> Telp. (031) 5915551, 5914042 ext. 227</li>
-                                <li><i class="fa fa-laptop"></i><span class="website-anggota"> www.unair.ac.id </span></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col col-md-6 col-sm-6 col-xs-6 box-keanggotaan">
-                    <div class="col col-md-12 col-sm-12 col-xs-12 none-padding sub-box-keanggotaan">
-                        <div class="col col-md-3 col-sm-3 col-xs-3">
-                            <div class="box-keanggotaan-left">
-                            	<div class="filter-box-mg-keanggotaan">
-                            		<img class="img-responsive" src="<?=base_url();?>assets/images/logo/logo4.png">
-                            	</div>
-                            </div>
-                        </div>
-                        <div class="col col-md-9 col-sm-9 col-xs-9 none-padding box-keanggotaan-right">
-                            <h4 class="text-bold title-box-keanggotaan">Institut teknologi sepuluh Nopember</h4>
-                            <ul class="list-unstyled">
-                                <li><i class="fa fa-map-marker"></i> Jl. Airlangga No. 4 - 6, Airlangga, Gubeng, Airlangga,Gubeng, Kota SBY, Jawa Timur 60115</li>
-                                <li><i class="fa fa-phone"></i> Telp. (031) 5915551, 5914042 ext. 227</li>
-                                <li><i class="fa fa-laptop"></i><span class="website-anggota"> www.unair.ac.id </span></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col col-md-6 col-sm-6 col-xs-6 box-keanggotaan">
-                    <div class="col col-md-12 col-sm-12 col-xs-12 none-padding sub-box-keanggotaan">
-                        <div class="col col-md-3 col-sm-3 col-xs-3">
-                            <div class="box-keanggotaan-left">
-                            	<div class="filter-box-mg-keanggotaan">
-                            		<img class="img-responsive" src="<?=base_url();?>assets/images/logo/logo5.png">
-                            	</div>
-                            </div>
-                        </div>
-                        <div class="col col-md-9 col-sm-9 col-xs-9 none-padding box-keanggotaan-right">
-                            <h4 class="text-bold title-box-keanggotaan">Institut teknologi sepuluh Nopember</h4>
-                            <ul class="list-unstyled">
-                                <li><i class="fa fa-map-marker"></i> Jl. Airlangga No. 4 - 6, Airlangga, Gubeng, Airlangga,Gubeng, Kota SBY, Jawa Timur 60115</li>
-                                <li><i class="fa fa-phone"></i> Telp. (031) 5915551, 5914042 ext. 227</li>
-                                <li><i class="fa fa-laptop"></i><span class="website-anggota"> www.unair.ac.id </span></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col col-md-6 col-sm-6 col-xs-6 box-keanggotaan">
-                    <div class="col col-md-12 col-sm-12 col-xs-12 none-padding sub-box-keanggotaan">
-                        <div class="col col-md-3 col-sm-3 col-xs-3">
-                            <div class="box-keanggotaan-left">
-                            	<div class="filter-box-mg-keanggotaan">
-                            		<img class="img-responsive" src="<?=base_url();?>assets/images/logo/logo6.png">
-                            	</div>
-                            </div>
-                        </div>
-                        <div class="col col-md-9 col-sm-9 col-xs-9 none-padding box-keanggotaan-right">
-                            <h4 class="text-bold title-box-keanggotaan">Institut teknologi sepuluh Nopember</h4>
-                            <ul class="list-unstyled">
-                                <li><i class="fa fa-map-marker"></i> Jl. Airlangga No. 4 - 6, Airlangga, Gubeng, Airlangga,Gubeng, Kota SBY, Jawa Timur 60115</li>
-                                <li><i class="fa fa-phone"></i> Telp. (031) 5915551, 5914042 ext. 227</li>
-                                <li><i class="fa fa-laptop"></i><span class="website-anggota"> www.unair.ac.id </span></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col col-md-6 col-sm-6 col-xs-6 box-keanggotaan">
-                    <div class="col col-md-12 col-sm-12 col-xs-12 none-padding sub-box-keanggotaan">
-                        <div class="col col-md-3 col-sm-3 col-xs-3">
-                            <div class="box-keanggotaan-left">
-                            	<div class="filter-box-mg-keanggotaan">
-                            		<img class="img-responsive" src="<?=base_url();?>assets/images/logo/logo7.png">
-                            	</div>
-                            </div>
-                        </div>
-                        <div class="col col-md-9 col-sm-9 col-xs-9 none-padding box-keanggotaan-right">
-                            <h4 class="text-bold title-box-keanggotaan">Institut teknologi sepuluh Nopember</h4>
-                            <ul class="list-unstyled">
-                                <li><i class="fa fa-map-marker"></i> Jl. Airlangga No. 4 - 6, Airlangga, Gubeng, Airlangga,Gubeng, Kota SBY, Jawa Timur 60115</li>
-                                <li><i class="fa fa-phone"></i> Telp. (031) 5915551, 5914042 ext. 227</li>
-                                <li><i class="fa fa-laptop"></i><span class="website-anggota"> www.unair.ac.id </span></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col col-md-6 col-sm-6 col-xs-6 box-keanggotaan">
-                    <div class="col col-md-12 col-sm-12 col-xs-12 none-padding sub-box-keanggotaan">
-                        <div class="col col-md-3 col-sm-3 col-xs-3">
-                            <div class="box-keanggotaan-left">
-                            	<div class="filter-box-mg-keanggotaan">
-                            		<img class="img-responsive" src="<?=base_url();?>assets/images/logo/logo8.png">
-                            	</div>
-                            </div>
-                        </div>
-                        <div class="col col-md-9 col-sm-9 col-xs-9 none-padding box-keanggotaan-right">
-                            <h4 class="text-bold title-box-keanggotaan">Institut teknologi sepuluh Nopember</h4>
-                            <ul class="list-unstyled">
-                                <li><i class="fa fa-map-marker"></i> Jl. Airlangga No. 4 - 6, Airlangga, Gubeng, Airlangga,Gubeng, Kota SBY, Jawa Timur 60115</li>
-                                <li><i class="fa fa-phone"></i> Telp. (031) 5915551, 5914042 ext. 227</li>
-                                <li><i class="fa fa-laptop"></i><span class="website-anggota"> www.unair.ac.id </span></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col col-md-6 col-sm-6 col-xs-6 box-keanggotaan">
-                    <div class="col col-md-12 col-sm-12 col-xs-12 none-padding sub-box-keanggotaan">
-                        <div class="col col-md-3 col-sm-3 col-xs-3">
-                            <div class="box-keanggotaan-left">
-                            	<div class="filter-box-mg-keanggotaan">
-                            		<img class="img-responsive" src="<?=base_url();?>assets/images/logo/logo2.png">
-                            	</div>
-                            </div>
-                        </div>
-                        <div class="col col-md-9 col-sm-9 col-xs-9 none-padding box-keanggotaan-right">
-                            <h4 class="text-bold title-box-keanggotaan">Institut teknologi sepuluh Nopember</h4>
-                            <ul class="list-unstyled">
-                                <li><i class="fa fa-map-marker"></i> Jl. Airlangga No. 4 - 6, Airlangga, Gubeng, Airlangga,Gubeng, Kota SBY, Jawa Timur 60115</li>
-                                <li><i class="fa fa-phone"></i> Telp. (031) 5915551, 5914042 ext. 227</li>
-                                <li><i class="fa fa-laptop"></i><span class="website-anggota"> www.unair.ac.id </span></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div> -->
-             
+            </div>
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <button class="btn btn-default loadmore" type="button">Load More</button>
             </div>
             <div class="ajax-load text-center" style="display:none">
-                <p><img src="http://demo.itsolutionstuff.com/plugin/loader.gif">Loading More post</p>
+                <p><img src="http://demo.itsolutionstuff.com/plugin/loader.gif">Loading More Data</p>
             </div>
     </section>
     <script src="<?=base_url().'assets/js/jquery-3.2.1.min.js';?>"></script>
     <script type="text/javascript">
         var page = 1;
-        $(window).scroll(function() {
-            if($(window).scrollTop() + $(window).height() >= $(document).height()) {
+        $('.loadmore').click(function() {
                 page++;
                 loadMoreData(page);
-            }
+                $('.content-keanggotaan').each(function() {
+                    var text = $(this).html();
+                    $(this).html(text.replace('null', '')); 
+                });
         });
 
 
         function loadMoreData(page){
           $.ajax(
                 {
-                    url: '?page=' + page,
+                    url: '<?=site_url('web/keanggotaan');?>'+'?page=' + page,
                     type: "get",
+                    dataType : 'text',
                     beforeSend: function()
                     {
                         $('.ajax-load').show();
@@ -284,6 +155,8 @@ div.sub-box-keanggotaan{
                 })
                 .done(function(data)
                 {
+                
+                    console.log(data);
                     if(data == "null"){
                         $('.ajax-load').html("No more Data found");
                         return;
@@ -291,6 +164,11 @@ div.sub-box-keanggotaan{
                     $('.ajax-load').hide();
                     if (data != "null") {
                         $(".content-keanggotaan").append(data);
+                        $('.content-keanggotaan').each(function() {
+                            var text = $(this).html();
+                            $(this).html(text.replace('null', '')); 
+                        });
+                        
                     }
                 })
                 .fail(function(jqXHR, ajaxOptions, thrownError)

@@ -1,5 +1,5 @@
-<?php if($keanggotaan != ''){ foreach ($keanggotaan as $key => $value) : ?>
-    <div class="col col-md-6 col-sm-6 col-xs-12 box-keanggotaan">
+<?php if(!empty($keanggotaan)){ foreach ($keanggotaan as $key => $value) : ?>
+    <?php $ret = ''; ?><div class="col col-md-6 col-sm-6 col-xs-12 box-keanggotaan">
         <div class="col col-md-12 col-sm-12 col-xs-12 none-padding sub-box-keanggotaan">
             <div class="col col-md-3 col-sm-12 col-xs-12">
                 <div class="box-keanggotaan-left">

@@ -70,6 +70,23 @@ class V1 extends REST_Controller {
     	$this->_galery_video();
     }
 
+    public function tube_video_get(){
+        header('Content-Type: application/json');
+        $this->_tube_video();
+    }
+
+    public function tube_video_pagging_get(){
+        header('Content-Type: application/json');
+        $param = $_GET['data'];
+        if(!isset($param) || $param == ''){
+            $retData['code'] = '500';
+            $retData['status'] = 'failed';
+            $retData['error'] = 'Your parameter is invalid';
+            $this->response($retData,400);
+        }
+        $this->_tube_video_pagging($param);
+    }
+
     public function galery_video_pagging_get(){
         header('Content-Type: application/json');
         $param = $_GET['data'];
@@ -458,6 +475,38 @@ class V1 extends REST_Controller {
         $this->response($retData,200);
     }
 
+    function _tube_video(){
+        $type = 'video';
+        $galery = $this->v1_model->getTypeTube($type);
+        
+        if ($galery == '') {
+            $retData['code'] = '500';
+            $retData['status'] = 'Failed';
+            $retData['data'] = 'data not found';
+        }else{
+            $retData['code'] = '200';
+            $retData['status'] = 'success';
+            $retData['data'] = $galery;
+        }
+        $this->response($retData,200);
+    }
+
+    function _tube_video_pagging($param){
+        $type = 'video';
+        $galery = $this->v1_model->getTypeTubePagging($type,$param);
+        
+        if ($galery == '') {
+            $retData['code'] = '500';
+            $retData['status'] = 'Failed';
+            $retData['data'] = 'data not found';
+        }else{
+            $retData['code'] = '200';
+            $retData['status'] = 'success';
+            $retData['data'] = $galery;
+        }
+        $this->response($retData,200);
+    }
+
     function _select_galery($data){
     	$param = $data['data'];
     	$galery = $this->v1_model->selectGalery($param);
@@ -526,7 +575,13 @@ class V1 extends REST_Controller {
     }
 
     function _step(){
-        $profit = $this->v1_model->user_setting()['step'];
+        $profit['step'] = $this->v1_model->user_setting()['step'];
+        $profit['picture'] = $this->v1_model->user_setting()['picture'];
+        if ($this->v1_model->user_setting()['picture'] == '') {
+            $profit['picture']=base_url().'assets/images/logo/IDREN-2.png';
+        }else{
+            $profit['picture']=base_url().'media/'.$this->v1_model->user_setting()['picture'];
+        }  
         $retData['code'] = '200';
         $retData['status'] = 'Success';
         $retData['data'] = $profit;

@@ -1,10 +1,11 @@
+<link rel="stylesheet" href="<?=base_url();?>assets/datatables/css/dataTables.bootstrap.min.css">
 <div class="col col-md-12 col-sm-12 col-xs-12">
 	<div class="box">
 	<div class="box-body">
 		<div class="col col-md-12 col-sm-12 col-xs-12" style="padding-left: 0; margin-bottom: 15px;">
 			<a href="<?=site_url('admin/galery/add_image');?>"><button class="btn btn-success">Tambah Gambar</button></a>
 		</div>
-		<table class="table table-bordered  dataTable">
+		<table class="table table-bordered  dataTable" id="example2">
 			  <thead>
 			  	<th>No</th>
 			  	<th>judul</th>

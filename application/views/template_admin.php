@@ -172,7 +172,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li <?php if(current_url() == site_url('admin/keanggotaan/index')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/keanggotaan/index');?>"><i class="fa fa-users"></i> List Anggota</a></li>
+            <!-- <li <?php if(current_url() == site_url('admin/keanggotaan/index')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/keanggotaan/index');?>"><i class="fa fa-users"></i> List Anggota</a></li> -->
             <li <?php if(current_url() == site_url('admin/keanggotaan/instansi')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/keanggotaan/instansi');?>"><i class="fa fa-black-tie"></i>Instansi</a></li>
             <li <?php if(current_url() == site_url('admin/keanggotaan/setting')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/keanggotaan/setting');?>"><i class="fa fa-gear"></i>Benefit</a></li>
             <li <?php if(current_url() == site_url('admin/keanggotaan/setting_reg')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/keanggotaan/setting_reg');?>"><i class="fa fa-gear"></i>Registrasi</a></li>

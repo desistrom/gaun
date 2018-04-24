@@ -106,6 +106,7 @@ div.sub-box-keanggotaan{
     margin-left: 0;
     display: inline-block;
 }
+
 }
 
   </style>
@@ -122,8 +123,8 @@ div.sub-box-keanggotaan{
             <div class="col-md-12 col-sm-12 col-xs-12 content-keanggotaan">
               <?php $this->load->view('keanggotaan_looping', $keanggotaan); ?>
             </div>
-            <div class="col-md-12 col-sm-12 col-xs-12">
-                <button class="btn btn-default loadmore" type="button">Load More</button>
+            <div class="col-md-12 col-sm-12 col-xs-12 text-center" style="padding-bottom: 15px;">
+                <button class="btn btn-danger loadmore" type="button">Load More</button>
             </div>
             <div class="ajax-load text-center" style="display:none">
                 <p><img src="http://demo.itsolutionstuff.com/plugin/loader.gif">Loading More Data</p>

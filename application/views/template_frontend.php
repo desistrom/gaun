@@ -23,7 +23,25 @@
       }
       .jsCalendar tbody td.jsCalendar-current{
          background-color: #D10909 !important;
+         border-radius: 0;
       }
+      .jsCalendar tbody{
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      .jsCalendar thead{
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      .jsCalendar thead .jsCalendar-week-days th, .jsCalendar tbody td{
+        margin: 0;
+        height: 30px;
+        width: 35px;
+      }
+      .jsCalendar tbody td:hover{
+  background-color: #EFDBDB;
+  border-radius: 0;
+}
     </style>
 </head>
 
@@ -128,8 +146,7 @@
                 </div>
                 <div class="col-md-4 col-sm-4 col-xs-12 footer-right text-right">
                   <h3 class="title-footer">Kalender dan Visitor</h3>
-                
-                    <ul class="list-inline">
+                    <ul class="list-unstyled">
                       <li><div class="auto-jsCalendar material-theme"></div></li>\
                       <li><div id="_wau4yv"></div></li>
                         <!-- <li>

@@ -127,7 +127,7 @@
             <li <?php if(current_url() == site_url('admin/home/Layanan_idroam')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/home/Layanan_idroam');?>"><i class="fa fa-bullhorn"></i>Layanan ID Roam</a></li>
             <li <?php if(current_url() == site_url('admin/home/Layanan_cloud')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/home/Layanan_cloud');?>"><i class="fa fa-bullhorn"></i>Layanan Cloud Federation</a></li>
             <li <?php if(current_url() == site_url('admin/home/kolaborasi')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/home/kolaborasi');?>"><i class="fa fa-bullhorn"></i>Kolaborasi</a></li>
-            <li <?php if(current_url() == site_url('admin/about/slider')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/about/slider');?>"><i class="fa fa-bullhorn"></i>Title Slider</a></li>
+            <li <?php if(current_url() == site_url('admin/about/slider')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/about/slider');?>"><i class="fa fa-bullhorn"></i>Akademisi</a></li>
           </ul>
         </li>
 

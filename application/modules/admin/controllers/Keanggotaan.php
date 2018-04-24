@@ -165,7 +165,7 @@ class Keanggotaan extends MX_Controller  {
 
 	public function instansi(){
 		$this->data['view'] = 'list';
-		$this->data['breadcumb'] = 'List Instransi';
+		$this->data['breadcumb'] = 'List Instansi';
 		$this->data['instansi'] = $this->db->get('tb_instansi')->result_array();
 		$this->ciparser->new_parse('template_admin','modules_admin', 'keanggotaan/master_instansi_layout',$this->data);
 	}

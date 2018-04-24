@@ -68,6 +68,12 @@ span.website-testimoni{
   padding:15px 1em;
 }
 }
+@media(min-width:1500px){
+div.sub-box-testimoni{
+  height: 24em;
+}
+}
+
 
 
   </style>

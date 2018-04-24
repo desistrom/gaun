@@ -4,7 +4,7 @@
     <div class="inner">
       <h3><?=$user;?></h3>
 
-      <p>User Registrations</p>
+      <p>Instansi Joined</p>
     </div>
     <div class="icon">
       <i class="ion ion-person-add"></i>

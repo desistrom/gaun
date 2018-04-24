@@ -284,12 +284,12 @@ div.sub-box-keanggotaan{
                 })
                 .done(function(data)
                 {
-                    if(data == " "){
-                        $('.ajax-load').html("No more records found");
+                    if(data == "null"){
+                        $('.ajax-load').html("No more Data found");
                         return;
                     }
                     $('.ajax-load').hide();
-                    if (data != null) {
+                    if (data != "null") {
                         $(".content-keanggotaan").append(data);
                     }
                 })

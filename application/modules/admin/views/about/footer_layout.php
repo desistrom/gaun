@@ -7,13 +7,15 @@
 	    <form role="form">
 		    <div class="form-group">
 		        <label>Alamat</label>
-		        <textarea class="form-control" id="alamat" name="alamat"><?=$footer['alamat'];?></textarea>
+		        <?php echo $this->ckeditor->editor("alamat", $footer['alamat'] ); ?>
+		        <input type="hidden" name="alamat" id="alamat">
 		        <div class="error" id="ntf_alamat"></div>
 		    </div>
 
 		    <div class="form-group">
 		        <label>Alamat Ke - 2</label>
-		        <textarea class="form-control" id="alamat2" name="alamat2"><?=$footer['alamat2'];?></textarea>
+		        <?php echo $this->ckeditor->editor("alamat2", $footer['alamat2'] ); ?>
+		        <input type="hidden" name="alamat2" id="alamat2">
 		        <div class="error" id="ntf_alamat"></div>
 		    </div>
 
@@ -61,9 +63,11 @@
 		</div>
 		<?php } ?>
 <script src="<?=base_url().'assets/js/jquery-3.2.1.min.js';?>"></script>
-
+<script type="text/javascript" src="<?=base_url();?>assets/ckeditor/ckeditor.js"></script>
 <script type="text/javascript">
   $(document).ready(function () {
+  	$('#alamat').val(CKEDITOR.instances.alamat.getData());
+  	$('#alamat2').val(CKEDITOR.instances.alamat2.getData());
     $('body').on('click','#submit', function(){
       $.ajax({
           url : window.location.href,

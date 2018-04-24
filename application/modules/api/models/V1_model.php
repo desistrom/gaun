@@ -113,7 +113,7 @@ class V1_model extends CI_Model{
 	}
 
 	public function getInstansi_pagging($data){
-		$sql = "SELECT nm_instansi as instansi, id_instansi as id, phone as number_phone, website as link, alamat as address, gambar as image FROM tb_instansi LIMIT ".$data.",8";
+		$sql = "SELECT nm_instansi as instansi, id_instansi as id, phone as number_phone, website as link, alamat as address, gambar as image FROM tb_instansi where status = 2 LIMIT ".$data.",8";
 		if ($this->db->query($sql)->num_rows() > 0) {
 			return $this->db->query($sql)->result_array();
 			exit();

@@ -94,6 +94,14 @@ class About extends MX_Controller  {
 			echo json_encode($ret);
 			exit();
 		}
+		$this->load->library('ckeditor');
+		$this->ckeditor->basePath = base_url().'assets/ckeditor/';
+		$this->ckeditor->config['toolbar'] = array(
+		                array( 'Source', '-', 'Bold', 'Italic', 'Underline', '-','Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo','-','NumberedList','BulletedList' )
+		                                                    );
+		$this->ckeditor->config['language'] = 'eng';
+		$this->ckeditor->config['width'] = '1024px';
+		$this->ckeditor->config['height'] = '200px';
 		$this->ciparser->new_parse('template_admin','modules_admin', 'about/footer_layout',$this->data);
 	}
 

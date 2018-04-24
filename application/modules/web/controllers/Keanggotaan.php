@@ -14,19 +14,19 @@ class Keanggotaan extends MX_Controller  {
         $this->load->library('pagination');
 	}
     function index() {
-        $url = $this->uri->segment_array();
+        /*$url = $this->uri->segment_array();
         $data = end($url);
         if (!is_numeric($data)) {
             $data = 0;
         }
-    	$url_instansi = site_url('api/v1/instansi') ;
+    	$url_instansi = site_url('api/v1/instansi') ;*/
         // $a = json_decode($this->api_helper($url),true);
         $methode = 'GET';
         $token = '';
-        $b = api_helper('',$url_instansi,$methode,$token);
-        $config['base_url'] = base_url().'web/keanggotaan/index';
+        /*$b = api_helper('',$url_instansi,$methode,$token);
+        $config['base_url'] = base_url().'web/keanggotaan/index';*/
         // $url = base_url().'api/v1/news';
-        $methode = 'GET';
+        /*$methode = 'GET';
         $config['total_rows'] = count($b['data']);
         $config['per_page'] = 8;
         $config['prev_tag_open'] = '<li>';
@@ -38,9 +38,23 @@ class Keanggotaan extends MX_Controller  {
         $this->pagination->initialize($config);
         $url = base_url().'api/v1/instansi_pagging?data='.$data;
         $a = api_helper('',$url,$methode,$token);
-        $this->data['keanggotaan']=$a['data'];
+        $this->data['keanggotaan']=$a['data'];*/
 
-    	$this->ciparser->new_parse('template_frontend','modules_web', 'keanggotaan_layout',$this->data);
+        if (!empty($this->input->get('page'))) {
+            $start = ceil($this->input->get('page') * 8);
+            $url = base_url().'api/v1/instansi_pagging?data='.$start;
+            $a = api_helper('',$url,$methode,$token);
+            $this->data['keanggotaan']=$a['data'];
+            $result = $this->load->view('keanggotaan_looping',$this->data);
+            echo json_encode($result);
+        }else{
+            $url = base_url().'api/v1/instansi_pagging?data=0';
+            $a = api_helper('',$url,$methode,$token);
+            $this->data['keanggotaan']=$a['data'];
+            $this->ciparser->new_parse('template_frontend','modules_web', 'keanggotaan_layout',$this->data);
+        }
+
+    	// $this->ciparser->new_parse('template_frontend','modules_web', 'keanggotaan_layout',$this->data);
     }
      function benefit() {
         $url = site_url('api/v1/profit') ;

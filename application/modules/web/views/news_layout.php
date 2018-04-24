@@ -71,35 +71,57 @@
                     </div> -->
                 </div>
                 <div class="col-md-9 col-sm-8 col-xs-12 content-left">
-                    <?php foreach ($news as $key => $value) : ?>
-                    <div class="col col-md-12 col-sm-12 col-xs-12 none-padding list-artikel">
-                        <div class="col col-md-6 col-sm-12 col-xs-12 none-padding img-news"><img class="img-responsive" src="<?php echo $value['gambar']; ?>"></div>
-                        <div class="col col-md-6 col-sm-12 col-xs-12 desrip-news">
-                            <h4 class="title-news"><?php echo $value['title']; ?></h4>
-                             <?php echo word_limiter($value['news_content'],20); ?> 
-                            
-                            <ul class="list-inline date_event">
-                                <div style="padding: 10px 0 5px 0;"><span><i class="fa fa-link" style="padding-right: 5px;"> </i></span><?php echo $value['sumber']; ?></div>
-                                <li><i class="glyphicon glyphicon-calendar"></i><?php echo date('d m Y', strtotime($value['tanggal'])); ?></li>
-                                <li><i class="glyphicon glyphicon-briefcase"></i> <?php echo $value['kategori']; ?></li>
-                                
-                            </ul>
-
-                        </div>
-                        <a href="<?=base_url();?>web/news/get_news?data=<?php echo $value['newsId']; ?>" class="btn btn-danger btn-read-more" type="button"  >Read More</a>
-                    </div>
-                <?php endforeach ?>
+                    <?php $this->load->view('news_looping', $news); ?>
     
                </div>
             </div>
         </div>
-        <div class="container-fluid section-pagination">
-            <div class="row">
-                <div class="col-md-12 col-sm-12 col-xs-12 text-center">
-                    <!-- <ul class="list-inline pagination list-pagination"> -->
-                        <?php echo $this->pagination->create_links(); ?>
-                    <!-- </ul> -->
-                </div>
-            </div>
+        <div class="ajax-load text-center" style="display:none">
+            <p><img src="http://demo.itsolutionstuff.com/plugin/loader.gif">Loading More post</p>
         </div>
+        <!-- <div class="container-fluid section-pagination">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12 text-center"> -->
+                    <!-- <ul class="list-inline pagination list-pagination"> -->
+                        <?php //echo $this->pagination->create_links(); ?>
+                    <!-- </ul> -->
+                <!-- </div>
+            </div>
+        </div> -->
     </section>
+    <script src="<?=base_url().'assets/js/jquery-3.2.1.min.js';?>"></script>
+    <script type="text/javascript">
+        var page = 1;
+        $(window).scroll(function() {
+            if($(window).scrollTop() + $(window).height() >= $(document).height()) {
+                page++;
+                loadMoreData(page);
+            }
+        });
+
+
+        function loadMoreData(page){
+          $.ajax(
+                {
+                    url: '?page=' + page,
+                    type: "get",
+                    beforeSend: function()
+                    {
+                        $('.ajax-load').show();
+                    }
+                })
+                .done(function(data)
+                {
+                    if(data == " "){
+                        $('.ajax-load').html("No more records found");
+                        return;
+                    }
+                    $('.ajax-load').hide();
+                    $(".content-left").append(data);
+                })
+                .fail(function(jqXHR, ajaxOptions, thrownError)
+                {
+                      alert('server not responding...');
+                });
+        }
+    </script>

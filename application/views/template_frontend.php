@@ -147,7 +147,7 @@
                 </div>
                 <div class="col-md-4 col-sm-4 col-xs-12 footer-right text-right">
                   <h3 class="title-footer">Kalender dan Visitor</h3>
-                    <ul class="list-unstyled" style="float: right;">
+                    <ul class="list-unstyled" style="">
                       <li><div id="_wau4yv"></div></li>
                       <li><div class="auto-jsCalendar material-theme"></div></li>
                       

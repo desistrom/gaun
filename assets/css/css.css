@@ -120,6 +120,10 @@ h3.title-footer{
  
   text-align:center;
 }*/
+.footer-right ul {
+  float: right;
+
+}
 .footer-right ul li a:hover{
   background-color: #D10909;
 }
@@ -952,6 +956,14 @@ img.logo-sponsor.logo2 {
 }
 
 }
+@media(max-width:767px){
+  .footer-right ul {
+  float: none;
+  text-align: center;
+  display: inline-block;
+  
+}
+}
 @media(max-width:500px){
 
 
@@ -1072,6 +1084,12 @@ img.logo-sponsor.logo2 {
 .footer-center,
 .footer-right{
   text-align: center;
+}
+.footer-right ul {
+  float: none;
+  text-align: center;
+  display: inline-block;
+  
 }
 
 /*idroam*/

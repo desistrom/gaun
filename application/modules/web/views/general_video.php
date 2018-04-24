@@ -230,7 +230,7 @@
               <div class="col col-md-12 col-sm-12 col-xs-12 none-padding list-video" id="list-video">
                 <div class="col col-sm-12 col-sm-12 col-xs-12 none-padding">
                   <div class="col-md-6 col-sm-6 col-xs-6">
-                  <h3>Lastest Video</h3>
+                  <h3>Lastest ID-TUBE</h3>
                   <div class="line-list"></div>
                 </div>
                 <div class="col-md-6 col-sm-6 col-xs-6 text-right">

@@ -131,7 +131,7 @@
     <div class="container wraper">
         <footer>
             <div class="row">
-                <div class="col-md-2 col-sm-2 col-xs-12 footer-left">
+                <div class="col-md-3 col-sm-3 col-xs-12 footer-left">
                     <h3 class="title-footer">Didukung oleh</h3>
                     <ul class="list-inline">
                         <li><img src="<?=base_url();?>assets/images/logo/Logo-Ristekdikti-Arza.jpg" class="logo-sponsor logo2"></li>
@@ -144,7 +144,7 @@
                         <li style="word-wrap: break-word;"><?php echo footer_helper()['data']['address']; ?></li>
                     </ul>
                 </div>
-                <div class="col-md-3 col-sm-3 col-xs-12 footer-center text-center">
+                <div class="col-md-2 col-sm-2 col-xs-12 footer-center text-center">
                     <h3 class="title-footer">Kantor Pusat 2</h3>
                     <ul class="list-unstyled">                  
                         <li style="word-wrap: break-word;"><?php echo footer_helper()['data']['address2']; ?></li>
@@ -166,7 +166,7 @@
                         </li> -->
                     </ul>
                 </div>
-                <div class="col-md-2 col-sm-2 col-xs-12 footer-right text-right">
+                <div class="col-md-2 col-sm-2 col-xs-12 footer-right text-right" ">
                   <h3 class="title-footer">Hits Counter</h3>
                     <ul class="list-unstyled" style="width: 100%;">
                       <li><div id="_wau4yv"></div></li>

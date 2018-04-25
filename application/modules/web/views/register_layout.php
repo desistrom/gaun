@@ -2,7 +2,7 @@
 <meta name="keywords" content="input, text, effect, focus, transition, interaction, inspiration, web design" />
 <meta name="author" content="Codrops" />
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
-<link rel="stylesheet" href="<?=base_url();?>assets/css/style_register.css">
+<link rel="stylesheet" href="<?=base_url();?>assets/css/style_register.min.css?t=<?=time();?>">
     <style type="text/css">
         /* Hoshi */
         .input {

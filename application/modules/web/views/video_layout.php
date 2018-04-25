@@ -1,4 +1,4 @@
- <link rel="stylesheet" href="<?=base_url();?>assets/css/style_video.css">
+ <link rel="stylesheet" href="<?=base_url();?>assets/css/style_video.min.css?t=<?=time();?>">
 <!--    
 
 <style type="text/css">

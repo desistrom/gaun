@@ -1,84 +1,4 @@
-   
-
-<style type="text/css">
- .content-video{
-  background-color: #F2F2F2;
-}
-.title-page-news{
-  padding-bottom: 0em;
-  margin-top: 5em;
-}
-    .content-foto{
-        margin-top: 6em;
-    }
-        .line{
-        width: 100px;
-        height: 3px;
-        background-color:#BD0E0E;
-        display: inline-table; 
-    }
-    .text-title{
-            position: absolute;
-    z-index: 10;
-    bottom: 0;
-    font-weight: bold;
-    color: #E91515;
-    transition: 0.8s;
-    }
-    div.box:hover .text-title,
-    div.box:active .text-title,
-    div.box:focus .text-title
-    {
-        margin-bottom: 50%;
-        color: white;
-
-    }
-
-    .list-video{
-      padding: 2em 15px;
-      margin: 1.5em 0;
-      background-color: white;
-    }
-    .list-video .line-list{
-      width: 150px;
-      height: 3px;
-      background-color: #CF090A;
-      margin-bottom: 2em;
-    }
-    .show-video{
-      width: 100%;
-      height: 100%;
-      position: absolute;
-    }
-    .modal iframe{
-      width: 100%;
-      height: 480px;
-    }
-    .box-img-galery{
-      padding-top: 15px;
-    }
-    .modal .close{
-        font-size: 36px;
-        padding-right: 15px;
-      }
-       }
-    @media(max-width:500px){
-      .modal iframe{
-      width: 100%;
-      height: 360px;
-    }
-    }
-    @media(max-width:400px){
-      .modal iframe{
-      width: 100%;
-      height: 270px;
-    }
-    }
-    
-         /* The Modal (background) */
-
-
-      </style>
+<link rel="stylesheet" href="<?=base_url();?>assets/css/style_list_video.min.css?t=<?=time();?>"> 
         <div class="container-fluid none-padding filter-title-page-news">
             <div class="col-md-12 col-sm-12 col-xs-12 none-padding title-page-news">
                 <div class="line-news">
@@ -152,7 +72,7 @@
     </div>
 </div>
 <script src="<?=base_url();?>assets/js/jquery.min.js"></script>
-<script src="<?=base_url();?>assets/js/modal-custom.js"></script>
+<script src="<?=base_url();?>assets/js/modal-custom.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function(){
       $(".show-video").click(function(){

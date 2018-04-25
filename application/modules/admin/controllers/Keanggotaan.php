@@ -198,11 +198,10 @@ class Keanggotaan extends MX_Controller  {
 						
 					}else{
 						if (isset($_FILES['userfile'])) {
-							$image = $this->upload_logo($_FILES);
-							if (isset($image['error'])) {
-								$ret['notif'] = $image;
+							$data_gambar = $this->upload_logo($_FILES);
+							if (isset($data_gambar['error'])) {
+								$ret['notif'] = $data_gambar;
 							}else{
-								$data_gambar = $this->upload_logo($_FILES);
 								$about['image'] = $data_gambar['asli'];
 								if (file_exists(FCPATH."media/".$this->data['content']['image'])) {
 			            			@chmod(FCPATH."media/".$this->data['content']['image'], 0777);
@@ -233,6 +232,37 @@ class Keanggotaan extends MX_Controller  {
 				}else{
 					if (!isset($_FILES['userfile'])) {
 						$ret['notif']['userfile'] = "Please Select File";
+					}else{
+						if (isset($_FILES['userfile'])) {
+							$data_gambar = $this->upload_logo($_FILES);
+							if (isset($data_gambar['error'])) {
+								$ret['notif'] = $data_gambar;
+							}else{
+								$about['image'] = $data_gambar['asli'];
+								if (file_exists(FCPATH."media/".$this->data['content']['image'])) {
+			            			@chmod(FCPATH."media/".$this->data['content']['image'], 0777);
+			            			@unlink(FCPATH."media/".$this->data['content']['image']);
+			            		}
+			            		if (file_exists(FCPATH."media/thumbnail/".$this->data['content']['image'])) {
+			            			@chmod(FCPATH."media/thumbnail/".$this->data['content']['image'], 0777);
+			            			@unlink(FCPATH."media/thumbnail/".$this->data['content']['image']);
+			            		}
+			            		if (file_exists(FCPATH."media/crop/".$this->data['content']['image'])) {
+			            			@chmod(FCPATH."media/crop/".$this->data['content']['image'], 0777);
+			            			@unlink(FCPATH."media/crop/".$this->data['content']['image']);
+			            		}
+
+			            		if ($this->db->update('tb_setting_user',$about,$id)) {
+									$ret['status'] = 1;
+									$this->session->set_flashdata("notif","Data Berhasil di Masukan");
+								}
+							}
+						}else{
+							if ($this->db->update('tb_setting_user',$about,$id)) {
+								$ret['status'] = 1;
+								$this->session->set_flashdata("notif","Data Berhasil di Masukan");
+							}
+						}
 					}
 				}
 			}

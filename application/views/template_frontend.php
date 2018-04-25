@@ -131,27 +131,28 @@
     <div class="container wraper">
         <footer>
             <div class="row">
-                <div class="col-md-4 col-sm-4 col-xs-12 footer-left">
+                <div class="col-md-2 col-sm-2 col-xs-12 footer-left">
                     <h3 class="title-footer">Didukung oleh</h3>
                     <ul class="list-inline">
                         <li><img src="<?=base_url();?>assets/images/logo/Logo-Ristekdikti-Arza.jpg" class="logo-sponsor logo2"></li>
                         <li><img src="<?=base_url();?>assets/images/logo/images_telkom.jpg" class="logo-sponsor"></li>
                     </ul>
                 </div>
-                <div class="col-md-4 col-sm-4 col-xs-12 footer-center text-center">
-                    <h3 class="title-footer">Kantor Pusat</h3>
+                <div class="col-md-2 col-sm-2 col-xs-12 footer-center text-center">
+                    <h3 class="title-footer">Kantor Pusat 1</h3>
                     <ul class="list-unstyled">
                         <li><?php echo footer_helper()['data']['address']; ?></li>
-                        <li><?php echo footer_helper()['data']['address2']; ?></li>
-                        <!-- <li>Gedung Alfamidi Lt.4</li>
-                        <li>Jl. Budi Utomo No. 3 Kav.56</li>
-                        <li>Sukun Jota Malang</li> -->
                     </ul>
                 </div>
-                <div class="col-md-4 col-sm-4 col-xs-12 footer-right text-right">
-                  <h3 class="title-footer">Kalender dan Visitor</h3>
+                <div class="col-md-3 col-sm-3 col-xs-12 footer-center text-center">
+                    <h3 class="title-footer">Kantor Pusat 2</h3>
+                    <ul class="list-unstyled">                  
+                        <li><?php echo footer_helper()['data']['address2']; ?></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-12 footer-right text-center">
+                  <h3 class="title-footer">Kalender</h3>
                     <ul class="list-unstyled" style="">
-                      <li><div id="_wau4yv"></div></li>
                       <li><div class="auto-jsCalendar material-theme"></div></li>
                       
                         <!-- <li>
@@ -163,6 +164,12 @@
                         <li>
                             <a href="<?php echo footer_helper()['data']['InstagramLink']; ?>" target="blank" > <i class="fa fa-instagram"></i></a>
                         </li> -->
+                    </ul>
+                </div>
+                <div class="col-md-2 col-sm-2 col-xs-12 footer-right text-right">
+                  <h3 class="title-footer">Hits Counter</h3>
+                    <ul class="list-unstyled" style="">
+                      <li><div id="_wau4yv"></div></li>
                     </ul>
                 </div>
             </div>

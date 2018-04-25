@@ -1,4 +1,5 @@
-   
+ <link rel="stylesheet" href="<?=base_url();?>assets/css/style_video.css">
+<!--    
 
 <style type="text/css">
  .content-video{
@@ -187,7 +188,7 @@
          /* The Modal (background) */
 
 
-      </style>
+      </style> -->
         <div class="container-fluid none-padding filter-title-page-news">
             <div class="col-md-12 col-sm-12 col-xs-12 none-padding title-page-news">
                 <div class="line-news">

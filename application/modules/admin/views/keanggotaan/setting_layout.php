@@ -19,6 +19,7 @@
         <label>Image</label>
         <input type="file" name="userfile" value="" class="form-control" id="userfile">
         <div class="error" id="ntf_userfile"></div>
+        <div class="error" id="ntf_error"></div>
       </div>
 
       <img src="<?=base_url();?>media/<?=$content['image'];?>" width="450px">

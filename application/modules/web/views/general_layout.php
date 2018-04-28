@@ -31,7 +31,7 @@
                     <div class="col col-md-12 col-sm-12 col-xs-12 none-padding list-artikel">
                         <div class="col col-md-12 col-sm-12 col-xs-12 none-padding img-news"><img class="img-responsive" src="<?=base_url();?>media/<?=$layanan['image'];?>"></div>
                         <div class="col col-md-12 col-sm-12 col-xs-12 desrip-news">
-                            <h4 class="title-news"><?=date("D m Y", strtotime($layanan['tgl_update']));?></h4>
+                            <h4 class="title-news"><?=date("d M Y", strtotime($layanan['tgl_update']));?></h4>
                             <div class="isi-news" style="padding: 0 15px;"><?=$layanan['content'];?></div>
                             
                             

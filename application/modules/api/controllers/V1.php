@@ -954,4 +954,41 @@ class V1 extends REST_Controller {
         $this->response($retData,200);
     }
 
+    public function menu_get(){
+        $sql = "SELECT id, label, link, parent FROM tb_menu ORDER BY parent, sort, label";
+        $item = $this->db->query($sql)->result_array();
+        $menus = array('items'=>array(),'parents'=>array());
+        $this->data['menu'] = '';
+        foreach ($item as $key => $value) {
+            $menus['items'][$value['id']] = $value;
+            $menus['parents'][$value['parent']][]= $value['id'];
+        }
+        $this->createTreeView(0,$menus);
+    }
+
+    function createTreeView($parent, $menu){
+       $html = "";
+       if (isset($menu['parents'][$parent])) {
+          $html .= '<ul class="nav navbar-nav">';
+           foreach ($menu['parents'][$parent] as $itemId) {
+              if(!isset($menu['parents'][$itemId])) {
+                 $html .= "<li><a href='".$menu['items'][$itemId]['link']."'>"
+    .$menu['items'][$itemId]['label']."</a></li>";
+              }
+              if(isset($menu['parents'][$itemId])) {
+                 $html .= "<li class='dropdown'><a href='".$menu['items'][$itemId]['link']."'>".$menu['items'][$itemId]['label']."</a>";
+                 $html .= "<ul class='dropdown-menu'>";
+                 $html .= "<li>".$this->createTreeView($itemId, $menu)."</li>";
+                 $html .= "</ul>";
+              }
+           }
+           $html .= "</ul>";
+       }
+       // return $html;
+       $retData['code'] = 200;
+       $retData['status'] = 'Success';
+       $retData['data'] = $html;
+       $this->response($retData,200);
+    }
+
 }

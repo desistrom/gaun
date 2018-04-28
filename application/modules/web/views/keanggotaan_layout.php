@@ -7,7 +7,7 @@
                     <div></div>
                 </div>
                 <div class="header-title">
-                    <h1>Keanggotaan </h1></div>
+                    <h1>Member </h1></div>
             </div>
             <div class="col-md-12 col-sm-12 col-xs-12 content-keanggotaan">
               <?php $this->load->view('keanggotaan_looping', $keanggotaan); ?>

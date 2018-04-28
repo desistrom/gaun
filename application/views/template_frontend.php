@@ -46,6 +46,9 @@
       .waubutton.wau.push{
          width: 100% !important;
           }
+          #ifrm{
+            display: none !important;
+          }
     </style>
 </head>
 
@@ -59,46 +62,7 @@
               <div class="collapse navbar-collapse" id="navcol-1">
 
                   <ul class="nav navbar-nav navbar-right">
-                      <li role="presentation" ><a <?php if(current_url() == site_url('web/home') || current_url() == site_url()){ ?> class="active" <?php } ?> href="<?php echo site_url('web/home'); ?>">Home</a></li>
-                      <li class="dropdown"><a data-toggle="dropdown" aria-expanded="false" href="#" class="dropdown-toggle <?php if(current_url() == site_url('web/a')){ ?> active <?php } ?>">Layanan <span class="fa fa-angle-down"></span></a>
-                          <ul class="dropdown-menu" role="menu">
-                              <!-- <li><a href="<?php echo site_url('web/layanan/idroam') ?>">IDROAM</a></li>
-                              <li><a href="<?php echo site_url('web/layanan/cloud_federation') ?>">Cloud Federation</a></li> -->
-                              <li><a href="<?php echo site_url('web/layanan/id_book') ?>">ID-BOOK</a></li>
-                              <li><a href="<?php echo site_url('web/layanan/id_journal') ?>">ID-JOURNAL</a></li>
-                              <li><a href="<?php echo site_url('web/layanan/id_tube') ?>">ID-TUBE</a></li>
-                              <li><a href="<?php echo site_url('web/layanan/id_mail') ?>">ID-MAIL</a></li>
-                              <li><a href="<?php echo site_url('web/layanan/id_research') ?>">ID-RESEARCH</a></li>
-                              <li><a href="<?php echo site_url('web/layanan/id_link') ?>">ID-LINKS</a></li>
-                              <li><a href="<?php echo site_url('web/layanan/id_rank') ?>">ID-RANK</a></li>
-
-                          </ul>
-                        </li>
-                        <li class="dropdown"><a data-toggle="dropdown" aria-expanded="false" href="#" class="dropdown-toggle">Konektivitas <span class="fa fa-angle-down"></span></a>
-                          <ul class="dropdown-menu" role="menu">
-                              <li><a href="<?php echo site_url('web/konektivitas') ?>">Topologi</a></li>
-                              <li><a href="<?php echo site_url('web/layanan/monitoring') ?>">Monitoring Graph</a></li>
-
-                          </ul>
-                        </li>
-                        <!-- <li role="presentation" class=""><a <?php if(current_url() == site_url('web/keanggotaan')){ ?> class="active" <?php } ?> href="<?php echo site_url('web/keanggotaan'); ?>">Keanggotaan</a></li> -->
-                        <li class="dropdown"><a data-toggle="dropdown" aria-expanded="false" href="#" class="dropdown-toggle">Keanggotaan <span class="fa fa-angle-down"></span></a>
-                          <ul class="dropdown-menu" role="menu">
-                              <li><a href="<?php echo site_url('web/keanggotaan/pendaftaran') ?>">Pendaftaran</a></li>
-                              <li><a href="<?php echo site_url('web/keanggotaan') ?>">Member</a></li>
-                              <li><a href="<?php echo site_url('web/keanggotaan/benefit') ?>">Benefit</a></li>
-
-                          </ul>
-                        </li>
-                        <li class="dropdown"><a data-toggle="dropdown" aria-expanded="false" href="#" class="dropdown-toggle">Galeri <span class="fa fa-angle-down"></span></a>
-                          <ul class="dropdown-menu" role="menu">
-                              <li><a href="<?php echo site_url('web/galery') ?>">foto</a></li>
-                              <li><a href="<?php echo site_url('web/galery/video') ?>">Video</a></li>
-
-                          </ul>
-                        </li>
-                        <li role="presentation" class=""><a <?php if(current_url() == site_url('web/news')){ ?> class="active" <?php } ?> href="<?php echo site_url('web/news'); ?>">Berita</a></li>
-                        <li role="presentation" class=""><a <?php if(current_url() == site_url('web/tentang')){ ?> class="active" <?php } ?> href="<?php echo site_url('web/tentang') ?>">Tentang</a></li>
+                      <?=$this->general->menu();?>
                   <!--   <li class="dropdown"><a data-toggle="dropdown" aria-expanded="false" href="#" class="dropdown-toggle">Tentang <span class="fa fa-angle-down"></span></a>
                           <ul class="dropdown-menu" role="menu">
                               <li><a href="<?php echo site_url('web/tentang/contact') ?>">Contact Us</a></li>
@@ -290,79 +254,6 @@
 <?php if(current_url() == site_url('web/galery/video')||current_url() == site_url('web/layanan/id_tube')){ ?> 
    <script type="text/javascript" src="<?=base_url();?>assets/js/jquery.waterwheelCarousel.miny.js"></script>
  <?php } ?>
- 
-<!--  <script type="text/javascript">
-   var base_url = "<?=base_url();?>"
-    $(document).ready(function(){
-      $(".btn-gabung").click(function(){
-          $("#myModal").modal();
-      });
 
-      $('body').on('click','#btn_register', function(){
-      // console.log($('form').val());
-      // $('#content').val(CKEDITOR.instances.content.getData());
-      // return false;
-      $.ajax({
-          url : base_url+"web/home/insert_user",
-          dataType : 'json',
-          type : 'POST',
-          data : $('#register_form').serialize()
-      }).done(function(data){
-          console.log(data);
-          if(data.state == 1){
-            if (data.status == 1) {
-              $('#regSukses').modal('show');
-            }else{
-              $('.error_pass').show();
-              $('.error_pass').css({'color':'red', 'font-style':'italic', 'text-align':'center'});
-              console.log(data);
-              $('.error_pass').html(data.error);
-            }
-          }
-            $.each(data.notif,function(key,value){
-            $('.error').show();
-            $('#ntf_'+ key).html(value);
-            $('#ntf_'+ key).css({'color':'red', 'font-style':'italic'});
-            });
-      });
-    });
-
-    });
- </script> -->
- <!--  <script type="text/javascript">
-   var base_url = "<?=base_url();?>"
-    $(document).ready(function(){
-
-      $('body').on('click','#btn_register', function(){
-      // console.log($('form').val());
-      // $('#content').val(CKEDITOR.instances.content.getData());
-      // return false;
-      $.ajax({
-          url : base_url+"web/gabung/insert_user",
-          dataType : 'json',
-          type : 'POST',
-          data : $('#register_form').serialize()
-      }).done(function(data){
-          console.log(data);
-          if(data.state == 1){
-            if (data.status == 1) {
-              $('#regSukses').modal('show');
-            }else{
-              $('.error_pass').show();
-              $('.error_pass').css({'color':'red', 'font-style':'italic', 'text-align':'center'});
-              console.log(data);
-              $('.error_pass').html(data.error);
-            }
-          }
-            $.each(data.notif,function(key,value){
-            $('.error').show();
-            $('#ntf_'+ key).html(value);
-            $('#ntf_'+ key).css({'color':'red', 'font-style':'italic'});
-            });
-      });
-    });
-
-    });
- </script> -->
 </body>
 </html>

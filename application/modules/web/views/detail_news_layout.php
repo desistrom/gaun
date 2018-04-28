@@ -12,6 +12,10 @@
          .box-news{
         padding: 0 ;
     }
+    .content-comment a.btn.btn-post{
+        padding: 10px 15px;
+        font-size: 16px;
+    }
     }
 </style>
 <section class="detail_news" style="margin-top: 6em;">

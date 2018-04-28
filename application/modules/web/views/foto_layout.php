@@ -1,5 +1,14 @@
       <link rel="stylesheet" href="<?=base_url();?>assets/css/style_foto.min.css?t=<?=time();?>"> 
-
+      <style type="text/css">
+        .content-img-top-left{
+          margin-top: 2em;
+        }
+        @media(max-width:500px){
+           .content-img-top-left{
+          margin-top: 1em;
+        }
+        }
+      </style>
 
         <div class="container-fluid none-padding filter-title-page-news">
             <div class="col-md-12 col-sm-12 col-xs-12 none-padding title-page-news">
@@ -16,7 +25,7 @@
             <div class="col col-md-12 col-sm-12 col-xs-12 none-padding">
               <div class="col col-md-5 col-sm-12 col-xs-12 content-img-top-left">
                      <h2 class="text-img-page" style="color: #747474;"><?php echo $album_id[0]['title']; ?></h2>
-                     <h4 style="margin-top: 2em;color: #BDBDBD"><?php echo $album_id[0]['date_album']; ?></h4>
+                     <h4 style="color: #BDBDBD"><?php echo $album_id[0]['date_album']; ?></h4>
               </div>
               <div class="col col-md-7 col-sm-12 col-xs-12 none-padding">
                 <div class="carousel-top">

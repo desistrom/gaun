@@ -193,7 +193,8 @@
 			      	<textarea class="form-control" id="alamat" name="alamat"><?=$instansi['alamat'];?></textarea>
 			      	<div class="error" id="ntf_alamat"></div>
 			      </div>
-			      <label>Logo Instansi</label>
+			      <div class="form-group">
+			      	<label>Logo Instansi</label>
 			        <input type="file" class="form-control" name="userfile" id="userfile">
 			        <div class="error" id="ntf_userfile"></div>
 			        <div class="error" id="ntf_error"></div>
@@ -259,7 +260,7 @@
           data : {'id' : id},
           async : false
       }).done(function(data){
-      	setTimeout(function(){  
+      	setTimeout(function(){
 	      	$('#progresLoading').modal('hide');
 	      	console.log(data);
 	        window.location.href = data.url;

@@ -111,18 +111,26 @@ class Galery extends MX_Controller  {
 				$media['tgl_upload'] = date('Y-m-d');
 				$media['type'] = 'image';
 				$media['id_user_ref'] = $this->session->userdata('data_user')['id_user'];
-				if (isset($_FILES['file_name'])) {
-					$image = $this->upload_logo($_FILES);
-					if (isset($image['error'])) {
-						$ret['notif'] = $image;
-					}else{
-						$ret['state'] = 1;
-						$media['file_name'] = $image['asli'];
-						if ($this->galery_model->insertGalery($media) == true) {
-	                		$ret['status'] = 1;
-	                		$ret['url'] = site_url('admin/galery/list_image');
-	                		$this->session->set_flashdata("notif","Data Berhasil di Masukan");
-	                	}
+				if (isset($_FILES['file_names'])) {
+					$filesCount = count($_FILES['file_names']['name']);
+					for ($i=0; $i < $filesCount ; $i++) { 
+						$_FILES['file_name']['name'] = $_FILES['file_names']['name'][$i];
+		                $_FILES['file_name']['type'] = $_FILES['file_names']['type'][$i];
+		                $_FILES['file_name']['tmp_name'] = $_FILES['file_names']['tmp_name'][$i];
+		                $_FILES['file_name']['error'] = $_FILES['file_names']['error'][$i];
+		                $_FILES['file_name']['size'] = $_FILES['file_names']['size'][$i];
+		                $image = $this->upload_logo($_FILES);
+						if (isset($image['error'])) {
+							$ret['notif'] = $image;
+						}else{
+							$ret['state'] = 1;
+							$media['file_name'] = $image['asli'];
+							if ($this->galery_model->insertGalery($media) == true) {
+		                		$ret['status'] = 1;
+		                		$ret['url'] = site_url('admin/galery/list_image');
+		                		$this->session->set_flashdata("notif","Data Berhasil di Masukan");
+		                	}
+						}
 					}
 				}
 			}

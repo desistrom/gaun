@@ -36,13 +36,47 @@
 
       <div class="form-group">
       <label>File</label>
-        <input type="file" class="form-control" name="file_name" id="file_name">
+        <input type="file" class="form-control file" name="file_name[]" id="file_name">
         <div style="font-style: italic;">*for best result use 450x240 px</div>
         <div class="error" id="ntf_file_name"></div>
         <div class="error" id="ntf_error"></div>
       </div>
 
-      <button type="button" class="btn btn-primary" id="submit">Submit</button>
+      <div class="form-group">
+      <label>File</label>
+        <input type="file" class="form-control file" name="file_name[]" id="file_name">
+        <div style="font-style: italic;">*for best result use 450x240 px</div>
+        <div class="error" id="ntf_file_name"></div>
+        <div class="error" id="ntf_error"></div>
+      </div>
+
+      <div class="form-group">
+      <label>File</label>
+        <input type="file" class="form-control file" name="file_name[]" id="file_name">
+        <div style="font-style: italic;">*for best result use 450x240 px</div>
+        <div class="error" id="ntf_file_name"></div>
+        <div class="error" id="ntf_error"></div>
+      </div>
+
+      <div class="form-group">
+      <label>File</label>
+        <input type="file" class="form-control file" name="file_name[]" id="file_name">
+        <div style="font-style: italic;">*for best result use 450x240 px</div>
+        <div class="error" id="ntf_file_name"></div>
+        <div class="error" id="ntf_error"></div>
+      </div>
+
+      <div class="form-group">
+      <label>File</label>
+        <input type="file" class="form-control file" name="file_name[]" id="file_name">
+        <div style="font-style: italic;">*for best result use 450x240 px</div>
+        <div class="error" id="ntf_file_name"></div>
+        <div class="error" id="ntf_error"></div>
+      </div>
+
+      <div class="add_more"></div>
+
+      <button type="button" class="btn btn-danger" id="add"><i class="fa fa-plus"></i> Add More</button> | <button type="button" class="btn btn-primary" id="submit">Submit</button>
 
     </form>
   </div>
@@ -53,11 +87,15 @@
   $(document).ready(function () {
     $('body').on('click','#submit', function(){
       var form_data = new FormData();
-      var file_data = $('#file_name').prop('files')[0];
+      var file_data = [];
+      $('.file').each(function() {
+          // file_data.push($(this).prop('files')[0]);
+          form_data.append('file_names[]', $(this).prop('files')[0]);
+      });
       form_data.append('judul', $('#judul').val());
       form_data.append('deskripsi', $('#deskripsi').val());
       form_data.append('album', $('#album').val());
-      form_data.append('file_name', file_data);
+      
       $.ajax({
           url : window.location.href,
           dataType : 'json',
@@ -86,5 +124,21 @@
             });
       });
     });
+    $('body').on('click','#add',function(){
+      var data = '<div class="form-group"><label>File</label><input type="file" class="form-control file" name="file_name[]" id="file_name"><div style="font-style: italic;">*for best result use 450x240 px</div><div class="error" id="ntf_file_name"></div><div class="error" id="ntf_error"></div></div>';
+      $('.add_more').append(data);
+    });
+    /*$('body').on('keyup','#judul',function(){
+      var file = $('.file').val();
+      var form_data = new FormData();
+      var file_data = [];
+      $('.file').each(function(key,value){
+        file_data.push($(this).prop('files')[0]);
+      });
+      console.log(file_data);
+    });*/
+    // $.each(file,function(key,value){
+    //   array_push(file,$);
+    // });
   });
 </script>

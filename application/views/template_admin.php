@@ -95,6 +95,24 @@
           </a>
         </li> -->
 
+        <li class="treeview <?php if(current_url() == site_url('admin/menu/index')){ ?> active <?php } ?>">
+          <a href="<?=site_url('admin/menu/index');?>">
+            <i class="fa fa-flag"></i> <span>Menu</span>
+            <span class="pull-right-container">
+              
+            </span>
+          </a>
+        </li>
+
+        <li class="treeview <?php if(current_url() == site_url('admin/menu/page')){ ?> active <?php } ?>">
+          <a href="<?=site_url('admin/menu/page');?>">
+            <i class="fa fa-flag"></i> <span>Page</span>
+            <span class="pull-right-container">
+              
+            </span>
+          </a>
+        </li>
+
         <li class="treeview <?php if(current_url() == site_url('admin/home/logo')){ ?> active <?php } ?>">
           <a href="<?=site_url('admin/home/logo');?>">
             <i class="fa fa-flag"></i> <span>Logo Setting</span>

@@ -48,7 +48,11 @@
             }
             .detail_layanan .desrip-news p{
                  word-wrap: break-word;
+                 font-size: 16px;
             }
+            .detail_layanan .desrip-news{
+            padding:15px 0;
+        }
         }
     </style>
     <section class="detail_layanan">

@@ -53,6 +53,7 @@ $route['default_controller'] = 'web/home';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 $route['admin'] = 'admin/home/index';
+$route['page/(:any)'] = 'web/page/index/$1';
 
 $route['api/invoice'] = 'admin/check_module/getInvoiceById';
 $route['api/invoice/(:any)'] = 'admin/check_module/getInvoiceById?id=2';

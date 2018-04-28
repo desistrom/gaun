@@ -47,7 +47,7 @@ class Galery extends MX_Controller  {
 				$ret['state'] = 1;
 				$media['judul_album'] = $this->input->post('name');
 				$media['tgl_kegiatan'] = $this->input->post('tgl');
-				// $media['tgl_upload'] = date("D m Y", strtotime($this->input->post('tgl')));
+				$media['key_album'] = $this->getRandomString($this->encryption->encrypt(now()));
 				if ($this->galery_model->insertAlbum($media) == true) {
             		$ret['status'] = 1;
             		$ret['url'] = site_url('admin/galery/album');
@@ -62,6 +62,17 @@ class Galery extends MX_Controller  {
 		$this->data['view'] = 'add';
 		$this->data['breadcumb'] = 'Add Album';
 		$this->ciparser->new_parse('template_admin','modules_admin', 'galery/album_master_layout',$this->data);
+	}
+
+	function getRandomString($characters) {
+	    $string = '';
+	    $length = 8;
+
+	    for ($i = 0; $i < $length; $i++) {
+	        $string .= $characters[mt_rand(0, strlen($characters) - 1)];
+	    }
+
+	    return $string;
 	}
 
 	public function edit_album(){
@@ -137,9 +148,6 @@ class Galery extends MX_Controller  {
 			$ret['notif']['judul'] = form_error('judul');
 			$ret['notif']['album'] = form_error('album');
 			$ret['notif']['deskripsi'] = form_error('deskripsi');
-			if (!isset($_FILES['file_name'])) {
-				$ret['notif']['file_name'] = "Please Select File";
-			}
 			echo json_encode($ret);
 			exit();
 		}

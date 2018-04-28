@@ -88,10 +88,36 @@
     $('body').on('click','#submit', function(){
       var form_data = new FormData();
       var file_data = [];
+      var data_error = '';
       $('.file').each(function() {
-          // file_data.push($(this).prop('files')[0]);
           form_data.append('file_names[]', $(this).prop('files')[0]);
+          if ($(this).prop('files')[0] != undefined) {
+            var file = $(this).prop('files')[0];
+            var fileType = file["type"];
+            var ValidImageTypes = ["image/gif", "image/jpeg", "image/png"];
+            if ($.inArray(fileType, ValidImageTypes) < 0) {
+                 data_error = $(this).parent().find('#ntf_file_name').text('Your type file is false');
+                 $('.error').css({'color':'red', 'font-style':'italic'});
+            }
+          }else{
+            data_error = $(this).parent().find('#ntf_file_name').text('Please Select File');
+          }
       });
+      if ($('#judul').val() == '') {
+        $('.error').css({'color':'red', 'font-style':'italic'});
+        data_error = $('#ntf_judul').text('The Judul field is required.');
+      }
+      if ($('#deskripsi').val() == '') {
+        $('.error').css({'color':'red', 'font-style':'italic'});
+        data_error = $('#ntf_deskripsi').text('The Deskripsi field is required.');
+      }
+      if ($('#album').val() == '') {
+        $('.error').css({'color':'red', 'font-style':'italic'});
+        data_error = $('#ntf_album').text('The Judul field is required.');
+      }
+      if (data_error != '') {
+        return;
+      }
       form_data.append('judul', $('#judul').val());
       form_data.append('deskripsi', $('#deskripsi').val());
       form_data.append('album', $('#album').val());

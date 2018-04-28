@@ -147,33 +147,47 @@ class Menu extends MX_Controller  {
 			$this->form_validation->set_error_delimiters('','');
 			$this->form_validation->set_rules('label','Label Menu','required');
 			$this->form_validation->set_rules('content','Content Page','required');
-			if ($this->form_validation->run() == true && isset($_FILES['userfile'])) {
+			$this->form_validation->set_rules('page','Jenis Page','required');
+			if ($this->form_validation->run() == true ) {
 				$ret['state'] = 1;
 				$page['title'] = $this->input->post('label');
 				if ($this->input->post('menu') != '') {
-					$page['link'] = $this->input->post('menu');
+					$url = explode("/", $this->input->post('menu'));
+					$page['link'] = end($url);
 				}else{
 					$page['link'] = $this->input->post('slug');
 				}
 				$page['content'] = $this->input->post('content');
-				$page['page'] = 1;
-				$data_gambar = $this->upload_logo($_FILES);
-				if (isset($data_gambar['error'])) {
-					$ret['notif'] = $data_gambar;
-				}else{	
-					$page['img'] = $data_gambar['asli'];
+				$page['page'] = $this->input->post('page');
+				if ($page['page'] == 1) {
+					if (isset($_FILES['userfile'])) {
+						$data_gambar = $this->upload_logo($_FILES);
+						if (isset($data_gambar['error'])) {
+							$ret['notif'] = $data_gambar;
+						}else{	
+							$page['img'] = $data_gambar['asli'];
+							if ($this->db->insert('tb_general_page',$page)) {
+								$ret['status'] = 1;
+								$this->session->set_flashdata("notif","Data Berhasil di Masukan");
+								$ret['url'] = site_url('admin/menu/page');
+							}
+						}
+					}else{
+						$ret['notif']['userfile'] = "Please Select File";
+					}
+				}elseif ($page['page'] == 2) {
+					$page['img'] = 'dummy';
 					if ($this->db->insert('tb_general_page',$page)) {
 						$ret['status'] = 1;
 						$this->session->set_flashdata("notif","Data Berhasil di Masukan");
 						$ret['url'] = site_url('admin/menu/page');
 					}
 				}
+				
 			}
 			$ret['notif']['label'] = form_error('label');
 			$ret['notif']['content'] = form_error('content');
-			if (!isset($_FILES['userfile'])) {
-				$ret['notif']['userfile'] = "Please Select File";
-			}
+			$ret['notif']['page'] = form_error('page');
 			echo json_encode($ret);
 			exit();
 		}
@@ -202,12 +216,13 @@ class Menu extends MX_Controller  {
 				$ret['state'] = 1;
 				$page['title'] = $this->input->post('label');
 				if ($this->input->post('menu') != '') {
-					$page['link'] = $this->input->post('menu');
+					$url = explode("/", $this->input->post('menu'));
+					$page['link'] = end($url);
 				}else{
 					$page['link'] = $this->input->post('slug');
 				}
 				$page['content'] = $this->input->post('content');
-				$page['page'] = 1;
+				// $page['page'] = 1;
 				if (isset($_FILES['userfile'])) {
 					$data_gambar = $this->upload_logo($_FILES);
 					if (isset($data_gambar['error'])) {

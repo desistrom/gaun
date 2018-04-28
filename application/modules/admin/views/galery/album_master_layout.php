@@ -16,6 +16,7 @@
     <tr>
       <th>No</th>
       <th>Nama alnum</th>
+      <th>key album</th>
       <th>Tanggal Kegiatan</th>
       <th>aksi</th>
     </tr>
@@ -23,6 +24,7 @@
       <tr>
         <td><?=($key+1);?></td>
         <td><?=$value['judul_album'];?></td>
+        <td><?=$value['key_album'];?></td>
         <td><?= date("d M Y", strtotime($value['tgl_kegiatan']));?></td>
         <td>
           <!-- <button class="btn btn-default">disable</button> -->

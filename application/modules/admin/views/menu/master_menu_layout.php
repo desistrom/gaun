@@ -160,7 +160,7 @@
 
 				<div class="form-group">
 					<label>Order Menu</label>
-					<input type="number" name="order" class="form-control" id="order" placeholder="Masukan order Menu" value="<?=$current['order'];?>">
+					<input type="number" name="order" class="form-control" id="order" placeholder="Masukan order Menu" value="<?=$current['sort'];?>">
 					<div class="error" id="ntf_label"></div>
 				</div>
 

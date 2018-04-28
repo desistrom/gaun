@@ -127,7 +127,7 @@
 
 				<div class="form-group">
 					<label>Page Template</label>
-					<select name="menu" id="menu" class="form-control">
+					<select name="page" id="page" class="form-control">
 						<option value="">-- Select Menu --</option>
 						<option value="1">General</option>	
 						<option value="2">Galery</option>	
@@ -193,6 +193,7 @@
 		form_data.append('slug',$('#slug').val());
 		form_data.append('content',$('#content').val());
 		form_data.append('menu',$('#menu').val());
+		form_data.append('page',$('#page').val());
     	console.log($('#slug').val());
     	$.ajax({
     		url : window.location.href,

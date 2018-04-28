@@ -82,25 +82,45 @@
   </div>
   <!-- /.box-body -->
 </div>
+<div class="modal fade" id="progresLoading" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center">
+            <div class="modal-content">
+                <div class="modal-body">
+                  <div class="box box-danger">
+                      <div class="box-header">
+                      </div>
+                      <div class="box-body">
+                      </div>
+                      <div class="overlay">
+                        <i class="fa fa-refresh fa-spin"></i>
+                      </div>
+                  </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
 <script src="<?=base_url().'assets/js/jquery-3.2.1.min.js';?>"></script>
 <script type="text/javascript">
   $(document).ready(function () {
     $('body').on('click','#submit', function(){
       var form_data = new FormData();
+      $('#progresLoading').modal('show');
       var file_data = [];
       var data_error = '';
-      $('.file').each(function() {
+      $('.file').each(function(i) {
           form_data.append('file_names[]', $(this).prop('files')[0]);
           if ($(this).prop('files')[0] != undefined) {
+            file_data.push(i);
             var file = $(this).prop('files')[0];
             var fileType = file["type"];
             var ValidImageTypes = ["image/gif", "image/jpeg", "image/png"];
             if ($.inArray(fileType, ValidImageTypes) < 0) {
-                 data_error = $(this).parent().find('#ntf_file_name').text('Your type file is false');
+                 var image_error = $(this).parent().find('#ntf_file_name').text('Your type file is false');
                  $('.error').css({'color':'red', 'font-style':'italic'});
             }
-          }else{
-            data_error = $(this).parent().find('#ntf_file_name').text('Please Select File');
           }
       });
       if ($('#judul').val() == '') {
@@ -115,7 +135,15 @@
         $('.error').css({'color':'red', 'font-style':'italic'});
         data_error = $('#ntf_album').text('The Judul field is required.');
       }
+      // console.log(file_data.length);
+      if (file_data.length == 0) {
+        $('.error').css({'color':'red', 'font-style':'italic'});
+        $('#ntf_file_name').text('Please Select File');
+        $('#progresLoading').modal('hide');
+        return;
+      }
       if (data_error != '') {
+        $('#progresLoading').modal('hide');
         return;
       }
       form_data.append('judul', $('#judul').val());
@@ -132,6 +160,7 @@
           contentType : false , 
           processData : false
       }).done(function(data){
+        $('#progresLoading').modal('hide');
           console.log(data);
           if(data.state == 1){
             if (data.status == 1) {

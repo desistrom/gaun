@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="<?=base_url();?>assets/datatables/css/dataTables.bootstrap.min.css">
 	<div class="box-body">
 		<div class="col col-md-12 col-sm-12 col-xs-12" style="padding-left: 0; margin-bottom: 15px;">
-			<a href="<?=site_url('admin/news/add');?>" class="btn btn-success">Tambah News</a> | <a href="<?=site_url('admin/news/get_rss');?>" class="btn btn-info">Get rss</a>
+			<a href="<?=site_url('admin/news/add');?>" class="btn btn-success">Tambah News</a> | <a href="<?=site_url('admin/news/get_rss');?>" class="btn btn-info btn_rss">Get rss</a>
 		</div>
 		<div class="col col-md-12 col-xs-12">
 			<table class="table table-bordered  dataTable" id="example2">
@@ -187,11 +187,32 @@
 <?php } ?>
 	
 </div>
+<div class="modal fade" id="progresLoading" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center">
+            <div class="modal-content">
+                <div class="modal-body">
+                  <div class="box box-danger">
+                      <div class="box-header">
+                      </div>
+                      <div class="box-body">
+                      </div>
+                      <div class="overlay">
+                        <i class="fa fa-refresh fa-spin"></i>
+                      </div>
+                  </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
 <script src="<?=base_url().'assets/js/jquery-3.2.1.min.js';?>"></script>
 <script src="<?=base_url().'assets/js/jquery.slugify.js';?>"></script>
 <script type="text/javascript">
   $(document).ready(function () {
     $('body').on('click','#submit', function(){
+      $('#progresLoading').modal('show');
       var form_data = new FormData();
       var file_data = $('#file_name').prop('files')[0];
       $('#content').val(CKEDITOR.instances.content.getData());
@@ -251,6 +272,9 @@
     $('#judul').keyup(function () {
       var slug = slugify($('#judul').val());
       $('#slug').val(slug);
+    });
+    $('body').on('click','.btn_rss', function () {
+      $('#progresLoading').modal('show');
     });
     $('#modalSuccess').modal('show');
   });

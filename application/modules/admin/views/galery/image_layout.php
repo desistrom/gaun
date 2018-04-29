@@ -78,7 +78,9 @@
           <div class="error" id="ntf_error"></div>
         </div>
       <?php } ?>
-      <button type="button" class="btn btn-primary" id="submit">Submit</button>
+      <div class="col-md-12">
+        <button type="button" class="btn btn-primary" id="submit">Submit</button>
+      </div>
 
     </form>
   </div>

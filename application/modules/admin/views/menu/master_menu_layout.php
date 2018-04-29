@@ -11,6 +11,7 @@
 						<th>No</th>
 						<th>Menu</th>
 						<th>Link</th>
+						<th>Type</th>
 						<th>status</th>
 						<th>Action</th>
 					</thead>
@@ -20,6 +21,7 @@
 							<td><?=($key+1);?></td>
 							<td><?=$value['label'];?></td>
 							<td><?=$value['link'];?></td>
+							<td><?php if($value['type'] == 1){ ?> <span class="text-info">STATIC</span> <?php  }else{ ?> <span class="text-info">DYNAMIC</span> <?php } ?></td>
 							<td><?php if($value['parent'] == 0){ ?> <span class="text-success">MASTER</span> <?php  }else{ ?> <span class="text-success">SUBMENU</span> <?php } ?></td>
 							<td>
 								<a href="<?=site_url('admin/menu/edit/'.$value['id']);?>" class="btn btn-info btn-sm"><i class="fa fa-pencil"></i> Edit</a>

@@ -62,10 +62,12 @@ class News extends CI_Controller  {
     	$this->ciparser->new_parse('template_frontend','modules_web', 'news_layout',$this->data);
     }
         function get_news() {
-        $id=$_GET['data'];
+        $url = $this->uri->segment_array();
+        $id = end($url);
+        // $id=$_GET['data'];
 
-        $url = site_url('api/v1/get_news_byid');
-        $methode = 'POST';
+        $url = site_url('api/v1/get_news_byslug?news='.$id);
+        $methode = 'GET';
         $token = '';
         $data['data']=$id;
         $a = api_helper(json_encode($data),$url,$methode,$token);
@@ -75,6 +77,7 @@ class News extends CI_Controller  {
         $b = api_helper($token,$url_allnews,$methode,$token);
 
         $this->data['detail_news']=$a['data'];
+        // print_r($a['data']);
         $this->data['news']=$b['data'];
       
        

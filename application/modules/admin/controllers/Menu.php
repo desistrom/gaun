@@ -32,6 +32,7 @@ class Menu extends MX_Controller  {
 				$menu['link'] = base_url().'page/'.$this->input->post('slug');
 				$menu['parent'] = $this->input->post('menu');
 				$menu['sort'] = $this->input->post('order');
+				$menu['type'] = 2;
 				if ($this->db->insert('tb_menu',$menu)) {
 					$ret['status'] = 1;
 					$this->session->set_flashdata("notif","Data Berhasil di Masukan");
@@ -86,12 +87,17 @@ class Menu extends MX_Controller  {
 			$ret['status'] = 0;
 			$ret['notif'] = 'This menu has submenus, please first delete submenus from this menu';
 		}else{
-			if ($this->db->delete('tb_menu',array('id'=>$id))) {
-				$ret['status'] = 1;
-				$ret['notif'] = 'menu successfully deleted';
-			}else{
+			if($this->db->get_where('tb_menu',array('id'=>$id))->row_array()['type'] == 1){
 				$ret['status'] = 0;
-				$ret['notif'] = 'menu unsuccessfully deleted';
+				$ret['notif'] = 'cant deleted static menu';
+			}else{
+				if ($this->db->delete('tb_menu',array('id'=>$id))) {
+					$ret['status'] = 1;
+					$ret['notif'] = 'menu successfully deleted';
+				}else{
+					$ret['status'] = 0;
+					$ret['notif'] = 'menu unsuccessfully deleted';
+				}
 			}
 		}
 		echo json_encode($ret);

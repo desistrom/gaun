@@ -174,8 +174,8 @@ class News extends MX_Controller  {
 				$data_news['id_kategori_ref'] =  3;
 				$data_news['id_user_ref'] = $this->session->userdata('data_user')['id_user'];
 				$data_news['kategori_rss'] = $value['category'];
-				$data_news['link'] = $value['link'];
-				$data_news['content'] = $this->get_detail($data_news['link']);
+				$data_news['link'] = url_title($value['title'], 'dash', true);
+				$data_news['content'] = $this->get_detail($value['link'])."<br> Sumber : ".$value['link'];;
 				if ($this->db->get_where('tb_news',array('link'=>$value['link']))->num_rows() == 0) {
 					$this->db->insert('tb_news',$data_news);
 						

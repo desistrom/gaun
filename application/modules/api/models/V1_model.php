@@ -231,7 +231,7 @@ class V1_model extends CI_Model{
 			FROM tb_news n join tb_kategori_news k on n.id_kategori_ref = k.id_kategori_news 
 			join tb_user u on n.id_user_ref = u.id_user where n.is_aktif = 1 AND n.link = '".$data."'";
 		if ($this->db->query($sql)->num_rows() > 0) {
-			return $this->db->query($sql)->result_array();
+			return $this->db->query($sql)->row_array();
 			exit();	
 		}
 		return false;

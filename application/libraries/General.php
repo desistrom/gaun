@@ -46,7 +46,7 @@ class General
     }
 
     public function menu(){
-        $sql = "SELECT id, label, link, parent FROM tb_menu ORDER BY id ASC";
+        $sql = "SELECT id, label, link, parent FROM tb_menu ORDER BY sort ASC";
         $item = $this->CI->db->query($sql)->result_array();
         $menus = array('items'=>array(),'parents'=>array());
         foreach ($item as $key => $value) {
@@ -67,7 +67,7 @@ class General
               }
               if(isset($menu['parents'][$itemId])) {
                  $html .= "<li class='dropdown'>
-                 <a data-toggle='dropdown' aria-expanded='false' href='#' class='dropdown-toggle' href='".$menu['items'][$itemId]['link']."'>".$menu['items'][$itemId]['label']."<span class='fa fa-angle-down'></span></a>";
+                 <a data-toggle='dropdown' aria-expanded='false' href='#' class='dropdown-toggle' href='".$menu['items'][$itemId]['link']."'>".$menu['items'][$itemId]['label']." <span class='fa fa-angle-down'></span></a>";
                  $html .= "<ul class='dropdown-menu'>";
                  $html .= "<li>".$this->createTreeView($itemId, $menu)."</li>";
                  $html .= "</ul>";

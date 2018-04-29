@@ -33,50 +33,52 @@
         </select>
         <div class="error" id="ntf_album"></div>
       </div>
+      <?php if ($view == 'add'){ ?>
+        <div class="form-group col-md-6">
+        <label>File</label>
+          <input type="file" class="form-control file" name="file_name[]" id="file_name">
+          <div style="font-style: italic;">*for best result use 450x240 px</div>
+          <div class="error" id="ntf_file_name"></div>
+          <div class="error" id="ntf_error"></div>
+        </div>
 
-      <div class="form-group">
-      <label>File</label>
-        <input type="file" class="form-control file" name="file_name[]" id="file_name">
-        <div style="font-style: italic;">*for best result use 450x240 px</div>
-        <div class="error" id="ntf_file_name"></div>
-        <div class="error" id="ntf_error"></div>
-      </div>
+        <div class="form-group col-md-6">
+        <label>File</label>
+          <input type="file" class="form-control file" name="file_name[]" id="file_name">
+          <div style="font-style: italic;">*for best result use 450x240 px</div>
+          <div class="error" id="ntf_file_name"></div>
+          <div class="error" id="ntf_error"></div>
+        </div>
 
-      <div class="form-group">
-      <label>File</label>
-        <input type="file" class="form-control file" name="file_name[]" id="file_name">
-        <div style="font-style: italic;">*for best result use 450x240 px</div>
-        <div class="error" id="ntf_file_name"></div>
-        <div class="error" id="ntf_error"></div>
-      </div>
+        <div class="form-group col-md-6">
+        <label>File</label>
+          <input type="file" class="form-control file" name="file_name[]" id="file_name">
+          <div style="font-style: italic;">*for best result use 450x240 px</div>
+          <div class="error" id="ntf_file_name"></div>
+          <div class="error" id="ntf_error"></div>
+        </div>
 
-      <div class="form-group">
-      <label>File</label>
-        <input type="file" class="form-control file" name="file_name[]" id="file_name">
-        <div style="font-style: italic;">*for best result use 450x240 px</div>
-        <div class="error" id="ntf_file_name"></div>
-        <div class="error" id="ntf_error"></div>
-      </div>
-
-      <div class="form-group">
-      <label>File</label>
-        <input type="file" class="form-control file" name="file_name[]" id="file_name">
-        <div style="font-style: italic;">*for best result use 450x240 px</div>
-        <div class="error" id="ntf_file_name"></div>
-        <div class="error" id="ntf_error"></div>
-      </div>
-
-      <div class="form-group">
-      <label>File</label>
-        <input type="file" class="form-control file" name="file_name[]" id="file_name">
-        <div style="font-style: italic;">*for best result use 450x240 px</div>
-        <div class="error" id="ntf_file_name"></div>
-        <div class="error" id="ntf_error"></div>
-      </div>
-
-      <div class="add_more"></div>
-
-      <button type="button" class="btn btn-danger" id="add"><i class="fa fa-plus"></i> Add More</button> | <button type="button" class="btn btn-primary" id="submit">Submit</button>
+        <div class="form-group col-md-6">
+        <label>File</label>
+          <input type="file" class="form-control file" name="file_name[]" id="file_name">
+          <div style="font-style: italic;">*for best result use 450x240 px</div>
+          <div class="error" id="ntf_file_name"></div>
+          <div class="error" id="ntf_error"></div>
+        </div>
+        <div class="add_more"></div>
+        <div class="col-md-12">
+          <button type="button" class="btn btn-danger" style="float: right" id="add"><i class="fa fa-plus"></i> Add More</button>
+        </div>        
+      <?php }else{ ?>
+        <div class="form-group">
+        <label>File</label>
+          <input type="file" class="form-control file" name="file_name[]" id="file_name">
+          <div style="font-style: italic;">*for best result use 450x240 px</div>
+          <div class="error" id="ntf_file_name"></div>
+          <div class="error" id="ntf_error"></div>
+        </div>
+      <?php } ?>
+      <button type="button" class="btn btn-primary" id="submit">Submit</button>
 
     </form>
   </div>
@@ -106,6 +108,7 @@
 <script type="text/javascript">
   $(document).ready(function () {
     $('body').on('click','#submit', function(){
+      $('.error').text('');
       var form_data = new FormData();
       $('#progresLoading').modal('show');
       var file_data = [];
@@ -180,7 +183,7 @@
       });
     });
     $('body').on('click','#add',function(){
-      var data = '<div class="form-group"><label>File</label><input type="file" class="form-control file" name="file_name[]" id="file_name"><div style="font-style: italic;">*for best result use 450x240 px</div><div class="error" id="ntf_file_name"></div><div class="error" id="ntf_error"></div></div>';
+      var data = '<div class="form-group col-md-6"><label>File</label><input type="file" class="form-control file" name="file_name[]" id="file_name"><div style="font-style: italic;">*for best result use 450x240 px</div><div class="error" id="ntf_file_name"></div><div class="error" id="ntf_error"></div></div>';
       $('.add_more').append(data);
     });
     /*$('body').on('keyup','#judul',function(){

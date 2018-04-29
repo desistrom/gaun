@@ -152,6 +152,7 @@ class Galery extends MX_Controller  {
 			exit();
 		}
 		$this->data['breadcumb'] = 'Add Image';
+		$this->data['view'] = 'add';
 		$this->data['album'] = $this->db->get('tb_album_galery')->result_array();
 		$this->ciparser->new_parse('template_admin','modules_admin', 'galery/image_layout',$this->data);
 	}
@@ -246,6 +247,7 @@ class Galery extends MX_Controller  {
 			exit();
 		}
 		$this->data['breadcumb'] = 'Edit Image';
+		$this->data['view'] = 'edit';
 		$this->data['album'] = $this->db->get('tb_album_galery')->result_array();
 		$this->ciparser->new_parse('template_admin','modules_admin', 'galery/image_layout',$this->data);
 	}

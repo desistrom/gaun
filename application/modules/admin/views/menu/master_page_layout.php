@@ -132,7 +132,7 @@
 						<option value="1">General</option>	
 						<option value="2">Galery</option>	
 					</select>
-					<div class="error" id="ntf_menu"></div>
+					<div class="error" id="ntf_page"></div>
 				</div>
 
 				<button type="button" class="btn btn-primary" id="submit">Submit</button>
@@ -185,6 +185,7 @@
 <script type="text/javascript">
   $(document).ready(function () {
     $('body').on('click','#submit',function(){
+    	$('.error').text('');
     	$('#content').val(CKEDITOR.instances.content.getData());
     	var form_data = new FormData();
       	var data_file = $('#userfile').prop('files')[0];

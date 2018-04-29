@@ -148,6 +148,7 @@ class Menu extends MX_Controller  {
 			$this->form_validation->set_rules('label','Label Menu','required');
 			$this->form_validation->set_rules('content','Content Page','required');
 			$this->form_validation->set_rules('page','Jenis Page','required');
+			$this->form_validation->set_rules('menu','Menu Page','required');
 			if ($this->form_validation->run() == true ) {
 				$ret['state'] = 1;
 				$page['title'] = $this->input->post('label');
@@ -188,6 +189,7 @@ class Menu extends MX_Controller  {
 			$ret['notif']['label'] = form_error('label');
 			$ret['notif']['content'] = form_error('content');
 			$ret['notif']['page'] = form_error('page');
+			$ret['notif']['menu'] = form_error('menu');
 			echo json_encode($ret);
 			exit();
 		}

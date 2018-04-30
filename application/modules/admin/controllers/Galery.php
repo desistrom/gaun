@@ -88,7 +88,35 @@ class Galery extends MX_Controller  {
 				$ret['state'] = 1;
 				$media['judul_album'] = $this->input->post('name');
 				$media['tgl_kegiatan'] = $this->input->post('tgl');
+				$galery['judul'] = $this->input->post('name');
+				$galery['deskripsi'] = $this->input->post('tgl');
+				$galery['tgl_upload'] =  date('Y-m-d');
+				$galery['type'] = 'image';
+				$galery['id_album'] = $id;
+				$galery['id_user_ref'] = $this->session->userdata('data_user')['id_user'];
 				// $media['tgl_upload'] = date("D m Y", strtotime($this->input->post('tgl')));
+				if (isset($_FILES['file_names'])) {
+					$filesCount = count($_FILES['file_names']['name']);
+					for ($i=0; $i < $filesCount ; $i++) { 
+						$_FILES['file_name']['name'] = $_FILES['file_names']['name'][$i];
+		                $_FILES['file_name']['type'] = $_FILES['file_names']['type'][$i];
+		                $_FILES['file_name']['tmp_name'] = $_FILES['file_names']['tmp_name'][$i];
+		                $_FILES['file_name']['error'] = $_FILES['file_names']['error'][$i];
+		                $_FILES['file_name']['size'] = $_FILES['file_names']['size'][$i];
+		                $image = $this->upload_logo($_FILES);
+						if (isset($image['error'])) {
+							$ret['notif'] = $image;
+						}else{
+							$ret['state'] = 1;
+							$galery['file_name'] = $image['asli'];
+							if ($this->galery_model->insertGalery($galery) == true) {
+		                		$ret['status'] = 1;
+		                		$ret['url'] = site_url('admin/galery/list_image');
+		                		$this->session->set_flashdata("notif","Data Berhasil di Masukan");
+		                	}
+						}
+					}
+				}
 				if ($this->galery_model->updateAlbum($media,$id) == true) {
             		$ret['status'] = 1;
             		$ret['url'] = site_url('admin/galery/album');
@@ -101,9 +129,19 @@ class Galery extends MX_Controller  {
 			exit();
 		}
 		$this->data['view'] = 'edit';
+		$this->data['image'] = $this->galery_model->get_image($id);
 		$this->data['breadcumb'] = 'Edit Album';
 		$this->data['content'] = $this->db->get_where('tb_album_galery',array('id_album'=>$id))->row_array();
 		$this->ciparser->new_parse('template_admin','modules_admin', 'galery/album_master_layout',$this->data);
+	}
+
+	public function change(){
+		$id = $this->input->post('id');
+		$ret['status'] = 0;
+		if ($this->db->update('tb_galery',array('id_album'=>null),array('id_galery'=>$id))) {
+			$ret['status'] = 1;
+		}
+		echo json_encode($ret);
 	}
 
 	public function add_image(){
@@ -111,8 +149,8 @@ class Galery extends MX_Controller  {
 			$ret['state'] = 0;
 			$ret['status'] = 0;
 			$this->form_validation->set_error_delimiters('','');
-			$this->form_validation->set_rules('judul','Judul','trim|required');
-			$this->form_validation->set_rules('deskripsi','deskripsi','trim|required');
+			/*$this->form_validation->set_rules('judul','Judul','trim|required');
+			$this->form_validation->set_rules('deskripsi','deskripsi','trim|required');*/
 			$this->form_validation->set_rules('album','Album','trim|required');
 			if ($this->form_validation->run() == true) {
 				$ret['state'] = 1;
@@ -145,9 +183,9 @@ class Galery extends MX_Controller  {
 					}
 				}
 			}
-			$ret['notif']['judul'] = form_error('judul');
+			/*$ret['notif']['judul'] = form_error('judul');
+			$ret['notif']['deskripsi'] = form_error('deskripsi');*/
 			$ret['notif']['album'] = form_error('album');
-			$ret['notif']['deskripsi'] = form_error('deskripsi');
 			echo json_encode($ret);
 			exit();
 		}
@@ -197,8 +235,8 @@ class Galery extends MX_Controller  {
 			$ret['state'] = 0;
 			$ret['status'] = 0;
 			$this->form_validation->set_error_delimiters('','');
-			$this->form_validation->set_rules('judul','Judul','trim|required');
-			$this->form_validation->set_rules('deskripsi','deskripsi','trim|required');
+			/*$this->form_validation->set_rules('judul','Judul','trim|required');
+			$this->form_validation->set_rules('deskripsi','deskripsi','trim|required');*/
 			$this->form_validation->set_rules('album','Album','trim|required');
 			if ($this->form_validation->run() == true) {
 				$ret['state'] = 1;
@@ -240,8 +278,8 @@ class Galery extends MX_Controller  {
                 	}
 				}
 			}
-			$ret['notif']['judul'] = form_error('judul');
-			$ret['notif']['deskripsi'] = form_error('deskripsi');
+			/*$ret['notif']['judul'] = form_error('judul');
+			$ret['notif']['deskripsi'] = form_error('deskripsi');*/
 			$ret['notif']['album'] = form_error('album');
 			echo json_encode($ret);
 			exit();

@@ -133,7 +133,9 @@
                 <div class="col-md-2 col-sm-2 col-xs-12 footer-right text-right" ">
                   <h3 class="title-footer">Hits Counter</h3>
                     <ul class="list-unstyled" style="width: 100%;">
-                      <li><div id="_wau4yv"></div></li>
+                    	<li>
+                    		<div style="text-align:center;"><script type="text/javascript" src="http://services.webestools.com/cpt_visitors/54639-6-8.js"></script></div>
+                    	</li>
                     </ul>
                 </div>
             </div>
@@ -240,6 +242,7 @@
 
       </div>
     </div> -->
+
     <script src="<?=base_url();?>assets/js/jquery.min.js"></script>
    
     <script src="<?=base_url();?>assets/js/bootstrap.min.js"></script>
@@ -254,6 +257,9 @@
 <?php if(current_url() == site_url('web/galery/video')||current_url() == site_url('web/layanan/id_tube')){ ?> 
    <script type="text/javascript" src="<?=base_url();?>assets/js/jquery.waterwheelCarousel.miny.js"></script>
  <?php } ?>
+
+
+
 
 </body>
 </html>

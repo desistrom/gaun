@@ -81,7 +81,7 @@
         <div class="error" id="ntf_tgl"></div>
       </div>
 
-      <button type="button" class="btn btn-primary" id="submit">Submit</button>
+      <button type="button" class="btn btn-primary" id="submit_add">Submit</button>
 
     </form>
   </div>
@@ -104,20 +104,58 @@
         <input type="date" name="tgl" class="form-control" value="<?=$content['tgl_kegiatan'];?>" id="tgl">
         <div class="error" id="ntf_tgl"></div>
       </div>
+      <!-- <div class="col-md-12"> -->
+      <div class="form-group">
+        <label>Photo Album</label>
+        <input type="file" name="file_name[]" class="form-control file" id="file_name">
+        <div class="error" id="ntf_name"></div>
+      </div>
+      <div class="add_file"></div>
+      <div class="form-group">
+        <button style="float: right; margin-right: -120px; margin-top: -50px" type="button" class="btn btn-danger btn_add"><i class="fa fa-plus"></i> Add More</button>
+      </div>
+      <div class="form-group">
+        <button type="button" class="btn btn-primary" id="submit">Submit</button>
+      </div>
 
-      <button type="button" class="btn btn-primary" id="submit">Submit</button>
+      <!-- </div> -->
+      <div style="margin-top: 10px" class="col-md-12">
+      <?php foreach ($image as $key => $value): ?>
+        <div class="col-md-3">
+          <img class="col-md-12" style="margin:10px 0px" src="<?=base_url().'assets/media/'.$value['file_name'];?>">
+          <button type="button" style="position: absolute; margin-left: -35px; margin-top: 10px" class="btn btn-danger btn-xs btn_remove" id="<?=$value['id_galery'];?>"><i class="fa fa-times"></i></button>
+        </div>
+      <?php endforeach ?>
+      </div>
 
     </form>
   </div>
+  <div class="modal fade" id="progresLoading" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center">
+            <div class="modal-content">
+                <div class="modal-body">
+                  <div class="box box-danger">
+                      <div class="box-header">
+                      </div>
+                      <div class="box-body">
+                      </div>
+                      <div class="overlay">
+                        <i class="fa fa-refresh fa-spin"></i>
+                      </div>
+                  </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
 <?php } ?>
 <script src="<?=base_url().'assets/js/jquery-3.2.1.min.js';?>"></script>
 <script type="text/javascript" src="<?=base_url();?>assets/ckeditor/ckeditor.js"></script>
 <script type="text/javascript">
   $(document).ready(function () {
-    $('body').on('click','#submit', function(){
-      // console.log($('form').val());
-      // $('#content').val(CKEDITOR.instances.content.getData());
-      // return false;
+    $('body').on('click','#submit_add', function(){
       $.ajax({
           url : window.location.href,
           dataType : 'json',
@@ -141,6 +179,88 @@
             $('#ntf_'+ key).css({'color':'red', 'font-style':'italic'});
             });
       });
+    });
+    $('body').on('click','#submit', function(){
+      $('.error').text('');
+      var form_data = new FormData();
+      $('#progresLoading').modal('show');
+      var file_data = [];
+      var data_error = '';
+      $('.file').each(function(i) {
+          form_data.append('file_names[]', $(this).prop('files')[0]);
+          if ($(this).prop('files')[0] != undefined) {
+            file_data.push(i);
+            var file = $(this).prop('files')[0];
+            var fileType = file["type"];
+            var ValidImageTypes = ["image/gif", "image/jpeg", "image/png"];
+            if ($.inArray(fileType, ValidImageTypes) < 0) {
+                 var image_error = $(this).parent().find('#ntf_file_name').text('Your type file is false');
+                 $('.error').css({'color':'red', 'font-style':'italic'});
+            }
+          }
+      });
+      if ($('#nama').val() == '') {
+        $('.error').css({'color':'red', 'font-style':'italic'});
+        data_error = $('#ntf_nama').text('The Judul field is required.');
+      }
+      if ($('#tgl').val() == '') {
+        $('.error').css({'color':'red', 'font-style':'italic'});
+        data_error = $('#ntf_tgl').text('The Deskripsi field is required.');
+      }
+      if (data_error != '') {
+        $('#progresLoading').modal('hide');
+        return;
+      }
+      form_data.append('name', $('#name').val());
+      form_data.append('tgl', $('#tgl').val());
+      
+      $.ajax({
+          url : window.location.href,
+          dataType : 'json',
+          type : 'POST',
+          data : form_data,
+          async : false,
+          cache : false ,
+          contentType : false , 
+          processData : false
+      }).done(function(data){
+        $('#progresLoading').modal('hide');
+          console.log(data);
+          if(data.state == 1){
+            if (data.status == 1) {
+              window.location.href = window.location.href;
+            }else{
+              $('.error_pass').show();
+              $('.error_pass').css({'color':'red', 'font-style':'italic', 'text-align':'center'});
+              console.log(data);
+              $('.error_pass').html(data.error);
+            }
+          }
+            $.each(data.notif,function(key,value){
+            $('.error').show();
+            $('#ntf_'+ key).html(value);
+            $('#ntf_'+ key).css({'color':'red', 'font-style':'italic'});
+            });
+      });
+    });
+    $('body').on('click','.btn_remove',function(){
+      var id = $(this).attr('id');
+      if(confirm('Anda ingin Menghapusnya dari album ??')){
+        $.ajax({
+          url : base_url+'admin/galery/change',
+          dataType : 'json',
+          data : {'id' : id},
+          type : 'POST'
+        }).done(function(data){
+          if (data.status == 1) {
+            window.location.href = window.location.href;
+          }
+        });
+      }
+    });
+    $('body').on('click','.btn_add',function(){
+      var html = '<div class="form-group"><label>Photo Album</label><input type="file" name="file_name" class="form-control file" id="file_name"><div class="error" id="ntf_name"></div></div>';
+      $('.add_file').append(html);
     });
     $('#modalSuccess').modal('show');
   });

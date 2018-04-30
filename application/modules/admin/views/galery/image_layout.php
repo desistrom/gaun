@@ -1,6 +1,15 @@
+<link rel="stylesheet" type="text/css" href="css/demo.css" />
+    <link rel="stylesheet" type="text/css" href="<?=base_url();?>assets/css/component.css" />
 <style type="text/css">
   .form-group{
     width: 50%;
+  }
+  .file-group{
+    padding-bottom: 1em;
+  }
+  .file-group .error{
+    position: absolute;
+    bottom: 0;
   }
 </style>
 <div class="box ">
@@ -11,17 +20,17 @@
   <div class="box-body">
     <form role="form">
       <!-- text input -->
-      <div class="form-group">
+    <!--   <div class="form-group">
         <label>Judul</label>
         <input type="text" name="judul" class="form-control" id="judul" placeholder="Enter ..." value="<?php if(isset($galery)){ echo $galery['judul']; } ?>">
         <div class="error" id="ntf_judul"></div>
-      </div>
+      </div> -->
       <!-- textarea -->
-      <div class="form-group">
+<!--       <div class="form-group">
         <label>Deskribsi</label>
         <textarea class="form-control" name="deskripsi" id="deskripsi" rows="3" placeholder="Enter ..." ><?php if(isset($galery)){ echo $galery['deskripsi']; } ?></textarea>
         <div class="error" id="ntf_deskripsi"></div>
-      </div>
+      </div> -->
 
       <div class="form-group">
         <label>Album</label>
@@ -34,7 +43,7 @@
         <div class="error" id="ntf_album"></div>
       </div>
       <?php if ($view == 'add'){ ?>
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-6 file-group">
         <label>File</label>
           <input type="file" class="form-control file" name="file_name[]" id="file_name">
           <div style="font-style: italic;">*for best result use 450x240 px</div>
@@ -42,7 +51,7 @@
           <div class="error" id="ntf_error"></div>
         </div>
 
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-6 file-group">
         <label>File</label>
           <input type="file" class="form-control file" name="file_name[]" id="file_name">
           <div style="font-style: italic;">*for best result use 450x240 px</div>
@@ -50,7 +59,7 @@
           <div class="error" id="ntf_error"></div>
         </div>
 
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-6 file-group">
         <label>File</label>
           <input type="file" class="form-control file" name="file_name[]" id="file_name">
           <div style="font-style: italic;">*for best result use 450x240 px</div>
@@ -58,7 +67,7 @@
           <div class="error" id="ntf_error"></div>
         </div>
 
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-6 file-group">
         <label>File</label>
           <input type="file" class="form-control file" name="file_name[]" id="file_name">
           <div style="font-style: italic;">*for best result use 450x240 px</div>
@@ -77,6 +86,7 @@
           <div class="error" id="ntf_file_name"></div>
           <div class="error" id="ntf_error"></div>
         </div>
+        <img src="<?=base_url().'assets/media/'.$galery['file_name'];?>" width="250px">
       <?php } ?>
       <div class="col-md-12">
         <button type="button" class="btn btn-primary" id="submit">Submit</button>
@@ -107,6 +117,7 @@
     </div>
 </div>
 <script src="<?=base_url().'assets/js/jquery-3.2.1.min.js';?>"></script>
+
 <script type="text/javascript">
   $(document).ready(function () {
     $('body').on('click','#submit', function(){
@@ -128,18 +139,6 @@
             }
           }
       });
-      if ($('#judul').val() == '') {
-        $('.error').css({'color':'red', 'font-style':'italic'});
-        data_error = $('#ntf_judul').text('The Judul field is required.');
-      }
-      if ($('#deskripsi').val() == '') {
-        $('.error').css({'color':'red', 'font-style':'italic'});
-        data_error = $('#ntf_deskripsi').text('The Deskripsi field is required.');
-      }
-      if ($('#album').val() == '') {
-        $('.error').css({'color':'red', 'font-style':'italic'});
-        data_error = $('#ntf_album').text('The Judul field is required.');
-      }
       // console.log(file_data.length);
       if (file_data.length == 0) {
         $('.error').css({'color':'red', 'font-style':'italic'});
@@ -151,8 +150,6 @@
         $('#progresLoading').modal('hide');
         return;
       }
-      form_data.append('judul', $('#judul').val());
-      form_data.append('deskripsi', $('#deskripsi').val());
       form_data.append('album', $('#album').val());
       
       $.ajax({

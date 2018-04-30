@@ -9,6 +9,7 @@
   <!-- Bootstrap 3.3.6 -->
   <link rel="stylesheet" href="<?=base_url();?>assets/css/bootstrap.min.css">
   <!-- Font Awesome -->
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700|Roboto:300,400,500,700" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
@@ -20,6 +21,9 @@
     .ntf_err{
       color: red;
     }
+    .login-box-body h1{
+      text-align: center;font-size: 36px;margin: 0 0 1em 0;color: #2B679C; font-family: 'Roboto', sans-serif;
+    }
   </style>
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -30,17 +34,19 @@
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
+  
   <div class="login-logo">
-    <a href="../../index2.html"><img style="width: 200px;" src="<?=base_url();?>assets/images/logo/Asset_16@4x.png"></a>
+    <a href="#"><img style="width: 200px;" src="<?=base_url();?>assets/images/logo/Asset_16@4x.png"></a>
   </div>
-    <p class="login-box-msg">Sign in to start your session</p>
   <!-- /.login-logo -->
   <div class="login-box-body">
-
+      <h1 style="">LOGIN</h1>
     <form>
+      
+      
       <div class="form-group has-feedback">
         <input type="text" class="form-control" placeholder="Username" name="username">
-        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+        <span class="glyphicon glyphicon-user form-control-feedback"></span>
         <div class="error" id="ntf_username"></div>
       </div>
       <div class="form-group has-feedback">

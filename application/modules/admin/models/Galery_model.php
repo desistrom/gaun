@@ -48,4 +48,13 @@ class Galery_model extends CI_Model{
 		}
 		return false;
 	}
+
+	public function get_image($id){
+		$sql = "SELECT * FROM tb_galery WHERE id_album = ".$id;
+		if ($this->db->query($sql)->num_rows() > 0) {
+			return $this->db->query($sql)->result_array();
+			exit();
+		}
+		return false;
+	}
 }

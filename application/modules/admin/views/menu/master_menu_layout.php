@@ -25,7 +25,8 @@
 							<td><?php if($value['parent'] == 0){ ?> <span class="text-success">MASTER</span> <?php  }else{ ?> <span class="text-success">SUBMENU</span> <?php } ?></td>
 							<td>
 								<a href="<?=site_url('admin/menu/edit/'.$value['id']);?>" class="btn btn-info btn-sm"><i class="fa fa-pencil"></i> Edit</a>
-								<button class="btn btn-danger btn-sm btn_delete" id="<?=$value['id'];?>"><i class="fa fa-trash"> Delete</i></button>
+								<?php if($value['type'] != 1){ ?> <button class="btn btn-danger btn-sm btn_delete" id="<?=$value['id'];?>"><i class="fa fa-trash"> Delete</i></button> <?php  } ?>
+								
 							</td>
 						</tr>
 					<?php endforeach; ?>
@@ -114,7 +115,7 @@
 					<label>Parent Menu</label>
 					<select name="menu" id="menu" class="form-control">
 						<option value="">-- Select Parent --</option>
-						<option style="background-color: green;" value="0">Set as Parent</option>
+						<option style="background-color: green; color: white; font-weight: bold;" value="0">Set as Parent</option>
 						<?php foreach ($menu as $key => $value): ?>
 							<option value="<?=$value['id'];?>"><?=$value['label'];?></option>	
 						<?php endforeach ?>
@@ -152,7 +153,7 @@
 					<label>Parent Menu</label>
 					<select name="menu" id="menu" class="form-control">
 						<option value="">-- Select Menu --</option>
-						<option <?php if($current['parent'] == 0){ ?> selected <?php } ?> value="0">Master</option>
+						<option style="background-color: green; color: white; font-weight: bold;" <?php if($current['parent'] == 0){ ?> selected <?php } ?> value="0">Master</option>
 						<?php foreach ($menu as $key => $value): ?>
 							<?php if ($current['id'] != $value['id']){ ?><option <?php if($current['parent'] == $value['id']){ ?> selected <?php } ?> value="<?=$value['id'];?>"><?=$value['label'];?></option>	<?php } ?>
 						<?php endforeach ?>

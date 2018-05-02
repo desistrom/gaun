@@ -130,6 +130,7 @@
 
     </form>
   </div>
+<?php } ?>
   <div class="modal fade" id="progresLoading" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="vertical-alignment-helper">
         <div class="modal-dialog vertical-align-center">
@@ -150,7 +151,6 @@
         </div>
     </div>
 </div>
-<?php } ?>
 <script src="<?=base_url().'assets/js/jquery-3.2.1.min.js';?>"></script>
 <script type="text/javascript" src="<?=base_url();?>assets/ckeditor/ckeditor.js"></script>
 <script type="text/javascript">

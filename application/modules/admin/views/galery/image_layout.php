@@ -1,5 +1,5 @@
-<link rel="stylesheet" type="text/css" href="css/demo.css" />
-    <link rel="stylesheet" type="text/css" href="<?=base_url();?>assets/css/component.css" />
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+ 
 <style type="text/css">
   .form-group{
     width: 50%;
@@ -10,6 +10,30 @@
   .file-group .error{
     position: absolute;
     bottom: 0;
+  }
+  .form-goup-file{
+    height: auto;
+    overflow: hidden;
+    padding: 0;
+  }
+  .form-goup-file div{
+    display: inline-block;
+  }
+  .form-goup-file .input-file-left{
+    width: 100%;
+  }
+  .form-goup-file .input-file-left input{
+ 
+  }
+  .form-goup-file .input-file-right{
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+  .form-goup-file .input-file-right .btn-choose-foto{
+    height: 34px;
+    width: 105px;
+    border-radius: 0;
   }
 </style>
 <div class="box ">
@@ -45,12 +69,45 @@
       <?php if ($view == 'add'){ ?>
         <div class="form-group col-md-6 file-group">
         <label>File</label>
-          <input type="file" class="form-control file" name="file_name[]" id="file_name">
+        <div class="col col-md-12 form-goup-file">
+          <div class="input-file-right"><label class="btn btn-primary btn-choose-foto" for="file_name_1">Choose File</label></div>
+          <div class="input-file-left"><input type="file" class="form-control file" name="file_name[]" id="file_name_1" ></div>  
+        </div>
           <div style="font-style: italic;">*for best result use 450x240 px</div>
           <div class="error" id="ntf_file_name"></div>
           <div class="error" id="ntf_error"></div>
         </div>
-
+        <div class="form-group col-md-6 file-group">
+        <label>File</label>
+        <div class="col col-md-12 form-goup-file">
+          <div class="input-file-right"><label class="btn btn-primary btn-choose-foto" for="file_name_2">Choose File</label></div>
+          <div class="input-file-left"><input type="file" class="form-control file" name="file_name[]" id="file_name_2" ></div>  
+        </div>
+          <div style="font-style: italic;">*for best result use 450x240 px</div>
+          <div class="error" id="ntf_file_name"></div>
+          <div class="error" id="ntf_error"></div>
+        </div>
+        <div class="form-group col-md-6 file-group">
+        <label>File</label>
+        <div class="col col-md-12 form-goup-file">
+          <div class="input-file-right"><label class="btn btn-primary btn-choose-foto" for="file_name_3">Choose File</label></div>
+          <div class="input-file-left"><input type="file" class="form-control file" name="file_name[]" id="file_name_3" ></div>  
+        </div>
+          <div style="font-style: italic;">*for best result use 450x240 px</div>
+          <div class="error" id="ntf_file_name"></div>
+          <div class="error" id="ntf_error"></div>
+        </div>
+        <div class="form-group col-md-6 file-group">
+          <label>File</label>
+          <div class="col col-md-12 form-goup-file">
+            <div class="input-file-right"><label class="btn btn-primary btn-choose-foto" for="file_name_4">Choose File</label></div>
+            <div class="input-file-left"><input type="file" class="form-control file" name="file_name[]" id="file_name_4" ></div>  
+          </div>
+          <div style="font-style: italic;">*for best result use 450x240 px</div>
+          <div class="error" id="ntf_file_name"></div>
+          <div class="error" id="ntf_error"></div>
+        </div>
+<!-- 
         <div class="form-group col-md-6 file-group">
         <label>File</label>
           <input type="file" class="form-control file" name="file_name[]" id="file_name">
@@ -66,7 +123,6 @@
           <div class="error" id="ntf_file_name"></div>
           <div class="error" id="ntf_error"></div>
         </div>
-
         <div class="form-group col-md-6 file-group">
         <label>File</label>
           <input type="file" class="form-control file" name="file_name[]" id="file_name">
@@ -74,7 +130,7 @@
           <div class="error" id="ntf_file_name"></div>
           <div class="error" id="ntf_error"></div>
         </div>
-        <div class="add_more"></div>
+ -->        <div class="add_more"></div>
         <div class="col-md-12">
           <button type="button" class="btn btn-danger" style="float: right" id="add"><i class="fa fa-plus"></i> Add More</button>
         </div>        
@@ -117,9 +173,16 @@
     </div>
 </div>
 <script src="<?=base_url().'assets/js/jquery-3.2.1.min.js';?>"></script>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
 
 <script type="text/javascript">
   $(document).ready(function () {
+    $('body').on('change','.file',function(){
+      var id = $(this).parent().parent().find('.file').val();
+      console.log(id);
+    });
     $('body').on('click','#submit', function(){
       $('.error').text('');
       var form_data = new FormData();
@@ -182,7 +245,9 @@
       });
     });
     $('body').on('click','#add',function(){
-      var data = '<div class="form-group col-md-6"><label>File</label><input type="file" class="form-control file" name="file_name[]" id="file_name"><div style="font-style: italic;">*for best result use 450x240 px</div><div class="error" id="ntf_file_name"></div><div class="error" id="ntf_error"></div></div>';
+      var jumlah = $('.file').length;
+      var looping = jumlah + 1;
+      var data = '<div class="form-group col-md-6 file-group"><label>File</label><div class="col col-md-12 form-goup-file"><div class="input-file-right"><label class="btn btn-primary btn-choose-foto" for="file_name_'+looping+'">Choose File</label></div><div class="input-file-left"><input type="file" class="form-control file" name="file_name[]" id="file_name_'+looping+'"></div></div><div style="font-style: italic;">*for best result use 450x240 px</div><div class="error" id="ntf_file_name"></div><div class="error" id="ntf_error"></div></div>';
       $('.add_more').append(data);
     });
     /*$('body').on('keyup','#judul',function(){

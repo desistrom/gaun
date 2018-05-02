@@ -221,7 +221,21 @@
           </ul>
         </li>
 
-        <li class=" treeview <?php if(current_url() == site_url('admin/news')){ ?> active <?php } ?>">
+        <li class=" treeview <?php if(current_url() == site_url('admin/news') || current_url() == site_url('admin/kategori_news')){ ?>  active <?php } ?>">
+          <a href="#">
+            <i class="fa fa-newspaper-o"></i>  <span>Berita</span>
+            <span class="pull-right-container">
+
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li <?php if(current_url() == site_url('admin/news')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/news');?>"><i class="fa fa-newspaper-o"></i> List Berita</a></li>
+            <li <?php if(current_url() == site_url('admin/kategori_news')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/kategori_news');?>"><i class="fa fa-newspaper-o"></i> Kategori Berita </a></li>
+          </ul>
+        </li>
+
+        <!-- <li class=" treeview <?php if(current_url() == site_url('admin/news')){ ?> active <?php } ?>">
           <a href="<?=site_url('admin/news');?>">
             <i class="fa fa-newspaper-o"></i> <span>Berita</span>
             <span class="pull-right-container">
@@ -229,6 +243,15 @@
             </span>
           </a>
         </li>
+
+        <li class=" treeview <?php if(current_url() == site_url('admin/kategori_news')){ ?> active <?php } ?>">
+          <a href="<?=site_url('admin/kategori_news');?>">
+            <i class="fa fa-newspaper-o"></i> <span>Kategori Berita</span>
+            <span class="pull-right-container">
+
+            </span>
+          </a>
+        </li> -->
 
         <li class="treeview <?php if(current_url() == site_url('admin/about')){ ?> active <?php } ?>">
           <a href="<?=site_url('admin/about');?>">

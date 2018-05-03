@@ -29,7 +29,10 @@
                 <div class="col col-md-2 col-sm-2 col-xs-2"></div>
                 <div class="col-md-8 col-sm-8 col-xs-12 content-left">
                     <div class="col col-md-12 col-sm-12 col-xs-12 none-padding list-artikel">
-                        <div class="col col-md-12 col-sm-12 col-xs-12 none-padding img-news"><img class="img-responsive" src="<?=base_url();?>media/<?=$layanan['image'];?>"></div>
+                        <div class="col col-md-12 col-sm-12 col-xs-12 none-padding img-news"><?php if ($layanan['image'] != ''): ?>
+                            
+                            <img class="img-responsive" src="<?=base_url();?>media/<?=$layanan['image'];?>"><?php endif ?>
+                        </div>
                         <div class="col col-md-12 col-sm-12 col-xs-12 desrip-news">
                             <h4 class="title-news"><?=date("d M Y", strtotime($layanan['tgl_update']));?></h4>
                             <div class="isi-news" style="padding: 0 15px;"><?=$layanan['content'];?></div>

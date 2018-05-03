@@ -166,23 +166,19 @@ class Menu extends MX_Controller  {
 				}
 				$page['content'] = $this->input->post('content');
 				$page['page'] = $this->input->post('page');
-				if ($page['page'] == 1) {
-					if (isset($_FILES['userfile'])) {
-						$data_gambar = $this->upload_logo($_FILES);
-						if (isset($data_gambar['error'])) {
-							$ret['notif'] = $data_gambar;
-						}else{	
-							$page['img'] = $data_gambar['asli'];
-							if ($this->db->insert('tb_general_page',$page)) {
-								$ret['status'] = 1;
-								$this->session->set_flashdata("notif","Data Berhasil di Masukan");
-								$ret['url'] = site_url('admin/menu/page');
-							}
+				if (isset($_FILES['userfile'])) {
+					$data_gambar = $this->upload_logo($_FILES);
+					if (isset($data_gambar['error'])) {
+						$ret['notif'] = $data_gambar;
+					}else{	
+						$page['img'] = $data_gambar['asli'];
+						if ($this->db->insert('tb_general_page',$page)) {
+							$ret['status'] = 1;
+							$this->session->set_flashdata("notif","Data Berhasil di Masukan");
+							$ret['url'] = site_url('admin/menu/page');
 						}
-					}else{
-						$ret['notif']['userfile'] = "Please Select File";
 					}
-				}elseif ($page['page'] == 2) {
+				}else{
 					$page['img'] = 'dummy';
 					if ($this->db->insert('tb_general_page',$page)) {
 						$ret['status'] = 1;

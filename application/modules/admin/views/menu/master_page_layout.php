@@ -235,7 +235,7 @@
 		    			$('#ntfmodal .modal-body').text(data.notif);
 		    			$('#ntfmodal').modal('show');
 		    			$('#ntfmodal').on('hidden.bs.modal',function(){
-							window.location.href = base_url+'admin/menu';
+							window.location.href = base_url+'admin/menu/page';
 						});
 		    		}else{
 		    			$('#ntfmodal .modal-title').text('Failed');

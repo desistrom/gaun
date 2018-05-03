@@ -88,6 +88,7 @@ class Menu extends MX_Controller  {
 
 	public function delete(){
 		$id = $this->input->post('id');
+		$link = $this->db->get_where('tb_menu',array('parent'=>$id))->row_array()['link'];
 		if ($this->db->get_where('tb_menu',array('parent'=>$id))->num_rows() > 0) {
 			$ret['status'] = 0;
 			$ret['notif'] = 'This menu has submenus, please first delete submenus from this menu';
@@ -97,6 +98,7 @@ class Menu extends MX_Controller  {
 				$ret['notif'] = 'cant deleted static menu';
 			}else{
 				if ($this->db->delete('tb_menu',array('id'=>$id))) {
+					$this->db->update('tb_general_page',array('link'=>null),array('link'=>$link));
 					$ret['status'] = 1;
 					$ret['notif'] = 'menu successfully deleted';
 				}else{

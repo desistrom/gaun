@@ -6,7 +6,7 @@
            <iframe  width="100%" height="270px" src="<?php echo $value['file'] ?>" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
       </div>
       <div class="galery-deskripsi text-left">
-        <h3><?php echo $value['title']; ?> </h3>
+        <h3><?php echo word_limiter($value['title'],4); ?> </h3>
         <ul class="list-inline">
           <!-- <li><?php echo $value['modify_date']; ?></li>
           <li>100 views</li> -->

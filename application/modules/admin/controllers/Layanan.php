@@ -508,7 +508,12 @@ class Layanan extends CI_Controller  {
 			$this->form_validation->set_rules('content','Content','trim|required');
 			if ($this->form_validation->run() == true) {
 				$ret['state'] = 1;
-				$layanan['content'] = $this->input->post('content');
+				$subcontent = $this->input->post('content');
+				$content = str_replace('&lt;', '<', $subcontent);
+				$final = str_replace('&gt;', '>', $content);
+				// print_r($final);
+				// return false;
+				$layanan['content'] = $final;
 				$layanan['nama_page'] = 'ID-RANK';
 				if ($this->db->get_where('tb_page_layanan',array('nama_page'=>'ID-RANK'))->num_rows() == 0) {
 					if (isset($_FILES['userfile'])) {
@@ -569,9 +574,7 @@ class Layanan extends CI_Controller  {
 		}
 		$this->load->library('ckeditor');
 		$this->ckeditor->basePath = base_url().'assets/ckeditor/';
-		$this->ckeditor->config['toolbar'] = array(
-		                array( 'Source', '-', 'Bold', 'Italic', 'Underline', '-','Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo','-','NumberedList','BulletedList','Link' )
-		                                                    );
+		// $this->ckeditor->config['toolbar'] = array(	                                                    );
 		$this->ckeditor->config['language'] = 'eng';
 		$this->ckeditor->config['width'] = '1024px';
 		$this->ckeditor->config['height'] = '300px';

@@ -14,38 +14,17 @@
           <div class="container-fluid ">
             <div class="row">
               <div class="col col-md-12 col-sm-12 col-xs-12 none-padding list-video">
-                <?php foreach ($video as $key => $value): ?>
-                  
-                
-                <div class="col-md-4 col-sm-6 col-xs-12 text-center" style="height: auto;overflow: hidden;">
-                    <div class="box-img-galery "> 
-                        <div class="filter-img-galery" >
-                          <a href="#" class="show-video" id="<?php echo $value['file'] ?>" ></a>
-                           <iframe  width="100%" height="270px" src="<?php echo $value['file'] ?>" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                      </div>
-                      <div class="galery-deskripsi text-left">
-                        <h3><?php echo $value['title']; ?> </h3>
-                        <ul class="list-inline">
-                          <li><?php echo $value['modify_date']; ?></li>
-                          <li>100 views</li>
-                        </ul>
-                      </div>
-                    </div>
-                </div>
-                <?php endforeach ?>
+                <?php $this->load->view('video_looping', $video); ?>
               
               </div>
+              <div class="col-md-12 col-sm-12 col-xs-12 text-center" style="padding-bottom: 15px;">
+                <button class="btn btn-danger loadmore" type="button">Load More</button>
+            </div>
+            <div class="ajax-load text-center" style="display:none">
+                <p><img src="http://demo.itsolutionstuff.com/plugin/loader.gif">Loading More Data</p>
+            </div>
             </div>
           </div>
-            <div class="container-fluid section-pagination">
-            <div class="row">
-                <div class="col-md-12 col-sm-12 col-xs-12 text-center">
-                    <!-- <ul class="list-inline pagination list-pagination"> -->
-                        <?php echo $this->pagination->create_links(); ?>
-                    <!-- </ul> -->
-                </div>
-            </div>
-        </div>
           
         </section>
 
@@ -73,19 +52,71 @@
         </div>
     </div>
 </div>
-<script src="<?=base_url();?>assets/js/jquery.min.js"></script>
-<script src="<?=base_url();?>assets/js/modal-custom.min.js"></script>
-<script type="text/javascript">
+<!-- <script src="<?=base_url();?>assets/js/jquery.min.js"></script> -->
+<script src="<?=base_url().'assets/js/jquery-3.2.1.min.js';?>"></script>
+<script src="<?=base_url();?>assets/js/modal-custom.js"></script>
+    <script type="text/javascript">
     $(document).ready(function(){
-      $(".show-video").click(function(){
+      $("body").on('click','.show-video',function(){
         var file = $(this).attr('id');
           $('#list-video iframe').attr('src',file);
-          
-          $(".modal-list-video").modal();
+          console.log(file);
+          $(".modal-list-video").modal('show');
       });
-    });
-</script>
+        var page = 0;
+        $('.loadmore').click(function() {
+                page++;
+                loadMoreData(page);
+                $('.list-video').each(function() {
+                    var text = $(this).html();
+                    $(this).html(text.replace('null', '')); 
+                });
+        });
 
+
+        function loadMoreData(page){
+          $.ajax(
+                {
+                    url: '<?=site_url('web/galery/list_video');?>'+'?page=' + page,
+                    type: "get",
+                    dataType : 'text',
+                    beforeSend: function()
+                    {
+                        $('.ajax-load').show();
+                    }
+                })
+                .done(function(data)
+                {
+                
+                    console.log(data);
+                    if(data == "null"){
+                        $('.ajax-load').html("<span class='btn btn-danger'>No more Data found</span>");
+                        $('.loadmore').css({'display' : 'none'});
+                        return;
+                    }
+                    $('.ajax-load').hide();
+                    if (data != "null") {
+                        $(".list-video").append(data);
+                        $('.list-video').each(function() {
+                            var text = $(this).html();
+                            $(this).html(text.replace('null', '')); 
+                        });
+                        
+                    }
+                })
+                .fail(function(jqXHR, ajaxOptions, thrownError)
+                {
+                      alert('server not responding...');
+                });
+        }
+    });
+    </script>
+
+
+<script type="text/javascript">
+    
+     
+</script>
 
 
    

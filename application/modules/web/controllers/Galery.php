@@ -74,34 +74,48 @@ class Galery extends CI_Controller  {
     	$this->ciparser->new_parse('template_frontend','modules_web', 'video_layout',$this->data);
     }
      function list_video() {
-        $config['base_url'] = base_url().'web/galery/list_video';
-        $url = base_url().'api/v1/galery_video';
+        // $config['base_url'] = base_url().'web/galery/list_video';
+        // $url = base_url().'api/v1/galery_video';
         // $url = site_url('api/v1/galery_video') ;
         $data = '';
         $methode = 'GET';
         
-        $a = api_helper('',$url,$methode,'');
-        $config['total_rows'] = count($a['data']);
-        $config['per_page'] = 9;
-        $config['prev_tag_open'] = '<li>';
-        $config['prev_tag_close'] = '</li>';
-        $config['prev_link'] = 'Prev';
-        $config['next_tag_open'] = '<li>';
-        $config['next_tag_close'] = '</li>';
-        $config['next_link'] = 'Next';
-        $this->pagination->initialize($config);
+        // $a = api_helper('',$url,$methode,'');
+        // $config['total_rows'] = count($a['data']);
+        // $config['per_page'] = 9;
+        // $config['prev_tag_open'] = '<li>';
+        // $config['prev_tag_close'] = '</li>';
+        // $config['prev_link'] = 'Prev';
+        // $config['next_tag_open'] = '<li>';
+        // $config['next_tag_close'] = '</li>';
+        // $config['next_link'] = 'Next';
+        // $this->pagination->initialize($config);
 
         
-        $url = $this->uri->segment_array();
-        $data = end($url);
-        if (!is_numeric($data)) {
-            $data = 0;
-        }
-        $url = base_url().'api/v1/galery_video_pagging?data='.$data;
+        // $url = $this->uri->segment_array();
+        // $data = end($url);
+        // if (!is_numeric($data)) {
+        //     $data = 0;
+        // }
         $token = '';
-        $b = api_helper('',$url,$methode,'');
-        $this->data['video']=$b['data'];    
-        $this->ciparser->new_parse('template_frontend','modules_web', 'list_video_layout',$this->data);
+        if (!empty($this->input->get('page'))) {
+            $start = ceil($this->input->get('page') * 9);
+            $url = base_url().'api/v1/galery_video_pagging?data='.$start;
+            $a = api_helper('',$url,$methode,$token);
+            $this->data['video']=$a['data'];
+            // print_r($a['data']);
+            $result = $this->load->view('video_looping',$this->data);
+            echo json_encode($result);
+        }else{
+            $url = base_url().'api/v1/galery_video_pagging?data=0';
+            $a = api_helper('',$url,$methode,$token);
+            $this->data['video']=$a['data'];
+            $this->ciparser->new_parse('template_frontend','modules_web', 'list_video_layout',$this->data);
+        }
+        // $url = base_url().'api/v1/galery_video_pagging?data='.$data;
+        // $b = api_helper('',$url,$methode,'');
+        // $this->data['video']=$b['data'];
+        // $this->ciparser->new_parse('template_frontend','modules_web', 'list_video_layout',$this->data);
     }
 
       function search_foto() {

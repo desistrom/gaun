@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="<?=base_url();?>assets/css/owl.transitions.min.css">
     <link rel="stylesheet" href="<?=base_url();?>assets/css/owl.carousel.min.css">
     <link rel="stylesheet" href="<?=base_url();?>assets/css/css.min.css?t=<?=time();?>">
+    <link rel="shortcut icon" href="<?=base_url();?>media/crop/favicon.png" />
     <style type="text/css">
       .modal .ntf_err{
           color: red;
@@ -48,6 +49,21 @@
           }
           #ifrm{
             display: none !important;
+          }
+          .address-foot{
+          	font-size: 14px;
+          	word-wrap: break-word;
+          }
+          .flag-count{
+          	width: 100%;
+          }
+          .flagcounter-foot{
+        height: auto;
+        overflow: hidden;
+        padding-top: 15px;
+          }
+          .sub-flagcounter-foot{
+            margin-top: -3em;
           }
     </style>
 </head>
@@ -102,7 +118,17 @@
                         <li><img src="<?=base_url();?>assets/images/logo/images_telkom.jpg" class="logo-sponsor"></li>
                     </ul>
                 </div>
-                <div class="col-md-2 col-sm-2 col-xs-12 footer-center text-center">
+                <div class="col-md-4 col-sm-4 col-xs-12 footer-center text-center address-foot">
+                	<h3 class="title-footer">Kantor Pusat 1</h3>
+                	<div class="col-md-6 col-sm-12 col-xs-12 address-foot" style="padding: 0 5px 0 0;"><?php echo footer_helper()['data']['address']; ?></div>
+                	<div class="col-md-6 col-sm-12 col-xs-12 address-foot" style="padding: 0 0 0 5px;"><?php echo footer_helper()['data']['address2']; ?></div>
+                	<!-- <ul class="list-inline">
+
+                		<li class="address-foot" style="word-wrap: break-word;"><?php echo footer_helper()['data']['address']; ?></li>
+                		<li class="address-foot" style="word-wrap: break-word;"><?php echo footer_helper()['data']['address2']; ?></li>
+                	</ul> -->
+                </div>
+             <!--    <div class="col-md-2 col-sm-2 col-xs-12 footer-center text-center">
                     <h3 class="title-footer">Kantor Pusat 1</h3>
                     <ul class="list-unstyled">
                         <li style="word-wrap: break-word;"><?php echo footer_helper()['data']['address']; ?></li>
@@ -113,7 +139,7 @@
                     <ul class="list-unstyled">                  
                         <li style="word-wrap: break-word;"><?php echo footer_helper()['data']['address2']; ?></li>
                     </ul>
-                </div>
+                </div> -->
                 <div class="col-md-3 col-sm-3 col-xs-12 footer-right text-center">
                   <h3 class="title-footer">Kalender</h3>
                     <ul class="list-unstyled" style="">
@@ -132,11 +158,17 @@
                 </div>
                 <div class="col-md-2 col-sm-2 col-xs-12 footer-right text-right" ">
                   <h3 class="title-footer">Hits Counter</h3>
-                    <ul class="list-unstyled" style="width: 100%;">
+                  <div style="text-align:center;"><script type="text/javascript" src="http://services.webestools.com/cpt_visitors/54639-6-8.js"></script></div>
+                  <div align="center" class="flagcounter-foot">
+                      <div class="sub-flagcounter-foot">
+                        <a href="https://www.worldflagcounter.com/details/egi"><img src="https://www.worldflagcounter.com/egi/" alt="Flag Counter"></a>
+                      </div>
+                   <!--  <ul class="list-unstyled" style="width: 100%;">
                     	<li>
-                    		<div style="text-align:center;"><script type="text/javascript" src="http://services.webestools.com/cpt_visitors/54639-6-8.js"></script></div>
-                    	</li>
-                    </ul>
+                    		<a href="https://info.flagcounter.com/t8JL"><img src="https://s01.flagcounter.com/count/t8JL/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_10/viewers_0/labels_0/pageviews_0/flags_0/percent_0/" alt="Flag Counter" border="0"></a> -->
+                    		<!-- <div style="text-align:center;"><script type="text/javascript" src="http://services.webestools.com/cpt_visitors/54639-6-8.js"></script></div> -->
+                    <!-- 	</li>
+                    </ul> -->
                 </div>
             </div>
         </footer>
@@ -250,7 +282,7 @@
     <script src="<?=base_url();?>assets/js/owl.carousel.min.js"></script>
     <script src="<?=base_url();?>assets/js/main-owl.min.js"></script>
       <script src="<?=base_url();?>assets/js/scrolling-nav.min.js"></script>
-      <script id="_wau4yv">var _wau = _wau || []; _wau.push(["dynamic", "tmevyyvsq3", "4yv", "c4302bffffff", "big"]);</script><script async src="//waust.at/d.js"></script>
+    <!--   <script id="_wau4yv">var _wau = _wau || []; _wau.push(["dynamic", "tmevyyvsq3", "4yv", "c4302bffffff", "big"]);</script><script async src="//waust.at/d.js"></script> -->
 
       <script type="text/javascript" src="<?=base_url();?>assets/js/jsCalendar.js"></script>
  <script src="<?=base_url();?>assets/js/jquery.easing.min.js"></script>

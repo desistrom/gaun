@@ -91,6 +91,7 @@
                     console.log(data);
                     if(data == "null"){
                         $('.ajax-load').html("<span class='btn btn-danger'>No more Data found</span>");
+                        $('.ajax-load').css({'margin-bottom' : '30px'});
                         $('.loadmore').css({'display' : 'none'});
                         return;
                     }

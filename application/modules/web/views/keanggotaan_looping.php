@@ -26,7 +26,7 @@
                     <li>
                         <ul class="list-inline">
                             <li><i class="fa fa-laptop"></i></li>
-                            <li><a href="<?php echo $value['link']; ?>" class="website-anggota" style="color:#CF090A;text-decoration:none; "> <?php echo $value['link']; ?> </a></li>
+                            <li><a href="<?php $url = explode('/', $value['link']); if(isset($url[1])){ echo $value['link']; }else{ echo "http://".$value['link']; } ?>" target='_blank' class="website-anggota" style="color:#CF090A;text-decoration:none; "> <?php $url = explode('/', $value['link']); if(isset($url[1])){ echo $value['link']; }else{ echo "http://".$value['link']; } ?> </a></li>
                         </ul>
 
                 </ul>

@@ -57,6 +57,7 @@ $route['page/(:any)'] = 'web/page/index/$1';
 
 $route['api/invoice'] = 'admin/check_module/getInvoiceById';
 $route['api/invoice/(:any)'] = 'admin/check_module/getInvoiceById?id=2';
+// $route['sitemap\.xml'] = "sitemap";
 
 
 

@@ -61,14 +61,23 @@ class Layanan extends MX_Controller  {
     }
 
     public function id_tube(){
-          $url = site_url('api/v1/tube_video') ;
+        $token = '';
         $data = '';
         $methode = 'GET';
-        $token = '';
-        $a = api_helper('',$url,$methode,$token);
-        $this->data['id_tube']=$a['data'];    
-
-        $this->ciparser->new_parse('template_frontend','modules_web', 'general_video',$this->data);
+        if (!empty($this->input->get('page'))) {
+            $start = ceil($this->input->get('page') * 9);
+            $url = base_url().'api/v1/galery_video_pagging?data='.$start;
+            $a = api_helper('',$url,$methode,$token);
+            $this->data['video']=$a['data'];
+            // print_r($a['data']);
+            $result = $this->load->view('video_looping',$this->data);
+            echo json_encode($result);
+        }else{
+            $url = base_url().'api/v1/galery_video_pagging?data=0';
+            $a = api_helper('',$url,$methode,$token);
+            $this->data['video']=$a['data'];
+            $this->ciparser->new_parse('template_frontend','modules_web', 'list_video_layout',$this->data);
+        }
 /*        $this->data['layanan'] = $this->db->get_where('tb_page_layanan',array('nama_page'=>'ID-TUBE'))->row_array();
         $this->ciparser->new_parse('template_frontend','modules_web', 'general_layout',$this->data);*/
     }

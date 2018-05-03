@@ -181,6 +181,7 @@
                     <li><a href="#">kebijakan Privasi</a></li>
                     <li><a href="#">FAQ </a></li>
                     <li><a href="#">Syarat dan Ketentuan</a></li>
+                    <li><a href="<?php echo site_url('web/sitemap'); ?>">sitemap</a></li>
                 </ul>
             </div>
         </div>

@@ -20,7 +20,7 @@
 						<tr>
 							<td><?=($key+1);?></td>
 							<td><?=$value['label'];?></td>
-							<td><?=site_url().'/'.$value['link'];?></td>
+							<td><?=site_url().$value['link'];?></td>
 							<td><?php if($value['type'] == 1){ ?> <span class="text-info">STATIC</span> <?php  }else{ ?> <span class="text-info">DYNAMIC</span> <?php } ?></td>
 							<td><?php if($value['parent'] == 0){ ?> <span class="text-success">MASTER</span> <?php  }else{ ?> <span class="text-success">SUBMENU</span> <?php } ?></td>
 							<td>

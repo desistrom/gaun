@@ -31,7 +31,12 @@ class Menu extends MX_Controller  {
 				$menu['label'] = $this->input->post('label');
 				$menu['link'] = 'page/'.$this->input->post('slug');
 				$menu['parent'] = $this->input->post('menu');
-				$menu['sort'] = $this->input->post('order');
+				if ($this->input->post('order') != '') {
+					$menu['sort'] = $this->input->post('order');
+				}else{
+
+					$menu['sort'] = null;
+				}
 				$menu['type'] = 2;
 				if ($this->db->insert('tb_menu',$menu)) {
 					$ret['status'] = 1;

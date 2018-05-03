@@ -8,8 +8,8 @@
       <div class="galery-deskripsi text-left">
         <h3><?php echo $value['title']; ?> </h3>
         <ul class="list-inline">
-          <li><?php echo $value['modify_date']; ?></li>
-          <li>100 views</li>
+          <!-- <li><?php echo $value['modify_date']; ?></li>
+          <li>100 views</li> -->
         </ul>
       </div>
     </div>

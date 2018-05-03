@@ -65,9 +65,9 @@ class Email extends MX_Controller  {
 		}
 		$this->load->library('ckeditor');
 		$this->ckeditor->basePath = base_url().'assets/ckeditor/';
-		$this->ckeditor->config['toolbar'] = array(
+		/*$this->ckeditor->config['toolbar'] = array(
 		                array( 'Source', '-', 'Bold', 'Italic', 'Underline', '-','Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo','-','NumberedList','BulletedList','Link' )
-		                                                    );
+		                                                    );*/
 		$this->ckeditor->config['language'] = 'eng';
 		$this->ckeditor->config['width'] = '1024px';
 		$this->ckeditor->config['height'] = '300px';

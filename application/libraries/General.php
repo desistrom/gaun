@@ -62,12 +62,12 @@ class General
           $html .= '';
            foreach ($menu['parents'][$parent] as $itemId) {
               if(!isset($menu['parents'][$itemId])) {
-                 $html .= "<li><a href='".$menu['items'][$itemId]['link']."'>"
+                 $html .= "<li><a href='".base_url().$menu['items'][$itemId]['link']."'>"
     .$menu['items'][$itemId]['label']."</a></li>";
               }
               if(isset($menu['parents'][$itemId])) {
                  $html .= "<li class='dropdown'>
-                 <a data-toggle='dropdown' aria-expanded='false' href='#' class='dropdown-toggle' href='".$menu['items'][$itemId]['link']."'>".$menu['items'][$itemId]['label']." <span class='fa fa-angle-down'></span></a>";
+                 <a data-toggle='dropdown' aria-expanded='false' href='#' class='dropdown-toggle' href='".base_url().$menu['items'][$itemId]['link']."'>".$menu['items'][$itemId]['label']." <span class='fa fa-angle-down'></span></a>";
                  $html .= "<ul class='dropdown-menu'>";
                  $html .= "<li>".$this->createTreeView($itemId, $menu)."</li>";
                  $html .= "</ul>";

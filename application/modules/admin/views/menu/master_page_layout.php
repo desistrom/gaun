@@ -169,7 +169,7 @@
 					<select name="menu" id="menu" class="form-control">
 						<option value="">-- Select Menu --</option>
 						<?php foreach ($menu as $key => $value): ?>
-							<option <?php if($current['link'] == $value['link']){ ?> selected <?php } ?> value="<?=$value['link'];?>"><?=$value['label'];?></option>
+							<option <?php if('page/'.$current['link'] == $value['link']){ ?> selected <?php } ?> value="<?=$value['link'];?>"><?=$value['label'];?></option>
 						<?php endforeach ?>
 					</select>
 					<div class="error" id="ntf_menu"></div>

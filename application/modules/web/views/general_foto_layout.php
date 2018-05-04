@@ -24,6 +24,7 @@
           <div class="row">
             <div class="col col-md-12 col-sm-12 col-xs-12 none-padding">
               <div class="col col-md-5 col-sm-12 col-xs-12 content-img-top-left">
+                    <?php if(isset($slideshow)){ ?>
                      <h2 class="text-img-page" style="color: #747474;"><?php echo $slideshow[0]['title']; ?></h2>
                      <h4 style="color: #BDBDBD"><?php echo $slideshow[0]['date_album']; ?></h4>
               </div>
@@ -71,14 +72,14 @@
           </div>
         </div>
         </section>
-
+        <?php } ?>
         <div class="container-fluid album-galery" id="album-galery" >
           <div class="col col-md-12 col-sm-12 col-xs-12">
             <h2 style="color:#747474; ">Album Galery</h2>
             <div class="line-galery" style=""></div>
           </div>
             <div class="img-galery" id="owl-demo">
-              <?php foreach ($foto as $key => $value) : ?>
+              <?php if(isset($foto)){ foreach ($foto as $key => $value) : ?>
                 <div class="col-md-12 col-sm-12 col-xs-12 text-center item" >
                     <div class="box-img-galery">
                       <a href="#" class="show-album" id="<?php echo $value['albumId'] ?>" data-toggle="modal" >
@@ -92,7 +93,7 @@
                       </div>
                     </div>
                 </div>
-            <?php endforeach ?>
+            <?php endforeach; } ?>
               
             </div>
           

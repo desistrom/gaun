@@ -3,6 +3,10 @@
         .content-img-top-left{
           margin-top: 2em;
         }
+        .filter-img-galery img{
+          width: 100%;
+          height: 205px;
+        }
         @media(max-width:500px){
            .content-img-top-left{
           margin-top: 1em;

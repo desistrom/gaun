@@ -65,8 +65,8 @@ class Menu extends MX_Controller  {
 			if ($this->form_validation->run() == true) {
 				$ret['state'] = 1;
 				$menu['label'] = $this->input->post('label');
-				$menu['link'] = base_url().'page/'.$this->input->post('slug');
-				// $menu['parent'] = $this->input->post('menu');
+				// $menu['link'] = base_url().'page/'.$this->input->post('slug');
+				$menu['parent'] = $this->input->post('menu');
 				$menu['sort'] = $this->input->post('order');
 				if ($this->db->update('tb_menu',$menu,array('id'=>$id))) {
 					$ret['status'] = 1;

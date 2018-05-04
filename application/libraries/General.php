@@ -62,8 +62,9 @@ class General
           $html .= '';
            foreach ($menu['parents'][$parent] as $itemId) {
               if(!isset($menu['parents'][$itemId])) {
-                 $html .= "<li><a href='".base_url().$menu['items'][$itemId]['link']."'>"
-    .$menu['items'][$itemId]['label']."</a></li>";
+                 $html .= "<li><a href='".base_url().$menu['items'][$itemId]['link']."'";
+                  if(current_url() == base_url().$menu['items'][$itemId]['link']){ $html .= "class='active'"; }
+                 $html .= ">".$menu['items'][$itemId]['label']."</a></li>";
               }
               if(isset($menu['parents'][$itemId])) {
                  $html .= "<li class='dropdown'>

@@ -1,4 +1,5 @@
 <div class="box">
+<link rel="stylesheet" href="<?=base_url();?>assets/css/select2.min.css">
 	<?php if($view == 'list'){ ?>
 		<link rel="stylesheet" href="<?=base_url();?>assets/datatables/css/dataTables.bootstrap.min.css">
 		<div class="box-body">
@@ -116,10 +117,10 @@
 			    </div>
 				<div class="form-group">
 					<label>Setting to Menu</label>
-					<select name="menu" id="menu" class="form-control">
+					<select name="menu" id="menu" class="form-control select2">
 						<option value="">-- Select Menu --</option>
 						<?php foreach ($menu as $key => $value): ?>
-							<option value="<?=$value['link'];?>"><?=$value['label'];?></option>	
+							<option style="padding: 5px;" value="<?=$value['link'];?>"><?=$value['label'];?></option>	
 						<?php endforeach ?>
 					</select>
 					<div class="error" id="ntf_menu"></div>
@@ -186,6 +187,7 @@
 <!-- <script src="<?=base_url().'assets/js/jquery.slugify.js';?>"></script> -->
 <script type="text/javascript">
   $(document).ready(function () {
+  	
     $('body').on('click','#submit',function(){
     	$('.error').text('');
     	$('#content').val(CKEDITOR.instances.content.getData());

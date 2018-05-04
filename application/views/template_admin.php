@@ -33,7 +33,7 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="index2.html" class="logo" style="background:white;">
+    <a href="<?=base_url();?>" class="logo" style="background:white;">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>IDren</b></span>
       <!-- logo for regular state and mobile devices -->
@@ -512,6 +512,10 @@
 <!-- jQuery 3 -->
 <script src="<?=base_url();?>assets/js/jquery-2.2.3.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
+<script src="<?=base_url().'assets/js/select2.min.js';?>"></script>
+<script type="text/javascript">
+  $('.select2').select2();
+</script>
 <script src="<?=base_url();?>assets/js/jquery-ui.min.js"></script>
 <script src="<?=base_url();?>assets/js/bootstrap.min.js"></script>
 <script src="<?=base_url();?>assets/datatables.net/js/jquery.dataTables.min.js"></script>

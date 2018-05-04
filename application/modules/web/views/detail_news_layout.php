@@ -79,7 +79,7 @@
                 </div>
                 <div class="col-md-9 col-sm-8 col-xs-12 content-left box-news">
                     <div class="col col-md-12 col-sm-12 col-xs-12 none-padding list-artikel">
-                        <div class="col col-md-12 col-sm-12 col-xs-12 none-padding img-news"><img class="img-responsive" src="<?php echo $detail_news['gambar']; ?>">
+                        <div class="col col-md-12 col-sm-12 col-xs-12 none-padding img-news"><img class="img-responsive" src="<?php $c = explode('/', $detail_news['gambar']) if(isset($c[1])){ echo $detail_news['gambar']; }else{ echo base_url().'assets/media/'.$detail_news['gambar']; } ?>">
                         <div class="col col-md-12 col-sm-12 col-xs-12 desrip-news">
                             <h4 class="title-news"><?php echo $detail_news['title']; ?></h4>
                             <p class="isi-news"><?php echo $detail_news['news_content'] ?> </p>

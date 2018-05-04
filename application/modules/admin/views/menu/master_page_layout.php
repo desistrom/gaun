@@ -174,7 +174,9 @@
 					</select>
 					<div class="error" id="ntf_menu"></div>
 				</div>
+			    <?php if ($current['img'] != 'dummy'): ?>
 			    <img src="<?=base_url();?>media/<?=$current['img'];?>" width="250px">
+			    <?php endif ?>
 				<button type="button" class="btn btn-primary" id="submit">Submit</button>
 			</form>
 		</div>

@@ -60,7 +60,7 @@
           .flagcounter-foot{
         height: auto;
         overflow: hidden;
-        padding-top: 15px;
+        padding-top: 20px;
           }
           .sub-flagcounter-foot{
             margin-top: -3em;
@@ -165,10 +165,11 @@
                 </div>
                 <div class="col-md-2 col-sm-2 col-xs-12 footer-right text-right" ">
                   <h3 class="title-footer">Hits Counter</h3>
-                <!--   <div style="text-align:center;"><script type="text/javascript" src="http://services.webestools.com/cpt_visitors/54639-6-8.js"></script></div> -->
-                  <div align="center" class="flagcounter-foot">
+                  <div style="text-align:center;"><script type="text/javascript" src="http://services.webestools.com/cpt_visitors/54718-6-8.js"></script></div>
+<!--                   <div style="text-align:center;"><script type="text/javascript" src="http://services.webestools.com/cpt_visitors/54639-6-8.js"></script></div> -->
+                  <div align="left" class="flagcounter-foot">
                       <div class="sub-flagcounter-foot">
-                        <a href="https://www.worldflagcounter.com/details/egE"><img src="https://www.worldflagcounter.com/egE/" alt="Flag Counter"></a>
+                        <a href="https://www.worldflagcounter.com/details/egF"><img src="https://www.worldflagcounter.com/egF/" alt="Flag Counter"></a>
                       </div>
                    <!--  <ul class="list-unstyled" style="width: 100%;">
                     	<li>

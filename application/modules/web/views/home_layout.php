@@ -24,12 +24,12 @@
                  
                     <a href="<?php echo site_url('web/layanan'); ?>" class="btn  btn-pelajari" type="button">Pelajari lebih lanjut <i class="fa fa-long-arrow-right"></i></a>
                 </div>
-                <div class="col-md-12 col-sm-12 col-xs-12">
+              <!--   <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="arrow-line">
                         <div class="line-left"><a class="js-scroll-trigger" href="#layanan"><i class="glyphicon glyphicon-arrow-down"></i></a></div>
                        
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </section>
@@ -75,6 +75,7 @@
                     <?php foreach ($instansi as $key => $value) :  ?>
                     <div class="col col-md-12 col-sm-12 col-xs-12 text-center item">
                         <div class="filter-img-client "><img src="<?php echo $value['image_thumbnail']; ?>" class="img-responsive" ></div>
+                        <div><p><?php echo $value['instansi']; ?></p></div>
                     </div>
                 <?php endforeach ?>
             

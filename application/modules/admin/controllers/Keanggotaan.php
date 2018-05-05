@@ -139,16 +139,87 @@ class Keanggotaan extends MX_Controller  {
 				$ret['state'] = 1;
 				$about['profit'] = $this->input->post('benefit');
 				$id['id_setting'] = $this->input->post('id');
-				if ($this->input->post('id') == '') {
-					$about['cara'] = 'dumy';
-					if ($this->db->insert('tb_setting_user',$about)) {
-						$ret['status'] = 1;
-						$this->session->set_flashdata("notif","Data Berhasil di Masukan");
+				if(!is_null($this->data['content']['image_profit'])){
+					if ($this->input->post('id') == '') {
+						// $about['profit'] = 'dumy';
+						$data_gambar = $this->upload_logo($_FILES);
+						if (isset($data_gambar['error'])) {
+							$ret['notif'] = $data_gambar;
+						}else{	
+							$about['image_profit'] = $data_gambar['asli'];
+							if ($this->db->insert('tb_setting_user',$about)) {
+								$ret['status'] = 1;
+								$this->session->set_flashdata("notif","Data Berhasil di Masukan");
+							}
+						}					
+						
+					}else{
+						if (isset($_FILES['userfile'])) {
+							$data_gambar = $this->upload_logo($_FILES);
+							if (isset($data_gambar['error'])) {
+								$ret['notif'] = $data_gambar;
+							}else{
+								$about['image_profit'] = $data_gambar['asli'];
+								if (file_exists(FCPATH."media/".$this->data['content']['image_profit'])) {
+			            			@chmod(FCPATH."media/".$this->data['content']['image_profit'], 0777);
+			            			@unlink(FCPATH."media/".$this->data['content']['image_profit']);
+			            		}
+			            		if (file_exists(FCPATH."media/thumbnail/".$this->data['content']['image_profit'])) {
+			            			@chmod(FCPATH."media/thumbnail/".$this->data['content']['image_profit'], 0777);
+			            			@unlink(FCPATH."media/thumbnail/".$this->data['content']['image_profit']);
+			            		}
+			            		if (file_exists(FCPATH."media/crop/".$this->data['content']['image_profit'])) {
+			            			@chmod(FCPATH."media/crop/".$this->data['content']['image_profit'], 0777);
+			            			@unlink(FCPATH."media/crop/".$this->data['content']['image_profit']);
+			            		}
+
+			            		if ($this->db->update('tb_setting_user',$about,$id)) {
+									$ret['status'] = 1;
+									$this->session->set_flashdata("notif","Data Berhasil di Masukan");
+								}
+							}
+						}else{
+							if ($this->db->update('tb_setting_user',$about,$id)) {
+								$ret['status'] = 1;
+								$this->session->set_flashdata("notif","Data Berhasil di Masukan");
+							}
+						}
+						
 					}
 				}else{
-					if ($this->db->update('tb_setting_user',$about,$id)) {
-						$ret['status'] = 1;
-						$this->session->set_flashdata("notif","Data Berhasil di Masukan");
+					if (!isset($_FILES['userfile'])) {
+						$ret['notif']['userfile'] = "Please Select File";
+					}else{
+						if (isset($_FILES['userfile'])) {
+							$data_gambar = $this->upload_logo($_FILES);
+							if (isset($data_gambar['error'])) {
+								$ret['notif'] = $data_gambar;
+							}else{
+								$about['image_profit'] = $data_gambar['asli'];
+								if (file_exists(FCPATH."media/".$this->data['content']['image_profit'])) {
+			            			@chmod(FCPATH."media/".$this->data['content']['image_profit'], 0777);
+			            			@unlink(FCPATH."media/".$this->data['content']['image_profit']);
+			            		}
+			            		if (file_exists(FCPATH."media/thumbnail/".$this->data['content']['image_profit'])) {
+			            			@chmod(FCPATH."media/thumbnail/".$this->data['content']['image_profit'], 0777);
+			            			@unlink(FCPATH."media/thumbnail/".$this->data['content']['image_profit']);
+			            		}
+			            		if (file_exists(FCPATH."media/crop/".$this->data['content']['image_profit'])) {
+			            			@chmod(FCPATH."media/crop/".$this->data['content']['image_profit'], 0777);
+			            			@unlink(FCPATH."media/crop/".$this->data['content']['image_profit']);
+			            		}
+
+			            		if ($this->db->update('tb_setting_user',$about,$id)) {
+									$ret['status'] = 1;
+									$this->session->set_flashdata("notif","Data Berhasil di Masukan");
+								}
+							}
+						}else{
+							if ($this->db->update('tb_setting_user',$about,$id)) {
+								$ret['status'] = 1;
+								$this->session->set_flashdata("notif","Data Berhasil di Masukan");
+							}
+						}
 					}
 				}
 			}
@@ -302,6 +373,7 @@ class Keanggotaan extends MX_Controller  {
 			$this->form_validation->set_rules('email','Email','trim|required');
 			$this->form_validation->set_rules('username','Username','trim|required');
 			$this->form_validation->set_rules('password','Passowrd','trim|required');
+			$this->form_validation->set_rules('sort','Urutan','trim|numeric');
 			if ($this->form_validation->run() == true && isset($_FILES['userfile'])) {
 				$ret['state'] = 1;
 				$data_instansi['nm_instansi'] = $this->input->post('name');
@@ -311,6 +383,7 @@ class Keanggotaan extends MX_Controller  {
 				$data_instansi['username'] = $this->input->post('username');
 				$data_instansi['email'] = $this->input->post('email');
 				$data_instansi['password'] = $this->input->post('password');
+				$data_instansi['sort'] = $this->input->post('sort');
 				$data_gambar = $this->upload_logo($_FILES);
 				if (isset($data_gambar['error'])) {
 					$ret['notif'] = $data_gambar;
@@ -330,6 +403,7 @@ class Keanggotaan extends MX_Controller  {
 			$ret['notif']['username'] = form_error('username');
 			$ret['notif']['email'] = form_error('email');
 			$ret['notif']['password'] = form_error('password');
+			$ret['notif']['sort'] = form_error('sort');
 			if (!isset($_FILES['userfile'])) {
 				$ret['notif']['userfile'] = "Please Select File";
 			}
@@ -355,6 +429,7 @@ class Keanggotaan extends MX_Controller  {
 			$this->form_validation->set_rules('alamat','Alamat','trim|required');
 			$this->form_validation->set_rules('phone','phone','trim|required');
 			$this->form_validation->set_rules('email','Email','trim|required');
+			$this->form_validation->set_rules('sort','Urutan','trim|numeric');
 			if ($this->form_validation->run() == true) {
 				$ret['state'] = 1;
 				$data_instansi['nm_instansi'] = $this->input->post('name');
@@ -362,6 +437,7 @@ class Keanggotaan extends MX_Controller  {
 				$data_instansi['phone'] = $this->input->post('phone');
 				$data_instansi['alamat'] = $this->input->post('alamat');
 				$data_instansi['email'] = $this->input->post('email');
+				$data_instansi['sort'] = $this->input->post('sort');
 				if (isset($_FILES['userfile'])) {
 					$image = $this->upload_logo($_FILES);
 					if (isset($image['error'])) {
@@ -402,6 +478,7 @@ class Keanggotaan extends MX_Controller  {
 			$ret['notif']['phone'] = form_error('phone');
 			$ret['notif']['alamat'] = form_error('alamat');
 			$ret['notif']['email'] = form_error('email');
+			$ret['notif']['sort'] = form_error('sort');
 			echo json_encode($ret);
 			exit();
 		}

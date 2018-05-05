@@ -79,5 +79,13 @@ class General
        return $html;
     }
 
+    public function title(){
+      $title = $this->CI->db->get('tb_logo')->row_array()['title'];
+      if ($title == '') {
+        $title = 'IDREN';
+      }
+      return $title;
+    }
+
 
 }

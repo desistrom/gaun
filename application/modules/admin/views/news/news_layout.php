@@ -84,19 +84,12 @@
         <input type="text" name="slug" class="form-control" id="slug" disabled="true" value="">
         <div class="error" id="ntf_judul"></div>
       </div>
-      
-      
-
       <div class="form-group">
       <label>Content News</label>
       <?php echo $this->ckeditor->editor("content", "" ); ?>
         <input type="hidden" name="content" id="content">
         <div class="error" id="ntf_content"></div>
       </div>
-
-     
-
-  
   </div></div>
 
   </div>
@@ -104,7 +97,6 @@
 </div>
 <div class="col col-md-4 col-sm-4 col-xs-12" style="padding-top: 1em;">
   <div class="panel ">
-
       <div class="panel-header" style="background-color:  #F5F5F5;">
         <div class="box-header with-border">
         <h3 class="box-title">News Setting</h3>
@@ -124,9 +116,9 @@
       </div>
       <div class="form-group">
         <label>Post Status</label>
-        <select class="form-control" name="kategori" id="kategori" >
-          <option>Publish</option>
-          <option>Private</option>
+        <select class="form-control" name="status" id="status" >
+          <option value="1">Publish</option>
+          <option value="2">Draft</option>
         </select>
         <div class="error" id="ntf_kategori"></div>
       </div>
@@ -144,12 +136,18 @@
   </form>
   
 <?php }else{ ?>
-	<div class="box-header with-border">
-    <h3 class="box-title">Edit News</h3>
-  </div>
   <!-- /.box-header -->
+<form role="form">
+<div class="col col-md-8 col-sm-8 col-xs-12" style="padding-top: 1em;">
+  <div class="panel">
+    <div class="panel-header" style="background-color:  #F5F5F5;">
+        <div class="box-header with-border">
+    <h3 class="box-title"> News Content</h3>
+  </div>
+    </div>
+    <div class="panel-body"><!-- /.box-header -->
   <div class="box-body">
-    <form role="form">
+    
       <!-- text input -->
       <div class="form-group">
         <label>Judul Berita</label>
@@ -157,33 +155,64 @@
         <div class="error" id="ntf_judul"></div>
       </div>
       <div class="form-group">
-        <label>Gambar Berita</label>
-        <input type="file" name="file_name" class="form-control" id="file_name">
-        <div class="error" id="ntf_file_name"></div>
+        <label>Slug Berita</label>
+        <input type="text" name="slug" class="form-control" id="slug" disabled="true" value="<?=$news['link'];?>">
+        <div class="error" id="ntf_judul"></div>
       </div>
-      <!-- textarea -->
-      <div class="form-group">
-        <label>Kategori Berita</label>
-        <select class="form-control" name="kategori" id="kategori" >
-        	<option value="">-- Pilih Kategori --</option>
-        	<?php foreach ($kategori as $key => $value): ?>
-        		<option <?php if ($news['id_kategori_ref'] == $value['id_kategori_news']){ ?> selected <?php } ?> value="<?=$value['id_kategori_news'];?>"><?=$value['nm_kategori'];?></option>
-        	<?php endforeach ?>
-        </select>
-        <div class="error" id="ntf_kategori"></div>
-      </div>
-
       <div class="form-group">
       <label>Content News</label>
       <?php echo $this->ckeditor->editor("content", $news['content'] ); ?>
         <input type="hidden" name="content" id="content">
         <div class="error" id="ntf_content"></div>
       </div>
+  </div></div>
 
-      <button type="button" class="btn btn-primary" id="submit">Submit</button>
-
-    </form>
   </div>
+
+</div>
+<div class="col col-md-4 col-sm-4 col-xs-12" style="padding-top: 1em;">
+  <div class="panel ">
+      <div class="panel-header" style="background-color:  #F5F5F5;">
+        <div class="box-header with-border">
+        <h3 class="box-title">News Setting</h3>
+      </div>
+    </div>
+    <div class="panel-body">
+      <!-- textarea -->
+      <div class="form-group">
+        <label>Kategori Berita</label>
+        <select class="form-control" name="kategori" id="kategori" >
+          <option value="">-- Pilih Kategori --</option>
+          <?php foreach ($kategori as $key => $value): ?>
+            <option <?php if($news['id_kategori_ref'] == $value['id_kategori_news']){ ?> selected <?php } ?> value="<?=$value['id_kategori_news'];?>"><?=$value['nm_kategori'];?></option>
+          <?php endforeach ?>
+        </select>
+        <div class="error" id="ntf_kategori"></div>
+      </div>
+      <div class="form-group">
+        <label>Post Status</label>
+        <select class="form-control" name="status" id="status" >
+          <option value="">-- Pilih Status --</option>
+          <option <?php if($news['is_aktif'] == '1'){ ?> selected <?php } ?> value="1">Publish</option>
+          <option <?php if($news['is_aktif'] == '0'){ ?> selected <?php } ?> value="0">Draft</option>
+        </select>
+        <div class="error" id="ntf_kategori"></div>
+      </div>
+      <div class="form-group">
+        <label>Gambar Berita</label>
+        <input type="file" name="file_name" class="form-control" id="file_name">
+        <div class="error" id="ntf_file_name"></div>
+      </div>
+      <?php if ($news['img'] != ''): $images = explode("/", $news['img']); ?>
+        <img style="width: 100%; margin-bottom: 10px;" src="<?php if (isset($images[1])) { echo $news['img']; }else{ echo base_url().'assets/media/'.$news['img']; } ?>">
+      <?php endif ?>
+       <button type="button" class="btn btn-primary" id="submit">Submit</button>
+    </div>
+
+
+</div>
+</div>
+  </form>
 <?php } ?>
 	
 </div>
@@ -219,6 +248,7 @@
       form_data.append('judul', $('#judul').val());
       form_data.append('kategori', $('#kategori').val());
       form_data.append('content', $('#content').val());
+      form_data.append('status', $('#status').val());
       form_data.append('file_name', file_data);
       $.ajax({
           url : window.location.href,

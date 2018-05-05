@@ -12,6 +12,7 @@
 						<th>Nama Instansi</th>
 						<th>email</th>
 						<th>status</th>
+						<th>Urutan</th>
 						<th>Visible</th>
 						<th>Action</th>
 					</thead>
@@ -22,6 +23,7 @@
 							<td class="btn_detail" id="<?=$value['id_instansi'];?>" style="cursor: pointer;"><?=$value['nm_instansi'];?></td>
 							<td><?=$value['email'];?></td>
 							<td><?php if($value['status'] == 0){ ?> <span class="text-info">Not Actived</span> <?php }elseif($value['status']==1){ ?> <span class="text-primary">On Proces</span> <?php }else{ ?> <span class="text-success">Active</span> <?php } ?></td>
+							<td><?=$value['sort'];?></td>
 							<td><?php if($value['is_aktif'] == 0){ ?> <span class="text-danger">NO</span> <?php  }else{ ?> <span class="text-success">YES</span> <?php } ?></td>
 							<td>
 								<a href="<?=site_url('admin/keanggotaan/edit_instansi/'.$value['id_instansi']);?>">
@@ -155,6 +157,11 @@
 			        <div class="error" id="ntf_userfile"></div>
 			        <div class="error" id="ntf_error"></div>
 			      </div>
+			      <div class="form-group">
+			      <label>Urutan</label>
+			        <input type="number" class="form-control" name="sort" id="sort" value="" placeholder="">
+			        <div class="error" id="ntf_sort"></div>
+			      </div>
 				<button type="button" class="btn btn-primary" id="submit">Submit</button>
 			</form>
 		</div>
@@ -199,6 +206,11 @@
 			        <div class="error" id="ntf_userfile"></div>
 			        <div class="error" id="ntf_error"></div>
 			      </div>
+			      <div class="form-group">
+			      <label>Urutan</label>
+			        <input type="number" class="form-control" name="sort" id="sort" value="<?=$instansi['sort'];?>" placeholder="">
+			        <div class="error" id="ntf_sort"></div>
+			      </div>
 				<button type="button" class="btn btn-primary" id="submit">Submit</button>
 			</form>
 		</div>
@@ -220,6 +232,7 @@
       form_data.append('username',$('#username').val());
       form_data.append('password',$('#password').val());
       form_data.append('repassword',$('#repassword').val());
+      form_data.append('sort',$('#sort').val());
       $.ajax({
           url : window.location.href,
           dataType : 'json',

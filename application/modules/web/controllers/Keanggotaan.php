@@ -18,13 +18,14 @@ class Keanggotaan extends MX_Controller  {
         $data = end($url);
         if (!is_numeric($data)) {
             $data = 0;
-        }
-    	$url_instansi = site_url('api/v1/instansi') ;*/
+        }*/
+    	$url_instansi = site_url('api/v1/instansi') ;
         // $a = json_decode($this->api_helper($url),true);
         $methode = 'GET';
         $token = '';
-        /*$b = api_helper('',$url_instansi,$methode,$token);
-        $config['base_url'] = base_url().'web/keanggotaan/index';*/
+        $b = api_helper('',$url_instansi,$methode,$token);
+        $this->data['total'] = count($b['data']);
+        // $config['base_url'] = base_url().'web/keanggotaan/index';
         // $url = base_url().'api/v1/news';
         /*$methode = 'GET';
         $config['total_rows'] = count($b['data']);
@@ -42,6 +43,7 @@ class Keanggotaan extends MX_Controller  {
 
         if (!empty($this->input->get('page'))) {
             $start = ceil($this->input->get('page') * 10);
+            $this->data['total_row'] = $start;
             $url = base_url().'api/v1/instansi_pagging?data='.$start;
             $a = api_helper('',$url,$methode,$token);
             $this->data['keanggotaan']=$a['data'];
@@ -49,6 +51,7 @@ class Keanggotaan extends MX_Controller  {
             echo json_encode($result);
         }else{
             $url = base_url().'api/v1/instansi_pagging?data=0';
+            $this->data['total_row'] = '10';
             $a = api_helper('',$url,$methode,$token);
             $this->data['keanggotaan']=$a['data'];
             $this->ciparser->new_parse('template_frontend','modules_web', 'keanggotaan_layout',$this->data);

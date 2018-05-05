@@ -151,11 +151,13 @@ class Home extends CI_Controller  {
 			$this->form_validation->set_rules('content','Content','trim|required');
 			$this->form_validation->set_rules('name','Nama User','trim|required');
 			$this->form_validation->set_rules('jabatan','Jabatan','trim|required');
+			$this->form_validation->set_rules('sort','Urutan','trim|integer');
 			if ($this->form_validation->run() == true) {
 				$ret['state'] = 1;
 				$testimoni['content'] = $this->input->post('content');
 				$testimoni['nama_user'] = $this->input->post('name');
 				$testimoni['jabatan'] = $this->input->post('jabatan');
+				$testimoni['sort'] = $this->input->post('sort');
 				if (isset($_FILES['userfile'])) {
 					$image = $this->upload_logo($_FILES);
 					if (isset($image['error'])) {
@@ -174,6 +176,7 @@ class Home extends CI_Controller  {
 			$ret['notif']['content'] = form_error('content');
 			$ret['notif']['name'] = form_error('name');
 			$ret['notif']['jabatan'] = form_error('jabatan');
+			$ret['notif']['sort'] = form_error('sort');
 			if (!isset($_FILES['userfile'])) {
 				$ret['notif']['userfile'] = "Please Select File";
 			}
@@ -206,12 +209,14 @@ class Home extends CI_Controller  {
 			$this->form_validation->set_rules('content','Content','trim|required');
 			$this->form_validation->set_rules('name','Nama User','trim|required');
 			$this->form_validation->set_rules('jabatan','Jabatan','trim|required');
+			$this->form_validation->set_rules('sort','Urutan','integer');
 			if ($this->form_validation->run() == true) {
 				$ret['state'] = 1;
 				$testimoni['content'] = $this->input->post('content');
 				// $testimoni['id_user_ref'] = $this->session->userdata('data_user')['id_user'];
 				$testimoni['nama_user'] = $this->input->post('name');
 				$testimoni['jabatan'] = $this->input->post('jabatan');
+				$testimoni['sort'] = $this->input->post('sort');
 				$id_testimoni['id_testimoni'] = $id;
 				if (isset($_FILES['userfile'])) {
 					$image = $this->upload_logo($_FILES);
@@ -254,15 +259,16 @@ class Home extends CI_Controller  {
 			$ret['notif']['name'] = form_error('name');
 			$ret['notif']['jabatan'] = form_error('jabatan');
 			$ret['notif']['content'] = form_error('content');
+			$ret['notif']['sort'] = form_error('sort');
 			echo json_encode($ret);
 			exit();
 		}
-		/*$this->load->library('ckeditor');
+		$this->load->library('ckeditor');
 		$this->ckeditor->basePath = base_url().'assets/ckeditor/';
-		$this->ckeditor->config['toolbar'] = array(
+		/*$this->ckeditor->config['toolbar'] = array(
 		                array( 'Source', '-', 'Bold', 'Italic', 'Underline', '-','Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo','-','NumberedList','BulletedList','Link' )
-		                                                    );*/
-		$this->ckeditor->config['language'] = 'eng';
+		                                                    );
+		*/$this->ckeditor->config['language'] = 'eng';
 		$this->ckeditor->config['width'] = '1024px';
 		$this->ckeditor->config['height'] = '300px';  
 		$this->data['view'] = 'edit';

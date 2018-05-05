@@ -22,8 +22,9 @@
         <div class="error" id="ntf_error"></div>
       </div>
 
-      <img src="<?=base_url();?>media/<?=$content['image'];?>" width="450px">
-
+      <?php if ($content['image'] != ''): ?>        
+        <img src="<?=base_url();?>media/<?=$content['image'];?>" width="450px">
+      <?php endif ?>
       <div class="form-group">
         <label>Tata Cara</label>
         <?php echo $this->ckeditor->editor("cara", $content['cara'] ); ?>
@@ -31,6 +32,15 @@
         <div class="error" id="ntf_cara"></div>
       </div>
       <?php }else{ ?>
+      <div class="form-group">
+        <label>Image</label>
+        <input type="file" name="userfile" value="" class="form-control" id="userfile">
+        <div class="error" id="ntf_userfile"></div>
+        <div class="error" id="ntf_error"></div>
+      </div>
+      <?php if ($content['image_profit'] != ''): ?>        
+        <img src="<?=base_url();?>media/<?=$content['image_profit'];?>" width="450px">
+      <?php endif ?>
       <div class="form-group">
         <label>Benefit</label>
         <?php echo $this->ckeditor->editor("benefit", $content['profit'] ); ?>
@@ -76,10 +86,10 @@
       // console.log($('form').val());
       var form_data = new FormData();
       form_data.append('id',$('#id').val());
-      <?php if($view == 'cara'){ ?>
-      $('#cara').val(CKEDITOR.instances.cara.getData());
       var data_file = $('#userfile').prop('files')[0];
       form_data.append('userfile',data_file);
+      <?php if($view == 'cara'){ ?>
+      $('#cara').val(CKEDITOR.instances.cara.getData());
       form_data.append('cara',$('#cara').val());
       <?php }else{ ?>
       $('#benefit').val(CKEDITOR.instances.benefit.getData());

@@ -45,13 +45,14 @@ class Page extends MX_Controller  {
                     // print_r($sql);
                 }
             }
+            
+        $this->data['layanan'] = $data_page;        
+        $this->ciparser->new_parse('template_frontend','modules_web', $layout,$this->data);
         }else{
-            echo "Page Not Found";
-            exit();
+            $this->ciparser->new_parse('template_frontend','modules_web', 'notfound_layout');            
+            // exit();
         }
         
-        $this->data['layanan'] = $data_page;        
-    	$this->ciparser->new_parse('template_frontend','modules_web', $layout,$this->data);
     }
   
 }

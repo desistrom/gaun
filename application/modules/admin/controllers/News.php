@@ -30,10 +30,12 @@ class News extends MX_Controller  {
 			$this->form_validation->set_rules('judul', 'Judul Berita', 'trim|required');
 			$this->form_validation->set_rules('content', 'Content Berita', 'trim|required');
 			$this->form_validation->set_rules('kategori', 'Kategori Berita', 'trim|required');
+			$this->form_validation->set_rules('status', 'Status Berita', 'trim|required');
 			if ($this->form_validation->run() == true) {
 				$ret['state'] = 1;
 				$data_news['judul'] = $this->input->post('judul');
 				$data_news['content'] = $this->input->post('content');
+				$data_news['is_aktif'] = $this->input->post('status');
 				$data_news['id_kategori_ref'] = $this->input->post('kategori');
 				$data_news['id_user_ref'] = $this->session->userdata('data_user')['id_user'];
 				$data_news['link'] = url_title($this->input->post('judul'), 'dash', true);
@@ -55,6 +57,7 @@ class News extends MX_Controller  {
 			$ret['notif']['judul'] = form_error('judul');
 			$ret['notif']['content'] = form_error('content');
 			$ret['notif']['kategori'] = form_error('kategori');
+			$ret['notif']['status'] = form_error('status');
 			if (!isset($_FILES['file_name'])) {
 				$ret['notif']['file_name'] = "Please Select File";
 			}

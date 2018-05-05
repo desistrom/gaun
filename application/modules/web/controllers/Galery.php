@@ -76,11 +76,12 @@ class Galery extends CI_Controller  {
      function list_video() {
         // $config['base_url'] = base_url().'web/galery/list_video';
         // $url = base_url().'api/v1/galery_video';
-        // $url = site_url('api/v1/galery_video') ;
+        $url = site_url('api/v1/galery_video') ;
         $data = '';
         $methode = 'GET';
         
-        // $a = api_helper('',$url,$methode,'');
+        $b = api_helper('',$url,$methode,'');
+        $this->data['total'] = count($b['data']);
         // $config['total_rows'] = count($a['data']);
         // $config['per_page'] = 9;
         // $config['prev_tag_open'] = '<li>';
@@ -100,6 +101,7 @@ class Galery extends CI_Controller  {
         $token = '';
         if (!empty($this->input->get('page'))) {
             $start = ceil($this->input->get('page') * 9);
+            $this->data['total_row'] = $start;
             $url = base_url().'api/v1/galery_video_pagging?data='.$start;
             $a = api_helper('',$url,$methode,$token);
             $this->data['video']=$a['data'];
@@ -109,6 +111,7 @@ class Galery extends CI_Controller  {
         }else{
             $url = base_url().'api/v1/galery_video_pagging?data=0';
             $a = api_helper('',$url,$methode,$token);
+            $this->data['total_row'] = '9';
             $this->data['video']=$a['data'];
             $this->ciparser->new_parse('template_frontend','modules_web', 'list_video_layout',$this->data);
         }

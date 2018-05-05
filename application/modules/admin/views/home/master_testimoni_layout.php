@@ -18,6 +18,7 @@
       <th>Nama User</th>
       <th>Jabatan</th>
       <th>Content</th>
+      <th>Sort</th>
       <th>Keterangan</th>
       <th>aksi</th>
     </thead>
@@ -28,6 +29,7 @@
         <td><?=$value['nama_user'];?></td>
         <td><?=$value['jabatan'];?></td>
         <td><?=word_limiter($value['content'],10);?></td>
+        <td><?=$value['sort'];?></td>
         <td><?php if($value['is_aktif'] == 1){ ?> Enable <?php }else{ ?> Disable <?php } ?></td>
         <td>
           <!-- <button class="btn btn-default">disable</button> -->
@@ -86,6 +88,7 @@
         <div class="error" id="ntf_jabatan"></div>
       </div>
 
+
       <div class="form-group">
       <label>Gambar User</label>
         <input type="file" class="form-control" name="userfile" id="userfile">
@@ -98,6 +101,12 @@
         <?php echo $this->ckeditor->editor("content", ''); ?>
         <input type="hidden" name="content" value="" id="content">
         <div class="error" id="ntf_content"></div>
+      </div>
+
+      <div class="form-group">
+        <label>Urutan</label>
+        <input type="text" name="sort" class="form-control" value="" id="sort">
+        <div class="error" id="ntf_sort"></div>
       </div>
       <button type="button" class="btn btn-primary" id="submit">Submit</button>
 
@@ -135,12 +144,17 @@
       
       <div class="form-group">
         <label>testimoni</label>
-        <?php echo $this->ckeditor->editor("content", $testimoni['content'] ); ?>
-        <input type="hidden" name="content" value="<?php if(isset($testimoni)){ echo $testimoni['content']; } ?>" id="content">
+        <?php echo $this->ckeditor->editor("content", $testimoni['content']); ?>
+        <input type="hidden" name="content" value="" id="content">
         <div class="error" id="ntf_content"></div>
       </div>
       <input type="hidden" name="id" id="id" value="<?php if(isset($testimoni)){ echo $testimoni['id_testimoni']; } ?>">
 
+      <div class="form-group">
+        <label>Urutan</label>
+        <input type="text" name="sort" class="form-control" value="<?=$testimoni['sort'];?>" id="sort">
+        <div class="error" id="ntf_sort"></div>
+      </div>
       <button type="button" class="btn btn-primary" id="submit">Submit</button>
 
     </for
@@ -157,6 +171,7 @@
       form_data.append('userfile',data_file);
       form_data.append('jabatan',$('#jabatan').val());
       form_data.append('name',$('#name').val());
+      form_data.append('sort',$('#sort').val());
       $('#content').val(CKEDITOR.instances.content.getData());
       form_data.append('content',$('#content').val());
       $.ajax({

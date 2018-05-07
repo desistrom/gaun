@@ -18,6 +18,13 @@ class Layanan extends MX_Controller  {
     function index() {
         $sql = "SELECT * FROM tb_menu where parent=24";
         $this->data['page'] = $this->db->query($sql)->result_array();
+        foreach ($this->data['page'] as $key => $value) {
+            $url = explode('/', $value['link']);
+            $link = end($url);
+            $sql_page = "SELECT * FROM tb_general_page where link = '".$link."'";
+            $this->data['page'][$key]['content'] = $this->db->query($sql_page)->row_array()['content'];
+            $this->data['page'][$key]['image'] = $this->db->query($sql_page)->row_array()['img'];
+        }
         /*$this->data['book'] = $this->db->get_where('tb_page_layanan',array('nama_page'=>'ID-BOOK'))->row_array();
         $this->data['journal'] = $this->db->get_where('tb_page_layanan',array('nama_page'=>'ID-JOURNAL'))->row_array();
         $this->data['tube'] = $this->db->get_where('tb_page_layanan',array('nama_page'=>'ID-TUBE'))->row_array();

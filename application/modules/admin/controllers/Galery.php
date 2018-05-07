@@ -135,6 +135,18 @@ class Galery extends MX_Controller  {
 		$this->ciparser->new_parse('template_admin','modules_admin', 'galery/album_master_layout',$this->data);
 	}
 
+	public function delete_album(){
+		$id = $this->input->post('id');
+		$ret['status'] = 0;
+		if ($this->db->update('tb_galery',array('id_album'=>null),array('id_galery'=>$id))) {
+			if ($this->db->delete('tb_album_galery',array('id_album'=>$id))) {
+				$ret['status'] = 1;
+				$this->session->set_flashdata("notif","Data Berhasil di Hapus");
+			}
+		}
+		echo json_encode($ret);
+	}
+
 	public function change(){
 		$id = $this->input->post('id');
 		$ret['status'] = 0;

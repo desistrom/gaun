@@ -27,8 +27,8 @@
         <td><?=$value['key_album'];?></td>
         <td><?= date("d M Y", strtotime($value['tgl_kegiatan']));?></td>
         <td>
-          <!-- <button class="btn btn-default">disable</button> -->
-          <a href="<?=site_url('admin/galery/edit_album/'.$value['id_album']);?>"><button class="btn btn-primary" id="edit">Edit</button></a>
+          <button class="btn btn-danger btn-sm btn_delete" id="<?=$value['id_album'];?>">Delete</button>
+          <a href="<?=site_url('admin/galery/edit_album/'.$value['id_album']);?>"><button class="btn btn-primary btn-sm" id="edit">Edit</button></a>
         </td>
       </tr>
     <?php endforeach ?>
@@ -258,6 +258,23 @@
         });
       }
     });
+
+    $('body').on('click','.btn_delete',function(){
+      var id = $(this).attr('id');
+      if(confirm('Anda ingin Menghapusnya dari album ??')){
+        $.ajax({
+          url : base_url+'admin/galery/delete_album',
+          dataType : 'json',
+          data : {'id' : id},
+          type : 'POST'
+        }).done(function(data){
+          if (data.status == 1) {
+            window.location.href = window.location.href;
+          }
+        });
+      }
+    });
+
     $('body').on('click','.btn_add',function(){
       var html = '<div class="form-group"><label>Photo Album</label><input type="file" name="file_name" class="form-control file" id="file_name"><div class="error" id="ntf_name"></div></div>';
       $('.add_file').append(html);

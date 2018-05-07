@@ -544,10 +544,12 @@ class Keanggotaan extends MX_Controller  {
 			$ret['state'] = 0;
 			$ret['status'] = 0;
 			$this->form_validation->set_error_delimiters('','');
-			$this->form_validation->set_rules('kategori','Kategori Email', 'trim|required');
+			$this->form_validation->set_rules('kategori','Jenis Instansi', 'trim|required');
+			$this->form_validation->set_rules('content','Deskripsi Instansi', 'trim|required');
 			if ($this->form_validation->run() == true) {
 				$ret['state'] = 1;
 				$datakat['nm_jenis_instansi'] = $this->input->post('kategori');
+				$datakat['deskripsi'] = $this->input->post('content');
 				if ($this->db->insert('tb_jenis_instansi',$datakat)) {
 					$ret['status'] = 1;
 					$this->session->set_flashdata("notif","Data Berhasil di Masukan");

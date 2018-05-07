@@ -233,6 +233,10 @@
 			        <div class="error" id="ntf_error"></div>
 			      </div>
 
+			      <?php if ($instansi['gambar'] != ''): ?>
+			      	<img width="450px" src="<?=base_url().'media/'.$instansi['gambar'];?>">
+			      <?php endif ?>
+
 			      <div class="form-group">
 			      <label>Urutan</label>
 			        <input type="number" class="form-control" name="sort" id="sort" value="<?=$instansi['sort'];?>" placeholder="">

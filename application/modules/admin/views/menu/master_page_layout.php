@@ -1,3 +1,8 @@
+<style type="text/css">
+	  #cke_content{
+    width: 100% !important;
+  }
+</style>
 <div class="box">
 <link rel="stylesheet" href="<?=base_url();?>assets/css/select2.min.css">
 	<?php if($view == 'list'){ ?>
@@ -90,25 +95,41 @@
 		  </div>
 		</div>
 		<?php }elseif($view == 'add'){ ?>
-		<div class="box-header with-border">
-			<h3 class="box-title">Add page</h3>
-		</div>
-		<!-- /.box-header -->
-		<div class="box-body">
-			<form role="form">
-				<!-- text input -->
-				<div class="form-group">
-					<label>Title Page</label>
-					<input type="text" name="label" class="form-control" id="label" placeholder="Masukan Title Page ..." value="">
-					<div class="error" id="ntf_label"></div>
+		<form role="form">
+			<div class="col col-md-8 col-sm-8 col-xs-12" style="padding-top: 1em;">
+			  <div class="panel">
+			    <div class="panel-header" style="background-color:  #F5F5F5;">
+			        <div class="box-header with-border">
+					    <h3 class="box-title"> Page Content</h3>
+					 </div>
+			   </div>
+				<div class="panel-body"><!-- /.box-header -->
+					<div class="box-body">
+						<!-- text input -->
+						<div class="form-group">
+							<label>Title Page</label>
+							<input type="text" name="label" class="form-control" id="label" placeholder="Masukan Title Page ..." value="">
+							<div class="error" id="ntf_label"></div>
+						</div>
+						<input type="hidden" name="slug" class="form-control" id="slug" placeholder="" value="">
+						<div class="form-group">
+					      <label>Content</label>
+					        <?php  echo $this->ckeditor->editor("content", "" ); ?>
+					        <input type="hidden" name="content" id="content">
+					        <div class="error" id="ntf_content"></div>
+					    </div>
+					</div>
 				</div>
-				<input type="hidden" name="slug" class="form-control" id="slug" placeholder="" value="">
-				<div class="form-group">
-			      <label>Content</label>
-			        <?php  echo $this->ckeditor->editor("content", "" ); ?>
-			        <input type="hidden" name="content" id="content">
-			        <div class="error" id="ntf_content"></div>
-			    </div>
+		</div>
+	</div>
+	<div class="col col-md-4 col-sm-4 col-xs-12" style="padding-top: 1em;">
+	  <div class="panel ">
+	      <div class="panel-header" style="background-color:  #F5F5F5;">
+	        <div class="box-header with-border">
+	        <h3 class="box-title">Page Setting</h3>
+	      </div>
+	    </div>
+	    <div class="panel-body">
 				<div class="form-group">
 			      	<label>Image Page</label>
 			        <input type="file" class="form-control" name="userfile" id="userfile">
@@ -137,48 +158,70 @@
 				</div>
 
 				<button type="button" class="btn btn-primary" id="submit">Submit</button>
+			</div>
+		</div>
+	</div>
 			</form>
 		</div>
 		<?php }else{ ?>
-		<div class="box-header with-border">
-			<h3 class="box-title">Edit Menu</h3>
-		</div>
-		<!-- /.box-header -->
-		<div class="box-body">
-			<form role="form">
-				<!-- text input -->
-				<div class="form-group">
-					<label>Nama Menu</label>
-					<input type="text" name="label" class="form-control" id="label" placeholder="Masukan Nama Menu ..." value="<?=$current['title'];?>">
-					<div class="error" id="ntf_label"></div>
+		<form role="form">
+			<div class="col col-md-8 col-sm-8 col-xs-12" style="padding-top: 1em;">
+			 	<div class="panel">
+				    <div class="panel-header" style="background-color:  #F5F5F5;">
+				        <div class="box-header with-border">
+						    <h3 class="box-title"> Page Content</h3>
+						 </div>
+				   </div>
+					<div class="panel-body"><!-- /.box-header -->
+						<div class="box-body">
+							<!-- text input -->
+							<div class="form-group">
+								<label>Nama Menu</label>
+								<input type="text" name="label" class="form-control" id="label" placeholder="Masukan Nama Menu ..." value="<?=$current['title'];?>">
+								<div class="error" id="ntf_label"></div>
+							</div>
+							<input type="hidden" name="slug" class="form-control" id="slug" placeholder="" value="<?=$current['link'];?>">
+							<div class="form-group">
+						      <label>Content</label>
+						        <?php echo $this->ckeditor->editor("content", $current['content'] ); ?>
+						        <input type="hidden" name="content" id="content">
+						        <div class="error" id="ntf_content"></div>
+						    </div>
+						</div>
+					</div>
 				</div>
-				<input type="hidden" name="slug" class="form-control" id="slug" placeholder="" value="<?=$current['link'];?>">
-				<div class="form-group">
-			      <label>Content</label>
-			        <?php echo $this->ckeditor->editor("content", $current['content'] ); ?>
-			        <input type="hidden" name="content" id="content">
-			        <div class="error" id="ntf_content"></div>
-			    </div>
-				<div class="form-group">
-			      	<label>Image Page</label>
-			        <input type="file" class="form-control" name="userfile" id="userfile">
-			        <div class="error" id="ntf_userfile"></div>
-			        <div class="error" id="ntf_error"></div>
-			    </div>
-				<div class="form-group">
-					<label>Setting to Menu</label>
-					<select name="menu" id="menu" class="form-control">
-						<option value="">-- Select Menu --</option>
-						<?php foreach ($menu as $key => $value): ?>
-							<option <?php if('page/'.$current['link'] == $value['link']){ ?> selected <?php } ?> value="<?=$value['link'];?>"><?=$value['label'];?></option>
-						<?php endforeach ?>
-					</select>
-					<div class="error" id="ntf_menu"></div>
+			</div>
+			<div class="col col-md-4 col-sm-4 col-xs-12" style="padding-top: 1em;">
+				<div class="panel ">
+				     <div class="panel-header" style="background-color:  #F5F5F5;">
+				        <div class="box-header with-border">
+				        	<h3 class="box-title">Page Setting</h3>
+				      	</div>
+				    </div>
+		    		<div class="panel-body">
+						<div class="form-group">
+					      	<label>Image Page</label>
+					        <input type="file" class="form-control" name="userfile" id="userfile">
+					        <div class="error" id="ntf_userfile"></div>
+					        <div class="error" id="ntf_error"></div>
+					    </div>
+						<div class="form-group">
+							<label>Setting to Menu</label>
+							<select name="menu" id="menu" class="form-control">
+								<option value="">-- Select Menu --</option>
+								<?php foreach ($menu as $key => $value): ?>
+									<option <?php if('page/'.$current['link'] == $value['link']){ ?> selected <?php } ?> value="<?=$value['link'];?>"><?=$value['label'];?></option>
+								<?php endforeach ?>
+							</select>
+							<div class="error" id="ntf_menu"></div>
+						</div>
+					    <?php if ($current['img'] != 'dummy'): ?>
+					    <img src="<?=base_url();?>media/<?=$current['img'];?>" width="250px">
+					    <?php endif ?>
+						<button style="margin-top: 15PX;" type="button" class="btn btn-primary" id="submit">Submit</button>
+					</div>
 				</div>
-			    <?php if ($current['img'] != 'dummy'): ?>
-			    <img src="<?=base_url();?>media/<?=$current['img'];?>" width="250px">
-			    <?php endif ?>
-				<button type="button" class="btn btn-primary" id="submit">Submit</button>
+			</div>
 			</form>
 		</div>
 		<?php } ?>

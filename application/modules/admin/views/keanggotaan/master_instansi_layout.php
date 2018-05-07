@@ -9,6 +9,7 @@
 				<table class="table table-bordered  dataTable" id="example2">
 					<thead>
 						<th>No</th>
+						<th>Jenis Instansi</th>
 						<th>Nama Instansi</th>
 						<th>email</th>
 						<th>status</th>
@@ -20,6 +21,7 @@
 					<?php foreach ($instansi as $key => $value): ?>
 						<tr>
 							<td><?=($key+1);?></td>
+							<td><?=$value['nm_jenis_instansi'];?></td>
 							<td class="btn_detail" id="<?=$value['id_instansi'];?>" style="cursor: pointer;"><?=$value['nm_instansi'];?></td>
 							<td><?=$value['email'];?></td>
 							<td><?php if($value['status'] == 0){ ?> <span class="text-info">Not Actived</span> <?php }elseif($value['status']==1){ ?> <span class="text-primary">On Proces</span> <?php }else{ ?> <span class="text-success">Active</span> <?php } ?></td>
@@ -125,6 +127,17 @@
 			      </div>
 
 			      <div class="form-group">
+			      <label>Kategori Instansi</label>
+			      	<select name="jenis" id="jenis" class="form-control">
+			      		<option value="">-- Select Kategori --</option>
+			      		<?php foreach ($kategori as $key => $value): ?>
+			      			<option value="<?=$value['id_jenis_instansi'];?>"><?=$value['nm_jenis_instansi'];?></option>
+			      		<?php endforeach ?>
+			      	</select>
+			        <div class="error" id="ntf_jenis"></div>
+			      </div>
+
+			      <div class="form-group">
 			      <label>Phone Number</label>
 			        <input type="text" class="form-control" name="phone" id="phone" value="" placeholder="Enter Phone Number ...">
 			        <div class="error" id="ntf_phone"></div>
@@ -191,21 +204,35 @@
 			      </div>
 
 			      <div class="form-group">
+			      <label>Kategori Instansi</label>
+			      	<select name="jenis" id="jenis" class="form-control">
+			      		<option value="">-- Select Kategori --</option>
+			      		<?php foreach ($kategori as $key => $value): ?>
+			      			<option <?php if($value['id_jenis_instansi'] == $instansi['id_jenis_instansi']) ?> value="<?=$value['id_jenis_instansi'];?>"><?=$value['nm_jenis_instansi'];?></option>
+			      		<?php endforeach ?>
+			      	</select>
+			        <div class="error" id="ntf_jenis"></div>
+			      </div>
+
+			      <div class="form-group">
 			      <label>Phone Number</label>
 			        <input type="text" class="form-control" name="phone" id="phone" value="<?=$instansi['phone'];?>" placeholder="Enter Phone Number ...">
 			        <div class="error" id="ntf_phone"></div>
 			      </div>
+
 			      <div class="form-group">
 			      	<label>Alamat Instansi</label>
 			      	<textarea class="form-control" id="alamat" name="alamat"><?=$instansi['alamat'];?></textarea>
 			      	<div class="error" id="ntf_alamat"></div>
 			      </div>
+
 			      <div class="form-group">
 			      	<label>Logo Instansi</label>
 			        <input type="file" class="form-control" name="userfile" id="userfile">
 			        <div class="error" id="ntf_userfile"></div>
 			        <div class="error" id="ntf_error"></div>
 			      </div>
+
 			      <div class="form-group">
 			      <label>Urutan</label>
 			        <input type="number" class="form-control" name="sort" id="sort" value="<?=$instansi['sort'];?>" placeholder="">
@@ -229,6 +256,7 @@
       form_data.append('phone',$('#phone').val());
       form_data.append('alamat',$('#alamat').val());
       form_data.append('email',$('#email').val());
+      form_data.append('jenis',$('#jenis').val());
       form_data.append('username',$('#username').val());
       form_data.append('password',$('#password').val());
       form_data.append('repassword',$('#repassword').val());

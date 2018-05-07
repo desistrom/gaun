@@ -23,7 +23,7 @@ class Kategori_news extends MX_Controller  {
 			$ret['state'] = 0;
 			$ret['status'] = 0;
 			$this->form_validation->set_error_delimiters('','');
-			$this->form_validation->set_rules('kategori','Kategori Email', 'trim|required');
+			$this->form_validation->set_rules('kategori','Kategori News', 'trim|required');
 			if ($this->form_validation->run() == true) {
 				$ret['state'] = 1;
 				$datakat['nm_kategori'] = $this->input->post('kategori');
@@ -50,7 +50,7 @@ class Kategori_news extends MX_Controller  {
 			$ret['state'] = 0;
 			$ret['status'] = 0;
 			$this->form_validation->set_error_delimiters('','');
-			$this->form_validation->set_rules('kategori','Kategori Email', 'trim|required');
+			$this->form_validation->set_rules('kategori','Kategori News', 'trim|required');
 			if ($this->form_validation->run() == true) {
 				$ret['state'] = 1;
 				$data_email['nm_kategori'] = $this->input->post('kategori');

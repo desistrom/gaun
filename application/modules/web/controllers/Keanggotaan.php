@@ -77,7 +77,24 @@ class Keanggotaan extends MX_Controller  {
         $this->data['step']=$a['data'];
         $this->ciparser->new_parse('template_frontend','modules_web', 'pendaftaran_layout',$this->data);
      }
+     public function search()
+     {
+        $search['search'] = $_GET['data'];
+        $url= site_url('api/v1/search_instansi') ;  
+        $methode = 'POST';
+        $token='';
+        $app_data = api_helper(json_encode($search),$url,$methode,$token);
+        $html = '';
+        if (is_array($app_data['data']) !="") {
+            $this->load->view('keanggotaan_looping',$keanggotaan);
+            
+        }else{
+            $html.='<h3 style="margin-top:2em;">Data Not Found</h3>';
+        }
+        
+        echo json_encode($html);
+
+    }
+     }
 
 
-
-}

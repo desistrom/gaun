@@ -357,7 +357,8 @@ class Keanggotaan extends MX_Controller  {
 	public function instansi(){
 		$this->data['view'] = 'list';
 		$this->data['breadcumb'] = 'List Instansi';
-		$this->data['instansi'] = $this->db->get('tb_instansi')->result_array();
+		$sql = 'SELECT * FROM tb_instansi i LEFT join tb_jenis_instansi j on i.id_jenis_instansi = j.id_jenis_instansi';
+		$this->data['instansi'] = $this->db->query($sql)->result_array();
 		$this->ciparser->new_parse('template_admin','modules_admin', 'keanggotaan/master_instansi_layout',$this->data);
 	}
 
@@ -371,6 +372,7 @@ class Keanggotaan extends MX_Controller  {
 			$this->form_validation->set_rules('alamat','Alamat','trim|required');
 			$this->form_validation->set_rules('phone','phone','trim|required');
 			$this->form_validation->set_rules('email','Email','trim|required');
+			$this->form_validation->set_rules('jenis','Kategori Instansi','trim|required');
 			$this->form_validation->set_rules('username','Username','trim|required');
 			$this->form_validation->set_rules('password','Passowrd','trim|required');
 			$this->form_validation->set_rules('sort','Urutan','trim|numeric');
@@ -382,6 +384,7 @@ class Keanggotaan extends MX_Controller  {
 				$data_instansi['alamat'] = $this->input->post('alamat');
 				$data_instansi['username'] = $this->input->post('username');
 				$data_instansi['email'] = $this->input->post('email');
+				$data_instansi['id_jenis_instansi'] = $this->input->post('jenis');
 				$data_instansi['password'] = $this->input->post('password');
 				$data_instansi['sort'] = $this->input->post('sort');
 				$data_gambar = $this->upload_logo($_FILES);
@@ -401,6 +404,7 @@ class Keanggotaan extends MX_Controller  {
 			$ret['notif']['phone'] = form_error('phone');
 			$ret['notif']['alamat'] = form_error('alamat');
 			$ret['notif']['username'] = form_error('username');
+			$ret['notif']['jenis'] = form_error('jenis');
 			$ret['notif']['email'] = form_error('email');
 			$ret['notif']['password'] = form_error('password');
 			$ret['notif']['sort'] = form_error('sort');
@@ -412,7 +416,7 @@ class Keanggotaan extends MX_Controller  {
 		}
 		$this->data['breadcumb'] = 'Add Instansi';
 		$this->data['view'] = 'add';
-		$this->data['instansi'] = $this->db->get('tb_instansi')->result_array();
+		$this->data['kategori'] = $this->db->get('tb_jenis_instansi')->result_array();
 		$this->ciparser->new_parse('template_admin','modules_admin', 'keanggotaan/master_instansi_layout',$this->data);
 	}
 
@@ -429,6 +433,7 @@ class Keanggotaan extends MX_Controller  {
 			$this->form_validation->set_rules('alamat','Alamat','trim|required');
 			$this->form_validation->set_rules('phone','phone','trim|required');
 			$this->form_validation->set_rules('email','Email','trim|required');
+			$this->form_validation->set_rules('jenis','Kategori Instansi','trim|required');
 			$this->form_validation->set_rules('sort','Urutan','trim|numeric');
 			if ($this->form_validation->run() == true) {
 				$ret['state'] = 1;
@@ -436,6 +441,7 @@ class Keanggotaan extends MX_Controller  {
 				$data_instansi['website'] = $this->input->post('website');
 				$data_instansi['phone'] = $this->input->post('phone');
 				$data_instansi['alamat'] = $this->input->post('alamat');
+				$data_instansi['id_jenis_instansi'] = $this->input->post('jenis');
 				$data_instansi['email'] = $this->input->post('email');
 				$data_instansi['sort'] = $this->input->post('sort');
 				if (isset($_FILES['userfile'])) {
@@ -477,12 +483,14 @@ class Keanggotaan extends MX_Controller  {
 			$ret['notif']['website'] = form_error('website');
 			$ret['notif']['phone'] = form_error('phone');
 			$ret['notif']['alamat'] = form_error('alamat');
+			$ret['notif']['jenis'] = form_error('jenis');
 			$ret['notif']['email'] = form_error('email');
 			$ret['notif']['sort'] = form_error('sort');
 			echo json_encode($ret);
 			exit();
 		}
 		$this->data['view'] = 'edit';
+		$this->data['kategori'] = $this->db->get('tb_jenis_instansi')->result_array();
 		$this->data['breadcumb'] = 'Edit Instansi';
 		$this->ciparser->new_parse('template_admin','modules_admin', 'keanggotaan/master_instansi_layout',$this->data);
 	}
@@ -524,7 +532,67 @@ class Keanggotaan extends MX_Controller  {
 		}
 	}
 
-	
+	public function kategori_instansi(){
+		$this->data['breadcumb'] = 'List Kategori Instansi';
+		$this->data['view'] = 'list';
+		$this->data['kategori'] = $this->db->get('tb_jenis_instansi')->result_array();
+		$this->ciparser->new_parse('template_admin','modules_admin', 'keanggotaan/master_jenis_instansi',$this->data);
+	}
+
+	public function add_jenis(){
+		if ($this->input->server('REQUEST_METHOD') == 'POST') {
+			$ret['state'] = 0;
+			$ret['status'] = 0;
+			$this->form_validation->set_error_delimiters('','');
+			$this->form_validation->set_rules('kategori','Kategori Email', 'trim|required');
+			if ($this->form_validation->run() == true) {
+				$ret['state'] = 1;
+				$datakat['nm_jenis_instansi'] = $this->input->post('kategori');
+				if ($this->db->insert('tb_jenis_instansi',$datakat)) {
+					$ret['status'] = 1;
+					$this->session->set_flashdata("notif","Data Berhasil di Masukan");
+					$ret['url'] = site_url('admin/keanggotaan/kategori_instansi');
+				}
+			}
+			$ret['notif']['kategori'] = form_error('kategori');
+
+			echo json_encode($ret);
+			exit();
+		}
+		$this->data['breadcumb'] = 'Add Kategori Instansi';
+		$this->data['view'] = 'add';
+		$this->ciparser->new_parse('template_admin','modules_admin', 'keanggotaan/master_jenis_instansi',$this->data);
+	}
+
+	public function edit_jenis(){
+		$url = $this->uri->segment_array();
+		$id = end($url);
+		if ($this->input->server('REQUEST_METHOD') == 'POST') {
+			$ret['state'] = 0;
+			$ret['status'] = 0;
+			$this->form_validation->set_error_delimiters('','');
+			$this->form_validation->set_rules('kategori','Kategori Email', 'trim|required');
+			if ($this->form_validation->run() == true) {
+				$ret['state'] = 1;
+				$data_kategori['nm_jenis_instansi'] = $this->input->post('kategori');
+				if ($this->db->update('tb_jenis_instansi',$data_kategori,array('id_jenis_instansi'=>$id))) {
+					$ret['status'] = 1;
+					$this->session->set_flashdata("notif","Data Berhasil di Masukan");
+					$ret['url'] = site_url('admin/keanggotaan/kategori_instansi');
+				}
+			}
+			$ret['notif']['kategori'] = form_error('kategori');
+
+			echo json_encode($ret);
+			exit();
+		}
+		$this->data['breadcumb'] = 'Edit Kategori Instansi';
+		$this->data['view'] = 'edit';
+		$this->data['kategori'] = $this->db->get_where('tb_jenis_instansi',array('id_jenis_instansi'=>$id))->row_array();
+		$this->ciparser->new_parse('template_admin','modules_admin', 'keanggotaan/master_jenis_instansi',$this->data);
+	}
+
+	public function delete_jenis(){}
 
 	public function upload_logo($logo){	    		
     	

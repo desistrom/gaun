@@ -139,6 +139,15 @@ class V1_model extends CI_Model{
 		return false;
 	}
 
+	public function searchInstansi($data){
+		$sql = "SELECT nm_instansi as instansi, id_instansi as id, phone as number_phone, website as link, alamat as address, gambar as image FROM tb_instansi where status = 2 AND is_aktif = 1 AND nm_instansi like'%".$data."%' order by sort ASC";
+		if ($this->db->query($sql)->num_rows() > 0) {
+			return $this->db->query($sql)->result_array();
+			exit();
+		}
+		return false;
+	}
+
 	public function getUser(){
 		$sql = "SELECT u.id_user as UserId, u.name as user_nama, u.email as user_email, u.phone as user_phone, u.gambar as image FROM tb_user u join tb_instansi i on u.id_instansi_ref = id_instansi where u.is_aktif = 1";
 		if ($this->db->query($sql)->num_rows() > 0) {

@@ -31,14 +31,16 @@
             </div>
             <div class="col-md-12 col-sm-12 col-xs-12 text-right sub-search">
                 <div class="form-group">
-                    <div class="input-search"><input type="email" class="form-control" id="cari" placeholder="Cari"></div>
-                    <div class="input-search"><button type="submit" class="btn btn-danger"><i class="fa fa-search"></i></button></div>
+                    <div class="input-search"><input type="email" class="form-control" name="search" id="search" placeholder="Cari"></div>
+                    <div class="input-search"><button type="submit" class="btn btn-danger btn-search"><i class="fa fa-search"></i></button></div>
                     
                   </div>
                   
             </div>
             <div class="col-md-12 col-sm-12 col-xs-12 content-keanggotaan">
+
               <?php $this->load->view('keanggotaan_looping', $keanggotaan); ?>
+
             </div>
             <?php if ($total > $total_row){ ?>
                 <div class="col-md-12 col-sm-12 col-xs-12 text-center" style="padding-bottom: 15px;">
@@ -100,4 +102,22 @@
                       alert('server not responding...');
                 });
         }
+        $(document).ready(function(){
+        $('body').on('click','.btn-search',function(){
+            var data = $('#search').val();
+            if (data != '') {
+                // window.location.href = '<?=base_url();?>web/galery/search_video?data='+data;
+                $.ajax({
+                url : '<?=base_url();?>web/keanggotaan/search?data='+data,
+                type : 'POST',
+                dataType : 'json',
+                data :""
+            }).done(function(data){
+                console.log(data);
+                $('.replace-content').html(data);
+            });
+
+            }
+        });
+    });
     </script>

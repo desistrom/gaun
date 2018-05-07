@@ -164,6 +164,18 @@ class V1 extends REST_Controller {
         $this->_getinstansi_pagging($param);
     }
 
+    public function search_instansi_post(){
+        header('Content-Type: application/json');
+        $param = json_decode(file_get_contents('php://input'), true);
+        if(!isset($param['search']) || $param['search'] == ''){
+            $retData['code'] = '500';
+            $retData['status'] = 'failed';
+            $retData['error'] = 'Your parameter is invalid';
+            $this->response($retData,400);
+        }
+        $this->_search_instansi($param);
+    }
+
     //User
 
     public function alluser_get(){
@@ -618,7 +630,31 @@ class V1 extends REST_Controller {
         }
         $retData['data'] = $user;
         $this->response($retData,200);
-    }   
+    }
+
+    function _search_instansi($data){
+        $param = $data['search'];
+        $instansi = $this->v1_model->searchInstansi($param);
+        
+        if ($instansi == '') {
+            $retData['code'] = '500';
+            $retData['status'] = 'Failed';
+            $retData['data'] = 'data not found';
+        }else{
+            $retData['code'] = '200';
+            $retData['status'] = 'success';
+            foreach ($instansi as $key => $value) {
+                if ($value['image'] == '') {
+                    $instansi[$key]['image']=base_url().'assets/images/logo/IDREN-2.png';
+                }else{
+                    $instansi[$key]['image']=base_url().'media/'.$instansi[$key]['image'];
+                    $instansi[$key]['image_thumbnail']=base_url().'media/thumbnail/'.$instansi[$key]['image'];
+                }                                                                                                                     
+            }
+            $retData['data'] = $instansi;
+        }
+        $this->response($retData,200);
+    }
 
     function _getuser(){
         $user = $this->v1_model->getUser();

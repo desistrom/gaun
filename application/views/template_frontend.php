@@ -126,7 +126,7 @@
                     </ul>
                 </div>
                 <div class="col-md-4 col-sm-4 col-xs-12 footer-center text-center address-foot">
-                	<h3 class="title-footer">Kantor Pusat 1</h3>
+                	<h3 class="title-footer">Kantor Pusat</h3>
                 	<div class="col-md-6 col-sm-12 col-xs-12 address-foot" style="padding: 0 5px 0 0;"><?php echo footer_helper()['data']['address']; ?></div>
                 	<div class="col-md-6 col-sm-12 col-xs-12 address-foot" style="padding: 0 0 0 5px;"><?php echo footer_helper()['data']['address2']; ?></div>
                 	<!-- <ul class="list-inline">

@@ -16,14 +16,15 @@ class Layanan extends MX_Controller  {
 
     }
     function index() {
-
-        $this->data['book'] = $this->db->get_where('tb_page_layanan',array('nama_page'=>'ID-BOOK'))->row_array();
+        $sql = "SELECT * FROM tb_menu where parent=24";
+        $this->data['page'] = $this->db->query($sql)->result_array();
+        /*$this->data['book'] = $this->db->get_where('tb_page_layanan',array('nama_page'=>'ID-BOOK'))->row_array();
         $this->data['journal'] = $this->db->get_where('tb_page_layanan',array('nama_page'=>'ID-JOURNAL'))->row_array();
         $this->data['tube'] = $this->db->get_where('tb_page_layanan',array('nama_page'=>'ID-TUBE'))->row_array();
         $this->data['mail'] = $this->db->get_where('tb_page_layanan',array('nama_page'=>'ID-MAIL'))->row_array();
         $this->data['research'] = $this->db->get_where('tb_page_layanan',array('nama_page'=>'ID-RESEARCH'))->row_array();
         $this->data['link'] = $this->db->get_where('tb_page_layanan',array('nama_page'=>'ID-LINKS'))->row_array();
-        $this->data['rank'] = $this->db->get_where('tb_page_layanan',array('nama_page'=>'ID-RANK'))->row_array();
+        $this->data['rank'] = $this->db->get_where('tb_page_layanan',array('nama_page'=>'ID-RANK'))->row_array();*/
     	$this->ciparser->new_parse('template_frontend','modules_web', 'layanan_layout',$this->data);
     }
      function idroam() {

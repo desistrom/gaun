@@ -208,7 +208,7 @@
 			      	<select name="jenis" id="jenis" class="form-control">
 			      		<option value="">-- Select Kategori --</option>
 			      		<?php foreach ($kategori as $key => $value): ?>
-			      			<option <?php if($value['id_jenis_instansi'] == $instansi['id_jenis_instansi']) ?> value="<?=$value['id_jenis_instansi'];?>"><?=$value['nm_jenis_instansi'];?></option>
+			      			<option <?php if($value['id_jenis_instansi'] == $instansi['id_jenis_instansi']){ ?> selected <?php } ?> value="<?=$value['id_jenis_instansi'];?>"><?=$value['nm_jenis_instansi'];?></option>
 			      		<?php endforeach ?>
 			      	</select>
 			        <div class="error" id="ntf_jenis"></div>

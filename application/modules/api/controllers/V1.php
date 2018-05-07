@@ -634,7 +634,8 @@ class V1 extends REST_Controller {
 
     function _search_instansi($data){
         $param = $data['search'];
-        $instansi = $this->v1_model->searchInstansi($param);
+        $page = $data['page'];
+        $instansi = $this->v1_model->searchInstansi($param,$page);
         
         if ($instansi == '') {
             $retData['code'] = '500';
@@ -646,6 +647,7 @@ class V1 extends REST_Controller {
             foreach ($instansi as $key => $value) {
                 if ($value['image'] == '') {
                     $instansi[$key]['image']=base_url().'assets/images/logo/IDREN-2.png';
+                    $instansi[$key]['image_thumbnail']=base_url().'assets/images/logo/IDREN-2.png';
                 }else{
                     $instansi[$key]['image']=base_url().'media/'.$instansi[$key]['image'];
                     $instansi[$key]['image_thumbnail']=base_url().'media/thumbnail/'.$instansi[$key]['image'];

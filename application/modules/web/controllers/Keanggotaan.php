@@ -79,22 +79,35 @@ class Keanggotaan extends MX_Controller  {
      }
      public function search()
      {
+        $url_instansi = site_url('api/v1/instansi') ;
+        $methode = 'GET';
+        $token = '';
+        $b = api_helper('',$url_instansi,$methode,$token);
+        $this->data['total'] = count($b['data']);
+
         $search['search'] = $_GET['data'];
         $url= site_url('api/v1/search_instansi') ;  
         $methode = 'POST';
         $token='';
-        $app_data = api_helper(json_encode($search),$url,$methode,$token);
-        $html = '';
-        if (is_array($app_data['data']) !="") {
-            $this->load->view('keanggotaan_looping',$keanggotaan);
-            
+        if (!empty($this->input->get('page'))) {
+            $start = ceil($this->input->get('page') * 10);
+            $this->data['total_row'] = $start;
+            $search['page'] = $start;
+            $a = api_helper(json_encode($search),$url,$methode,$token);
+            $this->data['keanggotaan']=$a['data'];
+            $result = $this->load->view('keanggotaan_looping',$this->data);
+            echo json_encode($result);
         }else{
-            $html.='<h3 style="margin-top:2em;">Data Not Found</h3>';
+            // $url = base_url().'api/v1/instansi_pagging?data=0';
+            // print_r($search);
+            $search['page'] = 0;
+            $this->data['total_row'] = '10';
+            $a = api_helper(json_encode($search),$url,$methode,$token);
+            $this->data['keanggotaan']=$a['data'];
+            $this->ciparser->new_parse('template_frontend','modules_web', 'keanggotaan_search',$this->data);
         }
-        
-        echo json_encode($html);
 
     }
-     }
+}
 
 

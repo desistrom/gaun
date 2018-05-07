@@ -120,12 +120,12 @@
 
       <!-- </div> -->
       <div style="margin-top: 10px" class="col-md-12">
-      <?php foreach ($image as $key => $value): ?>
+      <?php if($image != ''){ foreach ($image as $key => $value): ?>
         <div class="col-md-3">
           <img class="col-md-12" style="margin:10px 0px" src="<?=base_url().'assets/media/'.$value['file_name'];?>">
           <button type="button" style="position: absolute; margin-left: -35px; margin-top: 10px" class="btn btn-danger btn-xs btn_remove" id="<?=$value['id_galery'];?>"><i class="fa fa-times"></i></button>
         </div>
-      <?php endforeach ?>
+      <?php endforeach; } ?>
       </div>
 
     </form>

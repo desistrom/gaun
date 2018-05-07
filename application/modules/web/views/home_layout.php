@@ -72,12 +72,17 @@
                 <div class="col-md-12 col-sm-12 col-xs-12 top" >
                     <h3 class="text-center"><?php echo $title_slider['title']; ?></h3></div>
                 <div class="col-md-12 col-sm-12 col-xs-12 none-padding sub-client" id="owl-demo" >
-                    <?php foreach ($instansi as $key => $value) :  ?>
-                    <div class="col col-md-12 col-sm-12 col-xs-12 text-center item">
-                        <div class="filter-img-client "><img src="<?php echo $value['image_thumbnail']; ?>" class="img-responsive" ></div>
-                        <div><p><?php echo $value['instansi']; ?></p></div>
-                    </div>
-                <?php endforeach ?>
+                    <?php if ($instansi !="") {?>
+                        <?php foreach ($instansi as $key => $value) :  ?>
+                            <div class="col col-md-12 col-sm-12 col-xs-12 text-center item">
+                                <div class="filter-img-client "><img src="<?php echo $value['image_thumbnail']; ?>" class="img-responsive" ></div>
+                                <div><p><?php echo $value['instansi']; ?></p></div>
+                            </div>
+                        <?php endforeach ?>
+                   <?php }else
+                        echo "Data not found"
+                    ?>
+                    
             
                 </div>
                 
@@ -92,15 +97,22 @@
     <section class="testimonial" id="testimonial">
         <div class="container-fluid">
             <div class="row sub-testimoni" id="owl-demo">
-                <?php foreach ($testimoni as $key => $value) : ?>
-                <div class="col-md-12 col-sm-12 col-xs-12 text-center item" >
-                    <div class="filter-img-testimoni"><img src="<?php echo $value['image']; ?>" class="img-testimoni"></div>
-                    <h2 class="name-testi"><?php echo $value['user']; ?></h2>
-                    <h3 class="job description"><?php echo $value['sebagai']; ?> </h3><i class="fa fa-quote-left fa-2x"></i>
-                    <p> <?php echo $value['testimoni']; ?></p>
-                    <a href="<?php echo site_url('web/testimoni'); ?>" class="btn  btn-rekomendasi" type="button">Lihat Rekomendasi Lain</a>
-                </div>
-            <?php endforeach ?>
+                <?php if ($testimoni !="") { ?>
+
+                    <?php foreach ($testimoni as $key => $value) : ?>
+                        <div class="col-md-12 col-sm-12 col-xs-12 text-center item" >
+                            <div class="filter-img-testimoni"><img src="<?php echo $value['image']; ?>" class="img-testimoni"></div>
+                            <h2 class="name-testi"><?php echo $value['user']; ?></h2>
+                            <h3 class="job description"><?php echo $value['sebagai']; ?> </h3><i class="fa fa-quote-left fa-2x"></i>
+                            <p> <?php echo $value['testimoni']; ?></p>
+                            <a href="<?php echo site_url('web/testimoni'); ?>" class="btn  btn-rekomendasi" type="button">Lihat Rekomendasi Lain</a>
+                        </div>
+                    <?php endforeach ?>
+
+                <?php }else
+                    echo "data not found";
+                 ?>
+                
              
             </div>
         </div>

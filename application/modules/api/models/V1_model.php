@@ -122,7 +122,7 @@ class V1_model extends CI_Model{
 	}
 
 	public function getInstansi(){
-		$sql = "SELECT nm_instansi as instansi, id_instansi as id, phone as number_phone, website as link, alamat as address, gambar as image FROM tb_instansi where is_aktif = 1 order by sort asc";
+		$sql = "SELECT nm_instansi as instansi, id_instansi as id, phone as number_phone, website as link, alamat as address, gambar as image FROM tb_instansi where is_aktif = 1 order by -sort DESC";
 		if ($this->db->query($sql)->num_rows() > 0) {
 			return $this->db->query($sql)->result_array();
 			exit();
@@ -139,8 +139,8 @@ class V1_model extends CI_Model{
 		return false;
 	}
 
-	public function searchInstansi($data){
-		$sql = "SELECT nm_instansi as instansi, id_instansi as id, phone as number_phone, website as link, alamat as address, gambar as image FROM tb_instansi where status = 2 AND is_aktif = 1 AND nm_instansi like'%".$data."%' order by sort ASC";
+	public function searchInstansi($data,$page){
+		$sql = "SELECT nm_instansi as instansi, id_instansi as id, phone as number_phone, website as link, alamat as address, gambar as image FROM tb_instansi where status = 2 AND is_aktif = 1 AND nm_instansi like'%".$data."%' order by sort ASC LIMIT ".$page.",10";
 		if ($this->db->query($sql)->num_rows() > 0) {
 			return $this->db->query($sql)->result_array();
 			exit();

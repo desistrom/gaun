@@ -56,7 +56,7 @@
     </section>
     <script src="<?=base_url().'assets/js/jquery-3.2.1.min.js';?>"></script>
     <script type="text/javascript">
-        var page = 1;
+        var page = 0;
         $('.loadmore').click(function() {
                 page++;
                 loadMoreData(page);
@@ -70,7 +70,7 @@
         function loadMoreData(page){
           $.ajax(
                 {
-                    url: '<?=site_url('web/keanggotaan');?>'+'?page=' + page,
+                    url: window.location.href+'&page=' + page,
                     type: "get",
                     dataType : 'text',
                     beforeSend: function()
@@ -103,22 +103,4 @@
                       alert('server not responding...');
                 });
         }
-        $(document).ready(function(){
-        $('body').on('click','.btn-search',function(){
-            var data = $('#search').val();
-            if (data != '') {
-                // window.location.href = '<?=base_url();?>web/galery/search_video?data='+data;
-                $.ajax({
-                url : '<?=base_url();?>web/keanggotaan/search?data='+data,
-                type : 'POST',
-                dataType : 'json',
-                data :""
-            }).done(function(data){
-                console.log(data);
-                $('.replace-content').html(data);
-            });
-
-            }
-        });
-    });
     </script>

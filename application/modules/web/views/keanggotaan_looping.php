@@ -1,4 +1,4 @@
-<?php if(!empty($keanggotaan)){ foreach ($keanggotaan as $key => $value) : ?>
+<?php if(!empty($keanggotaan) && $keanggotaan != 'data not found'){ foreach ($keanggotaan as $key => $value) : ?>
     <?php $ret = ''; ?><div class="col col-md-6 col-sm-6 col-xs-12 box-keanggotaan">
         <div class="col col-md-12 col-sm-12 col-xs-12 none-padding sub-box-keanggotaan">
             <div class="col col-md-3 col-sm-12 col-xs-12">

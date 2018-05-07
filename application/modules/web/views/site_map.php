@@ -1,6 +1,11 @@
 
-<link rel="stylesheet" href="<?=base_url();?>assets/css/bootstrap.min.css">
 <style type="text/css">
+.detail_layanan{
+    padding-top: 6em;
+}
+.content-tree{
+    padding-left: 5em;
+}
   .tree, .tree ul {
     margin:0;
     padding:0;
@@ -65,26 +70,33 @@
     outline: 0;
 }
 </style>
-<ul id="tree2">
-    <li><a href="#">Menu</a>
+<section class="detail_layanan">
+        <div class="container-fluid none-padding filter-title-page-news">
+            <div class="col-md-12 col-sm-12 col-xs-12 none-padding title-page-news">
+                <div class="line-news">
+                    <div></div>
+                </div>
+                <div class="header-title">
+                    <h1 style=""> Site Map </h1></div>
+                    <div class="content-tree">
+                        <ul id="tree2">
+                            <li class="li-tree"><a href="#">Menu</a>
 
-        <ul>
-        <?php foreach ($menu as $key => $value): ?>
-          <li><?php $a = explode("/", $value['link']); if(isset($a[3])){ echo $value['link']; }else{ echo base_url().$value['link']; }?></li>
-        <?php endforeach ?>
-            
-        </ul>
-    </li>
-    <li><a href="#">XRP</a>
-        <ul>
-        <?php foreach ($news as $key => $news_value) { ?>
-            <li><?php echo site_url('web/news/get_news').'/'.$news_value['link'];?></li>
-        <?php } ?>
-        </ul>
-    </li>
-</ul>
+                                <ul>
+                                <?php echo $menu; ?>
+                                    
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    
+            </div>
+
+        </div>
+
+</section>
 <script src="<?=base_url().'assets/js/jquery-3.2.1.min.js';?>"></script>
-<script src="<?=base_url();?>assets/js/bootstrap.min.js"></script>
+<!-- <script src="<?=base_url();?>assets/js/bootstrap.min.js"></script> -->
 <script type="text/javascript">
   $.fn.extend({
     treed: function (o) {

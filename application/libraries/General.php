@@ -46,7 +46,7 @@ class General
     }
 
     public function menu(){
-        $sql = "SELECT id, label, link, parent FROM tb_menu ORDER BY sort ASC";
+        $sql = "SELECT id, label, link, parent FROM tb_menu ORDER BY sort, id ASC";
         $item = $this->CI->db->query($sql)->result_array();
         $menus = array('items'=>array(),'parents'=>array());
         foreach ($item as $key => $value) {

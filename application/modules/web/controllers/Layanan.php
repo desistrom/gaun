@@ -16,14 +16,35 @@ class Layanan extends MX_Controller  {
 
     }
     function index() {
-        $sql = "SELECT * FROM tb_menu where parent=24 ORDER BY id LIMIT ".$limit.",4";
-        $this->data['page'] = $this->db->query($sql)->result_array();
-        foreach ($this->data['page'] as $key => $value) {
-            $url = explode('/', $value['link']);
-            $link = end($url);
-            $sql_page = "SELECT * FROM tb_general_page where link = '".$link."'";
-            $this->data['page'][$key]['content'] = $this->db->query($sql_page)->row_array()['content'];
-            $this->data['page'][$key]['image'] = $this->db->query($sql_page)->row_array()['img'];
+        if (!empty($this->input->get('page'))) {
+            $limit = ceil($this->input->get('page') * 4);
+            $this->data['total'] = $this->db->get_where('tb_menu',array('parent'=>24))->num_rows();
+            $this->data['total_row'] = $limit;
+            $sql = "SELECT * FROM tb_menu where parent=24 ORDER BY sort ASC LIMIT ".$limit.",4";
+            $this->data['page'] = $this->db->query($sql)->result_array();
+            foreach ($this->data['page'] as $key => $value) {
+                $url = explode('/', $value['link']);
+                $link = end($url);
+                $sql_page = "SELECT * FROM tb_general_page where link = '".$link."'";
+                $this->data['page'][$key]['content'] = $this->db->query($sql_page)->row_array()['content'];
+                $this->data['page'][$key]['image'] = $this->db->query($sql_page)->row_array()['img'];
+            }
+            $result = $this->load->view('looping_layanan',$this->data);
+            echo json_encode($result);
+        }else{
+            $limit = 0;
+            $this->data['total'] = $this->db->get_where('tb_menu',array('parent'=>24))->num_rows();
+            $this->data['total_row'] = $limit;
+            $sql = "SELECT * FROM tb_menu where parent=24 ORDER BY sort ASC LIMIT ".$limit.",4";
+            $this->data['page'] = $this->db->query($sql)->result_array();
+            foreach ($this->data['page'] as $key => $value) {
+                $url = explode('/', $value['link']);
+                $link = end($url);
+                $sql_page = "SELECT * FROM tb_general_page where link = '".$link."'";
+                $this->data['page'][$key]['content'] = $this->db->query($sql_page)->row_array()['content'];
+                $this->data['page'][$key]['image'] = $this->db->query($sql_page)->row_array()['img'];
+            }
+    	   $this->ciparser->new_parse('template_frontend','modules_web', 'layanan_layout',$this->data);
         }
         /*$this->data['book'] = $this->db->get_where('tb_page_layanan',array('nama_page'=>'ID-BOOK'))->row_array();
         $this->data['journal'] = $this->db->get_where('tb_page_layanan',array('nama_page'=>'ID-JOURNAL'))->row_array();
@@ -32,7 +53,6 @@ class Layanan extends MX_Controller  {
         $this->data['research'] = $this->db->get_where('tb_page_layanan',array('nama_page'=>'ID-RESEARCH'))->row_array();
         $this->data['link'] = $this->db->get_where('tb_page_layanan',array('nama_page'=>'ID-LINKS'))->row_array();
         $this->data['rank'] = $this->db->get_where('tb_page_layanan',array('nama_page'=>'ID-RANK'))->row_array();*/
-    	$this->ciparser->new_parse('template_frontend','modules_web', 'layanan_layout',$this->data);
     }
      function idroam() {
         $url = site_url('api/v1/getlayanan_idroam') ;

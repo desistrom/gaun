@@ -63,84 +63,86 @@
                 <h1>Layanan </h1></div>
             </div>
        
-             <div class="col-md-12 col-sm-12 col-xs-12 content-left text-center">
-                <?php foreach ($page as $key => $value): ?>
-                    <div class="col col-md-6 col-sm-6 col-xs-12">
-                        <div class="col col-md-12 col-sm-12 col-xs-12 none-padding list-artikel">
-                            <div class="col col-md-12 col-sm-12 col-xs-12 none-padding img-news text-center">
-                                <div class="filter-img-layanan">
-                                    <img class="img-responsive img-layanan" src="<?=base_url();?><?php if($value['image'] != ''){ echo 'media/'.$value['image']; }else{ echo 'assets/images/logo/IDREN-2.png'; }?>">
-                                </div>
-                            </div>
-                            <div class="col col-md-12 col-sm-12 col-xs-12 desrip-news">
-                            <h4 class="title-news text-center"><?=$value['label'];?></h4>
-                             <p class="isi-news"> <?=word_limiter($value['content'],5);?> </p> 
-                            </div>
-                            <a href="<?php echo site_url($value['link']); ?>" class="btn btn-danger btn-read-more" type="button"  >Read More</a>
-                        </div>
-                    </div>
-                <?php endforeach ?>
-                    <!-- <div class="col col-md-6 col-sm-6 col-xs-12">
-                        <div class="col col-md-12 col-sm-12 col-xs-12 none-padding list-artikel">
-                            <div class="col col-md-12 col-sm-12 col-xs-12 none-padding img-news"><img class="img-responsive" src="<?=base_url();?>media/<?=$journal['image'];?>"></div>
-                            <div class="col col-md-12 col-sm-12 col-xs-12 desrip-news">
-                                <h4 class="title-news">ID-JOURNAL</h4>
-                                 <p class="isi-news"><?=word_limiter($journal['content'],5);?> </p> 
-                            </div>
-                            <a href="<?php echo site_url('web/layanan/id_journal') ?>" class="btn btn-danger btn-read-more" type="button"  >Read More</a>
-                        </div>
-                    </div>
-                    <div class="col col-md-6 col-sm-6 col-xs-12">
-                        <div class="col col-md-12 col-sm-12 col-xs-12 none-padding list-artikel">
-                            <div class="col col-md-12 col-sm-12 col-xs-12 none-padding img-news"><img class="img-responsive" src="<?=base_url();?>media/<?=$tube['image'];?>"></div>
-                            <div class="col col-md-12 col-sm-12 col-xs-12 desrip-news">
-                                <h4 class="title-news">ID-TUBE</h4>
-                                 <p class="isi-news"> <?=word_limiter($tube['content'],5);?> </p> 
-                            </div>
-                            <a href="<?php echo site_url('web/layanan/id_tube') ?>" class="btn btn-danger btn-read-more" type="button"  >Read More</a>
-                        </div>
-                    </div>
-                    <div class="col col-md-6 col-sm-6 col-xs-12">
-                        <div class="col col-md-12 col-sm-12 col-xs-12 none-padding list-artikel">
-                            <div class="col col-md-12 col-sm-12 col-xs-12 none-padding img-news"><img class="img-responsive" src="<?=base_url();?>media/<?=$mail['image'];?>"></div>
-                            <div class="col col-md-12 col-sm-12 col-xs-12 desrip-news">
-                                <h4 class="title-news">ID-Mail</h4>
-                                 <p class="isi-news"> <?=word_limiter($mail['content'],5);?></p> 
-                            </div>
-                            <a href="<?php echo site_url('web/layanan/id_mail') ?>" class="btn btn-danger btn-read-more" type="button"  >Read More</a>
-                        </div>
-                    </div>
-                    <div class="col col-md-6 col-sm-6 col-xs-12">
-                        <div class="col col-md-12 col-sm-12 col-xs-12 none-padding list-artikel">
-                            <div class="col col-md-12 col-sm-12 col-xs-12 none-padding img-news"><img class="img-responsive" src="<?=base_url();?>media/<?=$research['image'];?>"></div>
-                            <div class="col col-md-12 col-sm-12 col-xs-12 desrip-news">
-                                <h4 class="title-news">ID-Research</h4>
-                                 <p class="isi-news"> <?=word_limiter($research['content'],5);?> </p> 
-                            </div>
-                            <a href="<?php echo site_url('web/layanan/id_research') ?>" class="btn btn-danger btn-read-more" type="button"  >Read More</a>
-                        </div>
-                    </div>
-                    <div class="col col-md-6 col-sm-6 col-xs-12">
-                        <div class="col col-md-12 col-sm-12 col-xs-12 none-padding list-artikel">
-                            <div class="col col-md-12 col-sm-12 col-xs-12 none-padding img-news"><img class="img-responsive" src="<?=base_url();?>media/<?=$link['image'];?>"></div>
-                            <div class="col col-md-12 col-sm-12 col-xs-12 desrip-news">
-                                <h4 class="title-news">ID-Link</h4>
-                                 <p class="isi-news"> <?=word_limiter($link['content'],5);?> </p> 
-                            </div>
-                            <a href="<?php echo site_url('web/layanan/id_link') ?>" class="btn btn-danger btn-read-more" type="button"  >Read More</a>
-                        </div>
-                    </div> -->
-                    <!-- <div class="col col-md-6 col-sm-6 col-xs-12">
-                        <div class="col col-md-12 col-sm-12 col-xs-12 none-padding list-artikel">
-                            <div class="col col-md-12 col-sm-12 col-xs-12 none-padding img-news"><img class="img-responsive" src="<?=base_url();?>media/<?=$rank['image'];?>"></div>
-                            <div class="col col-md-12 col-sm-12 col-xs-12 desrip-news">
-                                <h4 class="title-news">ID-RANK</h4>
-                                 <p class="isi-news"> <?=word_limiter($rank['content'],5);?> </p> 
-                            </div>
-                            <a href="<?php echo site_url('web/layanan/id_rank') ?>" class="btn btn-danger btn-read-more" type="button"  >Read More</a>
-                        </div>
-                    </div> -->
-
+             <div class="col-md-12 col-sm-12 col-xs-12 content-left text-center content-keanggotaan">
+                <?php $this->load->view('looping_layanan', $page); ?> 
             </div> 
+            <?php if ($total > $total_row){ ?>
+                <div class="col-md-12 col-sm-12 col-xs-12 text-center" style="padding-bottom: 15px;">
+                    <button class="btn btn-danger loadmore" type="button">Load More</button>
+                </div>
+            <?php }else{ ?>
+                <span class='btn btn-danger'>No more Data found</span>
+            <?php } ?>
+            <div class="ajax-load text-center" style="display:none">
+                <p><img src="http://demo.itsolutionstuff.com/plugin/loader.gif">Loading More Data</p>
+            </div>
         </div>
     </section>
+    <script src="<?=base_url().'assets/js/jquery-3.2.1.min.js';?>"></script>
+    <script type="text/javascript">
+        var page = 0;
+        $('.loadmore').click(function() {
+                page++;
+                loadMoreData(page);
+                $('.content-keanggotaan').each(function() {
+                    var text = $(this).html();
+                    $(this).html(text.replace('null', '')); 
+                });
+        });
+
+
+        function loadMoreData(page){
+          $.ajax(
+                {
+                    url: '<?=site_url('web/layanan/');?>'+'?page=' + page,
+                    type: "get",
+                    dataType : 'text',
+                    beforeSend: function()
+                    {
+                        $('.ajax-load').show();
+                    }
+                })
+                .done(function(data)
+                {
+                
+                    console.log(data);
+                    if(data == "null"){
+                        $('.ajax-load').html("<span class='btn btn-danger'>No more Data found</span>");
+                        $('.ajax-load').css({'margin-bottom' : '30px'});
+                        $('.loadmore').css({'display' : 'none'});
+                        return;
+                    }
+                    $('.ajax-load').hide();
+                    if (data != "null") {
+                        $(".content-keanggotaan").append(data);
+                        $('.content-keanggotaan').each(function() {
+                            var text = $(this).html();
+                            $(this).html(text.replace('null', '')); 
+                        });
+                        
+                    }
+                })
+                .fail(function(jqXHR, ajaxOptions, thrownError)
+                {
+                      alert('server not responding...');
+                });
+        }
+        $(document).ready(function(){
+        $('body').on('click','.btn-search',function(){
+            var data = $('#search').val();
+            if (data != '') {
+                // window.location.href = '<?=base_url();?>web/galery/search_video?data='+data;
+                $.ajax({
+                url : '<?=base_url();?>web/keanggotaan/search?data='+data,
+                type : 'POST',
+                dataType : 'json',
+                data :""
+            }).done(function(data){
+                console.log(data);
+                $('.replace-content').html(data);
+            });
+
+            }
+        });
+    });
+    </script>

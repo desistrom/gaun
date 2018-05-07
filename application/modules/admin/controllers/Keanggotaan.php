@@ -546,7 +546,7 @@ class Keanggotaan extends MX_Controller  {
 			$this->form_validation->set_error_delimiters('','');
 			$this->form_validation->set_rules('kategori','Jenis Instansi', 'trim|required');
 			$this->form_validation->set_rules('content','Deskripsi Instansi', 'trim|required');
-			if ($this->form_validation->run() == true) {
+			if ($this->form_validation->run() == true && isset($_FILES['userfile'])) {
 				$ret['state'] = 1;
 				$datakat['nm_jenis_instansi'] = $this->input->post('kategori');
 				$datakat['deskripsi'] = $this->input->post('content');

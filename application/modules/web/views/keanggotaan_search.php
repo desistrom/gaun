@@ -18,6 +18,41 @@
         padding: 0 4em;
         margin-bottom: 0;
     }
+        @media(max-width:991px){
+        .sub-search{
+        padding: 0 1em;
+    }
+    .sub-search .form-group{
+        padding: 0;
+        margin-bottom: 0;
+    }
+    .input-search input{
+        border-radius: 20px;
+        width: 100%;
+    }
+    @media(max-width:500px){
+        .sub-search{
+        padding: 0 1em;
+    }
+    .sub-search .form-group{
+        padding: 0;
+        margin-bottom: 0;
+    }
+    .input-search input{
+        border-radius: 20px;
+        width: 100%;
+    }
+    .input-search-left{
+        width: 80%;
+    }
+     .input-search-right{
+        width: 18%;
+    }
+    .input-search-right button{
+        width: 100%;
+        text-align: center;
+    }
+}
 </style> 
 
    <section class="keanggotaan">
@@ -32,8 +67,8 @@
             <div class="col-md-12 col-sm-12 col-xs-12 text-right sub-search">
                 <div class="form-group">
                 <form method="get" action="<?=site_url('web/keanggotaan/search')?>">
-                    <div class="input-search"><input type="text" class="form-control" name="data" id="search" placeholder="Cari"></div>
-                    <div class="input-search"><button type="submit" class="btn btn-danger btn-search"><i class="fa fa-search"></i></button></div>
+                    <div class="input-search .input-search-left"><input type="text" class="form-control" name="data" id="search" placeholder="Cari"></div>
+                    <div class="input-search .input-search-right"><button type="submit" class="btn btn-danger btn-search"><i class="fa fa-search"></i></button></div>
                 </form>
                   </div>
                   
@@ -43,12 +78,14 @@
               <?php $this->load->view('keanggotaan_looping', $keanggotaan); ?>
 
             </div>
-            <?php if ($total > $total_row){ ?>
+            <?php if ($total >= $total_row){ ?>
                 <div class="col-md-12 col-sm-12 col-xs-12 text-center" style="padding-bottom: 15px;">
                     <button class="btn btn-danger loadmore" type="button">Load More</button>
                 </div>
             <?php }else{ ?>
-                <span class='btn btn-danger'>No more Data found</span>
+            <div class="col-md-12 col-sm-12 col-xs-12 text-center" style="padding-bottom: 15px;margin-bottom: 3em;">
+                <span class='alert alert-danger'>No More Data Found</span>
+            </div>
             <?php } ?>
             <div class="ajax-load text-center" style="display:none">
                 <p><img src="http://demo.itsolutionstuff.com/plugin/loader.gif">Loading More Data</p>

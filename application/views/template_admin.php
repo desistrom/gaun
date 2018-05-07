@@ -95,7 +95,7 @@
           </a>
         </li> -->
 
-        <li class="treeview <?php if(current_url() == site_url('admin/logo/title')){ ?> active <?php } ?>">
+        <!-- <li class="treeview <?php if(current_url() == site_url('admin/logo/title')){ ?> active <?php } ?>">
           <a href="<?=site_url('admin/logo/title');?>">
             <i class="fa fa-header"></i> <span>Title</span>
             <span class="pull-right-container">
@@ -111,7 +111,7 @@
               
             </span>
           </a>
-        </li>
+        </li> -->
 
         <li class="treeview <?php if(current_url() == site_url('admin/menu/index')){ ?> active <?php } ?>">
           <a href="<?=site_url('admin/menu/index');?>">
@@ -131,15 +131,29 @@
           </a>
         </li>
 
-        <li class="treeview <?php if(current_url() == site_url('admin/home/logo')){ ?> active <?php } ?>">
+        <!-- <li class="treeview <?php if(current_url() == site_url('admin/home/logo')){ ?> active <?php } ?>">
           <a href="<?=site_url('admin/home/logo');?>">
             <i class="fa fa-flag"></i> <span>Logo Setting</span>
             <span class="pull-right-container">
               
             </span>
           </a>
-        </li>
+        </li> -->
         
+        <li class=" treeview <?php if(current_url() == site_url('admin/home/logo') || current_url() == site_url('admin/logo/index') || current_url() == site_url('admin/logo/title')){ ?>  active <?php } ?>">
+          <a href="#">
+            <i class="fa fa-link"></i>  <span>Heading</span>
+            <span class="pull-right-container">
+
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li <?php if(current_url() == site_url('admin/home/logo')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/home/logo');?>"><i class="fa fa-picture-o"></i> Logo Website</a></li>
+            <li <?php if(current_url() == site_url('admin/logo/index')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/logo/index');?>"><i class="fa fa-comment"></i> Logo Tab  </a></li>
+            <li <?php if(current_url() == site_url('admin/logo/title')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/logo/title');?>"><i class="fa fa-comment"></i> Title Website </a></li>
+          </ul>
+        </li>
 
         <li class=" treeview <?php if(current_url() == site_url('admin/email/index') || current_url() == site_url('admin/email/template') || current_url() == site_url('admin/email/kategori') || current_url() == site_url('admin/email/setting_email')){ ?>  active <?php } ?>">
           <a href="#">
@@ -150,7 +164,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li <?php if(current_url() == site_url('admin/email/index')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/email/index');?>"><i class="fa fa-clone"></i> List Email</a></li>
+            <!-- <li <?php if(current_url() == site_url('admin/email/index')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/email/index');?>"><i class="fa fa-clone"></i> List Email</a></li> -->
             <li <?php if(current_url() == site_url('admin/email/template')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/email/template');?>"><i class="fa fa-columns"></i>Template</a></li>
             <li <?php if(current_url() == site_url('admin/email/kategori')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/email/kategori');?>"><i class="fa fa-boxes"></i>kategori Email</a></li>
             <li <?php if(current_url() == site_url('admin/email/setting_email')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/email/setting_email');?>"><i class="fa fa-boxes"></i>Setting Email</a></li>
@@ -176,7 +190,7 @@
           </ul>
         </li>
 
-        <li class=" treeview <?php if(current_url() == site_url('admin/layanan/index') || current_url() == site_url('admin/layanan/id_journal') || current_url() == site_url('admin/layanan/id_tube') || current_url() == site_url('admin/layanan/id_mail') || current_url() == site_url('admin/layanan/id_research') || current_url() == site_url('admin/layanan/id_links') || current_url() == site_url('admin/layanan/id_rank')){ ?>  active <?php } ?>">
+        <!-- <li class=" treeview <?php if(current_url() == site_url('admin/layanan/index') || current_url() == site_url('admin/layanan/id_journal') || current_url() == site_url('admin/layanan/id_tube') || current_url() == site_url('admin/layanan/id_mail') || current_url() == site_url('admin/layanan/id_research') || current_url() == site_url('admin/layanan/id_links') || current_url() == site_url('admin/layanan/id_rank')){ ?>  active <?php } ?>">
           <a href="#">
             <i class="fa fa-bullhorn"></i>  <span>Layanan</span>
             <span class="pull-right-container">
@@ -192,7 +206,7 @@
             <li <?php if(current_url() == site_url('admin/layanan/id_links')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/layanan/id_links');?>"><i class="fa fa-bullhorn"></i>ID-Links</a></li>
             <li <?php if(current_url() == site_url('admin/layanan/id_rank')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/layanan/id_rank');?>"><i class="fa fa-bullhorn"></i>ID-Rank</a></li>
           </ul>
-        </li>
+        </li> -->
 
         <li class=" treeview <?php if(current_url() == site_url('admin/home/topologi') || current_url() == site_url('admin/home/testimoni') || current_url() == site_url('admin/layanan/monitoring_graph')){ ?>  active <?php } ?>">
           <a href="#">

@@ -64,6 +64,20 @@
 	        <div class="error" id="ntf_kategori"></div>
 	      </div>
 
+        <div class="form-group">
+        <label>Deskripsi</label>
+        <?php echo $this->ckeditor->editor("content", $kategori['deskripsi'] ); ?>
+        <input type="hidden" name="content" value="" id="content">
+        <div class="error" id="ntf_content"></div>
+      </div>
+
+      <div class="form-group">
+        <label>Simbol Jenis Instansi</label>
+        <input type="file" class="form-control" name="userfile" id="userfile">
+        <div class="error" id="ntf_userfile"></div>
+        <div class="error" id="ntf_error"></div>
+      </div>
+
 	      <button type="button" class="btn btn-primary" id="submit">Submit</button>
 	      <div class="error" id="ntf_email"></div>
 	    </form>
@@ -85,9 +99,26 @@
 	        <div class="error" id="ntf_kategori"></div>
 	      </div>
 
+      <div class="form-group">
+        <label>Deskripsi</label>
+        <?php echo $this->ckeditor->editor("content", $kategori['deskripsi'] ); ?>
+        <input type="hidden" name="content" value="" id="content">
+        <div class="error" id="ntf_content"></div>
+      </div>
+
+      <div class="form-group">
+        <label>Simbol Jenis Instansi</label>
+        <input type="file" class="form-control" name="userfile" id="userfile">
+        <div class="error" id="ntf_userfile"></div>
+        <div class="error" id="ntf_error"></div>
+      </div>
+      <?php if ($kategori['gambar'] != ''): ?>
+        <img width="450px" src="<?=base_url().'media/'.$kategori['gambar'];?>">
+      <?php endif ?>
+      <div class="form-group" style="margin-top: 10px">
 	      <button type="button" class="btn btn-primary" id="submit">Submit</button>
-	      <div class="error" id="ntf_email"></div>
-	    </form>
+      </div>
+    </form>
 	</div>
 
 <?php } ?>
@@ -116,11 +147,21 @@
 <script type="text/javascript">
   $(document).ready(function () {
     $('body').on('click','#submit', function(){
+      var form_data = new FormData();
+      var data_file = $('#userfile').prop('files')[0];
+      $('#content').val(CKEDITOR.instances.content.getData());
+      form_data.append('userfile',data_file);
+      form_data.append('content',$('#content').val());
+      form_data.append('kategori',$('#kategori').val());
       $.ajax({
           url : window.location.href,
           dataType : 'json',
           type : 'POST',
-          data : $('form').serialize()
+          data : form_data,
+          async : false,
+          cache : false ,
+          contentType : false , 
+          processData : false
       }).done(function(data){
           console.log(data);
           if(data.state == 1){

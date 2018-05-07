@@ -88,8 +88,9 @@
                 <div class="col-md-12 col-sm-12 col-xs-12 content-left">
                     <div class="col col-md-12 col-sm-12 col-xs-12 none-padding list-artikel">
                         <div class="col col-md-12 col-sm-12 col-xs-12 desrip-news">
-                            
+                             
                             <div class="isi-news" style="padding: 0 15px;color: #919191;">
+                                <p>Akademisi adalah perghuruan tinggi negeri dan swasta sebagai stakeholder dan pengguna utama yang memanfaatkan jaringan IDREN untuk kerperluan riset.Academic berpeeran sebagai konseptor dalam menyiapkan standarisasi proses bisnis dan melakukan sertifikasi produk dan keahlian kreatif digital di Indonesia. Akademisi sangat berperan dalam seluruh variabel pembentuk kinerja bisnis</p>
                                    <div class="panel-group" id="accordion">
                                     <div class="panel panel-default" style=" text-align: left;">
                                         <div class="panel-heading" >

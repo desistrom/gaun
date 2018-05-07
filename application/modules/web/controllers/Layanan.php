@@ -16,7 +16,7 @@ class Layanan extends MX_Controller  {
 
     }
     function index() {
-        $sql = "SELECT * FROM tb_menu where parent=24";
+        $sql = "SELECT * FROM tb_menu where parent=24 ORDER BY id LIMIT ".$limit.",4";
         $this->data['page'] = $this->db->query($sql)->result_array();
         foreach ($this->data['page'] as $key => $value) {
             $url = explode('/', $value['link']);

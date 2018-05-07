@@ -6,6 +6,9 @@
        .layanan .title-page-news{
        
        }
+        .list-artikel{
+            margin-bottom: 7em;
+        }
        .layanan{
         background-color: #F2F2F2;
         height: auto;
@@ -33,6 +36,21 @@
         position: relative;
         right: 0;
        }
+        @media(max-width:991px){
+        .layanan .content-left{
+                padding: 3em 5em;
+                margin-top: 3em;
+            } 
+    }
+    @media(max-width:500px){
+        .layanan .content-left{
+                padding: 3em 1em;
+                margin-top: 3em;
+            }
+            .layanan{
+                margin-top: 3em;
+            }
+}
 
    </style>
    <section class="layanan">

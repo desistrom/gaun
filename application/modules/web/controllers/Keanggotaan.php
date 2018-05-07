@@ -83,9 +83,10 @@ class Keanggotaan extends MX_Controller  {
         $methode = 'GET';
         $token = '';
         $b = api_helper('',$url_instansi,$methode,$token);
-        $this->data['total'] = count($b['data']);
 
         $search['search'] = $_GET['data'];
+        $sql = "select * from tb_instansi where nm_instansi like '%".$search['search']."%'";
+        $this->data['total'] = $this->db->query($sql)->num_rows();
         $url= site_url('api/v1/search_instansi') ;  
         $methode = 'POST';
         $token='';

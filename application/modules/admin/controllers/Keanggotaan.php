@@ -550,14 +550,23 @@ class Keanggotaan extends MX_Controller  {
 				$ret['state'] = 1;
 				$datakat['nm_jenis_instansi'] = $this->input->post('kategori');
 				$datakat['deskripsi'] = $this->input->post('content');
-				if ($this->db->insert('tb_jenis_instansi',$datakat)) {
-					$ret['status'] = 1;
-					$this->session->set_flashdata("notif","Data Berhasil di Masukan");
-					$ret['url'] = site_url('admin/keanggotaan/kategori_instansi');
+				$data_gambar = $this->upload_logo($_FILES);
+				if (isset($data_gambar['error'])) {
+					$ret['notif'] = $data_gambar;
+				}else{	
+					$datakat['gambar'] = $data_gambar['asli'];
+					if ($this->db->insert('tb_jenis_instansi',$datakat)) {
+						$ret['status'] = 1;
+						$this->session->set_flashdata("notif","Data Berhasil di Masukan");
+						$ret['url'] = site_url('admin/keanggotaan/kategori_instansi');
+					}
 				}
 			}
 			$ret['notif']['kategori'] = form_error('kategori');
-
+			$ret['notif']['content'] = form_error('content');
+			if (!isset($_FILES['userfile'])) {
+				$ret['notif']['userfile'] = "Please Select File";
+			}
 			echo json_encode($ret);
 			exit();
 		}
@@ -569,32 +578,73 @@ class Keanggotaan extends MX_Controller  {
 	public function edit_jenis(){
 		$url = $this->uri->segment_array();
 		$id = end($url);
+		$this->data['kategori'] = $this->db->get_where('tb_jenis_instansi',array('id_jenis_instansi'=>$id))->row_array();
 		if ($this->input->server('REQUEST_METHOD') == 'POST') {
 			$ret['state'] = 0;
 			$ret['status'] = 0;
 			$this->form_validation->set_error_delimiters('','');
-			$this->form_validation->set_rules('kategori','Kategori Email', 'trim|required');
+			$this->form_validation->set_rules('kategori','Jenis Instansi', 'trim|required');
+			$this->form_validation->set_rules('content','Deskripsi Instansi', 'trim|required');
 			if ($this->form_validation->run() == true) {
 				$ret['state'] = 1;
 				$data_kategori['nm_jenis_instansi'] = $this->input->post('kategori');
-				if ($this->db->update('tb_jenis_instansi',$data_kategori,array('id_jenis_instansi'=>$id))) {
-					$ret['status'] = 1;
-					$this->session->set_flashdata("notif","Data Berhasil di Masukan");
-					$ret['url'] = site_url('admin/keanggotaan/kategori_instansi');
+				$data_kategori['deskripsi'] = $this->input->post('content');
+				if (isset($_FILES['userfile'])) {
+					$data_gambar = $this->upload_logo($_FILES);
+					if (isset($data_gambar['error'])) {
+						$ret['notif'] = $data_gambar;
+					}else{
+						$data_kategori['gambar'] = $data_gambar['asli'];
+						if (file_exists(FCPATH."media/".$this->data['kategori']['gambar'])) {
+	            			@chmod(FCPATH."media/".$this->data['kategori']['gambar'], 0777);
+	            			@unlink(FCPATH."media/".$this->data['kategori']['gambar']);
+	            		}
+	            		if (file_exists(FCPATH."media/thumbnail/".$this->data['kategori']['gambar'])) {
+	            			@chmod(FCPATH."media/thumbnail/".$this->data['kategori']['gambar'], 0777);
+	            			@unlink(FCPATH."media/thumbnail/".$this->data['kategori']['gambar']);
+	            		}
+	            		if (file_exists(FCPATH."media/crop/".$this->data['kategori']['gambar'])) {
+	            			@chmod(FCPATH."media/crop/".$this->data['kategori']['gambar'], 0777);
+	            			@unlink(FCPATH."media/crop/".$this->data['kategori']['gambar']);
+	            		}
+
+	            		if ($this->db->update('tb_jenis_instansi',$data_kategori,array('id_jenis_instansi'=>$id))) {
+							$ret['status'] = 1;
+							$this->session->set_flashdata("notif","Data Berhasil di Masukan");
+							$ret['url'] = site_url('admin/keanggotaan/kategori_instansi');
+						}
+					}
+				}else{
+					if ($this->db->update('tb_jenis_instansi',$data_kategori,array('id_jenis_instansi'=>$id))) {
+						$ret['status'] = 1;
+						$this->session->set_flashdata("notif","Data Berhasil di Masukan");
+						$ret['url'] = site_url('admin/keanggotaan/kategori_instansi');
+					}
 				}
 			}
 			$ret['notif']['kategori'] = form_error('kategori');
+			$ret['notif']['content'] = form_error('content');
 
 			echo json_encode($ret);
 			exit();
 		}
+		$this->load->library('ckeditor');
+		$this->ckeditor->basePath = base_url().'assets/ckeditor/';
+		$this->ckeditor->config['toolbar'] = array(
+		                array( 'Source', '-', 'Bold', 'Italic', 'Underline', '-','Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo','-','NumberedList','BulletedList','Link' )
+		                                                    );
+		$this->ckeditor->config['language'] = 'eng';
+		$this->ckeditor->config['width'] = '1024px';
+		$this->ckeditor->config['height'] = '300px';
 		$this->data['breadcumb'] = 'Edit Kategori Instansi';
 		$this->data['view'] = 'edit';
-		$this->data['kategori'] = $this->db->get_where('tb_jenis_instansi',array('id_jenis_instansi'=>$id))->row_array();
+		// $this->data['kategori'] = $this->db->get_where('tb_jenis_instansi',array('id_jenis_instansi'=>$id))->row_array();
 		$this->ciparser->new_parse('template_admin','modules_admin', 'keanggotaan/master_jenis_instansi',$this->data);
 	}
 
-	public function delete_jenis(){}
+	public function delete_jenis(){
+
+	}
 
 	public function upload_logo($logo){	    		
     	

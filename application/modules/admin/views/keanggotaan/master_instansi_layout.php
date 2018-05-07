@@ -5,7 +5,7 @@
 			<div class="col col-md-12 col-sm-12 col-xs-12" style="padding-left: 0; margin-bottom: 15px;">
 				<a href="<?=site_url('admin/keanggotaan/add_instansi');?>" class="btn btn-success">Tambah Instansi</a>
 			</div>
-			<div class="col col-md-12 col-xs-12">
+			<div class="col col-md-12 col-xs-12 table-responsive">
 				<table class="table table-bordered  dataTable" id="example2">
 					<thead>
 						<th>No</th>

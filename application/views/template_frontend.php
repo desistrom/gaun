@@ -127,8 +127,8 @@
                 </div>
                 <div class="col-md-4 col-sm-4 col-xs-12 footer-center text-center address-foot">
                 	<h3 class="title-footer">Kantor Pusat</h3>
-                	<div class="col-md-6 col-sm-12 col-xs-12 address-foot" style="padding: 0 5px 0 0;"><?php echo footer_helper()['data']['address']; ?></div>
-                	<div class="col-md-6 col-sm-12 col-xs-12 address-foot" style="padding: 0 0 0 5px;"><?php echo footer_helper()['data']['address2']; ?></div>
+                	<div class="col-md-6 col-sm-12 col-xs-12 address-foot" style=""><?php echo footer_helper()['data']['address']; ?></div>
+                	<div class="col-md-6 col-sm-12 col-xs-12 address-foot" style=""><?php echo footer_helper()['data']['address2']; ?></div>
                 	<!-- <ul class="list-inline">
 
                 		<li class="address-foot" style="word-wrap: break-word;"><?php echo footer_helper()['data']['address']; ?></li>
@@ -165,14 +165,14 @@
                 </div>
                 <div class="col-md-2 col-sm-2 col-xs-12 footer-right text-right" ">
                   <h3 class="title-footer">Hits Counter</h3>
-                  <div style="text-align:center;"><script type="text/javascript" src="http://services.webestools.com/cpt_visitors/54755-6-8.js"></script></div>
+                  <div style="text-align:center;" id="_wau4yv"></div>
                  <!--  <div style="text-align:center;"><script type="text/javascript" src="http://services.webestools.com/cpt_visitors/54718-6-8.js"></script></div> -->
 <!--                   <div style="text-align:center;"><script type="text/javascript" src="http://services.webestools.com/cpt_visitors/54639-6-8.js"></script></div> -->
 
 
                   <div align="left" class="flagcounter-foot">
                       <div class="sub-flagcounter-foot">
-                        <a href="https://www.worldflagcounter.com/details/ehu"><img src="https://www.worldflagcounter.com/ehu/" alt="Flag Counter"></a>
+                        <a href="https://info.flagcounter.com/XLv2"><img style="width: 100%;" src="https://s01.flagcounter.com/count2/XLv2/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_10/viewers_3/labels_1/pageviews_1/flags_0/percent_0/" alt="Flag Counter" border="0"></a>
                         <!-- <a href="https://www.worldflagcounter.com/details/egF"><img src="https://www.worldflagcounter.com/egF/" alt="Flag Counter"></a> -->
                       </div>
                    <!--  <ul class="list-unstyled" style="width: 100%;">
@@ -295,7 +295,7 @@
     <script src="<?=base_url();?>assets/js/owl.carousel.min.js"></script>
     <script src="<?=base_url();?>assets/js/main-owl.min.js"></script>
       <script src="<?=base_url();?>assets/js/scrolling-nav.min.js"></script>
-    <!--   <script id="_wau4yv">var _wau = _wau || []; _wau.push(["dynamic", "tmevyyvsq3", "4yv", "c4302bffffff", "big"]);</script><script async src="//waust.at/d.js"></script> -->
+      <script id="_wau4yv">var _wau = _wau || []; _wau.push(["dynamic", "tmevyyvsq3", "4yv", "c4302bffffff", "big"]);</script><script async src="//waust.at/d.js"></script>
 
       <script type="text/javascript" src="<?=base_url();?>assets/js/jsCalendar.js"></script>
  <script src="<?=base_url();?>assets/js/jquery.easing.min.js"></script>

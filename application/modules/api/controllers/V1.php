@@ -167,12 +167,12 @@ class V1 extends REST_Controller {
     public function search_instansi_post(){
         header('Content-Type: application/json');
         $param = json_decode(file_get_contents('php://input'), true);
-        if(!isset($param['search']) || $param['search'] == ''){
-            $retData['code'] = '500';
-            $retData['status'] = 'failed';
-            $retData['error'] = 'Your parameter is invalid';
-            $this->response($retData,400);
-        }
+        // if(!isset($param['search']) || $param['search'] == ''){
+        //     $retData['code'] = '500';
+        //     $retData['status'] = 'failed';
+        //     $retData['error'] = 'Your parameter is invalid';
+        //     $this->response($retData,400);
+        // }
         $this->_search_instansi($param);
     }
 
@@ -649,8 +649,8 @@ class V1 extends REST_Controller {
                     $instansi[$key]['image']=base_url().'assets/images/logo/IDREN-2.png';
                     $instansi[$key]['image_thumbnail']=base_url().'assets/images/logo/IDREN-2.png';
                 }else{
-                    $instansi[$key]['image']=base_url().'media/'.$instansi[$key]['image'];
                     $instansi[$key]['image_thumbnail']=base_url().'media/thumbnail/'.$instansi[$key]['image'];
+                    $instansi[$key]['image']=base_url().'media/'.$instansi[$key]['image'];
                 }                                                                                                                     
             }
             $retData['data'] = $instansi;

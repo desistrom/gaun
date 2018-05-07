@@ -1,3 +1,10 @@
+<style type="text/css">
+	    @media(max-width:991px){
+	    	. box-table{
+	    		overflow-x: auto;
+	    	}
+	    }
+</style>
 <div class="box">
 	<?php if($view == 'list'){ ?>
 		<link rel="stylesheet" href="<?=base_url();?>assets/datatables/css/dataTables.bootstrap.min.css">
@@ -5,7 +12,7 @@
 			<div class="col col-md-12 col-sm-12 col-xs-12" style="padding-left: 0; margin-bottom: 15px;">
 				<a href="<?=site_url('admin/menu/add');?>" class="btn btn-success">Tambah Menu</a>
 			</div>
-			<div class="col col-md-12 col-xs-12">
+			<div class="col col-md-12 col-xs-12 box-table table-responsive">
 				<table class="table table-bordered  dataTable" id="example2">
 					<thead>
 						<th>No</th>

@@ -14,7 +14,7 @@
       <div class="form-group">
         <label>About</label>
         <?php echo $this->ckeditor->editor("content", $about['content'] ); ?>
-        <input type="hidden" name="content" value="<?php if(isset($about)){ echo $about['content']; } ?>" id="content">
+        <input type="hidden" name="content" value="" id="content">
         <div class="error" id="ntf_content"></div>
       </div>
 

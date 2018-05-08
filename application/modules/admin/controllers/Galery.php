@@ -361,7 +361,7 @@ class Galery extends MX_Controller  {
         $config['allowed_types']        = 'gif|jpg|png|jpeg';
         $config['max_size']             = 400;
         $config['max_width']            = 2048;
-        $config['min_width']            = 600;
+        $config['min_width']            = 200;
         $config['file_name']            = time().".".$ext;
 
         $this->load->library('upload', $config);

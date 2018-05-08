@@ -171,7 +171,7 @@
           </ul>
         </li>
 
-        <li class=" treeview <?php if(current_url() == site_url('admin/home/testimoni') || current_url() == site_url('admin/home/hero') || current_url() == site_url('admin/home/Layanan_idroam') || current_url() == site_url('admin/home/Layanan_cloud') || current_url() == site_url('admin/home/kolaborasi') || current_url() == site_url('admin/about/slider')){ ?>  active <?php } ?>">
+        <li class=" treeview <?php if(current_url() == site_url('admin/home/testimoni') || current_url() == site_url('admin/home/hero') || current_url() == site_url('admin/home/Layanan_idroam') || current_url() == site_url('admin/home/Layanan_cloud') || current_url() == site_url('admin/home/kolaborasi') || current_url() == site_url('admin/about/slider') || current_url() == site_url('admin/home/pentahelix')){ ?>  active <?php } ?>">
           <a href="#">
             <i class="fa fa-home"></i>  <span>Home Page</span>
             <span class="pull-right-container">
@@ -183,6 +183,7 @@
             
             <li <?php if(current_url() == site_url('admin/home/testimoni')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/home/testimoni');?>"><i class="fa fa-comment"></i>Testimony</a></li>
             <li <?php if(current_url() == site_url('admin/home/hero')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/home/hero');?>"><i class="fa fa-video-camera"></i>Hero</a></li>
+            <li <?php if(current_url() == site_url('admin/home/pentahelix')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/home/pentahelix');?>"><i class="fa fa-building"></i>pentahelix</a></li>
             <li <?php if(current_url() == site_url('admin/home/Layanan_idroam')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/home/Layanan_idroam');?>"><i class="fa fa-bullhorn"></i>Layanan ID Roam</a></li>
             <li <?php if(current_url() == site_url('admin/home/Layanan_cloud')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/home/Layanan_cloud');?>"><i class="fa fa-bullhorn"></i>Layanan Cloud Federation</a></li>
             <li <?php if(current_url() == site_url('admin/home/kolaborasi')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/home/kolaborasi');?>"><i class="fa fa-bullhorn"></i>Kolaborasi</a></li>
@@ -233,7 +234,7 @@
           <ul class="treeview-menu">
             <!-- <li <?php if(current_url() == site_url('admin/keanggotaan/index')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/keanggotaan/index');?>"><i class="fa fa-users"></i> List Anggota</a></li> -->
             <li <?php if(current_url() == site_url('admin/keanggotaan/instansi')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/keanggotaan/instansi');?>"><i class="fa fa-black-tie"></i>Instansi</a></li>
-            <li <?php if(current_url() == site_url('admin/keanggotaan/kategori_instansi')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/keanggotaan/kategori_instansi');?>"><i class="fa fa-black-tie"></i>Jenis Kategori</a></li>
+            <li <?php if(current_url() == site_url('admin/keanggotaan/kategori_instansi')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/keanggotaan/kategori_instansi');?>"><i class="fa fa-black-tie"></i>Jenis Instansi</a></li>
             <li <?php if(current_url() == site_url('admin/keanggotaan/setting')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/keanggotaan/setting');?>"><i class="fa fa-gear"></i>Benefit</a></li>
             <li <?php if(current_url() == site_url('admin/keanggotaan/setting_reg')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/keanggotaan/setting_reg');?>"><i class="fa fa-gear"></i>Registrasi</a></li>
           </ul>

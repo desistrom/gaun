@@ -276,6 +276,111 @@ class Home extends CI_Controller  {
 		$this->ciparser->new_parse('template_admin','modules_admin', 'home/master_testimoni_layout',$this->data);
 	}
 
+	public function pentahelix(){
+		if ($this->input->server('REQUEST_METHOD') == 'POST') {
+			$ret['state'] = 0;
+			$ret['satus'] = 0;
+			// print_r($this->input->post());
+			$this->form_validation->set_error_delimiters('','');
+			// $this->form_validation->set_rules('title','Judul','required');
+			$this->form_validation->set_rules('deskripsi','Deskripsi','required');
+			$this->form_validation->set_rules('network','Judul Network','required');
+			$this->form_validation->set_rules('research','Judul research','required');
+			$this->form_validation->set_rules('education','Judul Education','required');
+			$this->form_validation->set_rules('content_net','Content Network','required');
+			$this->form_validation->set_rules('content_res','Content Research','required');
+			$this->form_validation->set_rules('content_edu','Judul Education','required');
+			$this->form_validation->set_rules('sort_res','Urutan Research','required');
+			$this->form_validation->set_rules('sort_net','Urutan Network','required');
+			$this->form_validation->set_rules('sort_edu','Urutan Education','required');
+			if ($this->form_validation->run() == true) {
+				$ret['state'] = 1;
+				$data_m['deskripsi'] = $this->input->post('deskripsi');
+				$data_m['jenis'] = 1;
+				if ($this->db->get_where('tb_pentahelix',array('jenis'=>1))->num_rows() > 0) {
+					if ($this->db->update('tb_pentahelix',$data_m,array('jenis'=>1))) {
+						$ret['status'] = 1;
+					}
+				}else{
+					if ($this->db->insert('tb_pentahelix',$data_m)) {
+						$ret['status'] = 1;
+					}
+				}
+
+				$data_net['judul'] = $this->input->post('network');
+				$data_net['deskripsi'] = $this->input->post('content_net');
+				$data_net['jenis'] = 2;
+				$data_net['sort'] = $this->input->post('sort_net');
+				if ($this->db->get_where('tb_pentahelix',array('jenis'=>2))->num_rows() > 0) {
+					if ($this->db->update('tb_pentahelix',$data_net,array('jenis'=>2))) {
+						$ret['status'] = 1;
+					}
+				}else{
+					if ($this->db->insert('tb_pentahelix',$data_net)) {
+						$ret['status'] = 1;
+					}
+				}
+
+				$data_ser['judul'] = $this->input->post('research');
+				$data_ser['deskripsi'] = $this->input->post('content_res');
+				$data_ser['jenis'] = 3;
+				$data_ser['sort'] = $this->input->post('sort_res');
+				if ($this->db->get_where('tb_pentahelix',array('jenis'=>3))->num_rows() > 0) {
+					if ($this->db->update('tb_pentahelix',$data_ser,array('jenis'=>3))) {
+						$ret['status'] = 1;
+					}
+				}else{
+					if ($this->db->insert('tb_pentahelix',$data_ser)) {
+						$ret['status'] = 1;
+					}
+				}
+
+				$data_edu['judul'] = $this->input->post('education');
+				$data_edu['deskripsi'] = $this->input->post('content_edu');
+				$data_edu['sort'] = $this->input->post('sort_edu');
+				$data_edu['jenis'] = 4;
+				if ($this->db->get_where('tb_pentahelix',array('jenis'=>4))->num_rows() > 0) {
+					if ($this->db->update('tb_pentahelix',$data_edu,array('jenis'=>4))) {
+						$ret['status'] = 1;
+					}
+				}else{
+					if ($this->db->insert('tb_pentahelix',$data_edu)) {
+						$ret['status'] = 1;
+					}
+				}
+			}
+			// $ret['notif']['title'] = form_error('title');
+			$ret['notif']['deskripsi'] = form_error('deskripsi');
+			$ret['notif']['research'] = form_error('research');
+			$ret['notif']['content_res'] = form_error('content_res');
+			$ret['notif']['network'] = form_error('network');
+			$ret['notif']['content_net'] = form_error('content_net');
+			$ret['notif']['education'] = form_error('education');
+			$ret['notif']['content_edu'] = form_error('content_edu');
+			$ret['notif']['sort_edu'] = form_error('sort_edu');
+			$ret['notif']['sort_net'] = form_error('sort_net');
+			$ret['notif']['sort_res'] = form_error('sort_res');
+			echo json_encode($ret);
+			exit();
+		}
+		$this->load->library('ckeditor');
+		$this->ckeditor->basePath = base_url().'assets/ckeditor/';
+		/*$this->ckeditor->config['toolbar'] = array(
+		                array( 'Source', '-', 'Bold', 'Italic', 'Underline', '-','Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo','-','NumberedList','BulletedList','Link','-','Styles' )
+		                                                    );*/
+		$this->ckeditor->config['language'] = 'eng';
+		$this->ckeditor->config['width'] = '1024px';
+		$this->ckeditor->config['height'] = '300px'; 
+		// $this->data['breadcumb'] = 'Hero';
+		// $this->ciparser->new_parse('template_admin','modules_admin', 'home/hero_layout',$this->data);
+		$this->data['breadcumb'] = 'Setting Pentahelix Testimoni';
+		$this->data['penta'] = $this->db->get_where('tb_pentahelix',array('jenis'=>1))->row_array();
+		$this->data['penta_net'] = $this->db->get_where('tb_pentahelix',array('jenis'=>2))->row_array();
+		$this->data['penta_res'] = $this->db->get_where('tb_pentahelix',array('jenis'=>3))->row_array();
+		$this->data['penta_edu'] = $this->db->get_where('tb_pentahelix',array('jenis'=>4))->row_array();
+		$this->ciparser->new_parse('template_admin','modules_admin', 'home/pentahelix_layout',$this->data);
+	}
+
     public function upload_logo($logo){	    		
     	
         $imagename = $logo['userfile']['name'];

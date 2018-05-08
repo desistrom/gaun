@@ -2,6 +2,54 @@
     .hero{
         margin-top: 5em;
     }
+     }
+        div.container-fluid.content-pentahelix{
+            background-color: white;
+            padding-top: 2em;
+            color: #444142;
+              font-family: 'Nunito Sans', sans-serif;
+        }
+         .content-pentahelix .fitur-content {
+            padding: 1.2em;
+         }
+        .content-pentahelix .content-top .fitur-box{
+            height: auto;
+            overflow: hidden;
+            box-shadow:0px 0px 38px 0px #bdbdbd;
+            background-color:white;
+            padding: 2em 2em;
+            height: 24em;
+        }
+         .content-pentahelix .content-top .fitur-box .icon-box i{
+            background-color: #CF090A;
+            padding: 1em;
+            border-radius: 50%;
+            font-size: 36px;
+            color: white;
+            margin-bottom: 10px;
+         }
+         .content-pentahelix .desc-content{
+            padding-top:1em;
+            padding-bottom: 1em; 
+            font-size: 21px;
+         }
+         .content-pentahelix .content-top .fitur-box p{
+            margin-top: 15px;
+            font-size: 16px;
+             font-family: 'Nunito Sans', sans-serif;
+             font-weight: 400;
+             color: #120F0F;
+         }
+         .content-pentahelix .content-top .header-fitur-content{
+            padding: 0 15px ;
+         }
+         .layanan{
+            padding: 0 ;
+            padding-bottom: 2em;
+         }
+         .layanan .top{
+            margin:0;
+         }
     @media(max-width:767px){
         .hero{
         margin-top: 1em;
@@ -39,23 +87,55 @@
                 <div class="sub-line"></div>
             </div>
             <div class="title">
-                <h2>Layanan <span style="color:#D10909;">IDren</span></h2></div>
+                <h2>Penta<span style="color:#D10909;">helix</span></h2></div>
         </div>
-        <div class="container-fluid">
+         <div class="container-fluid content-pentahelix">
+            <div class="row content">
+                <div class="col col-md-12 col-sm-12 col-xs-12 content-top">
+                    <div class="col col-md-12 col-sm-12 col-xs-12 desc-content">
+                        <p><?=$penta['deskripsi'];?></p>
+                    </div>
+                    <div class="col col-md-12 col-sm-12 col-xs-12 header-fitur-content">
+                        <h3><b>Kompnen Platform :</b></h3>
+                    </div>
+                    <?php foreach ($helix as $key => $value): ?>
+                        <div class="col col-md-4 col-sm-4 col-xs-12 fitur-content">
+                            <div class="fitur-box text-center">
+                                <div class="icon-box"><i class="glyphicon <?php if($value['jenis'] == 2){ ?> glyphicon-link <?php }elseif($value['jenis'] == 3){ ?> glyphicon-search <?php }else{ ?> glyphicon-education <?php } ?>"></i><!-- <i class="glyphicon glyphicon-education"></i> --></div>
+                                <h3><b><?=$value['judul'];?></b></h3>
+                                <p><?=$value['deskripsi'];?></p>
+                            </div>
+                        </div>    
+                    <?php endforeach ?>
+                    
+                    <div class="col col-md-12 col-sm-12 col-xs-12 text-right">
+                        <a href="<?php echo site_url('web/pentahelix'); ?>" class="btn  btn-pelajari" type="button">Pelajari lebih lanjut <i class="fa fa-long-arrow-right"></i></a>
+                    </div>
+                  <!--   <div class="col-md-12 col-sm-12 col-xs-12 text-left">
+                    <div class="arrow-line">
+                        <div class="line-left"><a class="js-scroll-trigger" href="#client"><i class="glyphicon glyphicon-arrow-down"></i></a></div>
+                        
+                    </div>
+                </div> -->
+                </div>
+           
+            </div>
+        </div>
+      <!--   <div class="container-fluid">
             <div class="row">
                 <div class="col-md-7 col-sm-8 col-xs-12 sub-service-left">
                     <div class="filter-box"><img class="img-responsive" src="<?php echo $layanan['image']; ?>"></div>
-                    <!-- <div class="navigation">
+                    <div class="navigation">
                         <ul class="">
                             <li style="border-right: solid 1px #761919;"><a href="#" style="color:#421A1A; "><i class="fa fa-angle-left"></i></a></li>
                             <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
                         </ul>
-                    </div> -->
+                    </div>
                 </div>
                 <div class="col-md-5 col-sm-4 col-xs-12 sub-service-right">
                     <h3>Kemudahan Berbagi</h3>
                     <div class="line"></div>
-                    <p><?php echo $layanan['deskripsi']; ?><!-- Melalui jaringan privat, kolaborasi dan pengembangan kegiatan di perguruan tinggi semakin cepat dan nyaman. --> </p>
+                    <p><?php echo $layanan['deskripsi']; ?></p>
                 </div>
                 <div class="col-md-12 col-sm-12 col-xs-12 text-right">
                     <div class="arrow-line">
@@ -64,7 +144,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </section>
     <section class="client" id="client">
         <div class="container-fluid">
@@ -122,7 +202,7 @@
             <div class="col-md-12 text-center">
                 <h3 class="title"><?=$kolaborasi['title'];?></h3>
                 <p><?=$kolaborasi['content'];?></p>
-                <a href="<?php echo site_url('web/gabung/register') ?>" class="btn  btn-gabung" type="button">Gabung Sekarang</a>
+                <a href="<?php echo site_url('web/keanggotaan/pendaftaran') ?>" class="btn  btn-gabung" type="button">Gabung Sekarang</a>
             </div>
         </div>
     </section>

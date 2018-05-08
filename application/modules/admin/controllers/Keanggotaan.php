@@ -546,30 +546,43 @@ class Keanggotaan extends MX_Controller  {
 			$this->form_validation->set_error_delimiters('','');
 			$this->form_validation->set_rules('kategori','Jenis Instansi', 'trim|required');
 			$this->form_validation->set_rules('content','Deskripsi Instansi', 'trim|required');
-			if ($this->form_validation->run() == true && isset($_FILES['userfile'])) {
+			$this->form_validation->set_rules('icon','icon Instansi', 'trim|required');
+			if ($this->form_validation->run() == true) {
 				$ret['state'] = 1;
 				$datakat['nm_jenis_instansi'] = $this->input->post('kategori');
 				$datakat['deskripsi'] = $this->input->post('content');
-				$data_gambar = $this->upload_logo($_FILES);
+				$datakat['icon'] = $this->input->post('icon');
+				/*$data_gambar = $this->upload_logo($_FILES);
 				if (isset($data_gambar['error'])) {
 					$ret['notif'] = $data_gambar;
 				}else{	
-					$datakat['gambar'] = $data_gambar['asli'];
+					$datakat['gambar'] = $data_gambar['asli'];*/
 					if ($this->db->insert('tb_jenis_instansi',$datakat)) {
 						$ret['status'] = 1;
 						$this->session->set_flashdata("notif","Data Berhasil di Masukan");
 						$ret['url'] = site_url('admin/keanggotaan/kategori_instansi');
 					}
-				}
+				// }
 			}
 			$ret['notif']['kategori'] = form_error('kategori');
 			$ret['notif']['content'] = form_error('content');
-			if (!isset($_FILES['userfile'])) {
+			$ret['notif']['icon'] = form_error('icon');
+			/*if (!isset($_FILES['userfile'])) {
 				$ret['notif']['userfile'] = "Please Select File";
-			}
+			}*/
 			echo json_encode($ret);
 			exit();
 		}
+		$this->load->library('ckeditor');
+		$this->ckeditor->basePath = base_url().'assets/ckeditor/';
+		/*$this->ckeditor->config['toolbar'] = array(
+		                array( 'Source', '-', 'Bold', 'Italic', 'Underline', '-','Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo','-','NumberedList','BulletedList','Link' )
+		                                                    );*/
+		$this->ckeditor->config['language'] = 'eng';
+		$this->ckeditor->config['width'] = '1024px';
+		$this->ckeditor->config['height'] = '300px';
+		$this->data['breadcumb'] = 'Edit Kategori Instansi';
+		$this->data['view'] = 'edit';
 		$this->data['breadcumb'] = 'Add Kategori Instansi';
 		$this->data['view'] = 'add';
 		$this->ciparser->new_parse('template_admin','modules_admin', 'keanggotaan/master_jenis_instansi',$this->data);
@@ -589,7 +602,8 @@ class Keanggotaan extends MX_Controller  {
 				$ret['state'] = 1;
 				$data_kategori['nm_jenis_instansi'] = $this->input->post('kategori');
 				$data_kategori['deskripsi'] = $this->input->post('content');
-				if (isset($_FILES['userfile'])) {
+				$data_kategori['icon'] = $this->input->post('icon');
+				/*if (isset($_FILES['userfile'])) {
 					$data_gambar = $this->upload_logo($_FILES);
 					if (isset($data_gambar['error'])) {
 						$ret['notif'] = $data_gambar;
@@ -614,13 +628,13 @@ class Keanggotaan extends MX_Controller  {
 							$ret['url'] = site_url('admin/keanggotaan/kategori_instansi');
 						}
 					}
-				}else{
+				}else{*/
 					if ($this->db->update('tb_jenis_instansi',$data_kategori,array('id_jenis_instansi'=>$id))) {
 						$ret['status'] = 1;
 						$this->session->set_flashdata("notif","Data Berhasil di Masukan");
 						$ret['url'] = site_url('admin/keanggotaan/kategori_instansi');
 					}
-				}
+				// }
 			}
 			$ret['notif']['kategori'] = form_error('kategori');
 			$ret['notif']['content'] = form_error('content');
@@ -630,9 +644,9 @@ class Keanggotaan extends MX_Controller  {
 		}
 		$this->load->library('ckeditor');
 		$this->ckeditor->basePath = base_url().'assets/ckeditor/';
-		$this->ckeditor->config['toolbar'] = array(
+		/*$this->ckeditor->config['toolbar'] = array(
 		                array( 'Source', '-', 'Bold', 'Italic', 'Underline', '-','Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo','-','NumberedList','BulletedList','Link' )
-		                                                    );
+		                                                    );*/
 		$this->ckeditor->config['language'] = 'eng';
 		$this->ckeditor->config['width'] = '1024px';
 		$this->ckeditor->config['height'] = '300px';

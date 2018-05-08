@@ -65,18 +65,25 @@
 	      </div>
 
         <div class="form-group">
+          <label>Icon</label>
+          <input type="text" name="icon" class="form-control" id="icon" placeholder="Enter Icon ..." value="">
+          <div><span>Masukan Kode Font <a href="https://fontawesome.com/v4.7.0/icons/" target="_blank"> awesome</a> atau <a href="http://glyphicons.com/" target="_blank">glyppicon</a></span></div>
+          <div class="error" id="ntf_icon"></div>
+        </div>
+
+        <div class="form-group">
         <label>Deskripsi</label>
-        <?php echo $this->ckeditor->editor("content", $kategori['deskripsi'] ); ?>
+        <?php echo $this->ckeditor->editor("content", "" ); ?>
         <input type="hidden" name="content" value="" id="content">
         <div class="error" id="ntf_content"></div>
       </div>
 
-      <div class="form-group">
+<!--       <div class="form-group">
         <label>Simbol Jenis Instansi</label>
         <input type="file" class="form-control" name="userfile" id="userfile">
         <div class="error" id="ntf_userfile"></div>
         <div class="error" id="ntf_error"></div>
-      </div>
+      </div> -->
 
 	      <button type="button" class="btn btn-primary" id="submit">Submit</button>
 	      <div class="error" id="ntf_email"></div>
@@ -99,6 +106,13 @@
 	        <div class="error" id="ntf_kategori"></div>
 	      </div>
 
+        <div class="form-group">
+          <label>Icon</label>
+          <input type="text" name="icon" class="form-control" id="icon" placeholder="Enter Icon ..." value="<?=$kategori['icon'];?>">
+          <div><span>Masukan Kode <a href="https://fontawesome.com/v4.7.0/icons/" target="_blank">Font awesome</a> atau <a href="http://glyphicons.com/" target="_blank">glyppicon</a></span></div>
+          <div class="error" id="ntf_icon"></div>
+        </div>
+
       <div class="form-group">
         <label>Deskripsi</label>
         <?php echo $this->ckeditor->editor("content", $kategori['deskripsi'] ); ?>
@@ -106,7 +120,7 @@
         <div class="error" id="ntf_content"></div>
       </div>
 
-      <div class="form-group">
+<!--       <div class="form-group">
         <label>Simbol Jenis Instansi</label>
         <input type="file" class="form-control" name="userfile" id="userfile">
         <div class="error" id="ntf_userfile"></div>
@@ -114,7 +128,7 @@
       </div>
       <?php if ($kategori['gambar'] != ''): ?>
         <img width="450px" src="<?=base_url().'media/'.$kategori['gambar'];?>">
-      <?php endif ?>
+      <?php endif ?> -->
       <div class="form-group" style="margin-top: 10px">
 	      <button type="button" class="btn btn-primary" id="submit">Submit</button>
       </div>
@@ -148,20 +162,16 @@
   $(document).ready(function () {
     $('body').on('click','#submit', function(){
       var form_data = new FormData();
-      var data_file = $('#userfile').prop('files')[0];
+      // var data_file = $('#userfile').prop('files')[0];
       $('#content').val(CKEDITOR.instances.content.getData());
-      form_data.append('userfile',data_file);
+      // form_data.append('userfile',data_file);
       form_data.append('content',$('#content').val());
       form_data.append('kategori',$('#kategori').val());
       $.ajax({
           url : window.location.href,
           dataType : 'json',
           type : 'POST',
-          data : form_data,
-          async : false,
-          cache : false ,
-          contentType : false , 
-          processData : false
+          data : $('form').serialize()
       }).done(function(data){
           console.log(data);
           if(data.state == 1){

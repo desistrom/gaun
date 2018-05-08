@@ -42,6 +42,8 @@ class Home extends CI_Controller  {
         $this->data['instansi']=$c['data'];
         $this->data['testimoni']=$d['data'];
         $this->data['title_slider']=$e['data'];
+        $this->data['penta'] = $this->db->get_where('tb_pentahelix',array('jenis'=>1))->row_array();
+        $this->data['helix'] = $this->db->query('SELECT * FROM tb_pentahelix where jenis != 1 order by sort asc')->result_array();
 
         $this->data['kolaborasi'] = $this->db->get_where('tb_layanan',array('kategori'=>3))->row_array();
 

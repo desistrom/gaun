@@ -546,11 +546,13 @@ class Keanggotaan extends MX_Controller  {
 			$this->form_validation->set_error_delimiters('','');
 			$this->form_validation->set_rules('kategori','Jenis Instansi', 'trim|required');
 			$this->form_validation->set_rules('content','Deskripsi Instansi', 'trim|required');
+			$this->form_validation->set_rules('short','Deskripsi Singkat', 'trim|required');
 			$this->form_validation->set_rules('icon','icon Instansi', 'trim|required');
 			if ($this->form_validation->run() == true) {
 				$ret['state'] = 1;
 				$datakat['nm_jenis_instansi'] = $this->input->post('kategori');
 				$datakat['deskripsi'] = $this->input->post('content');
+				$datakat['short_description'] = $this->input->post('short');
 				$datakat['icon'] = $this->input->post('icon');
 				/*$data_gambar = $this->upload_logo($_FILES);
 				if (isset($data_gambar['error'])) {
@@ -566,6 +568,7 @@ class Keanggotaan extends MX_Controller  {
 			}
 			$ret['notif']['kategori'] = form_error('kategori');
 			$ret['notif']['content'] = form_error('content');
+			$ret['notif']['short'] = form_error('short');
 			$ret['notif']['icon'] = form_error('icon');
 			/*if (!isset($_FILES['userfile'])) {
 				$ret['notif']['userfile'] = "Please Select File";
@@ -597,11 +600,14 @@ class Keanggotaan extends MX_Controller  {
 			$ret['status'] = 0;
 			$this->form_validation->set_error_delimiters('','');
 			$this->form_validation->set_rules('kategori','Jenis Instansi', 'trim|required');
+			$this->form_validation->set_rules('short','Deskripsi Singkat', 'trim|required');
+			$this->form_validation->set_rules('icon','icon Instansi', 'trim|required');
 			$this->form_validation->set_rules('content','Deskripsi Instansi', 'trim|required');
 			if ($this->form_validation->run() == true) {
 				$ret['state'] = 1;
 				$data_kategori['nm_jenis_instansi'] = $this->input->post('kategori');
 				$data_kategori['deskripsi'] = $this->input->post('content');
+				$data_kategori['short_description'] = $this->input->post('short');
 				$data_kategori['icon'] = $this->input->post('icon');
 				/*if (isset($_FILES['userfile'])) {
 					$data_gambar = $this->upload_logo($_FILES);
@@ -637,6 +643,8 @@ class Keanggotaan extends MX_Controller  {
 				// }
 			}
 			$ret['notif']['kategori'] = form_error('kategori');
+			$ret['notif']['short'] = form_error('short');
+			$ret['notif']['icon'] = form_error('icon');
 			$ret['notif']['content'] = form_error('content');
 
 			echo json_encode($ret);
@@ -657,7 +665,20 @@ class Keanggotaan extends MX_Controller  {
 	}
 
 	public function delete_jenis(){
+		$url = $this->uri->segment_array();
+		$id = end($url);
+		$ret['status'] = 0;
+		if ($this->db->get_where('tb_instansi',array('id_jenis_instansi'=>$id))->num_rows() > 0) {
+			$ret['notif'] = 'Data Tidak Bisa Di Hapus';
+			$this->session->set_flashdata("notif","Data Tidak Bisa Di Hapus");
+		}else{
+			if ($this->db->delete('tb_jenis_instansi',array('id_jenis_instansi'=>$id))) {
+				$ret['status'] = 1;
+				$this->session->set_flashdata("notif","Data Berhasil di Hapus");
+			}
+		}
 
+		echo json_encode($ret);
 	}
 
 	public function upload_logo($logo){	    		

@@ -293,6 +293,9 @@ class Home extends CI_Controller  {
 			$this->form_validation->set_rules('sort_res','Urutan Research','required');
 			$this->form_validation->set_rules('sort_net','Urutan Network','required');
 			$this->form_validation->set_rules('sort_edu','Urutan Education','required');
+			$this->form_validation->set_rules('icon_edu','Icon Education','required');
+			$this->form_validation->set_rules('icon_res','Icon Research','required');
+			$this->form_validation->set_rules('icon_net','Icon Network','required');
 			if ($this->form_validation->run() == true) {
 				$ret['state'] = 1;
 				$data_m['deskripsi'] = $this->input->post('deskripsi');
@@ -309,6 +312,7 @@ class Home extends CI_Controller  {
 
 				$data_net['judul'] = $this->input->post('network');
 				$data_net['deskripsi'] = $this->input->post('content_net');
+				$data_net['icon'] = $this->input->post('icon_net');
 				$data_net['jenis'] = 2;
 				$data_net['sort'] = $this->input->post('sort_net');
 				if ($this->db->get_where('tb_pentahelix',array('jenis'=>2))->num_rows() > 0) {
@@ -323,6 +327,7 @@ class Home extends CI_Controller  {
 
 				$data_ser['judul'] = $this->input->post('research');
 				$data_ser['deskripsi'] = $this->input->post('content_res');
+				$data_ser['icon'] = $this->input->post('icon_res');
 				$data_ser['jenis'] = 3;
 				$data_ser['sort'] = $this->input->post('sort_res');
 				if ($this->db->get_where('tb_pentahelix',array('jenis'=>3))->num_rows() > 0) {
@@ -338,6 +343,7 @@ class Home extends CI_Controller  {
 				$data_edu['judul'] = $this->input->post('education');
 				$data_edu['deskripsi'] = $this->input->post('content_edu');
 				$data_edu['sort'] = $this->input->post('sort_edu');
+				$data_edu['icon'] = $this->input->post('icon_edu');
 				$data_edu['jenis'] = 4;
 				if ($this->db->get_where('tb_pentahelix',array('jenis'=>4))->num_rows() > 0) {
 					if ($this->db->update('tb_pentahelix',$data_edu,array('jenis'=>4))) {
@@ -360,6 +366,9 @@ class Home extends CI_Controller  {
 			$ret['notif']['sort_edu'] = form_error('sort_edu');
 			$ret['notif']['sort_net'] = form_error('sort_net');
 			$ret['notif']['sort_res'] = form_error('sort_res');
+			$ret['notif']['icon_res'] = form_error('icon_res');
+			$ret['notif']['icon_net'] = form_error('icon_net');
+			$ret['notif']['icon_edu'] = form_error('icon_edu');
 			echo json_encode($ret);
 			exit();
 		}

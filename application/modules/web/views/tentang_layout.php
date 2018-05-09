@@ -40,14 +40,44 @@
             }
             .box-testimoni{
                 padding: 0 15px;
+
             }
             div.sub-box-testimoni{
                 height: 10em;
-                padding: 15px;
-                height: 25em;
+                padding: 0;
+                height: 28em;
+                 background-image:url('<?=base_url();?>assets/images/logo/bg-jabatan.png');
+                background-size: cover;
+                background-repeat: no-repeat;
+                font-family: 'Nunito Sans', sans-serif;
+                    }
+            .box-testimoni-right{
+
+                padding: 4em 15px 15px 15px;
+
+            }
+            .filter-img-user{
+                 background-image:url('<?=base_url();?>assets/images/logo/bg-pen-min.png');
+                background-size: cover;
+                background-repeat: no-repeat;
+            }
+            .box-testimoni-left{
+                padding: 4em  15px 15px;
+                margin-bottom: -5em;
+
             }
             .content-left{
                 margin-top: 0;
+              
+            }
+            .sec-anggota{
+                padding-top: 4.5em;
+            }
+            .box-testimoni-right .jabatan{
+                font-size: 14px;
+            }
+            .detail_layanan .desrip-news p{
+                font-size: 14px;
             }
         @media(max-width:991px){
             .descrip-img{
@@ -90,62 +120,31 @@
                         <div class="col col-md-12 col-sm-12 col-xs-12 desrip-news">
                             
                             <div class="col col-md-12 col-sm-12 col-xs-12 none-padding isi-news" style="padding: 0 15px;color: #919191;"><?php echo $about['content']; ?></div>
-                            <div class="col col-md-12 col-sm-12 col-xs-12 none-padding">
-                                  <div class="col col-md-4 col-sm-6 col-xs-12 box-testimoni">
-                                    <div class="col col-md-12 col-sm-12 col-xs-12 none-padding sub-box-testimoni">
-                                        <div class="col col-md-12 col-sm-12 col-xs-12 text-center">
-                                            <div class="box-testimoni-left ">
-                                                <div class="filter-box-mg-testimoni">
-                                                    <img class="img-responsive img-user" src="<?=base_url();?>assets/images/logo/ttg.png">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col col-md-12 col-sm-12 col-xs-12 none-padding box-testimoni-right">
-                                            <h4 class="text-bold title-box-testimoni" style="color: #CF090A;">M.dika Pratana</h4>
-                                            <p class="text-bold" style="color: #747474;">Menteri Riset, Teknologi dan Pendidikan Tinggi Republik Indonesia </p>
-                                           
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="col col-md-12 col-sm-12 col-xs-12 none-padding sec-anggota" >
+                            <?php foreach ($founder as $key => $value): ?>
                                 <div class="col col-md-4 col-sm-6 col-xs-12 box-testimoni">
                                     <div class="col col-md-12 col-sm-12 col-xs-12 none-padding sub-box-testimoni">
-                                        <div class="col col-md-12 col-sm-12 col-xs-12 text-center">
+                                        <div class="col col-md-12 col-sm-12 col-xs-12 text-center filter-img-user" style="background-color: white;">
                                             <div class="box-testimoni-left ">
                                                 <div class="filter-box-mg-testimoni">
-                                                    <img class="img-responsive img-user" src="<?=base_url();?>assets/images/logo/ttg.png">
+                                                    <img class="img-responsive img-user" src="<?=base_url();?>assets/media/<?=$value['foto'];?>">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col col-md-12 col-sm-12 col-xs-12 none-padding box-testimoni-right">
-                                            <h4 class="text-bold title-box-testimoni" style="color: #CF090A;">M.dika Pratana</h4>
-                                            <p class="text-bold" style="color: #747474;">Menteri Riset, Teknologi dan Pendidikan Tinggi Republik Indonesia </p>
+                                            <h3 class="text-bold title-box-testimoni" style="color: white;"><?=$value['nama'];?></h3>
+                                            <p class="jabatan" style="color: white;"><?=$value['jabatan'];?> </p>
                                            
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col col-md-4 col-sm-6 col-xs-12 box-testimoni">
-                                    <div class="col col-md-12 col-sm-12 col-xs-12 none-padding sub-box-testimoni">
-                                        <div class="col col-md-12 col-sm-12 col-xs-12 text-center">
-                                            <div class="box-testimoni-left ">
-                                                <div class="filter-box-mg-testimoni">
-                                                    <img class="img-responsive img-user" src="<?=base_url();?>assets/images/logo/ttg.png">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col col-md-12 col-sm-12 col-xs-12 none-padding box-testimoni-right">
-                                            <h4 class="text-bold title-box-testimoni" style="color: #CF090A;">M.dika Pratana</h4>
-                                            <p class="text-bold" style="color: #747474;">Menteri Riset, Teknologi dan Pendidikan Tinggi Republik Indonesia </p>
-                                           
-                                        </div>
-                                    </div>
-                                </div>
+                            <?php endforeach ?>
+                                
                             </div>
                             
                             
                         </div>
-                       <!--  <div class="col col-md-7 col-sm-12 col-xs-12 descrip-img">
-                            <img class="img-responsive" width="100%" src="<?=base_url();?>assets/images/logo/">
-                        </div> -->
+                       
                     </div>
                 </div>
             

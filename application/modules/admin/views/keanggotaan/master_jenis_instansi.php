@@ -70,13 +70,21 @@
           <div><span>Masukan Kode Font <a href="https://fontawesome.com/v4.7.0/icons/" target="_blank"> awesome</a> atau <a href="http://glyphicons.com/" target="_blank">glyppicon</a></span></div>
           <div class="error" id="ntf_icon"></div>
         </div>
-
-        <div class="form-group">
+      <div class="form-group">
+        <label>Deskripsi Singkat</label>
+        <?php echo $this->ckeditor->editor("short", "" ); ?>
+        <input type="hidden" name="short" value="" id="short">
+        <div class="error" id="ntf_short"></div>
+      </div>
+      
+      <div class="form-group">
         <label>Deskripsi</label>
         <?php echo $this->ckeditor->editor("content", "" ); ?>
         <input type="hidden" name="content" value="" id="content">
         <div class="error" id="ntf_content"></div>
       </div>
+
+      
 
 <!--       <div class="form-group">
         <label>Simbol Jenis Instansi</label>
@@ -114,11 +122,19 @@
         </div>
 
       <div class="form-group">
+        <label>Deskripsi Singkat</label>
+        <?php echo $this->ckeditor->editor("short", $kategori['short_description'] ); ?>
+        <input type="hidden" name="short" value="" id="short">
+        <div class="error" id="ntf_short"></div>
+      </div>
+
+      <div class="form-group">
         <label>Deskripsi</label>
         <?php echo $this->ckeditor->editor("content", $kategori['deskripsi'] ); ?>
         <input type="hidden" name="content" value="" id="content">
         <div class="error" id="ntf_content"></div>
       </div>
+
 
 <!--       <div class="form-group">
         <label>Simbol Jenis Instansi</label>
@@ -164,9 +180,10 @@
       var form_data = new FormData();
       // var data_file = $('#userfile').prop('files')[0];
       $('#content').val(CKEDITOR.instances.content.getData());
+      $('#short').val(CKEDITOR.instances.short.getData());
       // form_data.append('userfile',data_file);
-      form_data.append('content',$('#content').val());
-      form_data.append('kategori',$('#kategori').val());
+      /*form_data.append('content',$('#content').val());
+      form_data.append('kategori',$('#kategori').val());*/
       $.ajax({
           url : window.location.href,
           dataType : 'json',
@@ -198,7 +215,7 @@
     	if (confirm("Ingin menhapus data ini ?")) {
     		$('#progresLoading').modal('show');
 	    	$.ajax({
-	          url : base_url+"admin/keanggootaan/delete_jenis/"+id,
+	          url : base_url+"admin/keanggotaan/delete_jenis/"+id,
 	          dataType : 'json',
 	          type : 'post',
 	          data : {'id' : id},

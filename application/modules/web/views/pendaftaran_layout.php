@@ -175,6 +175,9 @@
     }
 
 }
+.flowchart{
+    width: 75%;
+}
 .filter-title-page-news{
     padding-bottom: 5em;
 }
@@ -200,6 +203,7 @@
 }
     .box-news{
         padding: 0 6em;
+        margin-bottom: 4em;
     }
     .pentahelix{
         padding: 2em 6.2em;
@@ -333,8 +337,8 @@
                 <div class="col-md-9 col-sm-8 col-xs-12 content-left box-news">
                     <div class="col col-md-12 col-sm-12 col-xs-12 none-padding list-artikel">
                       <div class="isi-news" style="padding:25px;color: #919191;"><?php echo $step['step']; ?></div>
-                      <div class="col col-md-12 col-sm-12 col-xs-12">
-                        <img width="100%" src="<?php echo $step['picture']; ?>">
+                      <div class="col col-md-12 col-sm-12 col-xs-12 text-center">
+                        <img class="flowchart" width="" src="<?php echo $step['picture']; ?>">
                     </div>
                 </div>
 

@@ -1,6 +1,28 @@
+<style type="text/css">
+  .tab-pane{
+    padding: 2em 1em 1em 1em;
+  }
+  .tab-content>.active{
+    border:solid 1px #3C8DBC ;
+  }
+  .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover{
+    background-color: #3C8DBC;
+    color: white;
+  }
+  .nav-tabs{
+    border-bottom:none;
+  }
+  .component-penta{
+    padding-top: 1.5em;
+  }
+  .nav>li>a:hover, .nav>li>a:active, .nav>li>a:focus{
+    background:  #3C8DBC;
+    color: white;
+  }
+</style>
 <div class="box ">
   <div class="box-header with-border">
-    <h3 class="box-title">penta Page</h3>
+    <h2 class="box-title">penta Page</h2>
   </div>
   <!-- /.box-header -->
   <div class="box-body">
@@ -14,35 +36,36 @@
       </div> -->
 
       <div class="form-group">
-        <label>Content</label>
+        <label><h3>Content</h3></label>
         <?php echo $this->ckeditor->editor("deskripsi", $penta['deskripsi'] ); ?>
         <input type="hidden" name="deskripsi" value="" id="deskripsi">
         <div class="error" id="ntf_deskripsi"></div>
       </div>
 
-      <div class="form-group">
-        <label>Title Network</label>
-        <input type="text" name="network" class="form-control" value="<?php if(isset($penta_net)){ echo $penta_net['judul']; } ?>" id="network">
-        <div class="error" id="ntf_network"></div>
-      </div>
 
-      <div class="form-group">
-        <label>Content Network</label>
-        <?php echo $this->ckeditor->editor("content_net", $penta_net['deskripsi'] ); ?>
-        <input type="hidden" name="content_net" value="" id="content_net">
-        <div class="error" id="ntf_content_net"></div>
-      </div>
+<div class="component-penta">
 
-      <div class="form-group">
-        <label>No Urut</label>
-        <input type="number" name="sort_net" class="form-control" value="<?php if(isset($penta_net)){ echo $penta_net['sort']; } ?>" id="sort_net">
-        <div class="error" id="ntf_sort_net"></div>
-      </div>
+  <h2>component</h2>
+  <br>
+  <ul class="nav nav-tabs primary">
+    <li class="active"><a data-toggle="tab" href="#menu1">Research</a></li>
+    <li><a data-toggle="tab" href="#menu2">Education</a></li>
+    <li><a data-toggle="tab" href="#menu3">Network</a></li>
+  </ul>
 
+  <div class="tab-content">
+    
+    <div id="menu1" class="tab-pane fade in active">
       <div class="form-group">
         <label>Title Research</label>
         <input type="text" name="research" class="form-control" value="<?php if(isset($penta_res)){ echo $penta_res['judul']; } ?>" id="research">
         <div class="error" id="ntf_research"></div>
+      </div>
+
+      <div class="form-group">
+        <label>Icon Research</label>
+        <input type="text" name="icon_res" class="form-control" value="<?php if(isset($penta_res)){ echo $penta_res['icon']; } ?>" id="icon_res">
+        <div class="error" id="ntf_icon_res"></div>
       </div>
 
       <div class="form-group">
@@ -58,10 +81,156 @@
         <div class="error" id="ntf_sort_res"></div>
       </div>
 
-      <div class="form-group">
+    </div>
+    <div id="menu2" class="tab-pane fade">
+       <div class="form-group">
         <label>Title Education</label>
         <input type="text" name="education" class="form-control" value="<?php if(isset($penta_edu)){ echo $penta_edu['judul']; } ?>" id="research" id="education">
         <div class="error" id="ntf_education"></div>
+      </div>
+
+      <div class="form-group">
+        <label>Icon Education</label>
+        <input type="text" name="icon_edu" class="form-control" value="<?php if(isset($penta_net)){ echo $penta_edu['icon']; } ?>" id="icon_edu">
+        <div class="error" id="ntf_icon_edu"></div>
+      </div>
+
+      <div class="form-group">
+        <label>Content</label>
+        <?php echo $this->ckeditor->editor("content_edu", $penta_edu['deskripsi'] ); ?>
+        <input type="hidden" name="content_edu" value="" id="content_edu">
+        <div class="error" id="ntf_content_edu"></div>
+      </div>
+
+      <div class="form-group">
+        <label>No Urut</label>
+        <input type="number" name="sort_edu" class="form-control" value="<?php if(isset($penta_net)){ echo $penta_edu['sort']; } ?>" id="sort_edu">
+        <div class="error" id="ntf_sort_edu"></div>
+      </div>
+    </div>
+    <div id="menu3" class="tab-pane fade ">
+     
+          <div class="form-group">
+            <label>Title Network</label>
+            <input type="text" name="network" class="form-control" value="<?php if(isset($penta_net)){ echo $penta_net['judul']; } ?>" id="network">
+            <div class="error" id="ntf_network"></div>
+          </div>
+
+          <div class="form-group">
+            <label>Icon Network</label>
+            <input type="text" name="icon_net" class="form-control" value="<?php if(isset($penta_net)){ echo $penta_net['icon']; } ?>" id="icon_net">
+            <div class="error" id="ntf_icon_net"></div>
+          </div>
+
+          <div class="form-group">
+            <label>Content Network</label>
+            <?php echo $this->ckeditor->editor("content_net", $penta_net['deskripsi'] ); ?>
+            <input type="hidden" name="content_net" value="" id="content_net">
+            <div class="error" id="ntf_content_net"></div>
+          </div>
+
+          <div class="form-group">
+            <label>No Urut</label>
+            <input type="number" name="sort_net" class="form-control" value="<?php if(isset($penta_net)){ echo $penta_net['sort']; } ?>" id="sort_net">
+            <div class="error" id="ntf_sort_net"></div>
+          </div>
+    </div>
+
+      <button type="button" class="btn btn-primary" id="submit" style="margin-top: 1.5em;">Submit</button>
+
+    </form>
+  </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+      <div class="form-group">
+        <label>Title Network</label>
+        <input type="text" name="network" class="form-control" value="<?php if(isset($penta_net)){ echo $penta_net['judul']; } ?>" id="network">
+        <div class="error" id="ntf_network"></div>
+      </div>
+
+      <div class="form-group">
+        <label>Icon Network</label>
+        <input type="text" name="icon_net" class="form-control" value="<?php if(isset($penta_net)){ echo $penta_net['icon']; } ?>" id="icon_net">
+        <div class="error" id="ntf_icon_net"></div>
+      </div>
+
+      <div class="form-group">
+        <label>Content Network</label>
+        <?php echo $this->ckeditor->editor("content_net", $penta_net['deskripsi'] ); ?>
+        <input type="hidden" name="content_net" value="" id="content_net">
+        <div class="error" id="ntf_content_net"></div>
+      </div>
+
+      <div class="form-group">
+        <label>No Urut</label>
+        <input type="number" name="sort_net" class="form-control" value="<?php if(isset($penta_net)){ echo $penta_net['sort']; } ?>" id="sort_net">
+        <div class="error" id="ntf_sort_net"></div>
+      </div> -->
+
+     <!--  <div class="form-group">
+        <label>Title Research</label>
+        <input type="text" name="research" class="form-control" value="<?php if(isset($penta_res)){ echo $penta_res['judul']; } ?>" id="research">
+        <div class="error" id="ntf_research"></div>
+      </div>
+
+      <div class="form-group">
+        <label>Icon Research</label>
+        <input type="text" name="icon_res" class="form-control" value="<?php if(isset($penta_res)){ echo $penta_res['icon']; } ?>" id="icon_res">
+        <div class="error" id="ntf_icon_res"></div>
+      </div>
+
+      <div class="form-group">
+        <label>Content Research</label>
+        <?php echo $this->ckeditor->editor("content_res", $penta_res['deskripsi'] ); ?>
+        <input type="hidden" name="content_res" value="" id="content_res">
+        <div class="error" id="ntf_content_res"></div>
+      </div>
+
+      <div class="form-group">
+        <label>No Urut</label>
+        <input type="number" name="sort_res" class="form-control" value="<?php if(isset($penta_net)){ echo $penta_res['sort']; } ?>" id="sort_res">
+        <div class="error" id="ntf_sort_res"></div>
+      </div>
+ -->
+    <!--   <div class="form-group">
+        <label>Title Education</label>
+        <input type="text" name="education" class="form-control" value="<?php if(isset($penta_edu)){ echo $penta_edu['judul']; } ?>" id="research" id="education">
+        <div class="error" id="ntf_education"></div>
+      </div>
+
+      <div class="form-group">
+        <label>Icon Education</label>
+        <input type="text" name="icon_edu" class="form-control" value="<?php if(isset($penta_net)){ echo $penta_edu['icon']; } ?>" id="icon_edu">
+        <div class="error" id="ntf_icon_edu"></div>
       </div>
 
       <div class="form-group">
@@ -80,7 +249,7 @@
       <button type="button" class="btn btn-primary" id="submit">Submit</button>
 
     </form>
-  </div>
+  </div> -->
   <!-- /.box-body -->
 </div>
 <?php if ($this->session->flashdata('notif') != '') { ?>

@@ -5,6 +5,11 @@
 }
 .content-tree{
     padding-left: 5em;
+    padding-right: 5em;
+}
+.li-tree{
+    background-color: #CF090A;
+    color: white;
 }
   .tree, .tree ul {
     margin:0;
@@ -59,6 +64,12 @@
 .tree li a {
     text-decoration: none;
     color:#369;
+}
+.tree .li-tree,
+.tree .li-tree a
+{
+
+    color:white;
 }
 .tree li button, .tree li button:active, .tree li button:focus {
     text-decoration: none;

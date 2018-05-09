@@ -14,12 +14,14 @@ class Tentang extends MX_Controller  {
         $this->load->library('Recaptcha');
 
 	}
-        function index() {
+    public function index() {
         $url = site_url('api/v1/about') ;
         $methode = 'GET';
         $token = '';
         $a = api_helper('',$url,$methode,$token);
         $this->data['about']=$a['data'];
+
+        $this->data['founder'] = $this->db->get('tb_founder')->result_array();
 
         $this->ciparser->new_parse('template_frontend','modules_web', 'tentang_layout',$this->data);
     }

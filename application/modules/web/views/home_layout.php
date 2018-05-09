@@ -10,7 +10,7 @@
               font-family: 'Nunito Sans', sans-serif;
         }
          .content-pentahelix .fitur-content {
-            padding: 1.2em;
+            padding: 10px;
          }
         .content-pentahelix .content-top .fitur-box{
             height: auto;
@@ -35,7 +35,7 @@
          }
          .content-pentahelix .content-top .fitur-box p{
             margin-top: 15px;
-            font-size: 16px;
+            font-size: 14px;
              font-family: 'Nunito Sans', sans-serif;
              font-weight: 400;
              color: #120F0F;
@@ -50,10 +50,31 @@
          .layanan .top{
             margin:0;
          }
+         .fitur-content{
+            width: 20%;
+         }
+
+          @media(max-width:1100px){
+         .fitur-content{
+            width: 33.33%;
+         }
+          }
+           @media(max-width:991px){
+         .fitur-content{
+                width: 50%;
+            } 
+            .fitur-box p{
+                padding-bottom: 15px;
+                overflow: hidden;
+            } 
+           }
     @media(max-width:767px){
         .hero{
         margin-top: 1em;
     }
+      .fitur-content{
+            width: 100%;
+         }
     }
 </style>
  <section class="hero" style="">
@@ -98,16 +119,17 @@
                     <div class="col col-md-12 col-sm-12 col-xs-12 header-fitur-content">
                         <h3><b>Kompnen Platform :</b></h3>
                     </div>
+                
                     <?php foreach ($helix as $key => $value): ?>
-                        <div class="col col-md-4 col-sm-4 col-xs-12 fitur-content">
+                        <div class="col col-md-2 col-sm-4 col-xs-12 fitur-content">
                             <div class="fitur-box text-center">
-                                <div class="icon-box"><i class="glyphicon <?php if($value['jenis'] == 2){ ?> glyphicon-link <?php }elseif($value['jenis'] == 3){ ?> glyphicon-search <?php }else{ ?> glyphicon-education <?php } ?>"></i><!-- <i class="glyphicon glyphicon-education"></i> --></div>
-                                <h3><b><?=$value['judul'];?></b></h3>
-                                <p><?=$value['deskripsi'];?></p>
+                                <div class="icon-box"><i class="<?=$value['icon'];?>"></i><!-- <i class="glyphicon glyphicon-education"></i> --></div>
+                                <h3><b><?=$value['nm_jenis_instansi']?></</b></h3>
+                                <p><?=$value['short_description'];?></p>
                             </div>
                         </div>    
                     <?php endforeach ?>
-                    
+                  
                     <div class="col col-md-12 col-sm-12 col-xs-12 text-right">
                         <a href="<?php echo site_url('web/pentahelix'); ?>" class="btn  btn-pelajari" type="button">Pelajari lebih lanjut <i class="fa fa-long-arrow-right"></i></a>
                     </div>

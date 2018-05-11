@@ -219,7 +219,7 @@
       });
     });
     $('body').on('click','.btn_add',function(){
-      var html = '<hr><div class="col-md-12"><div class="col-md-4"><label>Nama Founder</label><input type="text" name="name" class="form-control name" value="" id="name" placeholder="Masukan Nama Founder"><div class="error" id="ntf_name"></div></div><div class="col-md-4"><label>Jabatan Founder</label><input type="text" name="jabatan" class="form-control jabatan" value="" id="jabatan" placeholder="Masukan Jabatan Founder"><div class="error" id="ntf_jabatan"></div></div><div class="col-md-4"><label>Photo Founder</label><input type="file" name="file_name[]" class="form-control file" id="file_name"><div class="error" id="ntf_file_name"></div></div><input type="hidden" name="id_founder[]" class="id_founder" id="id_founder" value=""></div>';
+      var html = '<hr><div class="col-md-12"><div class="col-md-3"><label>Nama Founder</label><input type="text" name="name" class="form-control name" value="" id="name" placeholder="Masukan Nama Founder"><div class="error" id="ntf_name"></div></div><div class="col-md-4"><label>Jabatan Founder</label><input type="text" name="jabatan" class="form-control jabatan" value="" id="jabatan" placeholder="Masukan Jabatan Founder"><div class="error" id="ntf_jabatan"></div></div><div class="col-md-3"><label>Photo Founder</label><input type="file" name="file_name[]" class="form-control file" id="file_name"><div class="error" id="ntf_file_name"></div></div><input type="hidden" name="id_founder[]" class="id_founder" id="id_founder" value=""><div class="col-md-2"></div></div>';
       $('.add_file').append(html);
     });
     $('body').on('click','.foto',function(){

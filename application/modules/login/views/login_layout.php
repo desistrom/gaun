@@ -3,10 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 2 | Log in</title>
+  <title><?=strtoupper($this->general->title());?> | Log in</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
+  <link rel="shortcut icon" href="<?=base_url();?>media/crop/favicon.png" />
   <link rel="stylesheet" href="<?=base_url();?>assets/css/bootstrap.min.css">
   <!-- Font Awesome -->
   <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700|Roboto:300,400,500,700" rel="stylesheet">
@@ -53,6 +54,10 @@
         <input type="password" class="form-control" placeholder="Password" name="password">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
         <div class="error" id="ntf_password"></div>
+      </div>
+      <div class="form-group has-feedback">
+        <?php echo $captcha // tampilkan recaptcha ?>
+        <div class="error" id="ntf_g-recaptcha-response"></div>
       </div>
       <div class="row">
         <div class="col-xs-8">
@@ -155,5 +160,6 @@
     });
   });
 </script>
+<script src='https://www.google.com/recaptcha/api.js'></script>
 </body>
 </html>

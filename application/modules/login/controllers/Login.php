@@ -6,11 +6,13 @@
 class Login extends MX_Controller
 {
         var $idUser;
+        var $data = array();
 
     function __construct()
     {
     	// $this->load->model('login_model');
         $this->load->helper('api');
+        $this->load->library('Recaptcha');
     }
 
     public function index(){
@@ -20,7 +22,12 @@ class Login extends MX_Controller
             $this->form_validation->set_error_delimiters('', '');
             $this->form_validation->set_rules('username','username', 'required');
             $this->form_validation->set_rules('password','password', 'required');
-            if ($this->form_validation->run() == true) {
+            $this->form_validation->set_rules('g-recaptcha-response','Pleas Insert Captcha', 'required');
+            $recaptcha = $this->input->post('g-recaptcha-response');
+            $response = $this->recaptcha->verifyResponse($recaptcha);
+            /*print_r($response);
+            return false;*/
+            if ($this->form_validation->run() == true && $response['success'] == 1) {
             	$ret['state'] = 1;
             	$username = $this->input->post('username');
             	$password = sha1($this->input->post('password'));
@@ -46,13 +53,21 @@ class Login extends MX_Controller
             	}else{
                     $ret['notif']['login'] = 'username or password worng';
                 }
+            }else{
+                if ($response['success'] == '') {
+                    $ret['notif']['g-recaptcha-response'] = 'Captcha Expired';
+                }
             }
             $ret['notif']['username'] = form_error('username');
             $ret['notif']['password'] = form_error('password');
+            $ret['notif']['g-recaptcha-response'] = form_error('g-recaptcha-response');
             echo  json_encode($ret);
             exit();
         }
-        $this->load->view('login_layout.php');
+        $this->data['captcha'] = $this->recaptcha->getWidget();
+        $this->data['action'] = site_url('login');
+        $this->data['script_captcha'] = $this->recaptcha->getScriptTag();
+        $this->load->view('login_layout',$this->data);
     }
 
     public function logout(){

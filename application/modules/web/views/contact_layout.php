@@ -71,7 +71,7 @@
                                 </div>
                                 <div class="form-group">
                                   <?php echo $captcha // tampilkan recaptcha ?>
-                                  <div cla
+                                  
                                 <div class="text-right"><a class="btn btn-send">Send</a></div>
                             </div>
                             </form>

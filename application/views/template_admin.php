@@ -54,8 +54,8 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <!-- <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image"> -->
-              <!-- <span class="hidden-xs">Alexander Pierce</span> -->
+              <img src="<?=base_url();?>media/crop/favicon.png" class="user-image" alt="User Image">
+              <span class="hidden-xs">Admin</span>
             </a>
           </li>
           <!-- Control Sidebar Toggle Button -->

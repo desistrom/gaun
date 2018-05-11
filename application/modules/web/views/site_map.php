@@ -12,8 +12,8 @@
     color: white;
 }
 .tree{
-    background-color: #CF090A;
-    color: white;
+    background-color:white;
+    color:  #CF090A;
 }
 .tree li a{
 
@@ -39,17 +39,24 @@
     top:0;
     bottom:0;
     left:0;
-    border-left:1px solid
+    border-left:1px solid;
 }
 .tree li {
     margin:0;
+    margin-bottom: 10px;
+    
     padding:0 0 0 1em;
     line-height:2em;
-    color:white;
+    color: #CF090A;
     font-weight:700;
     position:relative;
     height: auto;
     overflow: hidden;
+}
+.tree .menu-parent,
+.tree .dropdown
+ {
+    border-bottom: solid 1px  #CF090A;
 }
 .tree ul li:before {
    
@@ -73,7 +80,7 @@
 }
 .tree li a {
     text-decoration: none;
-    color:white;
+    color: #CF090A;
 }
 .tree .li-tree,
 .tree .li-tree a
@@ -102,9 +109,12 @@
     background-color:#D2D2D2; 
 }
 .sub-menu{
-    width: 70%;
-    background-color: green;
+    width: 81%;
+    
     float: right;
+}
+.menu:hover{
+
 }
 </style>
 <section class="detail_layanan">

@@ -90,6 +90,7 @@
           	padding: 2em 6.2em;
             background-image:url('<?=base_url();?>assets/images/logo/Page_Pentahelix.png');
             background-size: cover;
+            background-attachment: fixed;
             background-repeat: no-repeat;
           }
           div.container-fluid.container-fluid.content-pentahelix_2{
@@ -103,7 +104,14 @@
             font-size: 18px;
             font-weight: 400;
            }
-
+           #accordion .panel{
+            width: 60%;
+            display: inline-block;
+            transition: 0.2s;
+           }
+           .panel .in{
+            width: 100%;
+           }
         @media(max-width:991px){
             .descrip-img{
                 display: none;
@@ -161,9 +169,9 @@
         </div>
         <div class="container-fluid content-pentahelix  content-pentahelix_2 ">
               <div class="col col-md-12 col-sm-12 col-xs-12 content-bottom">
-                <div class="panel-group" id="accordion">
+                <div class="panel-group text-center" id="accordion">
                           <?php foreach ($instansi as $key => $value): ?>
-                            <div class="panel " style=" text-align: left;">
+                            <div class="panel" style=" text-align: left;">
                                 <div class="panel-heading" >
                                     <h4 class="panel-title">
                                       <span><i class="<?=$value['icon'];?>"></i></span>
@@ -312,11 +320,16 @@
      <script src="<?=base_url();?>assets/js/jquery.min.js"></script>
     <script type="text/javascript">
       $(document).ready(function(){
+        console.log($('.in').parent());
+        // if ($(this).parent().parent().parent().find('.in').length > 0) {
+            $('.in').parent().css('width','100%');
+        // }
         $('.accordion-toggle').click(function(){
+            $('.panel').css('width','60%');
           if ($(this).parent().parent().parent().find('.in').length > 0) {
-            $(this).parent().parent().parent().css('background-color','white');
+            $(this).parent().parent().parent().css('width','60%');
           }else{
-            $(this).parent().parent().parent().css('background-color','red');
+            $(this).parent().parent().parent().css('width','100%');
           }
         });
       });

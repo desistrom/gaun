@@ -646,11 +646,10 @@ class V1 extends REST_Controller {
             $retData['status'] = 'success';
             foreach ($instansi as $key => $value) {
                 if ($value['image'] == '') {
-                    $instansi[$key]['image']=base_url().'assets/images/logo/IDREN-2.png';
-                    $instansi[$key]['image_thumbnail']=base_url().'assets/images/logo/IDREN-2.png';
+                    // $instansi[$key]['image']=base_url().'assets/images/logo/IDREN-2.png';
                 }else{
-                    $instansi[$key]['image_thumbnail']=base_url().'media/thumbnail/'.$instansi[$key]['image'];
-                    $instansi[$key]['image']=base_url().'media/'.$instansi[$key]['image'];
+                    // $instansi[$key]['image_thumbnail']=base_url().'media/thumbnail/'.$instansi[$key]['image'];
+                    // $instansi[$key]['image'] = base_url().'media/'.$value['image'];
                 }                                                                                                                     
             }
             $retData['data'] = $instansi;

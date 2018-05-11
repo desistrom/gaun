@@ -70,20 +70,19 @@
                         </ul>
                     </div> -->
                 </div>
-                <div class="col-md-9 col-sm-8 col-xs-12 content-left content-keanggotaan">
-                    <?php $this->load->view('news_looping', $news); ?>
-    
+                <div class="col-md-9 col-sm-8 col-xs-12 content-left ">
+                    <div class="content-keanggotaan">
+                        <?php $this->load->view('news_looping', $news); ?>
+                    </div>
+                    <?php if ($total > $total_row){ ?>
+                        <div class="col-md-12 col-sm-12 col-xs-12 text-center" style="padding-bottom: 15px;">
+                            <button class="btn btn-danger loadmore" type="button">Load More</button>
+                        </div>
+                    <?php } ?>
+                    <div class="ajax-load text-center" style="display:none">
+                        <p><img src="http://demo.itsolutionstuff.com/plugin/loader.gif">Loading More Data</p>
+                    </div>
                </div>
-            <?php if ($total > $total_row){ ?>
-                <div class="col-md-12 col-sm-12 col-xs-12 text-center" style="padding-bottom: 15px;">
-                    <button class="btn btn-danger loadmore" type="button">Load More</button>
-                </div>
-            <?php }else{ ?>
-                <span class='btn btn-danger'>No more Data found</span>
-            <?php } ?>
-            <div class="ajax-load text-center" style="display:none">
-                <p><img src="http://demo.itsolutionstuff.com/plugin/loader.gif">Loading More Data</p>
-            </div>
             </div>
         </div>
         <div class="container-fluid section-pagination">
@@ -98,7 +97,7 @@
     </section>
     <script src="<?=base_url().'assets/js/jquery-3.2.1.min.js';?>"></script>
     <script type="text/javascript">
-        var page = 1;
+        var page = 0;
         $('.loadmore').click(function() {
                 page++;
                 loadMoreData(page);

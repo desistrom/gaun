@@ -8,8 +8,15 @@
     padding-right: 5em;
 }
 .li-tree{
+   
+    color: white;
+}
+.tree{
     background-color: #CF090A;
     color: white;
+}
+.tree li a{
+
 }
   .tree, .tree ul {
     margin:0;
@@ -18,13 +25,14 @@
 }
 .tree ul {
     margin-left:1em;
-    position:relative
+    position:relative;
+
 }
 .tree ul ul {
     margin-left:.5em
 }
 .tree ul:before {
-    content:"";
+  
     display:block;
     width:0;
     position:absolute;
@@ -35,14 +43,16 @@
 }
 .tree li {
     margin:0;
-    padding:0 1em;
+    padding:0 0 0 1em;
     line-height:2em;
-    color:#369;
+    color:white;
     font-weight:700;
-    position:relative
+    position:relative;
+    height: auto;
+    overflow: hidden;
 }
 .tree ul li:before {
-    content:"";
+   
     display:block;
     width:10px;
     height:0;
@@ -63,7 +73,7 @@
 }
 .tree li a {
     text-decoration: none;
-    color:#369;
+    color:white;
 }
 .tree .li-tree,
 .tree .li-tree a
@@ -80,6 +90,22 @@
     padding:0px 0px 0px 0px;
     outline: 0;
 }
+.inline-site{
+    display: inline-table;
+}
+.menu{
+    width: 15%;
+    float: left;
+    
+}
+.li-tree {
+    background-color:#D2D2D2; 
+}
+.sub-menu{
+    width: 70%;
+    background-color: green;
+    float: right;
+}
 </style>
 <section class="detail_layanan">
         <div class="container-fluid none-padding filter-title-page-news">
@@ -89,15 +115,18 @@
                 </div>
                 <div class="header-title">
                     <h1 style=""> Site Map </h1></div>
+                    <div class="col col-md-12 col-sm-12 none-padding">
+                        
+                    </div>
                     <div class="content-tree">
                         <ul id="tree2">
-                            <li class="li-tree"><a href="#">Menu</a>
+                            <!-- <li class="li-tree"><a href="#">Menu</a>
 
-                                <ul>
+                                <ul> -->
                                 <?php echo $menu; ?>
                                     
-                                </ul>
-                            </li>
+                             <!--    </ul>
+                            </li> -->
                         </ul>
                     </div>
                     

@@ -191,11 +191,11 @@
             </div>
         </div>
     </section>
-    <div class="col-md-12 col-sm-12 col-xs-12 none-padding text-center">
+   <!--  <div class="col-md-12 col-sm-12 col-xs-12 none-padding text-center">
                     <div class="arrow-line">
                         <div class="line-left" style="padding-top: 5px;padding-right: 35px;"><a class="js-scroll-trigger" href="#testimonial"><i class="glyphicon glyphicon-arrow-down"></i></a></div>
                     </div>
-                </div>
+                </div> -->
     <section class="testimonial" id="testimonial">
         <div class="container-fluid">
             <div class="row sub-testimoni" id="owl-demo">

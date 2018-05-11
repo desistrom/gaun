@@ -21,10 +21,6 @@
                 <div class="col-md-12 col-sm-12 col-xs-12 text-center" style="padding-bottom: 15px;">
                     <button class="btn btn-danger loadmore" type="button">Load More</button>
                 </div>
-            <?php }else{ ?>
-            <div class="ajax-load text-center">
-                <span class='btn btn-danger'>No more Data found</span>
-            </div>
             <?php } ?>
             <div class="ajax-load text-center" style="display:none">
                 <p><img src="http://demo.itsolutionstuff.com/plugin/loader.gif">Loading More Data</p>

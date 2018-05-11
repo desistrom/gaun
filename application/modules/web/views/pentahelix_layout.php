@@ -97,7 +97,7 @@
             padding: 1em 0;
           }
           .content-pentahelix .content-bottom .panel{
-            margin: 2em 0;
+            margin: 1em 0;
             box-shadow:0px 0px 28px 0px #120F0F;
           }
            .content-pentahelix .content-bottom .panel .panel-body{

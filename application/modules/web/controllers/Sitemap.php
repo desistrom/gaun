@@ -39,8 +39,8 @@ class Sitemap extends CI_Controller {
               }
               if(isset($menu['parents'][$itemId])) {
                  $html .= "<li class='dropdown'>
-                 <a data-toggle='dropdown' aria-expanded='false' href='#' class='dropdown-toggle' href='".base_url().$menu['items'][$itemId]['link']."'>".$menu['items'][$itemId]['label']." <span class='fa fa-angle-down'></span></a>";
-                 $html .= "<ul>";
+                 <a class='inline-site menu' data-toggle='dropdown' aria-expanded='false' href='#' class='dropdown-toggle' href='".base_url().$menu['items'][$itemId]['link']."'>".$menu['items'][$itemId]['label']." <span class='fa fa-angle-down'></span></a>";
+                 $html .= "<ul class='inline-site sub-menu'>";
                  $html .= "<li>".$this->createTreeView($itemId, $menu)."</li>";
                  $html .= "</ul>";
               }

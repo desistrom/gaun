@@ -2,6 +2,30 @@
     .box-news{
         padding: 0 6em;
     }
+    .list-inline li{
+    	display: inline;
+    }
+    .sosmed_share{
+    	padding: 10px;
+    	font-size: 16px;
+    	border-radius: 50%;
+    	background-color: #D2D2D2;
+    	color: #747474;
+    	box-shadow: -1px 1px 1px 0 #bdbdbd;
+
+    }
+     .sosmed_share:hover{
+    	background-color: #CF090A;
+    	color: white;
+    	box-shadow: -1px 1px 3px 0 #bdbdbd;
+
+    }
+    .sosmed_share.fb{
+    	padding: 10px 13px;
+    }
+     .sosmed_share.ig{
+    	padding: 10px 12px;
+    }
     @media (max-width: 991px)
     {
          .box-news{
@@ -81,9 +105,17 @@
                     <div class="col col-md-12 col-sm-12 col-xs-12 none-padding list-artikel">
                         <div class="col col-md-12 col-sm-12 col-xs-12 none-padding img-news"><img class="img-responsive" src="<?php $c = explode('/', $detail_news['gambar']); if(isset($c[1])){ echo $detail_news['gambar']; }else{ echo base_url().'assets/media/'.$detail_news['gambar']; } ?>">
                         <div class="col col-md-12 col-sm-12 col-xs-12 desrip-news">
+                        	<div class="col col-md-7 col-sm-7 col-xs-12"></div>
                             <h4 class="title-news"><?php echo $detail_news['title']; ?></h4>
                             <p class="isi-news"><?php echo $detail_news['news_content'] ?> </p>
-                            <div class="col col-md-12 col-sm-12 col-xs-12 filter-date-event">
+                            
+                            <div class="col col-md-12 col-sm-12 col-xs-12 filter-date-event" >
+                            	<ul class="list-inline date_event" style="margin-bottom: 1.5em;">
+                                    <a href="#" class="sosmed_share fb" ><li class=""><i class="fa fa-facebook"></i></li></a>
+                                    <a href="#" class="sosmed_share twit" ><li class=""><i class="fa fa-twitter"></i></li></a>
+                                    <a href="#" class="sosmed_share ig" ><li class=""><i class="fa fa-instagram"></i> </li></a>
+
+                                </ul>
                                 <ul class="list-inline date_event">
                                     <li><i class="glyphicon glyphicon-calendar"></i><?php echo date('d m Y', strtotime($detail_news['tanggal'])); ?></li>
                                     <li><i class="glyphicon glyphicon-briefcase"></i> <?php echo $detail_news['kategori'];?></li>

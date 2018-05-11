@@ -103,6 +103,7 @@
             font-size: 18px;
             font-weight: 400;
            }
+
         @media(max-width:991px){
             .descrip-img{
                 display: none;
@@ -180,11 +181,11 @@
                                 </div>
                             </div>
                           <?php endforeach ?>
-                          <!-- <div class="panel " style=" text-align: left;">
+                     <!--      <div class="panel on" style=" text-align: left;">
                               <div class="panel-heading" >
                                   <h4 class="panel-title">
                                     <span><i class="glyphicon glyphicon-education"></i></span>
-                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" style="text-decoration: none;"><b>Academic</b></a>
+                                    <a id="open" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" style="text-decoration: none;"><b>Academic</b></a>
                                 </h4>
                                   
                               </div>
@@ -228,12 +229,12 @@
                                         </p>
                                     </div>
                                 </div>
-                                </div>
-                                    <div class="panel " style=" text-align: left;">
+                                </div> -->
+                          <!--           <div class="panel" style=" text-align: left;">
                                         <div class="panel-heading" >
                                           <h4 class="panel-title">
                                             <span><i class="fa fa-bank"></i></span>
-                                          <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" style="text-decoration: none;"><b>Government</b></a>
+                                          <a id="open" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" style="text-decoration: none;"><b>Government</b></a>
                                         </h4>
                                             
                                         </div>
@@ -257,7 +258,7 @@
                                         <div class="panel-heading" >
                                           <h4 class="panel-title">
                                             <span><i class="fa fa-users"></i></span>
-                                          <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" style="text-decoration: none;"><b>Community</b></a>
+                                          <a id="open" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" style="text-decoration: none;"><b>Community</b></a>
                                         </h4>
                                             
                                         </div>
@@ -281,7 +282,7 @@
                                         <div class="panel-heading" >
                                           <h4 class="panel-title">
                                             <span><i class="fa fa-newspaper-o"></i></span>
-                                          <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" style="text-decoration: none;"><b>Media</b></a>
+                                          <a id="open" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" style="text-decoration: none;"><b>Media</b></a>
                                         </h4>
                                             
                                         </div>
@@ -306,4 +307,17 @@
         </div>
 
     </section>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+   
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script> -->
+     <script src="<?=base_url();?>assets/js/jquery.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $('.accordion-toggle').click(function(){
+          if ($(this).parent().parent().parent().find('.in').length > 0) {
+            $(this).parent().parent().parent().css('background-color','white');
+          }else{
+            $(this).parent().parent().parent().css('background-color','red');
+          }
+        });
+      });
+    </script>

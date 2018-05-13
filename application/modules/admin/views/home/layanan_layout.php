@@ -1,21 +1,62 @@
 <style type="text/css">
   .form-group{
-    width: 50%;
+   
+  }
+  .file-group{
+    padding-bottom: 1em;
+  }
+  .file-group .error{
+    position: absolute;
+    bottom: 0;
+  }
+  .form-goup-file{
+    height: auto;
+    overflow: hidden;
+    padding: 0;
+  }
+  .form-goup-file div{
+    display: inline-block;
+  }
+  .form-goup-file .input-file-left{
+    width: 100%;
+  }
+  .form-goup-file .input-file-left input{
+  width: 50%;
+  }
+  .form-goup-file .input-file-right{
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+  .form-goup-file .input-file-right .btn-choose-foto{
+    height: 34px;
+    width: 105px;
+    border-radius: 0;
   }
 </style>
-<div class="box ">
+<div class="col col-md-12 col-sm-12">
+  <div class="box ">
   <div class="box-header with-border">
     <h3 class="box-title">Manage Layanan</h3>
   </div>
   <!-- /.box-header -->
   <div class="box-body">
     <form role="form">
-      <div class="form-group">
+       <div class="form-group">
+      <label>Logo Instansi</label>
+        <div class="col col-md-12 form-goup-file">
+          <div class="input-file-right"><label class="btn btn-primary btn-choose-foto" for="userfile">Choose File</label></div>
+          <div class="input-file-left"><input type="file" class="form-control file" name="userfile" id="userfile"></div> 
+          <div class="error" id="ntf_userfile"></div>
+          <div class="error" id="ntf_error"></div> 
+        </div>
+      </div>
+     <!--  <div class="form-group">
       <label>Logo Instansi</label>
         <input type="file" class="form-control" name="userfile" id="userfile">
         <div class="error" id="ntf_userfile"></div>
         <div class="error" id="ntf_error"></div>
-      </div>
+      </div> -->
       <img width="50%" src="<?=base_url();?>media/<?=$layanan['gambar'];?>">
       <div class="form-group">
         <label>Judul layanan</label>
@@ -35,6 +76,7 @@
     </form>
   </div>
   <!-- /.box-body -->
+</div>
 </div>
 <?php if ($this->session->flashdata('notif') != '') { ?>
     <div class="modal" tabindex="-1" role="dialog" id="modalSuccess">

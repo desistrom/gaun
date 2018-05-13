@@ -34,15 +34,24 @@
           <div class="error" id="ntf_jabatan"></div>
         </div>
 
-        <div class="col-md-3">
+        <div class="col-md-2">
           <label>Photo Founder</label>
           <input type="file" name="file_name[]" class="form-control file" id="file_name">
           <div class="error" id="ntf_file_name"></div>
-        <img src="<?=base_url().'assets/media/'.$value['foto'];?>" width="250px" style="display: none">
+          <img src="<?=base_url().'assets/media/'.$value['foto'];?>" width="250px" style="display: none">
         </div>
-        <div class="col-md-2">
+        <div class="col-md-1">
+          <label>Sort</label><br>
+          <input type="number" name="sort" class="form-control sort" value="<?=$value['sort'];?>">
+          <div class="error" id="ntf_sort"></div>
+        </div>
+        <div class="col-md-1">
           <label>Photo</label><br>
           <a id="<?=base_url().'assets/media/'.$value['foto'];?>" href="#" class="foto">Click Here</a>
+        </div>
+        <div class="col-md-1">
+          <label>Delete</label><br>
+          <button class="btn btn-danger btn-xs delete" id="<?=$value['id_founder']?>" type="button"><i class="fa fa-times"></i></button>
         </div>
         <input type="hidden" name="id_founder[]" class="id_founder" id="id_founder" value="<?=$value['id_founder'];?>">
         </div>
@@ -57,6 +66,12 @@
           <label>Jabatan Founder</label>
           <input type="text" name="jabatan" class="form-control jabatan" value="" id="jabatan" placeholder="Masukan Jabatan Founder">
           <div class="error" id="ntf_jabatan"></div>
+        </div>
+
+        <div class="col-md-1">
+          <label>Sort</label><br>
+          <input type="number" name="sort" class="form-control sort" value="">
+          <div class="error" id="ntf_sort"></div>
         </div>
 
         <div class="col-md-4">
@@ -172,8 +187,16 @@
         }else{
           error = $(this).parent().find('#ntf_name').text('The Nama field is required.');
         }
-        // console.log($(this).val());
       });
+
+      $('.sort').each(function(i){
+        if ($(this).val() != '') {
+          form_data.append('sort[]',$(this).val());
+        }else{
+          error = $(this).parent().find('#ntf_sort').text('The Sort field is required.');
+        }
+      });
+
       $('.jabatan').each(function(i){
         if ($(this).val() != '') {
           form_data.append('jabatan[]',$(this).val());
@@ -181,7 +204,6 @@
           error = $(this).parent().find('#ntf_jabatan').text('The Jabatan field is required.');
         }
       });
-      // return false;
 
       $('.id_founder').each(function(i){
         form_data.append('id_founder[]',$(this).val());
@@ -189,7 +211,6 @@
       if (error != '') {
         return false;
       }
-      // return false;
       $.ajax({
           url : window.location.href,
           dataType : 'json',
@@ -219,7 +240,7 @@
       });
     });
     $('body').on('click','.btn_add',function(){
-      var html = '<hr><div class="col-md-12"><div class="col-md-3"><label>Nama Founder</label><input type="text" name="name" class="form-control name" value="" id="name" placeholder="Masukan Nama Founder"><div class="error" id="ntf_name"></div></div><div class="col-md-4"><label>Jabatan Founder</label><input type="text" name="jabatan" class="form-control jabatan" value="" id="jabatan" placeholder="Masukan Jabatan Founder"><div class="error" id="ntf_jabatan"></div></div><div class="col-md-3"><label>Photo Founder</label><input type="file" name="file_name[]" class="form-control file" id="file_name"><div class="error" id="ntf_file_name"></div></div><input type="hidden" name="id_founder[]" class="id_founder" id="id_founder" value=""><div class="col-md-2"></div></div>';
+      var html = '<hr><div class="col-md-12"><div class="col-md-3"><label>Nama Founder</label><input type="text" name="name" class="form-control name" value="" id="name" placeholder="Masukan Nama Founder"><div class="error" id="ntf_name"></div></div><div class="col-md-4"><label>Jabatan Founder</label><input type="text" name="jabatan" class="form-control jabatan" value="" id="jabatan" placeholder="Masukan Jabatan Founder"><div class="error" id="ntf_jabatan"></div></div><div class="col-md-2"><label>Photo Founder</label><input type="file" name="file_name[]" class="form-control file" id="file_name"><div class="error" id="ntf_file_name"></div></div><div class="col-md-1"><label>Sort</label><br><input type="number" name="sort" class="form-control sort" value=""><div class="error" id="ntf_sort"></div></div><input type="hidden" name="id_founder[]" class="id_founder" id="id_founder" value=""><div class="col-md-2"></div></div>';
       $('.add_file').append(html);
     });
     $('body').on('click','.foto',function(){
@@ -233,6 +254,23 @@
         
       }, 3000);
 
+    });
+
+    $('body').on('click','.delete',function(){
+      var id = $(this).attr('id');
+      var nama = $(this).parent().parent().find('.name').val();
+      if(confirm('Anda ingin Menghapusn Founder '+nama+'??')){
+        $.ajax({
+          url : base_url+"admin/about/delete_about",
+          dataType : 'json',
+          data : {'id' : id},
+          type : 'POST'
+        }).done(function(data){
+          if (data == 1) {
+            window.location.href = window.location.href;
+          }
+        });
+      }
     });
     $('#modalSuccess').modal('show');
   });

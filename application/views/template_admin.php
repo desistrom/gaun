@@ -28,7 +28,7 @@
       var base_url = "<?=base_url();?>";
     </script>
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-red sidebar-mini">
 <div class="wrapper">
 
   <header class="main-header">
@@ -53,7 +53,7 @@
 
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <a href="<?=site_url('admin/logo/profile');?>">
               <img src="<?=base_url();?>media/crop/favicon.png" class="user-image" alt="User Image">
               <span class="hidden-xs">Admin</span>
             </a>
@@ -219,7 +219,7 @@
           </ul>
         </li> -->
 
-        <li class=" treeview <?php if(current_url() == site_url('admin/home/topologi') || current_url() == site_url('admin/home/testimoni') || current_url() == site_url('admin/layanan/monitoring_graph')){ ?>  active <?php } ?>">
+        <li class=" treeview <?php if(current_url() == site_url('admin/home/topologi') || current_url() == site_url('admin/home/topologi') || current_url() == site_url('admin/layanan/monitoring_graph')){ ?>  active <?php } ?>">
           <a href="#">
             <i class="fa fa-link"></i>  <span>Konektivitas</span>
             <span class="pull-right-container">

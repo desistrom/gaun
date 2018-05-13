@@ -758,13 +758,19 @@ class Keanggotaan extends MX_Controller  {
     public function active_instansi(){
     	$url = $this->uri->segment_array();
 		$id = end($url);
+		$ret['status'] = 0;
 		if ($this->db->get_where('tb_instansi',array('id_instansi'=>$id))->row_array()['is_aktif'] == 1) {
 			$this->db->update('tb_instansi',array('is_aktif'=>0),array('id_instansi'=>$id));
+			$ret['status'] = 1;
+			$ret['url'] = site_url('admin/keanggotaan/instansi');
 		}else{
+			$ret['status'] = 1;
+			$ret['url'] = site_url('admin/keanggotaan/instansi');
 			$this->db->update('tb_instansi',array('is_aktif'=>1),array('id_instansi'=>$id));
+			$this->session->set_flashdata("notif","Data Berhasil di Ubah");
 		}
-		$this->session->set_flashdata("notif","Data Berhasil di Ubah");
-		echo json_encode("berhasil");
+		echo json_encode($ret);
+		// redirect(site_url('admin/keanggotaan/instansi'));
     }
 
     public function status_instansi(){
@@ -833,5 +839,51 @@ class Keanggotaan extends MX_Controller  {
             $l = strlen($str) - $i;
             $ext = substr($str,$i+1,$l);
             return $ext;
+    }
+
+    public function ajax_list()
+    {
+    	$this->load->model('keanggotaan_model');
+        $list = $this->keanggotaan_model->get_datatables();
+        $data = array();
+        $no = $_POST['start'];
+        $aktif = '';
+        $button = '';
+        foreach ($list as $instansi) {
+            $no++;
+            if ($instansi->is_aktif == 1) {
+            	$aktif = '<span class="text-success">YES</span>';
+            	$button = '<button lass="btn btn-default btn_active btn-sm" id="'.$instansi->id_instansi.'"><span class="text-success"><i class="fa fa-eye-slash"></i></span> </button>
+							<a href="'.site_url("admin/keanggotaan/edit_instansi").'/'.$instansi->id_instansi.'"><button class="btn btn-primary btn-sm" id="edit">Edit</button></a>';
+            }else{
+            	$aktif = '<span class="text-Success">NO</span>';
+            	$button = '<button lass="btn btn-default btn_active btn-sm" id="'.$instansi->id_instansi.'"><span class="text-danger"><i class="fa fa-eye"></i></span></button>
+							<a href="'.site_url("admin/keanggotaan/edit_instansi").'/'.$instansi->id_instansi.'"><button class="btn btn-primary btn-sm" id="edit">Edit</button></a>';
+            }
+            $status = '';
+            if($instansi->status == 0){ $status .= '<span class="text-info">Not Actived</span>'; }elseif($instansi->status == 1 ){ $status .= '<span class="text-primary">On Proces</span>'; }else{ $status .= '<span class="text-success">Active</span>'; }
+            $proses = '<button class="btn btn-info status btn-sm" id="'.$instansi->status.'##'.$instansi->id_instansi.'">';
+             if($instansi->status == 0){ $proses .= 'Proses'; }elseif($instansi->status==1){ $proses .= 'Done'; }else{ $proses .= 'Active';  } $proses .= '</button>';
+            $row = array();
+            $row[] = $no;
+            $row[] = $instansi->nm_jenis_instansi;
+            $row[] = '<span class="btn_detail" id="'.$instansi->id_instansi.'" style="cursor : pointer">'.$instansi->nm_instansi.'</span>';
+            $row[] = $instansi->email;
+            $row[] = $status;
+            $row[] = $instansi->sort;
+            $row[] = $aktif;
+            $row[] = $button.' '.$proses.' <button class="btn btn-danger btn-sm btn_delete" id="'.$instansi->id_instansi.'"> Delete </button>';
+ 
+            $data[] = $row;
+        }
+ 
+        $output = array(
+                        "draw" => $_POST['draw'],
+                        "recordsTotal" => $this->keanggotaan_model->count_all(),
+                        "recordsFiltered" => $this->keanggotaan_model->count_filtered(),
+                        "data" => $data,
+                );
+        //output to json format
+        echo json_encode($output);
     }
 }

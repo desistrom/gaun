@@ -1,17 +1,61 @@
+<style type="text/css">
+  .file-group{
+    padding-bottom: 1em;
+  }
+  .file-group .error{
+    position: absolute;
+    bottom: 0;
+  }
+  .form-goup-file{
+    height: auto;
+    overflow: hidden;
+    padding: 0;
+  }
+  .form-goup-file div{
+    display: inline-block;
+  }
+  .form-goup-file .input-file-left{
+    width: 100%;
+  }
+  .form-goup-file .input-file-left input{
+  width: 100%;
+  }
+  .form-goup-file .input-file-right{
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+  .form-goup-file .input-file-right .btn-choose-foto{
+    height: 34px;
+    width: 105px;
+    border-radius: 0;
+  }
+</style>
 <div class="box">
     <div class="box-header with-border">
         <h3 class="box-title">Logo Website</h3>
     </div>
     <div class="box-body">
-    <div class="form-group">
+    <div class="col col-md-6 col-sm-7 col-xs-12">
+      <div class="form-group">
       <label>Picture</label>
+        <div class="col col-md-12 form-goup-file">
+          <div class="input-file-right"><label class="btn btn-primary btn-choose-foto" for="userfile">Choose File</label></div>
+          <div class="input-file-left"><input type="file" class="form-control file" name="userfile" id="userfile"></div> 
+          <div class="error" id="ntf_userfile"></div>
+          <div class="error" id="ntf_error"></div> 
+        </div>
+      <!-- <label>Picture</label>
         <input type="file" class="form-control" name="userfile" id="userfile">
         <div class="error" id="ntf_userfile"></div>
-        <div class="error" id="ntf_error"></div>
+        <div class="error" id="ntf_error"></div> -->
       </div>
-        <button type="button" class="btn btn-primary" id="submit">Submit</button>
+      
     </div>
-    <img width="50%" src="<?=base_url();?>media/<?=$image['logo'];?>">
+       <div class="col col-md-6 col-sm-5 col-xs-12" style="text-align: center;"><img width="50%" src="<?=base_url();?>media/<?=$image['logo'];?>"></div>
+       <div class="col col-md-12 col-sm-12 col-xs-12"><button type="button" class="btn btn-primary" id="submit">Submit</button></div> 
+    </div>
+    
 </div>
 <?php if ($this->session->flashdata('notif') != '') { ?>
     <div class="modal" tabindex="-1" role="dialog" id="modalSuccess">

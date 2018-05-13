@@ -11,7 +11,7 @@
 			<a href="<?=site_url('admin/news/add');?>" class="btn btn-success">Tambah News</a> | <a href="<?=site_url('admin/news/get_rss');?>" class="btn btn-info btn_rss">Get rss</a>
 		</div>
 		<div class="col col-md-12 col-xs-12 table-responsive">
-			<table class="table table-bordered  dataTable" id="example2">
+			<table class="table table-bordered  dataTable" id="table">
 				<thead>
 					<th>No</th>
 					<th>Judul</th>
@@ -22,7 +22,7 @@
 					<th>Opsi</th>
 				</thead>
 				<tbody>
-        <?php foreach ($news as $key => $value): ?>
+        <!-- <?php foreach ($news as $key => $value): ?>
           <tr>
 						<td><?=($key+1);?></td>
 						<td><?=$value['judul'];?></td>
@@ -35,7 +35,7 @@
 							<a href="<?=site_url('admin/news/edit/'.$value['id_news']);?>"><button class="btn btn-primary btn-sm" id="edit">Edit</button></a>
 						</td>
           </tr>
-        <?php endforeach; ?>
+        <?php endforeach; ?> -->
 				</tbody>
 			</table>
 		</div>
@@ -237,7 +237,8 @@
     </div>
 </div>
 <script src="<?=base_url().'assets/js/jquery-3.2.1.min.js';?>"></script>
-<script src="<?=base_url().'assets/js/jquery.slugify.js';?>"></script>
+<script src="<?=base_url();?>assets/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="<?=base_url();?>assets/datatables/js/dataTables.bootstrap.min.js"></script>
 <script type="text/javascript">
   $(document).ready(function () {
     $('body').on('click','#submit', function(){
@@ -308,4 +309,35 @@
     });
     $('#modalSuccess').modal('show');
   });
+</script>
+<script type="text/javascript">
+ 
+var table;
+ 
+$(document).ready(function() {
+ 
+    //datatables
+    table = $('#table').DataTable({ 
+ 
+        "processing": true, //Feature control the processing indicator.
+        "serverSide": true, //Feature control DataTables' server-side processing mode.
+        "order": [], //Initial no order.
+ 
+        // Load data for the table's content from an Ajax source
+        "ajax": {
+            "url": "<?php echo site_url('admin/news/ajax_list')?>",
+            "type": "POST"
+        },
+ 
+        //Set column definition initialisation properties.
+        "columnDefs": [
+        { 
+            "targets": [ 0 ], //first column / numbering column
+            "orderable": false, //set not orderable
+        },
+        ],
+ 
+    });
+ 
+});
 </script>

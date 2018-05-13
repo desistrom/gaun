@@ -10,6 +10,7 @@
 class News extends MX_Controller  {
 	var $data = array();
 	function __construct(){
+		$this->load->model('news_model');
 	}
 	public function index(){
 		// $rss = file_get_contents('https://rss.kontan.co.id/news/analisis');
@@ -327,6 +328,46 @@ class News extends MX_Controller  {
         $l = strlen($str) - $i;
         $ext = substr($str,$i+1,$l);
         return $ext;
+    }
+
+    public function ajax_list()
+    {
+        $list = $this->news_model->get_datatables();
+        $data = array();
+        $no = $_POST['start'];
+        $aktif = '';
+        $button = '';
+        foreach ($list as $news) {
+            $no++;
+            if ($news->is_aktif == 1) {
+            	$aktif = '<span class="text-success">Enable</span>';
+            	$button = '<button class="btn btn-default btn-sm btn_status" id="'.$news->id_news.'"> <span class="text-danger">Disabled</span> </button>
+							<a href="'.site_url("admin/news/edit").'/'.$news->id_news.'"><button class="btn btn-primary btn-sm" id="edit">Edit</button></a>';
+            }else{
+            	$aktif = '<span class="text-Success">Disable</span>';
+            	$button = '<button class="btn btn-default btn-sm btn_status" id="'.$news->id_news.'"> <span class="text-danger">Disabled</span> </button>
+							<a href="'.site_url("admin/news/edit").'/'.$news->id_news.'"><button class="btn btn-primary btn-sm" id="edit">Edit</button></a>';
+            }
+            $row = array();
+            $row[] = $no;
+            $row[] = $news->judul;
+            $row[] = word_limiter($news->content, 5);
+            $row[] = $news->nm_kategori;
+            $row[] = $news->created;
+            $row[] = $aktif;
+            $row[] = $button;
+ 
+            $data[] = $row;
+        }
+ 
+        $output = array(
+                        "draw" => $_POST['draw'],
+                        "recordsTotal" => $this->news_model->count_all(),
+                        "recordsFiltered" => $this->news_model->count_filtered(),
+                        "data" => $data,
+                );
+        //output to json format
+        echo json_encode($output);
     }
 	
 }

@@ -98,7 +98,7 @@ class Logo extends MX_Controller  {
 		$this->ciparser->new_parse('template_admin','modules_admin', 'logo/title_layout',$this->data);
 	}
 
-	public function profil(){
+	public function profile(){
 		$id = $this->session->userdata('data_user')['id_user'];
 		$this->data['profile'] = $this->db->get_where('tb_user',array('id_user'=>$id))->row_array();
 		if ($this->input->server('REQUEST_METHOD') == 'POST') {
@@ -108,12 +108,14 @@ class Logo extends MX_Controller  {
 			$this->form_validation->set_rules('username','Username','trim|required');
 			$this->form_validation->set_rules('password','Passowrd','trim|required');
 			$this->form_validation->set_rules('repassword','Re - Passowrd','trim|required|matches[password]');
-			if ($this->input->server('REQUEST_METHOD') == 'POST') {
+			if ($this->form_validation->run() == True) {
+				$ret['state'] = 1;
+				$data_input = $this->input->post();
 				$data_user['username'] = $data_input['username'];
 				$data_user['password'] = sha1($data_input['password']);
 				if ($this->db->update('tb_user',$data_user,array('id_user'=>$id))) {
 					$ret['status'] = 1;
-					$ret['url'] = site_url('admin/logo/profil');
+					$ret['url'] = site_url('admin/logo/profile');
 					$this->session->set_flashdata("notif","Data Berhasil di Update");
 				}
 			}
@@ -123,6 +125,8 @@ class Logo extends MX_Controller  {
 			echo json_encode($ret);
 			exit();
 		}
+		$this->data['breadcumb'] = 'Account';
+		$this->ciparser->new_parse('template_admin','modules_admin', 'logo/profile_layout',$this->data);
 	}
 
 	public function upload_logo($logo){	    		

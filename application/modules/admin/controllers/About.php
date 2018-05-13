@@ -46,6 +46,7 @@ class About extends MX_Controller  {
 				// print_r($_FILES['file_names']);
 				$jabatan = $this->input->post('jabatan');
 				$id_founder = $this->input->post('id_founder');
+				$sort = $this->input->post('sort');
 				$file = $this->input->post('file');
 				for ($i=0; $i < count($name); $i++) {
 					
@@ -65,6 +66,7 @@ class About extends MX_Controller  {
 						$data_founder_insert['nama'] = $name[$i];
 						$data_founder_insert['jabatan'] = $jabatan[$i];
 						$data_founder_insert['foto'] = $image['asli'];
+						$data_founder_insert['sort'] = $sort[$i];
 						if ($this->db->insert('tb_founder',$data_founder_insert)) {
 	                		$ret['status'] = 1;
 	                		$ret['url'] = current_url();
@@ -75,6 +77,7 @@ class About extends MX_Controller  {
 							$data_founder_update['nama'] = $name[$i];
 							$data_founder_update['jabatan'] = $jabatan[$i];
 							$data_founder_update['foto'] = $image['asli'];
+							$data_founder_update['sort'] = $sort[$i];
 							if ($this->db->update('tb_founder',$data_founder_update,array('id_founder'=>$id_founder[$i]))) {
 		                		$ret['status'] = 1;
 		                		$ret['url'] = current_url();
@@ -83,6 +86,7 @@ class About extends MX_Controller  {
 						}else{
 							$data_founder['nama'] = $name[$i];
 							$data_founder['jabatan'] = $jabatan[$i];
+							$data_founder['sort'] = $sort[$i];
 							if ($this->db->update('tb_founder',$data_founder,array('id_founder'=>$id_founder[$i]))) {
 		                		$ret['status'] = 1;
 		                		$ret['url'] = current_url();
@@ -109,6 +113,17 @@ class About extends MX_Controller  {
 		$this->data['breadcumb'] = 'About';
 		$this->data['founder'] = $this->db->get('tb_founder')->result_array();
 		$this->ciparser->new_parse('template_admin','modules_admin', 'about/about_layout',$this->data);
+	}
+
+	public function delete_about(){
+		$id = $this->input->post('id');
+		$ret = 0;
+		if ($this->db->delete('tb_founder',array('id_founder'=>$id))) {
+			$ret = 1;
+			$this->session->set_flashdata("notif","Data Berhasil di Hapus");
+		}
+		echo json_encode($ret);
+		exit();
 	}
 
 	public function contact(){

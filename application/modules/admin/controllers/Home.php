@@ -24,6 +24,9 @@ class Home extends CI_Controller  {
     	$this->data['breadcumb'] = 'Dashboard';
     	$this->data['user'] = $this->db->get('tb_instansi')->num_rows();
     	$this->data['news'] = $this->db->get('tb_news')->num_rows();
+    	$this->data['page'] = $this->db->get('tb_general_page')->num_rows();
+    	$this->data['video'] = $this->db->get_where('tb_galery',array('type'=>'video'))->num_rows();
+    	$this->data['picture'] = $this->db->get_where('tb_galery',array('type'=>'image'))->num_rows();
     	$this->ciparser->new_parse('template_admin','modules_admin', 'home/home_layout',$this->data);
     }
 

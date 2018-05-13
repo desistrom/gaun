@@ -6,7 +6,7 @@
 				<a href="<?=site_url('admin/keanggotaan/add_instansi');?>" class="btn btn-success">Tambah Instansi</a>
 			</div>
 			<div class="col col-md-12 col-xs-12 table-responsive">
-				<table class="table table-bordered  dataTable" id="example2">
+				<table class="table table-bordered  dataTable" id="table">
 					<thead>
 						<th>No</th>
 						<th>Jenis Instansi</th>
@@ -18,7 +18,7 @@
 						<th>Action</th>
 					</thead>
 					<tbody>
-					<?php foreach ($instansi as $key => $value): ?>
+					<!-- <?php foreach ($instansi as $key => $value): ?>
 						<tr>
 							<td><?=($key+1);?></td>
 							<td><?=$value['nm_jenis_instansi'];?></td>
@@ -37,7 +37,7 @@
 								<button class="btn btn-danger btn-sm btn_delete" id="<?=$value['id_instansi'];?>"> Delete </button>
 							</td>
 						</tr>
-					<?php endforeach; ?>
+					<?php endforeach; ?> -->
 					</tbody>
 				</table>
 				<div class="col col-md-12 col-xs-12 text-right">
@@ -248,7 +248,8 @@
 	<?php } ?>
 </div>
 <script src="<?=base_url().'assets/js/jquery-3.2.1.min.js';?>"></script>
-
+<script src="<?=base_url();?>assets/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="<?=base_url();?>assets/datatables/js/dataTables.bootstrap.min.js"></script>
 <script type="text/javascript">
   $(document).ready(function () {
     $('body').on('click','#submit', function(){
@@ -320,13 +321,17 @@
     	$.ajax({
           url : base_url+"admin/keanggotaan/active_instansi/"+id,
           dataType : 'json',
-          type : 'GET',
+          type : 'POST',
+          data : {'id' : id},
+          async : false
       }).done(function(data){
       	setTimeout(function(){  
-	      	$('#progresLoading').modal('hide');
-	      	console.log(data);
-	        window.location.href = window.location.href;
-        }, 3000);
+	      	// console.log(data);
+	      	if(data.status == 1){
+	      		$('#progresLoading').modal('hide');
+		        window.location.href = data.url;
+		    }
+        }, 2000);
       });
     });
 
@@ -373,4 +378,35 @@
     $('#modalSuccess').modal('show');
     
   });
+</script>
+<script type="text/javascript">
+ 
+var table;
+ 
+$(document).ready(function() {
+ 
+    //datatables
+    table = $('#table').DataTable({ 
+ 
+        "processing": true, //Feature control the processing indicator.
+        "serverSide": true, //Feature control DataTables' server-side processing mode.
+        "order": [], //Initial no order.
+ 
+        // Load data for the table's content from an Ajax source
+        "ajax": {
+            "url": "<?php echo site_url('admin/keanggotaan/ajax_list')?>",
+            "type": "POST"
+        },
+ 
+        //Set column definition initialisation properties.
+        "columnDefs": [
+        { 
+            "targets": [ 0 ], //first column / numbering column
+            "orderable": false, //set not orderable
+        },
+        ],
+ 
+    });
+ 
+});
 </script>

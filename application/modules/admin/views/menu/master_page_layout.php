@@ -130,12 +130,7 @@
 	      </div>
 	    </div>
 	    <div class="panel-body">
-				<div class="form-group">
-			      	<label>Image Page</label>
-			        <input type="file" class="form-control" name="userfile" id="userfile">
-			        <div class="error" id="ntf_userfile"></div>
-			        <div class="error" id="ntf_error"></div>
-			    </div>
+				
 				<div class="form-group">
 					<label>Setting to Menu</label>
 					<select name="menu" id="menu" class="form-control select2">
@@ -156,6 +151,12 @@
 					</select>
 					<div class="error" id="ntf_page"></div>
 				</div>
+				<div class="form-group">
+			      	<label>Image Page</label>
+			        <input type="file" class="form-control" name="userfile" id="userfile">
+			        <div class="error" id="ntf_userfile"></div>
+			        <div class="error" id="ntf_error"></div>
+			    </div>
 
 				<button type="button" class="btn btn-primary" id="submit">Submit</button>
 			</div>
@@ -216,9 +217,9 @@
 							<div class="error" id="ntf_menu"></div>
 						</div>
 					    <?php if ($current['img'] != 'dummy'): ?>
-					    <img src="<?=base_url();?>media/<?=$current['img'];?>" width="250px">
+					    <img width="100%" src="<?=base_url();?>media/<?=$current['img'];?>" width="250px">
 					    <?php endif ?>
-						<button style="margin-top: 15PX;" type="button" class="btn btn-primary" id="submit">Submit</button>
+						<div class="col col-md-12 col-sm-12 col-xs-12"><button style="margin-top: 15PX;" type="button" class="btn btn-primary" id="submit">Submit</button></div>
 					</div>
 				</div>
 			</div>

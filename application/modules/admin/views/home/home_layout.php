@@ -4,10 +4,10 @@
     <div class="inner">
       <h3><?=$user;?></h3>
 
-      <p>Instansi Joined</p>
+      <p>Instansi</p>
     </div>
     <div class="icon">
-      <i class="ion ion-person-add"></i>
+      <i class="fa fa-university"></i>
     </div>
     <a href="<?=site_url('admin/keanggotaan/instansi');?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
   </div>
@@ -22,7 +22,52 @@
       <p>News</p>
     </div>
     <div class="icon">
-      <i class="ion ion-bag"></i>
+      <i class="fa fa-newspaper-o"></i>
+    </div>
+    <a href="<?=site_url('admin/news');?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+  </div>
+</div>
+
+<div class="col-lg-3 col-xs-6">
+  <!-- small box -->
+  <div class="small-box bg-red">
+    <div class="inner">
+      <h3><?=$video;?></h3>
+
+      <p>Videos</p>
+    </div>
+    <div class="icon">
+      <i class="fa fa-video-camera"></i>
+    </div>
+    <a href="<?=site_url('admin/news');?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+  </div>
+</div>
+
+<div class="col-lg-3 col-xs-6">
+  <!-- small box -->
+  <div class="small-box bg-green">
+    <div class="inner">
+      <h3><?=$picture;?></h3>
+
+      <p>Images</p>
+    </div>
+    <div class="icon">
+      <i class="fa fa-picture-o"></i>
+    </div>
+    <a href="<?=site_url('admin/news');?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+  </div>
+</div>
+
+<div class="col-lg-3 col-xs-6">
+  <!-- small box -->
+  <div class="small-box bg-purple">
+    <div class="inner">
+      <h3><?=$page;?></h3>
+
+      <p>Pages</p>
+    </div>
+    <div class="icon">
+      <i class="fa fa-picture-o"></i>
     </div>
     <a href="<?=site_url('admin/news');?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
   </div>

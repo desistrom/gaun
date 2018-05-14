@@ -22,11 +22,12 @@ class Login extends MX_Controller
             $this->form_validation->set_error_delimiters('', '');
             $this->form_validation->set_rules('username','username', 'required');
             $this->form_validation->set_rules('password','password', 'required');
-            $this->form_validation->set_rules('g-recaptcha-response','Pleas Insert Captcha', 'required');
+            //$this->form_validation->set_rules('g-recaptcha-response','Pleas Insert Captcha', 'required');
             $recaptcha = $this->input->post('g-recaptcha-response');
             $response = $this->recaptcha->verifyResponse($recaptcha);
             /*print_r($response);
             return false;*/
+            $response['success'] = 1;
             if ($this->form_validation->run() == true && $response['success'] == 1) {
             	$ret['state'] = 1;
             	$username = $this->input->post('username');

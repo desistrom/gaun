@@ -3,6 +3,7 @@
     width: 50%;
   }
 </style>
+<div class="col col-md-12 col-sm-12 col-xs-12">
 <div class="box ">
   <div class="box-header with-border">
     <h3 class="box-title">Kolaborasi Page</h3>
@@ -31,6 +32,8 @@
   </div>
   <!-- /.box-body -->
 </div>
+
+ </div>
 <?php if ($this->session->flashdata('notif') != '') { ?>
     <div class="modal" tabindex="-1" role="dialog" id="modalSuccess">
       <div class="modal-dialog" role="document">

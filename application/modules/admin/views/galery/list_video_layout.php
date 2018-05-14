@@ -20,8 +20,8 @@
 				  	<td><?=$value['deskripsi'];?></td>
 				  	<td>
 				  		<!-- <a href="<?=site_url('admin/galery/preview');?>"><button class="btn btn-default">Preview</button></a> -->
-				  		<a href="<?=site_url('admin/galery/edit_video').'/'.$value['id_galery'];?>"><button class="btn btn-primary">Edit</button></a>
-				  		<button class="btn btn-danger hapus" id="<?=$value['id_galery'];?>">Hapus</button>
+				  		<a href="<?=site_url('admin/galery/edit_video').'/'.$value['id_galery'];?>" data-toggle="tooltip" title="Edit"><button class="btn btn-info"><i class="fa fa-pencil"></i></button></a>
+				  		<button class="btn btn-danger hapus" id="<?=$value['id_galery'];?>" data-toggle="tooltip" title="Delete"><i class="fa fa-trash"></i></button>
 				  	</td>
 				  </tr>
 

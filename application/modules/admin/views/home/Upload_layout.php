@@ -29,8 +29,13 @@
     height: 34px;
     width: 105px;
     border-radius: 0;
+    padding-left: 7px;
+  }
+  .fa-upload{
+    padding-right: 10px;
   }
 </style>
+<div class="col col-md-12 col-sm-12 col-xs-12">
 <div class="box">
     <div class="box-header with-border">
         <h3 class="box-title">Logo Website</h3>
@@ -40,7 +45,7 @@
       <div class="form-group">
       <label>Picture</label>
         <div class="col col-md-12 form-goup-file">
-          <div class="input-file-right"><label class="btn btn-primary btn-choose-foto" for="userfile">Choose File</label></div>
+          <div class="input-file-right"><label class="btn btn-success btn-choose-foto" for="userfile"><i class="fa fa-upload"></i>Choose File</label></div>
           <div class="input-file-left"><input type="file" class="form-control file" name="userfile" id="userfile"></div> 
           <div class="error" id="ntf_userfile"></div>
           <div class="error" id="ntf_error"></div> 
@@ -56,6 +61,8 @@
        <div class="col col-md-12 col-sm-12 col-xs-12"><button type="button" class="btn btn-primary" id="submit">Submit</button></div> 
     </div>
     
+</div>
+  
 </div>
 <?php if ($this->session->flashdata('notif') != '') { ?>
     <div class="modal" tabindex="-1" role="dialog" id="modalSuccess">

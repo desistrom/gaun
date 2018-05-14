@@ -1,16 +1,160 @@
 <style type="text/css">
   .form-group{
-    width: 50%;
+ 
   }
+  #cke_content{
+    width: 100% !important;
+  }
+  .tablink {
+    background-color: #1E282C;
+    color: white;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    font-size: 17px;
+    width: 25%;
+}
+
+.tablink:hover {
+    background-color: #CF090A;
+}
+
+/* Style the tab content (and add height:100% for full page content) */
+.tabcontent {
+    color: ;
+    display: none;
+    height: auto;
+    overflow: hidden;
+    padding-bottom: 1em;
+}
+
+/*#Home {background-color: red;}
+#News {background-color: green;}
+#Contact {background-color: blue;}
+#About {background-color: orange;}*/
+.heading-tab{
+  height: auto;
+  overflow: hidden;
+  background-color: #1E282C;
+}
+.list-founder{
+  border-bottom: solid #E0E0E0 1px;
+  padding: 15px 0;
+}
+.foot-tab{
+  text-align: right;
+  background-color: white;
+  padding: 1em;
+  border-top: solid 4px #E0E0E0;
+}
 </style>
+<div class="col col-md-12 col-sm-12 col-xs-12">
+  <div class="box">
+    <div class="heading-tab">
+      <button class="tablink" onclick="openPage('About', this, '#BD0E0E')" id="defaultOpen">About</button>
+      <button class="tablink" onclick="openPage('Founder', this, '#BD0E0E')" >Founder</button>
+    </div>
+      
+      
+  <form role="form">
+
+      <div id="About" class="tabcontent">
+         <div class="form-group">
+            <!-- <label>About</label> -->
+            <?php echo $this->ckeditor->editor("content", $about['content'] ); ?>
+            <input type="hidden" name="content" value="" id="content">
+            <div class="error" id="ntf_content"></div>
+        <input type="hidden" name="id" id="id" value="<?php if(isset($about)){ echo $about['id_about']; } ?>"  >
+          </div>
+      </div>
+
+      <div id="Founder" class="tabcontent">
+      <?php if(count($founder) > 0){ foreach ($founder as $key => $value): ?>
+       
+        <div class="col-md-12 list-founder" style="padding-top: 1em;">
+        <div class="col-md-3">
+          <label>Nama Founder</label>
+          <input type="text" name="name" class="form-control name" value="<?=$value['nama'];?>" id="name" placeholder="Masukan Nama Founder">
+          <div class="error" id="ntf_name"></div>
+        </div>
+
+        <div class="col-md-4">
+          <label>Jabatan Founder</label>
+          <input type="text" name="jabatan" class="form-control jabatan" value="<?=$value['jabatan'];?>" id="jabatan" placeholder="Masukan Jabatan Founder">
+          <div class="error" id="ntf_jabatan"></div>
+        </div>
+
+        <div class="col-md-2">
+          <label>Photo Founder</label>
+          <input type="file" name="file_name[]" class="form-control file" id="file_name">
+          <div class="error" id="ntf_file_name"></div>
+          <img src="<?=base_url().'assets/media/'.$value['foto'];?>" width="250px" style="display: none">
+        </div>
+        <div class="col-md-1">
+          <label>Sort</label><br>
+          <input type="number" name="sort" class="form-control sort" value="<?=$value['sort'];?>">
+          <div class="error" id="ntf_sort"></div>
+        </div>
+        <div class="col-md-1">
+          <label>Photo</label><br>
+          <a id="<?=base_url().'assets/media/'.$value['foto'];?>" href="#" class="foto">Click Here</a>
+        </div>
+        <div class="col-md-1">
+          <label>Delete</label><br>
+          <button class="btn btn-danger btn-xs delete" id="<?=$value['id_founder']?>" type="button"><i class="fa fa-times"></i></button>
+        </div>
+        <input type="hidden" name="id_founder[]" class="id_founder" id="id_founder" value="<?=$value['id_founder'];?>">
+        </div>
+      <?php endforeach; }else{ ?>
+        <hr><div class="col-md-4">
+          <label>Nama Founder</label>
+          <input type="text" name="name" class="form-control name" value="" id="name" placeholder="Masukan Nama Founder">
+          <div class="error" id="ntf_name"></div>
+        </div>
+
+        <div class="col-md-4">
+          <label>Jabatan Founder</label>
+          <input type="text" name="jabatan" class="form-control jabatan" value="" id="jabatan" placeholder="Masukan Jabatan Founder">
+          <div class="error" id="ntf_jabatan"></div>
+        </div>
+
+        <div class="col-md-1">
+          <label>Sort</label><br>
+          <input type="number" name="sort" class="form-control sort" value="">
+          <div class="error" id="ntf_sort"></div>
+        </div>
+
+        <div class="col-md-4">
+          <label>Photo Founder</label>
+          <input type="file" name="file_name[]" class="form-control file" id="file_name">
+          <div class="error" id="ntf_file_name"></div>
+        </div>
+        <input type="hidden" name="id_founder[]" class="id_founder" id="id_founder" value="">
+      <?php } ?>
+      <div class="add_file"></div>
+      <div class="col-md-12">
+        <button style="float: right;  margin-top: 10px" type="button" class="btn btn-danger btn_add"><i class="fa fa-plus"></i> Add More</button>
+      </div>
+      </div>
+      <div class="col-md-12 foot-tab">
+        <button type="button" class="btn btn-primary" id="submit">Submit</button>
+      </div> 
+
+    </form>
+  </div>
+</div>
+<!-- <div class="col col-md-12 col-sm-12 col-xs-12">
+  
 <div class="box ">
   <div class="box-header with-border">
     <h3 class="box-title">About Page</h3>
   </div>
-  <!-- /.box-header -->
+
   <div class="box-body">
     <form role="form">
-      <!-- textarea -->
+
       <div class="form-group">
         <label>About</label>
         <?php echo $this->ckeditor->editor("content", $about['content'] ); ?>
@@ -91,8 +235,9 @@
 
     </form>
   </div>
-  <!-- /.box-body -->
+
 </div>
+</div> -->
 <?php if ($this->session->flashdata('notif') != '') { ?>
     <div class="modal" tabindex="-1" role="dialog" id="modalSuccess">
       <div class="modal-dialog" role="document">
@@ -160,6 +305,7 @@
       var error = '';
       $('#content').val(CKEDITOR.instances.content.getData());
       form_data.append('content',$('#content').val());
+      form_data.append('id',$('#id').val());
       $('.file').each(function(i) {
           if ($(this).prop('files')[0] != undefined) {
             form_data.append('file_names[]', $(this).prop('files')[0]);
@@ -240,7 +386,7 @@
       });
     });
     $('body').on('click','.btn_add',function(){
-      var html = '<hr><div class="col-md-12"><div class="col-md-3"><label>Nama Founder</label><input type="text" name="name" class="form-control name" value="" id="name" placeholder="Masukan Nama Founder"><div class="error" id="ntf_name"></div></div><div class="col-md-4"><label>Jabatan Founder</label><input type="text" name="jabatan" class="form-control jabatan" value="" id="jabatan" placeholder="Masukan Jabatan Founder"><div class="error" id="ntf_jabatan"></div></div><div class="col-md-2"><label>Photo Founder</label><input type="file" name="file_name[]" class="form-control file" id="file_name"><div class="error" id="ntf_file_name"></div></div><div class="col-md-1"><label>Sort</label><br><input type="number" name="sort" class="form-control sort" value=""><div class="error" id="ntf_sort"></div></div><input type="hidden" name="id_founder[]" class="id_founder" id="id_founder" value=""><div class="col-md-2"></div></div>';
+      var html = '<hr><div class="col-md-12 list-founder"><div class="col-md-3"><label>Nama Founder</label><input type="text" name="name" class="form-control name" value="" id="name" placeholder="Masukan Nama Founder"><div class="error" id="ntf_name"></div></div><div class="col-md-4"><label>Jabatan Founder</label><input type="text" name="jabatan" class="form-control jabatan" value="" id="jabatan" placeholder="Masukan Jabatan Founder"><div class="error" id="ntf_jabatan"></div></div><div class="col-md-2"><label>Photo Founder</label><input type="file" name="file_name[]" class="form-control file" id="file_name"><div class="error" id="ntf_file_name"></div></div><div class="col-md-1"><label>Sort</label><br><input type="number" name="sort" class="form-control sort" value=""><div class="error" id="ntf_sort"></div></div><input type="hidden" name="id_founder[]" class="id_founder" id="id_founder" value=""><div class="col-md-2"></div></div>';
       $('.add_file').append(html);
     });
     $('body').on('click','.foto',function(){
@@ -274,4 +420,22 @@
     });
     $('#modalSuccess').modal('show');
   });
+</script>
+<script>
+function openPage(pageName,elmnt,color) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablink");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].style.backgroundColor = "";
+    }
+    document.getElementById(pageName).style.display = "block";
+    elmnt.style.backgroundColor = color;
+
+}
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
 </script>

@@ -231,6 +231,9 @@
         background-color: #FEFCFC;
         color: #CF090A;
     }
+    .detail_news .content-right{
+        border-bottom: none;
+    }
     @media (max-width: 991px)
     {
          .box-news{
@@ -245,6 +248,17 @@
         padding: 10px 15px;
         font-size: 16px;
     }
+    .title-page-news{
+    padding-top: 1em;
+    padding-bottom: 1em;
+    font-family: 'Nunito Sans', sans-serif;
+}
+.detail_news .content-right{
+    padding-left: 15px;
+    height: auto;
+    overflow: hidden;
+}
+
     }
 </style>
 <section class="detail_news" style="margin-top: 6em;">

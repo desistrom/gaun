@@ -115,7 +115,7 @@
 
         <li class="treeview <?php if(current_url() == site_url('admin/menu/index')){ ?> active <?php } ?>">
           <a href="<?=site_url('admin/menu/index');?>">
-            <i class="fa fa-anchor"></i> <span>Menu</span>
+           <i class="fa fa-th"></i> <span>Menu</span>
             <span class="pull-right-container">
               
             </span>
@@ -124,7 +124,7 @@
 
         <li class="treeview <?php if(current_url() == site_url('admin/menu/page')){ ?> active <?php } ?>">
           <a href="<?=site_url('admin/menu/page');?>">
-            <i class="fa fa-folder"></i> <span>Page</span>
+            <i class="fa fa-copy"></i><span>Page</span>
             <span class="pull-right-container">
               
             </span>
@@ -152,7 +152,7 @@
         
         <li class=" treeview <?php if(current_url() == site_url('admin/home/logo') || current_url() == site_url('admin/logo/index') || current_url() == site_url('admin/logo/title')){ ?>  active <?php } ?>">
           <a href="#">
-            <i class="fa fa-link"></i>  <span>Heading</span>
+            <i class="fa fa-header"></i><span>Heading</span>
             <span class="pull-right-container">
 
               <i class="fa fa-angle-left pull-right"></i>
@@ -191,13 +191,13 @@
           </a>
           <ul class="treeview-menu">
             
-            <li <?php if(current_url() == site_url('admin/home/testimoni')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/home/testimoni');?>"><i class="fa fa-comment"></i>Testimony</a></li>
             <li <?php if(current_url() == site_url('admin/home/hero')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/home/hero');?>"><i class="fa fa-video-camera"></i>Hero</a></li>
-            <!-- <li <?php if(current_url() == site_url('admin/home/pentahelix')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/home/pentahelix');?>"><i class="fa fa-building"></i>pentahelix</a></li> -->
-            <li <?php if(current_url() == site_url('admin/home/Layanan_idroam')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/home/Layanan_idroam');?>"><i class="fa fa-bullhorn"></i>Layanan ID Roam</a></li>
-            <li <?php if(current_url() == site_url('admin/home/Layanan_cloud')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/home/Layanan_cloud');?>"><i class="fa fa-bullhorn"></i>Layanan Cloud Federation</a></li>
-            <li <?php if(current_url() == site_url('admin/home/kolaborasi')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/home/kolaborasi');?>"><i class="fa fa-bullhorn"></i>Kolaborasi</a></li>
             <li <?php if(current_url() == site_url('admin/about/slider')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/about/slider');?>"><i class="fa fa-bullhorn"></i>Akademisi</a></li>
+            <li <?php if(current_url() == site_url('admin/home/testimoni')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/home/testimoni');?>"><i class="fa fa-comment"></i>Testimony</a></li>
+            <!-- <li <?php if(current_url() == site_url('admin/home/pentahelix')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/home/pentahelix');?>"><i class="fa fa-building"></i>pentahelix</a></li> -->
+          <!--   <li <?php if(current_url() == site_url('admin/home/Layanan_idroam')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/home/Layanan_idroam');?>"><i class="fa fa-bullhorn"></i>Layanan ID Roam</a></li>
+            <li <?php if(current_url() == site_url('admin/home/Layanan_cloud')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/home/Layanan_cloud');?>"><i class="fa fa-bullhorn"></i>Layanan Cloud Federation</a></li> -->
+            <li <?php if(current_url() == site_url('admin/home/kolaborasi')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/home/kolaborasi');?>"><i class="fa fa-bullhorn"></i>Kolaborasi</a></li>
           </ul>
         </li>
 
@@ -233,7 +233,7 @@
           </ul>
         </li>
 
-        <li class=" treeview <?php if(current_url() == site_url('admin/keanggotaan/setting') || current_url() == site_url('admin/keanggotaan/index') || current_url() == site_url('admin/keanggotaan/instansi') || current_url() == site_url('admin/keanggotaan/setting_reg') || current_url() == site_url('admin/keanggotaan/index') || current_url() == site_url('admin/keanggotaan/instansi')){ ?> active <?php } ?>">
+        <li class=" treeview <?php if(current_url() == site_url('admin/keanggotaan/setting') || current_url() == site_url('admin/keanggotaan/index') || current_url() == site_url('admin/keanggotaan/instansi') || current_url() == site_url('admin/keanggotaan/setting_reg') || current_url() == site_url('admin/keanggotaan/index') || current_url() == site_url('admin/keanggotaan/instansi') || current_url() == site_url('admin/keanggotaan/instansi_request')){ ?> active <?php } ?>">
           <a href="#">
             <i class="fa fa-users"></i>  <span>Keanggotaan</span>
             <span class="pull-right-container">
@@ -243,7 +243,8 @@
           </a>
           <ul class="treeview-menu">
             <!-- <li <?php if(current_url() == site_url('admin/keanggotaan/index')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/keanggotaan/index');?>"><i class="fa fa-users"></i> List Anggota</a></li> -->
-            <li <?php if(current_url() == site_url('admin/keanggotaan/instansi')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/keanggotaan/instansi');?>"><i class="fa fa-black-tie"></i>Instansi</a></li>
+            <li <?php if(current_url() == site_url('admin/keanggotaan/instansi')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/keanggotaan/instansi');?>"><i class="fa fa-black-tie"></i>Joined Instansi</a></li>
+            <li <?php if(current_url() == site_url('admin/keanggotaan/instansi_request')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/keanggotaan/instansi_request');?>"><i class="fa fa-black-tie"></i>Request Joined Instansi</a></li>
             <!-- <li <?php if(current_url() == site_url('admin/keanggotaan/kategori_instansi')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/keanggotaan/kategori_instansi');?>"><i class="fa fa-black-tie"></i>Jenis Instansi</a></li> -->
             <li <?php if(current_url() == site_url('admin/keanggotaan/setting')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/keanggotaan/setting');?>"><i class="fa fa-gear"></i>Benefit</a></li>
             <li <?php if(current_url() == site_url('admin/keanggotaan/setting_reg')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/keanggotaan/setting_reg');?>"><i class="fa fa-gear"></i>Registrasi</a></li>
@@ -274,8 +275,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li <?php if(current_url() == site_url('admin/news')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/news');?>"><i class="fa fa-newspaper-o"></i> List Berita</a></li>
             <li <?php if(current_url() == site_url('admin/kategori_news')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/kategori_news');?>"><i class="fa fa-newspaper-o"></i> Kategori Berita </a></li>
+            <li <?php if(current_url() == site_url('admin/news')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/news');?>"><i class="fa fa-newspaper-o"></i> List Berita</a></li>
           </ul>
         </li>
 
@@ -299,7 +300,7 @@
 
         <li class="treeview <?php if(current_url() == site_url('admin/about')){ ?> active <?php } ?>">
           <a href="<?=site_url('admin/about');?>">
-            <i class="fa fa-exclamation"></i> <span>Tentang</span>
+            <i class="fa fa-info"></i> <span>Tentang</span>
             <span class="pull-right-container">
 
             </span>
@@ -309,7 +310,7 @@
 
         <li class=" treeview <?php if(current_url() == site_url('admin/about/footer')){ ?> active <?php } ?>">
           <a href="<?=site_url('admin/about/footer');?>">
-            <i class="fa fa-newspaper-o"></i> <span>Footer Setting</span>
+            <i class="glyphicon glyphicon-option-horizontal"></i><span>Footer Setting</span>
             <span class="pull-right-container">
 
             </span>

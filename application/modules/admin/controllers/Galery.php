@@ -252,11 +252,18 @@ class Galery extends MX_Controller  {
 			$this->form_validation->set_rules('album','Album','trim|required');
 			if ($this->form_validation->run() == true) {
 				$ret['state'] = 1;
-				$media['judul'] = $this->input->post('judul');
-				$media['deskripsi'] = $this->input->post('deskripsi');
+				// $media['judul'] = $this->input->post('judul');
+				// $media['deskripsi'] = $this->input->post('deskripsi');
 				$media['id_album'] = $this->input->post('album');
 				$media['tgl_upload'] = date('Y-m-d');
-				if (isset($_FILES['file_name'])) {
+				/*print_r($_FILES['file_names']);
+				return false;*/
+				if (isset($_FILES['file_names'])) {
+					$_FILES['file_name']['name'] = $_FILES['file_names']['name'][0];
+	                $_FILES['file_name']['type'] = $_FILES['file_names']['type'][0];
+	                $_FILES['file_name']['tmp_name'] = $_FILES['file_names']['tmp_name'][0];
+	                $_FILES['file_name']['error'] = $_FILES['file_names']['error'][0];
+	                $_FILES['file_name']['size'] = $_FILES['file_names']['size'][0];
 					$image = $this->upload_logo($_FILES);
 	    			if (isset($image['error'])) {
 						$ret['notif'] = $image;

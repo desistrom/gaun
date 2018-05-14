@@ -20,11 +20,12 @@ class About extends MX_Controller  {
 		// print_r($this->session->userdata('token'));
 		$this->data['about'] = $this->db->get('tb_about')->row_array();
 		if ($this->input->server('REQUEST_METHOD') == 'POST') {
+			// print_r($this->input->post());
 			/*print_r($this->input->post('id_founder')[2]);
 			if ($this->input->post('id_founder')[2] == '') {
 				print_r("string");
-			}
-			return false;*/
+			}*/
+			// return false;
 			$ret['state'] = 0;
 			$ret['status'] = 0;
 			$this->form_validation->set_error_delimiters('','');

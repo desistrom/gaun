@@ -1,4 +1,6 @@
 <link rel="stylesheet" href="<?=base_url();?>assets/datatables/css/dataTables.bootstrap.min.css">
+<div class="col col-md-12 col-sm-12 col-xs-12">
+	
 <div class="box">
 	<?php if($view == 'list'){ ?>
 		<div class="box-body">
@@ -100,6 +102,8 @@
 		    </form>
 		  </div>
 	<?php } ?>
+</div>
+	
 </div>
 <script src="<?=base_url().'assets/js/jquery-3.2.1.min.js';?>"></script>
 <script type="text/javascript" src="<?=base_url();?>assets/ckeditor/ckeditor.js"></script>

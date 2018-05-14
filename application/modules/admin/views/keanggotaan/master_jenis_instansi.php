@@ -1,3 +1,5 @@
+<div class="col col-md12 col-sm-12 col-xs-12">
+  
 <div class="box">
 <?php if ($view == 'list') { ?>
 <link rel="stylesheet" href="<?=base_url();?>assets/datatables/css/dataTables.bootstrap.min.css">
@@ -18,8 +20,8 @@
 						<td><?=($key+1);?></td>
 						<td><?=$value['nm_jenis_instansi'];?></td>
 						<td>
-							<a href="<?=site_url('admin/keanggotaan/edit_jenis/'.$value['id_jenis_instansi']);?>"><button class="btn btn-primary btn-sm" id="edit">Edit</button></a>
-							<button class="btn btn-danger btn-sm btn_delete" id="<?=$value['id_jenis_instansi'];?>">Delete</button>
+							<a href="<?=site_url('admin/keanggotaan/edit_jenis/'.$value['id_jenis_instansi']);?>" data-toggle="tooltip" title="Edit"><button class="btn btn-info btn-sm" id="edit"><i class="fa fa-pencil"></i></button></a>
+							<button class="btn btn-danger btn-sm btn_delete" id="<?=$value['id_jenis_instansi'];?>" data-toggle="tooltip" title="Delete"><i class="fa fa-trash"></i></button>
 						</td>
           </tr>
         <?php endforeach; ?>
@@ -152,6 +154,7 @@
 	</div>
 
 <?php } ?>
+</div>
 </div>
 <div class="modal fade" id="progresLoading" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="vertical-alignment-helper">

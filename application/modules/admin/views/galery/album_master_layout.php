@@ -2,9 +2,42 @@
   .form-group{
     width: 50%;
   }
+   .file-group .error{
+    position: absolute;
+    bottom: 0;
+  }
+  .form-goup-file{
+    height: auto;
+    overflow: hidden;
+    padding: 0;
+  }
+  .form-goup-file div{
+    display: inline-block;
+  }
+  .form-goup-file .input-file-left{
+    width: 100%;
+  }
+  .form-goup-file .input-file-left input{
+  width: 100%;
+  }
+  .form-goup-file .input-file-right{
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+  .form-goup-file .input-file-right .btn-choose-foto{
+    height: 34px;
+    width: 105px;
+    border-radius: 0;
+    padding-left: 7px;
+  }
+
+  .fa-upload{
+    padding-right: 10px;
+  }
 </style>
 <link rel="stylesheet" href="<?=base_url();?>assets/datatables/css/dataTables.bootstrap.min.css">
-<div class="box ">
+<div class="col col-md-12 col-sm-12 col-xs-12 ">
 <?php if($view == 'list'){ ?>
 <div class="box">
   <div class="box-body">
@@ -27,8 +60,8 @@
         <td><?=$value['key_album'];?></td>
         <td><?= date("d M Y", strtotime($value['tgl_kegiatan']));?></td>
         <td>
-          <button class="btn btn-danger btn-sm btn_delete" id="<?=$value['id_album'];?>">Delete</button>
-          <a href="<?=site_url('admin/galery/edit_album/'.$value['id_album']);?>"><button class="btn btn-primary btn-sm" id="edit">Edit</button></a>
+          <a href="<?=site_url('admin/galery/edit_album/'.$value['id_album']);?>" data-toggle="tooltip" title="Edit"><button class="btn btn-info btn-sm" id="edit"><i class="fa fa-pencil"></i></button></a>
+          <button class="btn btn-danger btn-sm btn_delete" id="<?=$value['id_album'];?>" data-toggle="tooltip" title="Delete"><i class="fa fa-trash"></i></button>
         </td>
       </tr>
     <?php endforeach ?>
@@ -62,6 +95,8 @@
     </div>
   <?php } ?>
 <?php }elseif($view == 'add'){ ?>
+  <div class="box">
+    
   <div class="box-header with-border">
     <h3 class="box-title">Add Testimoni</h3>
   </div>
@@ -85,7 +120,10 @@
 
     </form>
   </div>
+  </div>
 <?php }else{ ?>
+  <div class="box">
+    
   <div class="box-header with-border">
     <h3 class="box-title">Add Testimoni</h3>
   </div>
@@ -105,14 +143,27 @@
         <div class="error" id="ntf_tgl"></div>
       </div>
       <!-- <div class="col-md-12"> -->
-      <div class="form-group">
+      <!-- <div class="form-group">
         <label>Photo Album</label>
         <input type="file" name="file_name[]" class="form-control file" id="file_name">
         <div class="error" id="ntf_name"></div>
+      </div> -->
+      <div class="form-group col-md-6 file-group" >
+          <label>File</label>
+          <div class="col col-md-12 form-goup-file">
+            <div class="input-file-right"><label class="btn btn-success btn-choose-foto" for="file_name_1">Choose File</label></div>
+            <div class="input-file-left"><input type="file" class="form-control file" name="file_name[]" id="file_name_1" ></div> 
+            <div class="error" id="ntf_name"></div> 
+          </div>
       </div>
-      <div class="add_file"></div>
-      <div class="form-group">
-        <button style="float: right; margin-right: -120px; margin-top: -50px" type="button" class="btn btn-danger btn_add"><i class="fa fa-plus"></i> Add More</button>
+      <div class=" add_file">
+        <div></div>
+      </div>
+      <div class="col col-md-12">
+        
+      <div class="form-group " style="text-align: right;width: 100%;">
+        <button style="  " type="button" class="btn btn-danger btn_add"><i class="fa fa-plus"></i> Add More</button>
+      </div>
       </div>
       <div class="form-group">
         <button type="button" class="btn btn-primary" id="submit">Submit</button>
@@ -130,7 +181,9 @@
 
     </form>
   </div>
+  </div>
 <?php } ?>
+</div>
   <div class="modal fade" id="progresLoading" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="vertical-alignment-helper">
         <div class="modal-dialog vertical-align-center">
@@ -274,11 +327,18 @@
         });
       }
     });
-
-    $('body').on('click','.btn_add',function(){
+     $('body').on('click','.btn_add',function(){
+      var jumlah = $('.file').length;
+      var looping = jumlah + 1;
+      var data = '<div class="form-group col-md-6 file-group"><label>File</label><div class="col col-md-12 form-goup-file"><div class="input-file-right"><label class="btn btn-success btn-choose-foto" for="file_name_'+looping+'">Choose File</label></div><div class="input-file-left"><input type="file" class="form-control file" name="file_name[]" id="file_name_'+looping+'"></div></div><div class="error" id="ntf_name"></div></div>';
+      $('.add_file').append(data);
+    });
+     $('#modalSuccess').modal('show');
+  });
+/*    $('body').on('click','.btn_add',function(){
       var html = '<div class="form-group"><label>Photo Album</label><input type="file" name="file_name" class="form-control file" id="file_name"><div class="error" id="ntf_name"></div></div>';
       $('.add_file').append(html);
     });
     $('#modalSuccess').modal('show');
-  });
+  })*/;
 </script>

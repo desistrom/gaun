@@ -67,8 +67,8 @@
             <div class="col-md-12 col-sm-12 col-xs-12 text-right sub-search">
                 <div class="form-group">
                 <form method="get" action="<?=site_url('web/keanggotaan/search')?>">
-                    <div class="input-search .input-search-left"><input type="text" class="form-control" name="data" id="search" placeholder="Cari"></div>
-                    <div class="input-search .input-search-right"><button type="submit" class="btn btn-danger btn-search"><i class="fa fa-search"></i></button></div>
+                    <div class="input-search input-search-left"><input type="text" class="form-control" name="data" id="search" placeholder="Cari"></div>
+                    <div class="input-search input-search-right"><button type="submit" class="btn btn-danger btn-search"><i class="fa fa-search"></i></button></div>
                 </form>
                   </div>
                   

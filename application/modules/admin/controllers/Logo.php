@@ -106,6 +106,7 @@ class Logo extends MX_Controller  {
 			$ret['status'] = 0;
 			$this->form_validation->set_error_delimiters('','');
 			$this->form_validation->set_rules('username','Username','trim|required');
+			$this->form_validation->set_rules('old_password','Old Passowrd','trim|required');
 			$this->form_validation->set_rules('password','Passowrd','trim|required');
 			$this->form_validation->set_rules('repassword','Re - Passowrd','trim|required|matches[password]');
 			if ($this->form_validation->run() == True) {
@@ -113,13 +114,18 @@ class Logo extends MX_Controller  {
 				$data_input = $this->input->post();
 				$data_user['username'] = $data_input['username'];
 				$data_user['password'] = sha1($data_input['password']);
-				if ($this->db->update('tb_user',$data_user,array('id_user'=>$id))) {
-					$ret['status'] = 1;
-					$ret['url'] = site_url('admin/logo/profile');
-					$this->session->set_flashdata("notif","Data Berhasil di Update");
+				if ($this->db->get_where('tb_user',array('username'=>$data_input['username'],'password'=>sha1($data_input['old_password'])))->num_rows() > 0) {
+					if ($this->db->update('tb_user',$data_user,array('id_user'=>$id))) {
+						$ret['status'] = 1;
+						$ret['url'] = site_url('admin/logo/profile');
+						$this->session->set_flashdata("notif","Data Berhasil di Update");
+					}
+				}else{
+					$ret['notif']['true_password'] = 'Old Password is Wrong';
 				}
 			}
 			$ret['notif']['username'] = form_error('username');
+			$ret['notif']['old_password'] = form_error('old_password');
 			$ret['notif']['password'] = form_error('password');
 			$ret['notif']['repassword'] = form_error('repassword');
 			echo json_encode($ret);

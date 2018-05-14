@@ -5,7 +5,8 @@
 	    	}
 	    }
 </style>
-<div class="box">
+<div class="col col-md-12 col-sm-12 col-xs-12">
+	<div class="box">
 	<?php if($view == 'list'){ ?>
 		<link rel="stylesheet" href="<?=base_url();?>assets/datatables/css/dataTables.bootstrap.min.css">
 		<div class="box-body">
@@ -31,8 +32,8 @@
 							<td><?php if($value['type'] == 1){ ?> <span class="text-info">STATIC</span> <?php  }else{ ?> <span class="text-info">DYNAMIC</span> <?php } ?></td>
 							<td><?php if($value['parent'] == 0){ ?> <span class="text-success">MASTER</span> <?php  }else{ ?> <span class="text-success">SUBMENU</span> <?php } ?></td>
 							<td>
-								<a href="<?=site_url('admin/menu/edit/'.$value['id']);?>" class="btn btn-info btn-sm"><i class="fa fa-pencil"></i> Edit</a>
-								<?php if($value['type'] != 1){ ?> <button class="btn btn-danger btn-sm btn_delete" id="<?=$value['id'];?>"><i class="fa fa-trash"> Delete</i></button> <?php  } ?>
+								<a href="<?=site_url('admin/menu/edit/'.$value['id']);?>" class="btn btn-info btn-sm" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil"></i></a>
+								<?php if($value['type'] != 1){ ?> <button class="btn btn-danger btn-sm btn_delete" id="<?=$value['id'];?>" data-toggle="tooltip" title="Delete"><i class="fa fa-trash"></i></button> <?php  } ?>
 								
 							</td>
 						</tr>
@@ -178,6 +179,7 @@
 			</form>
 		</div>
 		<?php } ?>
+</div>
 </div>
 <script src="<?=base_url().'assets/js/jquery-3.2.1.min.js';?>"></script>
 <!-- <script src="<?=base_url().'assets/js/jquery.slugify.js';?>"></script> -->

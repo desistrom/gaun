@@ -1,3 +1,5 @@
+<div class="col col-md-12 col-sm-12 col-xs-12">
+	
 <div class="box">
 	<?php if($view == 'list'){ ?>
 		<link rel="stylesheet" href="<?=base_url();?>assets/datatables/css/dataTables.bootstrap.min.css">
@@ -18,26 +20,6 @@
 						<th>Action</th>
 					</thead>
 					<tbody>
-					<!-- <?php foreach ($instansi as $key => $value): ?>
-						<tr>
-							<td><?=($key+1);?></td>
-							<td><?=$value['nm_jenis_instansi'];?></td>
-							<td class="btn_detail" id="<?=$value['id_instansi'];?>" style="cursor: pointer;"><?=$value['nm_instansi'];?></td>
-							<td><?=$value['email'];?></td>
-							<td><?php if($value['status'] == 0){ ?> <span class="text-info">Not Actived</span> <?php }elseif($value['status']==1){ ?> <span class="text-primary">On Proces</span> <?php }else{ ?> <span class="text-success">Active</span> <?php } ?></td>
-							<td><?=$value['sort'];?></td>
-							<td><?php if($value['is_aktif'] == 0){ ?> <span class="text-danger">NO</span> <?php  }else{ ?> <span class="text-success">YES</span> <?php } ?></td>
-							<td>
-								<a href="<?=site_url('admin/keanggotaan/edit_instansi/'.$value['id_instansi']);?>">
-									<button class="btn btn-primary btn-sm" id="edit">Edit</button></a> 
-								<a href="#">
-									<button class="btn btn-info status btn-sm" id="<?=$value['status'];?>##<?=$value['id_instansi'];?>"><?php if($value['status'] == 0){ ?> Proses <?php }elseif($value['status']==1){ ?> Done <?php }else{ ?> Active <?php } ?></button>
-								</a> 
-								<button class="btn btn-default btn_active btn-sm" id="<?=$value['id_instansi'];?>"> <?php if($value['is_aktif'] == 0){ ?> <span class="text-danger"><i class="fa fa-eye"></i></span> <?php  }else{ ?> <span class="text-success"><i class="fa fa-eye-slash"></i></span> <?php } ?> </button>
-								<button class="btn btn-danger btn-sm btn_delete" id="<?=$value['id_instansi'];?>"> Delete </button>
-							</td>
-						</tr>
-					<?php endforeach; ?> -->
 					</tbody>
 				</table>
 				<div class="col col-md-12 col-xs-12 text-right">
@@ -247,6 +229,7 @@
 		</div>
 	<?php } ?>
 </div>
+</div>
 <script src="<?=base_url().'assets/js/jquery-3.2.1.min.js';?>"></script>
 <script src="<?=base_url();?>assets/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?=base_url();?>assets/datatables/js/dataTables.bootstrap.min.js"></script>
@@ -314,7 +297,7 @@
       });
     });
 
-    $('body').on('click','.btn_active', function(){
+    $('body').on('click','.btn_active',function(){
     	var id = $(this).attr('id');
     	$('#progresLoading').modal('show');
     	console.log(id);
@@ -323,7 +306,7 @@
           dataType : 'json',
           type : 'POST',
           data : {'id' : id},
-          async : false
+          // async : false
       }).done(function(data){
       	setTimeout(function(){  
 	      	// console.log(data);

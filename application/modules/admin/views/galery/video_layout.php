@@ -3,6 +3,8 @@
     width: 50%;
   }
 </style>
+<div class="col col-md-12 col-sm-12 col-xs-12">
+  
 <div class="box ">
   <div class="box-header with-border">
     <h3 class="box-title">Video Galery</h3>
@@ -35,6 +37,7 @@
     </form>
   </div>
   <!-- /.box-body -->
+</div>
 </div>
 <script src="<?=base_url().'assets/js/jquery-3.2.1.min.js';?>"></script>
 <script type="text/javascript">

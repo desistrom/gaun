@@ -36,6 +36,8 @@
     border-radius: 0;
   }
 </style>
+<div class="col col-md-12 col-sm-12 col-xs-12">
+  
 <div class="box ">
   <div class="box-header with-border">
     <h3 class="box-title">Image Galery</h3>
@@ -70,7 +72,7 @@
         <div class="form-group col-md-6 file-group">
         <label>File</label>
         <div class="col col-md-12 form-goup-file">
-          <div class="input-file-right"><label class="btn btn-primary btn-choose-foto" for="file_name_1">Choose File</label></div>
+          <div class="input-file-right"><label class="btn btn-success btn-choose-foto" for="file_name_1">Choose File</label></div>
           <div class="input-file-left"><input type="file" class="form-control file" name="file_name[]" id="file_name_1" ></div>  
         </div>
           <div style="font-style: italic;">*for best result use 450x240 px</div>
@@ -80,7 +82,7 @@
         <div class="form-group col-md-6 file-group">
         <label>File</label>
         <div class="col col-md-12 form-goup-file">
-          <div class="input-file-right"><label class="btn btn-primary btn-choose-foto" for="file_name_2">Choose File</label></div>
+          <div class="input-file-right"><label class="btn btn-success btn-choose-foto" for="file_name_2">Choose File</label></div>
           <div class="input-file-left"><input type="file" class="form-control file" name="file_name[]" id="file_name_2" ></div>  
         </div>
           <div style="font-style: italic;">*for best result use 450x240 px</div>
@@ -90,7 +92,7 @@
         <div class="form-group col-md-6 file-group">
         <label>File</label>
         <div class="col col-md-12 form-goup-file">
-          <div class="input-file-right"><label class="btn btn-primary btn-choose-foto" for="file_name_3">Choose File</label></div>
+          <div class="input-file-right"><label class="btn btn-success btn-choose-foto" for="file_name_3">Choose File</label></div>
           <div class="input-file-left"><input type="file" class="form-control file" name="file_name[]" id="file_name_3" ></div>  
         </div>
           <div style="font-style: italic;">*for best result use 450x240 px</div>
@@ -100,7 +102,7 @@
         <div class="form-group col-md-6 file-group">
           <label>File</label>
           <div class="col col-md-12 form-goup-file">
-            <div class="input-file-right"><label class="btn btn-primary btn-choose-foto" for="file_name_4">Choose File</label></div>
+            <div class="input-file-right"><label class="btn btn-success btn-choose-foto" for="file_name_4">Choose File</label></div>
             <div class="input-file-left"><input type="file" class="form-control file" name="file_name[]" id="file_name_4" ></div>  
           </div>
           <div style="font-style: italic;">*for best result use 450x240 px</div>
@@ -135,22 +137,40 @@
           <button type="button" class="btn btn-danger" style="float: right" id="add"><i class="fa fa-plus"></i> Add More</button>
         </div>        
       <?php }else{ ?>
-        <div class="form-group">
+        <div class="form-group  file-group">
+          <label>File</label>
+          <div class="col col-md-12 form-goup-file">
+            <div class="input-file-right"><label class="btn btn-success btn-choose-foto" for="file_name">Choose File</label></div>
+            <div class="input-file-left"><input type="file" class="form-control file" name="file_name[]" id="file_name" ></div>
+            <div class="col-col-md-12">
+              <div style="font-style: italic;display: block;">*for best result use 450x240 px</div>
+            <div class="error" id="ntf_file_name" style="position: relative;"></div>
+            <div class="error" id="ntf_error" style="position: relative;"></div> 
+            </div> 
+            
+          </div>
+          
+        </div>
+       <!--  <div class="form-group">
         <label>File</label>
           <input type="file" class="form-control file" name="file_name[]" id="file_name">
           <div style="font-style: italic;">*for best result use 450x240 px</div>
           <div class="error" id="ntf_file_name"></div>
           <div class="error" id="ntf_error"></div>
-        </div>
+        </div> -->
+        <div class="col col-md-12 col-sm-12 col-xs-12">
+          
         <img src="<?=base_url().'assets/media/'.$galery['file_name'];?>" width="250px">
+        </div>
       <?php } ?>
-      <div class="col-md-12">
+      <div class="col-md-12" style="padding-top: 1em;">
         <button type="button" class="btn btn-primary" id="submit">Submit</button>
       </div>
 
     </form>
   </div>
   <!-- /.box-body -->
+</div>
 </div>
 <div class="modal fade" id="progresLoading" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="vertical-alignment-helper">
@@ -247,7 +267,7 @@
     $('body').on('click','#add',function(){
       var jumlah = $('.file').length;
       var looping = jumlah + 1;
-      var data = '<div class="form-group col-md-6 file-group"><label>File</label><div class="col col-md-12 form-goup-file"><div class="input-file-right"><label class="btn btn-primary btn-choose-foto" for="file_name_'+looping+'">Choose File</label></div><div class="input-file-left"><input type="file" class="form-control file" name="file_name[]" id="file_name_'+looping+'"></div></div><div style="font-style: italic;">*for best result use 450x240 px</div><div class="error" id="ntf_file_name"></div><div class="error" id="ntf_error"></div></div>';
+      var data = '<div class="form-group col-md-6 file-group"><label>File</label><div class="col col-md-12 form-goup-file"><div class="input-file-right"><label class="btn btn-success btn-choose-foto" for="file_name_'+looping+'">Choose File</label></div><div class="input-file-left"><input type="file" class="form-control file" name="file_name[]" id="file_name_'+looping+'"></div></div><div style="font-style: italic;">*for best result use 450x240 px</div><div class="error" id="ntf_file_name"></div><div class="error" id="ntf_error"></div></div>';
       $('.add_more').append(data);
     });
     /*$('body').on('keyup','#judul',function(){

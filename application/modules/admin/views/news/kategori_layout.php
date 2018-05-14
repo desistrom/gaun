@@ -1,3 +1,5 @@
+<div class="col col-md-12 col-sm-12 col-xs-12">
+  
 <div class="box">
 <?php if ($view == 'list') { ?>
 <link rel="stylesheet" href="<?=base_url();?>assets/datatables/css/dataTables.bootstrap.min.css">
@@ -91,6 +93,7 @@
 	</div>
 
 <?php } ?>
+</div>
 </div>
 <div class="modal fade" id="progresLoading" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="vertical-alignment-helper">

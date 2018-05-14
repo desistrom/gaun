@@ -3,6 +3,8 @@
     width: 100% !important;
   }
 </style>
+<div class="col col-md-12 col-sm-12 col-xs-12">
+	
 <div class="box">
 <link rel="stylesheet" href="<?=base_url();?>assets/css/select2.min.css">
 	<?php if($view == 'list'){ ?>
@@ -26,8 +28,8 @@
 							<td><?=$value['title'];?></td>
 							<td><?=word_limiter($value['content'],10);?></td>
 							<td>
-								<a href="<?=site_url('admin/menu/edit_page/'.$value['id_general_page']);?>" class="btn btn-info btn-sm"><i class="fa fa-pencil"></i> Edit</a>
-								<button class="btn btn-danger btn-sm btn_delete" id="<?=$value['id_general_page'];?>"><i class="fa fa-trash"> Delete</i></button>
+								<a href="<?=site_url('admin/menu/edit_page/'.$value['id_general_page']);?>" class="btn btn-info btn-sm" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil"></i> </a>
+								<button class="btn btn-danger btn-sm btn_delete" id="<?=$value['id_general_page'];?>" data-toggle="tooltip" title="Delete"><i class="fa fa-trash"> </i></button>
 							</td>
 						</tr>
 					<?php endforeach; ?>
@@ -96,7 +98,7 @@
 		</div>
 		<?php }elseif($view == 'add'){ ?>
 		<form role="form">
-			<div class="col col-md-8 col-sm-8 col-xs-12" style="padding-top: 1em;">
+			<div class="col col-md-8 col-sm-8 col-xs-12" style="padding-top: 1em;padding-left: 0;">
 			  <div class="panel">
 			    <div class="panel-header" style="background-color:  #F5F5F5;">
 			        <div class="box-header with-border">
@@ -122,7 +124,7 @@
 				</div>
 		</div>
 	</div>
-	<div class="col col-md-4 col-sm-4 col-xs-12" style="padding-top: 1em;">
+	<div class="col col-md-4 col-sm-4 col-xs-12" style="padding-top: 1em;padding-right: 0;">
 	  <div class="panel ">
 	      <div class="panel-header" style="background-color:  #F5F5F5;">
 	        <div class="box-header with-border">
@@ -166,7 +168,7 @@
 		</div>
 		<?php }else{ ?>
 		<form role="form">
-			<div class="col col-md-8 col-sm-8 col-xs-12" style="padding-top: 1em;">
+			<div class="col col-md-8 col-sm-8 col-xs-12" style="padding-top: 1em;padding-left: 0;">
 			 	<div class="panel">
 				    <div class="panel-header" style="background-color:  #F5F5F5;">
 				        <div class="box-header with-border">
@@ -192,7 +194,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col col-md-4 col-sm-4 col-xs-12" style="padding-top: 1em;">
+			<div class="col col-md-4 col-sm-4 col-xs-12" style="padding-top: 1em;padding-right: 0;">
 				<div class="panel ">
 				     <div class="panel-header" style="background-color:  #F5F5F5;">
 				        <div class="box-header with-border">
@@ -200,12 +202,6 @@
 				      	</div>
 				    </div>
 		    		<div class="panel-body">
-						<div class="form-group">
-					      	<label>Image Page</label>
-					        <input type="file" class="form-control" name="userfile" id="userfile">
-					        <div class="error" id="ntf_userfile"></div>
-					        <div class="error" id="ntf_error"></div>
-					    </div>
 						<div class="form-group">
 							<label>Setting to Menu</label>
 							<select name="menu" id="menu" class="form-control">
@@ -216,6 +212,12 @@
 							</select>
 							<div class="error" id="ntf_menu"></div>
 						</div>
+						<div class="form-group">
+					      	<label>Image Page</label>
+					        <input type="file" class="form-control" name="userfile" id="userfile">
+					        <div class="error" id="ntf_userfile"></div>
+					        <div class="error" id="ntf_error"></div>
+					    </div>
 					    <?php if ($current['img'] != 'dummy'): ?>
 					    <img width="100%" src="<?=base_url();?>media/<?=$current['img'];?>" width="250px">
 					    <?php endif ?>
@@ -226,6 +228,8 @@
 			</form>
 		</div>
 		<?php } ?>
+</div>
+	
 </div>
 <script src="<?=base_url().'assets/js/jquery-3.2.1.min.js';?>"></script>
 <!-- <script src="<?=base_url().'assets/js/jquery.slugify.js';?>"></script> -->

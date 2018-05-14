@@ -3,9 +3,12 @@
     width: 100% !important;
   }
 </style>
-<div class="box">
+
 <?php if ($view == 'list') { ?>
 <link rel="stylesheet" href="<?=base_url();?>assets/datatables/css/dataTables.bootstrap.min.css">
+<div class="col col-md-12 col-sm-12 col-xs-12">
+  
+<div class="box">
 	<div class="box-body">
 		<div class="col col-md-12 col-sm-12 col-xs-12" style="padding-left: 0; margin-bottom: 15px;">
 			<a href="<?=site_url('admin/news/add');?>" class="btn btn-success">Tambah News</a> | <a href="<?=site_url('admin/news/get_rss');?>" class="btn btn-info btn_rss">Get rss</a>
@@ -40,6 +43,8 @@
 			</table>
 		</div>
 	</div>
+</div>
+</div>
   <?php if ($this->session->flashdata('notif') != '') { ?>
     <div class="modal" tabindex="-1" role="dialog" id="modalSuccess">
       <div class="modal-dialog" role="document">
@@ -215,7 +220,7 @@
   </form>
 <?php } ?>
 	
-</div>
+
 <div class="modal fade" id="progresLoading" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="vertical-alignment-helper">
         <div class="modal-dialog vertical-align-center">

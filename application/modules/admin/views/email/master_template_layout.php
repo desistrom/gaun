@@ -1,3 +1,9 @@
+<style type="text/css">
+  .table .thead{
+  border-bottom:solid #F4F4F4 3px;
+  }
+</style>
+<div class="col col-md-12 col-sm-12 col-xs-12">
 <div class="box">
 	<?php if($view == 'list'){ ?>
 		<div class="box-body">
@@ -6,9 +12,10 @@
 			</div>
 			<div class="col col-md-12 col-xs-12">
 				<table class="table table-bordered  dataTable">
-					<tr>
+					<tr class="thead">
 						<th>No</th>
 						<th>Kategori</th>
+            <th>Action</th>
 					</tr>
 					<?php foreach ($kategori as $key => $value): ?>
 						<tr>
@@ -16,7 +23,7 @@
 							<td><?=$value['nm_kategori'];?></td>
 							<td>
 								<!-- <button class="btn btn-default">disable</button> -->
-								<a href="<?=site_url('admin/email/edit_template/'.$value['id_kategori_email']);?>"><button class="btn btn-primary" id="edit">Edit</button></a>
+								<a href="<?=site_url('admin/email/edit_template/'.$value['id_kategori_email']);?>" data-toggle="tooltip" title="Edit"><button class="btn btn-info" id="edit"><i class="fa fa-pencil"></i></button></a>
 							</td>
 						</tr>
 					<?php endforeach ?>
@@ -70,6 +77,8 @@
 		  </div>
 
 	<?php } ?>
+</div>
+  
 </div>
 <script src="<?=base_url().'assets/js/jquery-3.2.1.min.js';?>"></script>
 <script type="text/javascript" src="<?=base_url();?>assets/ckeditor/ckeditor.js"></script>

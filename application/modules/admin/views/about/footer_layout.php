@@ -1,3 +1,8 @@
+<style type="text/css">
+	.cke{
+		width: 100% !important;
+	}
+</style>
 <div class="box">
 	<div class="box-header with-border">
 	    <h3 class="box-title">Setting footer</h3>
@@ -5,19 +10,25 @@
 	  <!-- /.box-header -->
 	<div class="box-body">
 	    <form role="form">
-		    <div class="form-group">
-		        <label>Alamat</label>
-		        <?php echo $this->ckeditor->editor("alamat", $footer['alamat'] ); ?>
-		        <input type="hidden" name="alamat" id="alamat" value="">
-		        <div class="error" id="ntf_alamat"></div>
-		    </div>
+	    	<div class="col col-md-6 col-sm-6 col-xs-12" style="padding-left: 0;">
+	    		<div class="form-group">
+			        <label>Alamat</label>
+			        <?php echo $this->ckeditor->editor("alamat", $footer['alamat'] ); ?>
+			        <input type="hidden" name="alamat" id="alamat" value="">
+			        <div class="error" id="ntf_alamat"></div>
+			    </div>
+	    	</div>
+	    	<div class="col col-md-6 col-sm-6 col-xs-12" style="padding-right:  0;">
+	    		<div class="form-group">
+			        <label>Alamat Ke - 2</label>
+			        <?php echo $this->ckeditor->editor("alamat2", $footer['alamat2'] ); ?>
+			        <input type="hidden" name="alamat2" id="alamat2" value="">
+			        <div class="error" id="ntf_alamat2"></div>
+			    </div>
+	    	</div>
+		    
 
-		    <div class="form-group">
-		        <label>Alamat Ke - 2</label>
-		        <?php echo $this->ckeditor->editor("alamat2", $footer['alamat2'] ); ?>
-		        <input type="hidden" name="alamat2" id="alamat2" value="">
-		        <div class="error" id="ntf_alamat2"></div>
-		    </div>
+		    
 
 		    <div class="form-group">
 		        <label>Link Facebook</label>

@@ -1,3 +1,5 @@
+<div class="col col-md-12 col-sm-12 col-xs-12">
+  
 <div class="box">
 <div class="box-header with-border">
 	    <h3 class="box-title">Title Website</h3>
@@ -38,6 +40,9 @@
 	    </div>
 	<?php } ?>
 </div>
+  
+</div>
+
 <div class="modal fade" id="progresLoading" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="vertical-alignment-helper">
         <div class="modal-dialog vertical-align-center">

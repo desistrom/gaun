@@ -56,7 +56,7 @@
               <th>Content</th>
               <th>Sort</th>
               <th>Keterangan</th>
-              <th>aksi</th>
+              <th width="100px">Action</th>
             </thead>
             <tbody>
             <?php foreach ($testimoni as $key => $value): ?>
@@ -69,8 +69,8 @@
                 <td><?php if($value['is_aktif'] == 1){ ?> Enable <?php }else{ ?> Disable <?php } ?></td>
                 <td>
                   <!-- <button class="btn btn-default">disable</button> -->
-                  <a href="<?=site_url('admin/home/edit_testimoni/'.$value['id_testimoni']);?>"><button class="btn btn-primary" id="edit">Edit</button></a>
-                  <a href="<?=site_url('admin/home/status_testimoni/'.$value['id_testimoni']);?>"><button class="btn btn-info" id="edit"><?php if($value['is_aktif'] == 1){ ?> Disable <?php }else{ ?> Enable <?php } ?></button></a>
+                  <a href="<?=site_url('admin/home/edit_testimoni/'.$value['id_testimoni']);?>" data-toggle="tooltip" title="edit"><button class="btn btn-info" id="edit"><i class="fa fa-pencil"></i></button></a>
+                  <a href="<?=site_url('admin/home/status_testimoni/'.$value['id_testimoni']);?>"><button class="btn btn-success" id="edit"><?php if($value['is_aktif'] == 1){ ?> Disable <?php }else{ ?> Enable <?php } ?></button></a>
                 </td>
               </tr>
             <?php endforeach ?>

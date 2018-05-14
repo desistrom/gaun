@@ -14,6 +14,7 @@
       <div class="form-group">
         <label>Link Video</label>
         <input type="text" name="link" class="form-control" id="link" placeholder="Enter Link Video ..." value="<?=$hero['link_video'];?>">
+        <span style="color: #3c8dbc;font-style: italic;">your link must be embed format like this : https://www.youtube.com/embed/-QhronPdyWM</span>
         <div class="error" id="ntf_link"></div>
       </div>
       <div class="form-group">

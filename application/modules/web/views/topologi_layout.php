@@ -30,7 +30,7 @@ section.topologi{
     padding: 0 2em 2em 2em;
 }
 }
-@media(max-width:400px){
+@media(max-width:500px){
 section.topologi{
   margin-top: 4em;
 }

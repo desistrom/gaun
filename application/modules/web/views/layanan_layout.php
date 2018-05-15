@@ -43,6 +43,12 @@
             } 
     }
     @media(max-width:500px){
+        div.container-fluid.none-padding.filter-title-page-news{
+            margin-top: 0;
+        }
+        .title-page-news{
+            padding-top: 0;
+        }
         .layanan .content-left{
                 padding: 3em 1em;
                 margin-top: 3em;

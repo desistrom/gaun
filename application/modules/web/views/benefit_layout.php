@@ -25,6 +25,7 @@
         .detail_layanan .list-artikel,
         .detail_layanan .descrip-img{
             padding-right: 0;
+            padding-left: 0;
         }
         .detail_layanan .descrip-img img{
             width: 100%;
@@ -32,6 +33,9 @@
         .detail_layanan .desrip-news p{
                  word-wrap: break-word;
             }
+            .img-benefit{
+            height: 450px;
+        }
         @media(max-width:991px){
             .descrip-img{
                 display: none;
@@ -56,6 +60,7 @@
         .detail_layanan{
             margin-top: 4em;
         }
+
         }
     </style>
     <section class="detail_layanan">
@@ -73,9 +78,10 @@
                
                 <div class="col-md-12 col-sm-12 col-xs-12 content-left">
                     <div class="col col-md-12 col-sm-12 col-xs-12 none-padding list-artikel">
+                    <img class="img-benefit" width="100%;" src="<?php echo $benefit['picture']; ?>" >
                         <div class="col col-md-12 col-sm-12 col-xs-12 desrip-news">
                             
-                            <div class="isi-news" style="padding: 0 15px;color: #919191;"><?php echo $benefit; ?></div>
+                            <div class="isi-news" style="padding: 0 15px;color: #919191;"><?php echo $benefit['benefit']; ?></div>
                     </div>
                 </div>
             

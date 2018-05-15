@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="<?=base_url();?>assets/css/AdminLTE.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="<?=base_url();?>assets/css/skins/_all-skins.min.css">
@@ -23,6 +24,11 @@
   <!-- Morris chart -->
   <link rel="stylesheet" href="<?=base_url();?>assets/css/morris.css">
   <link rel="stylesheet" href="<?=base_url();?>assets/css/bootstrap3-wysihtml5.min.css">
+  <style type="text/css">
+    .material-icons{
+      font-size: 18px !important;
+    }
+  </style>
   
     <script type="text/javascript">
       var base_url = "<?=base_url();?>";
@@ -150,21 +156,7 @@
           </a>
         </li> -->
         
-        <li class=" treeview <?php if(current_url() == site_url('admin/home/logo') || current_url() == site_url('admin/logo/index') || current_url() == site_url('admin/logo/title')){ ?>  active <?php } ?>">
-          <a href="#">
-            <i class="fa fa-header"></i><span>Heading</span>
-            <span class="pull-right-container">
-
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li <?php if(current_url() == site_url('admin/home/logo')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/home/logo');?>"><i class="fa fa-picture-o"></i> Logo Website</a></li>
-            <li <?php if(current_url() == site_url('admin/logo/index')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/logo/index');?>"><i class="fa fa-comment"></i> Logo Tab  </a></li>
-            <li <?php if(current_url() == site_url('admin/logo/title')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/logo/title');?>"><i class="fa fa-comment"></i> Title Website </a></li>
-          </ul>
-        </li>
-
+       
         <li class=" treeview <?php if(current_url() == site_url('admin/email/index') || current_url() == site_url('admin/email/template') || current_url() == site_url('admin/email/kategori') || current_url() == site_url('admin/email/setting_email')){ ?>  active <?php } ?>">
           <a href="#">
             <i class="fa fa-envelope"></i>  <span>Email</span>
@@ -176,8 +168,8 @@
           <ul class="treeview-menu">
             <!-- <li <?php if(current_url() == site_url('admin/email/index')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/email/index');?>"><i class="fa fa-clone"></i> List Email</a></li> -->
             <li <?php if(current_url() == site_url('admin/email/template')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/email/template');?>"><i class="fa fa-columns"></i>Template</a></li>
-            <li <?php if(current_url() == site_url('admin/email/kategori')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/email/kategori');?>"><i class="fa fa-boxes"></i>kategori Email</a></li>
-            <li <?php if(current_url() == site_url('admin/email/setting_email')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/email/setting_email');?>"><i class="fa fa-boxes"></i>Setting Email</a></li>
+            <li <?php if(current_url() == site_url('admin/email/kategori')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/email/kategori');?>"><i class="glyphicon glyphicon-envelope"></i>kategori Email</a></li>
+            <li <?php if(current_url() == site_url('admin/email/setting_email')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/email/setting_email');?>"><i class="glyphicon glyphicon-cog"></i>Setting Email</a></li>
           </ul>
         </li>
 
@@ -192,7 +184,7 @@
           <ul class="treeview-menu">
             
             <li <?php if(current_url() == site_url('admin/home/hero')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/home/hero');?>"><i class="fa fa-video-camera"></i>Hero</a></li>
-            <li <?php if(current_url() == site_url('admin/about/slider')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/about/slider');?>"><i class="fa fa-bullhorn"></i>Akademisi</a></li>
+            <li <?php if(current_url() == site_url('admin/about/slider')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/about/slider');?>"><i class="glyphicon glyphicon-education"></i>Akademisi</a></li>
             <li <?php if(current_url() == site_url('admin/home/testimoni')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/home/testimoni');?>"><i class="fa fa-comment"></i>Testimony</a></li>
             <!-- <li <?php if(current_url() == site_url('admin/home/pentahelix')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/home/pentahelix');?>"><i class="fa fa-building"></i>pentahelix</a></li> -->
           <!--   <li <?php if(current_url() == site_url('admin/home/Layanan_idroam')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/home/Layanan_idroam');?>"><i class="fa fa-bullhorn"></i>Layanan ID Roam</a></li>
@@ -228,8 +220,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li <?php if(current_url() == site_url('admin/home/topologi')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/home/topologi');?>"><i class="fa fa-picture-o"></i> Topologi</a></li>
-            <li <?php if(current_url() == site_url('admin/layanan/monitoring_graph')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/layanan/monitoring_graph');?>"><i class="fa fa-comment"></i> Monitoring Graph </a></li>
+            <li <?php if(current_url() == site_url('admin/home/topologi')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/home/topologi');?>"><i class="material-icons">art_track</i> Topologi</a></li>
+            <li <?php if(current_url() == site_url('admin/layanan/monitoring_graph')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/layanan/monitoring_graph');?>"><i class="material-icons">computer</i> Monitoring Graph </a></li>
           </ul>
         </li>
 
@@ -243,11 +235,11 @@
           </a>
           <ul class="treeview-menu">
             <!-- <li <?php if(current_url() == site_url('admin/keanggotaan/index')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/keanggotaan/index');?>"><i class="fa fa-users"></i> List Anggota</a></li> -->
-            <li <?php if(current_url() == site_url('admin/keanggotaan/instansi')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/keanggotaan/instansi');?>"><i class="fa fa-black-tie"></i>Joined Instansi</a></li>
-            <li <?php if(current_url() == site_url('admin/keanggotaan/instansi_request')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/keanggotaan/instansi_request');?>"><i class="fa fa-black-tie"></i>Request Joined Instansi</a></li>
+            <li <?php if(current_url() == site_url('admin/keanggotaan/instansi_request')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/keanggotaan/instansi_request');?>"><i class="material-icons">group_add</i> Request Joined Instansi</a></li>
+            <li <?php if(current_url() == site_url('admin/keanggotaan/instansi')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/keanggotaan/instansi');?>"><i class="material-icons">group </i>  Joined Instansi</a></li>
             <!-- <li <?php if(current_url() == site_url('admin/keanggotaan/kategori_instansi')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/keanggotaan/kategori_instansi');?>"><i class="fa fa-black-tie"></i>Jenis Instansi</a></li> -->
-            <li <?php if(current_url() == site_url('admin/keanggotaan/setting')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/keanggotaan/setting');?>"><i class="fa fa-gear"></i>Benefit</a></li>
-            <li <?php if(current_url() == site_url('admin/keanggotaan/setting_reg')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/keanggotaan/setting_reg');?>"><i class="fa fa-gear"></i>Registrasi</a></li>
+            <li <?php if(current_url() == site_url('admin/keanggotaan/setting')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/keanggotaan/setting');?>"><i class="material-icons">rss_feed</i> Benefit</a></li>
+            <li <?php if(current_url() == site_url('admin/keanggotaan/setting_reg')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/keanggotaan/setting_reg');?>"><i class="material-icons">assignment</i> Registrasi</a></li>
           </ul>
         </li>
 
@@ -260,7 +252,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li <?php if(current_url() == site_url('admin/galery/album')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/galery/album');?>"><i class="fa fa-folder"></i></i>Photo Album</a></li>
+            <li <?php if(current_url() == site_url('admin/galery/album')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/galery/album');?>"><i class="material-icons">collections</i>Photo Album</a></li>
             <li <?php if(current_url() == site_url('admin/galery/list_image')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/galery/list_image');?>"><i class="fa fa-picture-o"></i> Photo</a></li>
             <li <?php if(current_url() == site_url('admin/galery/list_video')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/galery/list_video');?>"><i class="fa fa-film"></i></i>Video</a></li>
           </ul>
@@ -275,8 +267,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li <?php if(current_url() == site_url('admin/kategori_news')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/kategori_news');?>"><i class="fa fa-newspaper-o"></i> Kategori Berita </a></li>
-            <li <?php if(current_url() == site_url('admin/news')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/news');?>"><i class="fa fa-newspaper-o"></i> List Berita</a></li>
+            <li <?php if(current_url() == site_url('admin/kategori_news')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/kategori_news');?>"><i class="material-icons">featured_play_list</i> Kategori Berita </a></li>
+            <li <?php if(current_url() == site_url('admin/news')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/news');?>"><i class="material-icons">chrome_reader_mode</i> List Berita</a></li>
           </ul>
         </li>
 
@@ -307,6 +299,20 @@
           </a>
         </li>
 
+         <li class=" treeview <?php if(current_url() == site_url('admin/home/logo') || current_url() == site_url('admin/logo/index') || current_url() == site_url('admin/logo/title')){ ?>  active <?php } ?>">
+          <a href="#">
+            <i class="fa fa-header"></i><span>Header Setting</span>
+            <span class="pull-right-container">
+
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li <?php if(current_url() == site_url('admin/home/logo')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/home/logo');?>"><i class="fa fa-picture-o"></i> Logo Website</a></li>
+            <li <?php if(current_url() == site_url('admin/logo/index')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/logo/index');?>"><i class="material-icons">picture_in_picture</i> Logo Tab  </a></li>
+            <li <?php if(current_url() == site_url('admin/logo/title')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/logo/title');?>"><i class="material-icons">title</i> Title Website </a></li>
+          </ul>
+        </li>
 
         <li class=" treeview <?php if(current_url() == site_url('admin/about/footer')){ ?> active <?php } ?>">
           <a href="<?=site_url('admin/about/footer');?>">

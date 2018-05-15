@@ -117,9 +117,27 @@
                 display: none;
             }
         }
+        @media(max-width:767px){
+            div.container-fluid{
+              padding: 0 3em;
+            }
+            .content-pentahelix .content-bottom{
+              padding:2em 3.2em; 
+            }
+        }
         @media(max-width:500px){
+           div.container-fluid{
+              padding: 0 1em;
+            }
+            .content-pentahelix .content-bottom{
+              padding:2em 1.2em; 
+            }
 
-
+             .detail_layanan{
+            margin-top: 4em;
+              background-color: #F2F2F2;
+          }
+       
             div.container-fluid{
               padding: 0 1em;
             }
@@ -132,6 +150,27 @@
             }
             .detail_layanan .desrip-news{
             padding: 15px 0;
+        }
+        .title-page-news{
+          padding-bottom: 0.5em;
+          padding-top: 0.5em;
+        }
+        .content-pentahelix .desc-content{
+          padding-top: 0;
+          font-size: 16px;
+        }
+        .content-pentahelix .content-top .header-fitur-content{
+          padding-top: 0;
+          padding-bottom: 0;
+        }
+        .content-pentahelix .content-bottom .panel .panel-body{
+          font-size: 16px;
+        }
+        .panel-group .panel-heading span{
+          display: none;
+        }
+        .panel-group .panel-heading a{
+          border-left: none;
         }
         }
     </style>

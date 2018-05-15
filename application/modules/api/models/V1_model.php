@@ -95,7 +95,7 @@ class V1_model extends CI_Model{
 	}
 
 	public function user_setting(){
-		$sql = "SELECT profit as benefit, cara as step, image as picture FROM tb_setting_user";
+		$sql = "SELECT profit as benefit, cara as step, image as picture, image_profit as picture_profit FROM tb_setting_user";
 		if ($this->db->query($sql)->num_rows() > 0) {
 			return $this->db->query($sql)->row_array();
 			exit();

@@ -26,6 +26,9 @@
      .sosmed_share.ig{
     	padding: 10px 12px;
     }
+    .detail_news{
+        margin-top: 6em;
+    }
     @media (max-width: 991px)
     {
          .box-news{
@@ -41,8 +44,16 @@
         font-size: 16px;
     }
     }
+      @media(max-width:500px){
+          .detail_news{
+        margin-top: 4em;
+    }
+        .title-page-news{
+            padding-top: 1em;
+        }
+    }
 </style>
-<section class="detail_news" style="margin-top: 6em;">
+<section class="detail_news" style="">
         <div class="container-fluid none-padding filter-title-page-news">
             <div class="col-md-12 col-sm-12 col-xs-12 none-padding title-page-news">
                 <div class="line-news">

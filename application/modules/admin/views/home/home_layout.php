@@ -1,7 +1,7 @@
 <?php foreach ($daftar_instansi as $key => $value): ?>
  <div class="col-lg-3 col-xs-6">
           <!-- small box -->
-  <div class="small-box <?php if($key%2==0){ ?>bg-yellow <?php }else{ ?> bg-blue <?php } ?>">
+  <div class="small-box <?php if($key%2==0){ if($key%6==0){ ?> bg-yellow <?php }else { ?> bg-green <?php } }else{ if($key%3==0){ ?> bg-purple <?php }else { ?> bg-blue <?php } } ?>">
     <div class="inner">
       <h3><?=$$value['nm_jenis_instansi'];?></h3>
 

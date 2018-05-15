@@ -579,9 +579,15 @@ class V1 extends REST_Controller {
 
     //Setting User
     function _profit(){
-        $profit = $this->v1_model->user_setting()['benefit'];
+        $profit['benefit'] = $this->v1_model->user_setting()['benefit'];
+        $profit['picture'] = $this->v1_model->user_setting()['picture_profit'];
         $retData['code'] = '200';
         $retData['status'] = 'Success';
+        if ($this->v1_model->user_setting()['picture'] == '') {
+            $profit['picture']=base_url().'assets/images/logo/IDREN-2.png';
+        }else{
+            $profit['picture']=base_url().'media/'.$this->v1_model->user_setting()['picture_profit'];
+        }  
         $retData['data'] = $profit;
         $this->response($retData,200);
     }

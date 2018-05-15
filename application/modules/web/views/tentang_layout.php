@@ -86,7 +86,10 @@
         }
         @media(max-width:500px){
 
-
+              .detail_layanan{
+                margin-top: 4em;
+                background-color: #F2F2F2;
+            }
             div.container-fluid{
               padding: 0 1em;
             }
@@ -99,6 +102,10 @@
             }
             .detail_layanan .desrip-news{
             padding:15px 0;
+        }
+        .title-page-news{
+            padding-bottom: 0;
+            padding-top: 1em;
         }
         }
     </style>

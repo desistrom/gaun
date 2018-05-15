@@ -10,7 +10,14 @@
         #news .content-left{
             font-style: normal;
         }
-
+  @media(max-width:500px){
+        .news{
+            margin-top: 4em;
+        }
+        .title-page-news{
+            padding-top: 1em;
+        }
+    }
     </style>
     <section class="news" id="news">
         <div class="container-fluid none-padding filter-title-page-news">

@@ -43,20 +43,48 @@
 }
 .tree li {
     margin:0;
-    margin-bottom: 10px;
+   
     
     padding:0 0 0 1em;
     line-height:2em;
-    color: #CF090A;
+    color: #747474;
     font-weight:700;
     position:relative;
     height: auto;
     overflow: hidden;
 }
+.tree li:hover{
+    background-color: #CF090A;
+    color: white;
+}
+.tree li:hover a{
+
+    color: white;
+}
+.tree .dropdown:hover{
+    background-color: white;
+    color: #747474;
+}
+.tree .dropdown:hover a{
+
+    color: #747474;
+}
 .tree .menu-parent,
-.tree .dropdown
+.tree .branch
  {
-    border-bottom: solid 1px  #CF090A;
+    border-bottom: solid 1px  #E0E0E0;
+
+}
+.tree .dropdown  .sub-menu .menu-parent{
+    border-bottom: none;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+}
+.tree .dropdown  .sub-menu .menu-parent:hover a{
+    color: white;
+}
+.tree .dropdown .sub-menu{
+    border-left: solid 1px  #E0E0E0;
 }
 .tree ul li:before {
    
@@ -80,7 +108,7 @@
 }
 .tree li a {
     text-decoration: none;
-    color: #CF090A;
+    color: #747474;
 }
 .tree .li-tree,
 .tree .li-tree a
@@ -103,10 +131,16 @@
 .menu{
     width: 15%;
     float: left;
+     padding-top: 1em;
+    padding-bottom: 1em;
+
     
 }
 .li-tree {
     background-color:#D2D2D2; 
+}
+.indicator {
+    margin-top: 1em;
 }
 .sub-menu{
     width: 81%;

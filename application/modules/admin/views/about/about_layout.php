@@ -49,6 +49,37 @@
   padding: 1em;
   border-top: solid 4px #E0E0E0;
 }
+ .form-goup-file{
+    height: auto;
+    overflow: hidden;
+    padding: 0;
+  }
+  .form-goup-file div{
+    display: inline-block;
+  }
+  .form-goup-file .input-file-left{
+    width: 100%;
+  }
+  .form-goup-file .input-file-left input{
+  width: 100%;
+  }
+  .form-goup-file .input-file-right{
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+  .form-goup-file .input-file-right .btn-choose-foto{
+    height: 34px;
+    width: 105px;
+    border-radius: 0;
+    padding-left: 7px;
+  }
+  .logo-fav{
+    width: 100px;
+  }
+  .fa-upload{
+    padding-right: 10px;
+  }
 </style>
 <div class="col col-md-12 col-sm-12 col-xs-12">
   <div class="box">
@@ -86,12 +117,21 @@
           <div class="error" id="ntf_jabatan"></div>
         </div>
 
-        <div class="col-md-2">
+        <div class="col-md-2 form-group">
+          <label>Photo Founder</label>
+          <div class="col col-md-12 form-goup-file">
+            <div class="input-file-right"><label class="btn btn-success btn-choose-foto" for="file_name_<?=($key+1);?>"><i class="fa fa-upload" ></i>Choose File</label></div>
+            <div class="input-file-left"><input type="file" class="form-control file" name="file_name[]" id="file_name_<?=($key+1);?>"></div> 
+            <div class="error" id="ntf_file_name"></div> 
+            <img src="<?=base_url().'assets/media/'.$value['foto'];?>" width="250px" style="display: none">
+          </div>
+        </div>
+       <!--  <div class="col-md-2">
           <label>Photo Founder</label>
           <input type="file" name="file_name[]" class="form-control file" id="file_name">
           <div class="error" id="ntf_file_name"></div>
           <img src="<?=base_url().'assets/media/'.$value['foto'];?>" width="250px" style="display: none">
-        </div>
+        </div> -->
         <div class="col-md-1">
           <label>Sort</label><br>
           <input type="number" name="sort" class="form-control sort" value="<?=$value['sort'];?>">
@@ -108,7 +148,8 @@
         <input type="hidden" name="id_founder[]" class="id_founder" id="id_founder" value="<?=$value['id_founder'];?>">
         </div>
       <?php endforeach; }else{ ?>
-        <hr><div class="col-md-4">
+        <div class="col-md-12 list-founder" style="padding-top: 1em;">
+        <hr><div class="col-md-3">
           <label>Nama Founder</label>
           <input type="text" name="name" class="form-control name" value="" id="name" placeholder="Masukan Nama Founder">
           <div class="error" id="ntf_name"></div>
@@ -120,22 +161,31 @@
           <div class="error" id="ntf_jabatan"></div>
         </div>
 
+        <div class="col-md-2 form-group">
+          <label>Photo Founder</label>
+          <div class="col col-md-12 form-goup-file">
+            <div class="input-file-right"><label class="btn btn-success btn-choose-foto" for="file_name_1"><i class="fa fa-upload" ></i>Choose File</label></div>
+            <div class="input-file-left"><input type="file" class="form-control file" name="file_name[]" id="file_name_1"></div> 
+            <div class="error" id="ntf_file_name"></div> 
+          </div>
+        </div>
+
+        <!-- <div class="col-md-2">
+          <label>Photo Founder</label>
+          <input type="file" name="file_name[]" class="form-control file" id="file_name_1">
+          <div class="error" id="ntf_file_name"></div>
+        </div> -->
         <div class="col-md-1">
           <label>Sort</label><br>
           <input type="number" name="sort" class="form-control sort" value="">
           <div class="error" id="ntf_sort"></div>
-        </div>
-
-        <div class="col-md-4">
-          <label>Photo Founder</label>
-          <input type="file" name="file_name[]" class="form-control file" id="file_name">
-          <div class="error" id="ntf_file_name"></div>
         </div>
         <input type="hidden" name="id_founder[]" class="id_founder" id="id_founder" value="">
       <?php } ?>
       <div class="add_file"></div>
       <div class="col-md-12">
         <button style="float: right;  margin-top: 10px" type="button" class="btn btn-danger btn_add"><i class="fa fa-plus"></i> Add More</button>
+      </div>
       </div>
       </div>
       <div class="col-md-12 foot-tab">
@@ -319,9 +369,9 @@
                  $('.error').css({'color':'red', 'font-style':'italic'});
             }
           }else{
-            console.log($(this).parent().find('img').attr('src'));
-            if ($(this).parent().find('img').attr('src') == undefined) {
-              error = $(this).parent().find('#ntf_file_name').text('The Photo field is required.');
+            console.log($(this).parent().parent().find('img').attr('src'));
+            if ($(this).parent().parent().find('img').attr('src') == undefined) {
+              error = $(this).parent().parent().find('#ntf_file_name').text('The Photo field is required.');
             }else{
               form_data.append('file[]','kosong');
             }
@@ -386,7 +436,9 @@
       });
     });
     $('body').on('click','.btn_add',function(){
-      var html = '<hr><div class="col-md-12 list-founder"><div class="col-md-3"><label>Nama Founder</label><input type="text" name="name" class="form-control name" value="" id="name" placeholder="Masukan Nama Founder"><div class="error" id="ntf_name"></div></div><div class="col-md-4"><label>Jabatan Founder</label><input type="text" name="jabatan" class="form-control jabatan" value="" id="jabatan" placeholder="Masukan Jabatan Founder"><div class="error" id="ntf_jabatan"></div></div><div class="col-md-2"><label>Photo Founder</label><input type="file" name="file_name[]" class="form-control file" id="file_name"><div class="error" id="ntf_file_name"></div></div><div class="col-md-1"><label>Sort</label><br><input type="number" name="sort" class="form-control sort" value=""><div class="error" id="ntf_sort"></div></div><input type="hidden" name="id_founder[]" class="id_founder" id="id_founder" value=""><div class="col-md-2"></div></div>';
+      var jumlah = $('.file').length;
+      var looping = jumlah + 1;
+      var html = '<hr><div class="col-md-12 list-founder"><div class="col-md-3"><label>Nama Founder</label><input type="text" name="name" class="form-control name" value="" id="name" placeholder="Masukan Nama Founder"><div class="error" id="ntf_name"></div></div><div class="col-md-4"><label>Jabatan Founder</label><input type="text" name="jabatan" class="form-control jabatan" value="" id="jabatan" placeholder="Masukan Jabatan Founder"><div class="error" id="ntf_jabatan"></div></div><div class="col-md-2 form-group"><label>Photo Founder</label><div class="col col-md-12 form-goup-file"><div class="input-file-right"><label class="btn btn-success btn-choose-foto" for="file_name_'+looping+'"><i class="fa fa-upload" ></i>Choose File</label></div><div class="input-file-left"><input type="file" class="form-control file" name="file_name[]" id="file_name_'+looping+'"></div><div class="error" id="ntf_file_name"></div></div></div><div class="col-md-1"><label>Sort</label><br><input type="number" name="sort" class="form-control sort" value=""><div class="error" id="ntf_sort"></div></div><input type="hidden" name="id_founder[]" class="id_founder" id="id_founder" value=""><div class="col-md-2"></div></div>';
       $('.add_file').append(html);
     });
     $('body').on('click','.foto',function(){

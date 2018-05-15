@@ -70,11 +70,21 @@
            }
     @media(max-width:767px){
         .hero{
-        margin-top: 1em;
+        margin-top: 0;
+        padding-top: 4.5em;
     }
       .fitur-content{
             width: 100%;
          }
+    }
+        @media(max-width:400px){
+            .hero-video{
+                height: 220px;
+            }
+            .btn-pelajari{
+                padding: 13px 30px;
+                font-size: 14px;
+            }
     }
 </style>
  <section class="hero" style="">

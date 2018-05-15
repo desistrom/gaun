@@ -23,6 +23,12 @@ class Home extends CI_Controller  {
     // print_r($this->session->userdata('token'));
     	$this->data['breadcumb'] = 'Dashboard';
     	$this->data['user'] = $this->db->get('tb_instansi')->num_rows();
+    	$instansi = $this->db->get('tb_jenis_instansi')->result_array();
+    	foreach ($instansi as $key => $value) {
+    		$this->data[$value['nm_jenis_instansi']] = $this->db->get_where('tb_instansi',array('id_jenis_instansi'=>$value['id_jenis_instansi']))->num_rows();
+    	}
+    	$this->data['daftar_instansi'] = $instansi;
+    	// print_r($this->data);
     	$this->data['news'] = $this->db->get('tb_news')->num_rows();
     	$this->data['page'] = $this->db->get('tb_general_page')->num_rows();
     	$this->data['video'] = $this->db->get_where('tb_galery',array('type'=>'video'))->num_rows();

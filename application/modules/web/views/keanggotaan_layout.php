@@ -31,6 +31,9 @@
         width: 100%;
     }
     @media(max-width:500px){
+        section.keanggotaan{
+            margin-top: 4em;
+        }
         .sub-search{
         padding: 0 1em;
     }

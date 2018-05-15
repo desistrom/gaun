@@ -31,6 +31,11 @@ section.topologi{
 }
 }
 @media(max-width:400px){
+section.topologi{
+  margin-top: 4em;
+}
+}
+@media(max-width:400px){
 .content-topologi{
     text-align: center;
     padding: 0 15px 2em 15px;

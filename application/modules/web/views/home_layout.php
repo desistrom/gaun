@@ -40,6 +40,9 @@
              font-weight: 400;
              color: #120F0F;
          }
+          .content-pentahelix .content-top .fitur-box .paraph{
+            margin: 0;padding: 0;
+         }
          .content-pentahelix .content-top .header-fitur-content{
             padding: 0 15px ;
          }
@@ -85,6 +88,11 @@
                 padding: 13px 30px;
                 font-size: 14px;
             }
+          .content-pentahelix .desc-content{
+            padding-top:0;
+            font-size: 14px;
+
+         }
     }
 </style>
  <section class="hero" style="">
@@ -135,7 +143,7 @@
                             <div class="fitur-box text-center">
                                 <div class="icon-box"><i class="<?=$value['icon'];?>"></i><!-- <i class="glyphicon glyphicon-education"></i> --></div>
                                 <h3><b><?=$value['nm_jenis_instansi']?></</b></h3>
-                                <p><?=$value['short_description'];?></p>
+                                <p class="paraph"><?=$value['short_description'];?></p>
                             </div>
                         </div>    
                     <?php endforeach ?>

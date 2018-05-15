@@ -1,3 +1,9 @@
+<style type="text/css">
+   @media(max-width:500px){
+  .title-page-news{
+    margin-top: 0!important;
+  }
+</style>
 <link rel="stylesheet" href="<?=base_url();?>assets/css/style_video.min.css?t=<?=time();?>"> 
         <div class="container-fluid none-padding filter-title-page-news">
             <div class="col-md-12 col-sm-12 col-xs-12 none-padding title-page-news">

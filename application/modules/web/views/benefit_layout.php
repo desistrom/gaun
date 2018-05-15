@@ -53,6 +53,9 @@
             .detail_layanan .desrip-news{
             padding: 15px 0;
         }
+        .detail_layanan{
+            margin-top: 4em;
+        }
         }
     </style>
     <section class="detail_layanan">

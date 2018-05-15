@@ -1,3 +1,13 @@
+<style type="text/css">
+.header-title h2{
+font-size: 50px;color: #BDBDBD;
+}
+
+   @media(max-width:500px){
+  .title-page-news{
+    margin-top: 0!important;
+  }
+</style>
 <link rel="stylesheet" href="<?=base_url();?>assets/css/style_list_video.min.css?t=<?=time();?>"> 
         <div class="container-fluid none-padding filter-title-page-news">
             <div class="col-md-12 col-sm-12 col-xs-12 none-padding title-page-news">
@@ -5,7 +15,7 @@
                     <div></div>
                 </div>
                 <div class="header-title">
-                    <h2 style="font-size: 50px;color: #BDBDBD;">ID-TUBE </h2></div>
+                    <h2 style="">ID-TUBE </h2></div>
             </div>
         </div>
         <section class="content-video">

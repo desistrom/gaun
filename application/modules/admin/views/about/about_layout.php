@@ -80,11 +80,14 @@
   .fa-upload{
     padding-right: 10px;
   }
+  .box{
+    margin-bottom: 0;
+  }
 </style>
 <div class="col col-md-12 col-sm-12 col-xs-12">
   <div class="box">
     <div class="heading-tab">
-      <button class="tablink" onclick="openPage('About', this, '#BD0E0E')" id="defaultOpen">About</button>
+      <button class="tablink" onclick="openPage('About', this, '#BD0E0E')" id="defaultOpen">Description</button>
       <button class="tablink" onclick="openPage('Founder', this, '#BD0E0E')" >Founder</button>
     </div>
       

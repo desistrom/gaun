@@ -4,6 +4,9 @@
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
 <link rel="stylesheet" href="<?=base_url();?>assets/css/style_register.min.css?t=<?=time();?>">
     <style type="text/css">
+    .detail_news{
+        margin-top: 6em;
+    }
         /* Hoshi */
         .input {
     position: relative;
@@ -241,6 +244,7 @@
     }
     }
     @media (max-width: 767px){
+
          .box-news{
         padding: 0 ;
     }
@@ -260,8 +264,13 @@
 }
 
     }
+   @media (max-width: 500px){
+     .detail_news{
+        margin-top: 4em;
+    }
+   }
 </style>
-<section class="detail_news" style="margin-top: 6em;">
+<section class="detail_news" style="">
         <div class="container-fluid none-padding filter-title-page-news">
             <div class="col-md-12 col-sm-12 col-xs-12 none-padding title-page-news">
                 <div class="line-news">

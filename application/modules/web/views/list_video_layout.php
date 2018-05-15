@@ -1,4 +1,27 @@
-   
+<style type="text/css">
+.header-title h2{
+font-size: 50px;color: #BDBDBD;
+}
+
+   @media(max-width:500px){
+  .title-page-news{
+    margin-top: 0!important;
+    padding-top: 1em;
+  }
+  .header-title h2{
+    font-size: 30px;color: #BDBDBD;
+    }
+    .modal iframe{
+        height: 260px;
+    }
+    }
+@media(max-width:400px){
+
+    .modal iframe{
+        height: 260px !important;
+    }
+    }
+</style>   
 
 <link rel="stylesheet" href="<?=base_url();?>assets/css/style_list_video.min.css?t=<?=time();?>"> 
         <div class="container-fluid none-padding filter-title-page-news">
@@ -7,7 +30,7 @@
                     <div></div>
                 </div>
                 <div class="header-title">
-                    <h2 style="font-size: 50px;color: #BDBDBD;">Video </h2></div>
+                    <h2 style="">Video </h2></div>
             </div>
         </div>
         <section class="content-video">

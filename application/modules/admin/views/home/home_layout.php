@@ -1,5 +1,20 @@
-<div class="col-lg-3 col-xs-6">
+<?php foreach ($daftar_instansi as $key => $value): ?>
+ <div class="col-lg-3 col-xs-6">
           <!-- small box -->
+  <div class="small-box <?php if($key%2==0){ ?>bg-yellow <?php }else{ ?> bg-blue <?php } ?>">
+    <div class="inner">
+      <h3><?=$$value['nm_jenis_instansi'];?></h3>
+
+      <p><?=$value['nm_jenis_instansi'];?></p>
+    </div>
+    <div class="icon">
+      <i class="<?=$value['icon'];?>"></i>
+    </div>
+    <a href="<?=site_url('admin/keanggotaan/instansi');?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+  </div>
+</div> 
+<?php endforeach ?>
+<!-- <div class="col-lg-3 col-xs-6">
   <div class="small-box bg-yellow">
     <div class="inner">
       <h3><?=$user;?></h3>
@@ -11,7 +26,7 @@
     </div>
     <a href="<?=site_url('admin/keanggotaan/instansi');?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
   </div>
-</div>
+</div> -->
 
 <div class="col-lg-3 col-xs-6">
   <!-- small box -->
@@ -39,7 +54,7 @@
     <div class="icon">
       <i class="fa fa-video-camera"></i>
     </div>
-    <a href="<?=site_url('admin/news');?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+    <a href="<?=site_url('admin/galery/list_video');?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
   </div>
 </div>
 
@@ -54,7 +69,7 @@
     <div class="icon">
       <i class="fa fa-picture-o"></i>
     </div>
-    <a href="<?=site_url('admin/news');?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+    <a href="<?=site_url('admin/galery/list_image');?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
   </div>
 </div>
 
@@ -69,6 +84,6 @@
     <div class="icon">
       <i class="fa fa-picture-o"></i>
     </div>
-    <a href="<?=site_url('admin/news');?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+    <a href="<?=site_url('admin/menu/page');?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
   </div>
 </div>

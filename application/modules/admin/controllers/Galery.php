@@ -380,14 +380,6 @@ class Galery extends MX_Controller  {
         else
         {
             $upload_data = $this->upload->data();
-            /*$this->load->library('Compress');
-			$compress = new Compress();
-			$compress->file_url = FCPATH."assets/media/".$upload_data['file_name'];
-			$compress->new_name_image = $upload_data['file_name'];
-			$compress->quality = 60;
-			$compress->destination = FCPATH."assets/";
-			$result = $compress->compress_image();
-*/
             $data_upload['asli'] = $upload_data['file_name'];
             if ($upload_data) {
                 $data = array('upload_data' => $this->upload->data());
@@ -395,7 +387,9 @@ class Galery extends MX_Controller  {
                 $config_r['source_image'] = FCPATH."assets/media/".$upload_data['file_name'];
                 $config_r['quality'] = 60;
                 $config_r['maintain_ratio'] = TRUE;
-                $config_r['width']         = 150;
+                if ($upload_data['image_width'] > 768) {
+                	$config_r['width'] = 450;
+                }
                 $config_r['new_image'] = FCPATH."assets/media/thumbnail/".$upload_data['file_name'];
 
                 $this->load->library('image_lib', $config_r);
@@ -408,23 +402,8 @@ class Galery extends MX_Controller  {
                         // echo "berhasil resize";
                         $data_upload['resize'] = site_url('assets/media/thumbnail/')."/".$upload_data['file_name'];
                 }
-            }
-            if ($upload_data['image_width'] > 768) {
-                $config_c['image_library'] = 'GD2';
-                $config_c['new_image'] = FCPATH."assets/media/crop/".$upload_data['file_name'];
-                $config_c['source_image'] = FCPATH."assets/media/".$upload_data['file_name'];
-                $config_c['x_axis'] = 100;
-                $config_c['y_axis'] = 60;
 
-                $this->image_lib->initialize($config_c);
 
-                if ( ! $this->image_lib->crop())
-                {
-                        $data_upload['error'] = $this->image_lib->display_errors();
-                }else{
-                        // echo "berhasil Crop";
-                        $data_upload['crop'] = site_url('assets/media/crop/')."/".$upload_data['file_name'];
-                }
             }
         }
         return $data_upload;

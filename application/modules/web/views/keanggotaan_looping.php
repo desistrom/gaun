@@ -4,7 +4,7 @@
             <div class="col col-md-3 col-sm-12 col-xs-12">
                 <div class="box-keanggotaan-left">
                 	<div class="filter-box-mg-keanggotaan">
-                		<img class="img-responsive logo-instansi" src="<?php echo base_url().'media/'.$value['image']; ?>">
+                		<img class="img-responsive logo-instansi" src="<?php echo $value['image_thumbnail']; ?>">
                 	</div>
                 </div>
             </div>

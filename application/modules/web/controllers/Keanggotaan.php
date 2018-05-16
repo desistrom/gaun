@@ -45,15 +45,16 @@ class Keanggotaan extends MX_Controller  {
         if (!empty($this->input->get('page'))) {
             $start = ceil($this->input->get('page') * 10);
             $this->data['total_row'] = $start;
-            $url = base_url().'api/v1/instansi_pagging?data='.$start;
+            $url = URL_GET_INSTANSI_PAGGING.$start;
             $a = api_helper('',$url,$methode,$token);
             $this->data['keanggotaan']=$a['data'];
             $result = $this->load->view('keanggotaan_looping',$this->data);
             echo json_encode($result);
         }else{
-            $url = base_url().'api/v1/instansi_pagging?data=0';
+            $url = URL_GET_INSTANSI_PAGGING.'0';
             $this->data['total_row'] = '10';
-            $a = api_helper('',$url,$methode,$token);
+            $a = api_helper('',$url,'GET','');
+            // print_r($a);
             $this->data['keanggotaan']=$a['data'];
             $this->ciparser->new_parse('template_frontend','modules_web', 'keanggotaan_layout',$this->data);
         }

@@ -6,6 +6,7 @@ class V1 extends REST_Controller {
         parent::__construct();
         $this->load->library('REST_Controller');
         $this->load->model('v1_model');
+        ini_set('allow_url_fopen',1);
     }
 
     public function token_post()
@@ -397,7 +398,12 @@ class V1 extends REST_Controller {
                 if ($value['image'] == '') {
                     $galery[$key]['image']=base_url().'assets/images/logo/IDREN-2.png';
                 }else{
-                    $galery[$key]['image'] = base_url().'assets/media/'.$value['image'];
+                    if (file_exists(FCPATH."assets/media/thumbnail/".$value['file'])) {
+                        $galery[$key]['image'] = base_url().'assets/media/thumbnail/'.$value['file'];
+                    }else{
+                        $galery[$key]['image_big'] = base_url().'assets/media/'.$value['file'];
+                        $galery[$key]['image'] = base_url().'assets/media/thumbnail/'.$value['file'];
+                    }
                 }
 
             }
@@ -415,7 +421,12 @@ class V1 extends REST_Controller {
             if ($value['image'] == '') {
                 $galery[$key]['image']=base_url().'assets/images/logo/IDREN-2.png';
             }else{
-                $galery[$key]['image'] = base_url().'assets/media/'.$value['image'];
+                if (file_exists(FCPATH."assets/media/thumbnail/".$value['file'])) {
+                    $galery[$key]['image'] = base_url().'assets/media/thumbnail/'.$value['file'];
+                }else{
+                    $galery[$key]['image_big'] = base_url().'assets/media/'.$value['file'];
+                    $galery[$key]['image'] = base_url().'assets/media/thumbnail/'.$value['file'];
+                }
             }
 
         }
@@ -446,7 +457,12 @@ class V1 extends REST_Controller {
                 if ($value['file'] == '') {
                     $galery[$key]['file']=base_url().'assets/images/logo/IDREN-2.png';
                 }else{
-                    $galery[$key]['file'] = base_url().'assets/media/'.$value['file'];
+                    if (file_exists(FCPATH."assets/media/thumbnail/".$value['file'])) {
+                        $galery[$key]['file'] = base_url().'assets/media/thumbnail/'.$value['file'];
+                    }else{
+                        $galery[$key]['file_big'] = base_url().'assets/media/'.$value['file'];
+                        $galery[$key]['file'] = base_url().'assets/media/thumbnail/'.$value['file'];
+                    }
                 }
 
             }
@@ -614,8 +630,13 @@ class V1 extends REST_Controller {
             if ($value['image'] == '') {
                 $user[$key]['image_thumbnail']=base_url().'assets/images/logo/IDREN-2.png';
             }else{
-                $user[$key]['image_large']=base_url().'media/'.$user[$key]['image'];
-                $user[$key]['image_thumbnail']=base_url().'media/'.$user[$key]['image'];
+                if (file_exists(FCPATH."media/thumbnail/".$value['image'])) {
+                    $user[$key]['image_thumbnail'] = base_url().'media/thumbnail/'.$value['image'];
+                    $galery[$key]['image'] = base_url().'media/'.$value['image'];
+                }else{
+                    $user[$key]['image_thumbnail'] = base_url().'media/'.$value['image'];
+                    $user[$key]['image'] = base_url().'media/'.$value['image'];
+                }
             }                                                                                                                     
         }
         $retData['data'] = $user;
@@ -630,8 +651,13 @@ class V1 extends REST_Controller {
             if ($value['image'] == '') {
                 $user[$key]['image_thumbnail']=base_url().'assets/images/logo/IDREN-2.png';
             }else{
-                $user[$key]['image_large']=base_url().'media/'.$user[$key]['image'];
-                $user[$key]['image_thumbnail']=base_url().'media/'.$user[$key]['image'];
+                if (file_exists(FCPATH."media/thumbnail/".$value['image'])) {
+                    $user[$key]['image_thumbnail'] = base_url().'media/thumbnail/'.$value['image'];
+                    $user[$key]['image'] = base_url().'media/'.$value['image'];
+                }else{
+                    $user[$key]['image_thumbnail'] = base_url().'media/'.$value['image'];
+                    $user[$key]['image'] = base_url().'media/'.$value['image'];
+                }
             }                                                                                                                     
         }
         $retData['data'] = $user;
@@ -652,11 +678,16 @@ class V1 extends REST_Controller {
             $retData['status'] = 'success';
             foreach ($instansi as $key => $value) {
                 if ($value['image'] == '') {
-                    // $instansi[$key]['image']=base_url().'assets/images/logo/IDREN-2.png';
+                    $instansi[$key]['image_thumbnail']=base_url().'assets/images/logo/IDREN-2.png';
                 }else{
-                    // $instansi[$key]['image_thumbnail']=base_url().'media/thumbnail/'.$instansi[$key]['image'];
-                    // $instansi[$key]['image'] = base_url().'media/'.$value['image'];
-                }                                                                                                                     
+                    if (file_exists(FCPATH."media/thumbnail/".$value['image'])) {
+                        $instansi[$key]['image_thumbnail'] = base_url().'media/thumbnail/'.$value['image'];
+                        $instansi[$key]['image'] = base_url().'media/'.$value['image'];
+                    }else{
+                        $instansi[$key]['image_thumbnail'] = base_url().'media/'.$value['image'];
+                        $instansi[$key]['image'] = base_url().'media/'.$value['image'];
+                    }
+                }                                                                                                                      
             }
             $retData['data'] = $instansi;
         }

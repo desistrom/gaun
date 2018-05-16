@@ -702,43 +702,25 @@ class Keanggotaan extends MX_Controller  {
         {
             $upload_data = $this->upload->data();
             $data_upload['asli'] = $upload_data['file_name'];
-            if ($upload_data['image_width'] > 768 ) {
-                $data = array('upload_data' => $this->upload->data());
-                $config_r['image_library'] = 'GD2';
-                $config_r['source_image'] = FCPATH."media/".$upload_data['file_name'];
-                // $config_r['create_thumb'] = TRUE;
-                $config_r['maintain_ratio'] = TRUE;
-                $config_r['width']         = 132;
-                $config_r['new_image'] = FCPATH."media/thumbnail/".$upload_data['file_name'];
-
-                $this->load->library('image_lib', $config_r);
-
-                $this->image_lib->resize();
-                if ( ! $this->image_lib->resize())
-                {
-                        $data_upload['error'] = $this->image_lib->display_errors();
-                }else{
-                        // echo "berhasil resize";
-                        $data_upload['resize'] = site_url('media/thumbnail/')."/".$upload_data['file_name'];
-                        
-                }
-            }
+           	$data = array('upload_data' => $this->upload->data());
+            $config_r['image_library'] = 'GD2';
+            $config_r['source_image'] = FCPATH."media/".$upload_data['file_name'];
+            $config_r['quality'] = 60;
+            $config_r['maintain_ratio'] = TRUE;
             if ($upload_data['image_width'] > 768) {
-                $config_c['image_library'] = 'GD2';
-                $config_c['new_image'] = FCPATH."media/crop/".$upload_data['file_name'];
-                $config_c['source_image'] = FCPATH."media/".$upload_data['file_name'];
-                $config_c['x_axis'] = 100;
-                $config_c['y_axis'] = 60;
+            	$config_r['width'] = 450;
+            }
+            $config_r['new_image'] = FCPATH."media/thumbnail/".$upload_data['file_name'];
 
-                $this->image_lib->initialize($config_c);
+            $this->load->library('image_lib', $config_r);
 
-                if ( ! $this->image_lib->crop())
-                {
-                        $data_upload['error'] = $this->image_lib->display_errors();
-                }else{
-                        // echo "berhasil Crop";
-                        $data_upload['crop'] = site_url('media/crop/')."/".$upload_data['file_name'];
-                }
+            $this->image_lib->resize();
+            if ( ! $this->image_lib->resize())
+            {
+                    $data_upload['error'] = $this->image_lib->display_errors();
+            }else{
+                    // echo "berhasil resize";
+                    $data_upload['resize'] = site_url('media/thumbnail/')."/".$upload_data['file_name'];
             }
         }
         return $data_upload;

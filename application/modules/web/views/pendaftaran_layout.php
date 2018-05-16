@@ -3,8 +3,7 @@
 <meta name="author" content="Codrops" />
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
 <link rel="stylesheet" href="<?=base_url();?>assets/css/style_register.min.css?t=<?=time();?>">
-<link rel="stylesheet" href="<?=base_url();?>assets/css/style_register_2.min.css?t=<?=time();?>">
- 
+<link rel="stylesheet" href="<?=base_url();?>assets/css/style_register_2.min.css?t=<?=time();?>"> 
 <section class="detail_news" style="">
         <div class="container-fluid none-padding filter-title-page-news">
             <div class="col-md-12 col-sm-12 col-xs-12 none-padding title-page-news">
@@ -132,8 +131,6 @@
 </div>
     <div id="regSukses" class="modal fade modal-register" role="dialog" >
       <div class="modal-dialog">
-
-
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -142,15 +139,11 @@
           <div class="modal-body">
             <p class="text-center">Registrasi Anda sedang kami Proses, tunggu konfirmasi selanjutnya dari Admin</p>
           </div>
-
         </div>
-
       </div>
     </div>
     <div id="username-already" class="modal fade modal-register" role="dialog" >
       <div class="modal-dialog">
-
-
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -159,26 +152,19 @@
           <div class="modal-body">
             <p class="text-center">username sudah terdaftar, ganti unername anda</p>
           </div>
-
         </div>
-
       </div>
-    </div>
-    
+    </div>  
 <script src="<?=base_url();?>assets/js/jquery.min.js"></script>
  <script src="<?=base_url();?>assets/js/classie.min.js"></script>
  <script src="<?=base_url();?>assets/js/custom_pendaftaran.min.js"></script>
  <script src='https://www.google.com/recaptcha/api.js'></script>
-
 <script type="text/javascript">
    var base_url = "<?=base_url();?>"
     $(document).ready(function(){
-
       $('body').on('click','#btn_register', function(){
         $('#progresLoading').modal('show');
       console.log($('form').val());
-      // $('#content').val(CKEDITOR.instances.content.getData());
-      // return false;
       $.ajax({
           url : window.location.href,
           dataType : 'json',
@@ -209,7 +195,6 @@
             });
       });
     });
-
     });
  </script>
 

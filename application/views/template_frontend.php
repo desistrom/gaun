@@ -4,6 +4,18 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content='public' http-equiv='Cache-control'/>
+    <meta content='private' http-equiv='Cache-control'/>
+    <meta content='no-cache' http-equiv='Cache-control'/>
+    <meta content='no-store' http-equiv='Cache-control'/>
+    <!-- CACHE -->
+    <include expiration='7d' path='*.css'/>
+    <include expiration='7d' path='*.js'/>
+    <include expiration='7d' path='*.gif'/>
+    <include expiration='7d' path='*.jpeg'/>
+    <include expiration='7d' path='*.jpg'/>
+    <include expiration='7d' path='*.png'/>
+    <meta content='mon, 01 may 2100 00:00:00 GMT' http-equiv='expires'/>
     <title><?=strtoupper($this->general->title());?></title>
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800,900" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Crimson+Text:400,600,700" rel="stylesheet">
@@ -63,7 +75,7 @@
         padding-top: 20px;
           }
           .sub-flagcounter-foot{
-            margin-top: -3em;
+            margin-top: -1em;
             display: inline-block;
           }
           .list-inline>li{

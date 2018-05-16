@@ -80,7 +80,7 @@ font-size: 50px;color: #BDBDBD;
 <!-- <script src="<?=base_url();?>assets/js/jquery.min.js"></script> -->
 <script src="<?=base_url().'assets/js/jquery-3.2.1.min.js';?>"></script>
 <script src="<?=base_url();?>assets/js/modal-custom.js"></script>
-    <script type="text/javascript">
+<script type="text/javascript">
     $(document).ready(function(){
         $('.ajax-load').css({'margin-bottom' : '30px'});
       $("body").on('click','.show-video',function(){
@@ -139,11 +139,6 @@ font-size: 50px;color: #BDBDBD;
     });
     </script>
 
-
-<script type="text/javascript">
-    
-     
-</script>
 
 
    

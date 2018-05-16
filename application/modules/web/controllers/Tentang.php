@@ -21,7 +21,10 @@ class Tentang extends MX_Controller  {
         $a = api_helper('',$url,$methode,$token);
         $this->data['about']=$a['data'];
 
-        $this->data['founder'] = $this->db->get('tb_founder')->result_array();
+        $this->db->from('tb_founder');
+        $this->db->order_by("sort", "asc");
+        $query = $this->db->get(); 
+        $this->data['founder'] = $query->result_array();
 
         $this->ciparser->new_parse('template_frontend','modules_web', 'tentang_layout',$this->data);
     }

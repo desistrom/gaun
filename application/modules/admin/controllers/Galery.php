@@ -380,13 +380,20 @@ class Galery extends MX_Controller  {
         else
         {
             $upload_data = $this->upload->data();
-
+            /*$this->load->library('Compress');
+			$compress = new Compress();
+			$compress->file_url = FCPATH."assets/media/".$upload_data['file_name'];
+			$compress->new_name_image = $upload_data['file_name'];
+			$compress->quality = 60;
+			$compress->destination = FCPATH."assets/";
+			$result = $compress->compress_image();
+*/
             $data_upload['asli'] = $upload_data['file_name'];
-            if ($upload_data['image_width'] > 768 ) {
+            if ($upload_data) {
                 $data = array('upload_data' => $this->upload->data());
                 $config_r['image_library'] = 'GD2';
                 $config_r['source_image'] = FCPATH."assets/media/".$upload_data['file_name'];
-                // $config_r['create_thumb'] = TRUE;
+                $config_r['quality'] = 60;
                 $config_r['maintain_ratio'] = TRUE;
                 $config_r['width']         = 150;
                 $config_r['new_image'] = FCPATH."assets/media/thumbnail/".$upload_data['file_name'];

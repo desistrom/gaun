@@ -122,13 +122,13 @@
                             
                             <div class="col col-md-12 col-sm-12 col-xs-12 filter-date-event" >
                             	<ul class="list-inline date_event" style="margin-bottom: 1.5em;">
-                                    <a href="#" class="sosmed_share fb" ><li class=""><i class="fa fa-facebook"></i></li></a>
-                                    <a href="#" class="sosmed_share twit" ><li class=""><i class="fa fa-twitter"></i></li></a>
-                                    <a href="#" class="sosmed_share ig" ><li class=""><i class="fa fa-instagram"></i> </li></a>
+                                    <a href="http://www.facebook.com/sharer.php?u=<?=site_url('web/news/get_news').'/'.$detail_news['sumber'];?>" target="_blank" rel="nofollow" class="sosmed_share fb" ><li class=""><i class="fa fa-facebook"></i></li></a>
+                                    <a href="http://twitter.com/share?text=<?php echo $detail_news['title']; ?>&url=<?=site_url('web/news/get_news').'/'.$detail_news['sumber'];?>" class="sosmed_share twit" rel="nofollow" target="_blank"><li class=""><i class="fa fa-twitter"></i></li></a>
+                                    <!-- <a href="#" class="sosmed_share ig" ><li class=""><i class="fa fa-instagram"></i> </li></a> -->
 
                                 </ul>
                                 <ul class="list-inline date_event">
-                                    <li><i class="glyphicon glyphicon-calendar"></i><?php echo date('d m Y', strtotime($detail_news['tanggal'])); ?></li>
+                                    <li><i class="glyphicon glyphicon-calendar"></i><?php echo date('d M Y', strtotime($detail_news['tanggal'])); ?></li>
                                     <li><i class="glyphicon glyphicon-briefcase"></i> <?php echo $detail_news['kategori'];?></li>
                                     <li><i class="fa fa-link"></i> <?php echo $detail_news['sumber'];?></li>
 

@@ -3,273 +3,8 @@
 <meta name="author" content="Codrops" />
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
 <link rel="stylesheet" href="<?=base_url();?>assets/css/style_register.min.css?t=<?=time();?>">
-    <style type="text/css">
-    .detail_news{
-        margin-top: 6em;
-    }
-        /* Hoshi */
-        .input {
-    position: relative;
-    z-index: 1;
-    display: inline-block;
-    margin: 0 ;
-    max-width: 100%;
-    width: calc(100% - 2em);
-    vertical-align: top;
-
-}
-
-.input__field {
-    position: relative;
-    display: block;
-    float: right;
-    padding: 0.8em;
-    width: 60%;
-    border: none;
-    border-radius: 0;
-    background: #f0f0f0;
-
-    
-    -webkit-appearance: none; /* for box shadows to show on iOS */
-}
-
-.input__field:focus {
-    outline: none;
-}
-
-.input__label {
-    display: inline-block;
-    float: right;
-    padding: 0 1em;
-    width: 40%;
-    color: white;
-    font-weight: bold;
-    font-size: 90%;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-     font-weight: 400;
-}
-
-.input__label-content {
-    position: relative;
-    display: block;
-    padding: 1em 0;
-    width: 100%;
-}
-
-.graphic {
-    position: absolute;
-    top: 0;
-    left: 0;
-    fill: none;
-}
-
-
-
-/* Individual styles */
-.input--hoshi {
-    overflow: hidden;
-}
-
-.input__field--hoshi {
-    margin-top: 1em;
-    padding: 1em 0.15em;
-    width: 100%;
-    background: transparent;
-    color: white;
-}
-
-.input__label--hoshi {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    padding: 0 0.25em;
-    width: 100%;
-    height: calc(100% - 1em);
-    text-align: left;
-    pointer-events: none;
-}
-
-.input__label-content--hoshi {
-    position: absolute;
-}
-
-.input__label--hoshi::before,
-.input__label--hoshi::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: calc(100% - 10px);
-    border-bottom: 1px solid white;
-}
-
-.input__label--hoshi::after {
-    margin-top: 2px;
-    border-bottom: 4px solid red;
-    -webkit-transform: translate3d(-100%, 0, 0);
-    transform: translate3d(-100%, 0, 0);
-    -webkit-transition: -webkit-transform 0.3s;
-    transition: transform 0.3s;
-}
-
-.input__label--hoshi-color-1::after {
-    border-color:white;
-}
-
-
-.input__field--hoshi:focus + .input__label--hoshi::after,
-.input--filled .input__label--hoshi::after {
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-}
-
-.input__field--hoshi:focus + .input__label--hoshi .input__label-content--hoshi,
-.input--filled .input__label-content--hoshi {
-    -webkit-animation: anim-1 0.3s forwards;
-    animation: anim-1 0.3s forwards;
-}
-.error{
-    position: absolute;
-    bottom: -3px;
-}
-
-
-@-webkit-keyframes anim-1 {
-    50% {
-        opacity: 0;
-        -webkit-transform: translate3d(1em, 0, 0);
-        transform: translate3d(1em, 0, 0);
-    }
-    51% {
-        opacity: 0;
-        -webkit-transform: translate3d(-1em, -40%, 0);
-        transform: translate3d(-1em, -40%, 0);
-    }
-    100% {
-        opacity: 1;
-        -webkit-transform: translate3d(0, -40%, 0);
-        transform: translate3d(0, -40%, 0);
-    }
-}
-
-@keyframes anim-1 {
-    50% {
-        opacity: 0;
-        -webkit-transform: translate3d(1em, 0, 0);
-        transform: translate3d(1em, 0, 0);
-    }
-    51% {
-        opacity: 0;
-        -webkit-transform: translate3d(-1em, -40%, 0);
-        transform: translate3d(-1em, -40%, 0);
-    }
-    100% {
-        opacity: 1;
-        -webkit-transform: translate3d(0, -40%, 0);
-        transform: translate3d(0, -40%, 0);
-    }
-
-}
-.flowchart{
-    width: 75%;
-}
-.filter-title-page-news{
-    padding-bottom: 5em;
-}
-.title-page-news{
-    padding-top: 1em;
-    padding-bottom: 12em;
-    font-family: 'Nunito Sans', sans-serif;
-}
-.content-left{
-    margin-top: -7em;
-}
-.detail_news .content-right{
-    padding-left: 0;
-    border-left:none;
-}
-.box-danger{
-    text-align: center;
-    padding: 1em 0;
-    border-top: solid 4px red;
-}
-.box-danger i{
-    font-size: 36px;
-}
-    .box-news{
-        padding: 0 6em;
-        margin-bottom: 4em;
-    }
-    .pentahelix{
-        padding: 2em 6.2em;
-        background-image:url('<?=base_url();?>assets/images/logo/bg-register.min.jpg');
-        background-size: cover;
-        background-repeat: no-repeat;
-        font-family: 'Nunito Sans', sans-serif;
-        height: 80em;
-    }
-    .list-artikel{
-      box-shadow:0px 0px 28px 0px #120F0F;
-
-    }
-    .content-right{
-        padding-top: 1.5em;
-    }
-    div.row.content-news{
-        background-color: transparent;
-    }
-    .btn-submit{
-        background-color: white;
-        color: #CF090A;
-    }
-    .btn-submit:hover{
-        background-color: #FEFCFC;
-        color: #CF090A;
-    }
-    .detail_news .content-right{
-        border-bottom: none;
-    }
-    @media (max-width: 991px)
-    {
-         .box-news{
-        padding: 0 4em;
-    }
-    }
-    @media (max-width: 767px){
-
-         .box-news{
-        padding: 0 ;
-    }
-    .content-comment a.btn.btn-post{
-        padding: 10px 15px;
-        font-size: 16px;
-    }
-    .title-page-news{
-    padding-top: 1em;
-    padding-bottom: 1em;
-    font-family: 'Nunito Sans', sans-serif;
-}
-.detail_news .content-right{
-    padding-left: 15px;
-    height: auto;
-    overflow: hidden;
-}
-
-    }
-   @media (max-width: 500px){
-     .detail_news{
-        margin-top: 4em;
-    }
-   }
-</style>
+<link rel="stylesheet" href="<?=base_url();?>assets/css/style_register_2.min.css?t=<?=time();?>">
+ 
 <section class="detail_news" style="">
         <div class="container-fluid none-padding filter-title-page-news">
             <div class="col-md-12 col-sm-12 col-xs-12 none-padding title-page-news">
@@ -346,7 +81,14 @@
                                     </label>
                                     <span class="error" id="ntf_repassword"></span>
                                 </span>
+                                <div class="form-group" style="display: block;">
+                                  <?php echo $captcha // tampilkan recaptcha ?>
+                                  <div class="error" id="ntf_g-recaptcha-response" style="position: relative;"></div>
+                                </div>
                     
+                             </div>
+                             <div class="col col-md-12 col-sm-12 col-xs-12 action-footer">
+                                 <!-- <a href="#" style="color: #989898;">Forgot Password?</a> -->
                              </div>
                              <div class="col col-md-6 col-sm-6 col-xs-6 action-footer">
                                  <!-- <a href="#" style="color: #989898;">Forgot Password?</a> -->
@@ -424,50 +166,11 @@
     </div>
     
 <script src="<?=base_url();?>assets/js/jquery.min.js"></script>
- <script src="<?=base_url();?>assets/js/classie.js"></script>
-    <script>
-            (function() {
-                // trim polyfill : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/Trim
-                if (!String.prototype.trim) {
-                    (function() {
-                        // Make sure we trim BOM and NBSP
-                        var rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
-                        String.prototype.trim = function() {
-                            return this.replace(rtrim, '');
-                        };
-                    })();
-                }
+ <script src="<?=base_url();?>assets/js/classie.min.js"></script>
+ <script src="<?=base_url();?>assets/js/custom_pendaftaran.min.js"></script>
+ <script src='https://www.google.com/recaptcha/api.js'></script>
 
-                [].slice.call( document.querySelectorAll( 'input.input__field' ) ).forEach( function( inputEl ) {
-                    // in case the input is already filled..
-                    if( inputEl.value.trim() !== '' ) {
-                        classie.add( inputEl.parentNode, 'input--filled' );
-                    }
-
-                    // events:
-                    inputEl.addEventListener( 'focus', onInputFocus );
-                    inputEl.addEventListener( 'blur', onInputBlur );
-                } );
-
-                function onInputFocus( ev ) {
-                    classie.add( ev.target.parentNode, 'input--filled' );
-                }
-
-                function onInputBlur( ev ) {
-                    if( ev.target.value.trim() === '' ) {
-                        classie.remove( ev.target.parentNode, 'input--filled' );
-                    }
-                }
-            })();
-
-
-
-
-
-        </script>
-
-
-         <script type="text/javascript">
+<script type="text/javascript">
    var base_url = "<?=base_url();?>"
     $(document).ready(function(){
 
@@ -477,7 +180,7 @@
       // $('#content').val(CKEDITOR.instances.content.getData());
       // return false;
       $.ajax({
-          url : base_url+"web/gabung/insert_user",
+          url : window.location.href,
           dataType : 'json',
           type : 'POST',
           data : $('#register_form').serialize()
@@ -513,88 +216,3 @@
 
 
 
-<!--     <style type="text/css">
-        .img-news img{
-            width: 100%;
-            
-        }
-        .detail_layanan{
-            margin-top: 6em;
-            background-color: #F2F2F2;
-        }
-        div.row.content-news{
-            background-color: #F2F2F2;
-        }
-        .list-artikel{
-            padding: 0 15px;
-        }
-        .detail_layanan .desrip-news{
-            padding: 2em;
-        }
-        .detail_layanan .desrip-news p{
-            font-size: 18px;
-        }
-        .detail_layanan .content-left{
-            padding: 0 4em;
-        }
-        .detail_layanan .list-artikel,
-        .detail_layanan .descrip-img{
-            padding-right: 0;
-        }
-        .detail_layanan .descrip-img img{
-            width: 100%;
-        }
-        .detail_layanan .desrip-news p{
-                 word-wrap: break-word;
-            }
-        @media(max-width:991px){
-            .descrip-img{
-                display: none;
-            }
-        }
-        @media(max-width:500px){
-
-
-            div.container-fluid{
-              padding: 0 1em;
-            }
-            .detail_layanan .content-left{
-              padding: 15px;
-            }
-                .detail_layanan .desrip-news p{
-                 word-wrap: break-word;
-                 font-size: 14px;
-            }
-            .detail_layanan .desrip-news{
-            padding: 15px 0;
-        }
-        }
-    </style>
-    <section class="detail_layanan">
-        <div class="container-fluid none-padding filter-title-page-news">
-            <div class="col-md-12 col-sm-12 col-xs-12 none-padding title-page-news">
-                <div class="line-news">
-                    <div></div>
-                </div>
-                <div class="header-title">
-                    <h1 style="">Pendaftaran </h1></div>
-            </div>
-        </div>
-        <div class="container-fluid">
-            <div class="row content-news">
-               
-                <div class="col-md-12 col-sm-12 col-xs-12 content-left">
-                    <div class="col col-md-12 col-sm-12 col-xs-12 none-padding list-artikel">
-                        <div class="col col-md-12 col-sm-12 col-xs-12 desrip-news">
-                            
-                            <div class="isi-news" style="padding: 0 15px;color: #919191;"><?php echo $step['step']; ?></div>
-                    </div>
-                    <div class="col col-md-12 col-sm-12 col-xs-12">
-                        <img width="100%" src="<?php echo $step['picture']; ?>">
-                    </div>
-                </div>
-            
-            </div>
-        </div>
-
-    </section> -->

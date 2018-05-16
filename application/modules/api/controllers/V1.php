@@ -729,6 +729,7 @@ class V1 extends REST_Controller {
         $data_register['alamat'] = $data['address'];
         $data_register['website'] = $data['website'];
         $data_register['email'] = $data['email'];
+        $data_register['status'] = 0;
         if ($this->db->get_where('tb_instansi',array('username'=>$data['username']))->num_rows() > 0) {
             $retData['code'] = "500";
             $retData['status'] = 'Failed';

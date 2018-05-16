@@ -4,7 +4,7 @@
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
 <link rel="stylesheet" href="<?=base_url();?>assets/css/style_register.min.css?t=<?=time();?>">
     <style type="text/css">
-        /* Hoshi */
+     
         .input {
     position: relative;
     z-index: 1;
@@ -27,7 +27,7 @@
     background: #f0f0f0;
 
     
-    -webkit-appearance: none; /* for box shadows to show on iOS */
+    -webkit-appearance: none; /
 }
 
 .input__field:focus {
@@ -69,7 +69,7 @@
 
 
 
-/* Individual styles */
+
 .input--hoshi {
     overflow: hidden;
 }

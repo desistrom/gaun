@@ -137,14 +137,7 @@
           </a>
         </li>
 
-        <li class="treeview <?php if(current_url() == site_url('admin/keanggotaan/kategori_instansi')){ ?> active <?php } ?>">
-          <a href="<?=site_url('admin/keanggotaan/kategori_instansi');?>">
-            <i class="fa fa-building"></i> <span>Pentahelix</span>
-            <span class="pull-right-container">
-              
-            </span>
-          </a>
-        </li>
+       
 
             
         <!-- <li class="treeview <?php if(current_url() == site_url('admin/home/logo')){ ?> active <?php } ?>">
@@ -157,21 +150,7 @@
         </li> -->
         
        
-        <li class=" treeview <?php if(current_url() == site_url('admin/email/index') || current_url() == site_url('admin/email/template') || current_url() == site_url('admin/email/kategori') || current_url() == site_url('admin/email/setting_email')){ ?>  active <?php } ?>">
-          <a href="#">
-            <i class="fa fa-envelope"></i>  <span>Email</span>
-            <span class="pull-right-container">
-
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <!-- <li <?php if(current_url() == site_url('admin/email/index')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/email/index');?>"><i class="fa fa-clone"></i> List Email</a></li> -->
-            <li <?php if(current_url() == site_url('admin/email/template')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/email/template');?>"><i class="fa fa-columns"></i>Template</a></li>
-            <li <?php if(current_url() == site_url('admin/email/kategori')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/email/kategori');?>"><i class="glyphicon glyphicon-envelope"></i>kategori Email</a></li>
-            <li <?php if(current_url() == site_url('admin/email/setting_email')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/email/setting_email');?>"><i class="glyphicon glyphicon-cog"></i>Setting Email</a></li>
-          </ul>
-        </li>
+    
 
         <li class=" treeview <?php if(current_url() == site_url('admin/home/testimoni') || current_url() == site_url('admin/home/hero') || current_url() == site_url('admin/home/Layanan_idroam') || current_url() == site_url('admin/home/Layanan_cloud') || current_url() == site_url('admin/home/kolaborasi') || current_url() == site_url('admin/about/slider') || current_url() == site_url('admin/home/pentahelix')){ ?>  active <?php } ?>">
           <a href="#">
@@ -191,6 +170,14 @@
             <li <?php if(current_url() == site_url('admin/home/Layanan_cloud')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/home/Layanan_cloud');?>"><i class="fa fa-bullhorn"></i>Layanan Cloud Federation</a></li> -->
             <li <?php if(current_url() == site_url('admin/home/kolaborasi')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/home/kolaborasi');?>"><i class="fa fa-bullhorn"></i>Kolaborasi</a></li>
           </ul>
+        </li>
+         <li class="treeview <?php if(current_url() == site_url('admin/keanggotaan/kategori_instansi')){ ?> active <?php } ?>">
+          <a href="<?=site_url('admin/keanggotaan/kategori_instansi');?>">
+            <i class="fa fa-building"></i> <span>Pentahelix</span>
+            <span class="pull-right-container">
+              
+            </span>
+          </a>
         </li>
 
         <!-- <li class=" treeview <?php if(current_url() == site_url('admin/layanan/index') || current_url() == site_url('admin/layanan/id_journal') || current_url() == site_url('admin/layanan/id_tube') || current_url() == site_url('admin/layanan/id_mail') || current_url() == site_url('admin/layanan/id_research') || current_url() == site_url('admin/layanan/id_links') || current_url() == site_url('admin/layanan/id_rank')){ ?>  active <?php } ?>">
@@ -313,7 +300,21 @@
             <li <?php if(current_url() == site_url('admin/logo/title')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/logo/title');?>"><i class="material-icons">title</i> Title Website </a></li>
           </ul>
         </li>
+            <li class=" treeview <?php if(current_url() == site_url('admin/email/index') || current_url() == site_url('admin/email/template') || current_url() == site_url('admin/email/kategori') || current_url() == site_url('admin/email/setting_email')){ ?>  active <?php } ?>">
+          <a href="#">
+            <i class="fa fa-envelope"></i>  <span>Email</span>
+            <span class="pull-right-container">
 
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <!-- <li <?php if(current_url() == site_url('admin/email/index')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/email/index');?>"><i class="fa fa-clone"></i> List Email</a></li> -->
+            <li <?php if(current_url() == site_url('admin/email/template')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/email/template');?>"><i class="fa fa-columns"></i>Template</a></li>
+            <li <?php if(current_url() == site_url('admin/email/kategori')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/email/kategori');?>"><i class="glyphicon glyphicon-envelope"></i>kategori Email</a></li>
+            <li <?php if(current_url() == site_url('admin/email/setting_email')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/email/setting_email');?>"><i class="glyphicon glyphicon-cog"></i>Setting Email</a></li>
+          </ul>
+        </li>
         <li class=" treeview <?php if(current_url() == site_url('admin/about/footer')){ ?> active <?php } ?>">
           <a href="<?=site_url('admin/about/footer');?>">
             <i class="glyphicon glyphicon-option-horizontal"></i><span>Footer Setting</span>

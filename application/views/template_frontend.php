@@ -7,16 +7,71 @@
     <title><?=strtoupper($this->general->title());?></title>
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800,900" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Crimson+Text:400,600,700" rel="stylesheet">
-    <link  href="<?=base_url();?>assets/css/bootstrap.min.css" as="style" rel="preload" onload="this.rel='stylesheet'" >
-    <link  href="<?=base_url();?>assets/fonts/font-awesome.min.css" as="style" rel="preload" onload="this.rel='stylesheet'" >
-    <link  href="<?=base_url();?>assets/css/Navbar-with-mega-menu.min.css" as="style" rel="preload" onload="this.rel='stylesheet'" >
-    <link  type="text/css" href="<?=base_url();?>assets/css/jsCalendar.css" as="style" rel="preload" onload="this.rel='stylesheet'" >
-    <link  href="<?=base_url();?>assets/css/owl.transitions.min.css" as="style" rel="preload" onload="this.rel='stylesheet'" >
-    <link  href="<?=base_url();?>assets/css/owl.carousel.min.css" as="style" rel="preload" onload="this.rel='stylesheet'" >
-    <link  href="<?=base_url();?>assets/css/css.min.css?t=<?=time();?>" as="style" rel="preload" onload="this.rel='stylesheet'" >
+    <link  href="<?=base_url();?>assets/css/bootstrap.min.css" rel="stylesheet" >
+    <link  href="<?=base_url();?>assets/fonts/font-awesome.min.css" rel="stylesheet" >
+    <link  href="<?=base_url();?>assets/css/Navbar-with-mega-menu.min.css" rel="stylesheet" >
+    <link  type="text/css" href="<?=base_url();?>assets/css/jsCalendar.css" rel="stylesheet" >
+    <link  href="<?=base_url();?>assets/css/owl.transitions.min.css" rel="stylesheet" >
+    <link  href="<?=base_url();?>assets/css/owl.carousel.min.css" rel="stylesheet" >
+    <link  href="<?=base_url();?>assets/css/css.min.css?t=<?=time();?>" rel="stylesheet" >
     <link rel="shortcut icon" href="<?=base_url();?>media/crop/favicon.png" />
     <style type="text/css">
-.modal .ntf_err{color:red}.jsCalendar.material-theme thead{background-color:#D10909!important}.jsCalendar tbody td.jsCalendar-current{background-color:#D10909!important;border-radius:0;transition:0}.jsCalendar tbody{margin:0!important;padding:0!important}.jsCalendar thead{margin:0!important;padding:0!important}.jsCalendar thead .jsCalendar-week-days th,.jsCalendar tbody td{margin:0;height:30px;width:35px}.jsCalendar tbody td:hover{background-color:#EFDBDB;border-radius:0}.waubutton.wau.push{width:100%!important}#ifrm{display:none!important}.address-foot{font-size:14px;word-wrap:break-word}.flag-count{width:100%}.flagcounter-foot{height:auto;overflow:hidden;padding-top:20px}.sub-flagcounter-foot{margin-top:-3em;display:inline-block}.list-inline>li{display:inline!important}
+      .modal .ntf_err{
+          color: red;
+      }
+      .jsCalendar.material-theme thead{
+        background-color: #D10909 !important;
+      }
+      .jsCalendar tbody td.jsCalendar-current{
+         background-color: #D10909 !important;
+         border-radius: 0;
+         transition: 0;
+      }
+      .jsCalendar tbody{
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      .jsCalendar thead{
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      .jsCalendar thead .jsCalendar-week-days th, .jsCalendar tbody td{
+        margin: 0;
+        height: 30px;
+        width: 35px;
+      }
+      .jsCalendar tbody td:hover{
+        background-color: #EFDBDB;
+        border-radius: 0;
+      }
+      .waubutton.wau.push{
+         width: 100% !important;
+          }
+          #ifrm{
+            display: none !important;
+          }
+          .address-foot{
+          	font-size: 14px;
+          	word-wrap: break-word;
+          }
+          .flag-count{
+          	width: 100%;
+          }
+          .flagcounter-foot{
+        height: auto;
+        overflow: hidden;
+        padding-top: 20px;
+          }
+          .sub-flagcounter-foot{
+            margin-top: -3em;
+            display: inline-block;
+          }
+          .list-inline>li{
+          	display: inline !important;
+          }
+          .sub-flagcounter-foot img{
+        
+          }
     </style>
 </head>
 

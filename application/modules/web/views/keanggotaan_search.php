@@ -1,5 +1,13 @@
 <link rel="stylesheet" href="<?=base_url();?>assets/css/style_keanggotaan.min.css?t=<?=time();?>">
 <link rel="stylesheet" href="<?=base_url();?>assets/css/style_keanggotaan_2.min.css?t=<?=time();?>">
+<style type="text/css">
+    .alert-danger{
+        background-color: #CF090A;
+        background-image:none !important;
+        color: white;
+        border-color: #CF090A;
+    }
+</style>
 
 
    <section class="keanggotaan">
@@ -28,6 +36,12 @@
             <?php if ($total >= $total_row){ ?>
                 <div class="col-md-12 col-sm-12 col-xs-12 text-center" style="padding-bottom: 15px;">
                     <button class="btn btn-danger loadmore" type="button">Load More</button>
+                </div>
+            <?php }else{ ?>
+                <div class="col-md-12 col-sm-12 col-xs-12 content-keanggotaan">
+                    <div class="col-md-12 col-sm-12 col-xs-12 text-center" style="padding-bottom: 15px;">
+                        <div class="alert alert-danger">Data Not Found</div>
+                    </div>
                 </div>
             <?php } ?>
             <div class="ajax-load text-center" style="display:none">

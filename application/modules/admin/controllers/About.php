@@ -238,17 +238,18 @@ class About extends MX_Controller  {
             $upload_data = $this->upload->data();
 
             $data_upload['asli'] = $upload_data['file_name'];
-            if ($upload_data['image_width'] > 768 ) {
+            // if ($upload_data['image_width'] > 768 ) {
                 $data = array('upload_data' => $this->upload->data());
                 $config_r['image_library'] = 'GD2';
                 $config_r['source_image'] = FCPATH."assets/media/".$upload_data['file_name'];
                 // $config_r['create_thumb'] = TRUE;
                 $config_r['maintain_ratio'] = TRUE;
+                $config_r['quality'] = 60;
                 $config_r['width']         = 150;
                 $config_r['new_image'] = FCPATH."assets/media/thumbnail/".$upload_data['file_name'];
 
                 $this->load->library('image_lib', $config_r);
-
+                $this->image_lib->initialize($config_r);
                 $this->image_lib->resize();
                 if ( ! $this->image_lib->resize())
                 {
@@ -257,24 +258,7 @@ class About extends MX_Controller  {
                         // echo "berhasil resize";
                         $data_upload['resize'] = site_url('assets/media/thumbnail/')."/".$upload_data['file_name'];
                 }
-            }
-            if ($upload_data['image_width'] > 768) {
-                $config_c['image_library'] = 'GD2';
-                $config_c['new_image'] = FCPATH."assets/media/crop/".$upload_data['file_name'];
-                $config_c['source_image'] = FCPATH."assets/media/".$upload_data['file_name'];
-                $config_c['x_axis'] = 100;
-                $config_c['y_axis'] = 60;
-
-                $this->image_lib->initialize($config_c);
-
-                if ( ! $this->image_lib->crop())
-                {
-                        $data_upload['error'] = $this->image_lib->display_errors();
-                }else{
-                        // echo "berhasil Crop";
-                        $data_upload['crop'] = site_url('assets/media/crop/')."/".$upload_data['file_name'];
-                }
-            }
+            // }
         }
         return $data_upload;
     }
@@ -287,5 +271,32 @@ class About extends MX_Controller  {
         $l = strlen($str) - $i;
         $ext = substr($str,$i+1,$l);
         return $ext;
+    }
+
+    public function re_upload(){
+    	$data = $this->db->get('tb_founder')->result_array();
+    	foreach ($data as $key => $value) {
+    		if ($value['file_name'] != '') {
+	    		$config_r['image_library'] = 'GD2';
+		        $config_r['source_image'] = FCPATH."assets/media/".$value['foto'];
+		        $config_r['quality'] = 60;
+		        // $config_r['maintain_ratio'] = TRUE;
+		       	$config_r['width'] = 250;
+		        $config_r['new_image'] = FCPATH."assets/media/thumbnail/".$value['foto'];
+
+		        $this->load->library('image_lib', $config_r);
+		        $this->image_lib->initialize($config_r);
+		        $this->image_lib->resize();
+		        if ( ! $this->image_lib->resize())
+		        {
+		                $data_upload['error'] = $this->image_lib->display_errors();
+		        }else{
+		                // echo "berhasil resize";
+		                $data_upload['resize'] = site_url('assets/media/thumbnail/')."/".$value['foto'];
+		        }
+
+		        print_r($data_upload);
+    		}
+    	}
     }
 }

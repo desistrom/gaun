@@ -427,7 +427,7 @@ class Galery extends MX_Controller  {
 		        $config_r['source_image'] = FCPATH."assets/media/".$value['file_name'];
 		        $config_r['quality'] = 60;
 		        // $config_r['maintain_ratio'] = TRUE;
-		       	$config_r['width'] = 450;
+		       	$config_r['width'] = 250;
 		        $config_r['new_image'] = FCPATH."assets/media/thumbnail/".$value['file_name'];
 
 		        $this->load->library('image_lib', $config_r);

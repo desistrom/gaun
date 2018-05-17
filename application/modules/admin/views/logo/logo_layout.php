@@ -63,7 +63,7 @@
         </div>
         <div class="col col-md-6 col-sm-5 col-xs-12" style="text-align: center;">
           <?php if ($image['favicon'] != ''): ?>
-            <img class="logo-fav" src="<?=base_url();?>media/crop/<?=$image['favicon'];?>">
+            <img class="logo-fav" src="<?=base_url();?>media/<?=$image['favicon'];?>">
           <?php endif ?>
         </div>
         <div class="col col-md-12 col-sm-12 col-xs-12">

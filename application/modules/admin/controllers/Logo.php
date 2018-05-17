@@ -140,10 +140,10 @@ class Logo extends MX_Controller  {
         $imagename = $logo['userfile']['name'];
         $ext = strtolower($this->_getExtension($imagename));
         $config['upload_path']          = FCPATH."media/";
-        $config['allowed_types']        = 'gif|jpg|png';
+        $config['allowed_types']        = 'gif|jpg|png|ico';
         $config['max_size']             = 4000;
-        $config['max_width']            = 4056;
-        $config['min_width']            = 200;
+        $config['max_width']            = 2056;
+        $config['min_width']            = 1;
         $config['file_name']            = "favicon.".$ext;
 
         $this->load->library('upload', $config);
@@ -156,33 +156,6 @@ class Logo extends MX_Controller  {
         {
             $upload_data = $this->upload->data();
             $data_upload['asli'] = $upload_data['file_name'];
-
-            // if ($upload_data['image_width'] > 768 ) {
-                $data = array('upload_data' => $this->upload->data());
-                $config_r['image_library'] = 'GD2';
-                $config_r['source_image'] = FCPATH."media/".$upload_data['file_name'];
-                // $config_r['create_thumb'] = TRUE;
-                $config_r['maintain_ratio'] = TRUE;
-                $config_r['width']         = 500;
-                // $config_c['height'] = 100;
-                $config_r['new_image'] = FCPATH."media/thumbnail/".$upload_data['file_name'];
-
-                $this->load->library('image_lib', $config_r);
-
-                $this->image_lib->resize();
-                if ( ! $this->image_lib->resize())
-                {
-                        $data_upload['error'] = $this->image_lib->display_errors();
-                }else{
-                        // echo "berhasil resize";
-                        $data_upload['resize'] = site_url('media/thumbnail/')."/".$upload_data['file_name'];
-                        $data_upload['crop'] = $this->crop($upload_data['file_name']);
-                        
-                }
-            // }
-            /*if ($upload_data['image_width'] > 768) {
-                
-            }*/
         }
         return $data_upload;
     }
@@ -190,8 +163,8 @@ class Logo extends MX_Controller  {
     function crop($file_name){
     	$config_c['image_library'] = 'gd2';
                         // $config_c['library_path'] = '/usr/X11R6/bin/';
-            $config_c['new_image'] = FCPATH."media/crop/".$file_name;
-            $config_c['source_image'] = FCPATH."media/thumbnail/".$file_name;
+            $config_c['new_image'] = FCPATH."media/".$file_name;
+            $config_c['source_image'] = FCPATH."media/".$file_name;
             $config_c['width']  = 170;
             $config_c['height'] = 160;
             $config_c['maintain_ratio'] = false;
@@ -199,12 +172,12 @@ class Logo extends MX_Controller  {
 			$config_c['y_axis'] = 0;
 
             $this->image_lib->initialize($config_c);
-
+            $this->image_lib->crop();
             if ( ! $this->image_lib->crop())
             {
                     return $this->image_lib->display_errors();
             }else{
-                    return site_url('media/crop/')."/".$file_name;
+                    return site_url('media')."/".$file_name;
             }
     }
 

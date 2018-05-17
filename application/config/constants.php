@@ -89,7 +89,7 @@ define('URL_CHARGE', 'https://api.sandbox.midtrans.com/v2/charge');
 define('URL_UNIVERSAL', 'https://api.sandbox.midtrans.com/v2/');
 
 //define local
-define('URL_GET_ALL_MEDIA','http://localhost/idren/api/v1/galery');
+/*define('URL_GET_ALL_MEDIA','http://localhost/idren/api/v1/galery');
 define('URL_GET_ALL_ALBUM','http://localhost/idren/api/v1/albumAll');
 define('URL_GET_ALBUM_BY_ID','http://localhost/idren/api/v1/getAlbumById?data=');
 define('URL_GET_ALL_IMAGE','http://localhost/idren/api/v1/galery_image');
@@ -119,10 +119,10 @@ define('URL_GET_TESTIMONI_PAGGING','http://localhost/idren/api/v1/gettestimoni_p
 define('URL_GET_HERO','http://localhost/idren/api/v1/gethero');
 define('URL_GET_LOGO','http://localhost/idren/api/v1/getlogo');
 define('URL_GET_FOOTER','http://localhost/idren/api/v1/getfooter');
-define('URL_GET_AKADEMISI_TITLE','http://localhost/idren/api/v1/gettitleslider');
+define('URL_GET_AKADEMISI_TITLE','http://localhost/idren/api/v1/gettitleslider');*/
 
 //server
-/*define('URL_GET_ALL_MEDIA','http://http://128.199.233.73/idren/api/v1/galery');
+define('URL_GET_ALL_MEDIA','http://http://128.199.233.73/idren/api/v1/galery');
 define('URL_GET_ALL_ALBUM','http://http://128.199.233.73/idren/api/v1/albumAll');
 define('URL_GET_ALBUM_BY_ID','http://http://128.199.233.73/idren/api/v1/getAlbumById?data=');
 define('URL_GET_ALL_IMAGE','http://http://128.199.233.73/idren/api/v1/galery_image');
@@ -152,4 +152,4 @@ define('URL_GET_TESTIMONI_PAGGING','http://http://128.199.233.73/idren/api/v1/ge
 define('URL_GET_HERO','http://http://128.199.233.73/idren/api/v1/gethero');
 define('URL_GET_LOGO','http://http://128.199.233.73/idren/api/v1/getlogo');
 define('URL_GET_FOOTER','http://http://128.199.233.73/idren/api/v1/getfooter');
-define('URL_GET_AKADEMISI_TITLE','http://http://128.199.233.73/idren/api/v1/gettitleslider');*/
+define('URL_GET_AKADEMISI_TITLE','http://http://128.199.233.73/idren/api/v1/gettitleslider');

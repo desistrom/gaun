@@ -449,8 +449,7 @@ class Keanggotaan extends MX_Controller  {
 					if (isset($image['error'])) {
 						$ret['notif'] = $image;
 					}else{
-						$data_gambar = $this->upload_logo($_FILES);
-						$data_instansi['gambar'] = $data_gambar['asli'];
+						$data_instansi['gambar'] = $image['asli'];
 						if (file_exists(FCPATH."media/".$this->data['instansi']['gambar'])) {
 	            			@chmod(FCPATH."media/".$this->data['instansi']['gambar'], 0777);
 	            			@unlink(FCPATH."media/".$this->data['instansi']['gambar']);
@@ -713,7 +712,7 @@ class Keanggotaan extends MX_Controller  {
             $config_r['new_image'] = FCPATH."media/thumbnail/".$upload_data['file_name'];
 
             $this->load->library('image_lib', $config_r);
-
+            $this->image_lib->initialize($config_r);
             $this->image_lib->resize();
             if ( ! $this->image_lib->resize())
             {
@@ -918,5 +917,32 @@ class Keanggotaan extends MX_Controller  {
                 );
         //output to json format
         echo json_encode($output);
+    }
+
+    public function re_upload(){
+    	$data = $this->db->get('tb_instansi')->result_array();
+    	foreach ($data as $key => $value) {
+    		if ($value['gambar'] != '') {
+	    		$config_r['image_library'] = 'GD2';
+		        $config_r['source_image'] = FCPATH."media/".$value['gambar'];
+		        $config_r['quality'] = 60;
+		        $config_r['maintain_ratio'] = TRUE;
+		       	$config_r['width'] = 450;
+		        $config_r['new_image'] = FCPATH."media/thumbnail/".$value['gambar'];
+
+		        $this->load->library('image_lib', $config_r);
+		        $this->image_lib->initialize($config_r);
+		        $this->image_lib->resize();
+		        if ( ! $this->image_lib->resize())
+		        {
+		                $data_upload['error'] = $this->image_lib->display_errors();
+		        }else{
+		                // echo "berhasil resize";
+		                $data_upload['resize'] = site_url('media/thumbnail/')."/".$value['gambar'];
+		        }
+
+		        print_r($data_upload);
+    		}
+    	}
     }
 }

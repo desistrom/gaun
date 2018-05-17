@@ -421,11 +421,11 @@ class V1 extends REST_Controller {
             if ($value['image'] == '') {
                 $galery[$key]['image']=base_url().'assets/images/logo/IDREN-2.png';
             }else{
-                if (file_exists(FCPATH."assets/media/thumbnail/".$value['file'])) {
-                    $galery[$key]['image'] = base_url().'assets/media/thumbnail/'.$value['file'];
+                if (file_exists(FCPATH."assets/media/thumbnail/".$value['image'])) {
+                    $galery[$key]['image'] = base_url().'assets/media/thumbnail/'.$value['image'];
                 }else{
-                    $galery[$key]['image_big'] = base_url().'assets/media/'.$value['file'];
-                    $galery[$key]['image'] = base_url().'assets/media/thumbnail/'.$value['file'];
+                    $galery[$key]['image_big'] = base_url().'assets/media/'.$value['image'];
+                    $galery[$key]['image'] = base_url().'assets/media/thumbnail/'.$value['image'];
                 }
             }
 

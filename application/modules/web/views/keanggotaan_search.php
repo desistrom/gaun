@@ -1,59 +1,6 @@
 <link rel="stylesheet" href="<?=base_url();?>assets/css/style_keanggotaan.min.css?t=<?=time();?>">
-<style type="text/css">
-    .input-search{
-        display: inline-block;
-    }
-    .input-search input{
-        border-radius: 20px;
-        width: 300px;
-    }
-    .input-search button{
-        border-radius: 20px;
-        padding: 5px 20px;
-    }
-    .sub-search{
-        padding: 0 5em;
-    }
-    .sub-search .form-group{
-        padding: 0 4em;
-        margin-bottom: 0;
-    }
-        @media(max-width:991px){
-        .sub-search{
-        padding: 0 1em;
-    }
-    .sub-search .form-group{
-        padding: 0;
-        margin-bottom: 0;
-    }
-    .input-search input{
-        border-radius: 20px;
-        width: 100%;
-    }
-    @media(max-width:500px){
-        .sub-search{
-        padding: 0 1em;
-    }
-    .sub-search .form-group{
-        padding: 0;
-        margin-bottom: 0;
-    }
-    .input-search input{
-        border-radius: 20px;
-        width: 100%;
-    }
-    .input-search-left{
-        width: 80%;
-    }
-     .input-search-right{
-        width: 18%;
-    }
-    .input-search-right button{
-        width: 100%;
-        text-align: center;
-    }
-}
-</style> 
+<link rel="stylesheet" href="<?=base_url();?>assets/css/style_keanggotaan_2.min.css?t=<?=time();?>">
+
 
    <section class="keanggotaan">
         <div class="container-fluid none-padding filter-title-page-news">

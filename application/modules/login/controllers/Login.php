@@ -16,6 +16,7 @@ class Login extends MX_Controller
     }
 
     public function index(){
+        // print_r(file_get_contents(FCPATH."media/15264596851.jpg"));
     	if($this->input->method() == 'post'){
     		$ret['state'] = 0;
     		$ret['status'] = 0;

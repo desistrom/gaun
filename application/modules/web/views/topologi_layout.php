@@ -19,7 +19,7 @@ section.topologi{
 }
 .content-topologi{
     text-align: center;
-    padding: 0 8em 2em 8em;
+    padding: 0 10em 2em 10em;
 }
 .content-topologi img{
     width: 100%;

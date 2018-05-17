@@ -276,7 +276,7 @@ class About extends MX_Controller  {
     public function re_upload(){
     	$data = $this->db->get('tb_founder')->result_array();
     	foreach ($data as $key => $value) {
-    		if ($value['file_name'] != '') {
+    		if ($value['foto'] != '') {
 	    		$config_r['image_library'] = 'GD2';
 		        $config_r['source_image'] = FCPATH."assets/media/".$value['foto'];
 		        $config_r['quality'] = 60;

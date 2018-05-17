@@ -25,7 +25,7 @@
                                         <div class="col col-md-12 col-sm-12 col-xs-12 text-center filter-img-user" style="background-color: white;">
                                             <div class="box-testimoni-left ">
                                                 <div class="filter-box-mg-testimoni">
-                                                    <img class="img-responsive img-user" src="<?=base_url();?>assets/media/<?=$value['foto'];?>">
+                                                    <img class="img-responsive img-user" src="<?=base_url();?>assets/media/thumbnail/<?=$value['foto'];?>">
                                                 </div>
                                             </div>
                                         </div>

@@ -2,6 +2,37 @@
   .form-group{
     width: 50%;
   }
+  .form-goup-file{
+    height: auto;
+    overflow: hidden;
+    padding: 0;
+  }
+  .form-goup-file div{
+    display: inline-block;
+  }
+  .form-goup-file .input-file-left{
+    width: 100%;
+  }
+  .form-goup-file .input-file-left input{
+  width: 100%;
+  }
+  .form-goup-file .input-file-right{
+
+    left: 0;
+    top: 0;
+  }
+  .form-goup-file .input-file-right .btn-choose-foto{
+    height: 34px;
+    width: 105px;
+    border-radius: 0;
+    padding-left: 7px;
+  }
+  .logo-fav{
+    width: 100px;
+  }
+  .fa-upload{
+    padding-right: 10px;
+  }
 </style>
 <div class="box ">
   <div class="box-header with-border">
@@ -57,12 +88,22 @@
         </select>
         <div class="error" id="ntf_instansi"></div>
       </div>
+
       <div class="form-group">
+            <label>Logo Instansi</label>
+            <div class="col col-md-12 form-goup-file">
+              <div class="input-file-right"><label class="btn btn-success btn-choose-foto" for="userfile"><i class="fa fa-upload" ></i>Choose File</label></div>
+              <div class="input-file-left"><input type="file" class="form-control file" name="userfile" id="userfile"></div> 
+              <div class="error" id="ntf_userfile"></div>
+              <div class="error" id="ntf_error"></div> 
+            </div>
+      </div>
+      <!-- <div class="form-group">
       <label>Logo Instansi</label>
         <input type="file" class="form-control" name="userfile" id="userfile">
         <div class="error" id="ntf_userfile"></div>
         <div class="error" id="ntf_error"></div>
-      </div>
+      </div> -->
       <button type="button" class="btn btn-primary" id="submit">Submit</button>
 
     </form>

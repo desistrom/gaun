@@ -387,7 +387,7 @@ class Keanggotaan extends MX_Controller  {
 				$data_instansi['id_jenis_instansi'] = $this->input->post('jenis');
 				$data_instansi['password'] = $this->input->post('password');
 				$data_instansi['sort'] = $this->input->post('sort');
-				$data_gambar = $this->upload_logo($_FILES);
+				$data_gambar = $this->upload_instansi($_FILES);
 				if (isset($data_gambar['error'])) {
 					$ret['notif'] = $data_gambar;
 				}else{	
@@ -445,7 +445,7 @@ class Keanggotaan extends MX_Controller  {
 				$data_instansi['email'] = $this->input->post('email');
 				$data_instansi['sort'] = $this->input->post('sort');
 				if (isset($_FILES['userfile'])) {
-					$image = $this->upload_logo($_FILES);
+					$image = $this->upload_instansi($_FILES);
 					if (isset($image['error'])) {
 						$ret['notif'] = $image;
 					}else{
@@ -706,8 +706,56 @@ class Keanggotaan extends MX_Controller  {
             $config_r['source_image'] = FCPATH."media/".$upload_data['file_name'];
             $config_r['quality'] = 60;
             $config_r['maintain_ratio'] = TRUE;
-            if ($upload_data['image_width'] > 768) {
+            if ($upload_data['image_width'] > 450) {
             	$config_r['width'] = 450;
+            }
+            $config_r['new_image'] = FCPATH."media/thumbnail/".$upload_data['file_name'];
+
+            $this->load->library('image_lib', $config_r);
+            $this->image_lib->initialize($config_r);
+            $this->image_lib->resize();
+            if ( ! $this->image_lib->resize())
+            {
+                    $data_upload['error'] = $this->image_lib->display_errors();
+            }else{
+                    // echo "berhasil resize";
+                    $data_upload['resize'] = site_url('media/thumbnail/')."/".$upload_data['file_name'];
+            }
+        }
+        return $data_upload;
+    }
+
+    public function upload_instansi($logo){	    		
+    	
+        $imagename = $logo['userfile']['name'];
+        $ext = strtolower($this->_getExtension($imagename));
+        $config['upload_path']          = FCPATH."media/";
+        $config['allowed_types']        = 'gif|jpg|png';
+        $config['max_size']             = 4000;
+        $config['max_width']            = 2048;
+        $config['min_width']            = 400;
+        $config['file_name']            = time().".".$ext;
+
+        $this->load->library('upload', $config);
+
+        if ( ! $this->upload->do_upload('userfile'))
+        {
+            $data_upload['error'] = $this->upload->display_errors();
+        }
+        else
+        {
+            $upload_data = $this->upload->data();
+            $data_upload['asli'] = $upload_data['file_name'];
+           	$data = array('upload_data' => $this->upload->data());
+            $config_r['image_library'] = 'GD2';
+            $config_r['source_image'] = FCPATH."media/".$upload_data['file_name'];
+            $config_r['quality'] = 60;
+            $config_r['maintain_ratio'] = TRUE;
+            if ($upload_data['image_width'] > 150) {
+            	$config_r['width'] = 150;
+            }
+            if ($upload_data['file_size'] > 100) {
+            	$config_r['quality'] = 40;
             }
             $config_r['new_image'] = FCPATH."media/thumbnail/".$upload_data['file_name'];
 
@@ -927,7 +975,7 @@ class Keanggotaan extends MX_Controller  {
 		        $config_r['source_image'] = FCPATH."media/".$value['gambar'];
 		        $config_r['quality'] = 60;
 		        $config_r['maintain_ratio'] = TRUE;
-		       	$config_r['width'] = 450;
+		       	$config_r['width'] = 150;
 		        $config_r['new_image'] = FCPATH."media/thumbnail/".$value['gambar'];
 
 		        $this->load->library('image_lib', $config_r);

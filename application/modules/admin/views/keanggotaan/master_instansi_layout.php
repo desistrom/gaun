@@ -1,3 +1,36 @@
+<style type="text/css">
+	.form-goup-file{
+    height: auto;
+    overflow: hidden;
+    padding: 0;
+  }
+  .form-goup-file div{
+    display: inline-block;
+  }
+  .form-goup-file .input-file-left{
+    width: 100%;
+  }
+  .form-goup-file .input-file-left input{
+  width: 100%;
+  }
+  .form-goup-file .input-file-right{
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+  .form-goup-file .input-file-right .btn-choose-foto{
+    height: 34px;
+    width: 105px;
+    border-radius: 0;
+    padding-left: 7px;
+  }
+  .logo-fav{
+    width: 100px;
+  }
+  .fa-upload{
+    padding-right: 10px;
+  }
+</style>
 <div class="col col-md-12 col-sm-12 col-xs-12">
 	
 <div class="box">
@@ -146,12 +179,21 @@
 			        <input type="password" class="form-control" name="repassword" id="repassword" value="" placeholder="Enter Re type Password ...">
 			        <div class="error" id="ntf_repassword"></div>
 			      </div>
-			      <div class="form-group">
+			       <div class="form-group">
+			            <label>Logo Instansi</label>
+			            <div class="col col-md-12 form-goup-file">
+			              <div class="input-file-right"><label class="btn btn-success btn-choose-foto" for="userfile"><i class="fa fa-upload" ></i>Choose File</label></div>
+			              <div class="input-file-left"><input type="file" class="form-control file" name="userfile" id="userfile"></div> 
+			              <div class="error" id="ntf_userfile"></div>
+			              <div class="error" id="ntf_error"></div> 
+			            </div>
+			      </div>
+			      <!-- <div class="form-group">
 			      <label>Logo Instansi</label>
 			        <input type="file" class="form-control" name="userfile" id="userfile">
 			        <div class="error" id="ntf_userfile"></div>
 			        <div class="error" id="ntf_error"></div>
-			      </div>
+			      </div> -->
 			      <div class="form-group">
 			      <label>Urutan</label>
 			        <input type="number" class="form-control" name="sort" id="sort" value="" placeholder="">
@@ -207,13 +249,21 @@
 			      	<textarea class="form-control" id="alamat" name="alamat"><?=$instansi['alamat'];?></textarea>
 			      	<div class="error" id="ntf_alamat"></div>
 			      </div>
-
 			      <div class="form-group">
+			            <label>Logo Instansi</label>
+			            <div class="col col-md-12 form-goup-file">
+			              <div class="input-file-right"><label class="btn btn-success btn-choose-foto" for="userfile"><i class="fa fa-upload" ></i>Choose File</label></div>
+			              <div class="input-file-left"><input type="file" class="form-control file" name="userfile" id="userfile"></div> 
+			              <div class="error" id="ntf_userfile"></div>
+			              <div class="error" id="ntf_error"></div> 
+			            </div>
+			      </div>
+			      <!-- <div class="form-group">
 			      	<label>Logo Instansi</label>
 			        <input type="file" class="form-control" name="userfile" id="userfile">
 			        <div class="error" id="ntf_userfile"></div>
 			        <div class="error" id="ntf_error"></div>
-			      </div>
+			      </div> -->
 
 			      <?php if ($instansi['gambar'] != ''): ?>
 			      	<img width="450px" src="<?=base_url().'media/'.$instansi['gambar'];?>">

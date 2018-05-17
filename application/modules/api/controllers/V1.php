@@ -921,9 +921,15 @@ class V1 extends REST_Controller {
             $retData['status'] = 'success';
             foreach ($user as $key => $value) {
                 if ($value['image'] == '') {
-                    $user[$key]['image']=base_url().'assets/images/logo/IDREN-2.png';
+                    $user[$key]['image_thumbnail']=base_url().'assets/images/logo/IDREN-2.png';
                 }else{
-                    $user[$key]['image'] = base_url().'media/'.$value['image'];
+                    if (file_exists(FCPATH."media/thumbnail/".$value['image'])) {
+                        $user[$key]['image_big'] = base_url().'media/'.$value['image'];
+                        $user[$key]['image'] = base_url().'media/thumbnail/'.$value['image'];
+                    }else{
+                        $user[$key]['image_thumbnail'] = base_url().'media/'.$value['image'];
+                        $user[$key]['image'] = base_url().'media/'.$value['image'];
+                    }
                 }
 
             }
@@ -938,13 +944,19 @@ class V1 extends REST_Controller {
         $retData['code'] = '200';
         $retData['status'] = 'Success';
         foreach ($user as $key => $value) {
-            if ($value['image'] == '') {
-                $user[$key]['image']=base_url().'assets/images/logo/IDREN-2.png';
-            }else{
-                $user[$key]['image'] = base_url().'media/'.$value['image'];
-            }
+                if ($value['image'] == '') {
+                    $user[$key]['image_thumbnail']=base_url().'assets/images/logo/IDREN-2.png';
+                }else{
+                    if (file_exists(FCPATH."media/thumbnail/".$value['image'])) {
+                        $user[$key]['image_big'] = base_url().'media/'.$value['image'];
+                        $user[$key]['image'] = base_url().'media/thumbnail/'.$value['image'];
+                    }else{
+                        $user[$key]['image_thumbnail'] = base_url().'media/'.$value['image'];
+                        $user[$key]['image'] = base_url().'media/'.$value['image'];
+                    }
+                }
 
-        }
+            }
         $retData['data'] = $user;
         $this->response($retData,200);
     }

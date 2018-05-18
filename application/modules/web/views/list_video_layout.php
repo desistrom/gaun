@@ -57,9 +57,9 @@ font-size: 50px;color: #BDBDBD;
         <div class="modal fade modal-list-video" id="list-video" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <button class="close" type="button" data-dismiss="modal" style="">×</button>
+            <button class="close close-video" type="button" data-dismiss="modal" style="">×</button>
               <div class="modal-body-gallery"> 
-              <iframe src="" id="tampil-video"></iframe>               
+              <iframe class="youtube-video" src="" id="tampil-video"></iframe>               
               </div>
             <div class="modal-footer" style="padding: 0 15px;">
               <div class="col col-md-12 col-sm-12 col-xs-12 none-padding">
@@ -81,10 +81,13 @@ font-size: 50px;color: #BDBDBD;
 <script src="<?=base_url().'assets/js/jquery-3.2.1.min.js';?>"></script>
 <script src="<?=base_url();?>assets/js/modal-custom.js"></script>
 <script type="text/javascript">
+	$('.close-video').click(function(){
+	$('.youtube-video')[0].contentWindow.postMessage('{"event":"command","func":"' + 'stopVideo' + '","args":""}', '*');
+});
     $(document).ready(function(){
         $('.ajax-load').css({'margin-bottom' : '30px'});
       $("body").on('click','.show-video',function(){
-        var file = $(this).attr('id');
+        var file = $(this).attr('id')+'?enablejsapi=1&version=3&playerapiid=ytplayer';
           $('#list-video iframe').attr('src',file);
           console.log(file);
           $(".modal-list-video").modal('show');

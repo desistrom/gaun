@@ -60,7 +60,7 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="<?=site_url('admin/logo/profile');?>">
-              <img src="<?=base_url();?>media/crop/favicon.png" class="user-image" alt="User Image">
+              <img src="<?=base_url();?>media/favicon.ico" class="user-image" alt="User Image">
               <span class="hidden-xs">Admin</span>
             </a>
           </li>

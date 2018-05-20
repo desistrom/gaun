@@ -78,8 +78,14 @@ class News extends CI_Controller  {
         $methode = 'GET';
         $url_allnews =  site_url('api/v1/news');
         $b = api_helper($token,$url_allnews,$methode,$token);
-
+        $gambar = '';
+        $c = explode('/', $a['data']['gambar']); if(isset($c[1])){ $gambar = $a['data']['gambar']; }else{ $gambar = base_url().'assets/media/'.$a['data']['gambar']; }
         $this->data['detail_news']=$a['data'];
+        $share_link['title'] = $a['data']['title'];
+        $share_link['image'] = $gambar;
+        $share_link['type'] = $a['data']['kategori'];
+        $share_link['url'] = site_url('web/news/get_news/'.$a['data']['sumber']);
+        $this->data['share'] = $share_link;
         // print_r($a['data']);
         $this->data['news']=$b['data'];
       

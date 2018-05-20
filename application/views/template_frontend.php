@@ -6,7 +6,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <?php if (isset($share)): ?>
+      <meta property="og:title" content="<?=$share['title'];?>"/>
+      <meta property="og:type" content="<?=$share['type'];?>"/>
+      <meta property="og:url" content="<?=$share['url'];?>"/>
+      <meta property="og:image" content="<?=$share['image'];?>"/>
+    <?php endif ?>
     <title><?=strtoupper($this->general->title());?></title>
     <link rel="shortcut icon" href="<?=base_url();?>media/favicon.ico">
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800,900" rel="stylesheet">
@@ -296,6 +301,7 @@
     <script src="<?=base_url();?>assets/js/bootstrap.min.js"></script>
    
     <script src="<?=base_url();?>assets/js/owl.carousel.min.js"></script>
+    <script src="<?=base_url();?>assets/share_link/js/social-share-kit.js"></script>
     <script src="<?=base_url();?>assets/js/main-owl.min.js"></script>
       <script src="<?=base_url();?>assets/js/scrolling-nav.min.js"></script>
       <script id="_wau4yv">var _wau = _wau || []; _wau.push(["dynamic", "tmevyyvsq3", "4yv", "c4302bffffff", "big"]);</script><script async src="//waust.at/d.js"></script>

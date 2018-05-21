@@ -6,12 +6,6 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <?php if (isset($share)): ?>
-      <meta property="og:title" content="<?=$share['title'];?>"/>
-      <meta property="og:type" content="<?=$share['type'];?>"/>
-      <meta property="og:url" content="<?=$share['url'];?>"/>
-      <meta property="og:image" content="<?=$share['image'];?>"/>
-    <?php endif ?>
     <title><?=strtoupper($this->general->title());?></title>
     <link rel="shortcut icon" href="<?=base_url();?>media/favicon.ico">
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800,900" rel="stylesheet">
@@ -23,6 +17,13 @@
     <link  href="<?=base_url();?>assets/css/owl.transitions.min.css" rel="stylesheet" >
     <link  href="<?=base_url();?>assets/css/owl.carousel.min.css" rel="stylesheet" >
     <link  href="<?=base_url();?>assets/css/css.min.css?t=<?=time();?>" rel="stylesheet" >
+    <?php if (isset($share)): ?>
+      <meta property="og:title" content="<?=$share['title'];?>"/>
+      <meta property="og:type" content="<?=$share['type'];?>"/>
+      <meta property="og:url" content="<?=$share['url'];?>"/>
+      <meta property="og:image" content="<?=$share['image'];?>"/>
+      <meta property="fb:app_id" content="173869386564200"/>
+    <?php endif ?>
     <style type="text/css">
       .modal .ntf_err{
           color: red;

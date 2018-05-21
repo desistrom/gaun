@@ -139,9 +139,10 @@ class Keanggotaan extends MX_Controller  {
             echo json_encode($ret);
             exit();
         }
+        $url = URL_GET_PENDAFTARAN ;
         $a = api_helper('',$url,$methode,$token);
         $this->data = array(
-            'action' => site_url('web/tentang/add_contact'),
+            'action' => site_url('web/keanggotaan/pendaftaran'),
             'captcha' => $this->recaptcha->getWidget(), // menampilkan recaptcha
             'script_captcha' => $this->recaptcha->getScriptTag(), // javascript recaptcha ditaruh di head
         );

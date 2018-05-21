@@ -71,7 +71,7 @@ class Keanggotaan extends MX_Controller  {
         $this->ciparser->new_parse('template_frontend','modules_web', 'benefit_layout',$this->data);
      }
      function pendaftaran() {
-        $url = site_url('api/v1/step') ;
+        $url = URL_GET_PENDAFTARAN ;
         // $a = json_decode($this->api_helper($url),true);
         $methode = 'GET';
         $token = '';

@@ -16,7 +16,7 @@ class Konektivitas extends MX_Controller  {
 	}
     function index() {
 
-    	$url = site_url('api/v1/gettopologi') ;
+    	$url = URL_GET_TOPOLOGI;
         // $a = json_decode($this->api_helper($url),true);
         $methode = 'GET';
         $token = '';

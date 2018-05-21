@@ -40,21 +40,21 @@ class News extends CI_Controller  {
         // $url = base_url().'api/v1/pagging_news?data='.$data;
         // $token = '';
         // $a = api_helper('',$url,$methode,$token);
-        $url = base_url().'api/v1/news';
+        $url = URL_GET_ALL_NEWS;
         $b = api_helper('',$url,$methode,'');
         $this->data['recent']=$b['data'];
         $this->data['total'] = count($b['data']);
         if (!empty($this->input->get('page'))) {
             $start = ceil($this->input->get('page') * 4);
             $this->data['total_row'] = $start;
-            $url = base_url().'api/v1/pagging_news?data='.$start;
+            $url = URL_GET_NEWS_PAGGING.$start;
             $a = api_helper('',$url,$methode,'');
             $this->data['news']=$a['data'];
             $result = $this->load->view('news_looping',$this->data);
             echo json_encode($result);
         }else{
             $this->data['total_row'] = 0;
-            $url = base_url().'api/v1/pagging_news?data=0';
+            $url = URL_GET_NEWS_PAGGING.'0';
             $a = api_helper('',$url,$methode,'');
             $this->data['news']=$a['data'];
             $this->ciparser->new_parse('template_frontend','modules_web', 'news_layout',$this->data);
@@ -69,14 +69,14 @@ class News extends CI_Controller  {
         $id = end($url);
         // $id=$_GET['data'];
 
-        $url = site_url('api/v1/get_news_byslug?news='.$id);
+        $url = URL_GET_NEWS_BY_SLUG.$id;
         $methode = 'GET';
         $token = '';
         $data['data']=$id;
         $a = api_helper(json_encode($data),$url,$methode,$token);
 
         $methode = 'GET';
-        $url_allnews =  site_url('api/v1/news');
+        $url_allnews =  URL_GET_ALL_NEWS;
         $b = api_helper($token,$url_allnews,$methode,$token);
         $gambar = '';
         $c = explode('/', $a['data']['gambar']); if(isset($c[1])){ $gambar = $a['data']['gambar']; }else{ $gambar = base_url().'assets/media/'.$a['data']['gambar']; }

@@ -16,7 +16,7 @@ class Footer extends MX_Controller  {
 	}
     function index() {
 
-    	$url = site_url('api/v1/getfooter') ;
+    	$url = URL_GET_FOOTER;
         // $a = json_decode($this->api_helper($url),true);
         $methode = 'GET';
         $token = '';

@@ -117,6 +117,7 @@ define('URL_GET_RSS','http://localhost/idren/api/v1/get_rss');
 define('URL_GET_TESTIMONI','http://localhost/idren/api/v1/gettestimoni');
 define('URL_GET_TESTIMONI_PAGGING','http://localhost/idren/api/v1/gettestimoni_pagging?data=');
 define('URL_GET_HERO','http://localhost/idren/api/v1/gethero');
+define('URL_GET_TOPOLOGI','http://localhost/idren/api/v1/gettopologi');
 define('URL_GET_LOGO','http://localhost/idren/api/v1/getlogo');
 define('URL_GET_FOOTER','http://localhost/idren/api/v1/getfooter');
 define('URL_GET_AKADEMISI_TITLE','http://localhost/idren/api/v1/gettitleslider');*/
@@ -150,6 +151,7 @@ define('URL_GET_RSS','http://128.199.233.73/idren/api/v1/get_rss');
 define('URL_GET_TESTIMONI','http://128.199.233.73/idren/api/v1/gettestimoni');
 define('URL_GET_TESTIMONI_PAGGING','http://128.199.233.73/idren/api/v1/gettestimoni_pagging?data=');
 define('URL_GET_HERO','http://128.199.233.73/idren/api/v1/gethero');
+define('URL_GET_TOPOLOGI','http://128.199.233.73/idren/api/v1/gettopologi');
 define('URL_GET_LOGO','http://128.199.233.73/idren/api/v1/getlogo');
 define('URL_GET_FOOTER','http://128.199.233.73/idren/api/v1/getfooter');
 define('URL_GET_AKADEMISI_TITLE','http://128.199.233.73/idren/api/v1/gettitleslider');
@@ -183,6 +185,7 @@ define('URL_GET_RSS','http://103.107.100.9/idren_new/api/v1/get_rss');
 define('URL_GET_TESTIMONI','http://103.107.100.9/idren_new/api/v1/gettestimoni');
 define('URL_GET_TESTIMONI_PAGGING','http://103.107.100.9/idren_new/api/v1/gettestimoni_pagging?data=');
 define('URL_GET_HERO','http://103.107.100.9/idren_new/api/v1/gethero');
+define('URL_GET_TOPOLOGI','http://103.107.100.9/idren/api/v1/gettopologi');
 define('URL_GET_LOGO','http://103.107.100.9/idren_new/api/v1/getlogo');
 define('URL_GET_FOOTER','http://103.107.100.9/idren_new/api/v1/getfooter');
 define('URL_GET_AKADEMISI_TITLE','http://103.107.100.9/idren_new/api/v1/gettitleslider');*/

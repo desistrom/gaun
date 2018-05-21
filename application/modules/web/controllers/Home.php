@@ -16,29 +16,29 @@ class Home extends CI_Controller  {
     }
 
     function index() {
-        $url = site_url('api/v1/gethero') ;
+        $url = URL_GET_HERO;
         $methode = 'GET';
         $token = '';
         $a = api_helper('',$url,$methode,$token);
 
-        $url_layanan =  site_url('api/v1/getlayanan_idroam') ;
-        $b = api_helper('',$url_layanan,$methode,$token);
+        // $url_layanan =  site_url('api/v1/getlayanan_idroam') ;
+        // $b = api_helper('',$url_layanan,$methode,$token);
 
-        $url_instansi = site_url('api/v1/instansi') ;
+        $url_instansi = URL_GET_ALL_INSTANSI;
         $c = api_helper('',$url_instansi,$methode,$token);
         
         
-        $url_testi =site_url('api/v1/gettestimoni');
+        $url_testi = URL_GET_TESTIMONI;
         $d = api_helper('',$url_testi,$methode,$token);
 
-         $url_titleslider =site_url('api/v1/gettitleslider');
+         $url_titleslider = URL_GET_AKADEMISI_TITLE;
         $e = api_helper('',$url_titleslider,$methode,$token);
 
 
         // $url = "http://192.168.88.138/idren/api/v1/about";
         // $a = json_decode($this->hit_api($url),true);
         $this->data['hero']=$a['data'];
-        $this->data['layanan']=$b['data'];
+        // $this->data['layanan']=$b['data'];
         $this->data['instansi']=$c['data'];
         $this->data['testimoni']=$d['data'];
         $this->data['title_slider']=$e['data'];

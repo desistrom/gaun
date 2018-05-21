@@ -50,7 +50,7 @@ class Gabung extends MX_Controller  {
                 $data_user['username'] = $data_input['username'];
                 $data_user['password'] = sha1($data_input['password']);
             
-                $url = site_url('api/v1/insert_instansi') ;
+                $url = URL_REGISTER;
 
                 
                 $methode = "POST";

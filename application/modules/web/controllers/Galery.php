@@ -17,7 +17,7 @@ class Galery extends CI_Controller  {
     }
 
     function index() {
-        $url = site_url('api/v1/albumAll') ;
+        $url = URL_GET_ALL_ALBUM;
     	$data = '';
         $methode = 'GET';
         $token = '';
@@ -25,7 +25,7 @@ class Galery extends CI_Controller  {
 
         $id=$a['data'][0]['albumId'];
 
-        $url_album_id =  base_url().'api/v1/getAlbumById?data='.$id ;
+        $url_album_id =  URL_GET_ALBUM_BY_ID.$id ;
         $b = api_helper('',$url_album_id,$methode,$token);
 
 
@@ -37,7 +37,7 @@ class Galery extends CI_Controller  {
 
     function detail_album() {
         $id = $_GET['data'];
-        $url =  base_url().'api/v1/getAlbumById?data='.$id ;
+        $url =  URL_GET_ALBUM_BY_ID.$id ;
         $data = '';
         $methode = 'GET';
         $token = '';
@@ -65,7 +65,7 @@ class Galery extends CI_Controller  {
         
     }
     function video() {
-        $url = site_url('api/v1/galery_video') ;
+        $url = URL_GET_ALL_VIDEO ;
     	$data = '';
     	$methode = 'GET';
         $token = '';
@@ -76,7 +76,7 @@ class Galery extends CI_Controller  {
      function list_video() {
         // $config['base_url'] = base_url().'web/galery/list_video';
         // $url = base_url().'api/v1/galery_video';
-        $url = site_url('api/v1/galery_video') ;
+        $url = URL_GET_ALL_VIDEO ;
         $data = '';
         $methode = 'GET';
         
@@ -102,14 +102,14 @@ class Galery extends CI_Controller  {
         if (!empty($this->input->get('page'))) {
             $start = ceil($this->input->get('page') * 9);
             $this->data['total_row'] = $start;
-            $url = base_url().'api/v1/galery_video_pagging?data='.$start;
+            $url = URL_GET_VIDEO_PAGGING.$start;
             $a = api_helper('',$url,$methode,$token);
             $this->data['video']=$a['data'];
             // print_r($a['data']);
             $result = $this->load->view('video_looping',$this->data);
             echo json_encode($result);
         }else{
-            $url = base_url().'api/v1/galery_video_pagging?data=0';
+            $url = URL_GET_VIDEO_PAGGING.'0';
             $a = api_helper('',$url,$methode,$token);
             $this->data['total_row'] = '9';
             $this->data['video']=$a['data'];

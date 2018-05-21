@@ -20,7 +20,7 @@ class Keanggotaan extends MX_Controller  {
         if (!is_numeric($data)) {
             $data = 0;
         }*/
-    	$url_instansi = site_url('api/v1/instansi') ;
+    	$url_instansi = URL_GET_ALL_INSTANSI;
         // $a = json_decode($this->api_helper($url),true);
         $methode = 'GET';
         $token = '';
@@ -62,7 +62,7 @@ class Keanggotaan extends MX_Controller  {
     	// $this->ciparser->new_parse('template_frontend','modules_web', 'keanggotaan_layout',$this->data);
     }
      function benefit() {
-        $url = site_url('api/v1/profit') ;
+        $url = URL_GET_BENEFIT;
         // $a = json_decode($this->api_helper($url),true);
         $methode = 'GET';
         $token = '';
@@ -104,7 +104,7 @@ class Keanggotaan extends MX_Controller  {
                 $data_user['username'] = $data_input['username'];
                 $data_user['password'] = sha1($data_input['password']);
             
-                $url = site_url('api/v1/insert_instansi') ;
+                $url = URL_REGISTER ;
 
                 
                 $methode = "POST";
@@ -150,7 +150,7 @@ class Keanggotaan extends MX_Controller  {
      }
      public function search()
      {
-        $url_instansi = site_url('api/v1/instansi') ;
+        $url_instansi = URL_GET_ALL_INSTANSI ;
         $methode = 'GET';
         $token = '';
         $b = api_helper('',$url_instansi,$methode,$token);
@@ -158,7 +158,7 @@ class Keanggotaan extends MX_Controller  {
         $search['search'] = $_GET['data'];
         $sql = "select * from tb_instansi where nm_instansi like '%".$search['search']."%'";
         $this->data['total'] = $this->db->query($sql)->num_rows();
-        $url= site_url('api/v1/search_instansi') ;  
+        $url=URL_GET_INSTANSI_PAGGING;  
         $methode = 'POST';
         $token='';
         if (!empty($this->input->get('page'))) {

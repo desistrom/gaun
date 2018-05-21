@@ -15,7 +15,7 @@ class Tentang extends MX_Controller  {
 
 	}
     public function index() {
-        $url = site_url('api/v1/about') ;
+        $url = URL_GET_ABOUT;
         $methode = 'GET';
         $token = '';
         $a = api_helper('',$url,$methode,$token);

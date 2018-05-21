@@ -19,7 +19,7 @@ class Testimoni extends MX_Controller  {
 
     	
         $config['base_url'] = base_url().'web/Testimoni/index';
-        $url = base_url().'api/v1/gettestimoni';
+        $url = URL_GET_TESTIMONI;
         $methode = 'GET';
         $b = api_helper('',$url,$methode,'');
         $config['total_rows'] = count($b['data']);
@@ -38,7 +38,7 @@ class Testimoni extends MX_Controller  {
         if (!is_numeric($data)) {
             $data = 0;
         }
-        $url = base_url().'api/v1/gettestimoni_pagging?data='.$data;
+        $url = URL_GET_TESTIMONI_PAGGING.$data;
         $methode = 'GET';
         $token = '';
         $a = api_helper('',$url,$methode,$token);

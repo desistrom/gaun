@@ -11,6 +11,9 @@ if ($_SERVER['SERVER_NAME'] == 'localhost') {
 }elseif ($_SERVER['SERVER_NAME'] == '103.107.100.9') {
 	$config['recaptcha_site_key'] = '6LfBXVoUAAAAAGEGY2fu6EpezkuyMZxF8dqKBljn';
 	$config['recaptcha_secret_key'] = '6LfBXVoUAAAAAK8koINvPNRSgSRTN60a4GAD9UiJ';
+}elseif ($_SERVER['SERVER_NAME'] == 'skyrainstudio.id') {
+	$config['recaptcha_site_key'] = '6LeBZVoUAAAAAKUjhzLoZSPEk3Lv6yTBDSeHtqTF';
+	$config['recaptcha_secret_key'] = '6LeBZVoUAAAAANJ_8YGwBvbNmyUivsW4p6z-MGCa';
 }else{
 	$config['recaptcha_site_key'] = '6LdauUMUAAAAAI1FtUG_c1WsrHqmviswNtqn1VcE';
 	$config['recaptcha_secret_key'] = '6LdauUMUAAAAAB6e4HnuCA6pls9XB7F51c8SMDe_';

@@ -993,7 +993,7 @@ class V1 extends REST_Controller {
         $retData['code'] = '200';
         $retData['status'] = 'Success';
         if ($user['image'] == '') {
-                $user['image']=base_url().'assets/images/logo/IDREN-2.png';
+                $user['image'] = base_url().'assets/images/logo/IDREN-2.png';
             }else{
                 $user['image'] = base_url()."media/".$user['image'];
             }

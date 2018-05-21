@@ -122,7 +122,7 @@ define('URL_GET_FOOTER','http://localhost/idren/api/v1/getfooter');
 define('URL_GET_AKADEMISI_TITLE','http://localhost/idren/api/v1/gettitleslider');*/
 
 //server
-/*define('URL_GET_ALL_MEDIA','http://128.199.233.73/idren/api/v1/galery');
+define('URL_GET_ALL_MEDIA','http://128.199.233.73/idren/api/v1/galery');
 define('URL_GET_ALL_ALBUM','http://128.199.233.73/idren/api/v1/albumAll');
 define('URL_GET_ALBUM_BY_ID','http://128.199.233.73/idren/api/v1/getAlbumById?data=');
 define('URL_GET_ALL_IMAGE','http://128.199.233.73/idren/api/v1/galery_image');
@@ -152,10 +152,10 @@ define('URL_GET_TESTIMONI_PAGGING','http://128.199.233.73/idren/api/v1/gettestim
 define('URL_GET_HERO','http://128.199.233.73/idren/api/v1/gethero');
 define('URL_GET_LOGO','http://128.199.233.73/idren/api/v1/getlogo');
 define('URL_GET_FOOTER','http://128.199.233.73/idren/api/v1/getfooter');
-define('URL_GET_AKADEMISI_TITLE','http://128.199.233.73/idren/api/v1/gettitleslider');*/
+define('URL_GET_AKADEMISI_TITLE','http://128.199.233.73/idren/api/v1/gettitleslider');
 
 //productio
-define('URL_GET_ALL_MEDIA','http://103.107.100.9/idren_new/api/v1/galery');
+/*define('URL_GET_ALL_MEDIA','http://103.107.100.9/idren_new/api/v1/galery');
 define('URL_GET_ALL_ALBUM','http://103.107.100.9/idren_new/api/v1/albumAll');
 define('URL_GET_ALBUM_BY_ID','http://103.107.100.9/idren_new/api/v1/getAlbumById?data=');
 define('URL_GET_ALL_IMAGE','http://103.107.100.9/idren_new/api/v1/galery_image');
@@ -185,4 +185,4 @@ define('URL_GET_TESTIMONI_PAGGING','http://103.107.100.9/idren_new/api/v1/gettes
 define('URL_GET_HERO','http://103.107.100.9/idren_new/api/v1/gethero');
 define('URL_GET_LOGO','http://103.107.100.9/idren_new/api/v1/getlogo');
 define('URL_GET_FOOTER','http://103.107.100.9/idren_new/api/v1/getfooter');
-define('URL_GET_AKADEMISI_TITLE','http://103.107.100.9/idren_new/api/v1/gettitleslider');
+define('URL_GET_AKADEMISI_TITLE','http://103.107.100.9/idren_new/api/v1/gettitleslider');*/

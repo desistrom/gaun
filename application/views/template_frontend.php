@@ -303,6 +303,19 @@
    
     <script src="<?=base_url();?>assets/js/owl.carousel.min.js"></script>
     <script src="<?=base_url();?>assets/share_link/js/social-share-kit.js"></script>
+    <script type="text/javascript">
+SocialShareKit.init({
+    onBeforeOpen: function(targetElement, network, paramsObj){
+        console.log(arguments);
+    },
+    onOpen: function(targetElement, network, networkUrl, popupWindow){
+        console.log(arguments);
+    },
+    onClose: function(targetElement, network, networkUrl, popupWindow){
+        console.log(arguments);
+    }
+});
+</script>
     <script src="<?=base_url();?>assets/js/main-owl.min.js"></script>
       <script src="<?=base_url();?>assets/js/scrolling-nav.min.js"></script>
       <script id="_wau4yv">var _wau = _wau || []; _wau.push(["dynamic", "tmevyyvsq3", "4yv", "c4302bffffff", "big"]);</script><script async src="//waust.at/d.js"></script>

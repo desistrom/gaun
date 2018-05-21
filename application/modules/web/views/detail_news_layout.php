@@ -124,9 +124,9 @@
                             <div class="col col-md-12 col-sm-12 col-xs-12 filter-date-event" >
                             	<ul class="list-inline date_event" style="margin-bottom: 1.5em;">
                                     <!-- <a href="http://www.facebook.com/sharer.php?u=<?=site_url('web/news/get_news').'/'.$detail_news['sumber'];?>" target="_blank" rel="nofollow" class="sosmed_share fb" ><li class=""><i class="fa fa-facebook"></i></li></a> -->
-                                    <a href="http://www.facebook.com/sharer.php?u=<?=site_url('web/news/get_news').'/'.$detail_news['sumber'];?>" target="_blank" rel="nofollow" class="ssk ssk-facebook"></a>
+                                    <a href="" data-url="http://www.facebook.com/sharer.php?u=<?=site_url('web/news/get_news').'/'.$detail_news['sumber'];?>" class="ssk ssk-facebook"></a>
                                     <!-- <a href="http://twitter.com/share?text=<?php echo $detail_news['title']; ?>&url=<?=site_url('web/news/get_news').'/'.$detail_news['sumber'];?>" class="sosmed_share twit" rel="nofollow" target="_blank"><li class=""><i class="fa fa-twitter"></i></li></a> -->
-                                    <a href="http://twitter.com/share?text=<?php echo $detail_news['title']; ?>&url=<?=site_url('web/news/get_news').'/'.$detail_news['sumber'];?>" class="ssk ssk-twitter" rel="nofollow" target="_blank"></a>
+                                    <a href="" class="ssk ssk-twitter" data-url="http://twitter.com/share?text=<?php echo $detail_news['title']; ?>&url=<?=site_url('web/news/get_news').'/'.$detail_news['sumber'];?>"></a>
                                     <!-- <a href="#" class="sosmed_share ig" ><li class=""><i class="fa fa-instagram"></i> </li></a> -->
 
                                 </ul>

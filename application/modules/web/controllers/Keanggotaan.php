@@ -158,7 +158,7 @@ class Keanggotaan extends MX_Controller  {
         $search['search'] = $_GET['data'];
         $sql = "select * from tb_instansi where nm_instansi like '%".$search['search']."%'";
         $this->data['total'] = $this->db->query($sql)->num_rows();
-        $url=URL_GET_INSTANSI_PAGGING;  
+        $url=URL_SEARCH_INSTANSI;  
         $methode = 'POST';
         $token='';
         if (!empty($this->input->get('page'))) {

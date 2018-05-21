@@ -8,6 +8,9 @@ if ($_SERVER['SERVER_NAME'] == 'localhost') {
 }elseif ($_SERVER['SERVER_NAME'] == '192.168.88.138') {
 	$config['recaptcha_site_key'] = '6Lc1tkMUAAAAAOiWx6tY8JZU0wNDdyLN-FME7sy9';
 	$config['recaptcha_secret_key'] = '6Lc1tkMUAAAAACJGOt6y9dmhpWR-xrVDx5NzoIGE';
+}elseif ($_SERVER['SERVER_NAME'] == '103.107.100.9') {
+	$config['recaptcha_site_key'] = '6LfBXVoUAAAAAGEGY2fu6EpezkuyMZxF8dqKBljn';
+	$config['recaptcha_secret_key'] = '6LfBXVoUAAAAAK8koINvPNRSgSRTN60a4GAD9UiJ';
 }else{
 	$config['recaptcha_site_key'] = '6LdauUMUAAAAAI1FtUG_c1WsrHqmviswNtqn1VcE';
 	$config['recaptcha_secret_key'] = '6LdauUMUAAAAAB6e4HnuCA6pls9XB7F51c8SMDe_';

@@ -18,11 +18,11 @@
     <link  href="<?=base_url();?>assets/css/owl.carousel.min.css" rel="stylesheet" >
     <link  href="<?=base_url();?>assets/css/css.min.css?t=<?=time();?>" rel="stylesheet" >
     <?php if (isset($share)): ?>
+      <meta property="fb:app_id" content="173869386564200"/>
       <meta property="og:title" content="<?=$share['title'];?>"/>
       <meta property="og:type" content="<?=$share['type'];?>"/>
       <meta property="og:url" content="<?=$share['url'];?>"/>
       <meta property="og:image" content="<?=$share['image'];?>"/>
-      <meta property="fb:app_id" content="173869386564200"/>
     <?php endif ?>
     <style type="text/css">
       .modal .ntf_err{

@@ -7,7 +7,7 @@ if (!function_exists('logo_helper')) {
 	{
 		$curl = curl_init();
 		curl_setopt_array($curl, array(
-		  CURLOPT_URL => "http://localhost/idren/api/v1/getlogo",
+		  CURLOPT_URL => URL_GET_LOGO,
 		  CURLOPT_RETURNTRANSFER => true,
 		  CURLOPT_ENCODING => "",
 		  CURLOPT_MAXREDIRS => 10,
@@ -80,7 +80,7 @@ if (!function_exists('footer_helper')) {
 	{
 		$curl = curl_init();
 		curl_setopt_array($curl, array(
-		  CURLOPT_URL => "http://localhost/idren/api/v1/getfooter",
+		  CURLOPT_URL => URL_GET_FOOTER,
 		  CURLOPT_RETURNTRANSFER => true,
 		  CURLOPT_ENCODING => "",
 		  CURLOPT_MAXREDIRS => 10,

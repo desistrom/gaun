@@ -20,7 +20,7 @@
     <?php if (isset($share)): ?>
       <meta property="fb:app_id" content="173869386564200"/>
       <meta property="og:title" content="<?=$share['title'];?>"/>
-      <meta property="og:type" content="<?=$share['type'];?>"/>
+      <meta property="og:type" content="article"/>
       <meta property="og:url" content="<?=$share['url'];?>"/>
       <meta property="og:image" content="<?=$share['image'];?>"/>
     <?php endif ?>

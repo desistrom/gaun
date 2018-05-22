@@ -39,7 +39,7 @@ class Page extends MX_Controller  {
                     $foto = str_replace('<p>@["slideshow":"', "'", $foto);
                     // $foto = explode(',', $foto);
                     $foto = substr($foto, 0, -3);
-                    $sql = "select a.id_album as albumId, a.judul_album as title, a.tgl_kegiatan as date_album, g.file_name as image from tb_galery g join tb_album_galery a on g.id_album = a.id_album where a.key_album in (".$foto.") group by a.id_album";
+                    $sql = "select a.id_album as albumId, a.judul_album as title, a.tgl_kegiatan as date_album, g.file_name as image, g.id_album from tb_galery g join tb_album_galery a on g.id_album = a.id_album where a.key_album in (".$foto.") group by a.id_album, g.id_album";
                 if ($this->db->query($sql)->num_rows() > 0) {
                     $this->data['foto'] = $this->db->query($sql)->result_array();
                     // print_r($sql);

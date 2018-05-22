@@ -23,6 +23,7 @@
       <meta property="og:type" content="article"/>
       <meta property="og:url" content="<?=$share['url'];?>"/>
       <meta property="og:image" content="<?=$share['image'];?>"/>
+      <link rel="image_src" type="image/jpeg" href="<?=$share['image'];?>" />
     <?php endif ?>
     <style type="text/css">
       .modal .ntf_err{

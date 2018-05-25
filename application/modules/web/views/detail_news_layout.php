@@ -149,36 +149,76 @@
                 <h2>Comment </h2></div>
             <div class="col-md-5 col-sm-12 col-xs-12 sub-comment">
                 <div class="col col-md-12 col-sm-12 col-xs-12 none-padding filter-comment">
+                    <?php foreach ($comment as $key => $value): ?>
                     <div class="comment-left col col-md-2 col-sm-2 col-xs-2 none-padding">
                         <div class="user text-center"><i class="fa fa-user"></i></div>
                     </div>
                     <div class="comment-right col col-md-10 col-sm-12 col-xs-12">
-                        <h4>Wahyu Kurniawan<span class="date-comment">11 Apri 2018</span></h4>
-                        <p>Mohon info untuk tergabung dengan IDren,tx</p>
+                        <h4><?=$value['nama'];?><span class="date-comment"><?=$value['email'];?></span></h4>
+                        <p><?=$value['content'];?></p>
                     </div>
+                    <?php endforeach ?>
                 </div>
             </div>
             <div class="col-md-7 col-sm-12 col-xs-12 right-comment">
                 <div class="sub-comment-right">
-                    <div class="form-group">
-                        <h2>Leave a Comment</h2>
-                        <p>Yout email address will not be published . Required fields are marked*</p>
-                        <div class="text-input">
-                            <input type="text" placeholder="Name" class="input-comment">
+                    <form id="form_comment">
+                        <div class="form-group">
+                            <h2>Leave a Comment</h2>
+                            <p>Yout email address will not be published . Required fields are marked*</p>
+                            <div class="text-input">
+                                <input type="text" name="nama" placeholder="Name" class="input-comment">
+                                <div class="error" id="ntf_nama"></div>
+                            </div>
+                            <div class="text-input">
+                                <input type="text" name="email" placeholder="Email" class="input-comment">
+                                <div class="error" id="ntf_email"></div>
+                            </div>
+                            <!-- <div class="text-input">
+                                <input type="text" nam placeholder="Website" class="input-comment">
+                            </div> -->
+                            <div class="text-input">
+                                <p>Paragraph</p>
+                                <textarea name="content"></textarea>
+                                <div class="error" id="ntf_content"></div>
+                            </div>
+                            <div class="form-group" style="display: block;">
+                              <?php echo $captcha // tampilkan recaptcha ?>
+                              <div class="error" id="ntf_g-recaptcha-response" style="position: relative;"></div>
+                            </div>
+                            <input type="hidden" name="id_berita" value="<?=$detail_news['newsId'];?>">
+                            <div class="text-right"><button class="btn btn-post" type="button">Post Comment</button></div>
                         </div>
-                        <div class="text-input">
-                            <input type="text" placeholder="Email" class="input-comment">
-                        </div>
-                        <div class="text-input">
-                            <input type="text" placeholder="Website" class="input-comment">
-                        </div>
-                        <div class="text-input">
-                            <p>Paragraph</p>
-                            <textarea></textarea>
-                        </div>
-                        <div class="text-right"><a href="#" class="btn btn-post">Post Comment</a></div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+    <script src="<?=base_url().'assets/js/jquery-3.2.1.min.js';?>"></script>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var base_url = "<?=base_url();?>";
+            $('body').on('click','.btn-post',function(){
+                $.ajax({
+                      url : base_url+"web/news/comment",
+                      dataType : 'json',
+                      type : 'POST',
+                      data : $('#form_comment').serialize()
+                  }).done(function(data){
+                      console.log(data);
+                      if(data.state == 1){
+                        if (data.status == 1) {
+                          window.location.href = window.location.href;
+                          $('#form_comment')[0].reset();
+                        }
+                      }
+                        $.each(data.notif,function(key,value){
+                        $('.error').show();
+                        $('#ntf_'+ key).html(value);
+                        $('#ntf_'+ key).css({'color':'white', 'font-style':'italic'});
+                        });
+                  });
+            });
+        });
+    </script>

@@ -19,9 +19,9 @@
     <link  href="<?=base_url();?>assets/css/css.min.css?t=<?=time();?>" rel="stylesheet" >
     <?php if (isset($share)): ?>
       <meta property="fb:app_id" content="173869386564200"/>
+      <meta property="og:url" content="<?=$share['url'];?>"/>
       <meta property="og:title" content="<?=$share['title'];?>"/>
       <meta property="og:type" content="article"/>
-      <meta property="og:url" content="<?=$share['url'];?>"/>
       <meta property="og:image" content="<?=$share['image'];?>"/>
       <link rel="image_src" type="image/jpeg" href="<?=$share['image'];?>" />
     <?php endif ?>

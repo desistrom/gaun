@@ -104,7 +104,7 @@
     </div>
 <script src="<?=base_url().'assets/js/jquery-3.2.1.min.js';?>"></script>
 <script type="text/javascript">
-   var base_url = "<?=base_url();?>"
+   var base_url = "<?=base_url();?>";
     $(document).ready(function(){
 
       $('body').on('click','.btn-send', function(){

@@ -14,6 +14,7 @@ class News extends CI_Controller  {
         parent::__construct();
          $this->load->helper('api');
          $this->load->library('pagination');
+         $this->load->library('Recaptcha');
     }
 
     function index() {
@@ -89,9 +90,44 @@ class News extends CI_Controller  {
         // print_r($a['data']);
         $this->data['news']=$b['data'];
       
-       
+       $this->data['action'] = site_url('web/news/get_news');
+       $this->data['captcha'] = $this->recaptcha->getWidget();
+       $this->data['script_captcha'] = $this->recaptcha->getScriptTag();
+       $this->data['comment'] = $this->db->get('tb_comment')->result_array();
    
         $this->ciparser->new_parse('template_frontend','modules_web', 'detail_news_layout',$this->data);
+    }
+
+    public function comment(){
+        if ($this->input->server('REQUEST_METHOD') == 'POST') {
+            // print_r($this->input->post());
+            $ret['state'] = 0;
+            $ret['status'] = 0;
+            $this->form_validation->set_error_delimiters('','');
+            $this->form_validation->set_rules('nama','Nama','required');
+            $this->form_validation->set_rules('email','Email','required');
+            $this->form_validation->set_rules('content','Comment','required');
+            $this->form_validation->set_rules('g-recaptcha-response','Pleas Insert Captcha', 'required');
+            $recaptcha = $this->input->post('g-recaptcha-response');
+            $response = $this->recaptcha->verifyResponse($recaptcha);
+            if ($this->form_validation->run() == true && $response['success'] == 1) {
+                $ret['state'] = 1;
+                $data_nama['nama'] = $this->input->post('nama');
+                $data_nama['email'] = $this->input->post('email');
+                $data_nama['content'] = $this->input->post('content');
+                $data_nama['id_berita'] = $this->input->post('id_berita');
+                if ($this->db->insert('tb_comment',$data_nama)) {
+                    $ret['status'] = 1;
+                    // $ret['url'] = site_url('')
+                }
+            }
+            $ret['notif']['nama'] = form_error('nama');
+            $ret['notif']['email'] = form_error('email');
+            $ret['notif']['content'] = form_error('content');
+
+            echo json_encode($ret);
+            exit();
+        }
     }
     
 

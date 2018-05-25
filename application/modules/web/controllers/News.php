@@ -93,7 +93,11 @@ class News extends CI_Controller  {
        $this->data['action'] = site_url('web/news/get_news');
        $this->data['captcha'] = $this->recaptcha->getWidget();
        $this->data['script_captcha'] = $this->recaptcha->getScriptTag();
-       $this->data['comment'] = $this->db->get('tb_comment')->result_array();
+       // $url_page = $this->uri->segment_array();
+       // $slug = end($url_page);
+       // $idnews = $this->db->get_where('tb_news',$url_page)->row_array()['id_news'];
+       $this->data['comment'] = $this->db->get_where('tb_comment',array('id_berita'=>$a['data']['newsId']))->result_array();
+       // print_r($this->data['comment']);
    
         $this->ciparser->new_parse('template_frontend','modules_web', 'detail_news_layout',$this->data);
     }

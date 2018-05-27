@@ -231,4 +231,61 @@ class Email extends MX_Controller  {
 		$this->ciparser->new_parse('template_admin','modules_admin', 'email/setting_email_layout',$this->data);
 	}
 
+	public function list_comment(){
+		if ($this->input->server('REQUEST_METHOD') == 'POST') {
+			// print_r($this->input->post());
+			// return false;
+			$this->form_validation->set_error_delimiters('','');
+			// $this->form_validation->set_rules('kategori','Kategori Email', 'trim|required');
+			$this->form_validation->set_rules('subject','Email Penerima', 'trim|required');
+			$this->form_validation->set_rules('title','Subject Email', 'trim|required');
+			$this->form_validation->set_rules('content','Content Email', 'trim|required');
+			if ($this->form_validation->run() == true) {
+				$ret['state'] = 1;
+				$data_email['id_kategori_email_ref'] = 1;
+				$data_email['subject'] = $this->input->post('subject');
+				$data_email['title'] = $this->input->post('title');
+				$data_email['content'] = $this->input->post('content');
+				$template = $this->db->get_where('tb_template_email',array('id_kategori_email_ref'=>$this->input->post('kategori'),'status'=>1))->row_array()['source_code'];
+				$final = str_replace("Email_User", $this->input->post('subject'), $template);
+				$final = str_replace("subject_email", $this->input->post('title'), $final);
+				// str_replace("content_email", $this->input->post('content'), $template);
+				$sender = $this->db->get('tb_setting_email')->row_array();
+				$this->load->helper('email_send_helper');
+			   	$data['email_from'] = $sender['email'];
+			   	$data['name_from'] = $sender['nama_user'];
+			   	$data['email_to'] = $this->input->post('subject');
+			   	$data['subject'] = $this->input->post('title');
+			   	$data['content'] = str_replace("content_email", $this->input->post('content'), $final);
+			   	if (email_send($data) == true) {
+					if ($this->db->insert('tb_notifikasi_email',$data_email)) {
+						$ret['status'] = 1;
+						$ret['url'] = site_url('admin/email/list_comment');
+					}
+			   	}else{
+			   		$ret['notif']['email'] = "Can't Send Email";
+			   	}
+			}
+			// $ret['notif']['kategori'] = form_error('kategori');
+			$ret['notif']['subject'] = form_error('subject');
+			$ret['notif']['title'] = form_error('title');
+			$ret['notif']['content'] = form_error('content');
+
+			echo json_encode($ret);
+			exit();
+		}
+		$this->load->library('ckeditor');
+		$this->ckeditor->basePath = base_url().'assets/ckeditor/';
+		/*$this->ckeditor->config['toolbar'] = array(
+		                array( 'Source', '-', 'Bold', 'Italic', 'Underline', '-','Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo','-','NumberedList','BulletedList','Link' )
+		                                                    );*/
+		$this->ckeditor->config['language'] = 'eng';
+		$this->ckeditor->config['width'] = '870px';
+		$this->ckeditor->config['height'] = '300px';
+		$this->data['breadcumb'] = 'List Comment';
+		$this->data['view'] = 'list';
+		$this->data['comment'] = $this->home_model->get_comment();
+		$this->ciparser->new_parse('template_admin','modules_admin', 'email/comment_layout',$this->data);
+	}
+
 }

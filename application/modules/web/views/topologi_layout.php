@@ -55,7 +55,7 @@ section.topologi{
             </div>
             <div class="col col-md-12 col-sm-12 col-xs-12 content-topologi">
                 <div class="filter-topologi-image" >
-                    <img class="" src="<?php echo $topologi['image']; ?>">
+                    <img class="" src="<?php echo base_url().$topologi['image']; ?>">
                 </div>
             </div>
 

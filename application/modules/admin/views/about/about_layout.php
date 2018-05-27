@@ -83,6 +83,9 @@
   .box{
     margin-bottom: 0;
   }
+  .list-founder:hover{
+    background-color: #F7F7F7;
+  }
 </style>
 <div class="col col-md-12 col-sm-12 col-xs-12">
   <div class="box">

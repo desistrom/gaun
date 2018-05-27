@@ -18,4 +18,15 @@ class Home_model extends CI_Model{
 		}
 		return array();
 	}
+
+	public function get_comment(){
+		$sql = "SELECT * FROM tb_comment c JOIN tb_news n ON c.id_berita = n.id_news";
+		if ($this->db->query($sql)->num_rows() > 0) {
+			return $this->db->query($sql)->result_array();
+			exit();
+		}
+		return false;
+	}
+
+	
 }

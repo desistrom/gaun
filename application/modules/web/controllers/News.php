@@ -128,6 +128,7 @@ class News extends CI_Controller  {
             $ret['notif']['nama'] = form_error('nama');
             $ret['notif']['email'] = form_error('email');
             $ret['notif']['content'] = form_error('content');
+            $ret['notif']['g-recaptcha-response'] = form_error('g-recaptcha-response');
 
             echo json_encode($ret);
             exit();

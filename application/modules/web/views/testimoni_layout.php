@@ -17,13 +17,13 @@
                         <div class="col col-md-12 col-sm-12 col-xs-12 text-center">
                             <div class="box-testimoni-left ">
                             	<div class="filter-box-mg-testimoni">
-                            		<img class="img-responsive" src="<?php echo $value['image']; ?>">
+                            		<img class="img-responsive" src="<?php echo base_url().$value['image']; ?>">
                             	</div>
                             </div>
                         </div>
                         <div class="col col-md-12 col-sm-12 col-xs-12 none-padding box-testimoni-right">
                             <h4 class="text-bold title-box-testimoni" style="color: #CF090A;"><?php echo $value['user']; ?></h4>
-                            <p class="text-bold" style="color: #747474;">Menteri Riset, Teknologi dan Pendidikan Tinggi Republik Indonesia </p>
+                            <p class="text-bold" style="color: #747474;"><?php echo $value['sebagai']; ?> </p>
                             <div style="color: #BDBDBD;"><i class="fa fa-quote-left"></i> <?php echo $value['testimoni']; ?> <i class="fa fa-quote-right"></i> </div>
                         </div>
                     </div>

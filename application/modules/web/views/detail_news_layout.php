@@ -154,7 +154,7 @@
                         <div class="user text-center"><i class="fa fa-user"></i></div>
                     </div>
                     <div class="comment-right col col-md-10 col-sm-12 col-xs-12">
-                        <h4><?=$value['nama'];?><span class="date-comment"><?=$value['email'];?></span></h4>
+                        <h4><?=$value['nama'];?><span class="date-comment"><!-- <?=$value['email'];?> --></span></h4>
                         <p><?=$value['content'];?></p>
                     </div>
                     <?php endforeach ?>

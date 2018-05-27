@@ -350,7 +350,7 @@ class News extends MX_Controller  {
             }
             $row = array();
             $row[] = $no;
-            $row[] = $news->judul;
+            $row[] = '<div class="comment" id="'.$news->id_news.'">'.$news->judul.'</div>';
             $row[] = word_limiter($news->content, 5);
             $row[] = $news->nm_kategori;
             $row[] = $news->created;
@@ -369,5 +369,32 @@ class News extends MX_Controller  {
         //output to json format
         echo json_encode($output);
     }
+
+    public function comment_ajax(){
+    	$id = $this->input->post('id');
+    	$comment = $this->news_model->news_comment($id);
+    	$data = '<table class="table table-bordered  dataTable" id="example2">
+			<thead>
+				<th>No</th>
+				<th>News</th>
+				<th>From</th>
+				<th>Email</th>
+				<th>Subject</th>
+			</thead>
+			<tbody>';
+			if(!empty($comment)){ foreach ($comment as $key => $value):
+				$data .= '<tr>
+					<td>'.($key+1).'</td>
+					<td><div class="judul">'.$value['judul'].'</div></td>
+					<td><div class="from">'.$value['nama'].'</div></td>
+					<td><div class="email">'.$value['email'].'</div></td>
+					<td><div class="subject">'.word_limiter($value['content'],5).'</div></td>
+				</tr>';
+			endforeach; }
+			$data .= '</tbody>
+		</table>';
+		echo json_encode($data);
+    }
+
 	
 }

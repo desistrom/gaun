@@ -122,7 +122,8 @@ define('URL_GET_HERO','http://localhost/idren/api/v1/gethero');
 define('URL_GET_TOPOLOGI','http://localhost/idren/api/v1/gettopologi');
 define('URL_GET_LOGO','http://localhost/idren/api/v1/getlogo');
 define('URL_GET_FOOTER','http://localhost/idren/api/v1/getfooter');
-define('URL_GET_AKADEMISI_TITLE','http://localhost/idren/api/v1/gettitleslider');*/
+define('URL_GET_AKADEMISI_TITLE','http://localhost/idren/api/v1/gettitleslider');
+define('URL_GET_FOUNDER','http://localhost/idren/api/v1/founder');*/
 
 //server
 /*define('URL_GET_ALL_MEDIA','http://128.199.233.73/idren/api/v1/galery');
@@ -156,7 +157,8 @@ define('URL_GET_HERO','http://128.199.233.73/idren/api/v1/gethero');
 define('URL_GET_TOPOLOGI','http://128.199.233.73/idren/api/v1/gettopologi');
 define('URL_GET_LOGO','http://128.199.233.73/idren/api/v1/getlogo');
 define('URL_GET_FOOTER','http://128.199.233.73/idren/api/v1/getfooter');
-define('URL_GET_AKADEMISI_TITLE','http://128.199.233.73/idren/api/v1/gettitleslider');*/
+define('URL_GET_AKADEMISI_TITLE','http://128.199.233.73/idren/api/v1/gettitleslider');
+define('URL_GET_FOUNDER','http://128.199.233.73/idren/api/v1/founder');*/
 
 //productio
 /*define('URL_GET_ALL_MEDIA','http://103.107.100.9/idren_new/api/v1/galery');
@@ -190,12 +192,13 @@ define('URL_GET_HERO','http://103.107.100.9/idren_new/api/v1/gethero');
 define('URL_GET_TOPOLOGI','http://103.107.100.9/idren/api/v1/gettopologi');
 define('URL_GET_LOGO','http://103.107.100.9/idren_new/api/v1/getlogo');
 define('URL_GET_FOOTER','http://103.107.100.9/idren_new/api/v1/getfooter');
-define('URL_GET_AKADEMISI_TITLE','http://103.107.100.9/idren_new/api/v1/gettitleslider');*/
+define('URL_GET_AKADEMISI_TITLE','http://103.107.100.9/idren_new/api/v1/gettitleslider');
+define('URL_GET_FOUNDER','http://103.107.100.9/idren/api/v1/founder');*/
 
 //for API versi 2
 
 //define local
-define('URL_GET_ALL_MEDIA','http://localhost/idren/api/v2/galery');
+/*define('URL_GET_ALL_MEDIA','http://localhost/idren/api/v2/galery');
 define('URL_GET_ALL_ALBUM','http://localhost/idren/api/v2/albumAll');
 define('URL_GET_ALBUM_BY_ID','http://localhost/idren/api/v2/getAlbumById?data=');
 define('URL_GET_ALL_IMAGE','http://localhost/idren/api/v2/galery_image');
@@ -227,10 +230,10 @@ define('URL_GET_TOPOLOGI','http://localhost/idren/api/v2/gettopologi');
 define('URL_GET_LOGO','http://localhost/idren/api/v2/getlogo');
 define('URL_GET_FOOTER','http://localhost/idren/api/v2/getfooter');
 define('URL_GET_AKADEMISI_TITLE','http://localhost/idren/api/v2/gettitleslider');
-define('URL_GET_FOUNDER','http://localhost/idren/api/v2/founder');
+define('URL_GET_FOUNDER','http://localhost/idren/api/v2/founder');*/
 
 //server
-/*define('URL_GET_ALL_MEDIA','http://128.199.233.73/idren/api/v2/galery');
+define('URL_GET_ALL_MEDIA','http://128.199.233.73/idren/api/v2/galery');
 define('URL_GET_ALL_ALBUM','http://128.199.233.73/idren/api/v2/albumAll');
 define('URL_GET_ALBUM_BY_ID','http://128.199.233.73/idren/api/v2/getAlbumById?data=');
 define('URL_GET_ALL_IMAGE','http://128.199.233.73/idren/api/v2/galery_image');
@@ -261,7 +264,8 @@ define('URL_GET_HERO','http://128.199.233.73/idren/api/v2/gethero');
 define('URL_GET_TOPOLOGI','http://128.199.233.73/idren/api/v2/gettopologi');
 define('URL_GET_LOGO','http://128.199.233.73/idren/api/v2/getlogo');
 define('URL_GET_FOOTER','http://128.199.233.73/idren/api/v2/getfooter');
-define('URL_GET_AKADEMISI_TITLE','http://128.199.233.73/idren/api/v2/gettitleslider');*/
+define('URL_GET_AKADEMISI_TITLE','http://128.199.233.73/idren/api/v2/gettitleslider');
+define('URL_GET_FOUNDER','http://128.199.233.73/idren/api/v2/founder');
 
 //productio
 /*define('URL_GET_ALL_MEDIA','http://103.107.100.9/idren_new/api/v2/galery');
@@ -295,4 +299,5 @@ define('URL_GET_HERO','http://103.107.100.9/idren_new/api/v2/gethero');
 define('URL_GET_TOPOLOGI','http://103.107.100.9/idren/api/v2/gettopologi');
 define('URL_GET_LOGO','http://103.107.100.9/idren_new/api/v2/getlogo');
 define('URL_GET_FOOTER','http://103.107.100.9/idren_new/api/v2/getfooter');
-define('URL_GET_AKADEMISI_TITLE','http://103.107.100.9/idren_new/api/v2/gettitleslider');*/
+define('URL_GET_AKADEMISI_TITLE','http://103.107.100.9/idren_new/api/v2/gettitleslider');
+define('URL_GET_FOUNDER','http://103.107.100.9/idren/api/v2/founder');*/

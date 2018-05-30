@@ -101,14 +101,14 @@
           </a>
         </li> -->
 
-        <!-- <li class="treeview <?php if(current_url() == site_url('admin/logo/title')){ ?> active <?php } ?>">
-          <a href="<?=site_url('admin/logo/title');?>">
-            <i class="fa fa-header"></i> <span>Title</span>
+        <!-- <li class="treeview <?php if(current_url() == site_url('admin/email/list-comment')){ ?> active <?php } ?>">
+          <a href="<?=site_url('admin/email/list_comment');?>">
+            <i class="fa fa-header"></i> <span>Comment</span>
             <span class="pull-right-container">
               
             </span>
           </a>
-        </li>
+        </li> -->
 
         <li class="treeview <?php if(current_url() == site_url('admin/logo/index')){ ?> active <?php } ?>">
           <a href="<?=site_url('admin/logo/index');?>">
@@ -117,7 +117,7 @@
               
             </span>
           </a>
-        </li> -->
+        </li>
 
         <li class="treeview <?php if(current_url() == site_url('admin/menu/index')){ ?> active <?php } ?>">
           <a href="<?=site_url('admin/menu/index');?>">

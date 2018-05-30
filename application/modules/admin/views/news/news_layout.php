@@ -219,7 +219,24 @@
 </div>
   </form>
 <?php } ?>
-	
+<div class="modal" tabindex="-1" role="dialog" id="modal_comment">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Success</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <!-- <span aria-hidden="true">&times;</span> -->
+        </button>
+      </div>
+      <div class="modal-body">
+      </div>
+      <div class="modal-footer">
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="modal fade" id="progresLoading" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="vertical-alignment-helper">
@@ -308,6 +325,20 @@
     $('#judul').keyup(function () {
       var slug = slugify($('#judul').val());
       $('#slug').val(slug);
+    });
+    $('body').on('click','.comment',function(){
+      var id = $(this).attr('id');
+      $.ajax({
+          url : base_url+'admin/news/comment_ajax',
+          dataType : 'json',
+          type : 'POST',
+          data : {'id' : id}
+      }).done(function(data){
+        console.log(data);
+        $('#modal_comment .modal-body').html(data);
+        $('#modal_comment').modal('show');
+        // window.location.href = window.location.href;
+      });
     });
     $('body').on('click','.btn_rss', function () {
       $('#progresLoading').modal('show');

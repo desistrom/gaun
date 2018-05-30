@@ -19,10 +19,11 @@
     <link  href="<?=base_url();?>assets/css/css.min.css?t=<?=time();?>" rel="stylesheet" >
     <?php if (isset($share)): ?>
       <meta property="fb:app_id" content="173869386564200"/>
-      <meta property="og:title" content="<?=$share['title'];?>"/>
-      <meta property="og:type" content="<?=$share['type'];?>"/>
       <meta property="og:url" content="<?=$share['url'];?>"/>
+      <meta property="og:title" content="<?=$share['title'];?>"/>
+      <meta property="og:type" content="article"/>
       <meta property="og:image" content="<?=$share['image'];?>"/>
+      <link rel="image_src" type="image/jpeg" href="<?=$share['image'];?>" />
     <?php endif ?>
     <style type="text/css">
       .modal .ntf_err{
@@ -88,7 +89,7 @@
         <nav class="navbar navbar-fixed-top " id="main-navigation">
       <div class="">
             <div class="container-fluid">
-              <div class="navbar-header"><a href="<?php echo site_url('web/home'); ?>" class="navbar-brand navbar-link"><img class="logo" src="<?=logo_helper()['data']['image'];?>" /> </a>
+              <div class="navbar-header"><a href="<?php echo site_url('web/home'); ?>" class="navbar-brand navbar-link"><img class="logo" src="<?=base_url().logo_helper()['data']['image'];?>" /> </a>
                   <button data-toggle="collapse" data-target="#navcol-1" class="navbar-toggle collapsed"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
               </div>
               <div class="collapse navbar-collapse" id="navcol-1">

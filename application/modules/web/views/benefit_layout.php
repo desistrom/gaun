@@ -58,7 +58,7 @@
                     <div class="col col-md-12 col-sm-12 col-xs-12 none-padding list-artikel">
                         <div class="col col-md-12 col-sm-12 col-xs-12 none-padding img-news">
                        
-                        <img class="img-responsive" width="100%;" src="<?php echo $benefit['picture']; ?>" >                          
+                        <img class="img-responsive" width="100%;" src="<?php echo base_url().$benefit['picture']; ?>" >                          
                         
                         </div>
                         <div class="col col-md-12 col-sm-12 col-xs-12 desrip-news">

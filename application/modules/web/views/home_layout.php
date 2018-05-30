@@ -100,7 +100,7 @@
                     <?php if ($instansi !="") {?>
                         <?php foreach ($instansi as $key => $value) :  ?>
                             <div class="col col-md-12 col-sm-12 col-xs-12 text-center item">
-                                <div class="filter-img-client "><img src="<?php echo $value['image_thumbnail']; ?>" class="img-responsive" ></div>
+                                <div class="filter-img-client "><img src="<?php echo base_url().$value['image_thumbnail']; ?>" class="img-responsive" ></div>
                                 <div><p><?php echo $value['instansi']; ?></p></div>
                             </div>
                         <?php endforeach ?>
@@ -126,7 +126,7 @@
 
                     <?php foreach ($testimoni as $key => $value) : ?>
                         <div class="col-md-12 col-sm-12 col-xs-12 text-center item" >
-                            <div class="filter-img-testimoni"><img src="<?php echo $value['image']; ?>" class="img-testimoni"></div>
+                            <div class="filter-img-testimoni"><img src="<?php echo base_url().$value['image']; ?>" class="img-testimoni"></div>
                             <h2 class="name-testi"><?php echo $value['user']; ?></h2>
                             <h3 class="job description"><?php echo $value['sebagai']; ?> </h3><i class="fa fa-quote-left fa-2x"></i>
                             <p> <?php echo $value['testimoni']; ?></p>

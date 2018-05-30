@@ -74,5 +74,14 @@ class News_model extends CI_Model
         $this->db->from($this->table);
         return $this->db->count_all_results();
     }
+
+    public function news_comment($id){
+        $sql = "SELECT n.judul, c.nama, c.email, c.content FROM tb_comment c JOIN tb_news n ON c.id_berita = n.id_news WHERE c.id_berita = ?";
+        if ($this->db->query($sql,$id)->num_rows() > 0) {
+            return $this->db->query($sql,$id)->result_array();
+            exit();
+        }
+        return false;
+    }
    
 }

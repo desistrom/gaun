@@ -298,4 +298,11 @@ class V1_model extends CI_Model{
 		}
 		return false;
 	}
+
+	public function getFounder(){
+		$this->db->from('tb_founder');
+        $this->db->order_by("sort", "asc");
+        $query = $this->db->get(); 
+        return $query->result_array();
+	}
 }

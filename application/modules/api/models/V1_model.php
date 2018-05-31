@@ -247,7 +247,7 @@ class V1_model extends CI_Model{
 	}
 
 	public function getTestimoni(){
-		$sql = "SELECT content as testimoni, gambar as image, id_testimoni as testimoniId, nama_user as user, jabatan as sebagai  FROM tb_testimoni where is_aktif = 1 ORDER BY sort asc";
+		$sql = "SELECT content as testimoni, gambar as image, id_testimoni as testimoniId, nama_user as user, jabatan as sebagai FROM tb_testimoni where is_aktif = 1 ORDER BY sort ASC";
 		if ($this->db->query($sql)->num_rows() > 0) {
 			return $this->db->query($sql)->result_array();
 			exit();
@@ -304,5 +304,27 @@ class V1_model extends CI_Model{
         $this->db->order_by("sort", "asc");
         $query = $this->db->get(); 
         return $query->result_array();
+	}
+
+	public function getPage($link){
+		return $this->db->get_where('tb_general_page',array('link'=>$link))->row_array();
+	}
+
+	public function getSliderFoto($slide){
+		$sql = "select a.judul_album as title, a.tgl_kegiatan as date_album, g.file_name as image from tb_galery g join tb_album_galery a on g.id_album = a.id_album where a.key_album = '".$slide."'";
+		if ($this->db->query($sql)->num_rows() > 0) {
+			return $this->db->query($sql)->result_array();
+			exit();
+		}
+		return false;
+	}
+
+	public function getDataFoto($foto){
+		$sql = "select a.id_album as albumId, a.judul_album as title, a.tgl_kegiatan as date_album, g.file_name as image, g.id_album from tb_galery g join tb_album_galery a on g.id_album = a.id_album where a.key_album in (".$foto.") group by a.id_album, g.id_album";
+		if ($this->db->query($sql)->num_rows() > 0) {
+			return $this->db->query($sql)->result_array();
+			exit();
+		}
+		return false;
 	}
 }

@@ -42,7 +42,7 @@
                               <?php endif ?>">
                              
                               <div class="col col-md-12 col-sm-12 col-xs-12 none-padding content-img-top-right">
-                                <img class="img-responsive img-slider" src="<?php echo base_url().'assets/media/thumbnail/'.$value['image']; ?>"  style="width:100%;">
+                                <img class="img-responsive img-slider" src="<?php echo base_url().$value['image']; ?>"  style="width:100%;">
                               </div>   
                             </div>
                             <?php endforeach ?>
@@ -84,7 +84,7 @@
                     <div class="box-img-galery">
                       <a href="#" class="show-album" id="<?php echo $value['albumId'] ?>" data-toggle="modal" >
                         <div class="filter-img-galery" >
-                        <img class="img-responsive" src="<?php echo base_url().'assets/media/thumbnail/'.$value['image']; ?>">
+                        <img class="img-responsive" src="<?php echo base_url().$value['image']; ?>">
                       </div>
                       </a>
                       <div class="galery-deskripsi text-left">

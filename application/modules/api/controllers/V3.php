@@ -1,11 +1,12 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 require APPPATH . '/libraries/REST_Controller.php';
-class V2 extends REST_Controller {
+class V3 extends REST_Controller {
 	var $data = array();
 	public function __construct() {
         parent::__construct();
         $this->load->library('REST_Controller');
         $this->load->model('v1_model');
+        $this->load->helper('api');
         ini_set('allow_url_fopen',1);
     }
 
@@ -359,18 +360,6 @@ class V2 extends REST_Controller {
         $this->_getFounder();
     }
 
-    public function page_get(){
-        header('Content-Type: application/json');
-        $param = $_GET['link'];
-        if($param == ''){
-            $retData['code'] = '500';
-            $retData['status'] = 'failed';
-            $retData['error'] = 'Your parameter is invalid';
-            $this->response($retData,400);
-        }
-        $this->_getPage($param);
-    }
-
     public function insert_contact_post(){
         header('Content-Type: application/json');
         $param = json_decode(file_get_contents('php://input'), true);
@@ -402,153 +391,82 @@ class V2 extends REST_Controller {
     }
 
     function _albumAll(){
-        $galery = $this->v1_model->getAllAlbum();
-        $retData['code'] = '200';
-        $retData['status'] = 'success';
-        if ($galery == '') {
-            $retData['code'] = '500';
-            $retData['status'] = 'Failed';
-            $retData['data'] = 'data not found';
-        }else{
-            foreach ($galery as $key => $value) {
-                $galery[$key]['date_album'] = date("d M Y", strtotime($value['date_album']));
-                if ($value['image'] == '') {
-                    $galery[$key]['image']='assets/images/logo/IDREN-2.png';
-                }else{
-                    if (file_exists(FCPATH."assets/media/thumbnail/".$value['file'])) {
-                        $galery[$key]['image'] = 'assets/media/thumbnail/'.$value['file'];
-                    }else{
-                        $galery[$key]['image_big'] = 'assets/media/'.$value['file'];
-                        $galery[$key]['image'] = 'assets/media/thumbnail/'.$value['file'];
-                    }
-                }
-
-            }
-        }
-        $retData['data'] = $galery;
+        $url = URL_GET_ALL_ALBUM;
+    	$data = '';
+        $methode = 'GET';
+        $token = '';
+        $retData['data'] = api_helper('',$url,$methode,$token);
         $this->response($retData,200);
     }
 
     function _getAlbumById($param){
-        $galery = $this->v1_model->getAlbumById($param);
-        $retData['code'] = '200';
-        $retData['status'] = 'success';
-        foreach ($galery as $key => $value) {
-            $galery[$key]['date_album'] = date("d M Y", strtotime($value['date_album']));
-            if ($value['image'] == '') {
-                $galery[$key]['image']='assets/images/logo/IDREN-2.png';
-            }else{
-                if (file_exists(FCPATH."assets/media/thumbnail/".$value['image'])) {
-                    $galery[$key]['image'] = 'assets/media/thumbnail/'.$value['image'];
-                }else{
-                    $galery[$key]['image_big'] = 'assets/media/'.$value['image'];
-                    $galery[$key]['image'] = 'assets/media/thumbnail/'.$value['image'];
-                }
-            }
-
-        }
+    	$id = $param;
+        $url =  URL_GET_ALBUM_BY_ID.$id ;
+        $data = '';
+        $methode = 'GET';
+        $token = '';
+        $galery = api_helper(json_encode($id),$url,$methode,$token);        
         $retData['data'] = $galery;
         $this->response($retData,200);
     }
 
     function _galery(){
-    	$galery = $this->v1_model->getAllGalery();
-		$retData['code'] = '200';
-		$retData['status'] = 'success';
-		$retData['data'] = $galery;
-		$this->response($retData,200);
+    	$url = URL_GET_ALL_MEDIA;
+    	$data = '';
+        $methode = 'GET';
+        $token = '';
+        $retData['data'] = api_helper('',$url,$methode,$token);
+        $this->response($retData,200);
     }
 
     function _galery_image(){
-    	$type = 'image';
-    	$galery = $this->v1_model->getTypeGalery($type);
-		
-		if ($galery == '') {
-            $retData['code'] = '500';
-            $retData['status'] = 'Failed';
-            $retData['data'] = 'data not found';
-		}else{
-            $retData['code'] = '200';
-            $retData['status'] = 'success';
-            foreach ($galery as $key => $value) {
-                if ($value['file'] == '') {
-                    $galery[$key]['file']='assets/images/logo/IDREN-2.png';
-                }else{
-                    if (file_exists(FCPATH."assets/media/thumbnail/".$value['file'])) {
-                        $galery[$key]['file'] = 'assets/media/thumbnail/'.$value['file'];
-                    }else{
-                        $galery[$key]['file_big'] = 'assets/media/'.$value['file'];
-                        $galery[$key]['file'] = 'assets/media/thumbnail/'.$value['file'];
-                    }
-                }
-
-            }
-            $retData['data'] = $galery;
-		}
-		$this->response($retData,200);
+    	$url = URL_GET_ALL_IMAGE;
+    	$data = '';
+        $methode = 'GET';
+        $token = '';
+        $retData['data'] = api_helper('',$url,$methode,$token);
+        $this->response($retData,200);
     }
 
     function _galery_video(){
-    	$type = 'video';
-    	$galery = $this->v1_model->getTypeGalery($type);
-		
-		if ($galery == '') {
-            $retData['code'] = '500';
-            $retData['status'] = 'Failed';
-            $retData['data'] = 'data not found';
-		}else{
-            $retData['code'] = '200';
-            $retData['status'] = 'success';
-            $retData['data'] = $galery;
-		}
-		$this->response($retData,200);
+    	$url = URL_GET_ALL_VIDEO;
+    	$data = '';
+        $methode = 'GET';
+        $token = '';
+        $retData['data'] = api_helper('',$url,$methode,$token);
+        $this->response($retData,200);
     }
 
     function _galery_video_pagging($param){
-        $type = 'video';
-        $galery = $this->v1_model->getTypeGaleryPagging($type,$param);
-        
-        if ($galery == '') {
-            $retData['code'] = '500';
-            $retData['status'] = 'Failed';
-            $retData['data'] = 'data not found';
-        }else{
-            $retData['code'] = '200';
-            $retData['status'] = 'success';
-            $retData['data'] = $galery;
-        }
+        $url = URL_GET_VIDEO_PAGGING_V2.$param;
+    	$data = '';
+        $methode = 'GET';
+        $token = '';
+        $user = api_helper('',$url,$methode,$token)['data'];
+        $retData['code'] = '200';
+        $retData['status'] = 'Success';
         $this->response($retData,200);
     }
 
     function _tube_video(){
-        $type = 'video';
-        $galery = $this->v1_model->getTypeTube($type);
-        
-        if ($galery == '') {
-            $retData['code'] = '500';
-            $retData['status'] = 'Failed';
-            $retData['data'] = 'data not found';
-        }else{
-            $retData['code'] = '200';
-            $retData['status'] = 'success';
-            $retData['data'] = $galery;
-        }
+        $url = URL_GET_ID_TUBE_V2;
+    	$data = '';
+        $methode = 'GET';
+        $token = '';
+        $user = api_helper('',$url,$methode,$token)['data'];
+        $retData['code'] = '200';
+        $retData['status'] = 'Success';
         $this->response($retData,200);
     }
 
     function _tube_video_pagging($param){
-        $type = 'video';
-        $galery = $this->v1_model->getTypeTubePagging($type,$param);
-        
-        if ($galery == '') {
-            $retData['code'] = '500';
-            $retData['status'] = 'Failed';
-            $retData['data'] = 'data not found';
-        }else{
-            $retData['code'] = '200';
-            $retData['status'] = 'success';
-            $retData['data'] = $galery;
-        }
+        $url = URL_GET_ID_TUBE_PAGGING_V2.$param;
+    	$data = '';
+        $methode = 'GET';
+        $token = '';
+        $user = api_helper('',$url,$methode,$token)['data'];
+        $retData['code'] = '200';
+        $retData['status'] = 'Success';
         $this->response($retData,200);
     }
 
@@ -603,47 +521,53 @@ class V2 extends REST_Controller {
     //about
 
     function _about(){
-        $about = $this->v1_model->about();
+        $url = URL_GET_ABOUT_V2;
+    	$data = '';
+        $methode = 'GET';
+        $token = '';
+        $user = api_helper('',$url,$methode,$token)['data'];
         $retData['code'] = '200';
-        $retData['status'] = 'success';
-        $retData['data'] = $about;
+        $retData['status'] = 'Success';
+        $retData['data'] = $user;
         $this->response($retData,200);
     }
 
     //Setting User
     function _profit(){
-        $profit['benefit'] = $this->v1_model->user_setting()['benefit'];
-        $profit['picture'] = $this->v1_model->user_setting()['picture_profit'];
+        $url = URL_GET_BENEFIT_V2;
+    	$data = '';
+        $methode = 'GET';
+        $token = '';
+        $user = api_helper('',$url,$methode,$token)['data'];
         $retData['code'] = '200';
         $retData['status'] = 'Success';
-        if ($this->v1_model->user_setting()['picture'] == '') {
-            $profit['picture']='assets/images/logo/IDREN-2.png';
-        }else{
-            $profit['picture']='media/'.$this->v1_model->user_setting()['picture_profit'];
-        }  
-        $retData['data'] = $profit;
+        $retData['data'] = $user;
         $this->response($retData,200);
     }
 
     function _step(){
-        $profit['step'] = $this->v1_model->user_setting()['step'];
-        $profit['picture'] = $this->v1_model->user_setting()['picture'];
-        if ($this->v1_model->user_setting()['picture'] == '') {
-            $profit['picture']='assets/images/logo/IDREN-2.png';
-        }else{
-            $profit['picture']='media/'.$this->v1_model->user_setting()['picture'];
-        }  
+        $url = URL_GET_PENDAFTARAN_V2;
+    	$data = '';
+        $methode = 'GET';
+        $token = '';
+        $user = api_helper('',$url,$methode,$token)['data'];
         $retData['code'] = '200';
         $retData['status'] = 'Success';
-        $retData['data'] = $profit;
+        $retData['data'] = $user;
         $this->response($retData,200);
     }
 
     function _getinstansi(){
-        $user = $this->v1_model->getInstansi();
+    	$url = URL_GET_ALL_INSTANSI_V2;
+    	$data = '';
+        $methode = 'GET';
+        $token = '';
+        $user = api_helper('',$url,$methode,$token)['data'];
+        // $this->response($retData,200);
+        // $user = $this->v1_model->getInstansi();
         $retData['code'] = '200';
         $retData['status'] = 'Success';
-        foreach ($user as $key => $value) {
+        /*foreach ($user as $key => $value) {
             if ($value['image'] == '') {
                 $user[$key]['image_thumbnail']='assets/images/logo/IDREN-2.png';
             }else{
@@ -655,13 +579,22 @@ class V2 extends REST_Controller {
                     $user[$key]['image'] = 'media/'.$value['image'];
                 }
             }                                                                                                                     
-        }
+        }*/
         $retData['data'] = $user;
         $this->response($retData,200);
     }
 
     function _getinstansi_pagging($param){
-        $user = $this->v1_model->getInstansi_pagging($param);
+    	$url = URL_GET_INSTANSI_PAGGING_V2.$param;
+    	$data = '';
+        $methode = 'GET';
+        $token = '';
+        $retData['data'] = api_helper('',$url,$methode,$token)['data'];
+        $retData['code'] = '200';
+        $retData['status'] = 'Success';
+        $retData['data'] = $user;
+        $this->response($retData,200);
+        /*$user = $this->v1_model->getInstansi_pagging($param);
         $retData['code'] = '200';
         $retData['status'] = 'Success';
         foreach ($user as $key => $value) {
@@ -678,11 +611,20 @@ class V2 extends REST_Controller {
             }                                                                                                                     
         }
         $retData['data'] = $user;
-        $this->response($retData,200);
+        $this->response($retData,200);*/
     }
 
     function _search_instansi($data){
-        $param = $data['search'];
+    	$url = URL_SEARCH_INSTANSI_V2;
+    	$data = json_encode($data);
+        $methode = 'POST';
+        $token = '';
+        $retData['data'] = api_helper($data,$url,$methode,$token)['data'];
+        $retData['code'] = '200';
+        $retData['status'] = 'Success';
+        $retData['data'] = $user;
+        $this->response($retData,200);
+        /*$param = $data['search'];
         $page = $data['page'];
         $instansi = $this->v1_model->searchInstansi($param,$page);
         
@@ -708,7 +650,7 @@ class V2 extends REST_Controller {
             }
             $retData['data'] = $instansi;
         }
-        $this->response($retData,200);
+        $this->response($retData,200);*/
     }
 
     function _getuser(){
@@ -770,7 +712,15 @@ class V2 extends REST_Controller {
     }
 
     function _register_instansi($data){
-        $data_register['username'] = $data['username'];
+    	$url = URL_REGISTER_V2;
+    	$data = json_encode($data);
+        $methode = 'POST';
+        $token = '';
+        $retData['data'] = api_helper($data,$url,$methode,$token)['data'];
+        $retData['code'] = '200';
+        $retData['status'] = 'Success';
+        $this->response($retData,200);
+        /*$data_register['username'] = $data['username'];
         $data_register['password'] = sha1($data['password']);
         $data_register['nm_instansi'] = $data['instansi'];
         $data_register['phone'] = $data['number_phone'];
@@ -818,7 +768,7 @@ class V2 extends REST_Controller {
             $retData['status'] = 'failed';
             $retData['data'] = 'Email Not Send';
         }
-        $this->response($retData,200);
+        $this->response($retData,200);*/
     }
 
     function _search_user($data){
@@ -838,152 +788,91 @@ class V2 extends REST_Controller {
     }
 
     function _getnews(){
-        $news = $this->v1_model->news();
+        $url = URL_GET_ALL_NEWS_V2;
+    	$data = '';
+        $methode = 'GET';
+        $token = '';
+        $retData['data'] = api_helper('',$url,$methode,$token)['data'];
         $retData['code'] = '200';
-        $retData['status'] = 'success';
-        foreach ($news as $key => $value) {
-            if ($value['kategori'] != 'rss' && $value['gambar'] != '') {
-                $news[$key]['gambar'] = 'assets/media/'.$news[$key]['gambar'];
-            }
-            if ($value['gambar'] == '') {
-                $news[$key]['gambar']='assets/images/logo/IDREN-2.png';
-            }
-
-        }
-        $retData['data'] = $news;
+        $retData['status'] = 'Success';
         $this->response($retData,200);
     }
 
     function _paggingnews($param){
-        $news = $this->v1_model->newsPagging($param);
+        $url = URL_GET_NEWS_PAGGING_V2.$param;
+    	$data = '';
+        $methode = 'GET';
+        $token = '';
+        $retData['data'] = api_helper('',$url,$methode,$token)['data'];
         $retData['code'] = '200';
-        $retData['status'] = 'success';
-        foreach ($news as $key => $value) {
-            if ($value['kategori'] != 'rss' && $value['gambar'] != '') {
-                $news[$key]['gambar'] = 'assets/media/'.$news[$key]['gambar'];
-            }
-            if ($value['gambar'] == '') {
-                $news[$key]['gambar']='assets/images/logo/IDREN-2.png';
-            }
-
-        }
-        $retData['data'] = $news;
+        $retData['status'] = 'Success';
         $this->response($retData,200);
     }
 
     function _search_news($data){
-        $param = $data['search'];
-        $news = $this->v1_model->searchNews($param);
-        
-        if ($news == '') {
-            $retData['code'] = '500';
-            $retData['status'] = 'Failed';
-            $retData['data'] = 'data not found';
-        }else{
-            $retData['code'] = '200';
-            $retData['status'] = 'success';
-            $retData['data'] = $news;
-        }
+    	$url = URL_SEARCH_NEWS_V2;
+    	$data = json_encode($data['search']);
+        $methode = 'POST';
+        $token = '';
+        $retData['data'] = api_helper($data,$url,$methode,$token)['data'];
+        $retData['code'] = '200';
+        $retData['status'] = 'Success';
         $this->response($retData,200);
     }
 
     function _get_news_by_id($data){
-        $param = $data['data'];
-        $news = $this->v1_model->rowNews($param);
-        
-        if ($news == '') {
-            $retData['code'] = '500';
-            $retData['status'] = 'Failed';
-            $retData['data'] = 'data not found';
-        }else{
-            $retData['code'] = '200';
-            $retData['status'] = 'success';
-            
-            if ($news['gambar'] == '') {
-                $news['gambar']='assets/images/logo/IDREN-2.png';
-            }else{
-                if ($news['kategori'] != 'rss') {
-                    $news['gambar'] = 'assets/media/'.$news['gambar'];
-                }
-            }
-            $retData['data'] = $news;
-        }
+       $url = URL_GET_NEWS_BY_SLUG_V2.$data['data'];
+    	$data = '';
+        $methode = 'GET';
+        $token = '';
+        $retData['data'] = api_helper('',$url,$methode,$token)['data'];
+        $retData['code'] = '200';
+        $retData['status'] = 'Success';
         $this->response($retData,200);
     }
 
     function _get_news_by_slug($data){
-        $param = $data['news'];
-        $news = $this->v1_model->slugNews($param);
-        
-        if ($news == '') {
-            $retData['code'] = '500';
-            $retData['status'] = 'Failed';
-            $retData['data'] = 'data not found';
-        }else{
-            $retData['code'] = '200';
-            $retData['status'] = 'success';
-            $retData['data'] = $news;
-        }
+    	$url = URL_GET_NEWS_BY_SLUG_V2.$param;
+    	$data = '';
+        $methode = 'GET';
+        $token = '';
+        $retData['data'] = api_helper('',$url,$methode,$token)['data'];
+        $retData['code'] = '200';
+        $retData['status'] = 'Success';
         $this->response($retData,200);
     }
 
     function _getTestimoni(){
-        $user = $this->v1_model->getTestimoni();
-        if ($user == '') {
-            $retData['code'] = '500';
-            $retData['status'] = 'Failed';
-            $retData['data'] = 'data not found';
-        }else{
-            $retData['code'] = '200';
-            $retData['status'] = 'success';
-            foreach ($user as $key => $value) {
-                if ($value['image'] == '') {
-                    $user[$key]['image_thumbnail']='assets/images/logo/IDREN-2.png';
-                }else{
-                    if (file_exists(FCPATH."media/thumbnail/".$value['image'])) {
-                        $user[$key]['image_big'] = 'media/'.$value['image'];
-                        $user[$key]['image'] = 'media/thumbnail/'.$value['image'];
-                    }else{
-                        $user[$key]['image_thumbnail'] = 'media/'.$value['image'];
-                        $user[$key]['image'] = 'media/'.$value['image'];
-                    }
-                }
-
-            }
-            $retData['data'] = $user;
-        }
-        $retData['data'] = $user;
+        $url = URL_GET_TESTIMONI_V2;
+    	$data = '';
+        $methode = 'GET';
+        $token = '';
+        $retData['data'] = api_helper('',$url,$methode,$token)['data'];
+        $retData['code'] = '200';
+        $retData['status'] = 'Success';
         $this->response($retData,200);
     }
 
     function _getTestimoni_pagination($data){
-        $user = $this->v1_model->getTestimoni_paging($data);
+        $url = URL_GET_TESTIMONI_PAGGING_V2.$data;
+    	$data = '';
+        $methode = 'GET';
+        $token = '';
+        $retData['data'] = api_helper('',$url,$methode,$token)['data'];
         $retData['code'] = '200';
         $retData['status'] = 'Success';
-        foreach ($user as $key => $value) {
-                if ($value['image'] == '') {
-                    $user[$key]['image_thumbnail']='assets/images/logo/IDREN-2.png';
-                }else{
-                    if (file_exists(FCPATH."media/thumbnail/".$value['image'])) {
-                        $user[$key]['image_big'] = 'media/'.$value['image'];
-                        $user[$key]['image'] = 'media/thumbnail/'.$value['image'];
-                    }else{
-                        $user[$key]['image_thumbnail'] = 'media/'.$value['image'];
-                        $user[$key]['image'] = 'media/'.$value['image'];
-                    }
-                }
-
-            }
-        $retData['data'] = $user;
         $this->response($retData,200);
     }
 
     //hero
     function _getHero(){
-        $user = $this->v1_model->getHero();
+        $url = URL_GET_HERO_V2;
+    	$data = '';
+        $methode = 'GET';
+        $token = '';
+        $retData['data'] = api_helper('',$url,$methode,$token)['data'];
         $retData['code'] = '200';
         $retData['status'] = 'Success';
-        $retData['data'] = $user;
         $this->response($retData,200);
     }
 
@@ -1006,24 +895,25 @@ class V2 extends REST_Controller {
     }
 
     function _getLogo(){
-        $user = $this->v1_model->getLogo(1);
+    	$url = URL_GET_LOGO_V2;
+    	$data = '';
+        $methode = 'GET';
+        $token = '';
+        $user = api_helper('',$url,$methode,$token)['data'];
         $retData['code'] = '200';
         $retData['status'] = 'Success';
-        if ($user['image'] == '') {
-                $user['image'] = 'assets/images/logo/IDREN-2.png';
-            }else{
-                $user['image'] = "media/".$user['image'];
-            }
         $retData['data'] = $user;
         $this->response($retData,200);
     }
 
     function _getTopologi(){
-        $user = $this->v1_model->getLogo(2);
+    	$url = URL_GET_TOPOLOGI_V2;
+    	$data = '';
+        $methode = 'GET';
+        $token = '';
+        $retData['data'] = api_helper('',$url,$methode,$token)['data'];
         $retData['code'] = '200';
         $retData['status'] = 'Success';
-        $user['image'] = "media/".$user['image'];
-        $retData['data'] = $user;
         $this->response($retData,200);
     }
 
@@ -1045,108 +935,35 @@ class V2 extends REST_Controller {
     }
 
     function _getFooter(){
-        $user = $this->v1_model->getFooter();
+        $url = URL_GET_FOOTER_V2;
+    	$data = '';
+        $methode = 'GET';
+        $token = '';
+        $retData['data'] = api_helper('',$url,$methode,$token)['data'];
         $retData['code'] = '200';
         $retData['status'] = 'Success';
-        $retData['data'] = $user;
         $this->response($retData,200);
     }
 
     function _getFounder(){
-        $user = $this->v1_model->getFounder();
+        $url = URL_GET_FOUNDER_V2;
+    	$data = '';
+        $methode = 'GET';
+        $token = '';
+        $retData['data'] = api_helper('',$url,$methode,$token)['data'];
         $retData['code'] = '200';
         $retData['status'] = 'Success';
-        foreach ($user as $key => $value) {
-            if ($value['foto'] == '') {
-                $user[$key]['foto'] = 'assets/images/logo/IDREN-2.png';
-            }else{
-                $user[$key]['foto'] = "assets/media/thumbnail/".$value['foto'];
-            }
-        }
-        $retData['data'] = $user;
         $this->response($retData,200);
     }
 
     function _getSlider(){
-        $user = $this->v1_model->getSlider();
+        $url = URL_GET_AKADEMISI_TITLE_V2;
+    	$data = '';
+        $methode = 'GET';
+        $token = '';
+        $retData['data'] = api_helper('',$url,$methode,$token)['data'];
         $retData['code'] = '200';
         $retData['status'] = 'Success';
-        $retData['data'] = $user;
-        $this->response($retData,200);
-    }
-
-    function _getPage($param){
-        $user = $this->v1_model->getPage($param);
-        $retData['code'] = '200';
-        $retData['status'] = 'Success';
-        $retData['data'] = $user;
-        $this->response($retData,200);
-    }
-
-    public function getSliderFoto_get(){
-        header('Content-Type: application/json');
-        $param = $_GET['key'];
-        if($param == ''){
-            $retData['code'] = '500';
-            $retData['status'] = 'failed';
-            $retData['error'] = 'Your parameter is invalid';
-            $this->response($retData,400);
-        }
-        $this->_getSliderFoto($param);
-    }
-
-    function _getSliderFoto($param){
-        $galery = $this->v1_model->getSliderFoto($param);
-        foreach ($galery as $key => $value) {
-            if ($value['image'] == '') {
-                $galery[$key]['image']='assets/images/logo/IDREN-2.png';
-            }else{
-                if (file_exists(FCPATH."assets/media/thumbnail/".$value['image'])) {
-                    $galery[$key]['image'] = 'assets/media/thumbnail/'.$value['image'];
-                }else{
-                    $galery[$key]['image_big'] = 'assets/media/'.$value['image'];
-                    $galery[$key]['image'] = 'assets/media/thumbnail/'.$value['image'];
-                }
-            }
-
-        }
-        $retData['code'] = '200';
-        $retData['status'] = 'Success';
-        $retData['data'] = $galery;
-        $this->response($retData,200);
-    }
-
-    public function getDataFoto_post(){
-        header('Content-Type: application/json');
-        // $param = $_GET['key'];
-        $param = json_decode(file_get_contents('php://input'), true);
-        if($param == ''){
-            $retData['code'] = '500';
-            $retData['status'] = 'failed';
-            $retData['error'] = 'Your parameter is invalid';
-            $this->response($retData,400);
-        }
-        $this->_getDataFoto($param['key']);
-    }
-
-    function _getDataFoto($param){
-        $galery = $this->v1_model->getDataFoto($param);
-        foreach ($galery as $key => $value) {
-            if ($value['image'] == '') {
-                $galery[$key]['image']='assets/images/logo/IDREN-2.png';
-            }else{
-                if (file_exists(FCPATH."assets/media/thumbnail/".$value['image'])) {
-                    $galery[$key]['image'] = 'assets/media/thumbnail/'.$value['image'];
-                }else{
-                    $galery[$key]['image_big'] = 'assets/media/'.$value['image'];
-                    $galery[$key]['image'] = 'assets/media/thumbnail/'.$value['image'];
-                }
-            }
-
-        }
-        $retData['code'] = '200';
-        $retData['status'] = 'Success';
-        $retData['data'] = $galery;
         $this->response($retData,200);
     }
 
@@ -1185,6 +1002,117 @@ class V2 extends REST_Controller {
        $retData['status'] = 'Success';
        $retData['data'] = $html;
        $this->response($retData,200);
+    }
+
+    public function page_get(){
+        header('Content-Type: application/json');
+        $param = $_GET['link'];
+        if($param == ''){
+            $retData['code'] = '500';
+            $retData['status'] = 'failed';
+            $retData['error'] = 'Your parameter is invalid';
+            $this->response($retData,400);
+        }
+        $this->_getPage($param);
+    }
+
+    function _getPage($param){
+    	$url = URL_GET_PAGE_V2.$param;
+    	$data = '';
+        $methode = 'GET';
+        $token = '';
+        $retData['data'] = api_helper('',$url,$methode,$token)['data'];
+        $retData['code'] = '200';
+        $retData['status'] = 'Success';
+        $this->response($retData,200);
+        /*$user = $this->v1_model->getPage($param);
+        $retData['code'] = '200';
+        $retData['status'] = 'Success';
+        $retData['data'] = $user;
+        $this->response($retData,200);*/
+    }
+
+    public function getSliderFoto_get(){
+        header('Content-Type: application/json');
+        $param = $_GET['key'];
+        if($param == ''){
+            $retData['code'] = '500';
+            $retData['status'] = 'failed';
+            $retData['error'] = 'Your parameter is invalid';
+            $this->response($retData,400);
+        }
+        $this->_getSliderFoto($param);
+    }
+
+    function _getSliderFoto($param){
+    	$url = URL_GET_SLIDER_FOTO_V2.$param;
+    	$data = '';
+        $methode = 'GET';
+        $token = '';
+        $retData['data'] = api_helper('',$url,$methode,$token)['data'];
+        $retData['code'] = '200';
+        $retData['status'] = 'Success';
+        $this->response($retData,200);
+        /*$galery = $this->v1_model->getSliderFoto($param);
+        foreach ($galery as $key => $value) {
+            if ($value['image'] == '') {
+                $galery[$key]['image']='assets/images/logo/IDREN-2.png';
+            }else{
+                if (file_exists(FCPATH."assets/media/thumbnail/".$value['image'])) {
+                    $galery[$key]['image'] = 'assets/media/thumbnail/'.$value['image'];
+                }else{
+                    $galery[$key]['image_big'] = 'assets/media/'.$value['image'];
+                    $galery[$key]['image'] = 'assets/media/thumbnail/'.$value['image'];
+                }
+            }
+
+        }
+        $retData['code'] = '200';
+        $retData['status'] = 'Success';
+        $retData['data'] = $galery;
+        $this->response($retData,200);*/
+    }
+
+    public function getDataFoto_post(){
+        header('Content-Type: application/json');
+        // $param = $_GET['key'];
+        $param = json_decode(file_get_contents('php://input'), true);
+        if($param == ''){
+            $retData['code'] = '500';
+            $retData['status'] = 'failed';
+            $retData['error'] = 'Your parameter is invalid';
+            $this->response($retData,400);
+        }
+        $this->_getDataFoto($param['key']);
+    }
+
+    function _getDataFoto($param){
+    	$url = URL_GET_DATA_FOTO_V2.$param;
+    	$data['key'] = $param;
+        $methode = 'POST';
+        $token = '';
+        $retData['data'] = api_helper(json_encode($data),$url,$methode,$token)['data'];
+        $retData['code'] = '200';
+        $retData['status'] = 'Success';
+        $this->response($retData,200);
+        /*$galery = $this->v1_model->getDataFoto($param);
+        foreach ($galery as $key => $value) {
+            if ($value['image'] == '') {
+                $galery[$key]['image']='assets/images/logo/IDREN-2.png';
+            }else{
+                if (file_exists(FCPATH."assets/media/thumbnail/".$value['image'])) {
+                    $galery[$key]['image'] = 'assets/media/thumbnail/'.$value['image'];
+                }else{
+                    $galery[$key]['image_big'] = 'assets/media/'.$value['image'];
+                    $galery[$key]['image'] = 'assets/media/thumbnail/'.$value['image'];
+                }
+            }
+
+        }
+        $retData['code'] = '200';
+        $retData['status'] = 'Success';
+        $retData['data'] = $galery;
+        $this->response($retData,200);*/
     }
 
 }

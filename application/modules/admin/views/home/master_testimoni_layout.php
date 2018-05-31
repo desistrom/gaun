@@ -147,7 +147,7 @@
                     <div class="form-group">
                         <label>Gambar User</label>
                         <div class="col col-md-12 form-goup-file">
-                            <div class="input-file-right"><label class="btn btn-primary btn-choose-foto" for="userfile">Choose File</label></div>
+                            <div class="input-file-right"><label class="btn btn-success btn-choose-foto" for="userfile">Choose File</label></div>
                             <div class="input-file-left"><input type="file" class="form-control file" name="userfile" id="userfile"></div> 
                             <div class="error" id="ntf_userfile"></div>
                             <div class="error" id="ntf_error"></div> 
@@ -248,7 +248,7 @@
                     <div class="form-group">
                         <label>Gambar User</label>
                         <div class="col col-md-12 form-goup-file">
-                            <div class="input-file-right"><label class="btn btn-primary btn-choose-foto" for="userfile">Choose File</label></div>
+                            <div class="input-file-right"><label class="btn btn-success btn-choose-foto" for="userfile">Choose File</label></div>
                             <div class="input-file-left"><input type="file" class="form-control file" name="userfile" id="userfile"></div> 
                             <div class="error" id="ntf_userfile"></div>
                             <div class="error" id="ntf_error"></div> 

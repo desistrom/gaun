@@ -1087,7 +1087,7 @@ class V3 extends REST_Controller {
     }
 
     function _getDataFoto($param){
-    	$url = URL_GET_DATA_FOTO_V2.$param;
+    	$url = URL_GET_DATA_FOTO_V2;
     	$data['key'] = $param;
         $methode = 'POST';
         $token = '';

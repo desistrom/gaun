@@ -592,7 +592,7 @@ class V3 extends REST_Controller {
         $retData['data'] = api_helper('',$url,$methode,$token)['data'];
         $retData['code'] = '200';
         $retData['status'] = 'Success';
-        $retData['data'] = $user;
+        // $retData['data'] = $user;
         $this->response($retData,200);
         /*$user = $this->v1_model->getInstansi_pagging($param);
         $retData['code'] = '200';

@@ -236,7 +236,7 @@ define('URL_GET_DATA_FOTO_V2','http://localhost/idren/api/v2/getDataFoto');
 define('URL_GET_FOUNDER_V2','http://localhost/idren/api/v2/founder');*/
 
 //server
-define('URL_GET_ALL_MEDIA_V2','http://128.199.233.73/idren/api/v2/galery');
+/*define('URL_GET_ALL_MEDIA_V2','http://128.199.233.73/idren/api/v2/galery');
 define('URL_GET_ALL_ALBUM_V2','http://128.199.233.73/idren/api/v2/albumAll');
 define('URL_GET_ALBUM_BY_ID_V2','http://128.199.233.73/idren/api/v2/getAlbumById?data=');
 define('URL_GET_ALL_IMAGE_V2','http://128.199.233.73/idren/api/v2/galery_image');
@@ -271,10 +271,10 @@ define('URL_GET_AKADEMISI_TITLE_V2','http://128.199.233.73/idren/api/v2/gettitle
 define('URL_GET_PAGE_V2','http://128.199.233.73/idren/api/v2/page?link=');
 define('URL_GET_SLIDER_FOTO_V2','http://128.199.233.73/idren/api/v2/getSliderFoto?key=');
 define('URL_GET_DATA_FOTO_V2','http://128.199.233.73/idren/api/v2/getDataFoto');
-define('URL_GET_FOUNDER_V2','http://128.199.233.73/idren/api/v2/founder');
+define('URL_GET_FOUNDER_V2','http://128.199.233.73/idren/api/v2/founder');*/
 
 //production di pasang di server development
-/*define('URL_GET_ALL_MEDIA_V2','http://103.107.100.9/idren_new/api/v2/galery');
+define('URL_GET_ALL_MEDIA_V2','http://103.107.100.9/idren_new/api/v2/galery');
 define('URL_GET_ALL_ALBUM_V2','http://103.107.100.9/idren_new/api/v2/albumAll');
 define('URL_GET_ALBUM_BY_ID_V2','http://103.107.100.9/idren_new/api/v2/getAlbumById?data=');
 define('URL_GET_ALL_IMAGE_V2','http://103.107.100.9/idren_new/api/v2/galery_image');
@@ -309,7 +309,7 @@ define('URL_GET_AKADEMISI_TITLE_V2','http://103.107.100.9/idren_new/api/v2/getti
 define('URL_GET_PAGE_V2','http://103.107.100.9/idren_new/api/v2/page?link=');
 define('URL_GET_SLIDER_FOTO_V2','http://103.107.100.9/idren_new/api/v2/getSliderFoto?key=');
 define('URL_GET_DATA_FOTO_V2','http://103.107.100.9/idren_new/api/v2/getDataFoto');
-define('URL_GET_FOUNDER_V2','http://103.107.100.9/idren_new/api/v2/founder');*/
+define('URL_GET_FOUNDER_V2','http://103.107.100.9/idren_new/api/v2/founder');
 
 //for API versi 3
 

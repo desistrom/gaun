@@ -233,6 +233,7 @@ define('URL_GET_AKADEMISI_TITLE_V2','http://localhost/idren/api/v2/gettitleslide
 define('URL_GET_PAGE_V2','http://localhost/idren/api/v2/page?link=');
 define('URL_GET_SLIDER_FOTO_V2','http://localhost/idren/api/v2/getSliderFoto?key=');
 define('URL_GET_DATA_FOTO_V2','http://localhost/idren/api/v2/getDataFoto');
+define('URL_GET_COMMENT_V2','http://localhost/idren/api/v2/getComment?id=');
 define('URL_GET_FOUNDER_V2','http://localhost/idren/api/v2/founder');*/
 
 //server
@@ -271,6 +272,7 @@ define('URL_GET_AKADEMISI_TITLE','http://128.199.233.73/idren/api/v2/gettitlesli
 define('URL_GET_PAGE','http://128.199.233.73/idren/api/v2/page?link=');
 define('URL_GET_SLIDER_FOTO','http://128.199.233.73/idren/api/v2/getSliderFoto?key=');
 define('URL_GET_DATA_FOTO','http://128.199.233.73/idren/api/v2/getDataFoto');
+define('URL_GET_COMMENT','http://128.199.233.73/idren/api/v2/getComment?id=');
 define('URL_GET_FOUNDER','http://128.199.233.73/idren/api/v2/founder');
 
 //production di pasang di server development
@@ -309,6 +311,7 @@ define('URL_GET_AKADEMISI_TITLE','http://103.107.100.9/idren_new/api/v2/gettitle
 define('URL_GET_PAGE','http://103.107.100.9/idren_new/api/v2/page?link=');
 define('URL_GET_SLIDER_FOTO','http://103.107.100.9/idren_new/api/v2/getSliderFoto?key=');
 define('URL_GET_DATA_FOTO','http://103.107.100.9/idren_new/api/v2/getDataFoto');
+define('URL_GET_COMMENT','http://103.107.100.9/idren_new/api/v2/getComment?id=');
 define('URL_GET_FOUNDER','http://103.107.100.9/idren_new/api/v2/founder');*/
 
 //for API versi 3
@@ -387,6 +390,7 @@ define('URL_GET_AKADEMISI_TITLE','http://128.199.233.73/idren/api/v3/gettitlesli
 define('URL_GET_PAGE','http://128.199.233.73/idren/api/v3/page?link=');
 define('URL_GET_SLIDER_FOTO','http://128.199.233.73/idren/api/v3/getSliderFoto?key=');
 define('URL_GET_DATA_FOTO','http://128.199.233.73/idren/api/v3/getDataFoto');
+define('URL_GET_COMMENT','http://128.199.233.73/idren/api/v3/getComment?id=');
 define('URL_GET_FOUNDER','http://128.199.233.73/idren/api/v3/founder');*/
 
 //productio
@@ -425,6 +429,7 @@ define('URL_GET_AKADEMISI_TITLE','http://103.107.100.9/idren_new/api/v3/gettitle
 define('URL_GET_PAGE','http://103.107.100.9/idren_new/api/v3/page?link=');
 define('URL_GET_SLIDER_FOTO','http://103.107.100.9/idren_new/api/v3/getSliderFoto?key=');
 define('URL_GET_DATA_FOTO','http://103.107.100.9/idren_new/api/v3/getDataFoto');
+define('URL_GET_COMMENT','http://103.107.100.9/idren_new/api/v3/getComment?id=');
 define('URL_GET_FOUNDER','http://103.107.100.9/idren_new/api/v3/founder');*/
 
 /*define('URL_GET_ALL_MEDIA_V2','http://192.168.88.157/idren/api/v3/galery');

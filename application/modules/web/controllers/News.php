@@ -73,8 +73,8 @@ class News extends CI_Controller  {
         $url = URL_GET_NEWS_BY_SLUG.$id;
         $methode = 'GET';
         $token = '';
-        $data['data']=$id;
-        $a = api_helper(json_encode($data),$url,$methode,$token);
+        // $data['data']=$id;
+        $a = api_helper('',$url,$methode,$token);
 
         $methode = 'GET';
         $url_allnews =  URL_GET_ALL_NEWS;
@@ -96,7 +96,7 @@ class News extends CI_Controller  {
        // $url_page = $this->uri->segment_array();
        // $slug = end($url_page);
        // $idnews = $this->db->get_where('tb_news',$url_page)->row_array()['id_news'];
-       $this->data['comment'] = $this->db->get_where('tb_comment',array('id_berita'=>$a['data']['newsId']))->result_array();
+       $this->data['comment'] = api_helper('',URL_GET_COMMENT,$methode,$token);
        // print_r($this->data['comment']);
    
         $this->ciparser->new_parse('template_frontend','modules_web', 'detail_news_layout',$this->data);

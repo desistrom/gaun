@@ -149,7 +149,7 @@
                 <h2>Comment </h2></div>
             <div class="col-md-5 col-sm-12 col-xs-12 sub-comment">
                 <div class="col col-md-12 col-sm-12 col-xs-12 none-padding filter-comment">
-                    <?php foreach ($comment as $key => $value): ?>
+                    <?php if(isset($comment['data'])){ if($comment['data'] != 'data not found'){ foreach ($comment['data'] as $key => $value): ?>
                     <div class="comment-left col col-md-2 col-sm-2 col-xs-2 none-padding">
                         <div class="user text-center"><i class="fa fa-user"></i></div>
                     </div>
@@ -157,7 +157,7 @@
                         <h4><?=$value['nama'];?><span class="date-comment"><!-- <?=$value['email'];?> --></span></h4>
                         <p><?=$value['content'];?></p>
                     </div>
-                    <?php endforeach ?>
+                    <?php endforeach; } } ?>
                 </div>
             </div>
             <div class="col-md-7 col-sm-12 col-xs-12 right-comment">

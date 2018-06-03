@@ -1115,4 +1115,27 @@ class V3 extends REST_Controller {
         $this->response($retData,200);*/
     }
 
+    public function getComment_get(){
+        header('Content-Type: application/json');
+        $param = $_GET['id'];
+        if($param == ''){
+            $retData['code'] = '500';
+            $retData['status'] = 'failed';
+            $retData['error'] = 'Your parameter is invalid';
+            $this->response($retData,400);
+        }
+        $this->_getPage($param);
+    }
+
+    function _getComment($param){
+        $url = URL_GET_COMMENT_V2.$param;
+        $data = '';
+        $methode = 'GET';
+        $token = '';
+        $retData['data'] = api_helper('',$url,$methode,$token)['data'];
+        $retData['code'] = '200';
+        $retData['status'] = 'Success';
+        $this->response($retData,200);
+    }
+
 }

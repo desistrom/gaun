@@ -1187,4 +1187,29 @@ class V2 extends REST_Controller {
        $this->response($retData,200);
     }
 
+    public function getComment_get(){
+        header('Content-Type: application/json');
+        $param = $_GET['id'];
+        if($param == ''){
+            $retData['code'] = '500';
+            $retData['status'] = 'failed';
+            $retData['error'] = 'Your parameter is invalid';
+            $this->response($retData,400);
+        }
+        $this->_getComment($param);
+    }
+
+    function _getComment($param){
+        $galery = $this->db->get_where('tb_comment',array('id_berita'=>$param))->result_array();
+        $retData['code'] = '200';
+        $retData['status'] = 'Success';
+        if (count($galery) != 0) {
+            $retData['data'] = $galery;
+        }else{
+            $retData['data'] = 'data not found';
+        }
+        
+        $this->response($retData,200);
+    }
+
 }

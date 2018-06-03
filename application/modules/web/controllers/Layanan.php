@@ -92,21 +92,21 @@ class Layanan extends MX_Controller  {
         $token = '';
         $data = '';
         $methode = 'GET';
-        $url = site_url('api/v1/galery_video') ;
+        $url = URL_GET_ALL_VIDEO ;
         
         $b = api_helper('',$url,$methode,'');
         $this->data['total'] = count($b['data']);
         if (!empty($this->input->get('page'))) {
             $start = ceil($this->input->get('page') * 9);
             $this->data['total_row'] = $start;
-            $url = base_url().'api/v1/galery_video_pagging?data='.$start;
+            $url = URL_GET_VIDEO_PAGGING.$start;
             $a = api_helper('',$url,$methode,$token);
             $this->data['video']=$a['data'];
             // print_r($a['data']);
             $result = $this->load->view('video_looping',$this->data);
             echo json_encode($result);
         }else{
-            $url = base_url().'api/v1/galery_video_pagging?data=0';
+            $url = URL_GET_VIDEO_PAGGING.'0';
             $a = api_helper('',$url,$methode,$token);
             $this->data['total_row'] = '9';
             $this->data['video']=$a['data'];

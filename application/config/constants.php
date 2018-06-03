@@ -274,42 +274,42 @@ define('URL_GET_DATA_FOTO_V2','http://128.199.233.73/idren/api/v2/getDataFoto');
 define('URL_GET_FOUNDER_V2','http://128.199.233.73/idren/api/v2/founder');*/
 
 //production di pasang di server development
-define('URL_GET_ALL_MEDIA_V2','http://103.107.100.9/idren_new/api/v2/galery');
-define('URL_GET_ALL_ALBUM_V2','http://103.107.100.9/idren_new/api/v2/albumAll');
-define('URL_GET_ALBUM_BY_ID_V2','http://103.107.100.9/idren_new/api/v2/getAlbumById?data=');
-define('URL_GET_ALL_IMAGE_V2','http://103.107.100.9/idren_new/api/v2/galery_image');
-define('URL_GET_ALL_VIDEO_V2','http://103.107.100.9/idren_new/api/v2/galery_video');
-define('URL_GET_ID_TUBE_V2','http://103.107.100.9/idren_new/api/v2/tube_video');
-define('URL_GET_VIDEO_PAGGING_V2','http://103.107.100.9/idren_new/api/v2/galery_video_pagging?data=');
-define('URL_GET_ID_TUBE_PAGGING_V2','http://103.107.100.9/idren_new/api/v2/tube_video_pagging?data=');
-define('URL_GET_GALERY_BY_ID_V2','http://103.107.100.9/idren_new/api/v2/select_galery');
-define('URL_GET_IMAGE_BY_ID_V2','http://103.107.100.9/idren_new/api/v2/search_galery_image');
-define('URL_GET_VIDEO_BY_ID_V2','http://103.107.100.9/idren_new/api/v2/search_galery_video');
-define('URL_REGISTER_V2','http://103.107.100.9/idren_new/api/v2/insert_instansi');
-define('URL_INSERT_CONTACT_US_V2','http://103.107.100.9/idren_new/api/v2/insert_contact');
-define('URL_GET_ABOUT_V2','http://103.107.100.9/idren_new/api/v2/about');
-define('URL_GET_PENDAFTARAN_V2','http://103.107.100.9/idren_new/api/v2/step');
-define('URL_GET_BENEFIT_V2','http://103.107.100.9/idren_new/api/v2/profit');
-define('URL_GET_ALL_INSTANSI_V2','http://103.107.100.9/idren_new/api/v2/instansi');
-define('URL_SEARCH_INSTANSI_V2','http://103.107.100.9/idren_new/api/v2/search_instansi');
-define('URL_GET_INSTANSI_PAGGING_V2','http://103.107.100.9/idren_new/api/v2/instansi_pagging?data=');
-define('URL_GET_ALL_NEWS_V2','http://103.107.100.9/idren_new/api/v2/news');
-define('URL_GET_NEWS_PAGGING_V2','http://103.107.100.9/idren_new/api/v2/pagging_news?data=');
-define('URL_SEARCH_NEWS_V2','http://103.107.100.9/idren_new/api/v2/search_news');
-define('URL_GET_NEWS_BY_ID_V2','http://103.107.100.9/idren_new/api/v2/get_news_byid');
-define('URL_GET_NEWS_BY_SLUG_V2','http://103.107.100.9/idren_new/api/v2/get_news_byslug?news=');
-define('URL_GET_RSS_V2','http://103.107.100.9/idren_new/api/v2/get_rss');
-define('URL_GET_TESTIMONI_V2','http://103.107.100.9/idren_new/api/v2/gettestimoni');
-define('URL_GET_TESTIMONI_PAGGING_V2','http://103.107.100.9/idren_new/api/v2/gettestimoni_pagging?data=');
-define('URL_GET_HERO_V2','http://103.107.100.9/idren_new/api/v2/gethero');
-define('URL_GET_TOPOLOGI_V2','http://103.107.100.9/idren_new/api/v2/gettopologi');
-define('URL_GET_LOGO_V2','http://103.107.100.9/idren_new/api/v2/getlogo');
-define('URL_GET_FOOTER_V2','http://103.107.100.9/idren_new/api/v2/getfooter');
-define('URL_GET_AKADEMISI_TITLE_V2','http://103.107.100.9/idren_new/api/v2/gettitleslider');
-define('URL_GET_PAGE_V2','http://103.107.100.9/idren_new/api/v2/page?link=');
-define('URL_GET_SLIDER_FOTO_V2','http://103.107.100.9/idren_new/api/v2/getSliderFoto?key=');
-define('URL_GET_DATA_FOTO_V2','http://103.107.100.9/idren_new/api/v2/getDataFoto');
-define('URL_GET_FOUNDER_V2','http://103.107.100.9/idren_new/api/v2/founder');
+define('URL_GET_ALL_MEDIA','http://103.107.100.9/idren_new/api/v2/galery');
+define('URL_GET_ALL_ALBUM','http://103.107.100.9/idren_new/api/v2/albumAll');
+define('URL_GET_ALBUM_BY_ID','http://103.107.100.9/idren_new/api/v2/getAlbumById?data=');
+define('URL_GET_ALL_IMAGE','http://103.107.100.9/idren_new/api/v2/galery_image');
+define('URL_GET_ALL_VIDEO','http://103.107.100.9/idren_new/api/v2/galery_video');
+define('URL_GET_ID_TUBE','http://103.107.100.9/idren_new/api/v2/tube_video');
+define('URL_GET_VIDEO_PAGGING','http://103.107.100.9/idren_new/api/v2/galery_video_pagging?data=');
+define('URL_GET_ID_TUBE_PAGGING','http://103.107.100.9/idren_new/api/v2/tube_video_pagging?data=');
+define('URL_GET_GALERY_BY_ID','http://103.107.100.9/idren_new/api/v2/select_galery');
+define('URL_GET_IMAGE_BY_ID','http://103.107.100.9/idren_new/api/v2/search_galery_image');
+define('URL_GET_VIDEO_BY_ID','http://103.107.100.9/idren_new/api/v2/search_galery_video');
+define('URL_REGISTER','http://103.107.100.9/idren_new/api/v2/insert_instansi');
+define('URL_INSERT_CONTACT_US','http://103.107.100.9/idren_new/api/v2/insert_contact');
+define('URL_GET_ABOUT','http://103.107.100.9/idren_new/api/v2/about');
+define('URL_GET_PENDAFTARAN','http://103.107.100.9/idren_new/api/v2/step');
+define('URL_GET_BENEFIT','http://103.107.100.9/idren_new/api/v2/profit');
+define('URL_GET_ALL_INSTANSI','http://103.107.100.9/idren_new/api/v2/instansi');
+define('URL_SEARCH_INSTANSI','http://103.107.100.9/idren_new/api/v2/search_instansi');
+define('URL_GET_INSTANSI_PAGGING','http://103.107.100.9/idren_new/api/v2/instansi_pagging?data=');
+define('URL_GET_ALL_NEWS','http://103.107.100.9/idren_new/api/v2/news');
+define('URL_GET_NEWS_PAGGING','http://103.107.100.9/idren_new/api/v2/pagging_news?data=');
+define('URL_SEARCH_NEWS','http://103.107.100.9/idren_new/api/v2/search_news');
+define('URL_GET_NEWS_BY_ID','http://103.107.100.9/idren_new/api/v2/get_news_byid');
+define('URL_GET_NEWS_BY_SLUG','http://103.107.100.9/idren_new/api/v2/get_news_byslug?news=');
+define('URL_GET_RSS','http://103.107.100.9/idren_new/api/v2/get_rss');
+define('URL_GET_TESTIMONI','http://103.107.100.9/idren_new/api/v2/gettestimoni');
+define('URL_GET_TESTIMONI_PAGGING','http://103.107.100.9/idren_new/api/v2/gettestimoni_pagging?data=');
+define('URL_GET_HERO','http://103.107.100.9/idren_new/api/v2/gethero');
+define('URL_GET_TOPOLOGI','http://103.107.100.9/idren_new/api/v2/gettopologi');
+define('URL_GET_LOGO','http://103.107.100.9/idren_new/api/v2/getlogo');
+define('URL_GET_FOOTER','http://103.107.100.9/idren_new/api/v2/getfooter');
+define('URL_GET_AKADEMISI_TITLE','http://103.107.100.9/idren_new/api/v2/gettitleslider');
+define('URL_GET_PAGE','http://103.107.100.9/idren_new/api/v2/page?link=');
+define('URL_GET_SLIDER_FOTO','http://103.107.100.9/idren_new/api/v2/getSliderFoto?key=');
+define('URL_GET_DATA_FOTO','http://103.107.100.9/idren_new/api/v2/getDataFoto');
+define('URL_GET_FOUNDER','http://103.107.100.9/idren_new/api/v2/founder');
 
 //for API versi 3
 
@@ -352,7 +352,7 @@ define('URL_GET_DATA_FOTO','http://localhost/idren/api/v3/getDataFoto');
 define('URL_GET_FOUNDER','http://localhost/idren/api/v3/founder');*/
 
 //server di pasanag di server production
-define('URL_GET_ALL_MEDIA','http://128.199.233.73/idren/api/v3/galery');
+/*define('URL_GET_ALL_MEDIA','http://128.199.233.73/idren/api/v3/galery');
 define('URL_GET_ALL_ALBUM','http://128.199.233.73/idren/api/v3/albumAll');
 define('URL_GET_ALBUM_BY_ID','http://128.199.233.73/idren/api/v3/getAlbumById?data=');
 define('URL_GET_ALL_IMAGE','http://128.199.233.73/idren/api/v3/galery_image');
@@ -387,7 +387,7 @@ define('URL_GET_AKADEMISI_TITLE','http://128.199.233.73/idren/api/v3/gettitlesli
 define('URL_GET_PAGE','http://128.199.233.73/idren/api/v3/page?link=');
 define('URL_GET_SLIDER_FOTO','http://128.199.233.73/idren/api/v3/getSliderFoto?key=');
 define('URL_GET_DATA_FOTO','http://128.199.233.73/idren/api/v3/getDataFoto');
-define('URL_GET_FOUNDER','http://128.199.233.73/idren/api/v3/founder');
+define('URL_GET_FOUNDER','http://128.199.233.73/idren/api/v3/founder');*/
 
 //productio
 /*define('URL_GET_ALL_MEDIA','http://103.107.100.9/idren_new/api/v3/galery');

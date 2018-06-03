@@ -157,8 +157,8 @@ class Keanggotaan extends MX_Controller  {
         $b = api_helper('',$url_instansi,$methode,$token);
 
         $search['search'] = $_GET['data'];
-        $sql = "select * from tb_instansi where nm_instansi like '%".$search['search']."%'";
-        $this->data['total'] = $this->db->query($sql)->num_rows();
+        // $sql = "select * from tb_instansi where nm_instansi like '%".$search['search']."%'";
+        // $this->data['total'] = $this->db->query($sql)->num_rows();
         $url=URL_SEARCH_INSTANSI;  
         $methode = 'POST';
         $token='';
@@ -167,6 +167,7 @@ class Keanggotaan extends MX_Controller  {
             $this->data['total_row'] = $start;
             $search['page'] = $start;
             $a = api_helper(json_encode($search),$url,$methode,$token);
+            $this->data['total'] = count($a['data']);
             $this->data['keanggotaan']=$a['data'];
             $result = $this->load->view('keanggotaan_looping',$this->data);
             echo json_encode($result);
@@ -176,6 +177,7 @@ class Keanggotaan extends MX_Controller  {
             $search['page'] = 0;
             $this->data['total_row'] = '10';
             $a = api_helper(json_encode($search),$url,$methode,$token);
+            $this->data['total'] = count($a['data']);
             $this->data['keanggotaan']=$a['data'];
             $this->ciparser->new_parse('template_frontend','modules_web', 'keanggotaan_search',$this->data);
         }

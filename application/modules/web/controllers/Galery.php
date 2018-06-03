@@ -49,14 +49,14 @@ class Galery extends CI_Controller  {
         foreach ($app_data['data'] as $key => $value) :
             $html['slideshow'].='<div class="item ';
             if($key==0){ $html['slideshow'] .= 'active';} 
-            $html['slideshow'] .= '"><img width="100%" src="'. $value['image'] .'" ></div>';
+            $html['slideshow'] .= '"><img width="100%" src="'.base_url().$value['image'] .'" ></div>';
         endforeach;
 
         $hmtl['thumbnail_album']='';
         foreach ($app_data['data'] as $key => $value) :
             $html['thumbnail_album'].='<li class="thumbnail-indicator" data-target="#myCarousel-pop" data-slide-to="'.$key.'" class="' ;
              if($key==0){ $html['thumbnail_album'] .= 'active';} 
-            $html['thumbnail_album'].='"><img class="img-responsive" src="'. $value['image'] .'">
+            $html['thumbnail_album'].='"><img class="img-responsive" src="'.base_url().$value['image'] .'">
                 </li>';
         endforeach;
 

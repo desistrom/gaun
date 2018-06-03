@@ -37,10 +37,11 @@
                 <div class="col-md-12 col-sm-12 col-xs-12 text-center" style="padding-bottom: 15px;">
                     <button class="btn btn-danger loadmore" type="button">Load More</button>
                 </div>
-            <?php }else{ ?>
+            <?php }else{  ?>
+
                 <div class="col-md-12 col-sm-12 col-xs-12 content-keanggotaan">
                     <div class="col-md-12 col-sm-12 col-xs-12 text-center" style="padding-bottom: 15px;">
-                        <div class="alert alert-danger">Data Not Found</div>
+                        <div class="alert alert-danger"><?php if($total_row == 0 ){ echo 'Data Not Found'; }else{ echo 'No More Data Found'; }?></div>
                     </div>
                 </div>
             <?php } ?>

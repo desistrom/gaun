@@ -32,7 +32,7 @@ class V2 extends REST_Controller {
         $ret['message'] = 'FAILED AUTHORIZATION';
         $this->set_response($ret, 400);
     }
-    public function check_token_get()
+    public function check_token_post()
     {
         $headers = $this->input->request_headers();
         if (array_key_exists('Authorization', $headers) && !empty($headers['Authorization'])) {
@@ -45,7 +45,8 @@ class V2 extends REST_Controller {
             }
         }
         
-        $this->set_response("Unauthorised", REST_Controller::HTTP_UNAUTHORIZED);
+        // $this->session->set_flashdata("login","User has Exp");
+        $this->set_response('Unauthorized', REST_Controller::HTTP_UNAUTHORIZED);
     }
 
     public function albumAll_get(){

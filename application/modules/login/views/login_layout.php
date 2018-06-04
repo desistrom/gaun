@@ -6,6 +6,7 @@
   <title><?=strtoupper($this->general->title());?> | Log in</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <link rel="shortcut icon" href="<?=base_url();?>media/favicon.ico" />
   <!-- Bootstrap 3.3.6 -->
   <link rel="shortcut icon" href="<?=base_url();?>media/crop/favicon.png" />
   <link rel="stylesheet" href="<?=base_url();?>assets/css/bootstrap.min.css">

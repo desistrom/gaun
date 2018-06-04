@@ -102,7 +102,7 @@
                     <div class="col col-md-12 col-sm-12 col-xs-12 none-padding list-artikel">
                       <div class="isi-news" style="padding:25px;color: #919191;"><?php echo $step['step']; ?></div>
                       <div class="col col-md-12 col-sm-12 col-xs-12 text-center">
-                        <img class="flowchart" width="" src="<?php echo $step['picture']; ?>">
+                        <img class="flowchart" width="" src="<?php echo base_url().$step['picture']; ?>">
                     </div>
                 </div>
 

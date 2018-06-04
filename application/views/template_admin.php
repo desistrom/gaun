@@ -110,14 +110,14 @@
           </a>
         </li> -->
 
-        <li class="treeview <?php if(current_url() == site_url('admin/logo/index')){ ?> active <?php } ?>">
+        <!-- <li class="treeview <?php if(current_url() == site_url('admin/logo/index')){ ?> active <?php } ?>">
           <a href="<?=site_url('admin/logo/index');?>">
             <i class="fa fa-globe"></i> <span>Logo Tab</span>
             <span class="pull-right-container">
               
             </span>
           </a>
-        </li>
+        </li> -->
 
         <li class="treeview <?php if(current_url() == site_url('admin/menu/index')){ ?> active <?php } ?>">
           <a href="<?=site_url('admin/menu/index');?>">

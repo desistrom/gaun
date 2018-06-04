@@ -92,6 +92,7 @@ define('URL_UNIVERSAL', 'https://api.sandbox.midtrans.com/v2/');
 
 //define local
 /*define('URL_GET_ALL_MEDIA_V1','http://localhost/idren/api/v1/galery');
+define('URL_GET_TOKEN_V1','http://localhost/idren/api/v1/token');
 define('URL_GET_ALL_ALBUM_V1','http://localhost/idren/api/v1/albumAll');
 define('URL_GET_ALBUM_BY_ID_V1','http://localhost/idren/api/v1/getAlbumById?data=');
 define('URL_GET_ALL_IMAGE_V1','http://localhost/idren/api/v1/galery_image');
@@ -126,6 +127,7 @@ define('URL_GET_AKADEMISI_TITLE_V1','http://localhost/idren/api/v1/gettitleslide
 define('URL_GET_FOUNDER_V1','http://localhost/idren/api/v1/founder');*/
 
 //server
+define('URL_GET_TOKEN_V1','http://128.199.233.73/idren/api/v1/token');
 define('URL_GET_ALL_MEDIA_V1','http://128.199.233.73/idren/api/v1/galery');
 define('URL_GET_ALL_ALBUM_V1','http://128.199.233.73/idren/api/v1/albumAll');
 define('URL_GET_ALBUM_BY_ID_V1','http://128.199.233.73/idren/api/v1/getAlbumById?data=');
@@ -162,6 +164,7 @@ define('URL_GET_FOUNDER_V1','http://128.199.233.73/idren/api/v1/founder');
 
 //productio
 /*define('URL_GET_ALL_MEDIA_V1','http://103.107.100.9/idren_new/api/v1/galery');
+define('URL_GET_TOKEN_V1','http://103.107.100.9/idren_new/api/v1/token');
 define('URL_GET_ALL_ALBUM_V1','http://103.107.100.9/idren_new/api/v1/albumAll');
 define('URL_GET_ALBUM_BY_ID_V1','http://103.107.100.9/idren_new/api/v1/getAlbumById?data=');
 define('URL_GET_ALL_IMAGE_V1','http://103.107.100.9/idren_new/api/v1/galery_image');
@@ -199,6 +202,7 @@ define('URL_GET_FOUNDER_V1','http://103.107.100.9/idren_new/api/v1/founder');*/
 
 //define local
 /*define('URL_GET_ALL_MEDIA_V2','http://localhost/idren/api/v2/galery');
+define('URL_GET_TOKEN_V2','http://localhost/idren/api/v2/token');
 define('URL_GET_ALL_ALBUM_V2','http://localhost/idren/api/v2/albumAll');
 define('URL_GET_ALBUM_BY_ID_V2','http://localhost/idren/api/v2/getAlbumById?data=');
 define('URL_GET_ALL_IMAGE_V2','http://localhost/idren/api/v2/galery_image');
@@ -238,6 +242,7 @@ define('URL_GET_FOUNDER_V2','http://localhost/idren/api/v2/founder');*/
 
 //server
 define('URL_GET_ALL_MEDIA','http://128.199.233.73/idren/api/v2/galery');
+define('URL_GET_TOKEN','http://128.199.233.73/idren/api/v2/token');
 define('URL_GET_ALL_ALBUM','http://128.199.233.73/idren/api/v2/albumAll');
 define('URL_GET_ALBUM_BY_ID','http://128.199.233.73/idren/api/v2/getAlbumById?data=');
 define('URL_GET_ALL_IMAGE','http://128.199.233.73/idren/api/v2/galery_image');
@@ -277,6 +282,7 @@ define('URL_GET_FOUNDER','http://128.199.233.73/idren/api/v2/founder');
 
 //production di pasang di server development
 /*define('URL_GET_ALL_MEDIA','http://103.107.100.9/idren_new/api/v2/galery');
+define('URL_GET_TOKEN','http://103.107.100.9/idren_new/api/v2/token');
 define('URL_GET_ALL_ALBUM','http://103.107.100.9/idren_new/api/v2/albumAll');
 define('URL_GET_ALBUM_BY_ID','http://103.107.100.9/idren_new/api/v2/getAlbumById?data=');
 define('URL_GET_ALL_IMAGE','http://103.107.100.9/idren_new/api/v2/galery_image');
@@ -318,6 +324,7 @@ define('URL_GET_FOUNDER','http://103.107.100.9/idren_new/api/v2/founder');*/
 
 //define local
 /*define('URL_GET_ALL_MEDIA','http://localhost/idren/api/v3/galery');
+define('URL_GET_TOKEN','http://localhost/idren/api/v3/token');
 define('URL_GET_ALL_ALBUM','http://localhost/idren/api/v3/albumAll');
 define('URL_GET_ALBUM_BY_ID','http://localhost/idren/api/v3/getAlbumById?data=');
 define('URL_GET_ALL_IMAGE','http://localhost/idren/api/v3/galery_image');
@@ -356,6 +363,7 @@ define('URL_GET_FOUNDER','http://localhost/idren/api/v3/founder');*/
 
 //server di pasanag di server production
 /*define('URL_GET_ALL_MEDIA','http://128.199.233.73/idren/api/v3/galery');
+define('URL_GET_TOKEN','http://128.199.233.73/idren/api/v3/token');
 define('URL_GET_ALL_ALBUM','http://128.199.233.73/idren/api/v3/albumAll');
 define('URL_GET_ALBUM_BY_ID','http://128.199.233.73/idren/api/v3/getAlbumById?data=');
 define('URL_GET_ALL_IMAGE','http://128.199.233.73/idren/api/v3/galery_image');
@@ -395,6 +403,7 @@ define('URL_GET_FOUNDER','http://128.199.233.73/idren/api/v3/founder');*/
 
 //productio
 /*define('URL_GET_ALL_MEDIA','http://103.107.100.9/idren_new/api/v3/galery');
+define('URL_GET_TOKEN','http://103.107.100.9/idren_new/api/v3/token');
 define('URL_GET_ALL_ALBUM','http://103.107.100.9/idren_new/api/v3/albumAll');
 define('URL_GET_ALBUM_BY_ID','http://103.107.100.9/idren_new/api/v3/getAlbumById?data=');
 define('URL_GET_ALL_IMAGE','http://103.107.100.9/idren_new/api/v3/galery_image');

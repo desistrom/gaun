@@ -43,7 +43,7 @@ class Login extends MX_Controller
                     $this->session->set_userdata('is_login', true);
                     $data_token['username'] = $username;
                     $data_token['password'] = $password;
-                    $url = site_url('api/v1/token');
+                    $url = URL_GET_TOKEN;
                     $method = 'POST';
                     $token = "";
                     $result = api_helper(json_encode($data_token),$url,$method,$token);

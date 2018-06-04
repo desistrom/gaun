@@ -2,6 +2,37 @@
   #cke_content{
     width: 100% !important;
   }
+    .form-goup-file{
+    height: auto;
+    overflow: hidden;
+    padding: 0;
+  }
+  .form-goup-file div{
+    display: inline-block;
+  }
+  .form-goup-file .input-file-left{
+    width: 100%;
+  }
+  .form-goup-file .input-file-left input{
+  width: 100%;
+  }
+  .form-goup-file .input-file-right{
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+  .form-goup-file .input-file-right .btn-choose-foto{
+    height: 34px;
+    width: 105px;
+    border-radius: 0;
+    padding-left: 7px;
+  }
+  .logo-fav{
+    width: 100px;
+  }
+  .fa-upload{
+    padding-right: 10px;
+  }
 </style>
 
 <?php if ($view == 'list') { ?>
@@ -128,10 +159,18 @@
         <div class="error" id="ntf_kategori"></div>
       </div>
       <div class="form-group">
+      <label>Gambar Berita</label>
+      <div class="col col-md-12 form-goup-file">
+        <div class="input-file-right"><label class="btn btn-success btn-choose-foto" for="file_name"><i class="fa fa-upload" ></i>Choose File</label></div>
+        <div class="input-file-left"><input type="file" class="form-control file" name="file_name" id="file_name"></div> 
+        <div class="error" id="ntf_file_name"></div> 
+      </div>
+    </div>
+  <!--     <div class="form-group">
         <label>Gambar Berita</label>
         <input type="file" name="file_name" class="form-control" id="file_name">
         <div class="error" id="ntf_file_name"></div>
-      </div>
+      </div> -->
        <button type="button" class="btn btn-primary" id="submit">Submit</button>
     </div>
 
@@ -204,10 +243,18 @@
         <div class="error" id="ntf_kategori"></div>
       </div>
       <div class="form-group">
+      <label>Gambar Berita</label>
+      <div class="col col-md-12 form-goup-file">
+        <div class="input-file-right"><label class="btn btn-success btn-choose-foto" for="file_name"><i class="fa fa-upload" ></i>Choose File</label></div>
+        <div class="input-file-left"><input type="file" class="form-control file" name="file_name" id="file_name"></div> 
+        <div class="error" id="ntf_file_name"></div> 
+      </div>
+    </div>
+     <!--  <div class="form-group">
         <label>Gambar Berita</label>
         <input type="file" name="file_name" class="form-control" id="file_name">
         <div class="error" id="ntf_file_name"></div>
-      </div>
+      </div> -->
       <?php if ($news['img'] != ''): $images = explode("/", $news['img']); ?>
         <img style="width: 100%; margin-bottom: 10px;" src="<?php if (isset($images[1])) { echo $news['img']; }else{ echo base_url().'assets/media/'.$news['img']; } ?>">
       <?php endif ?>

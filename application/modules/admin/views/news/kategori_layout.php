@@ -20,8 +20,8 @@
 						<td><?=($key+1);?></td>
 						<td><?=$value['nm_kategori'];?></td>
 						<td>
-							<a href="<?=site_url('admin/kategori_news/edit/'.$value['id_kategori_news']);?>"><button class="btn btn-primary btn-sm" id="edit">Edit</button></a>
-							<button class="btn btn-danger btn-sm btn_delete" id="<?=$value['id_kategori_news'];?>">Delete</button>
+							<a href="<?=site_url('admin/kategori_news/edit/'.$value['id_kategori_news']);?>" data-toggle="tooltip" title="Edit"><button class="btn btn-info btn-sm" id="edit"><i class="fa fa-pencil"></i></button></a>
+							<button class="btn btn-danger btn-sm btn_delete" id="<?=$value['id_kategori_news'];?>" data-toggle="tooltip" title="Delete"><i class="fa fa-trash"></i></button>
 						</td>
           </tr>
         <?php endforeach; ?>

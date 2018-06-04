@@ -14,17 +14,21 @@ class V1 extends REST_Controller {
         header('Content-Type: application/json');
         $param = json_decode(file_get_contents('php://input'),true);
         // $login_platform = $this->getData($param);
-        // if ($login_platform['status'] == 1) {
+        // if ($login_platform['status'] == 'ok') {
+        if (isset($param['username'])) {
             $tokenData = array();
             $tokenData['id']['username'] = $param['username']; 
             $tokenData['id']['password'] = $param['password']; 
             $tokenData['timestamp'] = now();
             $output['status'] = "ok";
+            $output['data'] = $tokenData;
             $output['token'] = AUTHORIZATION::generateToken($tokenData);
             $result = $this->set_response($output, REST_Controller::HTTP_OK);
             return $result;
-        // }
+        }
+        // $ret['status'] = $param;
         $ret['status'] = 'failed';
+        // $ret['message'] = $param;
         $ret['message'] = 'FAILED AUTHORIZATION';
         $this->set_response($ret, 400);
     }

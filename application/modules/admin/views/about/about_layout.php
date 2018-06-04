@@ -470,8 +470,8 @@
           data : {'id' : id},
           type : 'POST'
         }).done(function(data){
-          if (data == 1) {
-            window.location.href = window.location.href;
+          if (data.status == 1) {
+            window.location.href = data.url;
           }
         });
       }

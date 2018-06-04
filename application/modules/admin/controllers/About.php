@@ -118,9 +118,10 @@ class About extends MX_Controller  {
 
 	public function delete_about(){
 		$id = $this->input->post('id');
-		$ret = 0;
+		$ret['status'] = 0;
 		if ($this->db->delete('tb_founder',array('id_founder'=>$id))) {
-			$ret = 1;
+			$ret['status'] = 1;
+			$ret['url'] = site_url('admin/about');
 			$this->session->set_flashdata("notif","Data Berhasil di Hapus");
 		}
 		echo json_encode($ret);

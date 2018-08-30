@@ -75,7 +75,8 @@ class News extends CI_Controller  {
         $token = '';
         // $data['data']=$id;
         $a = api_helper('',$url,$methode,$token);
-
+        // print_r($a);
+        if ($a['code'] != 500) {
         $methode = 'GET';
         $url_allnews =  URL_GET_ALL_NEWS;
         $b = api_helper($token,$url_allnews,$methode,$token);
@@ -100,6 +101,11 @@ class News extends CI_Controller  {
        // print_r($this->data['comment']);
    
         $this->ciparser->new_parse('template_frontend','modules_web', 'detail_news_layout',$this->data);
+        }else{
+            $this->output->set_status_header('404'); 
+            $this->ciparser->new_parse('template_frontend','modules_web', 'notfound_layout');
+            // exit();
+        }
     }
 
     public function comment(){

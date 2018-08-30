@@ -36,10 +36,10 @@
   }
 </style>
 <div class="col col-md-12 col-sm-12 col-xs-12">
-<div class="box">
-    <div class="box-header with-border">
+<div class="box" style="padding-top: 1.5em;">
+  <!--   <div class="box-header with-border">
         <h3 class="box-title">Logo Website</h3>
-    </div>
+    </div> -->
     <div class="box-body">
     <div class="col col-md-6 col-sm-7 col-xs-12">
       <div class="form-group">

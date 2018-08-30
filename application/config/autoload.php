@@ -104,7 +104,7 @@ $autoload['helper'] = array('url','encrypt_decrypt','general_helper','jwt', "aut
 |
 */
 
-$autoload['config'] = array();
+$autoload['config'] = array('jwt');
 
 
 /*

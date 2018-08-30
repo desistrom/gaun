@@ -64,10 +64,16 @@ class Page extends MX_Controller  {
         $this->data['layanan'] = $data_page;        
         $this->ciparser->new_parse('template_frontend','modules_web', $layout,$this->data);
         }else{
-            $this->ciparser->new_parse('template_frontend','modules_web', 'notfound_layout');            
+            $this->output->set_status_header('404'); 
+            $this->ciparser->new_parse('template_frontend','modules_web', 'notfound_layout');
             // exit();
         }
         
+    }
+
+    public function not_found(){
+        $this->output->set_status_header('404'); 
+        $this->ciparser->new_parse('template_frontend','modules_web', 'notfound_layout');
     }
   
 }

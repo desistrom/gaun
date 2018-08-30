@@ -104,7 +104,7 @@
            #accordion .panel{
             width: 60%;
             display: inline-block;
-            transition: 0.2s;
+            transition: 0.6s;
            }
            .panel .in{
             width: 100%;

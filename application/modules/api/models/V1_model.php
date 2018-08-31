@@ -122,7 +122,7 @@ class V1_model extends CI_Model{
 	}
 
 	public function getInstansi(){
-		$sql = "SELECT nm_instansi as instansi, id_instansi as id, phone as number_phone, website as link, alamat as address, gambar as image FROM tb_instansi where is_aktif = 1 order by -sort DESC";
+		$sql = "SELECT nm_instansi as instansi, id_instansi as id, phone as number_phone, website as link, alamat as address, gambar as image FROM tb_instansi where is_aktif = 1 AND status = 2 order by -sort DESC";
 		if ($this->db->query($sql)->num_rows() > 0) {
 			return $this->db->query($sql)->result_array();
 			exit();

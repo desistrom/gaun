@@ -5,7 +5,7 @@ class User extends CI_Model{
         $this->primaryKey = 'id_pengguna';
     }
     public function checkUser($data = array()){
-        $this->db->select($this->primaryKey);
+        $this->db->select('*');
         $this->db->from($this->tableName);
         $this->db->where(array('oauth_provider'=>$data['oauth_provider'],'oauth_id'=>$data['oauth_id']));
         $query = $this->db->get();
@@ -15,11 +15,16 @@ class User extends CI_Model{
             $result = $query->row_array();
             // $data['modified'] = date("Y-m-d H:i:s");
             // $update = $this->db->update($this->tableName,$data,array('id'=>$result['id']));
-            $user_data = 'exist';
+            $userID = $result['id_pengguna'];
+            if ($result['status'] == 0) {
+                $user_data = 'no';
+            }else{
+                $user_data = $userID;
+            }
         }else{
             // $data['created'] = date("Y-m-d H:i:s");
             // $data['modified']= date("Y-m-d H:i:s");
-            $pengguna['oauth_id'] = $data['oauth_id'];
+            /*$pengguna['oauth_id'] = $data['oauth_id'];
             $pengguna['oauth_provider'] = $data['oauth_provider'];
             $pengguna['email'] = $data['email'];
             $pengguna['username'] = $data['email'];
@@ -28,13 +33,7 @@ class User extends CI_Model{
             $dosen['nama'] = $data['first_name']." ".$data['last_name'];
             $dosen['jeniskelamin'] = $data['gender'] == 'male'?'L':'P';
             $dosen['id_pengguna_ref'] = $userID;
-            if ($data['status'] == 'dosen') {
-                $pengguna['id_role_ref'] = 1;
-                $this->db->insert('tb_dosen',$dosen);
-            }else{
-                $pengguna['id_role_ref'] = 0;
-                $this->db->insert('tb_mahasiswa',$dosen);
-            }
+            $this->db->insert('tb_dosen',$dosen);*/
             $user_data = 'insert';
         }
 

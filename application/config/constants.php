@@ -477,3 +477,5 @@ define('URL_GET_PAGE_V2','http://192.168.88.157/idren/api/v3/page?link=');
 define('URL_GET_SLIDER_FOTO_V2','http://192.168.88.157/idren/api/v3/getSliderFoto?key=');
 define('URL_GET_DATA_FOTO_V2','http://192.168.88.157/idren/api/v3/getDataFoto');
 define('URL_GET_FOUNDER_V2','http://192.168.88.157/idren/api/v3/founder');*/
+
+define('URL_API','http://localhost/idren/');

@@ -12,7 +12,17 @@
 */
 $config['google']['client_id']        = '241538137751-cebmc4661fvfj5pvseu3vdqi5jd6g4ke.apps.googleusercontent.com';
 $config['google']['client_secret']    = 'DAqOlcomQZRgYy54byGdh8y3';
-$config['google']['redirect_uri']     = 'http://localhost/idren/web/keanggotaan/google/';
+$link = $_SERVER['PHP_SELF'];
+    $link_array = explode('/',$link);
+    $page = end($link_array);
+    // $this->CI = & get_instance();
+if ($page == 'login_user') {
+	$config['google']['redirect_uri']     = URL_API.'user/login_user/google/';
+}elseif($page == 'pendaftaran_dosen'){
+	$config['google']['redirect_uri']     = URL_API.'web/keanggotaan/google/';
+}else{
+	$config['google']['redirect_uri']     = URL_API.'web/keanggotaan/google_mahasiswa/';
+}
 $config['google']['application_name'] = 'CodeIgniter';
 $config['google']['api_key']          = '';
 $config['google']['scopes']           = array();

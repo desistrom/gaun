@@ -95,11 +95,12 @@ ul.drop-menu {
 .dropdown .drop-menu.active {
     display: block;
     top: 100%;
-    padding-left: 30px;
+ 
 }
 .dropdown .drop-menu.active li a{
-  padding-left: 0 ;
+ /* padding-left: 0 ;*/
 }
+
 .drop-menu li a {
     display: block;
     padding: 3px 20px;
@@ -185,6 +186,18 @@ div.dataTables_length label{
 }
 .box-content .btn-add{
   margin-bottom: -3.5em;
+}
+.welcome{
+  color: #A2A2A2;
+}
+.ID_front{
+  color: #D10909;
+}
+.ren_back{
+  color: black;
+}
+.drop-menu li a i{
+  margin-right: 10px;
 }
 .bg-red,
 .bg-yellow,
@@ -523,4 +536,9 @@ div.dataTables_length label{
     margin: 0;
     padding: 15px;
   }
+  .dropdown .drop-menu.active {
+    display: block;
+    top: 100%;
+    padding-left: 30px;
+}
 }

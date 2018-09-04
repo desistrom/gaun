@@ -17,7 +17,7 @@ class Dashboard extends MX_Controller  {
     public function index() {
       
 
-        $this->ciparser->new_parse('template_user','modules_web', 'dasboard_layout');
+        $this->ciparser->new_parse('template_user','modules_user', 'dashboard_layout');
     }
   
 

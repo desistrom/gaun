@@ -22,7 +22,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $config['facebook_app_id']              = '117942632203648';
 $config['facebook_app_secret']          = 'f86ea994cadb7cd6730781ded4bf679c';
 $config['facebook_login_type']          = 'web';
-$config['facebook_login_redirect_url']  = 'web/keanggotaan/facebook';
+$link = $_SERVER['PHP_SELF'];
+    $link_array = explode('/',$link);
+    $page = end($link_array);
+if ($page == 'login_user') {
+	$config['facebook_login_redirect_url']  = 'user/login_user/facebook';
+	
+}else{
+	if ($page == 'pendaftaran_dosen') {
+		$config['facebook_login_redirect_url']  = 'web/keanggotaan/facebook';
+	}else{
+		$config['facebook_login_redirect_url']  = 'web/keanggotaan/facebook_mahasiswa';
+	}
+}
 $config['facebook_logout_redirect_url'] = 'login/user_authentication_facebook/logout';
 $config['facebook_permissions']         = array('email');
 $config['facebook_graph_version']       = 'v2.6';

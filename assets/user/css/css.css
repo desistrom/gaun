@@ -82,7 +82,7 @@ ul.drop-menu li a{
 
 ul.drop-menu li a:hover{
   color:#E72A2A;
-  border-left:solid 3px #E72A2A;
+  border-right:solid 5px #E72A2A;
   background-color:white;
 }
 

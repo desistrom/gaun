@@ -1,3 +1,21 @@
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <title>login user</title>
+        <link rel="shortcut icon" href="<?=base_url();?>media/favicon.ico">
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Crimson+Text:400,600,700" rel="stylesheet">
+    <link  href="<?=base_url();?>assets/css/bootstrap.min.css" rel="stylesheet" >
+    <link  href="<?=base_url();?>assets/fonts/font-awesome.min.css" rel="stylesheet" >
+    <link  href="<?=base_url();?>assets/css/Navbar-with-mega-menu.min.css" rel="stylesheet" >
+    <link  type="text/css" href="<?=base_url();?>assets/css/jsCalendar.css" rel="stylesheet" >
+    <link  href="<?=base_url();?>assets/css/owl.transitions.min.css" rel="stylesheet" >
+    <link  href="<?=base_url();?>assets/css/owl.carousel.min.css" rel="stylesheet" >
+    <link  href="<?=base_url();?>assets/css/css.min.css?t=<?=time();?>" rel="stylesheet" >
+    </head>
+    <body>
+    
+    
     <style type="text/css">
         div.container-fluid.content-comment{
           background-color: white;
@@ -22,7 +40,6 @@
         .google .btn-google{
           background-color: white;
           color: black;
-          border:solid #A2A2A2 1px;
         }
         .google .btn-google i{
           color: #34A853;
@@ -31,10 +48,7 @@
               width: 14px;
         }
         .content-comment .sub-comment-right{
-          margin-top: 1em;
-        }
-        div.container-fluid.content-comment{
-          padding-top: 1em;
+          margin-top: 0;
         }
         @media (max-width:1300px) {
           div.container-fluid{
@@ -58,89 +72,58 @@
         }
         }
     </style>   
-    <section class="detail_news" style="margin-top: 6em; background-color: #F2F2F2;">
-        <div class="container-fluid none-padding filter-title-page-news">
-            <div class="col-md-12 col-sm-12 col-xs-12 none-padding title-page-news" style="padding-bottom: 2em;">
-                <div class="line-news">
-                    <div></div>
-                </div>
-                <div class="header-title">
-                    <h1>Register </h1></div>
-            </div>
-        </div>
-        <div class="container-fluid content-comment "  >
+    <section class="detail_news" style="background-color: #F2F2F2;">
+        
+        <div class="container-fluid content-comment " style="" >
                     <div class="row sub-content-comment">
                       <div class="col col-md-3 col-sm-3 col-xs-12"></div>
-                      <div class="col col-md-6 col col-sm-7 col-xs-12" style="padding-top: 15px;">
-                         <div>
-                            
-                            <div class="other-registery">
-                              <div class="fb">
-                                <a href="<?php echo $this->facebook->login_url(); ?>">
-                                  <button class="btn btn-primary"><i class="fa fa-facebook"></i> Daftar Dengan Faceook</button>
-                                </a>
-                                <!-- <button class="btn btn-primary"><i class="fa fa-facebook"></i> Daftar Dengan Faceook</button> -->
-                              </div>
-                              <div class="google">
-                                <a href="<?php echo $loginURL; ?>">
-                                  <button class="btn btn-google " ><i class="fa fa-google"></i> Daftar Dengan Google</button>
-                                </a>
-                              </div>
-                            </div>
-                            <p style="text-align: center;padding-top:20px;">--atau--</p>
-                          </div>
-                          <div class="col-md-12 col-sm-12 col-xs-12 right-comment" style="margin-top: 0;">
-
+                          <div class="col-md-6 col-sm-7 col-xs-12 right-comment">
                             <div class="sub-comment-right" style="box-shadow: 0 0 48px 0 #bdbdbd;">
                                 <div class="form-group">
-                                    <h2>Register right now </h2>
-                                    <p>and lets collaborate</p>
-                                    <form id="register_form">
-                                     
-                                    <div class="text-input">
-                                        <input type="text" placeholder="Name" name="name" class="input-comment">
-                                        <div class="error" id="ntf_name"></div>
+                                    <h2>Login</h2>
+                                    <!-- <p>and lets collaborate</p> -->
+                                   <div>
+                                      
+                                      <div class="other-registery">
+                                        <div class="fb">
+                                          <a href="<?php echo $this->facebook->login_url(); ?>">
+                                            <button class="btn btn-primary" type="button"><i class="fa fa-facebook"></i> Daftar Dengan Faceook</button>
+                                          </a>
+                                          <!-- <button class="btn btn-primary"><i class="fa fa-facebook"></i> Daftar Dengan Faceook</button> -->
+                                        </div>
+                                        <div class="google">
+                                          <a href="<?php echo $loginURL; ?>">
+                                            <button class="btn btn-google " type="button"><i class="fa fa-google"></i> Daftar Dengan Google</button>
+                                          </a>
+                                        </div>
+                                      </div>
+
                                     </div>
+                                    <div class="text-input">
+                                      <p style="text-align: center;">--atau--</p>
+                                    </div>
+                                    <form id="register_form">
                                     <div class="text-input">
                                         <input type="text" placeholder="Username" name="username" class="input-comment">
                                         <div class="error" id="ntf_username"></div>
                                     </div>
+                                 
                                     <div class="text-input">
-                                        <input type="text" placeholder="Email" name="email" class="input-comment">
-                                        <div class="error" id="ntf_email"></div>
-                                    </div>
-                                    <!-- <div class="text-input">
                                         <input type="password" placeholder="Password" name="password" class="input-comment">
                                         <div class="error" id="ntf_password"></div>
                                     </div>
+                                    
+                                    
                                     <div class="text-input">
-                                        <input type="password" placeholder="Confirm Password" name="repassword" class="input-comment">
-                                        <div class="error" id="ntf_repassword"></div>
-                                    </div> -->
-                                    <div class="text-input">
-                                        <input type="text" placeholder="No. Handpone" name="no_hp" class="input-comment">
-                                        <div class="error" id="ntf_no_hp"></div>
-                                    </div>
-                                    <div class="text-input">
-                                        <select class="form-control" id="instansi" name="instansi">
-                                          <option value="">-- Pilih Instansi --</option>
-                                          <?php foreach ($instansi as $key => $value): ?>
-                                            <option value="<?=$value['id_instansi']?>"><?=$value['nm_instansi']?></option>
-                                          <?php endforeach ?>
-                                        </select>
-                                        <div class="error" id="ntf_instansi"></div>
-                                    </div>
-                                    <div class="text-input">
-                                      <?php echo $captcha // tampilkan recaptcha ?>
+                                      <!-- <?php echo $captcha // tampilkan recaptcha ?> -->
                                       <div class="error" id="ntf_g-recaptcha-response" style="position: relative;"></div>
                                     </div>
                                     </form>
                                     <div class="text-right"><a class="btn btn-post" type="button" id="btn_register">Submit</a></div>
-                                    
+                                    x
                                 </div>
                             </div>
                         </div>
-                      </div>
                         <div class="col col-md-3 col-sm-3 col-xs-12"></div>
                     </div>
           </div>
@@ -157,8 +140,8 @@
                       </div>
                       <div class="box-body">
                       </div>
-                      <div class="overlay" style="text-align: center">
-                        <i class="fa fa-refresh fa-spin fa-3x"></i>
+                      <div class="overlay">
+                        <i class="fa fa-refresh fa-spin"></i>
                       </div>
                   </div>
                 </div>
@@ -182,19 +165,6 @@
       </div>
     </div>
     <?php } ?>
-    <div id="username-already" class="modal fade modal-register" role="dialog" >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h2 class="modal-title text-center" style="color:#CF090A; ">Registrasi Gagal</h2>
-          </div>
-          <div class="modal-body">
-            <p class="text-center">username sudah terdaftar, ganti unername anda</p>
-          </div>
-        </div>
-      </div>
-    </div> 
     <script>(function(d, s, id) {
       var js, fjs = d.getElementsByTagName(s)[0];
       if (d.getElementById(id)) return;
@@ -204,6 +174,7 @@
       }(document, 'script', 'facebook-jssdk'));
     </script> 
 <script src="<?=base_url();?>assets/js/jquery.min.js"></script>
+<script src="<?=base_url();?>assets/js/bootstrap.min.js"></script>
  <script src="<?=base_url();?>assets/js/classie.min.js"></script>
  <script src="<?=base_url();?>assets/js/custom_pendaftaran.min.js"></script>
  <script src='https://www.google.com/recaptcha/api.js'></script>
@@ -228,7 +199,7 @@
                     console.log(data);
                     $('#regSukses').modal('show');
                     $('#register_form')[0].reset();
-                    window.location.href = window.location.href;
+             
               
                     }else{
                       $('#username-already').modal('show');
@@ -250,5 +221,6 @@
  </script>
 
 
-
+</body>
+    </html>
 

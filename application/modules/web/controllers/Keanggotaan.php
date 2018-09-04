@@ -187,8 +187,6 @@ class Keanggotaan extends MX_Controller  {
 
     }
     public function pendaftaran_dosen() {
-        $url = URL_GET_PENDAFTARAN ;
-        // $a = json_decode($this->api_helper($url),true);
         $methode = 'GET';
         $token = '';
         if ($this->input->server('REQUEST_METHOD') == 'POST') {
@@ -196,47 +194,40 @@ class Keanggotaan extends MX_Controller  {
             $ret['status'] = 0;
             $this->form_validation->set_error_delimiters('','');
             $this->form_validation->set_rules('instansi','Institute Name','trim|required');
-            // $this->form_validation->set_rules('address','Address Name','trim|required');
-            $this->form_validation->set_rules('email','Email','trim|required');
+            $this->form_validation->set_rules('email','Email','trim|required|is_unique[tb_pengguna.email]');
+            $this->form_validation->set_rules('no_hp','No. Handphone','trim|required');
             $this->form_validation->set_rules('name','name','trim|required');
-            // $this->form_validation->set_rules('jeniskelamin','jeniskelamin','trim|required');
-            $this->form_validation->set_rules('username','Username','trim|required');
-            $this->form_validation->set_rules('password','Passowrd','trim|required');
-            $this->form_validation->set_rules('repassword','Re - Passowrd','trim|required|matches[password]');
+            $this->form_validation->set_rules('username','Username','trim|required|is_unique[tb_pengguna.username]');
             $this->form_validation->set_rules('g-recaptcha-response','Pleas Insert Captcha', 'required');
             $recaptcha = $this->input->post('g-recaptcha-response');
             $response = $this->recaptcha->verifyResponse($recaptcha);
-            // print_r($response);
-            // return false;
-            // $response['success'] = 1;
             if ($this->form_validation->run() == true && $response['success'] == 1) {
                 $ret['state'] = 1;
                 $data_input = $this->input->post();
                 $data_user['email'] = $data_input['email'];
                 $data_user['username'] = $data_input['username'];
-                $data_user['password'] = sha1($data_input['password']);
-            /*
-                $url = URL_REGISTER ;
-
-                
-                $methode = "POST";*/
-                 // $ret['cek']=api_helper(json_encode($data_user),$url,$methode,'');
-                 // $ret['cek']=;
+                $data_user['id_role_ref'] = 1;
+                $data_user['password'] = sha1($this->generate());
                  if ($this->db->insert('tb_pengguna',$data_user)) {
                     $id = $this->db->insert_id();
                     $dosen['id_pengguna_ref'] = $id;
                     $dosen['instansi'] = $data_input['instansi'];
-                    // $dosen['address'] = $data_input['address'];
+                    $dosen['no_hp'] = $data_input['no_hp'];
                     $dosen['nama'] = $data_input['name'];
-                    // $dosen['jeniskelamin'] = $data_input['jeniskelamin'];
                     if ($this->db->insert('tb_dosen',$dosen)) {
                         $ret['status'] = 1;
                         $ret['url'] = site_url('admin/keanggotaan');
-
-                        $this->session->set_flashdata("notif","Data Berhasil di Masukan");
-                    }
-                    else{
-                        $ret['notif']['username-already']='username already exist, please change your username';
+                        $this->load->helper('email_send_helper');
+                        $data['email_from'] = 'support@idren';
+                        $data['name_from'] = 'Admin Support';
+                        $data['email_to'] = $data_user['email'];
+                        $data['subject'] = 'Pendaftaran Berhasil';
+                        $data['content'] = 'Halo '.$dosen['nama']."<br> Permintaan sedang diproses, harap bersabar";
+                        if (email_send($data) == true) {
+                            $user_data = 'success';
+                            $this->session->set_flashdata("header","Registrasi Berhasil");
+                            $this->session->set_flashdata("notif","Registrasi Anda sedang kami Proses, tunggu konfirmasi selanjutnya dari Admin");
+                        }
                     }
                  }
               
@@ -246,20 +237,15 @@ class Keanggotaan extends MX_Controller  {
                 }
             }
             $ret['notif']['instansi'] = form_error('instansi');
-            // $ret['notif']['address'] = form_error('address');
             $ret['notif']['email'] = form_error('email');
+            $ret['notif']['no_hp'] = form_error('no_hp');
             $ret['notif']['name'] = form_error('name');
-            // $ret['notif']['jeniskelamin'] = form_error('jeniskelamin');
             $ret['notif']['username'] = form_error('username');
-            $ret['notif']['password'] = form_error('password');
-            $ret['notif']['repassword'] = form_error('repassword');
             $ret['notif']['g-recaptcha-response'] = form_error('g-recaptcha-response');
     
             echo json_encode($ret);
             exit();
         }
-        // $url = URL_GET_PENDAFTARAN ;
-        // $a = api_helper('',$url,$methode,$token);
         $this->data = array(
             'action' => site_url('web/keanggotaan/pendaftaran'),
             'captcha' => $this->recaptcha->getWidget(), // menampilkan recaptcha
@@ -271,15 +257,91 @@ class Keanggotaan extends MX_Controller  {
         $this->ciparser->new_parse('template_frontend','modules_web', 'pendaftaran_dosen',$this->data);
     }
 
+    public function pendaftaran_mahasiswa() {
+        $methode = 'GET';
+        $token = '';
+        if ($this->input->server('REQUEST_METHOD') == 'POST') {
+            $ret['state'] = 0;
+            $ret['status'] = 0;
+            $this->form_validation->set_error_delimiters('','');
+            $this->form_validation->set_rules('instansi','Institute Name','trim|required');
+            $this->form_validation->set_rules('email','Email','trim|required|is_unique[tb_pengguna.email]');
+            $this->form_validation->set_rules('no_hp','No. Handphone','trim|required');
+            $this->form_validation->set_rules('name','name','trim|required');
+            $this->form_validation->set_rules('username','Username','trim|is_unique[tb_pengguna.username]');
+            $this->form_validation->set_rules('g-recaptcha-response','Pleas Insert Captcha', 'required');
+            $recaptcha = $this->input->post('g-recaptcha-response');
+            $response = $this->recaptcha->verifyResponse($recaptcha);
+            if ($this->form_validation->run() == true && $response['success'] == 1) {
+                $ret['state'] = 1;
+                $data_input = $this->input->post();
+                $data_user['email'] = $data_input['email'];
+                $data_user['username'] = $data_input['username'];
+                $data_user['id_role_ref'] = 0;
+                $data_user['password'] = sha1($this->generate());
+                 if ($this->db->insert('tb_pengguna',$data_user)) {
+                    $id = $this->db->insert_id();
+                    $mahasiswa['id_pengguna_ref'] = $id;
+                    $mahasiswa['instansi'] = $data_input['instansi'];
+                    $mahasiswa['no_hp'] = $data_input['no_hp'];
+                    $mahasiswa['nama'] = $data_input['name'];
+                    if ($this->db->insert('tb_mahasiswa',$mahasiswa)) {
+                        $ret['status'] = 1;
+                        $this->load->helper('email_send_helper');
+                        $ret['url'] = site_url('admin/keanggotaan');
+                        $data['email_from'] = 'support@idren';
+                        $data['name_from'] = 'Admin Support';
+                        $data['email_to'] = $data_user['email'];
+                        $data['subject'] = 'Pendaftaran Berhasil';
+                        $data['content'] = 'Halo '.$mahasiswa['nama']."<br> Permintaan sedang diproses, harap bersabar";
+                        if (email_send($data) == true) {
+                            $user_data = 'success';
+                            $this->session->set_flashdata("header","Registrasi Berhasil");
+                            $this->session->set_flashdata("notif","Registrasi Anda sedang kami Proses, tunggu konfirmasi selanjutnya dari Admin");
+                        }
+                    }
+                 }
+              
+            }else{
+                if ($response['success'] == '') {
+                    $ret['notif']['g-recaptcha-response'] = 'Captcha Expired';
+                }
+            }
+            $ret['notif']['instansi'] = form_error('instansi');
+            $ret['notif']['email'] = form_error('email');
+            $ret['notif']['no_hp'] = form_error('no_hp');
+            $ret['notif']['name'] = form_error('name');
+            $ret['notif']['username'] = form_error('username');
+            $ret['notif']['g-recaptcha-response'] = form_error('g-recaptcha-response');
+    
+            echo json_encode($ret);
+            exit();
+        }
+        $this->data = array(
+            'action' => site_url('web/keanggotaan/pendaftaran'),
+            'captcha' => $this->recaptcha->getWidget(), // menampilkan recaptcha
+            'script_captcha' => $this->recaptcha->getScriptTag(), // javascript recaptcha ditaruh di head
+        );
+        $this->data['loginURL'] = $this->google->loginURL();
+        $this->data['instansi'] = $this->db->query('select id_instansi, nm_instansi from tb_instansi where status = 2 and is_aktif = 1')->result_array();
+        $this->data['step']=array('picture'=>'','step'=>'');
+        $this->ciparser->new_parse('template_frontend','modules_web', 'pendaftaran_dosen',$this->data);
+    }
+
+    function generate(){
+        $chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        $res = "";
+        for ($i = 0; $i < 10; $i++) {
+            $res .= $chars[mt_rand(0, strlen($chars)-1)];
+        }
+        return $res;
+    }
+
     public function facebook(){
 
         $userData = array();
         $ret['status'] = 0;
         $ret['state'] = 0;
-
-        // Check if user is logged in
-        // if($this->facebook->is_authenticated()){
-            // Get user facebook profile details
             $userProfile = $this->facebook->request('get', '/me?fields=id,first_name,last_name,email,gender,locale,picture');
 
             // Preparing data for database insertion
@@ -289,19 +351,13 @@ class Keanggotaan extends MX_Controller  {
             $userData['last_name'] = $userProfile['last_name'];
             $userData['email'] = $userProfile['email'];
             $userData['gender'] = $userProfile['gender'];
-            /*$userData['locale'] = $userProfile['locale'];
-            $userData['profile_url'] = 'https://www.facebook.com/'.$userProfile['id'];
-            $userData['picture_url'] = $userProfile['picture']['data']['url'];*/
-
-            // Insert or update user data
-            // print_r($userData);
-            // return false;
+            $userData['status'] = 'dosen';
             $userID = $this->user->checkUser($userData);
             // Check user data insert or update status
             $this->load->helper('email_send_helper');
             if ($userID == 'insert') {
                 $data['email_from'] = 'support@idren';
-                $data['name_from'] = 'Admin Support';
+                $data['name_from'] = 'IDREN';
                 $data['email_to'] = $userData['email'];
                 $data['subject'] = 'Pendaftaran Berhasil';
                 $data['content'] = 'Halo '.$userData['first_name']." ".$userData['last_name']."<br> Permintaan sedang diproses, harap bersabar";
@@ -316,27 +372,11 @@ class Keanggotaan extends MX_Controller  {
                 $this->session->set_flashdata("notif","Akun Google Anda pernah didaftarkan sebelumnya, silahkan login untuk masuk");
                 redirect(site_url('web/keanggotaan/pendaftaran_dosen'));
             }
-
-            // Get logout URL
             $data['logoutUrl'] = $this->facebook->logout_url();
-        // }else{
-            // $fbuser = '';
-
-            // Get login URL
-            // $data['authUrl'] =  $this->facebook->login_url();
-        // }
-
-        // Load login & profile view
-        // $this->load->view('index_facebook',$data);
-        
-                // redirect(site_url('web/keanggotaan/pendaftaran_dosen'));
-        // echo json_encode($ret);
     }
 
     public function google(){
         $this->google->getAuthenticate();
-            
-        //get user info from google
         $gpInfo = $this->google->getUserInfo();
         
         //preparing data for database insertion
@@ -346,26 +386,19 @@ class Keanggotaan extends MX_Controller  {
         $userData['last_name']      = $gpInfo['family_name'];
         $userData['email']          = $gpInfo['email'];
         $userData['gender']         = !empty($gpInfo['gender'])?$gpInfo['gender']:'';
-        /*$userData['locale']         = !empty($gpInfo['locale'])?$gpInfo['locale']:'';
-        $userData['profile_url']    = !empty($gpInfo['link'])?$gpInfo['link']:'';
-        $userData['picture_url']    = !empty($gpInfo['picture'])?$gpInfo['picture']:'';*/
+        $userData['status']         = 'dosen';
         
-        //insert or update user data to the database
-        // print_r($userData);
-        // return false;
         $userID = $this->user->checkUser($userData);
-        // print_r($userID.'asdas<br>');
-        // print_r($gpInfo);
-        // return false;
         $this->load->helper('email_send_helper');
         if ($userID == 'insert') {
             $data['email_from'] = 'support@idren';
-            $data['name_from'] = 'Admin Support';
+            $data['name_from'] = 'IDREN';
             $data['email_to'] = $userData['email'];
             $data['subject'] = 'Pendaftaran Berhasil';
             $data['content'] = 'Halo '.$userData['first_name']." ".$userData['last_name']."<br> Permintaan sedang diproses, harap bersabar";
             if (email_send($data) == true) {
                 $user_data = 'success';
+                $this->session->set_flashdata("header","Registrasi Berhasil");
                 $this->session->set_flashdata("notif","Registrasi Anda sedang kami Proses, tunggu konfirmasi selanjutnya dari Admin");
                 redirect(site_url('web/keanggotaan/pendaftaran_dosen'));
             }
@@ -373,17 +406,77 @@ class Keanggotaan extends MX_Controller  {
             $this->session->set_flashdata("notif","Akun Google Anda pernah didaftarkan sebelumnya, silahkan login untuk masuk");
             redirect(site_url('web/keanggotaan/pendaftaran_dosen'));
         }
-        // print_r($userID);
-        // return f
-        // $this->session->set_flashdata("notif","Data Berhasil di Masukan");
-        //store status & user info in session
-        // $this->session->set_userdata('loggedIn', true);
-        // $this->session->set_userdata('userData', $userData);
+    }
+
+    public function facebook_mahasiswa(){
+
+        $userData = array();
+        $ret['status'] = 0;
+        $ret['state'] = 0;
+            $userProfile = $this->facebook->request('get', '/me?fields=id,first_name,last_name,email,gender,locale,picture');
+
+            // Preparing data for database insertion
+            $userData['oauth_provider'] = 'facebook';
+            $userData['oauth_id'] = $userProfile['id'];
+            $userData['first_name'] = $userProfile['first_name'];
+            $userData['last_name'] = $userProfile['last_name'];
+            $userData['email'] = $userProfile['email'];
+            $userData['gender'] = $userProfile['gender'];
+            $userData['status'] = 'mahasiswa';
+            $userID = $this->user->checkUser($userData);
+            // Check user data insert or update status
+            $this->load->helper('email_send_helper');
+            if ($userID == 'insert') {
+                $data['email_from'] = 'support@idren';
+                $data['name_from'] = 'IDREN';
+                $data['email_to'] = $userData['email'];
+                $data['subject'] = 'Pendaftaran Berhasil';
+                $data['content'] = 'Halo '.$userData['first_name']." ".$userData['last_name']."<br> Permintaan sedang diproses, harap bersabar";
+                if (email_send($data) == true) {
+                    $user_data = 'success';
+                    $this->session->set_flashdata("header","Registrasi Berhasil");
+                    $this->session->set_flashdata("notif","Registrasi Anda sedang kami Proses, tunggu konfirmasi selanjutnya dari Admin");
+                    redirect(site_url('web/keanggotaan/pendaftaran_dosen'));
+                }
+            }else{
+                $this->session->set_flashdata("header","Registrasi Gagal");
+                $this->session->set_flashdata("notif","Akun Google Anda pernah didaftarkan sebelumnya, silahkan login untuk masuk");
+                redirect(site_url('web/keanggotaan/pendaftaran_dosen'));
+            }
+            $data['logoutUrl'] = $this->facebook->logout_url();
+    }
+
+    public function google_mahasiswa(){
+        $this->google->getAuthenticate();
+        $gpInfo = $this->google->getUserInfo();
         
-        //redirect to profile page
-        // if ($userID == 'success') {
-            // redirect(site_url('web/keanggotaan/pendaftaran_dosen'));
-        // }
+        //preparing data for database insertion
+        $userData['oauth_provider'] = 'google';
+        $userData['oauth_id']      = $gpInfo['id'];
+        $userData['first_name']     = $gpInfo['given_name'];
+        $userData['last_name']      = $gpInfo['family_name'];
+        $userData['email']          = $gpInfo['email'];
+        $userData['gender']         = !empty($gpInfo['gender'])?$gpInfo['gender']:'';
+        $userData['status'] = 'mahasiswa';
+        
+        $userID = $this->user->checkUser($userData);
+        $this->load->helper('email_send_helper');
+        if ($userID == 'insert') {
+            $data['email_from'] = 'support@idren';
+            $data['name_from'] = 'IDREN';
+            $data['email_to'] = $userData['email'];
+            $data['subject'] = 'Pendaftaran Berhasil';
+            $data['content'] = 'Halo '.$userData['first_name']." ".$userData['last_name']."<br> Permintaan sedang diproses, harap bersabar";
+            if (email_send($data) == true) {
+                $user_data = 'success';
+                $this->session->set_flashdata("header","Registrasi Berhasil");
+                $this->session->set_flashdata("notif","Registrasi Anda sedang kami Proses, tunggu konfirmasi selanjutnya dari Admin");
+                redirect(site_url('web/keanggotaan/pendaftaran_dosen'));
+            }
+        }else{
+            $this->session->set_flashdata("notif","Akun Google Anda pernah didaftarkan sebelumnya, silahkan login untuk masuk");
+            redirect(site_url('web/keanggotaan/pendaftaran_dosen'));
+        }
     }
 }
 

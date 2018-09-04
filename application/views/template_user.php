@@ -6,20 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>w1</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/css/Navbar-with-mega-menu.css">
-    <link rel="stylesheet" href="assets/css/gallery-3-columns-minimal.css">
-    <link rel="stylesheet" href="assets/bootstrap/datatables/dataTables.bootstrap.css">
-    <link rel="stylesheet" href="assets/css/css.css">
-    <link rel="stylesheet" href="assets/css/admin-user.css">
+    <link rel="stylesheet" href="<?=base_url();?>assets/user/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?=base_url();?>assets/user/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="<?=base_url();?>assets/user/css/Navbar-with-mega-menu.css">
+    <link rel="stylesheet" href="<?=base_url();?>assets/user/css/gallery-3-columns-minimal.css">
+    <link rel="stylesheet" href="<?=base_url();?>assets/user/bootstrap/datatables/dataTables.bootstrap.css">
+    <link rel="stylesheet" href="<?=base_url();?>assets/user/css/css.css">
+    <link rel="stylesheet" href="<?=base_url();?>assets/user/css/admin-user.css">
 </head>
 
 <body>
            <nav class="navbar navbar-fixed-top " id="main-navigation">
       <div class="">
             <div class="container-fluid">
-              <div class="navbar-header"><a href="index.html" class="navbar-brand navbar-link"><img class="logo" src="assets/img/IDREN-2.png" /> </a>
+              <div class="navbar-header"><a href="index.html" class="navbar-brand navbar-link"><img class="logo" src="<?=base_url();?>assets/user/img/IDREN-2.png" /> </a>
                   <button data-toggle="collapse" data-target="#navcol-1" class="navbar-toggle collapsed"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
               </div>
               <div class="collapse navbar-collapse" id="navcol-1">
@@ -27,8 +27,8 @@
                   <ul class="nav navbar-nav navbar-right">
                       <li class="dropdown active"><a class="link_dropdown"  href="index.html" class="dropdown-toggle">Dashboard </a>
                           <ul class="drop-menu open active  col col-md-2" role="menu">
-                              <li><a href="index.html">Dashboard 1</a></li>
-                              <li><a href="#">Dashboard 2</a></li>
+                              <li><a href="index.html"> <i class="fa fa-user"></i>Profil</a></li>
+                              <li><a href="#"> <i class="fa fa-user"></i>Akun</a></li>
 
                           </ul>
                         </li>
@@ -64,12 +64,18 @@
           </div>
       </div>
   </nav>
-  
+  <div class="container-fluid as-content">
+      <div class="row">
+          <div class="col col-md-2 col-sm-2 col-xs-12 left-content">
+              
+          </div>
 
 
  <ci:doc type="modules"/>
 
-
+    </div>
+      </div>
+  </div>
 
      <div class="container-fluid footer-bottom">
         <div class="row">
@@ -82,12 +88,12 @@
             </div>
         </div>
     </div>
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/bootstrap/datatables/jquery.dataTables.min.js"></script>
-    <script src="assets/bootstrap/datatables/dataTables.bootstrap.min.js"></script>
-     <script src="assets/js/script.js"></script>
-    <script type="text/javascript">
+    <script src="<?=base_url();?>assets/user/js/jquery.min.js"></script>
+    <script src="<?=base_url();?>assets/user/bootstrap/js/bootstrap.min.js"></script>
+    <script src="<?=base_url();?>assets/user/bootstrap/datatables/jquery.dataTables.min.js"></script>
+    <script src="<?=base_url();?>assets/user/bootstrap/datatables/dataTables.bootstrap.min.js"></script>
+     <script src="<?=base_url();?>assets/user/js/script.js"></script>
+    <script type<?=base_url();?>assets/user/javascript">
         $(document).ready(function() {
             $(".dropdown").click(function(){
 

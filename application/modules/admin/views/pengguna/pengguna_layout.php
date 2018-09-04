@@ -6,13 +6,14 @@
 		</div>
 		<div class="col col-md-12 col-xs-12 table-responsive">
 	<table class="table table-bordered  dataTable" id="table">
-		<tr>
+		<thead>
 			<th>No</th>
 			<th>Nama User</th>
 			<th>Email</th>
 			<th>No Hp</th>
 			<th>aksi</th>
-		</tr>
+		<thead>
+		<tbody>
 		<?php foreach ($user as $key => $value): ?>
 			<tr>
 				<td><?=($key+1);?></td>
@@ -26,6 +27,7 @@
 				</td>
 			</tr>
 		<?php endforeach ?>
+		</tbody>
 	</table>
 	<div class="col col-md-12 col-xs-12 text-right">
 		<!-- <a href="#" class="btn btn-default">Setting</a> -->

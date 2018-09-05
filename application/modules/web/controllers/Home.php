@@ -19,29 +19,70 @@ class Home extends CI_Controller  {
         $url = URL_GET_HERO;
         $methode = 'GET';
         $token = '';
-        $a = api_helper('',$url,$methode,$token);
+        // $a = api_helper('',$url,$methode,$token);
+        $sql = "SELECT title as judul, link_video as video, content as deskripsi FROM tb_hero";
+        $hero = $this->db->query($sql)->row_array();
 
         // $url_layanan =  site_url('api/v1/getlayanan_idroam') ;
         // $b = api_helper('',$url_layanan,$methode,$token);
 
         $url_instansi = URL_GET_ALL_INSTANSI;
-        $c = api_helper('',$url_instansi,$methode,$token);
+        // $c = api_helper('',$url_instansi,$methode,$token);
+        $sql_instansi = "SELECT nm_instansi as instansi, id_instansi as id, phone as number_phone, website as link, alamat as address, gambar as image FROM tb_instansi where is_aktif = 1 AND status = 2 order by -sort DESC";
+        $instansi = $this->db->query($sql_instansi)->result_array();
+        foreach ($instansi as $key => $value) {
+            if ($value['image'] == '') {
+                $instansi[$key]['image_thumbnail']='assets/images/logo/IDREN-2.png';
+            }else{
+                if (file_exists(FCPATH."media/thumbnail/".$value['image'])) {
+                    $instansi[$key]['image_thumbnail'] = 'media/thumbnail/'.$value['image'];
+                    $instansi[$key]['image'] = 'media/'.$value['image'];
+                }else{
+                    $instansi[$key]['image_thumbnail'] = 'media/'.$value['image'];
+                    $instansi[$key]['image'] = 'media/'.$value['image'];
+                }
+            }                                                                                                                     
+        }
+
         
         
         $url_testi = URL_GET_TESTIMONI;
-        $d = api_helper('',$url_testi,$methode,$token);
+        // $d = api_helper('',$url_testi,$methode,$token);
+        $sql_testimoni = "SELECT content as testimoni, gambar as image, id_testimoni as testimoniId, nama_user as user, jabatan as sebagai FROM tb_testimoni where is_aktif = 1 ORDER BY sort ASC";
+        $testimoni = $this->db->query($sql_testimoni)->result_array();
+        foreach ($testimoni as $key => $value) {
+            if ($value['image'] == '') {
+                $testimoni[$key]['image_thumbnail']='assets/images/logo/IDREN-2.png';
+            }else{
+                if (file_exists(FCPATH."media/thumbnail/".$value['image'])) {
+                    $testimoni[$key]['image_big'] = 'media/'.$value['image'];
+                    $testimoni[$key]['image'] = 'media/thumbnail/'.$value['image'];
+                }else{
+                    $testimoni[$key]['image_thumbnail'] = 'media/'.$value['image'];
+                    $testimoni[$key]['image'] = 'media/'.$value['image'];
+                }
+            }
+
+        }
+        // print_r($testimoni);
 
          $url_titleslider = URL_GET_AKADEMISI_TITLE;
-        $e = api_helper('',$url_titleslider,$methode,$token);
+        // $e = api_helper('',$url_titleslider,$methode,$token);
+        $sql_slider = "SELECT content as title FROM tb_layanan WHERE kategori = 4";
+        $slider = $this->db->query($sql_slider)->row_array();
 
 
         // $url = "http://192.168.88.138/idren/api/v1/about";
         // $a = json_decode($this->hit_api($url),true);
-        $this->data['hero']=$a['data'];
+        // $this->data['hero']=$a['data'];
+        $this->data['hero']=$hero;
         // $this->data['layanan']=$b['data'];
-        $this->data['instansi']=$c['data'];
-        $this->data['testimoni']=$d['data'];
-        $this->data['title_slider']=$e['data'];
+        // $this->data['instansi']=$c['data'];
+        $this->data['instansi']=$instansi;
+        // $this->data['testimoni']=$d;
+        $this->data['testimoni']=$testimoni;
+        // $this->data['title_slider']=$e;
+        $this->data['title_slider']=$slider;
         $this->data['penta'] = $this->db->get_where('tb_pentahelix',array('jenis'=>1))->row_array();
         $this->data['helix'] = $this->db->query('SELECT * FROM tb_jenis_instansi order by nm_jenis_instansi asc')->result_array();
 

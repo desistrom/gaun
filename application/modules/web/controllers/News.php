@@ -42,22 +42,47 @@ class News extends CI_Controller  {
         // $token = '';
         // $a = api_helper('',$url,$methode,$token);
         $url = URL_GET_ALL_NEWS;
-        $b = api_helper('',$url,$methode,'');
-        $this->data['recent']=$b['data'];
-        $this->data['total'] = count($b['data']);
+        // $b = api_helper('',$url,$methode,'');
+        $sql = "SELECT n.id_news as newsId, n.created as tanggal,n.judul as title, n.content as news_content, u.name as author, k.nm_kategori as kategori, n.link as sumber, n.img as gambar
+            FROM tb_news n join tb_kategori_news k on n.id_kategori_ref = k.id_kategori_news 
+            join tb_user u on n.id_user_ref = u.id_user where n.is_aktif = 1 ORDER BY n.id_news DESC";
+        $news = $this->db->query($sql)->result_array();
+        foreach ($news as $key => $value) {
+            if ($value['kategori'] != 'rss' && $value['gambar'] != '') {
+                $news[$key]['gambar'] = 'assets/media/'.$news[$key]['gambar'];
+            }
+            if ($value['gambar'] == '') {
+                $news[$key]['gambar']='assets/images/logo/IDREN-2.png';
+            }
+        }
+        /*$this->data['recent']=$b['data'];
+        $this->data['total'] = count($b['data']);*/
+        $this->data['recent']=$news;
+        $this->data['total'] = count($news);
         if (!empty($this->input->get('page'))) {
             $start = ceil($this->input->get('page') * 4);
             $this->data['total_row'] = $start;
             $url = URL_GET_NEWS_PAGGING.$start;
-            $a = api_helper('',$url,$methode,'');
-            $this->data['news']=$a['data'];
+            // $a = api_helper('',$url,$methode,'');
+            $sql_paging = "SELECT n.id_news as newsId, n.created as tanggal,n.judul as title, n.content as news_content, u.name as author, k.nm_kategori as kategori, n.link as sumber, n.img as gambar
+                FROM tb_news n join tb_kategori_news k on n.id_kategori_ref = k.id_kategori_news 
+                join tb_user u on n.id_user_ref = u.id_user where n.is_aktif = 1 ORDER BY n.id_news DESC  LIMIT ".$start.",4 ";
+            // $this->data['news']=$a['data'];
+            $pagging_news = $this->db->query($sql_paging)->result_array();
+            $this->data['news']=$pagging_news;
             $result = $this->load->view('news_looping',$this->data);
             echo json_encode($result);
         }else{
             $this->data['total_row'] = 0;
             $url = URL_GET_NEWS_PAGGING.'0';
-            $a = api_helper('',$url,$methode,'');
-            $this->data['news']=$a['data'];
+            // $a = api_helper('',$url,$methode,'');
+            $sql_paging = "SELECT n.id_news as newsId, n.created as tanggal,n.judul as title, n.content as news_content, u.name as author, k.nm_kategori as kategori, n.link as sumber, n.img as gambar
+                FROM tb_news n join tb_kategori_news k on n.id_kategori_ref = k.id_kategori_news 
+                join tb_user u on n.id_user_ref = u.id_user where n.is_aktif = 1 ORDER BY n.id_news DESC  LIMIT 0,4 ";
+            // $this->data['news']=$a['data'];
+            $pagging_news = $this->db->query($sql_paging)->result_array();
+            $this->data['news']=$pagging_news;
+            // $this->data['news']=$a['data'];
             $this->ciparser->new_parse('template_frontend','modules_web', 'news_layout',$this->data);
         }
 

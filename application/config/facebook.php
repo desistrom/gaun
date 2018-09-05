@@ -28,6 +28,9 @@ $link = $_SERVER['PHP_SELF'];
 if ($page == 'login_user') {
 	$config['facebook_login_redirect_url']  = 'user/login_user/facebook';
 	
+}elseif ($page == 'login_mahasiswa') {
+	$config['facebook_login_redirect_url']  = 'user/login_user/facebook_mahasiswa';
+	
 }else{
 	if ($page == 'pendaftaran_dosen') {
 		$config['facebook_login_redirect_url']  = 'web/keanggotaan/facebook';

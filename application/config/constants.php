@@ -479,3 +479,5 @@ define('URL_GET_DATA_FOTO_V2','http://192.168.88.157/idren/api/v3/getDataFoto');
 define('URL_GET_FOUNDER_V2','http://192.168.88.157/idren/api/v3/founder');*/
 
 define('URL_API','http://localhost/idren/');
+define('URL_INSERT_DOSEN','http://localhost/idren/api/v3/insert_dosen');
+define('URL_INSERT_MAHASISWA','http://localhost/idren/api/v3/insert_mahasiswa');

@@ -262,6 +262,48 @@ class V3 extends REST_Controller {
         $this->_register_instansi($param);
     }
 
+    public function insert_dosen_post(){
+        header('Content-Type: application/json');
+        $param = json_decode(file_get_contents('php://input'), true);
+        if ($param['username'] == '' || !isset($param['username'])) {
+            $retData['username'] = 'username is required, "username" : "example"';
+        }
+        if ($param['nama'] == '' || !isset($param['nama'])) {
+            $retData['nama'] = 'nama is required, "nama" : "example"';
+        }
+        if ($param['email'] == '' || !isset($param['email'])) {
+            $retData['email'] = 'Email is required, "email" : "example@ex.com"';
+        }
+        if (!isset($param['username']) || $param['username'] == '' || !isset($param['nama']) || $param['nama'] == '' || !isset($param['email']) || $param['email'] == '') {
+            $retData['code'] = '500';
+            $retData['status'] = 'failed';
+            $retData['error'] = 'Your parameter is invalid';
+            $this->response($retData,200);
+        }
+        $this->_insert_dosen($param);
+    }
+
+    public function insert_mahasiswa_post(){
+        header('Content-Type: application/json');
+        $param = json_decode(file_get_contents('php://input'), true);
+        if ($param['username'] == '' || !isset($param['username'])) {
+            $retData['username'] = 'username is required, "username" : "example"';
+        }
+        if ($param['nama'] == '' || !isset($param['nama'])) {
+            $retData['nama'] = 'nama is required, "nama" : "example"';
+        }
+        if ($param['email'] == '' || !isset($param['email'])) {
+            $retData['email'] = 'Email is required, "email" : "example@ex.com"';
+        }
+        if (!isset($param['username']) || $param['username'] == '' || !isset($param['nama']) || $param['nama'] == '' || !isset($param['email']) || $param['email'] == '') {
+            $retData['code'] = '500';
+            $retData['status'] = 'failed';
+            $retData['error'] = 'Your parameter is invalid';
+            $this->response($retData,200);
+        }
+        $this->_insert_mahasiswa($param);
+    }
+
     public function search_user_post(){
         header('Content-Type: application/json');
         $param = json_decode(file_get_contents('php://input'), true);
@@ -710,6 +752,74 @@ class V3 extends REST_Controller {
             $this->response($retData,200);
             exit();
         }
+        $retData['code'] = '200';
+        $retData['status'] = 'Success';
+        $retData['data'] = 'User Has been inserted';
+        $this->response($retData,200);
+    }
+
+    function _insert_dosen($data){
+        $data_register['username'] = $data['username'];
+        $data_register['password'] = $data['password'];
+        $data_register['id_role_ref'] = $data['id_role_ref'];
+        @$data_register['oauth_id'] = $data['oauth_id'];
+        @$data_register['oauth_provider'] = $data['oauth_provider'];
+        @$data_register['email'] = $data['email'];
+        $sql = "SELECT * FROM tb_pengguna WHERE username = '".$data['username']."' OR email = '".$data['email']."'";
+        if ($this->db->query($sql)->num_rows() > 0) {
+            $retData['code'] = "500";
+            $retData['status'] = 'Failed';
+            $retData['data'] = "Username or Email alredy exist";
+            $this->response($retData,200);
+            exit();
+        }
+        $insert = $this->v1_model->insertPengguna($data_register);
+        if ($insert == false) {
+            $retData['code'] = "500";
+            $retData['status'] = 'Failed';
+            $retData['data'] = "Can't add user";
+            $this->response($retData,200);
+            exit();
+        }
+        $data_user['id_pengguna_ref'] = $insert;
+        $data_user['nama'] = $data['nama'];
+        @$data_user['instansi'] = $data['instansi'];
+        @$data_user['no_hp'] = $data['no_hp'];
+        $insert_dosen = $this->db->insert('tb_dosen',$data_user);
+        $retData['code'] = '200';
+        $retData['status'] = 'Success';
+        $retData['data'] = 'User Has been inserted';
+        $this->response($retData,200);
+    }
+
+    function _insert_mahasiswa($data){
+        $data_register['username'] = $data['username'];
+        $data_register['password'] = $data['password'];
+        $data_register['id_role_ref'] = $data['id_role_ref'];
+        @$data_register['oauth_id'] = $data['oauth_id'];
+        @$data_register['oauth_provider'] = $data['oauth_provider'];
+        @$data_register['email'] = $data['email'];
+        $sql = "SELECT * FROM tb_pengguna WHERE username = '".$data['username']."' OR email = '".$data['email']."'";
+        if ($this->db->query($sql)->num_rows() > 0) {
+            $retData['code'] = "500";
+            $retData['status'] = 'Failed';
+            $retData['data'] = "Username or Email alredy exist";
+            $this->response($retData,200);
+            exit();
+        }
+        $insert = $this->v1_model->insertPengguna($data_register);
+        if ($insert == false) {
+            $retData['code'] = "500";
+            $retData['status'] = 'Failed';
+            $retData['data'] = "Can't add user";
+            $this->response($retData,200);
+            exit();
+        }
+        $data_user['id_pengguna_ref'] = $insert;
+        $data_user['nama'] = $data['nama'];
+        @$data_user['instansi'] = $data['instansi'];
+        @$data_user['no_hp'] = $data['no_hp'];
+        $insert_dosen = $this->db->insert('tb_mahasiswa',$data_user);
         $retData['code'] = '200';
         $retData['status'] = 'Success';
         $retData['data'] = 'User Has been inserted';

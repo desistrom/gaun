@@ -436,12 +436,12 @@ class Keanggotaan extends MX_Controller  {
                     $user_data = 'success';
                     $this->session->set_flashdata("header","Registrasi Berhasil");
                     $this->session->set_flashdata("notif","Registrasi Anda sedang kami Proses, tunggu konfirmasi selanjutnya dari Admin");
-                    redirect(site_url('web/keanggotaan/pendaftaran_dosen'));
+                    redirect(site_url('web/keanggotaan/pendaftaran_mahasiswa'));
                 }
             }else{
                 $this->session->set_flashdata("header","Registrasi Gagal");
                 $this->session->set_flashdata("notif","Akun Google Anda pernah didaftarkan sebelumnya, silahkan login untuk masuk");
-                redirect(site_url('web/keanggotaan/pendaftaran_dosen'));
+                redirect(site_url('web/keanggotaan/pendaftaran_mahasiswa'));
             }
             $data['logoutUrl'] = $this->facebook->logout_url();
     }
@@ -471,11 +471,11 @@ class Keanggotaan extends MX_Controller  {
                 $user_data = 'success';
                 $this->session->set_flashdata("header","Registrasi Berhasil");
                 $this->session->set_flashdata("notif","Registrasi Anda sedang kami Proses, tunggu konfirmasi selanjutnya dari Admin");
-                redirect(site_url('web/keanggotaan/pendaftaran_dosen'));
+                redirect(site_url('web/keanggotaan/pendaftaran_mahasiswa'));
             }
         }else{
             $this->session->set_flashdata("notif","Akun Google Anda pernah didaftarkan sebelumnya, silahkan login untuk masuk");
-            redirect(site_url('web/keanggotaan/pendaftaran_dosen'));
+            redirect(site_url('web/keanggotaan/pendaftaran_mahasiswa'));
         }
     }
 }

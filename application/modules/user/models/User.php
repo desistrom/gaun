@@ -19,21 +19,30 @@ class User extends CI_Model{
             if ($result['status'] == 0) {
                 $user_data = 'no';
             }else{
-                $user_data = $userID;
+                if ($result['id_role_ref'] != $data['id_role_ref']) {
+                    $user_data = 'salah';
+                }else{
+                    $user_data = $userID;
+                }
             }
         }else{
             // $data['created'] = date("Y-m-d H:i:s");
             // $data['modified']= date("Y-m-d H:i:s");
-            /*$pengguna['oauth_id'] = $data['oauth_id'];
+            $pengguna['oauth_id'] = $data['oauth_id'];
             $pengguna['oauth_provider'] = $data['oauth_provider'];
             $pengguna['email'] = $data['email'];
             $pengguna['username'] = $data['email'];
+            $pengguna['id_role_ref'] = $data['id_role_ref'];
             $insert = $this->db->insert($this->tableName,$pengguna);
             $userID = $this->db->insert_id();
             $dosen['nama'] = $data['first_name']." ".$data['last_name'];
             $dosen['jeniskelamin'] = $data['gender'] == 'male'?'L':'P';
             $dosen['id_pengguna_ref'] = $userID;
-            $this->db->insert('tb_dosen',$dosen);*/
+            if ($data['id_role_ref'] == 1) {
+                $this->db->insert('tb_dosen',$dosen);
+            }else{
+                $this->db->insert('tb_mahasiswa',$dosen);
+            }
             $user_data = 'insert';
         }
 

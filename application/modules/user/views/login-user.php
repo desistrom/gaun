@@ -102,6 +102,7 @@
                                     <div class="text-input">
                                       <p style="text-align: center;">--atau--</p>
                                     </div>
+                                    <div class="error" id="ntf_login" style="text-align: center;font-weight: bold"></div>
                                     <form id="register_form">
                                     <div class="text-input">
                                         <input type="text" placeholder="Username" name="username" class="input-comment">
@@ -115,7 +116,7 @@
                                     
                                     
                                     <div class="text-input">
-                                      <!-- <?php echo $captcha // tampilkan recaptcha ?> -->
+                                      <?php echo $captcha // tampilkan recaptcha ?>
                                       <div class="error" id="ntf_g-recaptcha-response" style="position: relative;"></div>
                                     </div>
                                     </form>
@@ -140,8 +141,8 @@
                       </div>
                       <div class="box-body">
                       </div>
-                      <div class="overlay">
-                        <i class="fa fa-refresh fa-spin"></i>
+                      <div class="overlay" style="text-align: center">
+                        <i class="fa fa-refresh fa-spin fa-3x"></i>
                       </div>
                   </div>
                 </div>
@@ -196,14 +197,8 @@
               if(data.state == 1){
                 if (data.status == 1) {
                 
-                    console.log(data);
-                    $('#regSukses').modal('show');
-                    $('#register_form')[0].reset();
-             
-              
-                    }else{
-                      $('#username-already').modal('show');
-                      console.log(data.cek)
+                    window.location.href = data.url;
+                    
                     }
                   }
              },3000);

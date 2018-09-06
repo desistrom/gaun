@@ -89,7 +89,7 @@
         <nav class="navbar navbar-fixed-top " id="main-navigation">
       <div class="">
             <div class="container-fluid">
-              <div class="navbar-header"><a href="<?php echo site_url('web/home'); ?>" class="navbar-brand navbar-link"><img class="logo" src="<?=base_url().logo_helper()['data']['image'];?>" /> </a>
+              <div class="navbar-header"><a href="<?php echo site_url('web/home'); ?>" class="navbar-brand navbar-link"><img class="logo" src="<?=base_url().logo_helper()['image'];?>" /> </a>
                   <button data-toggle="collapse" data-target="#navcol-1" class="navbar-toggle collapsed"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
               </div>
               <div class="collapse navbar-collapse" id="navcol-1">
@@ -108,8 +108,8 @@
                         
                       
 
-                      <!-- <li role="presentation" class="active"><a href="#">Masuk</a></li> -->
-                   <!--    <li role="presentation" class=""><a class="active btn-gabung" href="<?php echo site_url('web/gabung/register') ?>" data-toggle="modal" >Gabung</a></li> -->
+                     <!--  <li role="presentation" class="active"><a href="#">Login</a></li> -->
+                      <li role="presentation" class=""><a class="active btn-gabung" href="<?php echo site_url('user/login_user') ?>" data-toggle="modal" >Login</a></li>
 
                   </ul>
               </div>

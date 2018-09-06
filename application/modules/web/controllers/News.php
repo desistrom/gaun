@@ -22,7 +22,7 @@ class News extends CI_Controller  {
         $url = base_url().'api/v1/news';*/
         $methode = 'GET';
         // $b = api_helper('',$url,$methode,'');
-        // $config['total_rows'] = count($b['data']);
+        // $config['total_rows'] = count($b);
         // $config['per_page'] = 4;
         // $config['prev_tag_open'] = '<li>';
         // $config['prev_tag_close'] = '</li>';
@@ -99,22 +99,30 @@ class News extends CI_Controller  {
         $methode = 'GET';
         $token = '';
         // $data['data']=$id;
-        $a = api_helper('',$url,$methode,$token);
+        // $a = api_helper('',$url,$methode,$token);
+        $sql = "SELECT n.id_news as newsId, n.created as tanggal, n.judul as title, n.content as news_content, u.name as author, k.nm_kategori as kategori, n.link as sumber, n.img as gambar 
+            FROM tb_news n join tb_kategori_news k on n.id_kategori_ref = k.id_kategori_news 
+            join tb_user u on n.id_user_ref = u.id_user where n.is_aktif = 1 AND n.link = '".$id."'";
+        $a = $this->db->query($sql)->row_array();
         // print_r($a);
-        if ($a['code'] != 500) {
+        if ($a!= '') {
         $methode = 'GET';
         $url_allnews =  URL_GET_ALL_NEWS;
-        $b = api_helper($token,$url_allnews,$methode,$token);
+        // $b = api_helper($token,$url_allnews,$methode,$token);
+        $sql = "SELECT n.id_news as newsId, n.created as tanggal,n.judul as title, n.content as news_content, u.name as author, k.nm_kategori as kategori, n.link as sumber, n.img as gambar
+            FROM tb_news n join tb_kategori_news k on n.id_kategori_ref = k.id_kategori_news 
+            join tb_user u on n.id_user_ref = u.id_user where n.is_aktif = 1 ORDER BY n.id_news DESC";
+        $b = $this->db->query($sql)->result_array();
         $gambar = '';
-        $c = explode('/', $a['data']['gambar']); if(isset($c[1])){ $gambar = $a['data']['gambar']; }else{ $gambar = base_url().'assets/media/'.$a['data']['gambar']; }
-        $this->data['detail_news']=$a['data'];
-        $share_link['title'] = $a['data']['title'];
+        $c = explode('/', $a['gambar']); if(isset($c[1])){ $gambar = $a['gambar']; }else{ $gambar = base_url().'assets/media/'.$a['gambar']; }
+        $this->data['detail_news']=$a;
+        $share_link['title'] = $a['title'];
         $share_link['image'] = $gambar;
-        $share_link['type'] = $a['data']['kategori'];
-        $share_link['url'] = site_url('web/news/get_news/'.$a['data']['sumber']);
+        $share_link['type'] = $a['kategori'];
+        $share_link['url'] = site_url('web/news/get_news/'.$a['sumber']);
         $this->data['share'] = $share_link;
-        // print_r($a['data']);
-        $this->data['news']=$b['data'];
+        // print_r($a);
+        $this->data['news']=$b;
       
        $this->data['action'] = site_url('web/news/get_news');
        $this->data['captcha'] = $this->recaptcha->getWidget();

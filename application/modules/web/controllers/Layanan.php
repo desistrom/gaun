@@ -92,11 +92,14 @@ class Layanan extends MX_Controller  {
         $token = '';
         $data = '';
         $methode = 'GET';
-        $url = URL_GET_ALL_VIDEO ;
+        // $url = URL_GET_ALL_VIDEO ;
         
-        $b = api_helper('',$url,$methode,'');
+        // $b = api_helper('',$url,$methode,'');
+        $type = 'video';
+        $sql = "select u.name as nama_user, g.id_galery as galeryId, g.file_name as file, g.judul as title, g.deskripsi as keterangan, g.tgl_upload as modify_date, g.type as jenis from tb_galery g join tb_user u on g.id_user_ref = u.id_user where g.type = ? and g.status = 1";
+        $b = $this->db->query($sql,$type)->result_array();
         $this->data['total'] = count($b['data']);
-        if (!empty($this->input->get('page'))) {
+        /*if (!empty($this->input->get('page'))) {
             $start = ceil($this->input->get('page') * 9);
             $this->data['total_row'] = $start;
             $url = URL_GET_VIDEO_PAGGING.$start;
@@ -108,6 +111,27 @@ class Layanan extends MX_Controller  {
         }else{
             $url = URL_GET_VIDEO_PAGGING.'0';
             $a = api_helper('',$url,$methode,$token);
+            $this->data['total_row'] = '9';
+            $this->data['video']=$a['data'];
+            $this->ciparser->new_parse('template_frontend','modules_web', 'list_video_layout',$this->data);
+        }*/
+        if (!empty($this->input->get('page'))) {
+            $start = ceil($this->input->get('page') * 9);
+            $this->data['total_row'] = $start;
+            $url = URL_GET_VIDEO_PAGGING.$start;
+            // $a = api_helper('',$url,$methode,$token);
+            $sql = "select u.name as nama_user, g.id_galery as galeryId, g.file_name as file, g.judul as title, g.deskripsi as keterangan, g.tgl_upload as modify_date, g.type as jenis from tb_galery g join tb_user u on g.id_user_ref = u.id_user where g.type = ? and g.status = 1 LIMIT ".$start.",9";
+            $a = $this->db->query($sql,$type)->result_array();
+            $this->data['video']=$a;
+            // print_r($a['data']);
+            $result = $this->load->view('video_looping',$this->data);
+            echo json_encode($result);
+        }else{
+            $url = URL_GET_VIDEO_PAGGING.'0';
+            // $a = api_helper('',$url,$methode,$token);
+            $sql = "select u.name as nama_user, g.id_galery as galeryId, g.file_name as file, g.judul as title, g.deskripsi as keterangan, g.tgl_upload as modify_date, g.type as jenis from tb_galery g join tb_user u on g.id_user_ref = u.id_user where g.type = ? and g.status = 1 LIMIT 0,9";
+            $a = $this->db->query($sql,$type)->result_array();
+            $this->data['video']=$a;
             $this->data['total_row'] = '9';
             $this->data['video']=$a['data'];
             $this->ciparser->new_parse('template_frontend','modules_web', 'list_video_layout',$this->data);

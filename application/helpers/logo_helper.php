@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 if (!function_exists('logo_helper')) {
 	function logo_helper()
 	{
-		$curl = curl_init();
+		/*$curl = curl_init();
 		curl_setopt_array($curl, array(
 		  CURLOPT_URL => URL_GET_LOGO,
 		  CURLOPT_RETURNTRANSFER => true,
@@ -35,7 +35,19 @@ if (!function_exists('logo_helper')) {
 		} else {
 			$result = json_decode($response, TRUE);
 			return $result;
-		}
+		}*/
+		$CI = & get_instance();
+		$sql = "SELECT logo as image FROM tb_logo where status = 1";
+		// if ($this->db->query($sql)->num_rows() > 0) {
+		$user = $CI->db->query($sql)->row_array();
+			// exit();
+		// }
+		if ($user['image'] == '') {
+            $user['image'] = 'assets/images/logo/IDREN-2.png';
+        }else{
+            $user['image'] = "media/".$user['image'];
+        }
+		return $user;
 	}
 }
 

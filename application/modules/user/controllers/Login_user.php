@@ -163,7 +163,9 @@ class Login_user extends MX_Controller  {
                 $data['name_from'] = 'Admin Support';
                 $data['email_to'] = $userData['email'];
                 $data['subject'] = 'Pendaftaran Berhasil';
-                $data['content'] = 'Halo '.$userData['first_name']." ".$userData['last_name']."<br> Permintaan sedang diproses, harap bersabar";
+                $data['content'] = 'Halo '.$userData['first_name']." ".$userData['last_name']."<br> request akun anda sedang diproses, silakan ditunggu.
+admin kami akan mengirimkan email notifikasi aktivasi akun anda dalam 1 x 24 jam dari waktu pendaftaran.
+terima kasih";
                 if (email_send($data) == true) {
                     $user_data = 'success';
                     $this->session->set_flashdata("header","Registrasi Berhasil");
@@ -209,7 +211,9 @@ class Login_user extends MX_Controller  {
                 $data['name_from'] = 'Admin Support';
                 $data['email_to'] = $userData['email'];
                 $data['subject'] = 'Pendaftaran Berhasil';
-                $data['content'] = 'Halo '.$userData['first_name']." ".$userData['last_name']."<br> Permintaan sedang diproses, harap bersabar";
+                $data['content'] = 'Halo '.$userData['first_name']." ".$userData['last_name']."<br> request akun anda sedang diproses, silakan ditunggu.
+admin kami akan mengirimkan email notifikasi aktivasi akun anda dalam 1 x 24 jam dari waktu pendaftaran.
+terima kasih";
                 if (email_send($data) == true) {
                     $user_data = 'success';
                     $this->session->set_flashdata("header","Registrasi Berhasil");
@@ -257,7 +261,9 @@ class Login_user extends MX_Controller  {
                 $data['name_from'] = 'Admin Support';
                 $data['email_to'] = $userData['email'];
                 $data['subject'] = 'Pendaftaran Berhasil';
-                $data['content'] = 'Halo '.$userData['first_name']." ".$userData['last_name']."<br> Permintaan sedang diproses, harap bersabar";
+                $data['content'] = 'Halo '.$userData['first_name']." ".$userData['last_name']."<br> request akun anda sedang diproses, silakan ditunggu.
+admin kami akan mengirimkan email notifikasi aktivasi akun anda dalam 1 x 24 jam dari waktu pendaftaran.
+terima kasih";
                 if (email_send($data) == true) {
                     $user_data = 'success';
                     $this->session->set_flashdata("header","Registrasi Berhasil");
@@ -303,7 +309,9 @@ class Login_user extends MX_Controller  {
                 $data['name_from'] = 'Admin Support';
                 $data['email_to'] = $userData['email'];
                 $data['subject'] = 'Pendaftaran Berhasil';
-                $data['content'] = 'Halo '.$userData['first_name']." ".$userData['last_name']."<br> Permintaan sedang diproses, harap bersabar";
+                $data['content'] = 'Halo '.$userData['first_name']." ".$userData['last_name']."<br> request akun anda sedang diproses, silakan ditunggu.
+admin kami akan mengirimkan email notifikasi aktivasi akun anda dalam 1 x 24 jam dari waktu pendaftaran.
+terima kasih";
                 if (email_send($data) == true) {
                     $user_data = 'success';
                     $this->session->set_flashdata("header","Registrasi Berhasil");

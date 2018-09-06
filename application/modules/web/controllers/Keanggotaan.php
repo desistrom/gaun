@@ -212,10 +212,10 @@ class Keanggotaan extends MX_Controller  {
         $sql = "SELECT profit as benefit, cara as step, image as picture, image_profit as picture_profit FROM tb_setting_user";
         $profit['step'] = $this->db->query($sql)->row_array()['step'];
         $profit['picture'] = $this->db->query($sql)->row_array()['picture'];
-        if ($this->v1_model->user_setting()['picture'] == '') {
+        if ($this->db->query($sql)->row_array()['picture'] == '') {
             $profit['picture']='assets/images/logo/IDREN-2.png';
         }else{
-            $profit['picture']='media/'.$this->v1_model->user_setting()['picture'];
+            $profit['picture']='media/'.$this->db->query($sql)->row_array()['picture'];
         }
         $this->data = array(
             'action' => site_url('web/keanggotaan/pendaftaran'),
@@ -314,7 +314,9 @@ class Keanggotaan extends MX_Controller  {
                         $data['name_from'] = 'Admin Support';
                         $data['email_to'] = $data_user['email'];
                         $data['subject'] = 'Pendaftaran Berhasil';
-                        $data['content'] = 'Halo '.$dosen['nama']."<br> Permintaan sedang diproses, harap bersabar";
+                        $data['content'] = 'Halo '.$dosen['nama']."<br> request akun anda sedang diproses, silakan ditunggu.
+admin kami akan mengirimkan email notifikasi aktivasi akun anda dalam 1 x 24 jam dari waktu pendaftaran.
+terima kasih";
                         if (email_send($data) == true) {
                             $user_data = 'success';
                             $this->session->set_flashdata("header","Registrasi Berhasil");
@@ -385,7 +387,9 @@ class Keanggotaan extends MX_Controller  {
                         $data['name_from'] = 'Admin Support';
                         $data['email_to'] = $data_user['email'];
                         $data['subject'] = 'Pendaftaran Berhasil';
-                        $data['content'] = 'Halo '.$mahasiswa['nama']."<br> Permintaan sedang diproses, harap bersabar";
+                        $data['content'] = 'Halo '.$mahasiswa['nama']."<br> request akun anda sedang diproses, silakan ditunggu.
+admin kami akan mengirimkan email notifikasi aktivasi akun anda dalam 1 x 24 jam dari waktu pendaftaran.
+terima kasih";
                         if (email_send($data) == true) {
                             $user_data = 'success';
                             $this->session->set_flashdata("header","Registrasi Berhasil");
@@ -452,7 +456,9 @@ class Keanggotaan extends MX_Controller  {
                 $data['name_from'] = 'IDREN';
                 $data['email_to'] = $userData['email'];
                 $data['subject'] = 'Pendaftaran Berhasil';
-                $data['content'] = 'Halo '.$userData['first_name']." ".$userData['last_name']."<br> Permintaan sedang diproses, harap bersabar";
+                $data['content'] = 'Halo '.$userData['first_name']." ".$userData['last_name']."<br> request akun anda sedang diproses, silakan ditunggu.
+admin kami akan mengirimkan email notifikasi aktivasi akun anda dalam 1 x 24 jam dari waktu pendaftaran.
+terima kasih";
                 if (email_send($data) == true) {
                     $user_data = 'success';
                     $this->session->set_flashdata("header","Registrasi Berhasil");
@@ -487,7 +493,9 @@ class Keanggotaan extends MX_Controller  {
             $data['name_from'] = 'IDREN';
             $data['email_to'] = $userData['email'];
             $data['subject'] = 'Pendaftaran Berhasil';
-            $data['content'] = 'Halo '.$userData['first_name']." ".$userData['last_name']."<br> Permintaan sedang diproses, harap bersabar";
+            $data['content'] = 'Halo '.$userData['first_name']." ".$userData['last_name']."<br> request akun anda sedang diproses, silakan ditunggu.
+admin kami akan mengirimkan email notifikasi aktivasi akun anda dalam 1 x 24 jam dari waktu pendaftaran.
+terima kasih";
             if (email_send($data) == true) {
                 $user_data = 'success';
                 $this->session->set_flashdata("header","Registrasi Berhasil");
@@ -523,7 +531,9 @@ class Keanggotaan extends MX_Controller  {
                 $data['name_from'] = 'IDREN';
                 $data['email_to'] = $userData['email'];
                 $data['subject'] = 'Pendaftaran Berhasil';
-                $data['content'] = 'Halo '.$userData['first_name']." ".$userData['last_name']."<br> Permintaan sedang diproses, harap bersabar";
+                $data['content'] = 'Halo '.$userData['first_name']." ".$userData['last_name']."<br> request akun anda sedang diproses, silakan ditunggu.
+admin kami akan mengirimkan email notifikasi aktivasi akun anda dalam 1 x 24 jam dari waktu pendaftaran.
+terima kasih";
                 if (email_send($data) == true) {
                     $user_data = 'success';
                     $this->session->set_flashdata("header","Registrasi Berhasil");
@@ -558,7 +568,9 @@ class Keanggotaan extends MX_Controller  {
             $data['name_from'] = 'IDREN';
             $data['email_to'] = $userData['email'];
             $data['subject'] = 'Pendaftaran Berhasil';
-            $data['content'] = 'Halo '.$userData['first_name']." ".$userData['last_name']."<br> Permintaan sedang diproses, harap bersabar";
+            $data['content'] = 'Halo '.$userData['first_name']." ".$userData['last_name']."<br> request akun anda sedang diproses, silakan ditunggu.
+admin kami akan mengirimkan email notifikasi aktivasi akun anda dalam 1 x 24 jam dari waktu pendaftaran.
+terima kasih";
             if (email_send($data) == true) {
                 $user_data = 'success';
                 $this->session->set_flashdata("header","Registrasi Berhasil");

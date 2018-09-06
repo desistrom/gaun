@@ -130,7 +130,7 @@ class News extends CI_Controller  {
        // $url_page = $this->uri->segment_array();
        // $slug = end($url_page);
        // $idnews = $this->db->get_where('tb_news',$url_page)->row_array()['id_news'];
-       $this->data['comment'] = $this->db->get_where('tb_comment',array('id_berita'=>$param))->result_array();;
+       $this->data['comment'] = $this->db->get_where('tb_comment',array('id_berita'=>$id))->result_array();;
        // print_r($this->data['comment']);
    
         $this->ciparser->new_parse('template_frontend','modules_web', 'detail_news_layout',$this->data);

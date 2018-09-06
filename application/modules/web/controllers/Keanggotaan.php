@@ -92,10 +92,10 @@ class Keanggotaan extends MX_Controller  {
         $profit['picture'] = $this->db->query($sql)->row_array()['picture_profit'];
         $ret['code'] = '200';
         $retData['status'] = 'Success';
-        if ($this->v1_model->user_setting()['picture'] == '') {
+        if ($this->db->query($sql)->row_array()['picture_profit'] == '') {
             $profit['picture']='assets/images/logo/IDREN-2.png';
         }else{
-            $profit['picture']='media/'.$this->v1_model->user_setting()['picture_profit'];
+            $profit['picture']='media/'.$this->db->query($sql)->row_array()['picture_profit'];
         }
         $this->data['benefit']=$profit;
         $this->ciparser->new_parse('template_frontend','modules_web', 'benefit_layout',$this->data);

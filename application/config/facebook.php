@@ -23,7 +23,7 @@ if($_SERVER['REQUEST_URI'] == 'localhost'){
 	$config['facebook_app_secret']          = 'f86ea994cadb7cd6730781ded4bf679c';
 }else{
 	$config['facebook_app_id']              = '607824559619085';
-	$config['facebook_app_secret']          = 'e06512b87c078488bb733b08f37e3662';
+	$config['facebook_app_secret']          = 'fbd158fe5954d6f9d2676350909ebae1';
 }
 $config['facebook_login_type']          = 'web';
 $link = $_SERVER['PHP_SELF'];

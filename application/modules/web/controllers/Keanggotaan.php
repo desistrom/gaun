@@ -27,8 +27,23 @@ class Keanggotaan extends MX_Controller  {
         // $a = json_decode($this->api_helper($url),true);
         $methode = 'GET';
         $token = '';
-        $b = api_helper('',$url_instansi,$methode,$token);
-        $this->data['total'] = count($b['data']);
+        // $b = api_helper('',$url_instansi,$methode,$token);
+        $sql = "SELECT nm_instansi as instansi, id_instansi as id, phone as number_phone, website as link, alamat as address, gambar as image FROM tb_instansi where is_aktif = 1 AND status = 2 order by -sort DESC";
+        $b = $this->db->query($sql)->result_array();
+        foreach ($b as $key => $value) {
+            if ($value['image'] == '') {
+                $b[$key]['image_thumbnail']='assets/images/logo/IDREN-2.png';
+            }else{
+                if (file_exists(FCPATH."media/thumbnail/".$value['image'])) {
+                    $b[$key]['image_thumbnail'] = 'media/thumbnail/'.$value['image'];
+                    $galery[$key]['image'] = 'media/'.$value['image'];
+                }else{
+                    $b[$key]['image_thumbnail'] = 'media/'.$value['image'];
+                    $b[$key]['image'] = 'media/'.$value['image'];
+                }
+            }                                                                                                                     
+        }
+        $this->data['total'] = count($b);
         // $config['base_url'] = base_url().'web/keanggotaan/index';
         // $url = base_url().'api/v1/news';
         /*$methode = 'GET';
@@ -49,16 +64,18 @@ class Keanggotaan extends MX_Controller  {
             $start = ceil($this->input->get('page') * 10);
             $this->data['total_row'] = $start;
             $url = URL_GET_INSTANSI_PAGGING.$start;
-            $a = api_helper('',$url,$methode,$token);
-            $this->data['keanggotaan']=$a['data'];
+            // $a = api_helper('',$url,$methode,$token);
+            $sql = "SELECT nm_instansi as instansi, id_instansi as id, phone as number_phone, website as link, alamat as address, gambar as image FROM tb_instansi where status = 2 AND is_aktif = 1 order by sort ASC LIMIT ".$start.",10";
+            $a = $this->db->query($sql)->result_array();
+            $this->data['keanggotaan']=$a;
             $result = $this->load->view('keanggotaan_looping',$this->data);
             echo json_encode($result);
         }else{
             $url = URL_GET_INSTANSI_PAGGING.'0';
             $this->data['total_row'] = '10';
-            $a = api_helper('',$url,'GET','');
-            // print_r($a);
-            $this->data['keanggotaan']=$a['data'];
+            $sql = "SELECT nm_instansi as instansi, id_instansi as id, phone as number_phone, website as link, alamat as address, gambar as image FROM tb_instansi where status = 2 AND is_aktif = 1 order by sort ASC LIMIT 0,10";
+            $a = $this->db->query($sql)->result_array();
+            $this->data['keanggotaan']=$a;
             $this->ciparser->new_parse('template_frontend','modules_web', 'keanggotaan_layout',$this->data);
         }
 
@@ -69,8 +86,18 @@ class Keanggotaan extends MX_Controller  {
         // $a = json_decode($this->api_helper($url),true);
         $methode = 'GET';
         $token = '';
-        $a = api_helper('',$url,$methode,$token);
-        $this->data['benefit']=$a['data'];
+        // $a = api_helper('',$url,$methode,$token);
+        $sql = "SELECT profit as benefit, cara as step, image as picture, image_profit as picture_profit FROM tb_setting_user";
+        $profit['benefit'] = $this->db->query($sql)->row_array()['benefit'];
+        $profit['picture'] = $this->db->query($sql)->row_array()['picture_profit'];
+        $ret['code'] = '200';
+        $retData['status'] = 'Success';
+        if ($this->v1_model->user_setting()['picture'] == '') {
+            $profit['picture']='assets/images/logo/IDREN-2.png';
+        }else{
+            $profit['picture']='media/'.$this->v1_model->user_setting()['picture_profit'];
+        }
+        $this->data['benefit']=$profit;
         $this->ciparser->new_parse('template_frontend','modules_web', 'benefit_layout',$this->data);
      }
      function pendaftaran() {
@@ -111,7 +138,45 @@ class Keanggotaan extends MX_Controller  {
 
                 
                 $methode = "POST";
-                 $ret['cek']=api_helper(json_encode($data_user),$url,$methode,'');
+                // $ret['cek']=api_helper(json_encode($data_user),$url,$methode,'');
+                if ($this->db->get_where('tb_instansi',array('username'=>$data_user['username']))->num_rows() > 0) {
+                    $ret['check']['code'] = "500";
+                    $ret['status'] = 'Failed';
+                    $ret['data'] = "Username alredy exist";
+                    $this->response($ret,200);
+                    exit();
+                }
+                if (!$this->db->insert('tb_instansi',$data_user)) {
+                    $ret['code'] = "500";
+                    $ret['status'] = 'Failed';
+                    $ret['data'] = "Can't add user";
+                }
+                $template = $this->db->get_where('tb_template_email',array('id_kategori_email_ref'=>1,'status'=>1))->row_array()['source_code'];
+                $final = str_replace("Email_User", $data['username'], $template);
+                // $final = str_replace("subject_email", "Registrasi", $final);
+                $sender = $this->db->get('tb_setting_email')->row_array();
+                $this->load->helper('email_send_helper');
+                $data_email['email_from'] = $sender['email'];
+                $data_email['name_from'] = $sender['nama_user'];
+                $data_email['email_to'] = $data['email'];
+                $data_email['subject'] = "Registerasi";
+                $content = '';
+                $content .= "<tr><td>Username </td><td>:</td> ".$data['username']."</td></tr>";
+                $content .= "<tr><td>Password </td><td>:</td> ".$data['password']."</td></tr>";
+                $content .= "<tr><td>Email </td><td>:</td> ".$data['email']."</td></tr>";
+                $content .= "<tr><td>Website </td><td>:</td> ".$data['website']."</td></tr>";
+                $content .= "<tr><td>Alamat </td><td>:</td> ".$data['address']."</td></tr>";
+                $data_email['content'] = str_replace("content_email", $content, $final);
+                if (email_send($data_email) == true) {
+                    $ret['cek']['code'] = '200';
+                    $ret['status'] = 'Success';
+                    $ret['data'] = 'User Has been inserted';
+                    $ret['data'] = $template;
+                }else{
+                    $ret['cek']['code'] = '500';
+                    $ret['status'] = 'failed';
+                    $ret['data'] = 'Email Not Send';
+                }
                  if ($ret['cek']['code']=='200') {
                        if (api_helper(json_encode($data_user),$url,$methode,'')) {
                         $ret['status'] = 1;
@@ -143,13 +208,21 @@ class Keanggotaan extends MX_Controller  {
             exit();
         }
         $url = URL_GET_PENDAFTARAN ;
-        $a = api_helper('',$url,$methode,$token);
+        // $a = api_helper('',$url,$methode,$token);
+        $sql = "SELECT profit as benefit, cara as step, image as picture, image_profit as picture_profit FROM tb_setting_user";
+        $profit['step'] = $this->db->query($sql)->row_array()['step'];
+        $profit['picture'] = $this->db->query($sql)->row_array()['picture'];
+        if ($this->v1_model->user_setting()['picture'] == '') {
+            $profit['picture']='assets/images/logo/IDREN-2.png';
+        }else{
+            $profit['picture']='media/'.$this->v1_model->user_setting()['picture'];
+        }
         $this->data = array(
             'action' => site_url('web/keanggotaan/pendaftaran'),
             'captcha' => $this->recaptcha->getWidget(), // menampilkan recaptcha
             'script_captcha' => $this->recaptcha->getScriptTag(), // javascript recaptcha ditaruh di head
         );
-        $this->data['step']=$a['data'];
+        $this->data['step']=$profit;
         $this->ciparser->new_parse('template_frontend','modules_web', 'pendaftaran_layout',$this->data);
      }
      public function search()
@@ -157,7 +230,22 @@ class Keanggotaan extends MX_Controller  {
         $url_instansi = URL_GET_ALL_INSTANSI ;
         $methode = 'GET';
         $token = '';
-        $b = api_helper('',$url_instansi,$methode,$token);
+        // $b = api_helper('',$url_instansi,$methode,$token);
+        $sql = "SELECT nm_instansi as instansi, id_instansi as id, phone as number_phone, website as link, alamat as address, gambar as image FROM tb_instansi where is_aktif = 1 AND status = 2 order by -sort DESC";
+        $b = $this->db->query($sql)->result_array();
+        foreach ($b as $key => $value) {
+            if ($value['image'] == '') {
+                $b[$key]['image_thumbnail']='assets/images/logo/IDREN-2.png';
+            }else{
+                if (file_exists(FCPATH."media/thumbnail/".$value['image'])) {
+                    $b[$key]['image_thumbnail'] = 'media/thumbnail/'.$value['image'];
+                    $galery[$key]['image'] = 'media/'.$value['image'];
+                }else{
+                    $b[$key]['image_thumbnail'] = 'media/'.$value['image'];
+                    $b[$key]['image'] = 'media/'.$value['image'];
+                }
+            }                                                                                                                     
+        }
 
         $search['search'] = $_GET['data'];
         // $sql = "select * from tb_instansi where nm_instansi like '%".$search['search']."%'";
@@ -169,9 +257,11 @@ class Keanggotaan extends MX_Controller  {
             $start = ceil($this->input->get('page') * 10);
             $this->data['total_row'] = $start;
             $search['page'] = $start;
-            $a = api_helper(json_encode($search),$url,$methode,$token);
-            $this->data['total'] = count($a['data']);
-            $this->data['keanggotaan']=$a['data'];
+            // $a = api_helper(json_encode($search),$url,$methode,$token);
+            $sql = "SELECT nm_instansi as instansi, id_instansi as id, phone as number_phone, website as link, alamat as address, gambar as image FROM tb_instansi where status = 2 AND is_aktif = 1 AND nm_instansi like'%".$search['search'] ."%' order by sort ASC LIMIT ".$search['page'].",10";
+            $a = $this->db->query($sql)->result_array();
+            $this->data['total'] = count($a);
+            $this->data['keanggotaan']=$a;
             $result = $this->load->view('keanggotaan_looping',$this->data);
             echo json_encode($result);
         }else{
@@ -179,9 +269,11 @@ class Keanggotaan extends MX_Controller  {
             // print_r($search);
             $search['page'] = 0;
             $this->data['total_row'] = '10';
-            $a = api_helper(json_encode($search),$url,$methode,$token);
-            $this->data['total'] = count($a['data']);
-            $this->data['keanggotaan']=$a['data'];
+            // $a = api_helper(json_encode($search),$url,$methode,$token);
+            $sql = "SELECT nm_instansi as instansi, id_instansi as id, phone as number_phone, website as link, alamat as address, gambar as image FROM tb_instansi where status = 2 AND is_aktif = 1 AND nm_instansi like'%".$search['search'] ."%' order by sort ASC LIMIT 0,10";
+            $a = $this->db->query($sql)->result_array();
+            $this->data['total'] = count($a);
+            $this->data['keanggotaan']=$a;
             $this->ciparser->new_parse('template_frontend','modules_web', 'keanggotaan_search',$this->data);
         }
 

@@ -16,6 +16,7 @@ class Home extends CI_Controller  {
     }
 
     function index() {
+        // print_r($_SERVER['SERVER_NAME']);
         $url = URL_GET_HERO;
         $methode = 'GET';
         $token = '';

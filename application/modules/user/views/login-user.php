@@ -170,11 +170,11 @@
       var js, fjs = d.getElementsByTagName(s)[0];
       if (d.getElementById(id)) return;
       js = d.createElement(s); js.id = id;
-      if($_SERVER['REQUEST_URI'] == 'localhost'){
+      <?php if(DOMAIN == 'localhost'){ ?>
         js.src = 'https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v2.12&appId=117942632203648&autoLogAppEvents=1';
-      }else{
+      <?php }else{ ?>
         js.src = 'https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v2.12&appId=607824559619085&autoLogAppEvents=1';
-      }
+      <?php } ?>
       fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
     </script> 

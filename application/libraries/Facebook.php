@@ -48,8 +48,10 @@ Class Facebook
         $this->load->helper('url');
         if (!isset($this->fb)){
             $this->fb = new FB([
-                'app_id'                => $this->config->item('facebook_app_id'),
-                'app_secret'            => $this->config->item('facebook_app_secret'),
+                // 'app_id'                => $this->config->item('facebook_app_id'),
+                // 'app_secret'            => $this->config->item('facebook_app_secret'),
+                'app_id'                => FACEBOOK_APP_ID,
+                'app_secret'            => FACEBOOK_APP_SECRET,
                 'default_graph_version' => $this->config->item('facebook_graph_version')
             ]);
         }

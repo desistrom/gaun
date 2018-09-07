@@ -11,21 +11,21 @@
 |  scopes            string   Specify scopes
 */
 $config['google']['client_id']        = '241538137751-cebmc4661fvfj5pvseu3vdqi5jd6g4ke.apps.googleusercontent.com';
-$config['google']['client_secret']    = 'DAqOlcomQZRgYy54byGdh8y3';
-$link = $_SERVER['PHP_SELF'];
-    $link_array = explode('/',$link);
-    $page = end($link_array);
-    // print_r($page);
+$config['google']['client_secret']    = 'N8CqiOO32Y7fvakqyhNAmbyB';
+
+    // print_r(PAGE);
+// echo PAGE;
     // $this->CI = & get_instance();
-if ($page == 'login_userlogin_user') {
-	$config['google']['redirect_uri']     = URL_API.'user/login_user/google/';
-}elseif($page == 'pendaftaran_dosenpendaftaran_dosen'){
-	$config['google']['redirect_uri']     = URL_API.'web/keanggotaan/google/';
-}elseif($page == 'login_mahasiswalogin_mahasiswa'){
-	$config['google']['redirect_uri']     = URL_API.'web/keanggotaan/google/';
-}else{
-	$config['google']['redirect_uri']     = URL_API.'web/keanggotaan/google_mahasiswa/';
-}
+// if (PAGE == 'login_user') {
+	// print_r('work');
+	// $config['google']['redirect_uri']     = URL_API.'user/login_user/google/';
+// }elseif(PAGE == 'pendaftaran_dosen'){
+	// $config['google']['redirect_uri']     = URL_API.'web/keanggotaan/google/';
+// }elseif(PAGE == 'login_mahasiswa'){
+	// $config['google']['redirect_uri']     = URL_API.'web/keanggotaan/google/';
+// }else{
+	// $config['google']['redirect_uri']     = URL_API.'web/keanggotaan/google_mahasiswa/';
+// }
 $config['google']['application_name'] = 'IDREN';
 $config['google']['api_key']          = '';
 $config['google']['scopes']           = array();

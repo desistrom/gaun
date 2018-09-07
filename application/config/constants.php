@@ -481,3 +481,14 @@ define('URL_GET_FOUNDER_V2','http://192.168.88.157/idren/api/v3/founder');*/
 define('URL_API','http://localhost/idren/');
 define('URL_INSERT_DOSEN','http://localhost/idren/api/v3/insert_dosen');
 define('URL_INSERT_MAHASISWA','http://localhost/idren/api/v3/insert_mahasiswa');
+$link = $_SERVER['PHP_SELF'];
+$link_array = explode('/',$link);
+$page = end($link_array);
+define('PAGE', $page);
+define('DOMAIN', $_SERVER['SERVER_NAME']);
+
+define('FACEBOOK_APP_ID','117942632203648');
+define('FACEBOOK_APP_SECRET','f86ea994cadb7cd6730781ded4bf679c');
+
+// define('FACEBOOK_APP_ID','607824559619085');
+// define('FACEBOOK_APP_SECRET','fbd158fe5954d6f9d2676350909ebae1');

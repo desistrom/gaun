@@ -12,14 +12,15 @@ class Login_user extends MX_Controller  {
 
 	function __construct(){
 	$this->load->library('Recaptcha');
-    $this->load->library('google');
+    // $this->load->library('google');
     $this->load->library('facebook');
     $this->load->model('user');
     $this->load->helper('api');
 
 	}
     public function index() {
-
+            $this->load->library('google',URL_API.'user/login_user/google/');
+        // print_r(PAGE);
         if($this->input->method() == 'post'){
             $ret['state'] = 0;
             $ret['status'] = 0;
@@ -80,7 +81,7 @@ class Login_user extends MX_Controller  {
     }
 
     public function login_mahasiswa() {
-
+        $this->load->library('google',URL_API.'user/login_user/google_mahasiswa/');
         if($this->input->method() == 'post'){
             $ret['state'] = 0;
             $ret['status'] = 0;
@@ -148,6 +149,8 @@ class Login_user extends MX_Controller  {
             $userProfile = $this->facebook->request('get', '/me?fields=id,first_name,last_name,email,gender,locale,picture');
 
             // Preparing data for database insertion
+            print_r($userProfile);
+            return false;
             $userData['oauth_provider'] = 'facebook';
             $userData['oauth_id'] = $userProfile['id'];
             $userData['first_name'] = $userProfile['first_name'];
@@ -191,10 +194,13 @@ terima kasih";
     }
 
     public function google(){
+        $this->load->library('google',URL_API.'user/login_user/google/');
         $this->google->getAuthenticate();
             
         //get user info from google
         $gpInfo = $this->google->getUserInfo();
+        // print_r($gpInfo);
+        // return false;
         
         //preparing data for database insertion
         $userData['oauth_provider'] = 'google';
@@ -289,6 +295,7 @@ terima kasih";
     }
 
     public function google_mahasiswa(){
+        $this->load->library('google',URL_API.'user/login_user/google_mahasiswa/');
         $this->google->getAuthenticate();
             
         //get user info from google

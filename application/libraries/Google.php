@@ -18,7 +18,7 @@
  */
 class Google{
     
-    public function __construct(){
+    public function __construct($uri = null){
         
         $CI =& get_instance();
         $CI->config->load('google');
@@ -30,7 +30,8 @@ class Google{
         $this->client->setApplicationName($CI->config->item('application_name', 'google'));
         $this->client->setClientId($CI->config->item('client_id', 'google'));
         $this->client->setClientSecret($CI->config->item('client_secret', 'google'));
-        $this->client->setRedirectUri($CI->config->item('redirect_uri', 'google'));
+        // $this->client->setRedirectUri($CI->config->item('redirect_uri', 'google'));
+        $this->client->setRedirectUri($uri);
         $this->client->setDeveloperKey($CI->config->item('api_key', 'google'));
         $this->client->setScopes($CI->config->item('scopes', 'google'));
         $this->client->setAccessType('online');

@@ -13,7 +13,7 @@ class Keanggotaan extends MX_Controller  {
 		$this->load->helper('api');
         $this->load->library('pagination');
         $this->load->library('Recaptcha');
-        $this->load->library('google');
+        // $this->load->library('google');
         $this->load->library('facebook');
         $this->load->model('user');
 	}
@@ -279,6 +279,9 @@ class Keanggotaan extends MX_Controller  {
 
     }
     public function pendaftaran_dosen() {
+        // print_r(PAGE);
+        $this->load->library('google',URL_API.'web/keanggotaan/google/');
+        // print_r($_SERVER['SERVER_NAME']);
         $methode = 'GET';
         $token = '';
         if ($this->input->server('REQUEST_METHOD') == 'POST') {
@@ -352,6 +355,7 @@ terima kasih";
     }
 
     public function pendaftaran_mahasiswa() {
+        $this->load->library('google',URL_API.'web/keanggotaan/google_mahasiswa/');
         $methode = 'GET';
         $token = '';
         if ($this->input->server('REQUEST_METHOD') == 'POST') {
@@ -474,6 +478,7 @@ terima kasih";
     }
 
     public function google(){
+        $this->load->library('google',URL_API.'web/keanggotaan/google/');
         $this->google->getAuthenticate();
         $gpInfo = $this->google->getUserInfo();
         
@@ -549,6 +554,7 @@ terima kasih";
     }
 
     public function google_mahasiswa(){
+        $this->load->library('google',URL_API.'web/keanggotaan/google_mahasiswa/');
         $this->google->getAuthenticate();
         $gpInfo = $this->google->getUserInfo();
         

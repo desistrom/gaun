@@ -23,6 +23,13 @@ class Pengguna extends MX_Controller  {
 		$this->ciparser->new_parse('template_admin','modules_admin', 'pengguna/pengguna_layout',$this->data);
 	}
 
+    public function mahasiswa(){
+        $this->data['breadcumb'] = 'Daftar Mahasiswa';
+        $sql = "SELECT * FROM tb_pengguna p JOIN tb_mahasiswa d on p.id_pengguna = d.id_pengguna_ref where status = 1";
+        $this->data['user'] = $this->db->query($sql)->result_array();
+        $this->ciparser->new_parse('template_admin','modules_admin', 'pengguna/pengguna_layout',$this->data);
+    }
+
 	public function confirm($id = null){
 		// print_r($id);
 		$data_p['status'] = 1;

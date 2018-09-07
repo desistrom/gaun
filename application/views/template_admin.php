@@ -212,6 +212,20 @@
           </ul>
         </li>
 
+        <li class=" treeview <?php if(current_url() == site_url('admin/pengguna') || current_url() == site_url('admin/pengguna/mahasiswa')){ ?>  active <?php } ?>">
+          <a href="#">
+            <i class="fa fa-link"></i>  <span>Request Akun</span>
+            <span class="pull-right-container">
+
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li <?php if(current_url() == site_url('admin/pengguna')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/pengguna');?>"><i class="material-icons">group_add</i> Dosen</a></li>
+            <li <?php if(current_url() == site_url('admin/pengguna/mahasiswa')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/pengguna/mahasiswa');?>"><i class="material-icons">group_add</i> Mahasiswa </a></li>
+          </ul>
+        </li>
+
         <li class=" treeview <?php if(current_url() == site_url('admin/keanggotaan/setting') || current_url() == site_url('admin/keanggotaan/index') || current_url() == site_url('admin/keanggotaan/instansi') || current_url() == site_url('admin/keanggotaan/setting_reg') || current_url() == site_url('admin/keanggotaan/index') || current_url() == site_url('admin/keanggotaan/instansi') || current_url() == site_url('admin/keanggotaan/instansi_request')){ ?> active <?php } ?>">
           <a href="#">
             <i class="fa fa-users"></i>  <span>Keanggotaan</span>

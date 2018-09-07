@@ -64,11 +64,11 @@ class Login_user extends MX_Controller  {
                 if ($data->num_rows() == 1) {
                     $ret['status'] = 1;
                     $data_user = $data->row_array();
-                    // $this->session->set_userdata('data_user', $data_user);
-                    // $this->session->set_userdata('previlage', $data_user['id_role_ref']);
-                    // $this->session->set_userdata('is_login', true);
-                    // $this->session->set_flashdata("header","Registrasi Berhasil");
-                    // $this->session->set_flashdata("notif","Registrasi Anda sedang kami Proses, tunggu konfirmasi selanjutnya dari Admin");
+                    $this->session->set_userdata('data_user', $data_user);
+                    $this->session->set_userdata('previlage', $data_user['id_role_ref']);
+                    $this->session->set_userdata('is_login', true);
+                    $this->session->set_flashdata("header","Registrasi Berhasil");
+                    $this->session->set_flashdata("notif","Registrasi Anda sedang kami Proses, tunggu konfirmasi selanjutnya dari Admin");
                     $data_token['username'] = $username;
                     $data_token['password'] = $password;
                     $url = URL_GET_TOKEN;

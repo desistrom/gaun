@@ -19,10 +19,10 @@
                     <div class="inner">
                       <h3>150</h3>
 
-                      <p>User</p>
+                      <p>Dosen</p>
                     </div>
                     <div class="icon">
-                      <i class="fa fa-building-o"></i>
+                      <i class="glyphicon glyphicon-education"></i>
                     </div>
                     <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                   </div>
@@ -37,7 +37,7 @@
                       <p>Mahasiswa</p>
                     </div>
                     <div class="icon">
-                      <i class="fa fa-university" aria-hidden="true"></i>
+                      <i class="glyphicon glyphicon-education"></i>
                     </div>
                     <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                   </div>

@@ -30,6 +30,13 @@ class Tentang extends MX_Controller  {
         $this->db->order_by("sort", "asc");
         $query = $this->db->get(); 
         $b = $query->result_array();
+        foreach ($b as $key => $value) {
+            if ($value['foto'] == '') {
+                $b[$key]['foto'] = 'assets/images/logo/IDREN-2.png';
+            }else{
+                $b[$key]['foto'] = "assets/media/thumbnail/".$value['foto'];
+            }
+        }
 
         /*$this->db->from('tb_founder');
         $this->db->order_by("sort", "asc");

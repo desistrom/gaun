@@ -83,10 +83,16 @@
         
           }
           .nav li a.active.btn-gabung{
-                /*background-color: #D10909;*/
+                background-color: white;
               color: #D10909;
               border-radius: 5px;
               border: solid 2px #D10909;
+          } 
+           .nav li a.active.btn-gabung:hover{
+                background-color: white;
+              color: #891111;
+              border-radius: 5px;
+              border: solid 2px #891111;
           } 
     </style>
 </head>

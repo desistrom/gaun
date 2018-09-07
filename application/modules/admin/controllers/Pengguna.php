@@ -17,14 +17,14 @@ class Pengguna extends MX_Controller  {
 	}
 
 	public function index(){
-		$this->data['breadcumb'] = 'Daftar Dosen';
+		$this->data['breadcumb'] = 'Request Dosen';
 		$sql = "SELECT * FROM tb_pengguna p JOIN tb_dosen d on p.id_pengguna = d.id_pengguna_ref where status = 0";
 		$this->data['user'] = $this->db->query($sql)->result_array();
 		$this->ciparser->new_parse('template_admin','modules_admin', 'pengguna/pengguna_layout',$this->data);
 	}
 
     public function mahasiswa(){
-        $this->data['breadcumb'] = 'Daftar Mahasiswa';
+        $this->data['breadcumb'] = 'Request Mahasiswa';
         $sql = "SELECT * FROM tb_pengguna p JOIN tb_mahasiswa d on p.id_pengguna = d.id_pengguna_ref where status = 1";
         $this->data['user'] = $this->db->query($sql)->result_array();
         $this->ciparser->new_parse('template_admin','modules_admin', 'pengguna/pengguna_layout',$this->data);

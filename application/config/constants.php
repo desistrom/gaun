@@ -487,8 +487,8 @@ $page = end($link_array);
 define('PAGE', $page);
 define('DOMAIN', $_SERVER['SERVER_NAME']);
 
-define('FACEBOOK_APP_ID','117942632203648');
-define('FACEBOOK_APP_SECRET','f86ea994cadb7cd6730781ded4bf679c');
+define('FACEBOOK_APP_ID','1051145755094888');
+define('FACEBOOK_APP_SECRET','9a62276f3da309bd71c9cc75dc1eae0a');
 
 // define('FACEBOOK_APP_ID','607824559619085');
 // define('FACEBOOK_APP_SECRET','fbd158fe5954d6f9d2676350909ebae1');

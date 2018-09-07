@@ -14,7 +14,7 @@ class Keanggotaan extends MX_Controller  {
         $this->load->library('pagination');
         $this->load->library('Recaptcha');
         // $this->load->library('google');
-        $this->load->library('facebook');
+        // $this->load->library('facebook');
         $this->load->model('user');
 	}
     function index() {
@@ -279,6 +279,7 @@ class Keanggotaan extends MX_Controller  {
 
     }
     public function pendaftaran_dosen() {
+        $this->load->library('facebook','web/keanggotaan/facebook');
         // print_r(PAGE);
         $this->load->library('google',URL_API.'web/keanggotaan/google/');
         // print_r($_SERVER['SERVER_NAME']);
@@ -355,6 +356,7 @@ terima kasih";
     }
 
     public function pendaftaran_mahasiswa() {
+        $this->load->library('facebook','web/keanggotaan/facebook_mahasiswa');
         $this->load->library('google',URL_API.'web/keanggotaan/google_mahasiswa/');
         $methode = 'GET';
         $token = '';
@@ -438,7 +440,7 @@ terima kasih";
     }
 
     public function facebook(){
-
+        $this->load->library('facebook','web/keanggotaan/facebook');
         $userData = array();
         $ret['status'] = 0;
         $ret['state'] = 0;
@@ -515,6 +517,7 @@ terima kasih";
 
     public function facebook_mahasiswa(){
 
+        $this->load->library('facebook','web/keanggotaan/facebook_mahasiswa');
         $userData = array();
         $ret['status'] = 0;
         $ret['state'] = 0;

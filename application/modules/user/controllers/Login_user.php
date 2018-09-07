@@ -13,12 +13,13 @@ class Login_user extends MX_Controller  {
 	function __construct(){
 	$this->load->library('Recaptcha');
     // $this->load->library('google');
-    $this->load->library('facebook');
+    // $this->load->library('facebook');
     $this->load->model('user');
     $this->load->helper('api');
 
 	}
     public function index() {
+        $this->load->library('facebook','user/login_user/facebook');
             $this->load->library('google',URL_API.'user/login_user/google/');
         // print_r(PAGE);
         if($this->input->method() == 'post'){
@@ -81,6 +82,7 @@ class Login_user extends MX_Controller  {
     }
 
     public function login_mahasiswa() {
+        $this->load->library('facebook','user/login_user/facebook_mahasiswa');
         $this->load->library('google',URL_API.'user/login_user/google_mahasiswa/');
         if($this->input->method() == 'post'){
             $ret['state'] = 0;
@@ -142,15 +144,15 @@ class Login_user extends MX_Controller  {
     }
 
     public function facebook(){
-
+        $this->load->library('facebook','user/login_user/facebook');
         $userData = array();
         $ret['status'] = 0;
         $ret['state'] = 0;
             $userProfile = $this->facebook->request('get', '/me?fields=id,first_name,last_name,email,gender,locale,picture');
 
             // Preparing data for database insertion
-            print_r($userProfile);
-            return false;
+            // print_r($userProfile);
+            // return false;
             $userData['oauth_provider'] = 'facebook';
             $userData['oauth_id'] = $userProfile['id'];
             $userData['first_name'] = $userProfile['first_name'];
@@ -166,8 +168,8 @@ class Login_user extends MX_Controller  {
                 $data['name_from'] = 'Admin Support';
                 $data['email_to'] = $userData['email'];
                 $data['subject'] = 'Pendaftaran Berhasil';
-                $data['content'] = 'Halo '.$userData['first_name']." ".$userData['last_name']."<br> request akun anda sedang diproses, silakan ditunggu.
-admin kami akan mengirimkan email notifikasi aktivasi akun anda dalam 1 x 24 jam dari waktu pendaftaran.
+                $data['content'] = 'Halo '.$userData['first_name']." ".$userData['last_name']."<br> request akun anda sedang diproses, silakan ditunggu.<br>
+admin kami akan mengirimkan email notifikasi aktivasi akun anda dalam 1 x 24 jam dari waktu pendaftaran.<br>
 terima kasih";
                 if (email_send($data) == true) {
                     $user_data = 'success';
@@ -217,8 +219,8 @@ terima kasih";
                 $data['name_from'] = 'Admin Support';
                 $data['email_to'] = $userData['email'];
                 $data['subject'] = 'Pendaftaran Berhasil';
-                $data['content'] = 'Halo '.$userData['first_name']." ".$userData['last_name']."<br> request akun anda sedang diproses, silakan ditunggu.
-admin kami akan mengirimkan email notifikasi aktivasi akun anda dalam 1 x 24 jam dari waktu pendaftaran.
+                $data['content'] = 'Halo '.$userData['first_name']." ".$userData['last_name']."<br> request akun anda sedang diproses, silakan ditunggu.<br>
+admin kami akan mengirimkan email notifikasi aktivasi akun anda dalam 1 x 24 jam dari waktu pendaftaran.<br>
 terima kasih";
                 if (email_send($data) == true) {
                     $user_data = 'success';
@@ -229,7 +231,7 @@ terima kasih";
             }else{
                 if ($userID == 'no') {
 	                $this->session->set_flashdata("header","Login Gagal");
-	                $this->session->set_flashdata("notif","Akun Anda pernah belum aktif, silahkan menunggu konformasi dari admin");
+	                $this->session->set_flashdata("notif","Akun Anda belum aktif, silahkan menunggu konformasi dari admin");
 	                redirect(site_url('user/login_user'));
 
                 }elseif ($userID == 'salah') {
@@ -245,7 +247,7 @@ terima kasih";
     }
 
     public function facebook_mahasiswa(){
-
+        $this->load->library('facebook','user/login_user/facebook_mahasiswa');
         $userData = array();
         $ret['status'] = 0;
         $ret['state'] = 0;
@@ -267,8 +269,8 @@ terima kasih";
                 $data['name_from'] = 'Admin Support';
                 $data['email_to'] = $userData['email'];
                 $data['subject'] = 'Pendaftaran Berhasil';
-                $data['content'] = 'Halo '.$userData['first_name']." ".$userData['last_name']."<br> request akun anda sedang diproses, silakan ditunggu.
-admin kami akan mengirimkan email notifikasi aktivasi akun anda dalam 1 x 24 jam dari waktu pendaftaran.
+                $data['content'] = 'Halo '.$userData['first_name']." ".$userData['last_name']."<br> request akun anda sedang diproses, silakan ditunggu.<br>
+admin kami akan mengirimkan email notifikasi aktivasi akun anda dalam 1 x 24 jam dari waktu pendaftaran.<br>
 terima kasih";
                 if (email_send($data) == true) {
                     $user_data = 'success';
@@ -316,8 +318,8 @@ terima kasih";
                 $data['name_from'] = 'Admin Support';
                 $data['email_to'] = $userData['email'];
                 $data['subject'] = 'Pendaftaran Berhasil';
-                $data['content'] = 'Halo '.$userData['first_name']." ".$userData['last_name']."<br> request akun anda sedang diproses, silakan ditunggu.
-admin kami akan mengirimkan email notifikasi aktivasi akun anda dalam 1 x 24 jam dari waktu pendaftaran.
+                $data['content'] = 'Halo '.$userData['first_name']." ".$userData['last_name']."<br> request akun anda sedang diproses, silakan ditunggu.<br>
+admin kami akan mengirimkan email notifikasi aktivasi akun anda dalam 1 x 24 jam dari waktu pendaftaran.<br>
 terima kasih";
                 if (email_send($data) == true) {
                     $user_data = 'success';
@@ -342,7 +344,10 @@ terima kasih";
                 }
             }
     }
-  
+    
+    public function logout(){
+        redirect(site_url('user/login_user'));
+    }
 
 
 

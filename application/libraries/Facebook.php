@@ -40,8 +40,10 @@ Class Facebook
     /**
      * Facebook constructor.
      */
-    public function __construct(){
+    var $url = '';
+    public function __construct($url = null){
         // Load fb config
+        $this->url = $url;
         $this->load->config('facebook');
         // Load required libraries and helpers
         $this->load->library('session');
@@ -131,7 +133,7 @@ Class Facebook
         }
         // Get login url
         return $this->helper->getLoginUrl(
-            base_url() . $this->config->item('facebook_login_redirect_url'),
+            base_url() . $this->url,
             $this->config->item('facebook_permissions')
         );
     }

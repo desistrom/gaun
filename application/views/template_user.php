@@ -27,12 +27,12 @@
                   <ul class="nav navbar-nav navbar-right">
                       <li class="dropdown active"><a class="link_dropdown"  href="index.html" class="dropdown-toggle">Dashboard </a>
                           <ul class="drop-menu open active  col col-md-2" role="menu">
-                              <li><a href="index.html"> <i class="fa fa-user"></i>Profil</a></li>
-                              <li><a href="#"> <i class="fa fa-user"></i>Akun</a></li>
+                              <li><a href="#"> <i class="fa fa-user"></i>Profil</a></li>
+                              <li><a href="#"> <i class="fa fa-gear"></i>Akun</a></li>
 
                           </ul>
                         </li>
-                    <li class="dropdown not-active"><a class="link_dropdown"  href="datatable.html" class="dropdown-toggle">tables </a>
+                   <!--  <li class="dropdown not-active"><a class="link_dropdown"  href="datatable.html" class="dropdown-toggle">tables </a>
                           <ul class="drop-menu sub-menu not-active  col col-md-2" >
                               <li><a href="datatable.html">Data tables</a></li>
                               <li><a href="#">submenu 2</a></li>
@@ -52,13 +52,13 @@
                               <li><a href="#">submenu 4</a></li>
 
                           </ul>
-                        </li>
+                        </li> -->
                         
 
                   </ul>
                   <ul class="nav navbar-nav navbar-right navbar-log">
                     <li><a href="#">User</a></li>
-                    <li><a href="#"><i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
+                    <li><a href="<?=site_url('user/login_user/logout');?>"><i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
                   </ul>
               </div>
           </div>

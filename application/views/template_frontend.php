@@ -82,6 +82,12 @@
           .sub-flagcounter-foot img{
         
           }
+          .nav li a.active.btn-gabung{
+                /*background-color: #D10909;*/
+              color: #D10909;
+              border-radius: 5px;
+              border: solid 2px #D10909;
+          } 
     </style>
 </head>
 
@@ -109,7 +115,14 @@
                       
 
                      <!--  <li role="presentation" class="active"><a href="#">Login</a></li> -->
-                      <li role="presentation" class=""><a class="active btn-gabung" href="<?php echo site_url('user/login_user') ?>" data-toggle="modal" >Login</a></li>
+                    <!--   <li role="presentation" class=""><a class="active btn-gabung" href="<?php echo site_url('user/login_user') ?>" data-toggle="modal" >Login</a></li> -->
+                       <li class="dropdown  "><a data-toggle="dropdown" aria-expanded="false" href="#" class="dropdown-toggle active btn-gabung">Login <span class="fa fa-angle-down"></span></a>
+                          <ul class="dropdown-menu" role="menu">
+                              <li><a href="<?php echo site_url('user/login_user') ?>">Dosen</a></li>
+                              <li><a href="<?php echo site_url('user/login_user/login_mahasiswa') ?>">Mahasiswa</a></li>
+
+                          </ul>
+                        </li>
 
                   </ul>
               </div>

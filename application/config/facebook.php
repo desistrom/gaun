@@ -29,20 +29,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 // }
 $config['facebook_login_type']          = 'web';
 
-if (PAGE == 'login_user') {
-	$config['facebook_login_redirect_url']  = 'user/login_user/facebook';
+// if (PAGE == 'login_user') {
+	// $config['facebook_login_redirect_url']  = URL_API.'user/login_user/facebook';
 	
-}elseif (PAGE == 'login_mahasiswa') {
-	$config['facebook_login_redirect_url']  = 'user/login_user/facebook_mahasiswa';
+// }elseif (PAGE == 'login_mahasiswa') {
+// 	$config['facebook_login_redirect_url']  = 'user/login_user/facebook_mahasiswa';
 	
-}else{
-	if (PAGE == 'pendaftaran_dosen') {
-		$config['facebook_login_redirect_url']  = 'web/keanggotaan/facebook';
-	}else{
-		$config['facebook_login_redirect_url']  = 'web/keanggotaan/facebook_mahasiswa';
-	}
-}
+// }else{
+// 	if (PAGE == 'pendaftaran_dosen') {
+// 		$config['facebook_login_redirect_url']  = 'web/keanggotaan/facebook';
+// 	}else{
+// 		$config['facebook_login_redirect_url']  = 'web/keanggotaan/facebook_mahasiswa';
+// 	}
+// }
 $config['facebook_logout_redirect_url'] = 'login/user_authentication_facebook/logout';
 $config['facebook_permissions']         = array('email');
-$config['facebook_graph_version']       = 'v2.6';
+$config['facebook_graph_version']       = 'v3.1';
 $config['facebook_auth_on_load']        = TRUE;

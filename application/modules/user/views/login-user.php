@@ -40,6 +40,7 @@
         .google .btn-google{
           background-color: white;
           color: black;
+          border:solid #A2A2A2 1px;
         }
         .google .btn-google i{
           color: #34A853;
@@ -48,7 +49,10 @@
               width: 14px;
         }
         .content-comment .sub-comment-right{
-          margin-top: 0;
+          margin-top: 1em;
+        }
+        div.container-fluid.content-comment{
+          padding-top: 1em;
         }
         @media (max-width:1300px) {
           div.container-fluid{
@@ -77,54 +81,51 @@
         <div class="container-fluid content-comment " style="" >
                     <div class="row sub-content-comment">
                       <div class="col col-md-3 col-sm-3 col-xs-12"></div>
-                          <div class="col-md-6 col-sm-7 col-xs-12 right-comment">
-                            <div class="sub-comment-right" style="box-shadow: 0 0 48px 0 #bdbdbd;">
-                                <div class="form-group">
-                                    <h2>Login</h2>
-                                    <!-- <p>and lets collaborate</p> -->
-                                   <div>
-                                      
-                                      <div class="other-registery">
-                                        <div class="fb">
-                                          <a href="<?php echo $this->facebook->login_url(); ?>">
-                                            <button class="btn btn-primary" type="button"><i class="fa fa-facebook"></i> Daftar Dengan Faceook</button>
-                                          </a>
-                                          <!-- <button class="btn btn-primary"><i class="fa fa-facebook"></i> Daftar Dengan Faceook</button> -->
-                                        </div>
-                                        <div class="google">
-                                          <a href="<?php echo $loginURL; ?>">
-                                            <button class="btn btn-google " type="button"><i class="fa fa-google"></i> Daftar Dengan Google</button>
-                                          </a>
-                                        </div>
-                                      </div>
-
-                                    </div>
-                                    <div class="text-input">
-                                      <p style="text-align: center;">--atau--</p>
-                                    </div>
-                                    <div class="error" id="ntf_login" style="text-align: center;font-weight: bold"></div>
-                                    <form id="register_form">
-                                    <div class="text-input">
-                                        <input type="text" placeholder="Username" name="username" class="input-comment">
-                                        <div class="error" id="ntf_username"></div>
-                                    </div>
-                                 
-                                    <div class="text-input">
-                                        <input type="password" placeholder="Password" name="password" class="input-comment">
-                                        <div class="error" id="ntf_password"></div>
-                                    </div>
-                                    
-                                    
-                                    <div class="text-input">
-                                      <?php echo $captcha // tampilkan recaptcha ?>
-                                      <div class="error" id="ntf_g-recaptcha-response" style="position: relative;"></div>
-                                    </div>
-                                    </form>
-                                    <div class="text-right"><a class="btn btn-post" type="button" id="btn_register">Submit</a></div>
-                                    x
-                                </div>
-                            </div>
+                      <div class="col col-md-6 col-sm-7 col-xs-12">
+                        
+                        <div class="other-registery">
+                          <div class="fb">
+                            <a href="<?php echo $this->facebook->login_url(); ?>">
+                              <button class="btn btn-primary" type="button"><i class="fa fa-facebook"></i> Login Dengan Faceook</button>
+                            </a>
+                            <!-- <button class="btn btn-primary"><i class="fa fa-facebook"></i> Daftar Dengan Faceook</button> -->
+                          </div>
+                          <div class="google">
+                            <a href="<?php echo $loginURL; ?>">
+                              <button class="btn btn-google " type="button"><i class="fa fa-google"></i> Login Dengan Google</button>
+                            </a>
+                          </div>
+                           <p style="text-align: center;padding-top:20px;">--atau--</p>
                         </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12 right-comment">
+                              <div class="sub-comment-right" style="box-shadow: 0 0 48px 0 #bdbdbd;">
+                                  <div class="form-group">
+                                      <h2>Login</h2>
+                                
+                                      <div class="error" id="ntf_login" style="text-align: center;font-weight: bold"></div>
+                                      <form id="register_form">
+                                      <div class="text-input">
+                                          <input type="text" placeholder="Username" name="username" class="input-comment">
+                                          <div class="error" id="ntf_username"></div>
+                                      </div>
+                                   
+                                      <div class="text-input">
+                                          <input type="password" placeholder="Password" name="password" class="input-comment">
+                                          <div class="error" id="ntf_password"></div>
+                                      </div>
+                                      
+                                      
+                                      <div class="text-input">
+                                        <?php echo $captcha // tampilkan recaptcha ?>
+                                        <div class="error" id="ntf_g-recaptcha-response" style="position: relative;"></div>
+                                      </div>
+                                      </form>
+                                      <div class="text-right"><a class="btn btn-post" type="button" id="btn_register">Submit</a></div>
+                                      
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
                         <div class="col col-md-3 col-sm-3 col-xs-12"></div>
                     </div>
           </div>
@@ -166,18 +167,32 @@
       </div>
     </div>
     <?php } ?>
-    <script>(function(d, s, id) {
+    <!-- <script>(function(d, s, id) {
       var js, fjs = d.getElementsByTagName(s)[0];
       if (d.getElementById(id)) return;
       js = d.createElement(s); js.id = id;
-      <?php if(DOMAIN == 'localhost'){ ?>
-        js.src = 'https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v2.12&appId=117942632203648&autoLogAppEvents=1';
-      <?php }else{ ?>
-        js.src = 'https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v2.12&appId=607824559619085&autoLogAppEvents=1';
-      <?php } ?>
+        js.src = 'https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v2.12&appId=<?=FACEBOOK_APP_ID;?>&autoLogAppEvents=1';
       fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
-    </script> 
+    </script>  -->
+    <script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '<?=FACEBOOK_APP_ID;?>',
+      xfbml      : true,
+      version    : 'v3.1'
+    });
+    FB.AppEvents.logPageView();
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "https://connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script> 
 <script src="<?=base_url();?>assets/js/jquery.min.js"></script>
 <script src="<?=base_url();?>assets/js/bootstrap.min.js"></script>
  <script src="<?=base_url();?>assets/js/classie.min.js"></script>

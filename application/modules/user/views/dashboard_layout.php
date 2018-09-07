@@ -7,7 +7,7 @@
                 <div class="row">
                   <div class="col col-md-12 col-sm-12 col-xs-12">
                         <h4 class="welcome">
-                        Selamat Datang di <span class="ID_front">ID</span><span class="ren_back">ren</span>
+                        Selamat Datang di M. Pudji Junaidi
                       </h4>
                       <hr>
                   </div>
@@ -19,7 +19,7 @@
                     <div class="inner">
                       <h3>150</h3>
 
-                      <p>New Orders</p>
+                      <p>User</p>
                     </div>
                     <div class="icon">
                       <i class="fa fa-building-o"></i>
@@ -32,9 +32,9 @@
                   <!-- small box -->
                   <div class="small-box bg-green">
                     <div class="inner">
-                      <h3>53<sup style="font-size: 20px">%</sup></h3>
+                      <h3>53</h3>
 
-                      <p>Bounce Rate</p>
+                      <p>Mahasiswa</p>
                     </div>
                     <div class="icon">
                       <i class="fa fa-university" aria-hidden="true"></i>

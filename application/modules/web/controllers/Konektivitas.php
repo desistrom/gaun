@@ -22,6 +22,7 @@ class Konektivitas extends MX_Controller  {
         $a =  $this->db->query($sql)->row_array();
         $methode = 'GET';
         $token = '';
+        $a['image'] = "media/".$a['image'];
         // $a = api_helper('',$url,$methode,$token);
         $this->data['topologi']=$a;
 

@@ -94,6 +94,23 @@
               border-radius: 5px;
               border: solid 2px #891111;
           } 
+           ul.dropdown-menu li a{
+
+            border: 0;
+         
+          }
+
+       /*   ul.dropdown-menu li a:hover{
+            color: #D10909;
+            border: 0;
+            border-bottom: solid 0 #E72A2A;
+            background-color: white;
+          }*/
+           .nav li.sub-btn-gabung .dropdown-menu{
+                /*border: solid 1px #D10909;
+                border-radius: 4px;*/
+                left: -6em;
+          }
     </style>
 </head>
 
@@ -122,7 +139,7 @@
 
                      <!--  <li role="presentation" class="active"><a href="#">Login</a></li> -->
                     <!--   <li role="presentation" class=""><a class="active btn-gabung" href="<?php echo site_url('user/login_user') ?>" data-toggle="modal" >Login</a></li> -->
-                       <li class="dropdown  "><a data-toggle="dropdown" aria-expanded="false" href="#" class="dropdown-toggle active btn-gabung">Login <span class="fa fa-angle-down"></span></a>
+                       <li class="dropdown  sub-btn-gabung"><a data-toggle="dropdown" aria-expanded="false" href="#" class="dropdown-toggle active btn-gabung">Login <span class="fa fa-angle-down"></span></a>
                           <ul class="dropdown-menu" role="menu">
                               <li><a href="<?php echo site_url('user/login_user') ?>">Dosen</a></li>
                               <li><a href="<?php echo site_url('user/login_user/login_mahasiswa') ?>">Mahasiswa</a></li>

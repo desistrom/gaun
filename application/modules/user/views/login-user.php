@@ -86,6 +86,7 @@
                         <div class="other-registery">
                           <div class="fb">
                             <a href="<?php echo $this->facebook->login_url(); ?>">
+                            <!-- <a href="<?php //echo site_url('user/login_user/login_fb'); ?>"> -->
                               <button class="btn btn-primary" type="button"><i class="fa fa-facebook"></i> Login Dengan Faceook</button>
                             </a>
                             <!-- <button class="btn btn-primary"><i class="fa fa-facebook"></i> Daftar Dengan Faceook</button> -->
@@ -180,9 +181,14 @@
     FB.init({
       appId      : '<?=FACEBOOK_APP_ID;?>',
       xfbml      : true,
-      version    : 'v3.1'
+      version    : 'v2.1'
     });
     FB.AppEvents.logPageView();
+      FB.getLoginStatus(function(response) {
+      if (response.status === 'connected') {
+        var accessToken = response.authResponse.accessToken;
+      } 
+    } );
   };
 
   (function(d, s, id){

@@ -7,6 +7,30 @@
  *
  * @author http://www.roytuts.com
  */
+    /*require APPPATH.'third_party/facebook/Facebook/FacebookSession.php';
+    require APPPATH.'third_party/facebook/Facebook/FacebookRedirectLoginHelper.php';
+    require APPPATH.'third_party/facebook/Facebook/FacebookRequest.php';
+    require APPPATH.'third_party/facebook/Facebook/FacebookResponse.php';
+    require APPPATH.'third_party/facebook/Facebook/FacebookSDKException.php';
+    require APPPATH.'third_party/facebook/Facebook/FacebookRequestException.php';
+    require APPPATH.'third_party/facebook/Facebook/FacebookAuthorizationException.php';
+    require APPPATH.'third_party/facebook/Facebook/GraphObject.php';
+    require APPPATH.'third_party/facebook/Facebook/Entities/AccessToken.php';
+    require APPPATH.'third_party/facebook/Facebook/HttpClients/FacebookHttpable.php';
+    require APPPATH.'third_party/facebook/Facebook/HttpClients/FacebookCurlHttpClient.php';
+
+        use Facebook\FacebookSession;
+        use Facebook\FacebookRedirectLoginHelper;
+        use Facebook\FacebookRequest;
+        use Facebook\FacebookResponse;
+        use Facebook\FacebookSDKException;
+        use Facebook\FacebookRequestException;
+        use Facebook\FacebookAuthorizationException;
+        use Facebook\GraphObject;
+        use Facebook\Entities\AccessToken;
+        use Facebook\HttpClients\FacebookHttpable;
+        use Facebook\HttpClients\FacebookCurlHttpClient;*/
+        // init app with app id and secret
 class Login_user extends MX_Controller  {
 	var $data = array();
 
@@ -347,6 +371,46 @@ terima kasih";
     
     public function logout(){
         redirect(site_url('user/login_user'));
+    }
+
+    public function login_fb(){
+        // $this->load->library('facebook_load');
+
+        //
+        FacebookSession::setDefaultApplication( '319748982117890','4d063c711fd365851f01c2c5172a7aeb' );
+        // login helper with redirect_uri
+            $helper = new FacebookRedirectLoginHelper(site_url('user/login_user/login_fb'));
+            // $helper = new FacebookRedirectLoginHelper('http://localhost/loginfb/1353/fbconfig.php' );
+        try {
+          $session = $helper->getSessionFromRedirect();
+        } catch( FacebookRequestException $ex ) {
+          // When Facebook returns an error
+        } catch( Exception $ex ) {
+          // When validation fails or other local issues
+        }
+        // print_r($helper);
+        // echo "string";
+        // see if we have a session
+        if ( isset( $session ) ) {
+          // graph api request for user data
+          $request = new FacebookRequest( $session, 'GET', '/me' );
+          $response = $request->execute();
+          // get response
+          $graphObject = $response->getGraphObject();
+                $fbid = $graphObject->getProperty('id');              // To Get Facebook ID
+                $fbfullname = $graphObject->getProperty('name'); // To Get Facebook full name
+                $femail = $graphObject->getProperty('email');    // To Get Facebook email ID
+            /* ---- Session Variables -----*/
+                $_SESSION['FBID'] = $fbid;
+                $_SESSION['FULLNAME'] = $fbfullname;
+                $_SESSION['EMAIL'] =  $femail;
+            /* ---- header location after session ----*/
+          // header("Location: " .site_url('user/dashboard'));
+            redirect('user/dashboard');
+        } else {
+          $loginUrl = $helper->getLoginUrl();
+         header("Location: ".$loginUrl);
+        }
     }
 
 

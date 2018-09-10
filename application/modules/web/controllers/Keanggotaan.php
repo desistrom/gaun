@@ -351,6 +351,7 @@ terima kasih";
         );
         $this->data['loginURL'] = $this->google->loginURL();
         $this->data['instansi'] = $this->db->query('select id_instansi, nm_instansi from tb_instansi where status = 2 and is_aktif = 1')->result_array();
+        $this->data['breadcumb'] = 'Dosen';
         $this->data['step']=array('picture'=>'','step'=>'');
         $this->ciparser->new_parse('template_frontend','modules_web', 'pendaftaran_dosen',$this->data);
     }
@@ -426,6 +427,7 @@ terima kasih";
         );
         $this->data['loginURL'] = $this->google->loginURL();
         $this->data['instansi'] = $this->db->query('select id_instansi, nm_instansi from tb_instansi where status = 2 and is_aktif = 1')->result_array();
+        $this->data['breadcumb'] = 'Mahasiswa';
         $this->data['step']=array('picture'=>'','step'=>'');
         $this->ciparser->new_parse('template_frontend','modules_web', 'pendaftaran_dosen',$this->data);
     }
@@ -473,7 +475,7 @@ terima kasih";
                 }
             }else{
                 $this->session->set_flashdata("header","Registrasi Gagal");
-                $this->session->set_flashdata("notif","Akun Google Anda pernah didaftarkan sebelumnya, silahkan login untuk masuk");
+                $this->session->set_flashdata("notif","Email pernah didaftarkan sebelumnya, silahkan login untuk masuk");
                 redirect(site_url('web/keanggotaan/pendaftaran_dosen'));
             }
             $data['logoutUrl'] = $this->facebook->logout_url();
@@ -510,7 +512,8 @@ terima kasih";
                 redirect(site_url('web/keanggotaan/pendaftaran_dosen'));
             }
         }else{
-            $this->session->set_flashdata("notif","Akun Google Anda pernah didaftarkan sebelumnya, silahkan login untuk masuk");
+            $this->session->set_flashdata("header","Registrasi Gagal");
+            $this->session->set_flashdata("notif","Email pernah didaftarkan sebelumnya, silahkan login untuk masuk");
             redirect(site_url('web/keanggotaan/pendaftaran_dosen'));
         }
     }
@@ -550,7 +553,7 @@ terima kasih";
                 }
             }else{
                 $this->session->set_flashdata("header","Registrasi Gagal");
-                $this->session->set_flashdata("notif","Akun Google Anda pernah didaftarkan sebelumnya, silahkan login untuk masuk");
+                $this->session->set_flashdata("notif","Email Anda pernah didaftarkan sebelumnya, silahkan login untuk masuk");
                 redirect(site_url('web/keanggotaan/pendaftaran_mahasiswa'));
             }
             $data['logoutUrl'] = $this->facebook->logout_url();
@@ -587,7 +590,8 @@ terima kasih";
                 redirect(site_url('web/keanggotaan/pendaftaran_mahasiswa'));
             }
         }else{
-            $this->session->set_flashdata("notif","Akun Google Anda pernah didaftarkan sebelumnya, silahkan login untuk masuk");
+            $this->session->set_flashdata("header","Registrasi Gagal");
+            $this->session->set_flashdata("notif","Email pernah didaftarkan sebelumnya, silahkan login untuk masuk");
             redirect(site_url('web/keanggotaan/pendaftaran_mahasiswa'));
         }
     }

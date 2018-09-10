@@ -10,7 +10,7 @@
 class Dashboard extends MX_Controller  {
 	var $data = array();
 	function __construct(){
-		if ($this->session->userdata('is_login') != true) {
+		if ($this->session->userdata('user_login') != true) {
 			redirect('user/login_user');
 		}
 		$this->load->helper('api');

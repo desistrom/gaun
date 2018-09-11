@@ -199,13 +199,13 @@
                       <li><div class="auto-jsCalendar material-theme"></div></li>
 
                         <!-- <li>
-                            <a href="<?php echo footer_helper()['data']['FacebookLink']; ?>" class="facebook" target="blank" > <i class="fa fa-facebook"></i></a>
+                            <a href="<?php #echo footer_helper()['data']['FacebookLink']; ?>" class="facebook" target="blank" > <i class="fa fa-facebook"></i></a>
                         </li>
                         <li class="text-left">
-                            <a href="<?php echo footer_helper()['data']['TwitterLink']; ?>" target="blank" > <i class="fa fa-twitter"></i></a>
+                            <a href="<?php #echo footer_helper()['data']['TwitterLink']; ?>" target="blank" > <i class="fa fa-twitter"></i></a>
                         </li>
                         <li>
-                            <a href="<?php echo footer_helper()['data']['InstagramLink']; ?>" target="blank" > <i class="fa fa-instagram"></i></a>
+                            <a href="<?php #echo footer_helper()['data']['InstagramLink']; ?>" target="blank" > <i class="fa fa-instagram"></i></a>
                         </li> -->
                     </ul>
                 </div>

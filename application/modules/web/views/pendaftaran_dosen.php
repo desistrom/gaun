@@ -76,7 +76,7 @@
                             
                             <div class="other-registery">
                               <div class="fb">
-                                <a href="<?php echo $this->facebook->login_url(); ?>">
+                                <a href="<?php echo $fb_data; ?>">
                                   <button class="btn btn-primary"><i class="fa fa-facebook"></i> Daftar Dengan Faceook</button>
                                 </a>
                                 <!-- <button class="btn btn-primary"><i class="fa fa-facebook"></i> Daftar Dengan Faceook</button> -->

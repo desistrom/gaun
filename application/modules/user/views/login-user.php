@@ -85,7 +85,7 @@
                         
                         <div class="other-registery">
                           <div class="fb">
-                            <a href="<?php echo $this->facebook->login_url(); ?>">
+                            <a href="<?php echo $fb_data; ?>">
                             <!-- <a href="<?php //echo $fb_data['loginUrl']; ?>"> -->
                             <!-- <a href="<?php //echo site_url('user/login_user/login_fb'); ?>"> -->
                               <button class="btn btn-primary" type="button"><i class="fa fa-facebook"></i> Login Dengan Faceook</button>

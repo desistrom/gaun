@@ -7,6 +7,7 @@
  *
  * @author http://www.roytuts.com
  */
+require_once(APPPATH.'third_party/Facebook/autoload.php');
 class Keanggotaan extends MX_Controller  {
 	var $data = array();
 	function __construct(){
@@ -279,7 +280,15 @@ class Keanggotaan extends MX_Controller  {
 
     }
     public function pendaftaran_dosen() {
-        $this->load->library('facebook','web/keanggotaan/facebook');
+        $fb = new Facebook\Facebook([
+              'app_id' => FACEBOOK_APP_ID, // Replace {app-id} with your app id
+              'app_secret' => FACEBOOK_APP_SECRET,
+              'default_graph_version' => 'v2.2',
+        ]);
+        $helper = $fb->getRedirectLoginHelper();
+        $permissions = ['email'];
+        $loginUrl = $helper->getLoginUrl(site_url('web/keanggotaan/facebook/'), $permissions);
+        $loginUrl = htmlspecialchars($loginUrl);
         // print_r(PAGE);
         $this->load->library('google',URL_API.'web/keanggotaan/google/');
         // print_r($_SERVER['SERVER_NAME']);
@@ -350,6 +359,7 @@ terima kasih";
             'script_captcha' => $this->recaptcha->getScriptTag(), // javascript recaptcha ditaruh di head
         );
         $this->data['loginURL'] = $this->google->loginURL();
+        $this->data['fb_data'] = $loginUrl;
         $this->data['instansi'] = $this->db->query('select id_instansi, nm_instansi from tb_instansi where status = 2 and is_aktif = 1')->result_array();
         $this->data['breadcumb'] = 'Dosen';
         $this->data['step']=array('picture'=>'','step'=>'');
@@ -357,7 +367,15 @@ terima kasih";
     }
 
     public function pendaftaran_mahasiswa() {
-        $this->load->library('facebook','web/keanggotaan/facebook_mahasiswa');
+        $fb = new Facebook\Facebook([
+              'app_id' => FACEBOOK_APP_ID, // Replace {app-id} with your app id
+              'app_secret' => FACEBOOK_APP_SECRET,
+              'default_graph_version' => 'v2.2',
+        ]);
+        $helper = $fb->getRedirectLoginHelper();
+        $permissions = ['email'];
+        $loginUrl = $helper->getLoginUrl(site_url('web/keanggotaan/facebook_mahasiswa/'), $permissions);
+        $loginUrl = htmlspecialchars($loginUrl);
         $this->load->library('google',URL_API.'web/keanggotaan/google_mahasiswa/');
         $methode = 'GET';
         $token = '';
@@ -426,6 +444,7 @@ terima kasih";
             'script_captcha' => $this->recaptcha->getScriptTag(), // javascript recaptcha ditaruh di head
         );
         $this->data['loginURL'] = $this->google->loginURL();
+        $this->data['fb_data'] = $loginUrl;
         $this->data['instansi'] = $this->db->query('select id_instansi, nm_instansi from tb_instansi where status = 2 and is_aktif = 1')->result_array();
         $this->data['breadcumb'] = 'Mahasiswa';
         $this->data['step']=array('picture'=>'','step'=>'');
@@ -442,19 +461,101 @@ terima kasih";
     }
 
     public function facebook(){
-        $this->load->library('facebook','web/keanggotaan/facebook');
-        $userData = array();
-        $ret['status'] = 0;
-        $ret['state'] = 0;
-            $userProfile = $this->facebook->request('get', '/me?fields=id,first_name,last_name,email,gender,locale,picture');
+        $fb = new Facebook\Facebook([
+              'app_id' => FACEBOOK_APP_ID, // Replace {app-id} with your app id
+              'app_secret' => FACEBOOK_APP_SECRET,
+              'default_graph_version' => 'v2.2',
+        ]);
+        $helper = $fb->getRedirectLoginHelper();
 
+        try {
+          $accessToken = $helper->getAccessToken();
+        } catch(Facebook\Exceptions\FacebookResponseException $e) {
+              // When Graph returns an error
+              echo 'Graph returned an error: ' . $e->getMessage();
+              echo '<a href="{site_url("web/keanggotaan/pendaftaran_dosen")}">Back to Register Dosen</a>';
+          exit;
+        } catch(Facebook\Exceptions\FacebookSDKException $e) {
+              // When validation fails or other local issues
+              echo 'Facebook SDK returned an error: ' . $e->getMessage();
+              echo '<a href="{site_url("web/keanggotaan/pendaftaran_dosen")}">Back to Register Dosen</a>';
+              exit;
+        }
+        if (!isset($accessToken)) {
+          if ($helper->getError()) {
+            header('HTTP/1.0 401 Unauthorized');
+            echo "Error: " . $helper->getError() . "\n";
+            echo "Error Code: " . $helper->getErrorCode() . "\n";
+            echo "Error Reason: " . $helper->getErrorReason() . "\n";
+            echo "Error Description: " . $helper->getErrorDescription() . "\n";
+          } else {
+            header('HTTP/1.0 400 Bad Request');
+            echo 'Bad request';
+          }
+          echo '<a href="{site_url()}">Back to Balaisehat</a>';
+          exit;
+        }
+        // Logged in
+        /*echo '<h3>Access Token</h3>';
+        var_dump($accessToken->getValue());*/
+
+        // The OAuth 2.0 client handler helps us manage access tokens
+        $oAuth2Client = $fb->getOAuth2Client();
+
+        // Get the access token metadata from /debug_token
+        $tokenMetadata = $oAuth2Client->debugToken($accessToken);
+        /*echo '<h3>Metadata</h3>';
+        var_dump($tokenMetadata);*/
+
+        // Validation (these will throw FacebookSDKException's when they fail)
+        $tokenMetadata->validateAppId(FACEBOOK_APP_ID); // Replace {app-id} with your app id
+        // If you know the user ID this access token belongs to, you can validate it here
+        //$tokenMetadata->validateUserId('123');
+        $tokenMetadata->validateExpiration();
+
+        if (! $accessToken->isLongLived()) {
+          // Exchanges a short-lived access token for a long-lived one
+          try {
+            $accessToken = $oAuth2Client->getLongLivedAccessToken($accessToken);
+          } catch (Facebook\Exceptions\FacebookSDKException $e) {
+            echo "<p>Error getting long-lived access token: " . $e->getMessage() . "</p>\n\n";
+            echo '<a href="{site_url("web/keanggotaan/pendaftaran_dosen")}">Back to Register Dosen</a>';
+            exit;
+          }
+        }
+
+
+        $accessToken = (string) $accessToken;
+        if(!empty($accessToken)){
+
+            try {
+            // Returns a `Facebook\FacebookResponse` object
+              $response = $fb->get('/me?fields=id,name,email,first_name,last_name,birthday,location,gender', $accessToken);
+            } catch(Facebook\Exceptions\FacebookResponseException $e) {
+                echo 'Graph returned an error: ' . $e->getMessage();
+                echo '<a href="{site_url("web/keanggotaan/pendaftaran_dosen")}">Back to Register Dosen</a>';
+                exit;
+            } catch(Facebook\Exceptions\FacebookSDKException $e) {
+                echo 'Facebook SDK returned an error: ' . $e->getMessage();
+                echo '<a href="{site_url("web/keanggotaan/pendaftaran_dosen")}">Back to Register Dosen</a>';
+                exit;
+            }
+            $me = $response->getGraphUser();
+        // $this->load->library('facebook','user/login_user/facebook');
+        // $userData = array();
+        // $ret['status'] = 0;
+        // $ret['state'] = 0;
+        //     $userProfile = $this->facebook->request('get', '/me?fields=id,first_name,last_name,email,gender,locale,picture');
+        //     print_r($userProfile);
             // Preparing data for database insertion
+            // print_r($userProfile);
+            // return false;
             $userData['oauth_provider'] = 'facebook';
-            $userData['oauth_id'] = $userProfile['id'];
-            $userData['first_name'] = $userProfile['first_name'];
-            $userData['last_name'] = $userProfile['last_name'];
-            $userData['email'] = $userProfile['email'];
-            $userData['gender'] = $userProfile['gender'];
+            $userData['oauth_id'] = $me->getProperty('id');
+            $userData['first_name'] = $me->getProperty('first_name');
+            $userData['last_name'] = $me->getProperty('last_name');
+            $userData['email'] = $me->getProperty('email');
+            $userData['gender'] = $me->getProperty('gender');
             $userData['status'] = 'dosen';
             $userID = $this->user->checkUser($userData);
             // Check user data insert or update status
@@ -478,7 +579,7 @@ terima kasih";
                 $this->session->set_flashdata("notif","Email pernah didaftarkan sebelumnya, silahkan login untuk masuk");
                 redirect(site_url('web/keanggotaan/pendaftaran_dosen'));
             }
-            $data['logoutUrl'] = $this->facebook->logout_url();
+        }
     }
 
     public function google(){
@@ -520,19 +621,101 @@ terima kasih";
 
     public function facebook_mahasiswa(){
 
-        $this->load->library('facebook','web/keanggotaan/facebook_mahasiswa');
-        $userData = array();
-        $ret['status'] = 0;
-        $ret['state'] = 0;
-            $userProfile = $this->facebook->request('get', '/me?fields=id,first_name,last_name,email,gender,locale,picture');
+        $fb = new Facebook\Facebook([
+              'app_id' => FACEBOOK_APP_ID, // Replace {app-id} with your app id
+              'app_secret' => FACEBOOK_APP_SECRET,
+              'default_graph_version' => 'v2.2',
+        ]);
+        $helper = $fb->getRedirectLoginHelper();
 
+        try {
+          $accessToken = $helper->getAccessToken();
+        } catch(Facebook\Exceptions\FacebookResponseException $e) {
+              // When Graph returns an error
+              echo 'Graph returned an error: ' . $e->getMessage();
+              echo '<a href="{site_url("web/keanggotaan/pendaftaran_mahasiswa")}">Back to Register Mahasiswa</a>';
+          exit;
+        } catch(Facebook\Exceptions\FacebookSDKException $e) {
+              // When validation fails or other local issues
+              echo 'Facebook SDK returned an error: ' . $e->getMessage();
+              echo '<a href="{site_url("web/keanggotaan/pendaftaran_mahasiswa")}">Back to Register Mahasiswa</a>';
+              exit;
+        }
+        if (!isset($accessToken)) {
+          if ($helper->getError()) {
+            header('HTTP/1.0 401 Unauthorized');
+            echo "Error: " . $helper->getError() . "\n";
+            echo "Error Code: " . $helper->getErrorCode() . "\n";
+            echo "Error Reason: " . $helper->getErrorReason() . "\n";
+            echo "Error Description: " . $helper->getErrorDescription() . "\n";
+          } else {
+            header('HTTP/1.0 400 Bad Request');
+            echo 'Bad request';
+          }
+          echo '<a href="{site_url("web/keanggotaan/pendaftaran_mahasiswa")}">Back to Register Mahasiswa</a>';
+          exit;
+        }
+        // Logged in
+        /*echo '<h3>Access Token</h3>';
+        var_dump($accessToken->getValue());*/
+
+        // The OAuth 2.0 client handler helps us manage access tokens
+        $oAuth2Client = $fb->getOAuth2Client();
+
+        // Get the access token metadata from /debug_token
+        $tokenMetadata = $oAuth2Client->debugToken($accessToken);
+        /*echo '<h3>Metadata</h3>';
+        var_dump($tokenMetadata);*/
+
+        // Validation (these will throw FacebookSDKException's when they fail)
+        $tokenMetadata->validateAppId(FACEBOOK_APP_ID); // Replace {app-id} with your app id
+        // If you know the user ID this access token belongs to, you can validate it here
+        //$tokenMetadata->validateUserId('123');
+        $tokenMetadata->validateExpiration();
+
+        if (! $accessToken->isLongLived()) {
+          // Exchanges a short-lived access token for a long-lived one
+          try {
+            $accessToken = $oAuth2Client->getLongLivedAccessToken($accessToken);
+          } catch (Facebook\Exceptions\FacebookSDKException $e) {
+            echo "<p>Error getting long-lived access token: " . $e->getMessage() . "</p>\n\n";
+            echo '<a href="{site_url("web/keanggotaan/pendaftaran_mahasiswa")}">Back to Register Mahasiswa</a>';
+            exit;
+          }
+        }
+
+
+        $accessToken = (string) $accessToken;
+        if(!empty($accessToken)){
+
+            try {
+            // Returns a `Facebook\FacebookResponse` object
+              $response = $fb->get('/me?fields=id,name,email,first_name,last_name,birthday,location,gender', $accessToken);
+            } catch(Facebook\Exceptions\FacebookResponseException $e) {
+                echo 'Graph returned an error: ' . $e->getMessage();
+                echo '<a href="{site_url("web/keanggotaan/pendaftaran_mahasiswa")}">Back to Register Mahasiswa</a>';
+                exit;
+            } catch(Facebook\Exceptions\FacebookSDKException $e) {
+                echo 'Facebook SDK returned an error: ' . $e->getMessage();
+                echo '<a href="{site_url("web/keanggotaan/pendaftaran_mahasiswa")}">Back to Register Mahasiswa</a>';
+                exit;
+            }
+            $me = $response->getGraphUser();
+        // $this->load->library('facebook','user/login_user/facebook');
+        // $userData = array();
+        // $ret['status'] = 0;
+        // $ret['state'] = 0;
+        //     $userProfile = $this->facebook->request('get', '/me?fields=id,first_name,last_name,email,gender,locale,picture');
+        //     print_r($userProfile);
             // Preparing data for database insertion
+            // print_r($userProfile);
+            // return false;
             $userData['oauth_provider'] = 'facebook';
-            $userData['oauth_id'] = $userProfile['id'];
-            $userData['first_name'] = $userProfile['first_name'];
-            $userData['last_name'] = $userProfile['last_name'];
-            $userData['email'] = $userProfile['email'];
-            $userData['gender'] = $userProfile['gender'];
+            $userData['oauth_id'] = $me->getProperty('id');
+            $userData['first_name'] = $me->getProperty('first_name');
+            $userData['last_name'] = $me->getProperty('last_name');
+            $userData['email'] = $me->getProperty('email');
+            $userData['gender'] = $me->getProperty('gender');
             $userData['status'] = 'mahasiswa';
             $userID = $this->user->checkUser($userData);
             // Check user data insert or update status
@@ -556,7 +739,7 @@ terima kasih";
                 $this->session->set_flashdata("notif","Email Anda pernah didaftarkan sebelumnya, silahkan login untuk masuk");
                 redirect(site_url('web/keanggotaan/pendaftaran_mahasiswa'));
             }
-            $data['logoutUrl'] = $this->facebook->logout_url();
+        }
     }
 
     public function google_mahasiswa(){

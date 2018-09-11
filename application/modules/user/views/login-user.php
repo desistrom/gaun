@@ -86,6 +86,7 @@
                         <div class="other-registery">
                           <div class="fb">
                             <a href="<?php echo $this->facebook->login_url(); ?>">
+                            <!-- <a href="<?php //echo $fb_data['loginUrl']; ?>"> -->
                             <!-- <a href="<?php //echo site_url('user/login_user/login_fb'); ?>"> -->
                               <button class="btn btn-primary" type="button"><i class="fa fa-facebook"></i> Login Dengan Faceook</button>
                             </a>
@@ -168,15 +169,15 @@
       </div>
     </div>
     <?php } ?>
-    <!-- <script>(function(d, s, id) {
+    <script>(function(d, s, id) {
       var js, fjs = d.getElementsByTagName(s)[0];
       if (d.getElementById(id)) return;
       js = d.createElement(s); js.id = id;
         js.src = 'https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v2.12&appId=<?=FACEBOOK_APP_ID;?>&autoLogAppEvents=1';
       fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
-    </script>  -->
-    <script>
+    </script> 
+   <!--  <script>
   window.fbAsyncInit = function() {
     FB.init({
       appId      : '<?=FACEBOOK_APP_ID;?>',
@@ -198,7 +199,7 @@
      js.src = "https://connect.facebook.net/en_US/sdk.js";
      fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));
-</script> 
+</script>  -->
 <script src="<?=base_url();?>assets/js/jquery.min.js"></script>
 <script src="<?=base_url();?>assets/js/bootstrap.min.js"></script>
  <script src="<?=base_url();?>assets/js/classie.min.js"></script>

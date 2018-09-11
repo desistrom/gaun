@@ -40,7 +40,7 @@ Class Facebook
     /**
      * Facebook constructor.
      */
-    var $url = '';
+    var $url;
     public function __construct($url = null){
         // Load fb config
         $this->url = $url;

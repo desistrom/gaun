@@ -65,7 +65,7 @@
                     <div></div>
                 </div>
                 <div class="header-title">
-                    <h1>Register </h1></div>
+                    <h1>Register <?=$breadcumb;?></h1></div>
             </div>
         </div>
         <div class="container-fluid content-comment "  >

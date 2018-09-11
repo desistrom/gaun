@@ -23,16 +23,21 @@ class User extends CI_Model{
             $pengguna['oauth_provider'] = $data['oauth_provider'];
             $pengguna['email'] = $data['email'];
             $pengguna['username'] = $data['email'];
+            if ($data['status'] == 'dosen') {
+                $pengguna['id_role_ref'] = 1;
+                }else{
+                $pengguna['id_role_ref'] = 0;
+            }
             $insert = $this->db->insert($this->tableName,$pengguna);
             $userID = $this->db->insert_id();
             $dosen['nama'] = $data['first_name']." ".$data['last_name'];
             $dosen['jeniskelamin'] = $data['gender'] == 'male'?'L':'P';
             $dosen['id_pengguna_ref'] = $userID;
             if ($data['status'] == 'dosen') {
-                $pengguna['id_role_ref'] = 1;
+                // $pengguna['id_role_ref'] = 1;
                 $this->db->insert('tb_dosen',$dosen);
             }else{
-                $pengguna['id_role_ref'] = 0;
+                // $pengguna['id_role_ref'] = 0;
                 $this->db->insert('tb_mahasiswa',$dosen);
             }
             $user_data = 'insert';

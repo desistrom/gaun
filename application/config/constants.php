@@ -484,11 +484,19 @@ define('URL_INSERT_MAHASISWA','http://localhost/idren/api/v3/insert_mahasiswa');
 $link = $_SERVER['PHP_SELF'];
 $link_array = explode('/',$link);
 $page = end($link_array);
+if ($page == 'login_user') {
+	define('URL_REDIRECT', 'user/login_user/');
+}
 define('PAGE', $page);
 define('DOMAIN', $_SERVER['SERVER_NAME']);
 
-define('FACEBOOK_APP_ID','1051145755094888');
-define('FACEBOOK_APP_SECRET','9a62276f3da309bd71c9cc75dc1eae0a');
+define('FACEBOOK_APP_ID','302252023926695');
+define('FACEBOOK_APP_SECRET','999ef92004da6a852f4cde38515db024');
+
+// define('FACEBOOK_APP_ID','1051145755094888');
+// define('FACEBOOK_APP_SECRET','9a62276f3da309bd71c9cc75dc1eae0a');
 
 // define('FACEBOOK_APP_ID','607824559619085');
 // define('FACEBOOK_APP_SECRET','fbd158fe5954d6f9d2676350909ebae1');
+
+

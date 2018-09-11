@@ -40,11 +40,15 @@ class Login_user extends MX_Controller  {
     // $this->load->library('facebook');
     $this->load->model('user');
     $this->load->helper('api');
+        // $this->load->model('Facebook_model','user/login_user/');
 
-	}
+    }
     public function index() {
         $this->load->library('facebook','user/login_user/facebook');
+        // $this->fb_dosen();
             $this->load->library('google',URL_API.'user/login_user/google/');
+            
+
         // print_r(PAGE);
         if($this->input->method() == 'post'){
             $ret['state'] = 0;
@@ -66,7 +70,7 @@ class Login_user extends MX_Controller  {
                     $data_user = $data->row_array();
                     $this->session->set_userdata('data_user', $data_user);
                     $this->session->set_userdata('previlage', $data_user['id_role_ref']);
-                    $this->session->set_userdata('is_login', true);
+                    $this->session->set_userdata('user_login', true);
                     $this->session->set_flashdata("header","Registrasi Berhasil");
                     $this->session->set_flashdata("notif","Registrasi Anda sedang kami Proses, tunggu konfirmasi selanjutnya dari Admin");
                     $data_token['username'] = $username;
@@ -96,11 +100,14 @@ class Login_user extends MX_Controller  {
             exit();
         }
       
-    	$this->data = array(
+        $this->data = array(
             'action' => site_url('web/keanggotaan/pendaftaran'),
             'captcha' => $this->recaptcha->getWidget(), // menampilkan recaptcha
             'script_captcha' => $this->recaptcha->getScriptTag(), // javascript recaptcha ditaruh di head
         );
+        // print_r($this->session->userdata('fb_data'));
+        // $fb_data = $this->session->userdata('fb_data');
+        // $this->data['fb_data'] = $fb_data;
         $this->data['loginURL'] = $this->google->loginURL();
         $this->load->view('login-user',$this->data);
     }
@@ -128,7 +135,7 @@ class Login_user extends MX_Controller  {
                     $data_user = $data->row_array();
                     $this->session->set_userdata('data_user', $data_user);
                     $this->session->set_userdata('previlage', $data_user['id_role_ref']);
-                    $this->session->set_userdata('is_login', true);
+                    $this->session->set_userdata('user_login', true);
                     // $this->session->set_flashdata("header","Registrasi Berhasil");
                     // $this->session->set_flashdata("notif","Registrasi Anda sedang kami Proses, tunggu konfirmasi selanjutnya dari Admin");
                     $data_token['username'] = $username;
@@ -173,7 +180,7 @@ class Login_user extends MX_Controller  {
         $ret['status'] = 0;
         $ret['state'] = 0;
             $userProfile = $this->facebook->request('get', '/me?fields=id,first_name,last_name,email,gender,locale,picture');
-
+            print_r($userProfile);
             // Preparing data for database insertion
             // print_r($userProfile);
             // return false;
@@ -237,6 +244,8 @@ terima kasih";
         $userData['email']          = $gpInfo['email'];
         $userData['gender']         = !empty($gpInfo['gender'])?$gpInfo['gender']:'';
         $userID = $this->user->checkUser($userData);
+        // print_r($userID);
+        // return false;
         $this->load->helper('email_send_helper');
         if ($userID == 'insert') {
                 $data['email_from'] = 'support@idren';
@@ -374,46 +383,52 @@ terima kasih";
         redirect(site_url('user/login_user'));
     }
 
-    public function login_fb(){
-        // $this->load->library('facebook_load');
-
+    public function fb_dosen(){
+        $config = array(
+                        'appId'  => FACEBOOK_APP_ID,
+                        'secret' => FACEBOOK_APP_SECRET,
+                        'fileUpload' => true, // Indicates if the CURL based @ syntax for file uploads is enabled.
+                        );
+        
+        $this->load->library('Facebook', $config);
+        $user = $this->facebook->getUser();
+        // print_r($user);
+        // We may or may not have this data based on whether the user is logged in.
         //
-        FacebookSession::setDefaultApplication( '319748982117890','4d063c711fd365851f01c2c5172a7aeb' );
-        // login helper with redirect_uri
-            $helper = new FacebookRedirectLoginHelper(site_url('user/login_user/login_fb'));
-            // $helper = new FacebookRedirectLoginHelper('http://localhost/loginfb/1353/fbconfig.php' );
-        try {
-          $session = $helper->getSessionFromRedirect();
-        } catch( FacebookRequestException $ex ) {
-          // When Facebook returns an error
-        } catch( Exception $ex ) {
-          // When validation fails or other local issues
+        // If we have a $user id here, it means we know the user is logged into
+        // Facebook, but we don't know if the access token is valid. An access
+        // token is invalid if the user logged out of Facebook.
+        $profile = null;
+        if($user)
+        {
+            try {
+                // Proceed knowing you have a logged in user who's authenticated.
+                $profile = $this->facebook->api('//me?fields=id,first_name,last_name,email,gender,locale,picture');
+                $fb_data['jun'] = 'junaedi';
+            } catch (FacebookApiException $e) {
+                error_log($e);
+                $user = null;
+            }       
         }
-        // print_r($helper);
-        // echo "string";
-        // see if we have a session
-        if ( isset( $session ) ) {
-          // graph api request for user data
-          $request = new FacebookRequest( $session, 'GET', '/me' );
-          $response = $request->execute();
-          // get response
-          $graphObject = $response->getGraphObject();
-                $fbid = $graphObject->getProperty('id');              // To Get Facebook ID
-                $fbfullname = $graphObject->getProperty('name'); // To Get Facebook full name
-                $femail = $graphObject->getProperty('email');    // To Get Facebook email ID
-            /* ---- Session Variables -----*/
-                $_SESSION['FBID'] = $fbid;
-                $_SESSION['FULLNAME'] = $fbfullname;
-                $_SESSION['EMAIL'] =  $femail;
-            /* ---- header location after session ----*/
-          // header("Location: " .site_url('user/dashboard'));
-            redirect('user/dashboard');
-        } else {
-          $loginUrl = $helper->getLoginUrl();
-         header("Location: ".$loginUrl);
-        }
+        
+        $fb_data = array(
+                        'me' => $profile,
+                        'uid' => $user,
+                        'loginUrl' => $this->facebook->getLoginUrl(
+                            array(
+                                'scope' => 'email', // app permissions
+                                'redirect_uri' => base_url().'user/login_user/jadi/' // URL where you want to redirect your users after a successful login
+                            )
+                        ),
+                        'logoutUrl' => $this->facebook->getLogoutUrl(),
+                    );
+
+        $this->session->set_userdata('fb_data', $fb_data);
     }
 
+    public function jadi(){
+        print_r($this->session->userdata('fb_data'));
+    }
 
 
 }

@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" Cache-Control:public;>
 <html>
@@ -80,24 +80,24 @@
           	display: inline !important;
           }
           .sub-flagcounter-foot img{
-        
+
           }
           .nav li a.active.btn-gabung{
                 background-color: white;
               color: #D10909;
               border-radius: 5px;
               border: solid 2px #D10909;
-          } 
+          }
            .nav li a.active.btn-gabung:hover{
                 background-color: white;
               color: #891111;
               border-radius: 5px;
               border: solid 2px #891111;
-          } 
+          }
            ul.dropdown-menu li a{
 
             border: 0;
-         
+
           }
 
        /*   ul.dropdown-menu li a:hover{
@@ -132,10 +132,10 @@
 
                           </ul>
                         </li> -->
-                        
-                        
-                        
-                      
+
+
+
+
 
                      <!--  <li role="presentation" class="active"><a href="#">Login</a></li> -->
                     <!--   <li role="presentation" class=""><a class="active btn-gabung" href="<?php echo site_url('user/login_user') ?>" data-toggle="modal" >Login</a></li> -->
@@ -173,31 +173,31 @@
                 </div>
                 <div class="col-md-4 col-sm-4 col-xs-12 footer-center text-center address-foot">
                 	<h3 class="title-footer">Kantor Pusat</h3>
-                	<div class="col-md-6 col-sm-12 col-xs-12 address-foot" style=""><?php echo footer_helper()['data']['address']; ?></div>
-                	<div class="col-md-6 col-sm-12 col-xs-12 address-foot" style=""><?php echo footer_helper()['data']['address2']; ?></div>
+                	<div class="col-md-6 col-sm-12 col-xs-12 address-foot" style=""><?php #echo footer_helper()['data']['address']; ?></div>
+                	<div class="col-md-6 col-sm-12 col-xs-12 address-foot" style=""><?php #echo footer_helper()['data']['address2']; ?></div>
                 	<!-- <ul class="list-inline">
 
-                		<li class="address-foot" style="word-wrap: break-word;"><?php echo footer_helper()['data']['address']; ?></li>
-                		<li class="address-foot" style="word-wrap: break-word;"><?php echo footer_helper()['data']['address2']; ?></li>
+                		<li class="address-foot" style="word-wrap: break-word;"><?php #echo footer_helper()['data']['address']; ?></li>
+                		<li class="address-foot" style="word-wrap: break-word;"><?php #echo footer_helper()['data']['address2']; ?></li>
                 	</ul> -->
                 </div>
              <!--    <div class="col-md-2 col-sm-2 col-xs-12 footer-center text-center">
                     <h3 class="title-footer">Kantor Pusat 1</h3>
                     <ul class="list-unstyled">
-                        <li style="word-wrap: break-word;"><?php echo footer_helper()['data']['address']; ?></li>
+                        <li style="word-wrap: break-word;"><?php #echo footer_helper()['data']['address']; ?></li>
                     </ul>
                 </div>
                 <div class="col-md-2 col-sm-2 col-xs-12 footer-center text-center">
                     <h3 class="title-footer">Kantor Pusat 2</h3>
-                    <ul class="list-unstyled">                  
-                        <li style="word-wrap: break-word;"><?php echo footer_helper()['data']['address2']; ?></li>
+                    <ul class="list-unstyled">
+                        <li style="word-wrap: break-word;"><?php #echo footer_helper()['data']['address2']; ?></li>
                     </ul>
                 </div> -->
                 <div class="col-md-3 col-sm-3 col-xs-12 footer-right text-center">
                   <h3 class="title-footer">Kalender</h3>
                     <ul class="list-unstyled" style="">
                       <li><div class="auto-jsCalendar material-theme"></div></li>
-                      
+
                         <!-- <li>
                             <a href="<?php echo footer_helper()['data']['FacebookLink']; ?>" class="facebook" target="blank" > <i class="fa fa-facebook"></i></a>
                         </li>
@@ -301,7 +301,7 @@
                 <select name="instansi" class="form-control" id="instansi">
                   <option value="">--- Select Instansi ---</option>
                   <?php foreach (instansi_helper()['data'] as $key => $value): ?>
-                    <option value="<?=$value['id'];?>"><?=$value['instansi'];?></option>  
+                    <option value="<?=$value['id'];?>"><?=$value['instansi'];?></option>
                   <?php endforeach ?>
                 </select>
                 <div class="error" id="ntf_instansi"></div>
@@ -335,9 +335,9 @@
     </div> -->
 
     <script src="<?=base_url();?>assets/js/jquery.min.js"></script>
-   
+
     <script src="<?=base_url();?>assets/js/bootstrap.min.js"></script>
-   
+
     <script src="<?=base_url();?>assets/js/owl.carousel.min.js"></script>
     <script src="<?=base_url();?>assets/share_link/js/social-share-kit.js"></script>
     <script type="text/javascript">
@@ -359,7 +359,7 @@ SocialShareKit.init({
 
       <script type="text/javascript" src="<?=base_url();?>assets/js/jsCalendar.js"></script>
  <script src="<?=base_url();?>assets/js/jquery.easing.min.js"></script>
-<?php if(current_url() == site_url('web/galery/video')||current_url() == site_url('web/layanan/id_tube')){ ?> 
+<?php if(current_url() == site_url('web/galery/video')||current_url() == site_url('web/layanan/id_tube')){ ?>
    <script type="text/javascript" src="<?=base_url();?>assets/js/jquery.waterwheelCarousel.miny.js"></script>
  <?php } ?>
 

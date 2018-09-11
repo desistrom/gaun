@@ -3,7 +3,7 @@
 (defined('BASEPATH')) OR exit('No direct script access allowed');
 
 /**
- * Description of site
+ * Description of site create by junaidi
  *
  * @author http://www.roytuts.com
  */

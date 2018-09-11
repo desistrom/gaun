@@ -51,7 +51,7 @@ if (!function_exists('logo_helper')) {
 	}
 }
 
-if (!function_exists('instansi_helper')) {
+/*if (!function_exists('instansi_helper')) {
 	function instansi_helper()
 	{
 		$curl = curl_init();
@@ -86,7 +86,7 @@ if (!function_exists('instansi_helper')) {
 			return $result;
 		}
 	}
-}
+}*/
 if (!function_exists('footer_helper')) {
 	function footer_helper()
 	{

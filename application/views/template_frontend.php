@@ -300,9 +300,7 @@
               <label>Instansi</label>
                 <select name="instansi" class="form-control" id="instansi">
                   <option value="">--- Select Instansi ---</option>
-                  <?php foreach (instansi_helper()['data'] as $key => $value): ?>
-                    <option value="<?=$value['id'];?>"><?=$value['instansi'];?></option>
-                  <?php endforeach ?>
+
                 </select>
                 <div class="error" id="ntf_instansi"></div>
               </div>

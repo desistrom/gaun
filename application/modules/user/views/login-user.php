@@ -36,14 +36,16 @@
             float: left;
         }
         .fb .btn{
-          padding: 15px 30px;
+          padding: 10px 40px;
         }
         .google .btn{
-          padding: 15px 30px;
+          padding: 10px 40px;
         }
         .other-registery{
           text-align: center;
-          padding: 0 3em 4em 3em;
+          padding: 0 3em 0 3em;
+          height: auto;
+          overflow: hidden;
         }
         .content-comment a.btn.btn-post{
           padding: 10px 20px;
@@ -108,7 +110,10 @@
                               <button class="btn btn-google " type="button"><i class="fa fa-google"></i> Login Dengan Google</button>
                             </a>
                           </div>
+                          <div class="col col-md-12 col-xs-12">
+                            
                            <p style="text-align: center;padding-top:20px;">--atau--</p>
+                          </div>
                         </div>
                             <div class="col-md-12 col-sm-12 col-xs-12 right-comment">
                               <div class="sub-comment-right" style="box-shadow: 0 0 48px 0 #bdbdbd;">

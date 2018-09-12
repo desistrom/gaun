@@ -288,6 +288,19 @@ class Keanggotaan extends MX_Controller  {
             // $a = api_helper(json_encode($search),$url,$methode,$token);
             $sql = "SELECT nm_instansi as instansi, id_instansi as id, phone as number_phone, website as link, alamat as address, gambar as image FROM tb_instansi where status = 2 AND is_aktif = 1 AND nm_instansi like'%".$search['search'] ."%' order by sort ASC LIMIT ".$search['page'].",10";
             $a = $this->db->query($sql)->result_array();
+            foreach ($a as $key => $value) {
+                if ($value['image'] == '') {
+                    $a[$key]['image_thumbnail']='assets/images/logo/IDREN-2.png';
+                }else{
+                    if (file_exists(FCPATH."media/thumbnail/".$value['image'])) {
+                        $a[$key]['image_thumbnail'] = 'media/thumbnail/'.$value['image'];
+                        $galery[$key]['image'] = 'media/'.$value['image'];
+                    }else{
+                        $a[$key]['image_thumbnail'] = 'media/'.$value['image'];
+                        $a[$key]['image'] = 'media/'.$value['image'];
+                    }
+                }                                                                                                                     
+            }
             $this->data['total'] = count($a);
             $this->data['keanggotaan']=$a;
             $result = $this->load->view('keanggotaan_looping',$this->data);
@@ -300,6 +313,19 @@ class Keanggotaan extends MX_Controller  {
             // $a = api_helper(json_encode($search),$url,$methode,$token);
             $sql = "SELECT nm_instansi as instansi, id_instansi as id, phone as number_phone, website as link, alamat as address, gambar as image FROM tb_instansi where status = 2 AND is_aktif = 1 AND nm_instansi like'%".$search['search'] ."%' order by sort ASC LIMIT 0,10";
             $a = $this->db->query($sql)->result_array();
+            foreach ($a as $key => $value) {
+                if ($value['image'] == '') {
+                    $a[$key]['image_thumbnail']='assets/images/logo/IDREN-2.png';
+                }else{
+                    if (file_exists(FCPATH."media/thumbnail/".$value['image'])) {
+                        $a[$key]['image_thumbnail'] = 'media/thumbnail/'.$value['image'];
+                        $galery[$key]['image'] = 'media/'.$value['image'];
+                    }else{
+                        $a[$key]['image_thumbnail'] = 'media/'.$value['image'];
+                        $a[$key]['image'] = 'media/'.$value['image'];
+                    }
+                }                                                                                                                     
+            }
             $this->data['total'] = count($a);
             $this->data['keanggotaan']=$a;
             $this->ciparser->new_parse('template_frontend','modules_web', 'keanggotaan_search',$this->data);

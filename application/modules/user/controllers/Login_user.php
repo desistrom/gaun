@@ -92,7 +92,7 @@ class Login_user extends MX_Controller  {
                     // print_r($result);
                     // setcookie('user',json_encode($result['token']), time()+"3600","/");
                     // print_r($data_token);
-                    $this->session->set_userdata('token', $result['token']);
+                    // $this->session->set_userdata('token', $result['token']);
                     $ret['url'] = site_url('user/dashboard');
 
                 }else{
@@ -165,7 +165,7 @@ class Login_user extends MX_Controller  {
                     // print_r($result);
                     // setcookie('user',json_encode($result['token']), time()+"3600","/");
                     // print_r($data_token);
-                    $this->session->set_userdata('token', $result['token']);
+                    // $this->session->set_userdata('token', $result['token']);
                     $ret['url'] = site_url('user/dashboard');
 
                 }else{

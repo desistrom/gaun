@@ -90,36 +90,40 @@ if (!function_exists('logo_helper')) {
 if (!function_exists('footer_helper')) {
 	function footer_helper()
 	{
-		$curl = curl_init();
-		curl_setopt_array($curl, array(
-		  CURLOPT_URL => URL_GET_FOOTER,
-		  CURLOPT_RETURNTRANSFER => true,
-		  CURLOPT_ENCODING => "",
-		  CURLOPT_MAXREDIRS => 10,
-		  CURLOPT_TIMEOUT => 30,
-		  CURLOPT_SSL_VERIFYPEER => FALSE,
-		  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-		  CURLOPT_CUSTOMREQUEST => "GET",
-		  CURLOPT_POSTFIELDS => "",
-		  CURLOPT_HTTPHEADER => array(
-		    "authorization:",
-		    "cache-control: no-cache",
-		    "accept: application/json",
-		    "content-type: application/json",
-		    "postman-token: a565886e-2a43-91de-681e-b95b72138cf0"
-		  ),
-		));
+		// $curl = curl_init();
+		// curl_setopt_array($curl, array(
+		//   CURLOPT_URL => URL_GET_FOOTER,
+		//   CURLOPT_RETURNTRANSFER => true,
+		//   CURLOPT_ENCODING => "",
+		//   CURLOPT_MAXREDIRS => 10,
+		//   CURLOPT_TIMEOUT => 30,
+		//   CURLOPT_SSL_VERIFYPEER => FALSE,
+		//   CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+		//   CURLOPT_CUSTOMREQUEST => "GET",
+		//   CURLOPT_POSTFIELDS => "",
+		//   CURLOPT_HTTPHEADER => array(
+		//     "authorization:",
+		//     "cache-control: no-cache",
+		//     "accept: application/json",
+		//     "content-type: application/json",
+		//     "postman-token: a565886e-2a43-91de-681e-b95b72138cf0"
+		//   ),
+		// ));
 
-		$response = curl_exec($curl);
-		$err = curl_error($curl);
+		// $response = curl_exec($curl);
+		// $err = curl_error($curl);
 
-		curl_close($curl);
+		// curl_close($curl);
 
-		if ($err) {
-		  echo "cURL Error #:" . $err;
-		} else {
-			$result = json_decode($response, TRUE);
-			return $result;
-		}
+		// if ($err) {
+		//   echo "cURL Error #:" . $err;
+		// } else {
+		// 	$result = json_decode($response, TRUE);
+		// 	return $result;
+		// }
+		$CI = & get_instance();
+		$sql = "SELECT alamat as address, alamat2 as address2, facebook as FacebookLink, twitter as TwitterLink, instagram as InstagramLink FROM tb_footer";
+		$user['data'] = $CI->db->query($sql)->row_array();
+		return $user;
 	}
 }

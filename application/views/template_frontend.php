@@ -173,8 +173,8 @@
                 </div>
                 <div class="col-md-4 col-sm-4 col-xs-12 footer-center text-center address-foot">
                 	<h3 class="title-footer">Kantor Pusat</h3>
-                	<div class="col-md-6 col-sm-12 col-xs-12 address-foot" style=""><?php #echo footer_helper()['data']['address']; ?></div>
-                	<div class="col-md-6 col-sm-12 col-xs-12 address-foot" style=""><?php #echo footer_helper()['data']['address2']; ?></div>
+                	<div class="col-md-6 col-sm-12 col-xs-12 address-foot" style=""><?php echo footer_helper()['data']['address']; ?></div>
+                	<div class="col-md-6 col-sm-12 col-xs-12 address-foot" style=""><?php echo footer_helper()['data']['address2']; ?></div>
                 	<!-- <ul class="list-inline">
 
                 		<li class="address-foot" style="word-wrap: break-word;"><?php #echo footer_helper()['data']['address']; ?></li>

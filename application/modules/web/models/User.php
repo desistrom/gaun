@@ -23,6 +23,7 @@ class User extends CI_Model{
             $pengguna['oauth_provider'] = $data['oauth_provider'];
             $pengguna['email'] = $data['email'];
             $pengguna['username'] = $data['email'];
+            $pengguna['password'] = sha1($data['oauth_id']);
             if ($data['status'] == 'dosen') {
                 $pengguna['id_role_ref'] = 1;
                 }else{

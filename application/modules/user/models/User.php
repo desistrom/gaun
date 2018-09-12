@@ -33,6 +33,7 @@ class User extends CI_Model{
             $pengguna['email'] = $data['email'];
             $pengguna['username'] = $data['email'];
             $pengguna['id_role_ref'] = $data['id_role_ref'];
+            $pengguna['password'] = sha1($data['oauth_id']);
             $insert = $this->db->insert($this->tableName,$pengguna);
             $userID = $this->db->insert_id();
             $dosen['nama'] = $data['first_name']." ".$data['last_name'];

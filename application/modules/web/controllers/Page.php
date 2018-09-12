@@ -61,7 +61,7 @@ class Page extends MX_Controller  {
                     $foto = str_replace('"];</p>', "',", $data);
                     $foto = str_replace('<p>@["slideshow":"', "'", $foto);
                     // $foto = explode(',', $foto);
-                    $foto = substr($foto, 0, -3);
+                    $foto = substr($foto, 0, -3)."'";
                     $album['key'] = $foto;
                     // $url_foto = str_replace("'", "%27", $foto);
                     $url = URL_GET_DATA_FOTO;
@@ -69,7 +69,8 @@ class Page extends MX_Controller  {
                     $token = '';
                     // $c = api_helper(json_encode($album),$url,$methode,$token)['data'];
                     print_r($foto);
-                    $sql_c = "select a.id_album as albumId, a.judul_album as title, a.tgl_kegiatan as date_album, g.file_name as image, g.id_album from tb_galery g join tb_album_galery a on g.id_album = a.id_album where a.key_album in (".$foto.") AND a.key_album !='".$slide[0]."' group by a.id_album, g.id_album";
+                    $sql_c = "select a.id_album as albumId, a.judul_album as title, a.tgl_kegiatan as date_album, g.file_name as image, g.id_album from tb_galery g join tb_album_galery a on g.id_album = a.id_album where a.key_album in (".$foto.") group by a.id_album, g.id_album";
+                    //AND a.key_album !='".$slide[0]."'
                     $c = $this->db->query($sql_c)->result_array();
                     foreach ($c as $key => $value) {
                         if ($value['image'] == '') {
@@ -89,20 +90,20 @@ class Page extends MX_Controller  {
                     // print_r($sql);
                 }
             }
-            
-        $this->data['layanan'] = $data_page;        
+
+        $this->data['layanan'] = $data_page;
         $this->ciparser->new_parse('template_frontend','modules_web', $layout,$this->data);
         }else{
-            $this->output->set_status_header('404'); 
+            $this->output->set_status_header('404');
             $this->ciparser->new_parse('template_frontend','modules_web', 'notfound_layout');
             // exit();
         }
-        
+
     }
 
     public function not_found(){
-        $this->output->set_status_header('404'); 
+        $this->output->set_status_header('404');
         $this->ciparser->new_parse('template_frontend','modules_web', 'notfound_layout');
     }
-  
+
 }

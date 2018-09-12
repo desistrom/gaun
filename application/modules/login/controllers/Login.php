@@ -13,13 +13,14 @@ class Login extends MX_Controller
     	// $this->load->model('login_model');
         $this->load->helper('api');
         $this->load->library('Recaptcha');
+        // $this->load->module('Jwt');
     }
 
     public function index(){
         // print_r(file_get_contents(FCPATH."media/15264596851.jpg"));
-    	if($this->input->method() == 'post'){
-    		$ret['state'] = 0;
-    		$ret['status'] = 0;
+        if($this->input->method() == 'post'){
+            $ret['state'] = 0;
+            $ret['status'] = 0;
             $this->form_validation->set_error_delimiters('', '');
             $this->form_validation->set_rules('username','username', 'required');
             $this->form_validation->set_rules('password','password', 'required');
@@ -30,14 +31,14 @@ class Login extends MX_Controller
             return false;*/
             // $response['success'] = 1;
             if ($this->form_validation->run() == true && $response['success'] == 1) {
-            	$ret['state'] = 1;
-            	$username = $this->input->post('username');
-            	$password = sha1($this->input->post('password'));
-            	$sql = "SELECT * FROM tb_user WHERE username = ? AND password = ?";
-            	$data = $this->db->query($sql,[$username,$password]);
-            	if ($data->num_rows() == 1) {
-            		$ret['status'] = 1;
-            		$data_user = $data->row_array();
+                $ret['state'] = 1;
+                $username = $this->input->post('username');
+                $password = sha1($this->input->post('password'));
+                $sql = "SELECT * FROM tb_user WHERE username = ? AND password = ?";
+                $data = $this->db->query($sql,[$username,$password]);
+                if ($data->num_rows() == 1) {
+                    $ret['status'] = 1;
+                    $data_user = $data->row_array();
                     $this->session->set_userdata('data_user', $data_user);
                     $this->session->set_userdata('previlage', $data_user['id_role_ref']);
                     $this->session->set_userdata('is_login', true);
@@ -46,7 +47,12 @@ class Login extends MX_Controller
                     $url = URL_GET_TOKEN;
                     $method = 'POST';
                     $token = "";
+                    $this->load->library('../modules/login/controllers/jwt');
+                    // $a modules::run('module/jwt/token_post', $data_token);
                     $result = api_helper(json_encode($data_token),$url,$method,$token);
+                    // $a = $this->jwt->token($data_token);
+                    // print_r($result);
+                    // return false;
                     // print_r($result);
                     // print_r($data_token);
             		$this->session->set_userdata('token', $result['token']);
@@ -75,5 +81,21 @@ class Login extends MX_Controller
     public function logout(){
     	$this->session->sess_destroy();
     	redirect(site_url('login'));
+    }
+
+    public function token_post($data)
+    {
+        require(APPPATH.'libraries/REST_Controller.php');
+        // require APPPATH . '/libraries/REST_Controller.php';
+        $this->load->library('REST_Controller');
+        $tokenData = array();
+        $tokenData['id']['username'] = $data['username']; 
+        $tokenData['id']['password'] = $data['password']; 
+        $tokenData['timestamp'] = now();
+        $output['status'] = "ok";
+        $output['data'] = $data;
+        $output['token'] = AUTHORIZATION::generateToken($tokenData);
+        $result = $this->REST_Controller->set_response($output, REST_Controller::HTTP_OK);
+        return $output['token'];
     }
 }

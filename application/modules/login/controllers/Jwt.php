@@ -14,7 +14,7 @@ class Jwt extends REST_Controller
         $output['data'] = $login_platform;
         $output['token'] = AUTHORIZATION::generateToken($tokenData);
         $result = $this->set_response($output, REST_Controller::HTTP_OK);
-        return $$output['token'];
+        return $output['token'];
     }
     public function check_token_post()
     {

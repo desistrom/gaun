@@ -242,7 +242,7 @@ define('URL_GET_FOUNDER_V2','http://localhost/idren/api/v2/founder');*/
 
 //server
 define('URL_GET_ALL_MEDIA','http://128.199.233.73/idren/api/v2/galery');
-define('URL_GET_TOKEN','http://128.199.233.73/idren/api/v2/token');
+// define('URL_GET_TOKEN','http://128.199.233.73/idren/api/v2/token');
 define('URL_GET_ALL_ALBUM','http://128.199.233.73/idren/api/v2/albumAll');
 define('URL_GET_ALBUM_BY_ID','http://128.199.233.73/idren/api/v2/getAlbumById?data=');
 define('URL_GET_ALL_IMAGE','http://128.199.233.73/idren/api/v2/galery_image');
@@ -477,6 +477,7 @@ define('URL_GET_PAGE_V2','http://192.168.88.157/idren/api/v3/page?link=');
 define('URL_GET_SLIDER_FOTO_V2','http://192.168.88.157/idren/api/v3/getSliderFoto?key=');
 define('URL_GET_DATA_FOTO_V2','http://192.168.88.157/idren/api/v3/getDataFoto');
 define('URL_GET_FOUNDER_V2','http://192.168.88.157/idren/api/v3/founder');*/
+define('URL_GET_TOKEN','https://idren.id/api/v2/token');
 
 define('URL_API','http://localhost/idren/');
 define('URL_INSERT_DOSEN','http://localhost/idren/api/v3/insert_dosen');

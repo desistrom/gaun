@@ -448,6 +448,7 @@ class Keanggotaan extends MX_Controller  {
 				if ($this->input->post('sort') == '') {
 					$data_instansi['sort'] = NULL;
 				}
+				//
 				if (isset($_FILES['userfile'])) {
 					$image = $this->upload_instansi($_FILES);
 					if (isset($image['error'])) {

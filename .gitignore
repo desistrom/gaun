@@ -1,2 +1,2 @@
 sendgrid.env
-/application/config/*.php
+application/config/*.php

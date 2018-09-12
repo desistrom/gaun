@@ -354,8 +354,9 @@ class Galery extends MX_Controller  {
 			unlink(FCPATH."assets/media/".$data['file_name']);
 		}
 		if($this->db->delete('tb_galery',array('id_galery'=>$id))){
-			$ret = 1;
-			$this->session->set_flashdata("notif","Data Berhasil di Masukan");
+			$ret['state'] = 1;
+			$this->session->set_flashdata("notif","Data Berhasil dihapus");
+			$ret['url'] = site_url('admin/galery/list_video');
 			echo json_encode($ret);
 		}
 	}

@@ -99,6 +99,38 @@
             border: 0;
 
           }
+          .calender_footer{
+            width: 100%
+          }
+          .calender_footer table{
+            width: 100%;
+          }
+           .calender_footer table tr td{
+            padding:6px 5px;
+           }
+           .calender_footer .heading,.calender_footer .week{
+            background-color: #D10909 !important;
+            color: white;
+           }
+            .calender_footer .heading,.calender_footer .week:hover{
+            background-color: #D10909 !important;
+            color: white;
+           }
+          .calender_footer table tr td, .calender_footer table tr th{
+            border:none;
+            cursor: default;
+           }
+            .calender_footer table tr td:hover{
+              background-color: #EFDBDB!important;
+            }
+           .calender_footer .highlight{
+             background-color: #D10909 !important;
+            color: white;
+           }
+           .heading i.fa{
+               background-color: #D10909 !important;
+           }
+
 
        /*   ul.dropdown-menu li a:hover{
             color: #D10909;
@@ -195,8 +227,9 @@
                 </div> -->
                 <div class="col-md-3 col-sm-3 col-xs-12 footer-right text-center">
                   <h3 class="title-footer">Kalender</h3>
-                    <ul class="list-unstyled" style="">
-                      <li><div class="auto-jsCalendar material-theme"></div></li>
+                    <ul class="list-unstyled calender_footer" style="">
+                      <!-- <li><div class="auto-jsCalendar material-theme"></div></li> -->
+                      <li><?php echo kalender_helper();?></li>
 
                         <!-- <li>
                             <a href="<?php #echo footer_helper()['data']['FacebookLink']; ?>" class="facebook" target="blank" > <i class="fa fa-facebook"></i></a>
@@ -338,6 +371,7 @@
 
     <script src="<?=base_url();?>assets/js/owl.carousel.min.js"></script>
     <script src="<?=base_url();?>assets/share_link/js/social-share-kit.js"></script>
+   
     <script type="text/javascript">
 SocialShareKit.init({
     onBeforeOpen: function(targetElement, network, paramsObj){

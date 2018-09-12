@@ -375,7 +375,7 @@ class Keanggotaan extends MX_Controller  {
 			$this->form_validation->set_rules('jenis','Kategori Instansi','trim|required');
 			$this->form_validation->set_rules('username','Username','trim|required');
 			$this->form_validation->set_rules('password','Passowrd','trim|required');
-			$this->form_validation->set_rules('sort','Urutan','trim|numeric');
+			// $this->form_validation->set_rules('sort','Urutan','trim|numeric');
 			if ($this->form_validation->run() == true && isset($_FILES['userfile'])) {
 				$ret['state'] = 1;
 				$data_instansi['nm_instansi'] = $this->input->post('name');
@@ -386,7 +386,9 @@ class Keanggotaan extends MX_Controller  {
 				$data_instansi['email'] = $this->input->post('email');
 				$data_instansi['id_jenis_instansi'] = $this->input->post('jenis');
 				$data_instansi['password'] = $this->input->post('password');
-				$data_instansi['sort'] = $this->input->post('sort');
+				if ($this->input->post('sort') == '') {
+					$data_instansi['sort'] = NULL;
+				}
 				$data_gambar = $this->upload_instansi($_FILES);
 				if (isset($data_gambar['error'])) {
 					$ret['notif'] = $data_gambar;
@@ -407,7 +409,7 @@ class Keanggotaan extends MX_Controller  {
 			$ret['notif']['jenis'] = form_error('jenis');
 			$ret['notif']['email'] = form_error('email');
 			$ret['notif']['password'] = form_error('password');
-			$ret['notif']['sort'] = form_error('sort');
+			// $ret['notif']['sort'] = form_error('sort');
 			if (!isset($_FILES['userfile'])) {
 				$ret['notif']['userfile'] = "Please Select File";
 			}
@@ -443,7 +445,9 @@ class Keanggotaan extends MX_Controller  {
 				$data_instansi['alamat'] = $this->input->post('alamat');
 				$data_instansi['id_jenis_instansi'] = $this->input->post('jenis');
 				$data_instansi['email'] = $this->input->post('email');
-				$data_instansi['sort'] = $this->input->post('sort');
+				if ($this->input->post('sort') == '') {
+					$data_instansi['sort'] = NULL;
+				}
 				if (isset($_FILES['userfile'])) {
 					$image = $this->upload_instansi($_FILES);
 					if (isset($image['error'])) {

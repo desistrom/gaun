@@ -1,3 +1,4 @@
+    <link rel="stylesheet" type="text/css" href="<?=base_url();?>assets/select2/select2.min.css">
     <style type="text/css">
         div.container-fluid.content-comment{
           background-color: white;
@@ -5,16 +6,27 @@
         div.container-fluid.content-comment{
           height: auto;
         }
-        .google{
+         .google{
           display: inline-block;
           margin-left: 10px;
+          float: right;
         }
         .fb{
           display: inline-block;
             margin-right: 10px;
+            float: left;
+        }
+        .fb .btn{
+          padding: 10px 40px;
+        }
+        .google .btn{
+          padding: 10px 40px;
         }
         .other-registery{
           text-align: center;
+          padding: 0 3em 0 3em;
+          height: auto;
+          overflow: hidden;
         }
         .content-comment a.btn.btn-post{
           padding: 10px 20px;
@@ -224,6 +236,7 @@
 <script src="<?=base_url();?>assets/js/jquery.min.js"></script>
  <script src="<?=base_url();?>assets/js/classie.min.js"></script>
  <script src="<?=base_url();?>assets/js/custom_pendaftaran.min.js"></script>
+ <script src="<?=base_url();?>assets/select2/select2.min.js"></script>
  <script src='https://www.google.com/recaptcha/api.js'></script>
 <script type="text/javascript">
    var base_url = "<?=base_url();?>"
@@ -265,6 +278,9 @@
           $('#regSukses').modal('show');
         <?php } ?>
     });
+    $('#instansi').select2( {
+    maximumSelectionSize: 2
+  } );
  </script>
 
 

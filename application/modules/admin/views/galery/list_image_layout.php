@@ -65,7 +65,7 @@
 	    		url : '<?=site_url('admin/galery/delete');?>',
 		        type : 'POST',
 		        dataType : 'json',
-		        data : {'id': id }
+		        data : {'id': id , 'tipe':'gambar'}
 	    	}).done(function(data){
 	    		console.log(data);
 	    		if (data.state == 1) {

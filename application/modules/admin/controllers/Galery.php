@@ -346,6 +346,12 @@ class Galery extends MX_Controller  {
 
 	public function delete(){
 		$id = $this->input->post('id');
+		$tipe = $this->input->post('tipe');
+		if ($tipe == 'video') {
+			$ret['url'] = site_url('admin/galery/list_video');
+		}else{
+			$ret['url'] = site_url('admin/galery/list_image');
+		}
 		$data = $this->galery_model->rowGalery($id);
 		// print_r(FCPATH."assets/media/".$data['file_name']);
 		// return false;
@@ -356,7 +362,7 @@ class Galery extends MX_Controller  {
 		if($this->db->delete('tb_galery',array('id_galery'=>$id))){
 			$ret['state'] = 1;
 			$this->session->set_flashdata("notif","Data Berhasil dihapus");
-			$ret['url'] = site_url('admin/galery/list_video');
+			
 			echo json_encode($ret);
 		}
 	}

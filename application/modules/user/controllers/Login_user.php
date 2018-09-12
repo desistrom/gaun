@@ -88,9 +88,9 @@ class Login_user extends MX_Controller  {
                     $url = URL_GET_TOKEN;
                     $method = 'POST';
                     $token = "";
-                    $result = api_helper(json_encode($data_token),$url,$method,$token);
+                    // $result = api_helper(json_encode($data_token),$url,$method,$token);
                     // print_r($result);
-                    setcookie('user',json_encode($result['token']), time()+"3600","/");
+                    // setcookie('user',json_encode($result['token']), time()+"3600","/");
                     // print_r($data_token);
                     $this->session->set_userdata('token', $result['token']);
                     $ret['url'] = site_url('user/dashboard');
@@ -161,9 +161,9 @@ class Login_user extends MX_Controller  {
                     $url = URL_GET_TOKEN;
                     $method = 'POST';
                     $token = "";
-                    $result = api_helper(json_encode($data_token),$url,$method,$token);
+                    // $result = api_helper(json_encode($data_token),$url,$method,$token);
                     // print_r($result);
-                    setcookie('user',json_encode($result['token']), time()+"3600","/");
+                    // setcookie('user',json_encode($result['token']), time()+"3600","/");
                     // print_r($data_token);
                     $this->session->set_userdata('token', $result['token']);
                     $ret['url'] = site_url('user/dashboard');

@@ -1,6 +1,8 @@
     <!DOCTYPE html>
     <html>
     <head>
+       <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>login user</title>
         <link rel="shortcut icon" href="<?=base_url();?>media/favicon.ico">
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800,900" rel="stylesheet">

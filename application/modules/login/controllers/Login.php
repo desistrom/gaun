@@ -47,17 +47,17 @@ class Login extends MX_Controller
                     $url = URL_GET_TOKEN;
                     $method = 'POST';
                     $token = "";
-                    // $this->load->library('../modules/login/controllers/jwt');
+                    // $this->load->library('../modules/login/controllers/token');
                     // $a modules::run('module/jwt/token_post', $data_token);
                     // $result = api_helper(json_encode($data_token),$url,$method,$token);
-                    $result = file_get_contents(site_url('login/token/token').'/'.$username.'/'.$password);
-                    $token_jwt = json_decode($result,true);
-                    // $a = $this->jwt->token($data_token);
-                    // print_r($result);
+                    // $result = file_get_contents(site_url('login/token/token').'/'.$username.'/'.$password);
+                    // $token_jwt = json_decode($result,true);
+                    // $a = $this->token->token($username,$password);
+                    // print_r($a);
                     // return false;
                     // print_r($result);
                     // print_r($data_token);
-            		$this->session->set_userdata('token', $token_jwt['token']);
+            		// $this->session->set_userdata('token', $data_token);
             		$ret['url'] = site_url('admin/home');
 
             	}else{

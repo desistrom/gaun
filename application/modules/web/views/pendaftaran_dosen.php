@@ -36,6 +36,11 @@
           color: black;
           border:solid #A2A2A2 1px;
         }
+        .google .btn-google:hover{
+          background-color: #CF0909;
+          color: white;
+         
+        }
         .google .btn-google i{
           color: #34A853;
         }

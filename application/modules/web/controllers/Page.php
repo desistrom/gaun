@@ -68,8 +68,8 @@ class Page extends MX_Controller  {
                     $methode = 'POST';
                     $token = '';
                     // $c = api_helper(json_encode($album),$url,$methode,$token)['data'];
-                    // print_r($c);
-                    $sql_c = "select a.id_album as albumId, a.judul_album as title, a.tgl_kegiatan as date_album, g.file_name as image, g.id_album from tb_galery g join tb_album_galery a on g.id_album = a.id_album where a.key_album in (".$foto.") group by a.id_album, g.id_album";
+                    print_r($foto);
+                    $sql_c = "select a.id_album as albumId, a.judul_album as title, a.tgl_kegiatan as date_album, g.file_name as image, g.id_album from tb_galery g join tb_album_galery a on g.id_album = a.id_album where a.key_album in (".$foto.") AND a.key_album !='".$slide[0]."' group by a.id_album, g.id_album";
                     $c = $this->db->query($sql_c)->result_array();
                     foreach ($c as $key => $value) {
                         if ($value['image'] == '') {

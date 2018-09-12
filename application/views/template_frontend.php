@@ -371,7 +371,10 @@
 
     <script src="<?=base_url();?>assets/js/owl.carousel.min.js"></script>
     <script src="<?=base_url();?>assets/share_link/js/social-share-kit.js"></script>
-   
+    <script type="text/javascript">
+    
+        
+    </script>
     <script type="text/javascript">
 SocialShareKit.init({
     onBeforeOpen: function(targetElement, network, paramsObj){

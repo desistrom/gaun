@@ -68,8 +68,9 @@
 		        data : {'id': id }
 	    	}).done(function(data){
 	    		console.log(data);
-	    		if (data == 1) {
+	    		if (data.state == 1) {
 	    			$('#tr_'+id).hide(1000);
+	    			window.location.href = data.url;
 	    		}
 	    	});
 	    }

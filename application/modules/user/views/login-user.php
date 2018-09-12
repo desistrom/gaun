@@ -28,13 +28,22 @@
         .google{
           display: inline-block;
           margin-left: 10px;
+          float: right;
         }
         .fb{
           display: inline-block;
             margin-right: 10px;
+            float: left;
+        }
+        .fb .btn{
+          padding: 15px 30px;
+        }
+        .google .btn{
+          padding: 15px 30px;
         }
         .other-registery{
           text-align: center;
+          padding: 0 3em 4em 3em;
         }
         .content-comment a.btn.btn-post{
           padding: 10px 20px;

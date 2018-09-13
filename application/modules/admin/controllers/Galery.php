@@ -165,9 +165,11 @@ class Galery extends MX_Controller  {
 			$this->form_validation->set_rules('deskripsi','deskripsi','trim|required');*/
 			$this->form_validation->set_rules('album','Album','trim|required');
 			if ($this->form_validation->run() == true) {
+				$judul = $this->input->post('judul');
+				$ex_judul = explode(',', $judul);
+				$deskripsi = $this->input->post('deskripsi');
+				$ex_deskripsi = explode(',', $deskripsi);
 				$ret['state'] = 1;
-				$media['judul'] = $this->input->post('judul');
-				$media['deskripsi'] = $this->input->post('deskripsi');
 				$media['id_album'] = $this->input->post('album');
 				$media['tgl_upload'] = date('Y-m-d');
 				$media['type'] = 'image';
@@ -175,6 +177,8 @@ class Galery extends MX_Controller  {
 				if (isset($_FILES['file_names'])) {
 					$filesCount = count($_FILES['file_names']['name']);
 					for ($i=0; $i < $filesCount ; $i++) { 
+						$media['judul'] = $ex_judul[$i];
+						$media['deskripsi'] = $ex_deskripsi[$i];
 						$_FILES['file_name']['name'] = $_FILES['file_names']['name'][$i];
 		                $_FILES['file_name']['type'] = $_FILES['file_names']['type'][$i];
 		                $_FILES['file_name']['tmp_name'] = $_FILES['file_names']['tmp_name'][$i];
@@ -252,8 +256,8 @@ class Galery extends MX_Controller  {
 			$this->form_validation->set_rules('album','Album','trim|required');
 			if ($this->form_validation->run() == true) {
 				$ret['state'] = 1;
-				// $media['judul'] = $this->input->post('judul');
-				// $media['deskripsi'] = $this->input->post('deskripsi');
+				$media['judul'] = $this->input->post('judul');
+				$media['deskripsi'] = $this->input->post('deskripsi');
 				$media['id_album'] = $this->input->post('album');
 				$media['tgl_upload'] = date('Y-m-d');
 				/*print_r($_FILES['file_names']);

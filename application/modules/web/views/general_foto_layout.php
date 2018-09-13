@@ -3,6 +3,23 @@
         .content-img-top-left{
           margin-top: 2em;
         }
+        .title-slider{
+        background-color: white;
+        color: #747474;
+        font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+         
+        }
+        .description-slider{
+          color: #8B8B8B;
+        }
+        .carousel-control.right{
+          background:none!important;
+        }
+        .carousel-control.left{
+          background:none!important;
+        }
         @media(max-width:500px){
            .content-img-top-left{
           margin-top: 1em;
@@ -143,6 +160,7 @@
                   <img width="100%" src="<?=base_url();?>assets/images/logo/nota-kesepahaman.jpg"" alt="New York">
                 </div> -->
               </div>
+                
 
               <!-- Left and right controls -->
               <a class="left carousel-control" href="#myCarousel-pop" data-slide="prev">

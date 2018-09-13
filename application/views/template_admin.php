@@ -212,6 +212,20 @@
           </ul>
         </li>
 
+        <li class=" treeview <?php if(current_url() == site_url('admin/pengguna/list_dosen') || current_url() == site_url('admin/pengguna/list_mahasiswa')){ ?>  active <?php } ?>">
+          <a href="#">
+            <i class="fa fa-user"></i>  <span>List Akun</span>
+            <span class="pull-right-container">
+
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li <?php if(current_url() == site_url('admin/pengguna/list_dosen')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/pengguna/list_dosen');?>"><i class="material-icons">group_add</i> Dosen</a></li>
+            <li <?php if(current_url() == site_url('admin/pengguna/list_mahasiswa')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/pengguna/list_mahasiswa');?>"><i class="material-icons">group_add</i> Mahasiswa </a></li>
+          </ul>
+        </li>
+
         <li class=" treeview <?php if(current_url() == site_url('admin/pengguna') || current_url() == site_url('admin/pengguna/mahasiswa')){ ?>  active <?php } ?>">
           <a href="#">
             <i class="fa fa-link"></i>  <span>Request Akun</span>

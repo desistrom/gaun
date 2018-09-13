@@ -16,6 +16,20 @@ class Pengguna extends MX_Controller  {
 		// }
 	}
 
+    public function list_dosen(){
+        $this->data['breadcumb'] = 'List Dosen';
+        $sql = "SELECT * FROM tb_pengguna p JOIN tb_dosen d on p.id_pengguna = d.id_pengguna_ref where id_role_ref = 1 AND status = 1";
+        $this->data['user'] = $this->db->query($sql)->result_array();
+        $this->ciparser->new_parse('template_admin','modules_admin', 'pengguna/list_layout',$this->data);
+    }
+
+    public function list_mahasiswa(){
+        $this->data['breadcumb'] = 'List Mahasiswa';
+        $sql = "SELECT * FROM tb_pengguna p JOIN tb_mahasiswa d on p.id_pengguna = d.id_pengguna_ref where id_role_ref = 0 AND status = 1";
+        $this->data['user'] = $this->db->query($sql)->result_array();
+        $this->ciparser->new_parse('template_admin','modules_admin', 'pengguna/list_layout',$this->data);
+    }
+
 	public function index(){
 		$this->data['breadcumb'] = 'Request Dosen';
 		$sql = "SELECT * FROM tb_pengguna p JOIN tb_dosen d on p.id_pengguna = d.id_pengguna_ref where id_role_ref = 1 AND status = 0";

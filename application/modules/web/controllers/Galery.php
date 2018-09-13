@@ -79,7 +79,7 @@ class Galery extends CI_Controller  {
         $methode = 'GET';
         $token = '';
         // $app_data = api_helper(json_encode($id),$url,$methode,$token);
-        $sql_a = "SELECT a.id_album as albumId, a.judul_album as title, a.tgl_kegiatan as date_album, g.file_name as image FROM tb_album_galery a join tb_galery g on a.id_album = g.id_album where g.status = 1 AND a.id_album = ".$id;
+        $sql_a = "SELECT a.id_album as albumId, a.judul_album as title, a.tgl_kegiatan as date_album, g.file_name as image, judul, deskripsi FROM tb_album_galery a join tb_galery g on a.id_album = g.id_album where g.status = 1 AND a.id_album = ".$id;
         $galery = $this->db->query($sql_a)->result_array();
         foreach ($galery as $key => $value) {
             $galery[$key]['date_album'] = date("d M Y", strtotime($value['date_album']));
@@ -102,7 +102,7 @@ class Galery extends CI_Controller  {
         foreach ($galery as $key => $value) :
             $html['slideshow'].='<div class="item ';
             if($key==0){ $html['slideshow'] .= 'active';} 
-            $html['slideshow'] .= '"><img width="100%" src="'.base_url().$value['image'] .'" ></div>';
+            $html['slideshow'] .= '"><img width="100%" src="'.base_url().$value['image'] .'" ><h2 class="title-slider">'.$value['judul'].'</h2><p class="description-slider">'.$value['deskripsi'].'</p></div>';
         endforeach;
 
         $hmtl['thumbnail_album']='';

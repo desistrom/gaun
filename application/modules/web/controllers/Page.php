@@ -62,7 +62,8 @@ class Page extends MX_Controller  {
                     $foto = str_replace('"];</p>', "',", $data);
                     $foto = str_replace('<p>@["slideshow":"', "'", $foto);
                     // $foto = explode(',', $foto);
-                    $foto = substr($foto, 0, -3)."'";
+                    $foto = substr($foto, 0, -3)."";
+                    // print_r($foto);
                     $album['key'] = $foto;
                     // $url_foto = str_replace("'", "%27", $foto);
                     $url = URL_GET_DATA_FOTO;

@@ -118,7 +118,7 @@
 
     <!-- Modal content-->
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header" ">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
 
         <div class="">
@@ -146,6 +146,7 @@
                   <img width="100%" src="<?=base_url();?>assets/images/logo/nota-kesepahaman.jpg"" alt="New York">
                 </div> -->
               </div>
+                <p>aaaaaaaaaaaaaaaaaa</p>
 
               <!-- Left and right controls -->
               <a class="left carousel-control" href="#myCarousel-pop" data-slide="prev">

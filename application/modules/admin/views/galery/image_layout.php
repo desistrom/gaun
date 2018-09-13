@@ -2,7 +2,7 @@
  
 <style type="text/css">
   .form-group{
-    width: 50%;
+    /*width: 50%;*/
   }
   .file-group{
     padding-bottom: 1em;
@@ -46,18 +46,6 @@
   <div class="box-body">
     <form role="form">
       <!-- text input -->
-    <!--   <div class="form-group">
-        <label>Judul</label>
-        <input type="text" name="judul" class="form-control" id="judul" placeholder="Enter ..." value="<?php if(isset($galery)){ echo $galery['judul']; } ?>">
-        <div class="error" id="ntf_judul"></div>
-      </div> -->
-      <!-- textarea -->
-<!--       <div class="form-group">
-        <label>Deskribsi</label>
-        <textarea class="form-control" name="deskripsi" id="deskripsi" rows="3" placeholder="Enter ..." ><?php if(isset($galery)){ echo $galery['deskripsi']; } ?></textarea>
-        <div class="error" id="ntf_deskripsi"></div>
-      </div> -->
-
       <div class="form-group">
         <label>Album</label>
         <select class="form-control" name="album" id="album">
@@ -69,27 +57,65 @@
         <div class="error" id="ntf_album"></div>
       </div>
       <?php if ($view == 'add'){ ?>
-        <div class="form-group col-md-6 file-group">
-        <label>File</label>
-        <div class="col col-md-12 form-goup-file">
-          <div class="input-file-right"><label class="btn btn-success btn-choose-foto" for="file_name_1">Choose File</label></div>
-          <div class="input-file-left"><input type="file" class="form-control file" name="file_name[]" id="file_name_1" ></div>  
+      <div class="col-md-6 file-group">
+        <div class="form-group">
+          <label>Judul</label>
+          <input type="text" name="judul[]" class="form-control judul" id="judul" placeholder="Enter ..." value="">
+          <div class="error" id="ntf_judul"></div>
         </div>
+        <!-- textarea -->
+        <div class="form-group">
+          <label>Deskribsi</label>
+          <textarea class="form-control deskripsi" name="deskripsi" id="deskripsi" rows="3" placeholder="Enter ..." ></textarea>
+          <div class="error" id="ntf_deskripsi"></div>
+        </div>
+        <div class="form-group">
+          <label>File</label>
+          <div class="col col-md-12 form-goup-file">
+            <div class="input-file-right"><label class="btn btn-success btn-choose-foto" for="file_name_1">Choose File</label></div>
+            <div class="input-file-left"><input type="file" class="form-control file" name="file_name[]" id="file_name_1" ></div>  
+          </div>
+            <div style="font-style: italic;">*for best result use 450x240 px</div>
+            <div class="error" id="ntf_file_name"></div>
+            <div class="error" id="ntf_error"></div>
+          </div>
+      </div>
+      <div class="col-md-6 file-group">
+        <div class="form-group">
+          <label>Judul</label>
+          <input type="text" name="judul[]" class="form-control judul" id="judul" placeholder="Enter ..." value="">
+          <div class="error" id="ntf_judul"></div>
+        </div>
+        <!-- textarea -->
+        <div class="form-group">
+          <label>Deskribsi</label>
+          <textarea class="form-control deskripsi" name="deskripsi" id="deskripsi" rows="3" placeholder="Enter ..." ></textarea>
+          <div class="error" id="ntf_deskripsi"></div>
+        </div>
+        <div class="form-group">
+        <label>File</label>
+          <div class="col col-md-12 form-goup-file">
+            <div class="input-file-right"><label class="btn btn-success btn-choose-foto" for="file_name_2">Choose File</label></div>
+            <div class="input-file-left"><input type="file" class="form-control file" name="file_name[]" id="file_name_2" ></div>  
+          </div>
           <div style="font-style: italic;">*for best result use 450x240 px</div>
           <div class="error" id="ntf_file_name"></div>
           <div class="error" id="ntf_error"></div>
         </div>
-        <div class="form-group col-md-6 file-group">
-        <label>File</label>
-        <div class="col col-md-12 form-goup-file">
-          <div class="input-file-right"><label class="btn btn-success btn-choose-foto" for="file_name_2">Choose File</label></div>
-          <div class="input-file-left"><input type="file" class="form-control file" name="file_name[]" id="file_name_2" ></div>  
+      </div>
+      <div class="col-md-6 file-group">
+        <div class="form-group">
+          <label>Judul</label>
+          <input type="text" name="judul[]" class="form-control judul" id="judul" placeholder="Enter ..." value="">
+          <div class="error" id="ntf_judul"></div>
         </div>
-          <div style="font-style: italic;">*for best result use 450x240 px</div>
-          <div class="error" id="ntf_file_name"></div>
-          <div class="error" id="ntf_error"></div>
+        <!-- textarea -->
+        <div class="form-group">
+          <label>Deskribsi</label>
+          <textarea class="form-control deskripsi" name="deskripsi" id="deskripsi" rows="3" placeholder="Enter ..." ></textarea>
+          <div class="error" id="ntf_deskripsi"></div>
         </div>
-        <div class="form-group col-md-6 file-group">
+        <div class="form-group">
         <label>File</label>
         <div class="col col-md-12 form-goup-file">
           <div class="input-file-right"><label class="btn btn-success btn-choose-foto" for="file_name_3">Choose File</label></div>
@@ -99,7 +125,20 @@
           <div class="error" id="ntf_file_name"></div>
           <div class="error" id="ntf_error"></div>
         </div>
-        <div class="form-group col-md-6 file-group">
+      </div>
+      <div class="col-md-6 file-group">
+        <div class="form-group">
+          <label>Judul</label>
+          <input type="text" name="judul[]" class="form-control judul" id="judul" placeholder="Enter ..." value="">
+          <div class="error" id="ntf_judul"></div>
+        </div>
+        <!-- textarea -->
+        <div class="form-group">
+          <label>Deskribsi</label>
+          <textarea class="form-control" name="deskripsi" id="deskripsi" rows="3" placeholder="Enter ..." ></textarea>
+          <div class="error" id="ntf_deskripsi"></div>
+        </div>
+        <div class="form-group">
           <label>File</label>
           <div class="col col-md-12 form-goup-file">
             <div class="input-file-right"><label class="btn btn-success btn-choose-foto" for="file_name_4">Choose File</label></div>
@@ -109,6 +148,7 @@
           <div class="error" id="ntf_file_name"></div>
           <div class="error" id="ntf_error"></div>
         </div>
+      </div>
 <!-- 
         <div class="form-group col-md-6 file-group">
         <label>File</label>
@@ -137,6 +177,7 @@
           <button type="button" class="btn btn-danger" style="float: right" id="add"><i class="fa fa-plus"></i> Add More</button>
         </div>        
       <?php }else{ ?>
+      
         <div class="form-group  file-group">
           <label>File</label>
           <div class="col col-md-12 form-goup-file">
@@ -160,7 +201,7 @@
         </div> -->
         <div class="col col-md-12 col-sm-12 col-xs-12">
           
-        <img src="<?=base_url().'assets/media/'.$galery['file_name'];?>" width="250px">
+        <img src="<?=base_url().'assets/media/'.$galery['file_name'];?>" width="250px" id="img">
         </div>
       <?php } ?>
       <div class="col-md-12" style="padding-top: 1em;">
@@ -209,6 +250,18 @@
       $('#progresLoading').modal('show');
       var file_data = [];
       var data_error = '';
+      var judul = [];
+      var deskripsi = [];
+      $('.judul').each(function(i) {
+        // console.log("asd");
+        judul.push($(this).val());
+      });
+      $('.deskripsi').each(function(i) {
+        // console.log("asd");
+        deskripsi.push($(this).val());
+      });
+      // console.log(judul);
+      // return false
       $('.file').each(function(i) {
           form_data.append('file_names[]', $(this).prop('files')[0]);
           if ($(this).prop('files')[0] != undefined) {
@@ -222,7 +275,11 @@
             }
           }
       });
+      
       // console.log(file_data.length);
+      if ($('#img').length > 0) {
+        file_data.length = 1;
+      }
       if (file_data.length == 0) {
         $('.error').css({'color':'red', 'font-style':'italic'});
         $('#ntf_file_name').text('Please Select File');
@@ -233,7 +290,17 @@
         $('#progresLoading').modal('hide');
         return;
       }
+      // var judul = $('#judul').val();
+      // var deskripsi = $('#deskripsi').val();
+      // if (judul == undefined) {
+      //   judul = '';
+      //   deskripsi = '';
+      // }
+      // console.log(deskripsi);
+      // console.log(judul);
       form_data.append('album', $('#album').val());
+      form_data.append('judul', judul);
+      form_data.append('deskripsi', deskripsi);
       
       $.ajax({
           url : window.location.href,
@@ -267,7 +334,7 @@
     $('body').on('click','#add',function(){
       var jumlah = $('.file').length;
       var looping = jumlah + 1;
-      var data = '<div class="form-group col-md-6 file-group"><label>File</label><div class="col col-md-12 form-goup-file"><div class="input-file-right"><label class="btn btn-success btn-choose-foto" for="file_name_'+looping+'">Choose File</label></div><div class="input-file-left"><input type="file" class="form-control file" name="file_name[]" id="file_name_'+looping+'"></div></div><div style="font-style: italic;">*for best result use 450x240 px</div><div class="error" id="ntf_file_name"></div><div class="error" id="ntf_error"></div></div>';
+      var data = '<div class="col-md-6 file-group"><div class="form-group"><label>Judul</label><input type="text" name="judul[]" class="form-control judul" id="judul" placeholder="Enter ..." value=""><div class="error" id="ntf_judul"></div></div><div class="form-group"><label>Deskribsi</label><textarea class="form-control" name="deskripsi" id="deskripsi" rows="3" placeholder="Enter ..." ></textarea><div class="error" id="ntf_deskripsi"></div></div><div class="form-group"><label>File</label><div class="col col-md-12 form-goup-file"><div class="input-file-right"><label class="btn btn-success btn-choose-foto" for="file_name_'+looping+'">Choose File</label></div><div class="input-file-left"><input type="file" class="form-control file" name="file_name[]" id="file_name_'+looping+'"></div></div><div style="font-style: italic;">*for best result use 450x240 px</div><div class="error" id="ntf_file_name"></div><div class="error" id="ntf_error"></div></div>';
       $('.add_more').append(data);
     });
     /*$('body').on('keyup','#judul',function(){

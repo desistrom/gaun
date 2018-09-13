@@ -214,7 +214,7 @@
 
         <li class=" treeview <?php if(current_url() == site_url('admin/pengguna/list_dosen') || current_url() == site_url('admin/pengguna/list_mahasiswa')){ ?>  active <?php } ?>">
           <a href="#">
-            <i class="fa fa-user"></i>  <span>List Akun</span>
+            <i class="fa fa-user"></i>  <span>Civitas</span>
             <span class="pull-right-container">
 
               <i class="fa fa-angle-left pull-right"></i>

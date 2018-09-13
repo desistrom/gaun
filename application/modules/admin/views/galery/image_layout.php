@@ -135,7 +135,7 @@
         <!-- textarea -->
         <div class="form-group">
           <label>Deskribsi</label>
-          <textarea class="form-control" name="deskripsi" id="deskripsi" rows="3" placeholder="Enter ..." ></textarea>
+          <textarea class="form-control deskripsi" name="deskripsi" id="deskripsi" rows="3" placeholder="Enter ..." ></textarea>
           <div class="error" id="ntf_deskripsi"></div>
         </div>
         <div class="form-group">
@@ -177,7 +177,17 @@
           <button type="button" class="btn btn-danger" style="float: right" id="add"><i class="fa fa-plus"></i> Add More</button>
         </div>        
       <?php }else{ ?>
-      
+         <div class="form-group">
+          <label>Judul</label>
+          <input type="text" name="judul[]" class="form-control judul" id="judul" placeholder="Enter ..." value="<?=$galery['judul'];?>">
+          <div class="error" id="ntf_judul"></div>
+        </div>
+        <!-- textarea -->
+        <div class="form-group">
+          <label>Deskribsi</label>
+          <textarea class="form-control deskripsi" name="deskripsi" id="deskripsi" rows="3" placeholder="Enter ..." ><?=$galery['deskripsi'];?></textarea>
+          <div class="error" id="ntf_deskripsi"></div>
+        </div>
         <div class="form-group  file-group">
           <label>File</label>
           <div class="col col-md-12 form-goup-file">
@@ -213,7 +223,7 @@
   <!-- /.box-body -->
 </div>
 </div>
-<div class="modal fade" id="progresLoading" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="progresLoading" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="vertical-alignment-helper">
         <div class="modal-dialog vertical-align-center">
             <div class="modal-content">

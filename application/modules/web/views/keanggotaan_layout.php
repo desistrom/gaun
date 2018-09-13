@@ -60,15 +60,20 @@
                 {
                 
                     console.log(data);
-                    if(data == "null"){
+                    var ex = data.split("null");
+                    // console.log(ex);
+                    if(ex[1] == ""){
+                        console.log('hmm');
+                    }
+                    if(ex[1] == ""){
                         $('.ajax-load').html("<span class='btn btn-danger'>No more Data found</span>");
                         $('.ajax-load').css({'margin-bottom' : '30px'});
                         $('.loadmore').css({'display' : 'none'});
                         return;
                     }
                     $('.ajax-load').hide();
-                    if (data != "null") {
-                        $(".content-keanggotaan").append(data);
+                    if (ex[1] != "") {
+                        $(".content-keanggotaan").append(ex[1]);
                         $('.content-keanggotaan').each(function() {
                             var text = $(this).html();
                             $(this).html(text.replace('null', '')); 

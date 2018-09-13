@@ -57,13 +57,22 @@ class Page extends MX_Controller  {
                     $this->data['slideshow'] = $b;
                     // print_r($slideshow);
                 }
-                    $temp_content = str_replace('<p>&nbsp;</p>', "", $data_page['content']);
-                    $data = str_replace('<p>@["set_album":"', "'", $temp_content);
-                    $foto = str_replace('"];</p>', "',", $data);
-                    $foto = str_replace('<p>@["slideshow":"', "'", $foto);
+                    $hm1 = str_replace('<p>','',$data_page['content']);
+                    $hm2 = str_replace('</p>','',$hm1);
+                    // $hm3 = str_replace('&nbsp;','',$hm2);
+                    $hm3 = str_replace('@["set_album":', "", $hm2);
+                    $foto = str_replace('];', ",", $hm3);
+                    // $temp_content = str_replace('<p>&nbsp;</p>', "", $data_page['content']);
+                    // $data = str_replace('<p>@["set_album":"', "'", $temp_content);
+                    // $foto = str_replace('"];</p>', "',", $data);
+                    $foto = str_replace('@["slideshow":', "", $foto);
+                    $foto = htmlentities($foto);
+                    $foto = preg_replace("/\s|&nbsp;/",'',$foto);
+                    $foto = str_replace('&quo', '"', $foto);
+                    $foto = str_replace('t;', '', $foto);
                     // $foto = explode(',', $foto);
-                    $foto = substr($foto, 0, -3)."";
-                    // print_r($foto);
+                    $foto = substr($foto, 0, -3).'"';
+                    print_r($foto);
                     $album['key'] = $foto;
                     // $url_foto = str_replace("'", "%27", $foto);
                     $url = URL_GET_DATA_FOTO;
@@ -71,7 +80,7 @@ class Page extends MX_Controller  {
                     $token = '';
                     // $c = api_helper(json_encode($album),$url,$methode,$token)['data'];
                     //print_r($foto);
-                    $sql_c = "select a.id_album as albumId, a.judul_album as title, a.tgl_kegiatan as date_album, g.file_name as image, g.id_album from tb_galery g join tb_album_galery a on g.id_album = a.id_album where a.key_album in (".$foto.") group by a.id_album, g.id_album";
+                    $sql_c = 'select a.id_album as albumId, a.judul_album as title, a.tgl_kegiatan as date_album, g.file_name as image, g.id_album from tb_galery g join tb_album_galery a on g.id_album = a.id_album where a.key_album in ('.$foto.') group by a.id_album, g.id_album';
                     //AND a.key_album !='".$slide[0]."'
                     $c = $this->db->query($sql_c)->result_array();
                     foreach ($c as $key => $value) {

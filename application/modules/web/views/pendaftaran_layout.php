@@ -66,20 +66,20 @@
                                     </label>
                                     <span class="error" id="ntf_username"></span>
                                 </span>
-                                <span class="input input--hoshi">
+                                <!-- <span class="input input--hoshi">
                                     <input class="input__field input__field--hoshi" type="password" id="input-4 password" name="password" />
                                     <label class="input__label input__label--hoshi input__label--hoshi-color-1" for="input-4">
                                         <span class="input__label-content input__label-content--hoshi">Password</span>
                                     </label>
                                     <span class="error" id="ntf_password"></span>
-                                </span>
-                                <span class="input input--hoshi">
+                                </span> -->
+                                <!-- <span class="input input--hoshi">
                                     <input class="input__field input__field--hoshi" type="password" id="input-4 repassword" name="repassword" />
                                     <label class="input__label input__label--hoshi input__label--hoshi-color-1" for="input-4">
                                         <span class="input__label-content input__label-content--hoshi">Confirm Password</span>
                                     </label>
                                     <span class="error" id="ntf_repassword"></span>
-                                </span>
+                                </span> -->
                                 <div class="form-group" style="display: block;">
                                   <?php echo $captcha // tampilkan recaptcha ?>
                                   <div class="error" id="ntf_g-recaptcha-response" style="position: relative;"></div>

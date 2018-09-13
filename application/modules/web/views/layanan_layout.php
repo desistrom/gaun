@@ -20,7 +20,7 @@
                     <button class="btn btn-danger loadmore" type="button">Load More</button>
                 </div>
             <?php }else{ ?>
-                <span class='btn btn-danger'>No more Data found</span>
+                <span class='btn btn-danger'>No Data found</span>
             <?php } ?>
             <div class="ajax-load text-center" style="display:none">
                 <p><img src="http://demo.itsolutionstuff.com/plugin/loader.gif">Loading More Data</p>
@@ -54,16 +54,21 @@
                 .done(function(data)
                 {
                 
-                    console.log(data);
-                    if(data == "null"){
+                    // console.log(data);
+                    var ex = data.split("null");
+                    // console.log(ex);
+                    if(ex[1] == ""){
+                        console.log('hmm');
+                    }
+                    if(ex[1] == ""){
                         $('.ajax-load').html("<span class='btn btn-danger'>No more Data found</span>");
                         $('.ajax-load').css({'margin-bottom' : '30px'});
                         $('.loadmore').css({'display' : 'none'});
                         return;
                     }
                     $('.ajax-load').hide();
-                    if (data != "null") {
-                        $(".content-keanggotaan").append(data);
+                    if (ex[1] != "") {
+                        $(".content-keanggotaan").append(ex[1]);
                         $('.content-keanggotaan').each(function() {
                             var text = $(this).html();
                             $(this).html(text.replace('null', '')); 

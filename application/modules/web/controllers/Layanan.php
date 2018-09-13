@@ -98,7 +98,7 @@ class Layanan extends MX_Controller  {
         $type = 'video';
         $sql = "select u.name as nama_user, g.id_galery as galeryId, g.file_name as file, g.judul as title, g.deskripsi as keterangan, g.tgl_upload as modify_date, g.type as jenis from tb_galery g join tb_user u on g.id_user_ref = u.id_user where g.type = ? and g.status = 1";
         $b = $this->db->query($sql,$type)->result_array();
-        $this->data['total'] = count($b['data']);
+        $this->data['total'] = count($b);
         /*if (!empty($this->input->get('page'))) {
             $start = ceil($this->input->get('page') * 9);
             $this->data['total_row'] = $start;
@@ -133,7 +133,7 @@ class Layanan extends MX_Controller  {
             $a = $this->db->query($sql,$type)->result_array();
             $this->data['video']=$a;
             $this->data['total_row'] = '9';
-            $this->data['video']=$a['data'];
+            $this->data['video']=$a;
             $this->ciparser->new_parse('template_frontend','modules_web', 'list_video_layout',$this->data);
         }
 /*        $this->data['layanan'] = $this->db->get_where('tb_page_layanan',array('nama_page'=>'ID-TUBE'))->row_array();

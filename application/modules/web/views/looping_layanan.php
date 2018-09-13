@@ -3,7 +3,7 @@
                         <div class="col col-md-12 col-sm-12 col-xs-12 none-padding list-artikel">
                             <div class="col col-md-12 col-sm-12 col-xs-12 none-padding img-news text-center">
                                 <div class="filter-img-layanan">
-                                    <img class="img-responsive img-layanan" src="<?=base_url();?><?php if($value['image'] != ''){ echo 'media/'.$value['image']; }else{ echo 'assets/images/logo/IDREN-2.png'; }?>">
+                                    <img class="img-responsive img-layanan" src="<?=base_url();?><?php if($value['image'] != '' && $value['image'] != 'dummy'){ echo 'media/'.$value['image']; }else{ echo 'assets/images/logo/IDREN-2.png'; }?>">
                                 </div>
                             </div>
                             <div class="col col-md-12 col-sm-12 col-xs-12 desrip-news">

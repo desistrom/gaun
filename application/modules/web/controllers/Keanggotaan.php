@@ -143,8 +143,8 @@ class Keanggotaan extends MX_Controller  {
             $this->form_validation->set_rules('phone','Phone','trim|required');
             $this->form_validation->set_rules('website','Website','trim|required');
             $this->form_validation->set_rules('username','Username','trim|required');
-            $this->form_validation->set_rules('password','Passowrd','trim|required');
-            $this->form_validation->set_rules('repassword','Re - Passowrd','trim|required|matches[password]');
+            // $this->form_validation->set_rules('password','Passowrd','trim|required');
+            // $this->form_validation->set_rules('repassword','Re - Passowrd','trim|required|matches[password]');
             $this->form_validation->set_rules('g-recaptcha-response','Pleas Insert Captcha', 'required');
             $recaptcha = $this->input->post('g-recaptcha-response');
             $response = $this->recaptcha->verifyResponse($recaptcha);
@@ -154,13 +154,13 @@ class Keanggotaan extends MX_Controller  {
             if ($this->form_validation->run() == true && $response['success'] == 1) {
                 $ret['state'] = 1;
                 $data_input = $this->input->post();
-                $data_user['instansi'] = $data_input['instansi'];
-                $data_user['address'] = $data_input['address'];
+                $data_user['nm_instansi'] = $data_input['instansi'];
+                $data_user['alamat'] = $data_input['address'];
                 $data_user['email'] = $data_input['email'];
-                $data_user['number_phone'] = $data_input['phone'];
+                $data_user['phone'] = $data_input['phone'];
                 $data_user['website'] = $data_input['website'];
                 $data_user['username'] = $data_input['username'];
-                $data_user['password'] = sha1($data_input['password']);
+                $data_user['password'] = sha1('password'.$data_input['username']);
             
                 $url = URL_REGISTER ;
 
@@ -180,20 +180,20 @@ class Keanggotaan extends MX_Controller  {
                     $ret['data'] = "Can't add user";
                 }
                 $template = $this->db->get_where('tb_template_email',array('id_kategori_email_ref'=>1,'status'=>1))->row_array()['source_code'];
-                $final = str_replace("Email_User", $data['username'], $template);
+                $final = str_replace("Email_User", $data_input['username'], $template);
                 // $final = str_replace("subject_email", "Registrasi", $final);
                 $sender = $this->db->get('tb_setting_email')->row_array();
                 $this->load->helper('email_send_helper');
                 $data_email['email_from'] = $sender['email'];
                 $data_email['name_from'] = $sender['nama_user'];
-                $data_email['email_to'] = $data['email'];
+                $data_email['email_to'] = $data_input['email'];
                 $data_email['subject'] = "Registerasi";
                 $content = '';
-                $content .= "<tr><td>Username </td><td>:</td> ".$data['username']."</td></tr>";
-                $content .= "<tr><td>Password </td><td>:</td> ".$data['password']."</td></tr>";
-                $content .= "<tr><td>Email </td><td>:</td> ".$data['email']."</td></tr>";
-                $content .= "<tr><td>Website </td><td>:</td> ".$data['website']."</td></tr>";
-                $content .= "<tr><td>Alamat </td><td>:</td> ".$data['address']."</td></tr>";
+                $content .= "<tr><td>Username </td><td>:</td> ".$data_input['username']."</td></tr>";
+                // $content .= "<tr><td>Password </td><td>:</td> ".$data_input['password']."</td></tr>";
+                $content .= "<tr><td>Email </td><td>:</td> ".$data_input['email']."</td></tr>";
+                $content .= "<tr><td>Website </td><td>:</td> ".$data_input['website']."</td></tr>";
+                $content .= "<tr><td>Alamat </td><td>:</td> ".$data_input['address']."</td></tr>";
                 $data_email['content'] = str_replace("content_email", $content, $final);
                 if (email_send($data_email) == true) {
                     $ret['cek']['code'] = '200';
@@ -228,8 +228,8 @@ class Keanggotaan extends MX_Controller  {
             $ret['notif']['phone'] = form_error('phone');
             $ret['notif']['website'] = form_error('website');
             $ret['notif']['username'] = form_error('username');
-            $ret['notif']['password'] = form_error('password');
-            $ret['notif']['repassword'] = form_error('repassword');
+            // $ret['notif']['password'] = form_error('password');
+            // $ret['notif']['repassword'] = form_error('repassword');
             $ret['notif']['g-recaptcha-response'] = form_error('g-recaptcha-response');
     
             echo json_encode($ret);
@@ -352,10 +352,10 @@ class Keanggotaan extends MX_Controller  {
             $ret['status'] = 0;
             $this->form_validation->set_error_delimiters('','');
             $this->form_validation->set_rules('instansi','Institute Name','trim|required');
-            $this->form_validation->set_rules('email','Email','trim|required|is_unique[tb_pengguna.email]');
+            $this->form_validation->set_rules('email','Email','trim|required|is_unique[tb_pengguna.email]',array('is_unique'=>'email is not available'));
             $this->form_validation->set_rules('no_hp','No. Handphone','trim|required');
             $this->form_validation->set_rules('name','name','trim|required');
-            $this->form_validation->set_rules('username','Username','trim|required|is_unique[tb_pengguna.username]');
+            $this->form_validation->set_rules('username','Username','trim|required|is_unique[tb_pengguna.username]',array('is_unique'=>'username is not available'));
             $this->form_validation->set_rules('g-recaptcha-response','Pleas Insert Captcha', 'required');
             $recaptcha = $this->input->post('g-recaptcha-response');
             $response = $this->recaptcha->verifyResponse($recaptcha);
@@ -376,7 +376,7 @@ class Keanggotaan extends MX_Controller  {
                         $ret['status'] = 1;
                         $ret['url'] = site_url('admin/keanggotaan');
                         $this->load->helper('email_send_helper');
-                        $data['email_from'] = 'support@idren';
+                        $data['email_from'] = 'IDREN support';
                         $data['name_from'] = 'Admin Support';
                         $data['email_to'] = $data_user['email'];
                         $data['subject'] = 'Pendaftaran Berhasil';
@@ -437,10 +437,10 @@ terima kasih";
             $ret['status'] = 0;
             $this->form_validation->set_error_delimiters('','');
             $this->form_validation->set_rules('instansi','Institute Name','trim|required');
-            $this->form_validation->set_rules('email','Email','trim|required|is_unique[tb_pengguna.email]');
+            $this->form_validation->set_rules('email','Email','trim|required|is_unique[tb_pengguna.email]',array('is_unique'=>'email is not available'));
             $this->form_validation->set_rules('no_hp','No. Handphone','trim|required');
             $this->form_validation->set_rules('name','name','trim|required');
-            $this->form_validation->set_rules('username','Username','trim|is_unique[tb_pengguna.username]');
+            $this->form_validation->set_rules('username','Username','trim|required|is_unique[tb_pengguna.username]',array('is_unique'=>'username is not available'));
             $this->form_validation->set_rules('g-recaptcha-response','Pleas Insert Captcha', 'required');
             $recaptcha = $this->input->post('g-recaptcha-response');
             $response = $this->recaptcha->verifyResponse($recaptcha);
@@ -461,7 +461,7 @@ terima kasih";
                         $ret['status'] = 1;
                         $this->load->helper('email_send_helper');
                         $ret['url'] = site_url('admin/keanggotaan');
-                        $data['email_from'] = 'support@idren';
+                        $data['email_from'] = 'IDREN support';
                         $data['name_from'] = 'Admin Support';
                         $data['email_to'] = $data_user['email'];
                         $data['subject'] = 'Pendaftaran Berhasil';
@@ -614,7 +614,7 @@ terima kasih";
             // Check user data insert or update status
             $this->load->helper('email_send_helper');
             if ($userID == 'insert') {
-                $data['email_from'] = 'support@idren';
+                $data['email_from'] = 'IDREN support';
                 $data['name_from'] = 'IDREN';
                 $data['email_to'] = $userData['email'];
                 $data['subject'] = 'Pendaftaran Berhasil';
@@ -652,7 +652,7 @@ terima kasih";
         $userID = $this->user->checkUser($userData);
         $this->load->helper('email_send_helper');
         if ($userID == 'insert') {
-            $data['email_from'] = 'support@idren';
+            $data['email_from'] = 'IDREN support';
             $data['name_from'] = 'IDREN';
             $data['email_to'] = $userData['email'];
             $data['subject'] = 'Pendaftaran Berhasil';
@@ -774,7 +774,7 @@ terima kasih";
             // Check user data insert or update status
             $this->load->helper('email_send_helper');
             if ($userID == 'insert') {
-                $data['email_from'] = 'support@idren';
+                $data['email_from'] = 'IDREN support';
                 $data['name_from'] = 'IDREN';
                 $data['email_to'] = $userData['email'];
                 $data['subject'] = 'Pendaftaran Berhasil';
@@ -812,7 +812,7 @@ terima kasih";
         $userID = $this->user->checkUser($userData);
         $this->load->helper('email_send_helper');
         if ($userID == 'insert') {
-            $data['email_from'] = 'support@idren';
+            $data['email_from'] = 'IDREN support';
             $data['name_from'] = 'IDREN';
             $data['email_to'] = $userData['email'];
             $data['subject'] = 'Pendaftaran Berhasil';

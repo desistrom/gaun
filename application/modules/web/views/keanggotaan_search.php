@@ -41,7 +41,7 @@
 
                 <div class="col-md-12 col-sm-12 col-xs-12 content-keanggotaan">
                     <div class="col-md-12 col-sm-12 col-xs-12 text-center" style="padding-bottom: 15px;">
-                        <?php if($total_row == 0 ){ ?><div class="alert alert-danger">Data Not Found</div><?php } ?>
+                        <div class="alert alert-danger">Data Not Found</div>
                     </div>
                 </div>
             <?php } ?>

@@ -77,41 +77,6 @@
                         </ul>
                          
                     </div>
-                   <!--  <div class="filter-side-bar">
-                        <h3 class="categoery">Recent Comment</h3>
-                        <div class="line-category-title"></div>
-                        <ul class="list-unstyled list-category">
-                            <li><a href="#">Wahyu IS On Nota Kesepahaman</a></li>
-                        </ul>
-                    </div>
-                    <div class="filter-side-bar">
-                        <h3 class="categoery">Archieve </h3>
-                        <div class="line-category-title"></div>
-                        <ul class="list-unstyled list-category">
-                            <li><a href="#">11 April 2018</a></li>
-                            <li><a href="#">11 April 2018</a></li>
-                            <li><a href="#">11 April 2018</a></li>
-                            <li><a href="#">11 April 2018</a></li>
-                        </ul>
-                    </div>
-                    <div class="filter-side-bar">
-                        <h3 class="categoery">Category </h3>
-                        <div class="line-category-title"></div>
-                        <ul class="list-unstyled list-category">
-                            <li><a href="#">Event </a></li>
-                            <li><a href="#">Rapat </a></li>
-                        </ul>
-                    </div> -->
-                 <!--    <div class="filter-side-bar">
-                        <h3 class="categoery">Meta </h3>
-                        <div class="line-category-title"></div>
-                        <ul class="list-unstyled list-category">
-                            <li><a href="#">Login </a></li>
-                            <li><a href="#">Entries RSS</a></li>
-                            <li><a href="#">Comments RSS</a></li>
-                            <li><a href="#">WordPress.org </a></li>
-                        </ul>
-                    </div> -->
                 </div>
                 <div class="col-md-9 col-sm-8 col-xs-12 content-left box-news">
                     <div class="col col-md-12 col-sm-12 col-xs-12 none-padding list-artikel">
@@ -123,12 +88,9 @@
                             
                             <div class="col col-md-12 col-sm-12 col-xs-12 filter-date-event" >
                             	<ul class="list-inline date_event" style="margin-bottom: 1.5em;">
-                                    <!-- <a href="http://www.facebook.com/sharer.php?u=<?=site_url('web/news/get_news').'/'.$detail_news['sumber'];?>" target="_blank" rel="nofollow" class="sosmed_share fb" ><li class=""><i class="fa fa-facebook"></i></li></a> -->
                                     <a href="" data-url="<?=site_url('web/news/get_news').'/'.$detail_news['sumber'];?>" class="ssk ssk-facebook"></a>
-                                    <!-- <a href="http://twitter.com/share?text=<?php echo $detail_news['title']; ?>&url=<?=site_url('web/news/get_news').'/'.$detail_news['sumber'];?>" class="sosmed_share twit" rel="nofollow" target="_blank"><li class=""><i class="fa fa-twitter"></i></li></a> -->
                                     <a href="" class="ssk ssk-twitter" data-url="<?php echo $detail_news['title']; ?>&url=<?=site_url('web/news/get_news').'/'.$detail_news['sumber'];?>"></a>
-                                    <!-- <a href="#" class="sosmed_share ig" ><li class=""><i class="fa fa-instagram"></i> </li></a> -->
-
+                                    <a href="http://www.facebook.com/sharer.php?u=<?=site_url('web/news/get_news').'/'.$detail_news['sumber'];?>">hmm</a>
                                 </ul>
                                 <ul class="list-inline date_event">
                                     <li><i class="glyphicon glyphicon-calendar"></i><?php echo date('d M Y', strtotime($detail_news['tanggal'])); ?></li>

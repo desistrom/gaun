@@ -117,6 +117,8 @@ class News extends CI_Controller  {
         $c = explode('/', $a['gambar']); if(isset($c[1])){ $gambar = $a['gambar']; }else{ $gambar = base_url().'assets/media/'.$a['gambar']; }
         $this->data['detail_news']=$a;
         $share_link['title'] = $a['title'];
+        $this->load->helper('text');
+        $share_link['description'] = word_limiter($a['news_content'], 20);
         $share_link['image'] = $gambar;
         $share_link['type'] = $a['kategori'];
         $share_link['url'] = site_url('web/news/get_news/'.$a['sumber']);

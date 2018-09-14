@@ -49,13 +49,7 @@
                 left: -6em;
           }
     </style>
-    <include expiration=’7d’ path=’*.css’/>
-<include expiration=’7d’ path=’*.js’/>
-<include expiration=’3d’ path=’*.gif’/>
-<include expiration=’3d’ path=’*.jpeg’/>
-<include expiration=’3d’ path=’*.jpg’/>
-<include expiration=’3d’ path=’*.png’/>
-<meta http-equiv=”expires” content=”sat, 02 jun 2020 00:00:00 GMT”/>
+    <include expiration=’7d’ path=’*.css’/><include expiration=’7d’ path=’*.js’/><include expiration=’3d’ path=’*.gif’/><include expiration=’3d’ path=’*.jpeg’/><include expiration=’3d’ path=’*.jpg’/><include expiration=’3d’ path=’*.png’/><meta http-equiv=”expires” content=”sat, 02 jun 2020 00:00:00 GMT”/>
 <?php 
      header("Cache-Control: private, max-age=10800, pre-check=10800");
      header("Pragma: private");

@@ -7,7 +7,7 @@
                 <div class="col-md-6 col-sm-6 col-xs-12 hero-right">
                     <div class="sub-video">
                         <!-- <img class="img-responsive" src="assets/img/video.jpg"> -->
-                        <iframe class="hero-video" src="<?php echo $hero['video']; ?>" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                        <iframe class="hero-video" title="hero" name="hero" src="<?php echo $hero['video']; ?>" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                     </div>
                 </div>
                     <div class="col-md-6 col-sm-6 col-xs-12 hero-left">
@@ -100,7 +100,7 @@
                     <?php if ($instansi !="") {?>
                         <?php foreach ($instansi as $key => $value) :  ?>
                             <div class="col col-md-12 col-sm-12 col-xs-12 text-center item">
-                                <div class="filter-img-client "><img src="<?php echo base_url().$value['image_thumbnail']; ?>" class="img-responsive" ></div>
+                                <div class="filter-img-client "><img src="<?php echo base_url().$value['image_thumbnail']; ?>" class="img-responsive" alt="logo instansi"></div>
                                 <div><p><?php echo $value['instansi']; ?></p></div>
                             </div>
                         <?php endforeach ?>
@@ -126,7 +126,7 @@
 
                     <?php foreach ($testimoni as $key => $value) : ?>
                         <div class="col-md-12 col-sm-12 col-xs-12 text-center item" >
-                            <div class="filter-img-testimoni"><img src="<?php echo base_url().$value['image']; ?>" class="img-testimoni"></div>
+                            <div class="filter-img-testimoni"><img src="<?php echo base_url().$value['image']; ?>" class="img-testimoni" alt="user testimoni"></div>
                             <h2 class="name-testi"><?php echo $value['user']; ?></h2>
                             <h3 class="job description"><?php echo $value['sebagai']; ?> </h3><i class="fa fa-quote-left fa-2x"></i>
                             <p> <?php echo $value['testimoni']; ?></p>

@@ -34,7 +34,7 @@
                     <div class="inner">
                       <h3>53</h3>
 
-                      <p>Mahasiswa</p>
+                      <p>Journal</p>
                     </div>
                     <div class="icon">
                       <i class="glyphicon glyphicon-education"></i>
@@ -49,7 +49,7 @@
                     <div class="inner">
                       <h3>44</h3>
 
-                      <p>User Registrations</p>
+                      <p>Video</p>
                     </div>
                     <div class="icon">
                       <i class="fa fa-users"></i>
@@ -64,7 +64,7 @@
                     <div class="inner">
                       <h3>65</h3>
 
-                      <p>Unique Visitors</p>
+                      <p>E-book</p>
                     </div>
                     <div class="icon">
                       <i class="glyphicon glyphicon-education"></i>

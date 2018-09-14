@@ -709,10 +709,10 @@ class Keanggotaan extends MX_Controller  {
            	$data = array('upload_data' => $this->upload->data());
             $config_r['image_library'] = 'GD2';
             $config_r['source_image'] = FCPATH."media/".$upload_data['file_name'];
-            $config_r['quality'] = 60;
-            $config_r['maintain_ratio'] = TRUE;
-            if ($upload_data['image_width'] > 450) {
-            	$config_r['width'] = 450;
+            $config_r['quality'] = 10;
+            $config_r['maintain_ratio'] = FALSE;
+            if ($upload_data['image_width'] > 50) {
+            	$config_r['width'] = 45;
             }
             $config_r['new_image'] = FCPATH."media/thumbnail/".$upload_data['file_name'];
 
@@ -754,14 +754,14 @@ class Keanggotaan extends MX_Controller  {
            	$data = array('upload_data' => $this->upload->data());
             $config_r['image_library'] = 'GD2';
             $config_r['source_image'] = FCPATH."media/".$upload_data['file_name'];
-            $config_r['quality'] = 60;
+            $config_r['quality'] = 20;
             $config_r['maintain_ratio'] = TRUE;
-            if ($upload_data['image_width'] > 150) {
-            	$config_r['width'] = 150;
+            if ($upload_data['image_width'] > 85) {
+            	$config_r['width'] = 85;
             }
-            if ($upload_data['file_size'] > 100) {
-            	$config_r['quality'] = 40;
-            }
+            // if ($upload_data['file_size'] > 15) {
+            // 	$config_r['quality'] = 40;
+            // }
             $config_r['new_image'] = FCPATH."media/thumbnail/".$upload_data['file_name'];
 
             $this->load->library('image_lib', $config_r);
@@ -978,10 +978,10 @@ class Keanggotaan extends MX_Controller  {
     		if ($value['gambar'] != '') {
 	    		$config_r['image_library'] = 'GD2';
 		        $config_r['source_image'] = FCPATH."media/".$value['gambar'];
-		        $config_r['quality'] = 60;
+		        $config_r['quality'] = 20;
 		        $config_r['maintain_ratio'] = TRUE;
-		       	$config_r['width'] = 150;
-		        $config_r['new_image'] = FCPATH."media/thumbnail/".$value['gambar'];
+		       	$config_r['width'] = 85;
+		        $config_r['new_image'] = FCPATH."media/thumbnail/thumbnail/".$value['gambar'];
 
 		        $this->load->library('image_lib', $config_r);
 		        $this->image_lib->initialize($config_r);

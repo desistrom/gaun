@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" Cache-Control:public;>
-<html>
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
@@ -11,8 +11,7 @@
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="Cache-control" content="no-store"> -->
     <link rel="shortcut icon" href="<?=base_url();?>media/favicon.ico">
-    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800,900" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Crimson+Text:400,600,700" rel="stylesheet">
+    <link  href="<?=base_url();?>assets/fonts/fonts.min.css" rel="stylesheet" >
     <link  href="<?=base_url();?>assets/css/bootstrap.min.css" rel="stylesheet" >
     <link  href="<?=base_url();?>assets/fonts/font-awesome.min.css" rel="stylesheet" >
     <link  href="<?=base_url();?>assets/css/Navbar-with-mega-menu.min.css" rel="stylesheet" >
@@ -61,7 +60,7 @@
         <nav class="navbar navbar-fixed-top " id="main-navigation">
       <div class="">
             <div class="container-fluid">
-              <div class="navbar-header"><a href="<?php echo site_url('web/home'); ?>" class="navbar-brand navbar-link"><img class="logo" src="<?=base_url().logo_helper()['image'];?>" /> </a>
+              <div class="navbar-header"><a href="<?php echo site_url('web/home'); ?>" class="navbar-brand navbar-link"><img class="logo" src="<?=base_url().logo_helper()['image'];?>" alt="logo idren"/> </a>
                   <button data-toggle="collapse" data-target="#navcol-1" class="navbar-toggle collapsed"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
               </div>
               <div class="collapse navbar-collapse" id="navcol-1">
@@ -92,8 +91,8 @@
                 <div class="col-md-3 col-sm-3 col-xs-12 footer-left">
                     <h3 class="title-footer">Didukung oleh</h3>
                     <ul class="list-inline">
-                        <li><img src="<?=base_url();?>assets/images/logo/Logo-Ristekdikti-Arza.jpg" class="logo-sponsor logo2"></li>
-                        <li><img src="<?=base_url();?>assets/images/logo/images_telkom.jpg" class="logo-sponsor"></li>
+                        <li><img src="<?=base_url();?>assets/images/logo/Logo-Ristekdikti-Arza.jpg" class="logo-sponsor logo2" alt="logo sponsor"></li>
+                        <li><img src="<?=base_url();?>assets/images/logo/images_telkom.jpg" class="logo-sponsor" alt="logo sponsor"></li>
                     </ul>
                 </div>
                 <div class="col-md-4 col-sm-4 col-xs-12 footer-center text-center address-foot">
@@ -112,7 +111,7 @@
                   <div style="text-align:center;" id="_wau4yv"></div>
                   <div align="left" class="flagcounter-foot">
                       <div class="sub-flagcounter-foot">
-                        <a href="https://info.flagcounter.com/XLv2"><img style="width: 100%;" src="https://s01.flagcounter.com/count2/XLv2/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_10/viewers_3/labels_1/pageviews_1/flags_0/percent_0/" alt="Flag Counter" border="0"></a>
+                        <a name="flag" href="https://info.flagcounter.com/XLv2" ><img style="width: 100%;" src="https://s01.flagcounter.com/count2/XLv2/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_10/viewers_3/labels_1/pageviews_1/flags_0/percent_0/" alt="Flag Counter" border="0"></a>
                       </div>
                 </div>
             </div>
@@ -202,7 +201,7 @@
     <script src="<?=base_url();?>assets/js/jquery.min.js"></script>
     <script src="<?=base_url();?>assets/js/bootstrap.min.js"></script>
     <script src="<?=base_url();?>assets/js/owl.carousel.min.js"></script>
-    <script src="<?=base_url();?>assets/share_link/js/social-share-kit.js"></script>
+    <script src="<?=base_url();?>assets/share_link/js/social-share-kit.min.js"></script>
     <script type="text/javascript">
     
         

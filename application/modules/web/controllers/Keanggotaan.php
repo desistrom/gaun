@@ -810,8 +810,8 @@ terima kasih";
         $userData['status'] = 'mahasiswa';
         
         $userID = $this->user->checkUser($userData);
-        $this->load->helper('email_send_helper');
         if ($userID == 'insert') {
+        $this->load->helper('email_send_helper');
             $data['email_from'] = 'IDREN support';
             $data['name_from'] = 'IDREN';
             $data['email_to'] = $userData['email'];
@@ -830,6 +830,23 @@ terima kasih";
             $this->session->set_flashdata("notif","Email pernah didaftarkan sebelumnya, silahkan login untuk masuk");
             redirect(site_url('web/keanggotaan/pendaftaran_mahasiswa'));
         }
+    }
+
+    public function email(){
+        $this->load->helper('email_send_helper');
+            $data['email_from'] = 'IDREN support';
+            $data['name_from'] = 'IDREN';
+            $data['email_to'] = $userData['email'];
+            $data['subject'] = 'Pendaftaran Berhasil';
+            $data['content'] = 'Halo '.$userData['first_name']." ".$userData['last_name']."<br> request akun anda sedang diproses, silakan ditunggu.
+admin kami akan mengirimkan email notifikasi aktivasi akun anda dalam 1 x 24 jam dari waktu pendaftaran.
+terima kasih";
+            if (email_send($data) == true) {
+                $user_data = 'success';
+                $this->session->set_flashdata("header","Registrasi Berhasil");
+                $this->session->set_flashdata("notif","Registrasi Anda sedang kami Proses, tunggu konfirmasi selanjutnya dari Admin");
+                redirect(site_url('web/keanggotaan/pendaftaran_mahasiswa'));
+            }
     }
 }
 

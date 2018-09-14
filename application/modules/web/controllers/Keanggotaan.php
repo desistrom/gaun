@@ -376,7 +376,7 @@ class Keanggotaan extends MX_Controller  {
                         $ret['status'] = 1;
                         $ret['url'] = site_url('admin/keanggotaan');
                         $this->load->helper('email_send_helper');
-                        $data['email_from'] = 'IDREN support';
+                        $data['email_from'] = 'IDREN@support';
                         $data['name_from'] = 'Admin Support';
                         $data['email_to'] = $data_user['email'];
                         $data['subject'] = 'Pendaftaran Berhasil';
@@ -461,7 +461,7 @@ terima kasih";
                         $ret['status'] = 1;
                         $this->load->helper('email_send_helper');
                         $ret['url'] = site_url('admin/keanggotaan');
-                        $data['email_from'] = 'IDREN support';
+                        $data['email_from'] = 'IDREN@support';
                         $data['name_from'] = 'Admin Support';
                         $data['email_to'] = $data_user['email'];
                         $data['subject'] = 'Pendaftaran Berhasil';
@@ -614,8 +614,8 @@ terima kasih";
             // Check user data insert or update status
             $this->load->helper('email_send_helper');
             if ($userID == 'insert') {
-                $data['email_from'] = 'IDREN support';
-                $data['name_from'] = 'IDREN';
+                $data['email_from'] = 'IDREN@support';
+                $data['name_from'] = 'IDREN support';
                 $data['email_to'] = $userData['email'];
                 $data['subject'] = 'Pendaftaran Berhasil';
                 $data['content'] = 'Halo '.$userData['first_name']." ".$userData['last_name']."<br> request akun anda sedang diproses, silakan ditunggu.
@@ -652,8 +652,8 @@ terima kasih";
         $userID = $this->user->checkUser($userData);
         $this->load->helper('email_send_helper');
         if ($userID == 'insert') {
-            $data['email_from'] = 'IDREN support';
-            $data['name_from'] = 'IDREN';
+            $data['email_from'] = 'IDREN@support';
+            $data['name_from'] = 'IDREN support';
             $data['email_to'] = $userData['email'];
             $data['subject'] = 'Pendaftaran Berhasil';
             $data['content'] = 'Halo '.$userData['first_name']." ".$userData['last_name']."<br> request akun anda sedang diproses, silakan ditunggu.
@@ -774,8 +774,8 @@ terima kasih";
             // Check user data insert or update status
             $this->load->helper('email_send_helper');
             if ($userID == 'insert') {
-                $data['email_from'] = 'IDREN support';
-                $data['name_from'] = 'IDREN';
+                $data['email_from'] = 'IDREN@support';
+                $data['name_from'] = 'IDREN support';
                 $data['email_to'] = $userData['email'];
                 $data['subject'] = 'Pendaftaran Berhasil';
                 $data['content'] = 'Halo '.$userData['first_name']." ".$userData['last_name']."<br> request akun anda sedang diproses, silakan ditunggu.
@@ -812,20 +812,25 @@ terima kasih";
         $userID = $this->user->checkUser($userData);
         if ($userID == 'insert') {
         $this->load->helper('email_send_helper');
-            $data['email_from'] = 'IDREN support';
-            $data['name_from'] = 'IDREN';
+            $data['email_from'] = 'IDREN@support';
+            $data['name_from'] = 'IDREN support';
             $data['email_to'] = $userData['email'];
             $data['subject'] = 'Pendaftaran Berhasil';
             $data['content'] = 'Halo '.$userData['first_name']." ".$userData['last_name']."<br> request akun anda sedang diproses, silakan ditunggu.
 admin kami akan mengirimkan email notifikasi aktivasi akun anda dalam 1 x 24 jam dari waktu pendaftaran.
 terima kasih";
-            if (email_send($data) == true) {
+                // print_r($data);
+                // $em = email_send($data);
+                // print_r($em);
+                // return false;
+            if ($em == true) {
                 $user_data = 'success';
                 $this->session->set_flashdata("header","Registrasi Berhasil");
                 $this->session->set_flashdata("notif","Registrasi Anda sedang kami Proses, tunggu konfirmasi selanjutnya dari Admin");
                 redirect(site_url('web/keanggotaan/pendaftaran_mahasiswa'));
             }
         }else{
+            print_r('gagal');
             $this->session->set_flashdata("header","Registrasi Gagal");
             $this->session->set_flashdata("notif","Email pernah didaftarkan sebelumnya, silahkan login untuk masuk");
             redirect(site_url('web/keanggotaan/pendaftaran_mahasiswa'));
@@ -834,8 +839,8 @@ terima kasih";
 
     public function email(){
         $this->load->helper('email_send_helper');
-            $data['email_from'] = 'IDREN support';
-            $data['name_from'] = 'IDREN';
+            $data['email_from'] = 'IDREN@support';
+            $data['name_from'] = 'IDREN support';
             $data['email_to'] = $userData['email'];
             $data['subject'] = 'Pendaftaran Berhasil';
             $data['content'] = 'Halo '.$userData['first_name']." ".$userData['last_name']."<br> request akun anda sedang diproses, silakan ditunggu.

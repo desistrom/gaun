@@ -298,7 +298,7 @@ class Login_user extends MX_Controller  {
             // Check user data insert or update status
             $this->load->helper('email_send_helper');
             if ($userID == 'insert') {
-                $data['email_from'] = 'IDREN@support';
+                $data['email_from'] = 'support@IDREN';
                 $data['name_from'] = 'IDREN support';
                 $data['email_to'] = $userData['email'];
                 $data['subject'] = 'Pendaftaran Berhasil';
@@ -352,7 +352,7 @@ terima kasih";
         // return false;
         $this->load->helper('email_send_helper');
         if ($userID == 'insert') {
-                $data['email_from'] = 'IDREN@support';
+                $data['email_from'] = 'support@IDREN';
                 $data['name_from'] = 'IDREN support';
                 $data['email_to'] = $userData['email'];
                 $data['subject'] = 'Pendaftaran Berhasil';
@@ -484,7 +484,7 @@ terima kasih";
             // Check user data insert or update status
             $this->load->helper('email_send_helper');
             if ($userID == 'insert') {
-                $data['email_from'] = 'IDREN@support';
+                $data['email_from'] = 'support@IDREN';
                 $data['name_from'] = 'IDREN support';
                 $data['email_to'] = $userData['email'];
                 $data['subject'] = 'Pendaftaran Berhasil';
@@ -534,7 +534,7 @@ terima kasih";
         $userID = $this->user->checkUser($userData);
         $this->load->helper('email_send_helper');
         if ($userID == 'insert') {
-                $data['email_from'] = 'IDREN@support';
+                $data['email_from'] = 'support@IDREN';
                 $data['name_from'] = 'IDREN support';
                 $data['email_to'] = $userData['email'];
                 $data['subject'] = 'Pendaftaran Berhasil';

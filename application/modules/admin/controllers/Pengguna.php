@@ -53,7 +53,7 @@ class Pengguna extends MX_Controller  {
         if ($this->db->update('tb_pengguna',$data_p,array('id_pengguna'=>$id))) {
         	$userData = $this->db->get_where('tb_pengguna',array('id_pengguna'=>$id))->row_array();
             $data['email_from'] = 'support@idren';
-            $data['name_from'] = 'IDREN';
+            $data['name_from'] = 'IDREN support';
             $data['email_to'] = $userData['email'];
             $data['subject'] = 'Aktifasi Akun';
             $data['content'] = 'Akun Anda Telah diaktifasi, berikut rincian data login anda<br> username : '.$userData['username'].'<br>Password : '.$password.'<br>Selamat berkontribusi untuk Negeri';
@@ -79,7 +79,7 @@ class Pengguna extends MX_Controller  {
         if ($this->db->update('tb_pengguna',$data_p,array('id_pengguna'=>$id))) {
         	$userData = $this->db->get_where('tb_pengguna',array('id_pengguna'=>$id))->row_array();
             $data['email_from'] = 'support@idren';
-            $data['name_from'] = 'IDREN';
+            $data['name_from'] = 'IDREN support';
             $data['email_to'] = $userData['email'];
             $data['subject'] = 'Konfirmasi Akun';
             $data['content'] = 'Akun Anda Telah di Tolak oleh admin';

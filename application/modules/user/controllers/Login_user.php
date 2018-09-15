@@ -77,9 +77,9 @@ class Login_user extends MX_Controller  {
                 $data = $this->db->query($sql,[$username,$password]);
                 if ($data->num_rows() == 1) {
                     $ret['status'] = 1;
-                    $data_user = $data->row_array();
-                    $this->session->set_userdata('data_user', $data_user);
-                    $this->session->set_userdata('previlage', $data_user['id_role_ref']);
+                    $user_data = $data->row_array();
+                    $this->session->set_userdata('user_data', $user_data);
+                    $this->session->set_userdata('previlage', $user_data['id_role_ref']);
                     $this->session->set_userdata('user_login', true);
                     $this->session->set_flashdata("header","Registrasi Berhasil");
                     $this->session->set_flashdata("notif","Registrasi Anda sedang kami Proses, tunggu konfirmasi selanjutnya dari Admin");
@@ -88,6 +88,7 @@ class Login_user extends MX_Controller  {
                     $url = URL_GET_TOKEN;
                     $method = 'POST';
                     $token = "";
+                    $this->db->update('tb_pengguna',array('is_login'=>1),array('id_pengguna'=>$user_data['id_pengguna']));
                     // $result = api_helper(json_encode($data_token),$url,$method,$token);
                     // print_r($result);
                     // setcookie('user',json_encode($result['token']), time()+"3600","/");
@@ -150,9 +151,9 @@ class Login_user extends MX_Controller  {
                 $data = $this->db->query($sql,[$username,$password]);
                 if ($data->num_rows() == 1) {
                     $ret['status'] = 1;
-                    $data_user = $data->row_array();
-                    $this->session->set_userdata('data_user', $data_user);
-                    $this->session->set_userdata('previlage', $data_user['id_role_ref']);
+                    $user_data = $data->row_array();
+                    $this->session->set_userdata('user_data', $user_data);
+                    $this->session->set_userdata('previlage', $user_data['id_role_ref']);
                     $this->session->set_userdata('user_login', true);
                     // $this->session->set_flashdata("header","Registrasi Berhasil");
                     // $this->session->set_flashdata("notif","Registrasi Anda sedang kami Proses, tunggu konfirmasi selanjutnya dari Admin");
@@ -161,6 +162,7 @@ class Login_user extends MX_Controller  {
                     $url = URL_GET_TOKEN;
                     $method = 'POST';
                     $token = "";
+                    $this->db->update('tb_pengguna',array('is_login'=>1),array('id_pengguna'=>$user_data['id_pengguna']));
                     // $result = api_helper(json_encode($data_token),$url,$method,$token);
                     // print_r($result);
                     // setcookie('user',json_encode($result['token']), time()+"3600","/");
@@ -566,8 +568,20 @@ terima kasih";
     }
     
     public function logout(){
-        $this->session->sess_destroy();
-        redirect(site_url('user/login_user'));
+        $user = $this->session->userdata('user_data');
+        print_r($user);
+        if($this->db->update('tb_pengguna',array('is_login'=>0),array('id_pengguna'=>$user['id_pengguna']))){
+            $data = $this->db->get_where('tb_pengguna',array('id_pengguna'=>$user['id_pengguna']))->row_array();
+            if ($user['id_role_ref'] == 0) {
+                $url = site_url('user/login_user/login_mahasiswa');
+            }else{
+                $url = site_url('user/login_user');
+            }
+            $this->session->set_userdata('user_login',false);
+            redirect($url);
+        }else{
+            echo "login gagal";
+        }
     }
 
     public function fb_dosen(){

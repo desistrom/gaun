@@ -23,6 +23,9 @@ class User extends CI_Model{
                     $user_data = 'salah';
                 }else{
                     $user_data = $userID;
+                    $result_user = $result;
+                    $this->session->set_userdata('user_data', $result_user);
+                    $this->db->update('tb_pengguna',array('is_login'=>1),array('id_pengguna'=>$userID));
                 }
             }
         }else{

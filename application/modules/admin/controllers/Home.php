@@ -32,6 +32,8 @@ class Home extends CI_Controller  {
     	$this->data['news'] = $this->db->get('tb_news')->num_rows();
     	$this->data['page'] = $this->db->get('tb_general_page')->num_rows();
     	$this->data['video'] = $this->db->get_where('tb_galery',array('type'=>'video'))->num_rows();
+    	$this->data['dosen'] = $this->db->get_where('tb_pengguna',array('is_login'=>1,'id_role_ref'=>1))->num_rows();
+    	$this->data['mahasiswa'] = $this->db->get_where('tb_pengguna',array('is_login'=>1,'id_role_ref'=>0))->num_rows();
     	$this->data['picture'] = $this->db->get_where('tb_galery',array('type'=>'image'))->num_rows();
     	$this->ciparser->new_parse('template_admin','modules_admin', 'home/home_layout',$this->data);
     }

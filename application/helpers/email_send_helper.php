@@ -45,7 +45,8 @@ if ( ! function_exists('email_send'))
 			return true;
 			// echo $CI->email->print_debugger();
 		}else{
-			return $CI->email->print_debugger();
+			return false;
+			// return $CI->email->print_debugger();
 		}
 
 	

@@ -799,7 +799,8 @@ terima kasih";
         $this->load->library('google',URL_API.'web/keanggotaan/google_mahasiswa/');
         $this->google->getAuthenticate();
         $gpInfo = $this->google->getUserInfo();
-        
+        // print_r($gpInfo);
+        // return false;
         //preparing data for database insertion
         $userData['oauth_provider'] = 'google';
         $userData['oauth_id']      = $gpInfo['id'];
@@ -820,7 +821,7 @@ terima kasih";
 admin kami akan mengirimkan email notifikasi aktivasi akun anda dalam 1 x 24 jam dari waktu pendaftaran.
 terima kasih";
                 // print_r($data);
-                // $em = email_send($data);
+                $em = email_send($data);
                 // print_r($em);
                 // return false;
             if ($em == true) {

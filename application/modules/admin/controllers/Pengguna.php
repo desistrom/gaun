@@ -52,7 +52,7 @@ class Pengguna extends MX_Controller  {
 		$this->load->helper('email_send_helper');
         if ($this->db->update('tb_pengguna',$data_p,array('id_pengguna'=>$id))) {
         	$userData = $this->db->get_where('tb_pengguna',array('id_pengguna'=>$id))->row_array();
-            $data['email_from'] = 'support@idren';
+            $data['email_from'] = 'support@IDREN';
             $data['name_from'] = 'IDREN support';
             $data['email_to'] = $userData['email'];
             $data['subject'] = 'Aktifasi Akun';
@@ -78,7 +78,7 @@ class Pengguna extends MX_Controller  {
 		$this->load->helper('email_send_helper');
         if ($this->db->update('tb_pengguna',$data_p,array('id_pengguna'=>$id))) {
         	$userData = $this->db->get_where('tb_pengguna',array('id_pengguna'=>$id))->row_array();
-            $data['email_from'] = 'support@idren';
+            $data['email_from'] = 'support@IDREN';
             $data['name_from'] = 'IDREN support';
             $data['email_to'] = $userData['email'];
             $data['subject'] = 'Konfirmasi Akun';

@@ -17,6 +17,18 @@ class Home extends CI_Controller  {
         if ($this->session->userdata('is_login') == false) {
         	redirect(site_url('login'));
         }
+        $token = $this->session->userdata('token');
+        $url = $this->uri->segment_array();
+        $cl = $url[1];
+        if (isset($url[2])) {
+        	$cl = $cl.'/'.$url[2];
+        	if (isset($url[3])) {
+        		$cl = $cl.'/'.$url[3];
+        	}
+        }
+        if ($this->session->flashdata('tkn') == '') {
+        	redirect(site_url('login/token/check_token?token='.$token.'&url='.$cl));
+        }
     }
 
     function index() {

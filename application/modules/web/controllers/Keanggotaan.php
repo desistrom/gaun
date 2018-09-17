@@ -355,7 +355,7 @@ class Keanggotaan extends MX_Controller  {
             $this->form_validation->set_rules('email','Email','trim|required|is_unique[tb_pengguna.email]',array('is_unique'=>'email is not available'));
             $this->form_validation->set_rules('no_hp','No. Handphone','trim|required');
             $this->form_validation->set_rules('name','name','trim|required');
-            $this->form_validation->set_rules('username','Username','trim|required|is_unique[tb_pengguna.username]',array('is_unique'=>'username is not available'));
+            $this->form_validation->set_rules('username','Username','trim|required|min_length[8]|max_length[10]|is_unique[tb_pengguna.username]',array('is_unique'=>'username is not available'));
             $this->form_validation->set_rules('g-recaptcha-response','Pleas Insert Captcha', 'required');
             $recaptcha = $this->input->post('g-recaptcha-response');
             $response = $this->recaptcha->verifyResponse($recaptcha);
@@ -440,7 +440,7 @@ terima kasih";
             $this->form_validation->set_rules('email','Email','trim|required|is_unique[tb_pengguna.email]',array('is_unique'=>'email is not available'));
             $this->form_validation->set_rules('no_hp','No. Handphone','trim|required');
             $this->form_validation->set_rules('name','name','trim|required');
-            $this->form_validation->set_rules('username','Username','trim|required|is_unique[tb_pengguna.username]',array('is_unique'=>'username is not available'));
+            $this->form_validation->set_rules('username','Username','trim|required|min_length[8]|max_length[10]|is_unique[tb_pengguna.username]',array('is_unique'=>'username is not available'));
             $this->form_validation->set_rules('g-recaptcha-response','Pleas Insert Captcha', 'required');
             $recaptcha = $this->input->post('g-recaptcha-response');
             $response = $this->recaptcha->verifyResponse($recaptcha);

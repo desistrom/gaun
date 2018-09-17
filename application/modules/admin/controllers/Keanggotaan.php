@@ -801,7 +801,7 @@ class Keanggotaan extends MX_Controller  {
 			$ret['status'] = 1;
 			$ret['url'] = site_url('admin/keanggotaan/instansi');
 			$this->db->update('tb_instansi',array('is_aktif'=>1),array('id_instansi'=>$id));
-			$this->session->set_flashdata("notif","Data Berhasil di Ubah");
+			$this->session->set_flashdata("notif","Instansi Berhasil di Aktifkan");
 		}
 		echo json_encode($ret);
 		// redirect(site_url('admin/keanggotaan/instansi'));
@@ -812,6 +812,7 @@ class Keanggotaan extends MX_Controller  {
 		$id = end($url);
 		$status = $url[0];
 		$data = $this->db->get_where('tb_instansi',array('id_instansi'=>$id))->row_array();
+		
     	if($status==0){
     		$template = $this->db->get_where('tb_template_email',array('id_kategori_email_ref'=>2,'status'=>1))->row_array()['source_code'];
 	        $final = str_replace("Email_User", $data['username'], $template);
@@ -832,12 +833,13 @@ class Keanggotaan extends MX_Controller  {
 	        $data_email['content'] = str_replace("content_email", $content, $final);
 	        if (email_send($data_email) == true) {
     			$this->db->update('tb_instansi',array('status'=>1),array('id_instansi'=>$id));
-	    		$this->session->set_flashdata("notif","Data Berhasil di Ubah, Email berhasil di Kirim");
+	    		$this->session->set_flashdata("notif","Instansi Berhasil di Proses, Email berhasil di Kirim");
 	    		$ret['url'] = site_url('admin/keanggotaan/instansi_request');
 	        }
     	}elseif($status==1){
     		$template = $this->db->get_where('tb_template_email',array('id_kategori_email_ref'=>2,'status'=>1))->row_array()['source_code'];
 	        $final = str_replace("Email_User", $data['username'], $template);
+	        $password = '';
 	        // $final = str_replace("subject_email", "Done", $final);
 	        $sender = $this->db->get('tb_setting_email')->row_array();
 	        $this->load->helper('email_send_helper');
@@ -848,15 +850,24 @@ class Keanggotaan extends MX_Controller  {
 	        $content = '';
 	        $content .= "<td>Nama Instansi</td><td>:</td> ".$data['nm_instansi']."</td>";
 	        $content .= "<td>Username</td><td>:</td> ".$data['username']."</td>";
-	        // $content .= "<td>Password</td><td>:</td> ".$data['password']."</td>";
+	        if ($data['password'] == sha1('password'.$data['username'])) {
+	        	$status_pass = 1;
+	        	$password = $this->generate();
+				$data['password'] = sha1($password);
+	        	$content .= "<td>Password</td><td>:</td> ".$password."</td>";
+			}
 	        $content .= "<td>Email</td><td>:</td> ".$data['email']."</td>";
 	        $content .= "<td>Website</td><td>:</td> ".$data['website']."</td>";
 	        $content .= "<td>Alamat</td><td>:</td> ".$data['alamat']."</td>";
 	        $data_email['content'] = str_replace("content_email", $content, $final);
 	        if (email_send($data_email) == true) {
-	    		$this->db->update('tb_instansi',array('status'=>2),array('id_instansi'=>$id));
+	        	if (isset($status_pass) || $status_pass == 1) {
+	        		$this->db->update('tb_instansi',array('status'=>2,'password'=>$password),array('id_instansi'=>$id));
+	        	}else{
+	    			$this->db->update('tb_instansi',array('status'=>2),array('id_instansi'=>$id));
+	        	}
 	    		$ret['url'] = site_url('admin/keanggotaan/instansi_request');
-	    		$this->session->set_flashdata("notif","Data Berhasil di Ubah, Email berhasil di Kirim");
+	    		$this->session->set_flashdata("notif","Instansi Berhasil di Aktifkan, Email berhasil di Kirim");
 	    	}else{
 	    		$ret['status'] = "false";
 	    	}
@@ -997,5 +1008,14 @@ class Keanggotaan extends MX_Controller  {
 		        print_r($data_upload);
     		}
     	}
+    }
+
+    function generate(){
+        $chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        $res = "";
+        for ($i = 0; $i < 10; $i++) {
+            $res .= $chars[mt_rand(0, strlen($chars)-1)];
+        }
+        return $res;
     }
 }

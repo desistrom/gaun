@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+// defined('BASEPATH') OR exit('No direct script access allowed');
 require APPPATH . '/libraries/REST_Controller.php';
 class Token extends REST_Controller
 {
@@ -14,18 +14,28 @@ class Token extends REST_Controller
         $output['data'] = $data;
         $output['token'] = AUTHORIZATION::generateToken($tokenData);
         $result = $this->set_response($output, REST_Controller::HTTP_OK);
-        return $output['token'];
+        // return $output['token'];
+        $this->session->set_userdata('token', $output['token']);
+        redirect(site_url('admin/home'));
     }
-    public function check_token_post()
+    public function check_token_get()
     {
-        $headers = $this->input->request_headers();
-        if (array_key_exists('Authorization', $headers) && !empty($headers['Authorization'])) {
+        // print_r($_GET);
+        // return false;
+        $data = $this->input->get();
+
+        // $headers = $this->input->request_headers();
+        if (isset($data['token']) && !empty($data['token'])) {
             //TODO: Change 'token_timeout' in application\config\jwt.php
-            $decodedToken = AUTHORIZATION::validateTimestamp($headers['Authorization']);
+            $decodedToken = AUTHORIZATION::validateTimestamp($data['token']);
             // return response if token is valid
             if ($decodedToken != false) {
                 $this->set_response($decodedToken, REST_Controller::HTTP_OK);
-                return;
+                $this->session->set_flashdata('tkn','1');
+                redirect(site_url($data['url']));
+                // return;
+            }else{
+                redirect(site_url('login'));
             }
         }
         

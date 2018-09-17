@@ -13,7 +13,7 @@ class Login extends MX_Controller
     	// $this->load->model('login_model');
         $this->load->helper('api');
         $this->load->library('Recaptcha');
-        // $this->load->module('Jwt');
+        $this->load->module('Token');
     }
 
     public function index(){
@@ -52,13 +52,13 @@ class Login extends MX_Controller
                     // $result = api_helper(json_encode($data_token),$url,$method,$token);
                     // $result = file_get_contents(site_url('login/token/token').'/'.$username.'/'.$password);
                     // $token_jwt = json_decode($result,true);
-                    // $a = $this->token->token($username,$password);
-                    // print_r($a);
-                    // return false;
+                    /*$a = $this->token->token_get($username,$password);
+                    print_r($a);
+                    return false;*/
                     // print_r($result);
                     // print_r($data_token);
             		// $this->session->set_userdata('token', $data_token);
-            		$ret['url'] = site_url('admin/home');
+            		$ret['url'] = site_url('login/token/token');
 
             	}else{
                     $ret['notif']['login'] = 'username or password worng';
@@ -89,7 +89,7 @@ class Login extends MX_Controller
     {
         require(APPPATH.'libraries/REST_Controller.php');
         // require APPPATH . '/libraries/REST_Controller.php';
-        $this->load->library('REST_Controller');
+        // $this->load->library('REST_Controller');
         $tokenData = array();
         $tokenData['id']['username'] = $data['username']; 
         $tokenData['id']['password'] = $data['password']; 
@@ -99,5 +99,30 @@ class Login extends MX_Controller
         $output['token'] = AUTHORIZATION::generateToken($tokenData);
         $result = $this->REST_Controller->set_response($output, REST_Controller::HTTP_OK);
         return $output['token'];
+    }
+
+    public function hmm(){
+        $request = new HttpRequest();
+        $request->setUrl('http://localhost/idren/login/jwt/token');
+        $request->setMethod(HTTP_METH_POST);
+
+        $request->setHeaders(array(
+          'postman-token' => '5ec9b16c-3eda-96af-a06d-186577f2e75e',
+          'cache-control' => 'no-cache',
+          'content-type' => 'application/json'
+        ));
+
+        $request->setBody('{
+          "username" : "admin",
+          "password" : "qwerty"
+        }');
+
+        try {
+          $response = $request->send();
+
+          echo $response->getBody();
+        } catch (HttpException $ex) {
+          echo $ex;
+        }
     }
 }

@@ -61,7 +61,11 @@ class Pengguna extends MX_Controller  {
                 $user_data = 'success';
                 $this->session->set_flashdata("header","Aktifasi Berhasil");
                 $this->session->set_flashdata("notif","Aktifasi Akun berhasil dilakukan");
-                redirect(site_url('admin/pengguna'));
+                if ($userData['id_role_ref'] == 1) {
+                    redirect(site_url('admin/pengguna'));
+                }else{
+                    redirect(site_url('admin/pengguna/mahasiswa'));
+                }
             }
         }else{
             $this->session->set_flashdata("header","Aktifasi Gagal");

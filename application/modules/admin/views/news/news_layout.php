@@ -331,6 +331,7 @@
           processData : false
       }).done(function(data){
           console.log(data);
+          $('#progresLoading').modal('hide');
           if(data.state == 1){
             if (data.status == 1) {
               window.location.href = data.url;

@@ -34,6 +34,8 @@ class Dashboard extends MX_Controller  {
     }
 
     public function change_password(){
+                $data = $this->session->userdata('user');
+        // print_r($data);
         if ($this->input->server('REQUEST_METHOD') == 'POST') {
             $ret['state'] = 0;
             $ret['status'] = 0;
@@ -42,14 +44,15 @@ class Dashboard extends MX_Controller  {
             $this->form_validation->set_rules('new','New Password', 'required');
             $this->form_validation->set_rules('re','Re-type New Password', 'required|matches[new]');
             if ($this->form_validation->run() == true) {
-                $data = $this->session->userdata('user');
                 $input = $this->input->post();
-                if ($this->db->get_where('tb_pengguna',array('id_pengguna'=>$data['id_pengguna'],'password'=>sha1($input['current'])))->num_rows() > 0) {
+                if ($this->db->get_where('tb_pengguna',array('id_pengguna'=>$data,'password'=>sha1($input['current'])))->num_rows() > 0) {
                     $ret['state'] = 1;
                     $data_user['password'] = $input['new'];
                     if ($this->db->update('tb_pengguna',array('password'=>sha1($input['new'])),array('id_pengguna'=>$data['id_pengguna']))) {
                         $ret['status'] = 1;
                     }
+                }else{
+                    $ret['notif']['wr'] = 'Currunt Password salah, pastikan password yang anda masukan benar';
                 }
             }
             $ret['notif']['current'] = form_error('current');

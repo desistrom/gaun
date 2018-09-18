@@ -53,15 +53,23 @@ class News extends MX_Controller  {
 							$this->session->set_flashdata("notif","Data Berhasil di Masukan");
 						}
 					}
+				}else{
+					$ret['state'] = 1;
+					$data_news['img'] = $image['asli'];
+					if ($this->db->insert('tb_news',$data_news)) {
+						$ret['status'] = 1;
+						$ret['url'] = site_url('admin/news');
+						$this->session->set_flashdata("notif","Data Berhasil di Masukan");
+					}
 				}
 			}
 			$ret['notif']['judul'] = form_error('judul');
 			$ret['notif']['content'] = form_error('content');
 			$ret['notif']['kategori'] = form_error('kategori');
 			$ret['notif']['status'] = form_error('status');
-			if (!isset($_FILES['file_name'])) {
-				$ret['notif']['file_name'] = "Please Select File";
-			}
+			// if (!isset($_FILES['file_name'])) {
+			// 	$ret['notif']['file_name'] = "Please Select File";
+			// }
 			echo json_encode($ret);
 			exit();
 		}

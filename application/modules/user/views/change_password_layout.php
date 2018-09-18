@@ -8,7 +8,8 @@
     		<div class="form-group">
     			<label>Curent Password</label>
     			<input type="password" name="current" class="form-control">
-    			<div class="error" id="ntf_current"></div>
+          <div class="error" id="ntf_current"></div>
+    			<div class="error" id="ntf_wr"></div>
     		</div>
     		<div class="form-group">
     			<label>New Password</label>

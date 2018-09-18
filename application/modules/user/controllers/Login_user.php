@@ -642,7 +642,7 @@ terima kasih";
         $input = $this->input->get('data');
         $data = $this->db->get_where('tb_pengguna',array('reset'=>$input));
         if ($data->num_rows() == 0) {
-               redirect(site_url());
+               redirect(site_url('user/login_user/link_expired'));
            }   
         if ($this->input->server('REQUEST_METHOD') == 'POST') {
             $ret['state'] = 0;
@@ -671,6 +671,10 @@ terima kasih";
             exit();
         }
         $this->load->view('reset_layout',$this->data);
+    }
+
+    public function link_expired(){
+        echo "<h2>Link expired</h2><h3><a href='".site_url('user/login_user/reset_password')."'>Back to Reset Password</a>";
     }
 
 

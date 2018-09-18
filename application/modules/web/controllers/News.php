@@ -69,6 +69,15 @@ class News extends CI_Controller  {
                 join tb_user u on n.id_user_ref = u.id_user where n.is_aktif = 1 ORDER BY n.id_news DESC  LIMIT ".$start.",4 ";
             // $this->data['news']=$a['data'];
             $pagging_news = $this->db->query($sql_paging)->result_array();
+            // foreach ($pagging_news as $key => $value) {
+            //     if ($value['kategori'] != 'rss' && $value['gambar'] != '') {
+            //         $pagging_news[$key]['gambar'] = 'assets/media/'.$pagging_news[$key]['gambar'];
+            //     }
+            //     if ($value['gambar'] == '') {
+            //         $pagging_news[$key]['gambar']='assets/images/logo/IDREN-2.png';
+            //     }
+
+            // }
             $this->data['news']=$pagging_news;
             $result = $this->load->view('news_looping',$this->data);
             echo json_encode($result);
@@ -81,6 +90,15 @@ class News extends CI_Controller  {
                 join tb_user u on n.id_user_ref = u.id_user where n.is_aktif = 1 ORDER BY n.id_news DESC  LIMIT 0,4 ";
             // $this->data['news']=$a['data'];
             $pagging_news = $this->db->query($sql_paging)->result_array();
+            foreach ($pagging_news as $key => $value) {
+                if ($value['kategori'] != 'rss' && $value['gambar'] != '') {
+                    $pagging_news[$key]['gambar'] = 'assets/media/'.$pagging_news[$key]['gambar'];
+                }
+                if ($value['gambar'] == '') {
+                    $pagging_news[$key]['gambar']='assets/images/logo/IDREN-2.png';
+                }
+
+            }
             $this->data['news']=$pagging_news;
             // $this->data['news']=$a['data'];
             $this->ciparser->new_parse('template_frontend','modules_web', 'news_layout',$this->data);

@@ -98,7 +98,7 @@ class Page extends MX_Controller  {
                     }
                 if (count($c) > 0) {
                     $this->data['foto'] = $c;
-                    // print_r($sql);
+                    // print_r($foto);
                 }
             }
 

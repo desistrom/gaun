@@ -17,18 +17,21 @@ class Home extends CI_Controller  {
         if ($this->session->userdata('is_login') == false) {
         	redirect(site_url('login'));
         }
-        $token = $this->session->userdata('token');
+        /*$token = $this->session->userdata('token');
         $url = $this->uri->segment_array();
         $cl = $url[1];
         if (isset($url[2])) {
         	$cl = $cl.'/'.$url[2];
         	if (isset($url[3])) {
         		$cl = $cl.'/'.$url[3];
+        		if (isset($url[4])) {
+        			$cl = $cl.'/'.$url[4];
+        		}
         	}
         }
         if ($this->session->flashdata('tkn') == '') {
         	redirect(site_url('login/token/check_token?token='.$token.'&url='.$cl));
-        }
+        }*/
     }
 
     function index() {
@@ -222,6 +225,8 @@ class Home extends CI_Controller  {
 	public function edit_testimoni(){
 		$url = $this->uri->segment_array();
 		$id = end($url);
+		// print_r($url);
+		// return false;
 		$this->data['testimoni'] = $this->db->get_where('tb_testimoni',array('id_testimoni'=>$id))->row_array();
 		/*print_r($this->input->post());
 		return false;*/
@@ -752,8 +757,6 @@ class Home extends CI_Controller  {
 		$this->data['breadcumb'] = 'Kolaborasi';
 		$this->ciparser->new_parse('template_admin','modules_admin', 'home/kolaborasi_layout',$this->data);
     }
-
-
    
 
    

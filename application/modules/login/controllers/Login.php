@@ -58,7 +58,7 @@ class Login extends MX_Controller
                     // print_r($result);
                     // print_r($data_token);
             		// $this->session->set_userdata('token', $data_token);
-            		$ret['url'] = site_url('login/token/token');
+            		$ret['url'] = site_url('login/token/token').'/'.$username.'/'.$password;
 
             	}else{
                     $ret['notif']['login'] = 'username or password worng';

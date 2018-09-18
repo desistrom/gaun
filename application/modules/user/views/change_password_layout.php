@@ -25,6 +25,19 @@
     	</form>
     </div>
 </div>
+<div id="regSukses" class="modal fade modal-register" role="dialog" >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h2 class="modal-title text-center" style="color:#CF090A; ">Success</h2>
+          </div>
+          <div class="modal-body">
+            <p class="text-center">Change Password Berhasil</p>
+          </div>
+        </div>
+      </div>
+    </div>
 <script src="<?=base_url();?>assets/js/jquery.min.js"></script>
 <script type="text/javascript">
    var base_url = "<?=base_url();?>"
@@ -52,5 +65,8 @@
             });
       });
     });
+      <?php if($this->session->flashdata("notif") != ''){ ?>
+          $('#regSukses').modal('show');
+        <?php } ?>
     });
  </script>

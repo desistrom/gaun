@@ -67,7 +67,7 @@
               width: 14px;
         }
         .content-comment .sub-comment-right{
-          margin-top: 1em;
+          margin-top: 9em;
         }
         div.container-fluid.content-comment{
           padding-top: 1em;
@@ -163,10 +163,10 @@
       </div>
     </div>
     <?php } ?>
-<script src="<?=base_url();?>assets/js/jquery.min.js"></script>
+<!-- <script src="<?=base_url();?>assets/js/jquery.min.js"></script>
 <script src="<?=base_url();?>assets/js/bootstrap.min.js"></script>
  <script src="<?=base_url();?>assets/js/classie.min.js"></script>
- <script src="<?=base_url();?>assets/js/custom_pendaftaran.min.js"></script>
+ <script src="<?=base_url();?>assets/js/custom_pendaftaran.min.js"></script> -->
 <script type="text/javascript">
    var base_url = "<?=base_url();?>"
     $(document).ready(function(){

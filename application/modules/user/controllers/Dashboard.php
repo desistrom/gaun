@@ -48,8 +48,10 @@ class Dashboard extends MX_Controller  {
                 if ($this->db->get_where('tb_pengguna',array('id_pengguna'=>$data,'password'=>sha1($input['current'])))->num_rows() > 0) {
                     $ret['state'] = 1;
                     $data_user['password'] = $input['new'];
-                    if ($this->db->update('tb_pengguna',array('password'=>sha1($input['new'])),array('id_pengguna'=>$data['id_pengguna']))) {
+                    if ($this->db->update('tb_pengguna',array('password'=>sha1($input['new'])),array('id_pengguna'=>$data))) {
                         $ret['status'] = 1;
+                        $ret['url'] = site_url('user/dashboard/change_password');
+                        $this->session->set_flashdata("notif","1");
                     }
                 }else{
                     $ret['notif']['wr'] = 'Currunt Password salah, pastikan password yang anda masukan benar';

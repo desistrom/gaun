@@ -634,7 +634,8 @@ terima kasih";
             echo json_encode($ret);
             exit();
         }
-        $this->load->view('reset_pass',$this->data);
+        $this->ciparser->new_parse('template_frontend','modules_user', 'reset_pass');
+        // $this->load->view('reset_pass',$this->data);
         // $this->ciparser->new_parse('template_user','modules_user', 'reset_password_layout',$this->data);
     }
 
@@ -670,7 +671,8 @@ terima kasih";
             echo json_encode($ret);
             exit();
         }
-        $this->load->view('reset_layout',$this->data);
+        $this->ciparser->new_parse('template_frontend','modules_user', 'reset_layout');
+        // $this->load->view('reset_layout',$this->data);
     }
 
     public function link_expired(){

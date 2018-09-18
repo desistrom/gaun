@@ -54,6 +54,7 @@
      header("Pragma: private");
      header("Expires: " . date(DATE_RFC822,strtotime("+7 day")));
 ?>
+<script src="<?=base_url();?>assets/js/jquery.min.js"></script>
 </head>
 
 <body>
@@ -198,7 +199,7 @@
     </div>
 
 
-    <script src="<?=base_url();?>assets/js/jquery.min.js"></script>
+  
     <script src="<?=base_url();?>assets/js/bootstrap.min.js"></script>
     <script src="<?=base_url();?>assets/js/owl.carousel.min.js"></script>
     <script src="<?=base_url();?>assets/share_link/js/social-share-kit.min.js"></script>

@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+   <!--  <!DOCTYPE html>
     <html>
     <head>
        <meta charset="utf-8">
@@ -15,12 +15,15 @@
     <link  href="<?=base_url();?>assets/css/owl.carousel.min.css" rel="stylesheet" >
     <link  href="<?=base_url();?>assets/css/css.min.css?t=<?=time();?>" rel="stylesheet" >
     </head>
-    <body>
-    
+    <body> -->
+    <!-- <script src="<?=base_url();?>assets/js/jquery.min.js"></script> -->
     
     <style type="text/css">
         div.container-fluid.content-comment{
           background-color: white;
+        }
+        div.container-fluid.content-comment{
+
         }
         div.container-fluid.content-comment{
           height: auto;
@@ -70,7 +73,7 @@
           margin-top: 1em;
         }
         div.container-fluid.content-comment{
-          padding-top: 1em;
+          padding-top: 9em;
         }
         @media (max-width:1300px) {
           div.container-fluid{
@@ -159,10 +162,10 @@
       </div>
     </div>
     <?php } ?>
-<script src="<?=base_url();?>assets/js/jquery.min.js"></script>
-<script src="<?=base_url();?>assets/js/bootstrap.min.js"></script>
+
+<!-- <script src="<?=base_url();?>assets/js/bootstrap.min.js"></script>
  <script src="<?=base_url();?>assets/js/classie.min.js"></script>
- <script src="<?=base_url();?>assets/js/custom_pendaftaran.min.js"></script>
+ <script src="<?=base_url();?>assets/js/custom_pendaftaran.min.js"></script> -->
 <script type="text/javascript">
    var base_url = "<?=base_url();?>"
     $(document).ready(function(){

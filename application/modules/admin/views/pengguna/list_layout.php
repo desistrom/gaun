@@ -2,7 +2,7 @@
 <div class="box">
 	<div class="box-body">
 		<div class="col col-md-12 col-sm-12 col-xs-12" style="padding-left: 0; margin-bottom: 15px;">
-			<!-- <a href="<?=site_url('admin/keanggotaan/add');?>" class="btn btn-success">Tambah User</a> -->
+			<a href="<?=site_url('admin/pengguna/report');?>" class="btn btn-success"><i class="fa fa-table"></i> Download report</a>
 		</div>
 		<div class="col col-md-12 col-xs-12 table-responsive">
 	<table class="table table-bordered  dataTable" id="table">
@@ -11,6 +11,7 @@
 			<th>Nama User</th>
 			<th>Email</th>
 			<th>No Hp</th>
+			<th>Action</th>
 		<thead>
 		<tbody>
 		<?php foreach ($user as $key => $value): ?>
@@ -19,6 +20,7 @@
 				<td><?=$value['nama'];?></td>
 				<td><?=$value['email'];?></td>
 				<td><?=$value['no_hp'];?></td>
+				<td><a class="btn btn-primary btn-sm" href="<?=site_url('admin/pengguna/reset').'/'.$value['id_pengguna'];?>">Reset</a></td>
 			</tr>
 		<?php endforeach ?>
 		</tbody>

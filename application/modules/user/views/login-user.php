@@ -143,6 +143,7 @@
                                         <div class="error" id="ntf_g-recaptcha-response" style="position: relative;"></div>
                                       </div>
                                       </form>
+                                      <div><a style="color: #0a7fff; font-style: italic;" href="<?=site_url('user/login_user/reset_password')?>"><u>Forgot Password</u></a></div>
                                       <div class="text-right"><a class="btn btn-post" type="button" id="btn_register">Submit</a></div>
                                       
                                   </div>

@@ -66,7 +66,7 @@
           </li>
           <!-- Control Sidebar Toggle Button -->
           <li>
-            <a href="<?=site_url("login/logout");?>">LogOut</a>
+            <a href="<?=site_url("login/logout");?>"><i class="fa fa-power-off"></i> LogOut</a>
           </li>
         </ul>
       </div>

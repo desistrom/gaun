@@ -28,7 +28,7 @@
                       <li class="dropdown active"><a class="link_dropdown"  href="index.html" class="dropdown-toggle">Dashboard </a>
                           <ul class="drop-menu open active  col col-md-2" role="menu">
                               <li><a href="#"> <i class="fa fa-user"></i>Profil</a></li>
-                              <li><a href="#"> <i class="fa fa-gear"></i>Akun</a></li>
+                              <li><a href="<?=site_url('user/dashboard/change_password');?>"> <i class="fa fa-gear"></i>change password</a></li>
 
                           </ul>
                         </li>

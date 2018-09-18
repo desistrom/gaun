@@ -14,6 +14,7 @@ class Pengguna extends MX_Controller  {
 		// if ($this->login->token_check() == 0) {
 		// 	// redirect('login');
 		// }
+        $this->load->library('Excel');
 	}
 
     public function list_dosen(){
@@ -107,5 +108,284 @@ class Pengguna extends MX_Controller  {
             $res .= $chars[mt_rand(0, strlen($chars)-1)];
         }
         return $res;
+    }
+
+    public function reset($id){
+
+        $sql = $this->db->get_where('tb_pengguna',array('id_pengguna'=>$id));
+        $mail = sha1($id);
+        $user = $sql->row_array();
+        $reset = $mail.$user['password'];
+        $this->load->helper('email_send_helper');
+        $data['email_from'] = 'support@IDREN';
+        $data['name_from'] = 'IDREN support';
+        $data['email_to'] = $user['email'];
+        $data['subject'] = 'Request reset Password';
+        $data['content'] = 'Ini Adalah link reset Password anda<br/>'.site_url('user/login_user/reset?data='.$reset);
+        if (email_send($data) == true) {
+            $this->db->update('tb_pengguna',array('reset'=>$reset),array('id_pengguna'=>$user['id_pengguna']));
+            $user_data = 'success';
+            $ret['status'] = 1;
+            $this->session->set_flashdata("header","Request Reset Password Berhasil");
+            $this->session->set_flashdata("notif","Email Request Reset Password berhasil dikirim ke E-mail anda, Silahkan kunjungi link yang kami berikan");
+            // redirect(site_url('dashboard/reset_password'));
+        }
+        if ($user['id_role_ref'] == 0) {
+            redirect(site_url('admin/pengguna/list_mahasiswa'));
+        }else{
+            redirect(site_url('admin/pengguna/list_dosen'));
+        }
+    }
+
+    function report() {
+        // $str = mb_convert_encoding($str, "SJIS","UTF-8");
+        $objPHPExcel    = new PHPExcel();
+        $objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(35);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('B')->setWidth(17);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(15);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('D')->setWidth(30);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(30);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(25);
+        
+        $objPHPExcel->getActiveSheet()->getStyle(1)->getFont()->setBold(true);
+        $objPHPExcel->getActiveSheet()->getStyle(2)->getFont()->setBold(true);
+        $objPHPExcel->getActiveSheet()->getStyle(3)->getFont()->setBold(true);
+        
+        /*$header = array(
+            'alignment' => array(
+                'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER,
+            ),
+            'font' => array(
+                'bold' => true,
+                'color' => array('rgb' => 'FF0000'),
+                'name' => 'Verdana'
+            )
+        );
+
+        $objPHPExcel->getActiveSheet()->getStyle("A1:D2")
+                ->applyFromArray($header)
+                ->getFont()->setSize(16);
+        $wajib = array('borders'=>array('allborders'=>array('style'=>PHPExcel_Style_Border::BORDER_THIN,'color'=>array('argb'=>'FF0000'))),'fill' => array('type' => PHPExcel_Style_Fill::FILL_SOLID,'color' => array('rgb' => 'FF0000')),'font' => array(
+                'bold' => true,
+                'color' => array('rgb' => 'FFFFFF'),
+                'name' => 'Verdana'
+            ));
+        $sunah = array('borders'=>array('allborders'=>array('style'=>PHPExcel_Style_Border::BORDER_THIN,'color'=>array('argb'=>'5FBA7D'))));
+        $objPHPExcel->getActiveSheet()->getStyle('A3:D3')->applyFromArray($wajib);
+        $objPHPExcel->getActiveSheet()->mergeCells('A1:D2');*/
+        $ex = $objPHPExcel->setActiveSheetIndex(0)
+            ->setCellValue('A1', 'No.')
+
+            // ->setCellValue('A3', 'Email')
+            // ->setCellValue('B3', 'Password')
+            ->setCellValue('B1', 'user Dosen aktif')
+            ->setCellValue('C1', 'user Dosen tidak aktif')
+            ->setCellValue('D1', 'user Mahasiswa aktif')
+            ->setCellValue('E1', 'user Mahasiswa tidak aktif');
+            // ->setCellValue('D1', 'No. Hp');
+            // ->setCellValue('F3', 'Last Rotasi Klinik');
+        
+        
+        // $counter = 4;
+        // foreach ($formSoal as $key => $row) :
+            $jumlah_aktif_dosen = $this->db->get_where('tb_pengguna',array('id_role_ref'=>1,'status'=>1))->num_rows();
+            $jumlah_pasif_dosen = $this->db->get_where('tb_pengguna',array('id_role_ref'=>1,'status'=>0))->num_rows();
+            $jumlah_aktif_mahasiswa = $this->db->get_where('tb_pengguna',array('id_role_ref'=>0,'status'=>1))->num_rows();
+            $jumlah_pasif_mahasiswa = $this->db->get_where('tb_pengguna',array('id_role_ref'=>1,'status'=>0))->num_rows();
+            $ex->setCellValue('A2', '1');
+            $ex->setCellValue('B2', $jumlah_aktif_dosen);
+            $ex->setCellValue('C2', $jumlah_pasif_dosen);
+            $ex->setCellValue('D2', $jumlah_aktif_mahasiswa);
+            $ex->setCellValue('E2', $jumlah_pasif_mahasiswa);
+            
+            // $counter = $counter+1;
+        // endforeach;
+        $objPHPExcel->getProperties()->setCreator("Admin")
+            ->setLastModifiedBy("Admin")
+            ->setTitle("Export PHPExcel Test Document")
+            ->setSubject("Export PHPExcel Test Document")
+            ->setDescription("Test doc for Office 2007 XLSX, generated by PHPExcel.")
+            ->setKeywords("office 2007 openxml php")
+            ->setCategory("PHPExcel");
+        $objPHPExcel->setActiveSheetIndex(0);
+        foreach($objPHPExcel->getActiveSheet()->getColumnDimension() as $col) {
+            $col->setAutoSize(true);
+        }
+        $objPHPExcel->getActiveSheet()->calculateColumnWidths();
+        
+        $objWriter  = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+        header('Last-Modified:'. gmdate("D, d M Y H:i:s").'GMT');
+        header('Chace-Control: no-store, no-cache, must-revalation');
+        header('Chace-Control: post-check=0, pre-check=0', FALSE);
+        header('Pragma: no-cache');
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="RekabUser'. date('Ymd') .'.xlsx"');
+        ob_end_clean();
+        ob_start();
+        $objWriter->save('php://output');  
+        $objWriter->save('php://output');
+    }
+    function download_user() {
+        // $select = $this->db->get('user')->result();
+        
+        $objPHPExcel    = new PHPExcel();
+        $objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(35);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('B')->setWidth(17);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(15);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('D')->setWidth(30);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(30);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(25);
+        
+        $objPHPExcel->getActiveSheet()->getStyle(1)->getFont()->setBold(true);
+        $objPHPExcel->getActiveSheet()->getStyle(2)->getFont()->setBold(true);
+        $objPHPExcel->getActiveSheet()->getStyle(3)->getFont()->setBold(true);
+        
+        $header = array(
+            'alignment' => array(
+                'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER,
+            ),
+            'font' => array(
+                'bold' => true,
+                'color' => array('rgb' => 'FF0000'),
+                'name' => 'Verdana'
+            )
+        );
+
+        $objPHPExcel->getActiveSheet()->getStyle("A1:D2")
+                ->applyFromArray($header)
+                ->getFont()->setSize(16);
+        $wajib = array('borders'=>array('allborders'=>array('style'=>PHPExcel_Style_Border::BORDER_THIN,'color'=>array('argb'=>'FF0000'))),'fill' => array('type' => PHPExcel_Style_Fill::FILL_SOLID,'color' => array('rgb' => 'FF0000')),'font' => array(
+                'bold' => true,
+                'color' => array('rgb' => 'FFFFFF'),
+                'name' => 'Verdana'
+            ));
+        $sunah = array('borders'=>array('allborders'=>array('style'=>PHPExcel_Style_Border::BORDER_THIN,'color'=>array('argb'=>'5FBA7D'))));
+        $objPHPExcel->getActiveSheet()->getStyle('A3:D3')->applyFromArray($wajib);
+        $objPHPExcel->getActiveSheet()->mergeCells('A1:D2');
+        $objPHPExcel->setActiveSheetIndex(0)
+            ->setCellValue('A1', 'Form User')
+
+            ->setCellValue('A3', 'Email')
+            // ->setCellValue('B3', 'Password')
+            ->setCellValue('B3', 'Nama')
+            ->setCellValue('C3', 'Institusi')
+            ->setCellValue('D3', 'No. Hp');
+            // ->setCellValue('F3', 'Last Rotasi Klinik');
+        
+        
+
+        $objPHPExcel->getProperties()->setCreator("Admin")
+            ->setLastModifiedBy("Admin")
+            ->setTitle("Export PHPExcel Test Document")
+            ->setSubject("Export PHPExcel Test Document")
+            ->setDescription("Test doc for Office 2007 XLSX, generated by PHPExcel.")
+            ->setKeywords("office 2007 openxml php")
+            ->setCategory("PHPExcel");
+        $objPHPExcel->setActiveSheetIndex(0);
+        foreach($objPHPExcel->getActiveSheet()->getColumnDimension() as $col) {
+            $col->setAutoSize(true);
+        }
+        $objPHPExcel->getActiveSheet()->calculateColumnWidths();
+        
+        $objWriter  = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+        header('Last-Modified:'. gmdate("D, d M Y H:i:s").'GMT');
+        header('Chace-Control: no-store, no-cache, must-revalation');
+        header('Chace-Control: post-check=0, pre-check=0', FALSE);
+        header('Pragma: no-cache');
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="Insert User'. date('Ymd') .'.xlsx"');
+        
+        $objWriter->save('php://output');
+    }
+
+    function hasil(){
+        // $select = $this->db->get('user')->result();
+        
+        $objPHPExcel    = new PHPExcel();
+        $objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(35);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('B')->setWidth(17);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(15);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('D')->setWidth(30);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(30);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(25);
+        
+        $objPHPExcel->getActiveSheet()->getStyle(1)->getFont()->setBold(true);
+        $objPHPExcel->getActiveSheet()->getStyle(2)->getFont()->setBold(true);
+        $objPHPExcel->getActiveSheet()->getStyle(3)->getFont()->setBold(true);
+        
+        /*$header = array(
+            'alignment' => array(
+                'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER,
+            ),
+            'font' => array(
+                'bold' => true,
+                'color' => array('rgb' => 'FF0000'),
+                'name' => 'Verdana'
+            )
+        );
+
+        $objPHPExcel->getActiveSheet()->getStyle("A1:D2")
+                ->applyFromArray($header)
+                ->getFont()->setSize(16);
+        $wajib = array('borders'=>array('allborders'=>array('style'=>PHPExcel_Style_Border::BORDER_THIN,'color'=>array('argb'=>'FF0000'))),'fill' => array('type' => PHPExcel_Style_Fill::FILL_SOLID,'color' => array('rgb' => 'FF0000')),'font' => array(
+                'bold' => true,
+                'color' => array('rgb' => 'FFFFFF'),
+                'name' => 'Verdana'
+            ));
+        $sunah = array('borders'=>array('allborders'=>array('style'=>PHPExcel_Style_Border::BORDER_THIN,'color'=>array('argb'=>'5FBA7D'))));
+        $objPHPExcel->getActiveSheet()->getStyle('A3:D3')->applyFromArray($wajib);
+        $objPHPExcel->getActiveSheet()->mergeCells('A1:D2');*/
+        $ex = $objPHPExcel->setActiveSheetIndex(0)
+            ->setCellValue('A1', 'No.')
+
+            // ->setCellValue('A3', 'Email')
+            // ->setCellValue('B3', 'Password')
+            ->setCellValue('B1', 'user Dosen aktif')
+            ->setCellValue('C1', 'user Dosen tidak aktif')
+            ->setCellValue('D1', 'user Mahasiswa aktif')
+            ->setCellValue('E1', 'user Mahasiswa tidak aktif');
+            // ->setCellValue('D1', 'No. Hp');
+            // ->setCellValue('F3', 'Last Rotasi Klinik');
+        
+        
+        // $counter = 4;
+        // foreach ($formSoal as $key => $row) :
+            $jumlah_aktif_dosen = $this->db->get_where('tb_pengguna',array('id_role_ref'=>1,'status'=>1))->num_rows();
+            $jumlah_pasif_dosen = $this->db->get_where('tb_pengguna',array('id_role_ref'=>1,'status'=>0))->num_rows();
+            $jumlah_aktif_mahasiswa = $this->db->get_where('tb_pengguna',array('id_role_ref'=>0,'status'=>1))->num_rows();
+            $jumlah_pasif_mahasiswa = $this->db->get_where('tb_pengguna',array('id_role_ref'=>1,'status'=>0))->num_rows();
+            $ex->setCellValue('A2', '1');
+            $ex->setCellValue('B2', $jumlah_aktif_dosen);
+            $ex->setCellValue('C2', $jumlah_pasif_dosen);
+            $ex->setCellValue('D2', $jumlah_aktif_mahasiswa);
+            $ex->setCellValue('E2', $jumlah_pasif_mahasiswa);
+            
+            // $counter = $counter+1;
+        // endforeach;
+        $objPHPExcel->getProperties()->setCreator("Admin")
+            ->setLastModifiedBy("Admin")
+            ->setTitle("Export PHPExcel Test Document")
+            ->setSubject("Export PHPExcel Test Document")
+            ->setDescription("Test doc for Office 2007 XLSX, generated by PHPExcel.")
+            ->setKeywords("office 2007 openxml php")
+            ->setCategory("PHPExcel");
+        $objPHPExcel->setActiveSheetIndex(0);
+        foreach($objPHPExcel->getActiveSheet()->getColumnDimension() as $col) {
+            $col->setAutoSize(true);
+        }
+        $objPHPExcel->getActiveSheet()->calculateColumnWidths();
+        
+        $objWriter  = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+        header('Last-Modified:'. gmdate("D, d M Y H:i:s").'GMT');
+        header('Chace-Control: no-store, no-cache, must-revalation');
+        header('Chace-Control: post-check=0, pre-check=0', FALSE);
+        header('Pragma: no-cache');
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="RekabUser'. date('Ymd') .'.xlsx"');
+        
+        $objWriter->save('php://output');
     }
 }

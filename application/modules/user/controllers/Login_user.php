@@ -7,30 +7,7 @@
  *
  * @author http://www.roytuts.com
  */
-    /*require APPPATH.'third_party/facebook/Facebook/FacebookSession.php';
-    require APPPATH.'third_party/facebook/Facebook/FacebookRedirectLoginHelper.php';
-    require APPPATH.'third_party/facebook/Facebook/FacebookRequest.php';
-    require APPPATH.'third_party/facebook/Facebook/FacebookResponse.php';
-    require APPPATH.'third_party/facebook/Facebook/FacebookSDKException.php';
-    require APPPATH.'third_party/facebook/Facebook/FacebookRequestException.php';
-    require APPPATH.'third_party/facebook/Facebook/FacebookAuthorizationException.php';
-    require APPPATH.'third_party/facebook/Facebook/GraphObject.php';
-    require APPPATH.'third_party/facebook/Facebook/Entities/AccessToken.php';
-    require APPPATH.'third_party/facebook/Facebook/HttpClients/FacebookHttpable.php';
-    require APPPATH.'third_party/facebook/Facebook/HttpClients/FacebookCurlHttpClient.php';
-
-        use Facebook\FacebookSession;
-        use Facebook\FacebookRedirectLoginHelper;
-        use Facebook\FacebookRequest;
-        use Facebook\FacebookResponse;
-        use Facebook\FacebookSDKException;
-        use Facebook\FacebookRequestException;
-        use Facebook\FacebookAuthorizationException;
-        use Facebook\GraphObject;
-        use Facebook\Entities\AccessToken;
-        use Facebook\HttpClients\FacebookHttpable;
-        use Facebook\HttpClients\FacebookCurlHttpClient;*/
-        // init app with app id and secret
+    
     require_once(APPPATH.'third_party/Facebook/autoload.php');
 class Login_user extends MX_Controller  {
     var $data = array();
@@ -593,12 +570,6 @@ terima kasih";
         
         $this->load->library('Facebook', $config);
         $user = $this->facebook->getUser();
-        // print_r($user);
-        // We may or may not have this data based on whether the user is logged in.
-        //
-        // If we have a $user id here, it means we know the user is logged into
-        // Facebook, but we don't know if the access token is valid. An access
-        // token is invalid if the user logged out of Facebook.
         $profile = null;
         if($user)
         {
@@ -627,8 +598,79 @@ terima kasih";
         $this->session->set_userdata('fb_data', $fb_data);
     }
 
-    public function jadi(){
-        print_r($this->session->userdata('fb_data'));
+    public function reset_password(){
+        if ($this->input->server('REQUEST_METHOD') == 'POST') {
+            $ret['state'] = 0;
+            $ret['status'] = 0;
+            $this->form_validation->set_error_delimiters('', '');
+            $this->form_validation->set_rules('email','E-Mail', 'required');
+            if ($this->form_validation->run() == true) {
+                $input = $this->input->post();
+                $sql = $this->db->get_where('tb_pengguna',array('email'=>$input['email']));
+                if ($sql->num_rows() > 0) {
+                    $ret['state'] = 1;
+                    $user = $sql->row_array();
+                    $mail = sha1($user['email']);
+                    $reset = $mail.$user['password'];
+                    $this->load->helper('email_send_helper');
+                    $data['email_from'] = 'support@IDREN';
+                    $data['name_from'] = 'IDREN support';
+                    $data['email_to'] = $user['email'];
+                    $data['subject'] = 'Request reset Password';
+                    $data['content'] = 'Ini Adalah link reset Password anda<br/>'.site_url('user/login_user/reset?data='.$reset);
+                    if (email_send($data) == true) {
+                        $this->db->update('tb_pengguna',array('reset'=>$reset),array('id_pengguna'=>$user['id_pengguna']));
+                        $user_data = 'success';
+                        $ret['status'] = 1;
+                        $this->session->set_flashdata("header","Request Reset Password Berhasil");
+                        $this->session->set_flashdata("notif","Email Request Reset Password berhasil dikirim ke E-mail anda, Silahkan kunjungi link yang kami berikan");
+                        // redirect(site_url('dashboard/reset_password'));
+                    }
+                }else{
+                    $ret['notif']['login'] = 'E-mail tidak terdaftar, pastikan email yang anda masukan benar';
+                }
+            }
+            $ret['notif']['current'] = form_error('current');
+            echo json_encode($ret);
+            exit();
+        }
+        $this->load->view('reset_pass',$this->data);
+        // $this->ciparser->new_parse('template_user','modules_user', 'reset_password_layout',$this->data);
+    }
+
+    public function reset(){
+        $input = $this->input->get('data');
+        $data = $this->db->get_where('tb_pengguna',array('reset'=>$input));
+        if ($data->num_rows() == 0) {
+               redirect(site_url());
+           }   
+        if ($this->input->server('REQUEST_METHOD') == 'POST') {
+            $ret['state'] = 0;
+            $ret['status'] = 0;
+            $this->form_validation->set_error_delimiters('', '');
+            $this->form_validation->set_rules('new','New Password', 'required');
+            $this->form_validation->set_rules('re','Re-type New Password', 'required|matches[new]');
+            if ($this->form_validation->run() == true) {
+                $input = $this->input->post();
+                    $ret['state'] = 1;
+                    $data_user['password'] = $input['new'];
+                    if ($this->db->update('tb_pengguna',array('password'=>sha1($input['new']),'reset'=>''),array('id_pengguna'=>$data->row_array()['id_pengguna']))) {
+                        $ret['status'] = 1;
+                        $this->session->set_flashdata("header","Reset Password Berhasil");
+                        $this->session->set_flashdata("notif","Reset Password Berhasil, silahkan login untuk melanjutkan");
+                        if ($data->row_array()['id_role_ref'] == 0) {
+                            $ret['url'] = site_url('user/login_user/login_mahasiswa');
+                        }else{
+                            $ret['url'] = site_url('user/login_user');
+                        }
+                    }
+            }
+            $ret['notif']['new'] = form_error('new');
+            $ret['notif']['re'] = form_error('re');
+            echo json_encode($ret);
+            exit();
+        }
+        $this->load->view('reset_layout',$this->data);
     }
 
 

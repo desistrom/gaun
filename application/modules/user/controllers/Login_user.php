@@ -58,6 +58,7 @@ class Login_user extends MX_Controller  {
                     $this->session->set_userdata('user_data', $user_data);
                     $this->session->set_userdata('previlage', $user_data['id_role_ref']);
                     $this->session->set_userdata('user_login', true);
+                    $this->session->set_userdata('user',$user_data['id_pengguna']);
                     $this->session->set_flashdata("header","Registrasi Berhasil");
                     $this->session->set_flashdata("notif","Registrasi Anda sedang kami Proses, tunggu konfirmasi selanjutnya dari Admin");
                     $data_token['username'] = $username;
@@ -132,6 +133,7 @@ class Login_user extends MX_Controller  {
                     $this->session->set_userdata('user_data', $user_data);
                     $this->session->set_userdata('previlage', $user_data['id_role_ref']);
                     $this->session->set_userdata('user_login', true);
+                    $this->session->set_userdata('user',$user_data['id_pengguna']);
                     // $this->session->set_flashdata("header","Registrasi Berhasil");
                     // $this->session->set_flashdata("notif","Registrasi Anda sedang kami Proses, tunggu konfirmasi selanjutnya dari Admin");
                     $data_token['username'] = $username;

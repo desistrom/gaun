@@ -75,7 +75,7 @@
             <div class="input-file-right"><label class="btn btn-success btn-choose-foto" for="file_name_1">Choose File</label></div>
             <div class="input-file-left"><input type="file" class="form-control file" name="file_name[]" id="file_name_1" ></div>  
           </div>
-            <div style="font-style: italic;">*for best result use 450x240 px</div>
+            <div><i>*for best result use 450x240 px. <br>Allowed file type : jpeg, jpg, png, gif.</i></div>
             <div class="error" id="ntf_file_name"></div>
             <div class="error" id="ntf_error"></div>
           </div>
@@ -98,7 +98,7 @@
             <div class="input-file-right"><label class="btn btn-success btn-choose-foto" for="file_name_2">Choose File</label></div>
             <div class="input-file-left"><input type="file" class="form-control file" name="file_name[]" id="file_name_2" ></div>  
           </div>
-          <div style="font-style: italic;">*for best result use 450x240 px</div>
+          <div><i>*for best result use 450x240 px. <br>Allowed file type : jpeg, jpg, png, gif.</i></div>
           <div class="error" id="ntf_file_name"></div>
           <div class="error" id="ntf_error"></div>
         </div>
@@ -121,7 +121,7 @@
           <div class="input-file-right"><label class="btn btn-success btn-choose-foto" for="file_name_3">Choose File</label></div>
           <div class="input-file-left"><input type="file" class="form-control file" name="file_name[]" id="file_name_3" ></div>  
         </div>
-          <div style="font-style: italic;">*for best result use 450x240 px</div>
+          <div><i>*for best result use 450x240 px. <br>Allowed file type : jpeg, jpg, png, gif.</i></div>
           <div class="error" id="ntf_file_name"></div>
           <div class="error" id="ntf_error"></div>
         </div>
@@ -144,7 +144,7 @@
             <div class="input-file-right"><label class="btn btn-success btn-choose-foto" for="file_name_4">Choose File</label></div>
             <div class="input-file-left"><input type="file" class="form-control file" name="file_name[]" id="file_name_4" ></div>  
           </div>
-          <div style="font-style: italic;">*for best result use 450x240 px</div>
+          <div><i>*for best result use 450x240 px. <br>Allowed file type : jpeg, jpg, png, gif.</i></div>
           <div class="error" id="ntf_file_name"></div>
           <div class="error" id="ntf_error"></div>
         </div>
@@ -194,7 +194,7 @@
             <div class="input-file-right"><label class="btn btn-success btn-choose-foto" for="file_name">Choose File</label></div>
             <div class="input-file-left"><input type="file" class="form-control file" name="file_name[]" id="file_name" ></div>
             <div class="col-col-md-12">
-              <div style="font-style: italic;display: block;">*for best result use 450x240 px</div>
+              <div><i>*for best result use 450x240 px. <br>Allowed file type : jpeg, jpg, png, gif.</i></div>
             <div class="error" id="ntf_file_name" style="position: relative;"></div>
             <div class="error" id="ntf_error" style="position: relative;"></div> 
             </div> 

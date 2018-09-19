@@ -38,7 +38,7 @@
 		<link rel="stylesheet" href="<?=base_url();?>assets/datatables/css/dataTables.bootstrap.min.css">
 		<div class="box-body">
 			<div class="col col-md-12 col-sm-12 col-xs-12" style="padding-left: 0; margin-bottom: 15px;">
-				<a href="<?=site_url('admin/keanggotaan/add_instansi');?>" class="btn btn-success">Tambah Instansi</a>
+				<!-- <a href="<?=site_url('admin/keanggotaan/add_instansi');?>" class="btn btn-success">Tambah Instansi</a> -->
 			</div>
 			<div class="col col-md-12 col-xs-12 table-responsive">
 				<table class="table table-bordered  dataTable" id="table">
@@ -136,7 +136,7 @@
 			      </div>
 
 			     <div class="form-group">
-			      <label>Emial</label>
+			      <label>Email</label>
 			        <input type="text" class="form-control" name="email" id="email" value="" placeholder="Enter Link Website ...">
 			        <div class="error" id="ntf_email"></div>
 			      </div>
@@ -184,7 +184,7 @@
 			            <div class="col col-md-12 form-goup-file">
 			              <div class="input-file-right"><label class="btn btn-success btn-choose-foto" for="userfile"><i class="fa fa-upload" ></i>Choose File</label></div>
 			              <div class="input-file-left"><input type="file" class="form-control file" name="userfile" id="userfile"></div>
-			              <div><i>*for best result use 450x240 px. <br>Allowed file type : jpeg, jpg, png, gif.</i></div> 
+			              <div><i>*for best result use 450x240 px. <br> Max file size 400KB, Width 200px - 1024px. <br>Allowed file type : jpeg, jpg, png, gif.</i></div> 
 			              <div class="error" id="ntf_userfile"></div>
 			              <div class="error" id="ntf_error"></div> 
 			            </div>
@@ -255,6 +255,7 @@
 			            <div class="col col-md-12 form-goup-file">
 			              <div class="input-file-right"><label class="btn btn-success btn-choose-foto" for="userfile"><i class="fa fa-upload" ></i>Choose File</label></div>
 			              <div class="input-file-left"><input type="file" class="form-control file" name="userfile" id="userfile"></div> 
+			              <div><i>*for best result use 450x240 px. <br> Max file size 400KB, Width 200px - 1024px. <br>Allowed file type : jpeg, jpg, png, gif.</i></div> 
 			              <div class="error" id="ntf_userfile"></div>
 			              <div class="error" id="ntf_error"></div> 
 			            </div>

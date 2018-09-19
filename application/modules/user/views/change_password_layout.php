@@ -6,7 +6,7 @@
     <div class="box-content">
     	<form>
     		<div class="form-group">
-    			<label>Curent Password</label>
+    			<label>Current Password</label>
     			<input type="password" name="current" class="form-control">
           <div class="error" id="ntf_current"></div>
     			<div class="error" id="ntf_wr"></div>

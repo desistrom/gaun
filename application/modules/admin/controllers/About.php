@@ -224,7 +224,7 @@ class About extends MX_Controller  {
         $config['upload_path']          = FCPATH."assets/media/";
         $config['allowed_types']        = 'gif|jpg|png|jpeg|PNG|JPG';
         $config['max_size']             = 400;
-        $config['max_width']            = 2048;
+        $config['max_width']            = 1048;
         $config['min_width']            = 150;
         $config['file_name']            = time().".".$ext;
 

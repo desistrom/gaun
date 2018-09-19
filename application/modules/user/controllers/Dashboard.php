@@ -54,7 +54,7 @@ class Dashboard extends MX_Controller  {
                         $this->session->set_flashdata("notif","1");
                     }
                 }else{
-                    $ret['notif']['wr'] = 'Currunt Password salah, pastikan password yang anda masukan benar';
+                    $ret['notif']['wr'] = 'Current Password salah, pastikan password yang anda masukan benar';
                 }
             }
             $ret['notif']['current'] = form_error('current');

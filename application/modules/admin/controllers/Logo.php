@@ -141,9 +141,9 @@ class Logo extends MX_Controller  {
         $ext = strtolower($this->_getExtension($imagename));
         $config['upload_path']          = FCPATH."media/";
         $config['allowed_types']        = 'gif|jpg|png|ico';
-        $config['max_size']             = 4000;
-        $config['max_width']            = 2056;
-        $config['min_width']            = 1;
+        $config['max_size']             = 2048;
+        $config['max_width']            = 1024;
+        $config['min_width']            = 200;
         $config['file_name']            = "favicon.".$ext;
 
         $this->load->library('upload', $config);

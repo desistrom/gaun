@@ -163,7 +163,7 @@
       <div class="col col-md-12 form-goup-file">
         <div class="input-file-right"><label class="btn btn-success btn-choose-foto" for="file_name"><i class="fa fa-upload" ></i>Choose File</label></div>
         <div class="input-file-left"><input type="file" class="form-control file" name="file_name" id="file_name"></div> 
-        <div><i>*for best result use 450x240 px. <br>Allowed file type : jpeg, jpg, png, gif.</i></div>
+        <div><i>*for best result use 450x240 px. <br> Max file size 400KB, Width 200px - 1024px. <br>Allowed file type : jpeg, jpg, png, gif.</i></div> 
         <div class="error" id="ntf_file_name"></div> 
       </div>
     </div>
@@ -248,6 +248,7 @@
       <div class="col col-md-12 form-goup-file">
         <div class="input-file-right"><label class="btn btn-success btn-choose-foto" for="file_name"><i class="fa fa-upload" ></i>Choose File</label></div>
         <div class="input-file-left"><input type="file" class="form-control file" name="file_name" id="file_name"></div> 
+        <div><i>*for best result use 450x240 px. <br> Max file size 400KB, Width 200px - 1024px. <br>Allowed file type : jpeg, jpg, png, gif.</i></div> 
         <div class="error" id="ntf_file_name"></div> 
       </div>
     </div>

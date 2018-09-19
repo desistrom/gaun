@@ -90,11 +90,26 @@
 
 <div class="col-lg-3 col-xs-6">
   <!-- small box -->
-  <div class="small-box bg-blue">
+  <div class="small-box bg-orange">
     <div class="inner">
-      <h3><?=$dosen;?></h3>
+      <h3><?=$jdosen;?></h3>
 
-      <p>Dosen Login</p>
+      <p>Jumlah Dosen</p>
+    </div>
+    <div class="icon">
+      <i class="fa fa-user"></i>
+    </div>
+    <a href="<?=site_url('admin/menu/page');?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+  </div>
+</div>
+
+<div class="col-lg-3 col-xs-6">
+  <!-- small box -->
+  <div class="small-box bg-yellow">
+    <div class="inner">
+
+      <h3><?=$jmahasiswa;?></h3>
+      <p>Jumlah Mahasiswa</p>
     </div>
     <div class="icon">
       <i class="fa fa-user"></i>
@@ -107,9 +122,24 @@
   <!-- small box -->
   <div class="small-box bg-blue">
     <div class="inner">
+      <h3><?=$dosen;?></h3>
+
+      <p>Dosen Aktif Login</p>
+    </div>
+    <div class="icon">
+      <i class="fa fa-user"></i>
+    </div>
+    <a href="<?=site_url('admin/menu/page');?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+  </div>
+</div>
+
+<div class="col-lg-3 col-xs-6">
+  <!-- small box -->
+  <div class="small-box bg-aqua">
+    <div class="inner">
       <h3><?=$mahasiswa;?></h3>
 
-      <p>Mahasiswa Login</p>
+      <p>Mahasiswa Aktif Login</p>
     </div>
     <div class="icon">
       <i class="fa fa-user"></i>

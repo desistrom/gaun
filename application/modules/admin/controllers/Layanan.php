@@ -671,8 +671,8 @@ class Layanan extends CI_Controller  {
         $ext = strtolower($this->_getExtension($imagename));
         $config['upload_path']          = FCPATH."media/";
         $config['allowed_types']        = 'gif|jpg|png';
-        $config['max_size']             = 4000;
-        $config['max_width']            = 4056;
+        $config['max_size']             = 2048;
+        $config['max_width']            = 1024;
         $config['min_width']            = 200;
         $config['file_name']            = time().".".$ext;
 

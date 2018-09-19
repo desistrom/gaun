@@ -125,6 +125,17 @@
 			<form role="form">
 				<!-- text input -->
 				<div class="form-group">
+			      <label>Kategori Instansi</label>
+			      	<select name="jenis" id="jenis" class="form-control">
+			      		<option value="">-- Select Kategori --</option>
+			      		<?php foreach ($kategori as $key => $value): ?>
+			      			<option value="<?=$value['id_jenis_instansi'];?>"><?=$value['nm_jenis_instansi'];?></option>
+			      		<?php endforeach ?>
+			      	</select>
+			        <div class="error" id="ntf_jenis"></div>
+			     </div>
+
+				<div class="form-group">
 					<label>Nama Instansi</label>
 					<input type="text" name="name" class="form-control" id="name" placeholder="Masukan Nama Instansi ..." value="">
 					<div class="error" id="ntf_name"></div>
@@ -141,17 +152,7 @@
 			        <div class="error" id="ntf_email"></div>
 			      </div>
 
-			      <div class="form-group">
-			      <label>Kategori Instansi</label>
-			      	<select name="jenis" id="jenis" class="form-control">
-			      		<option value="">-- Select Kategori --</option>
-			      		<?php foreach ($kategori as $key => $value): ?>
-			      			<option value="<?=$value['id_jenis_instansi'];?>"><?=$value['nm_jenis_instansi'];?></option>
-			      		<?php endforeach ?>
-			      	</select>
-			        <div class="error" id="ntf_jenis"></div>
-			      </div>
-
+			      
 			      <div class="form-group">
 			      <label>Phone Number</label>
 			        <input type="text" class="form-control" name="phone" id="phone" value="" placeholder="Enter Phone Number ...">
@@ -212,6 +213,17 @@
 			<form role="form">
 				<!-- text input -->
 				<div class="form-group">
+			      <label>Kategori Instansi</label>
+			      	<select name="jenis" id="jenis" class="form-control">
+			      		<option value="">-- Select Kategori --</option>
+			      		<?php foreach ($kategori as $key => $value): ?>
+			      			<option <?php if($value['id_jenis_instansi'] == $instansi['id_jenis_instansi']){ ?> selected <?php } ?> value="<?=$value['id_jenis_instansi'];?>"><?=$value['nm_jenis_instansi'];?></option>
+			      		<?php endforeach ?>
+			      	</select>
+			        <div class="error" id="ntf_jenis"></div>
+			     </div>
+
+				<div class="form-group">
 					<label>Nama Instansi</label>
 					<input type="text" name="name" class="form-control" id="name" placeholder="Masukan Nama Instansi ..." value="<?=$instansi['nm_instansi'];?>">
 					<div class="error" id="ntf_name"></div>
@@ -226,17 +238,6 @@
 			      <label>Email</label>
 			        <input type="text" class="form-control" name="email" id="email" value="<?=$instansi['email'];?>" placeholder="Enter Link Website ...">
 			        <div class="error" id="ntf_email"></div>
-			      </div>
-
-			      <div class="form-group">
-			      <label>Kategori Instansi</label>
-			      	<select name="jenis" id="jenis" class="form-control">
-			      		<option value="">-- Select Kategori --</option>
-			      		<?php foreach ($kategori as $key => $value): ?>
-			      			<option <?php if($value['id_jenis_instansi'] == $instansi['id_jenis_instansi']){ ?> selected <?php } ?> value="<?=$value['id_jenis_instansi'];?>"><?=$value['nm_jenis_instansi'];?></option>
-			      		<?php endforeach ?>
-			      	</select>
-			        <div class="error" id="ntf_jenis"></div>
 			      </div>
 
 			      <div class="form-group">

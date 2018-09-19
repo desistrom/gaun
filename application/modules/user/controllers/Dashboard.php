@@ -66,7 +66,67 @@ class Dashboard extends MX_Controller  {
         $this->ciparser->new_parse('template_user','modules_user', 'change_password_layout',$this->data);
     }
 
-
+    public function profil(){
+                $data = $this->session->userdata('user');
+        // print_r($data);
+        $user = $this->db->get_where('tb_pengguna',array('id_pengguna'=>$data))->row_array();
+        $role = '';
+        if ($user['id_role_ref'] == 1) {
+            $role = 'tb_dosen';
+            $this->data['user'] = $this->db->get_where('tb_dosen',array('id_pengguna_ref'=>$data))->row_array();
+        }else{
+            $role = 'tb_mahasiswa';
+            $this->data['user'] = $this->db->get_where('tb_mahasiswa',array('id_pengguna_ref'=>$data))->row_array();
+        }
+        if ($this->input->server('REQUEST_METHOD') == 'POST') {
+            $ret['state'] = 0;
+            $ret['status'] = 0;
+            $this->form_validation->set_error_delimiters('', '');
+            $this->form_validation->set_rules('nama','Nama Lengkap', 'required');
+            $this->form_validation->set_rules('jk','Jenis Kelamin', 'required');
+            $this->form_validation->set_rules('hp','Nomor HP', 'required');
+            $this->form_validation->set_rules('alamat','Alamat', 'required');
+            $this->form_validation->set_rules('instansi','Instansi', 'required');
+            if ($role == 'tb_mahasiswa') {
+            $this->form_validation->set_rules('angkatan','Tahun Angkatan', 'required');
+            $this->form_validation->set_rules('jurusan','Jurusan', 'required');
+            }
+            if ($this->form_validation->run() == true) {
+                $input = $this->input->post();
+                $ret['state'] = 1;
+                $data_user['nama'] = $input['nama'];
+                $data_user['jeniskelamin'] = $input['jk'];
+                $data_user['no_hp'] = $input['hp'];
+                $data_user['alamat'] = $input['alamat'];
+                $data_user['instansi'] = $input['instansi'];
+                if ($role == 'tb_mahasiswa') {
+                    $data_user['angkatan'] = $input['angkatan'];
+                    $data_user['jurusan'] = $input['jurusan'];
+                }
+                if ($this->db->update($role,$data_user,array('id_pengguna_ref'=>$data))) {
+                    $ret['status'] = 1;
+                    $ret['url'] = site_url('user/dashboard/profil');
+                    $this->session->set_flashdata("notif","1");
+                }
+            }
+            $ret['notif']['nam'] = form_error('nam');
+            $ret['notif']['jk'] = form_error('jk');
+            $ret['notif']['hp'] = form_error('hp');
+            $ret['notif']['alamat'] = form_error('alamat');
+            $ret['notif']['instansi'] = form_error('instansi');
+            if ($role == 'tb_mahasiswa') {
+                $ret['notif']['angkatan'] = form_error('angkatan');
+                $ret['notif']['jurusan'] = form_error('jurusan');
+            }
+            echo json_encode($ret);
+            exit();
+        }
+        
+        // print_r($this->data['user']);
+        $this->data['role'] = $role;
+        $this->data['instansi'] = $this->db->get_where('tb_instansi',array('id_jenis_instansi'=>1,'status'=>2))->result_array();
+        $this->ciparser->new_parse('template_user','modules_user', 'profil_layout',$this->data);
+    }
   
 
 

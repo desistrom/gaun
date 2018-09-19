@@ -17,7 +17,7 @@
 		<?php foreach ($user as $key => $value): ?>
 			<tr>
 				<td><?=($key+1);?></td>
-				<td><?=$value['nama'];?></td>
+				<td id="<?=$value['id_pengguna'];?>" class="detail"><span style="color:blue;"><u><?=$value['nama'];?></u></span></td>
 				<td><?=$value['email'];?></td>
 				<td><?=$value['no_hp'];?></td>
 				<td><a class="btn btn-primary btn-sm" href="<?=site_url('admin/pengguna/reset').'/'.$value['id_pengguna'];?>">Reset</a></td>
@@ -30,6 +30,21 @@
 	</div>
 </div>
 	</div>
+</div>
+<div class="modal" tabindex="-1" role="dialog" id="detail_modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Detail User</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+      </div>
+    </div>
+  </div>
 </div>
 <?php if ($this->session->flashdata('notif') != '') { ?>
 		<div class="modal" tabindex="-1" role="dialog" id="modalSuccess">
@@ -57,6 +72,20 @@
 <script src="<?=base_url();?>assets/datatables/js/dataTables.bootstrap.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function () {
+		var base_url = '<?=base_url();?>';
+		$('body').on('click','.detail',function(){
+			var id = $(this).attr('id');
+			$.ajax({
+		          url : base_url+'admin/pengguna/detail/'+id,
+		          dataType : 'json',
+		          type : 'POST',
+		          data : $('form').serialize()
+		      }).done(function(data){
+		          console.log(data);
+		          $('#detail_modal .modal-body').html(data);
+		          $('#detail_modal').modal('show');
+		      });
+		});
 	    $('#modalSuccess').modal('show');
   });
 </script>

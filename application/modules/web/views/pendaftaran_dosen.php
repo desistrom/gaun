@@ -119,7 +119,7 @@
                                         <div class="error" id="ntf_name"></div>
                                     </div>
                                     <div class="text-input">
-                                        <input type="text" placeholder="Username" name="username" class="input-comment">
+                                        <input type="text" placeholder="Username" name="username" class="input-comment" id="username">
                                         <div class="error" id="ntf_username"></div>
                                     </div>
                                     <div class="text-input">
@@ -248,6 +248,15 @@
     $(document).ready(function(){
       $('body').on('click','#btn_register', function(){
         $('#progresLoading').modal('show');
+        var regex = /^[a-zA-Z0-9_@.]+$/;
+        if ($('#username').val().match(regex)) {
+
+        }else{
+          $('#ntf_username').html('only alphabet, number and _@. can be input');
+          $('#ntf_username').css({'color':'white', 'font-style':'italic'});
+          $('#progresLoading').modal('hide');
+          return false;
+        }
       console.log($('form').val());
       $.ajax({
           url : window.location.href,
@@ -256,7 +265,7 @@
           data : $('#register_form').serialize()
       }).done(function(data){
           console.log(data);
-          setTimeout(function(){
+          // setTimeout(function(){
             $('#progresLoading').modal('hide');
               if(data.state == 1){
                 if (data.status == 1) {
@@ -271,7 +280,7 @@
                       console.log(data.cek)
                     }
                   }
-             },3000);
+             // },3000);
             $.each(data.notif,function(key,value){
             $('.error').show();
             $('#ntf_'+ key).html(value);

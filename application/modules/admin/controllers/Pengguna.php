@@ -31,6 +31,27 @@ class Pengguna extends MX_Controller  {
         $this->ciparser->new_parse('template_admin','modules_admin', 'pengguna/list_layout',$this->data);
     }
 
+    public function detail($id){
+        $data = $this->db->get_where('tb_pengguna',array('id_pengguna'=>$id))->row_array();
+        if ($data['id_role_ref'] == 1) {
+            $sql = "SELECT * FROM tb_pengguna p JOIN tb_dosen d on p.id_pengguna = d.id_pengguna_ref where id_pengguna = ?";
+        }else{
+            $sql = "SELECT * FROM tb_pengguna p JOIN tb_mahasiswa d on p.id_pengguna = d.id_pengguna_ref where id_pengguna = ?";
+        }
+        $user = $this->db->query($sql,$id)->row_array();
+        $html = '';
+        $html .= '<li>Nama : '.$user['nama'].'</li>';
+        $html .= '<li>Email : '.$user['email'].'</li>';
+        $html .= '<li>No. Hp : '.$user['no_hp'].'</li>';
+        $html .= '<li>Jenis Kelamin : '.$user['jeniskelamin'].'</li>';
+        $html .= '<li>Alamat : '.$user['alamat'].'</li>';
+        if ($data['id_role_ref'] == 0) {
+            $html .= '<li>Angkatan : '.$user['angkatan'].'</li>';
+            $html .= '<li>Jurusan : '.$user['jurusan'].'</li>';
+        }
+        echo json_encode($html);
+    }
+
 	public function index(){
 		$this->data['breadcumb'] = 'Request Dosen';
 		$sql = "SELECT * FROM tb_pengguna p JOIN tb_dosen d on p.id_pengguna = d.id_pengguna_ref where id_role_ref = 1 AND status = 0";

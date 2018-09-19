@@ -912,7 +912,7 @@ class Keanggotaan extends MX_Controller  {
             $row = array();
             $row[] = $no;
             $row[] = $instansi->nm_jenis_instansi;
-            $row[] = '<span class="btn_detail" id="'.$instansi->id_instansi.'" style="cursor : pointer">'.$instansi->nm_instansi.'</span>';
+            $row[] = '<span class="btn_detail" id="'.$instansi->id_instansi.'" style="cursor : pointer; color:blue;"><u>'.$instansi->nm_instansi.'<u/></span>';
             $row[] = $instansi->email;
             $row[] = $status;
             $row[] = $instansi->sort;

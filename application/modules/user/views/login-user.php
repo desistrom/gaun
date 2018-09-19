@@ -240,7 +240,7 @@
           data : $('#register_form').serialize()
       }).done(function(data){
           console.log(data);
-          setTimeout(function(){
+          // setTimeout(function(){
             $('#progresLoading').modal('hide');
               if(data.state == 1){
                 if (data.status == 1) {
@@ -249,7 +249,7 @@
                     
                     }
                   }
-             },3000);
+             // },3000);
             $.each(data.notif,function(key,value){
             $('.error').show();
             $('#ntf_'+ key).html(value);

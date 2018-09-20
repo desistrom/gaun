@@ -61,6 +61,8 @@ $route['topologi/konektivitas'] = 'web/konektivitas/index';
 $route['layanan/id_tube'] = 'web/layanan/id_tube';
 $route['keanggotaan/pendaftaran'] = 'web/keanggotaan/pendaftaran';
 $route['keanggotaan/benefit'] = 'web/keanggotaan/benefit';
+$route['keanggotaan'] = 'web/keanggotaan';
+$route['keanggotaan/(:any)'] = 'web/keanggotaan/$1';
 
 $route['api/invoice'] = 'admin/check_module/getInvoiceById';
 $route['api/invoice/(:any)'] = 'admin/check_module/getInvoiceById?id=2';

@@ -92,7 +92,7 @@
             if (data != '') {
                 // window.location.href = '<?=base_url();?>web/galery/search_video?data='+data;
                 $.ajax({
-                url : '<?=base_url();?>web/keanggotaan/search?data='+data,
+                url : '<?=base_url();?>keanggotaan/search?data='+data,
                 type : 'POST',
                 dataType : 'json',
                 data :""

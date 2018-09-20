@@ -174,7 +174,8 @@ class Login_user extends MX_Controller  {
         $this->data['fb_data'] = $loginUrl;
         $this->data['breadcumb'] = 'Mahasiswa';
         $this->data['loginURL'] = $this->google->loginURL();
-        $this->load->view('login-user',$this->data);
+        // $this->load->view('login-user',$this->data);
+        $this->ciparser->new_parse('template_frontend','modules_user', 'login-user',$this->data);
     }
 
     public function facebook(){

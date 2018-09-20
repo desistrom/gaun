@@ -3,7 +3,7 @@
     <head>
        <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>login user</title>
+      <title>login <?=$breadcumb;?></title>
         <link rel="shortcut icon" href="<?=base_url();?>media/favicon.ico">
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800,900" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Crimson+Text:400,600,700" rel="stylesheet">
@@ -105,7 +105,7 @@
                     <div class="row sub-content-comment">
                       <div class="col col-md-3 col-sm-3 col-xs-12"></div>
                       <div class="col col-md-6 col-sm-7 col-xs-12">
-                        <h3 class="text-center title-login">Login Mahasiswa</h3>
+                        <h3 class="text-center title-login">Login <?=$breadcumb;?></h3>
                         <div class="other-registery">
                           <div class="fb">
                             <a href="<?php echo $fb_data; ?>">

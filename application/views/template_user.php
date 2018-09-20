@@ -25,7 +25,7 @@
               <div class="collapse navbar-collapse" id="navcol-1">
 
                   <ul class="nav navbar-nav navbar-right">
-                      <li class="dropdown active"><a class="link_dropdown"  href="index.html" class="dropdown-toggle">Home </a>
+                      <li class="dropdown active"><a class="link_dropdown"  href="<?=site_url('user/dashboard');?>" class="dropdown-toggle">Home </a>
                           <ul class="drop-menu open active  col col-md-2" role="menu">
                               <li><a href="<?=site_url('user/dashboard');?>"> <i class="fa fa-home"></i>Dashboard</a></li>
                               <li><a href="<?=site_url('user/dashboard/profil');?>"> <i class="fa fa-user"></i>Profil</a></li>

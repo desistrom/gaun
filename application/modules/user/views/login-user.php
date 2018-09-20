@@ -72,6 +72,11 @@
         div.container-fluid.content-comment{
           padding-top: 1em;
         }
+        .title-login{
+          color: #9E9E9E;
+          padding: 15px 0;
+          margin:0;
+        }
         @media (max-width:1300px) {
           div.container-fluid{
             padding: 0 15px;
@@ -100,7 +105,7 @@
                     <div class="row sub-content-comment">
                       <div class="col col-md-3 col-sm-3 col-xs-12"></div>
                       <div class="col col-md-6 col-sm-7 col-xs-12">
-                        
+                        <h3 class="text-center title-login">Login Mahasiswa</h3>
                         <div class="other-registery">
                           <div class="fb">
                             <a href="<?php echo $fb_data; ?>">

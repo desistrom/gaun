@@ -89,7 +89,7 @@
                             <div class="col col-md-12 col-sm-12 col-xs-12 filter-date-event" >
                             	<ul class="list-inline date_event" style="margin-bottom: 1.5em;">
                                     <a href="" data-url="<?=site_url('web/news/get_news').'/'.$detail_news['sumber'];?>" class="ssk ssk-facebook"></a>
-                                    <a href="" class="ssk ssk-twitter" data-url="<?php echo $detail_news['title']; ?>&url=<?=site_url('web/news/get_news').'/'.$detail_news['sumber'];?>"></a>
+                                    <a href="" class="ssk ssk-twitter" data-url="<?=site_url('web/news/get_news').'/'.$detail_news['sumber'];?>"></a>
                                     <!-- <a href="http://www.facebook.com/sharer.php?u=<?=site_url('web/news/get_news').'/'.$detail_news['sumber'];?>">hmm</a> -->
                                 </ul>
                                 <ul class="list-inline date_event">

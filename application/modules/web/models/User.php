@@ -7,7 +7,7 @@ class User extends CI_Model{
     public function checkUser($data = array()){
         $this->db->select($this->primaryKey);
         $this->db->from($this->tableName);
-        $this->db->where(array('oauth_provider'=>$data['oauth_provider'],'oauth_id'=>$data['oauth_id']));
+        $this->db->where(array('email'=>$data['email']));
         $query = $this->db->get();
         $check = $query->num_rows();
         $user_data = '';

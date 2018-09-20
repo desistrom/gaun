@@ -47,14 +47,14 @@ class News extends CI_Controller  {
             FROM tb_news n join tb_kategori_news k on n.id_kategori_ref = k.id_kategori_news 
             join tb_user u on n.id_user_ref = u.id_user where n.is_aktif = 1 ORDER BY n.id_news DESC";
         $news = $this->db->query($sql)->result_array();
-        foreach ($news as $key => $value) {
-            if ($value['kategori'] != 'rss' && $value['gambar'] != '') {
-                $news[$key]['gambar'] = 'assets/media/'.$news[$key]['gambar'];
-            }
-            if ($value['gambar'] == '') {
-                $news[$key]['gambar']='assets/images/logo/IDREN-2.png';
-            }
-        }
+        // foreach ($news as $key => $value) {
+        //     if ($value['kategori'] != 'rss' && $value['gambar'] != '') {
+        //         $news[$key]['gambar'] = 'assets/media/'.$news[$key]['gambar'];
+        //     }
+        //     if ($value['gambar'] == '') {
+        //         $news[$key]['gambar']='assets/images/logo/IDREN-2.png';
+        //     }
+        // }
         /*$this->data['recent']=$b['data'];
         $this->data['total'] = count($b['data']);*/
         $this->data['recent']=$news;

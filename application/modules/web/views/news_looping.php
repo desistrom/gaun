@@ -13,7 +13,7 @@
             </ul>
 
         </div>
-        <a href="<?=base_url();?>news/<?php echo $value['sumber']; ?>" class="btn btn-danger btn-read-more" type="button"  >Read More</a>
+        <a href="<?=base_url();?>berita/<?php echo $value['sumber']; ?>" class="btn btn-danger btn-read-more" type="button"  >Read More</a>
     </div>
 <?php endforeach; }else{
     return false;

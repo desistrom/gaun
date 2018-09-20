@@ -37,7 +37,7 @@
                         <div class="line-category-title"></div>
                         <ul class="list-unstyled list-category">
                         <?php for ($i=0; $i < 5 ; $i++) { ?>
-                            <li class=""><a href="<?php if(isset($recent[$i])){ echo site_url('news').'/'.$recent[$i]['sumber']; } ?>"> <?php if(isset($recent[$i])){ echo $recent[$i]['title']; } ?> </a></li>
+                            <li class=""><a href="<?php if(isset($recent[$i])){ echo site_url('berita').'/'.$recent[$i]['sumber']; } ?>"> <?php if(isset($recent[$i])){ echo $recent[$i]['title']; } ?> </a></li>
                         <?php } ?>
                         </ul>
                     </div>

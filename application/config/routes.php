@@ -54,10 +54,13 @@ $route['404_override'] = 'web/page/not_found';
 $route['translate_uri_dashes'] = FALSE;
 $route['admin'] = 'admin/home/index';
 $route['page/(:any)'] = 'web/page/index/$1';
-$route['news/(:any)'] = 'web/news/get_news/$1';
-$route['news/list'] = 'web/news/index';
+$route['berita/(:any)'] = 'web/news/get_news/$1';
+$route['berita'] = 'web/news/index';
 $route['tentang'] = 'web/tentang/index';
-$route['konektivitas'] = 'web/konektivitas/index';
+$route['topologi/konektivitas'] = 'web/konektivitas/index';
+$route['layanan/id_tube'] = 'web/layanan/id_tube';
+$route['keanggotaan/pendaftaran'] = 'web/keanggotaan/pendaftaran';
+$route['keanggotaan/benefit'] = 'web/keanggotaan/benefit';
 
 $route['api/invoice'] = 'admin/check_module/getInvoiceById';
 $route['api/invoice/(:any)'] = 'admin/check_module/getInvoiceById?id=2';

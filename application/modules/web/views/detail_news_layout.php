@@ -72,7 +72,7 @@
                         <div class="line-category-title"></div>
                         <ul class="list-unstyled list-category">
                             <?php for ($i=0; $i < 5 ; $i++) { ?>
-                            <li class="active"><a href="<?php if(isset($news[$i])){ echo site_url('news').'/'.$news[$i]['sumber']; } ?>"> <?php if(isset($news[$i])){ echo $news[$i]['title']; } ?> </a></li>
+                            <li class="active"><a href="<?php if(isset($news[$i])){ echo site_url('berita').'/'.$news[$i]['sumber']; } ?>"> <?php if(isset($news[$i])){ echo $news[$i]['title']; } ?> </a></li>
                         <?php } ?>
                         </ul>
                          

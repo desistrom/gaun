@@ -98,6 +98,9 @@
             margin: 5px;
         }
         }
+        .detail_news{
+          margin-top: 9em;
+        }
     </style>   
     <section class="detail_news" style="background-color: #F2F2F2;">
         
@@ -227,8 +230,8 @@
      fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));
 </script>  -->
-<script src="<?=base_url();?>assets/js/jquery.min.js"></script>
-<script src="<?=base_url();?>assets/js/bootstrap.min.js"></script>
+<!-- <script src="<?=base_url();?>assets/js/jquery.min.js"></script> -->
+<!-- <script src="<?=base_url();?>assets/js/bootstrap.min.js"></script> -->
  <script src="<?=base_url();?>assets/js/classie.min.js"></script>
  <script src="<?=base_url();?>assets/js/custom_pendaftaran.min.js"></script>
  <script src='https://www.google.com/recaptcha/api.js'></script>

@@ -21,7 +21,7 @@
     <link  href="<?=base_url();?>assets/css/css.min.css?t=<?=time();?>" rel="stylesheet" >
     <?php if (isset($share)){ ?>
       <title><?=strtoupper($this->general->title());?>: <?=$share['title'];?></title>
-      <meta name="description" content="<?=$share['description'];?>"/>
+      <meta name="description" content="<?=strip_tags($share['description']);?>"/>
       <meta property="og:site_name" content="idren.id"/>
       <meta property="fb:app_id" content="173869386564200"/>
       <meta property="og:url" content="<?=$share['url'];?>"/>

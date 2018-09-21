@@ -114,6 +114,7 @@
                         $('#ntf_'+ key).html(value);
                         $('#ntf_'+ key).css({'color':'red', 'font-style':'italic'});
                         });
+                        grecaptcha.reset();
                 }).fail(function(xhr, status, error){
                     alert(xhr.responseText);
                 });

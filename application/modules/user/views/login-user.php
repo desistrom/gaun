@@ -263,6 +263,7 @@
             $('#ntf_'+ key).html(value);
             $('#ntf_'+ key).css({'color':'white', 'font-style':'italic'});
             });
+            grecaptcha.reset();
       });
     });
       <?php if($this->session->flashdata("notif") != ''){ ?>

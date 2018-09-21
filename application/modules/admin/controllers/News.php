@@ -55,7 +55,7 @@ class News extends MX_Controller  {
 					}
 				}else{
 					$ret['state'] = 1;
-					$data_news['img'] = $image['asli'];
+					// $data_news['img'] = $image['asli'];
 					if ($this->db->insert('tb_news',$data_news)) {
 						$ret['status'] = 1;
 						$ret['url'] = site_url('admin/news');

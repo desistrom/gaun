@@ -42,7 +42,7 @@
 <div class="box">
 	<div class="box-body">
 		<div class="col col-md-12 col-sm-12 col-xs-12" style="padding-left: 0; margin-bottom: 15px;">
-			<a href="<?=site_url('admin/news/add');?>" class="btn btn-success">Tambah News</a> | <a href="<?=site_url('admin/news/get_rss');?>" class="btn btn-info btn_rss">Get rss</a>
+			<a href="<?=site_url('instansi/add_berita');?>" class="btn btn-success">Tambah News</a>
 		</div>
 		<div class="col col-md-12 col-xs-12 table-responsive">
 			<table class="table table-bordered  dataTable" id="table">
@@ -153,8 +153,8 @@
       <div class="form-group">
         <label>Post Status</label>
         <select class="form-control" name="status" id="status" >
-          <option value="1">Publish</option>
-          <option value="2">Draft</option>
+          <!-- <option value="1">Publish</option> -->
+          <option value="0">Draft</option>
         </select>
         <div class="error" id="ntf_kategori"></div>
       </div>
@@ -165,6 +165,7 @@
         <div class="input-file-left"><input type="file" class="form-control file" name="file_name" id="file_name"></div> 
         <div><i>*for best result use 450x240 px. <br> Max file size 400KB, Width 200px - 1024px. <br>Allowed file type : jpeg, jpg, png, gif.</i></div> 
         <div class="error" id="ntf_file_name"></div> 
+        <div class="error" id="ntf_error"></div> 
       </div>
     </div>
   <!--     <div class="form-group">
@@ -238,7 +239,7 @@
         <label>Post Status</label>
         <select class="form-control" name="status" id="status" >
           <option value="">-- Pilih Status --</option>
-          <option <?php if($news['is_aktif'] == '1'){ ?> selected <?php } ?> value="1">Publish</option>
+          <!-- <option <?php if($news['is_aktif'] == '1'){ ?> selected <?php } ?> value="1">Publish</option> -->
           <option <?php if($news['is_aktif'] == '0'){ ?> selected <?php } ?> value="0">Draft</option>
         </select>
         <div class="error" id="ntf_kategori"></div>
@@ -411,7 +412,7 @@ $(document).ready(function() {
  
         // Load data for the table's content from an Ajax source
         "ajax": {
-            "url": "<?php echo site_url('instansi/news/ajax_list')?>",
+            "url": "<?php echo site_url('instansi/ajax_list')?>",
             "type": "POST"
         },
  

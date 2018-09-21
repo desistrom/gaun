@@ -94,6 +94,7 @@ class Instansi extends MX_Controller
     }
 
     public function add_berita(){
+        $user = $this->session->userdata('data_user');
         if ($this->input->server('REQUEST_METHOD') == "POST") {
             $ret['state'] = 0;
             $ret['status'] = 0;
@@ -108,7 +109,8 @@ class Instansi extends MX_Controller
                 $data_news['content'] = $this->input->post('content');
                 $data_news['is_aktif'] = $this->input->post('status');
                 $data_news['id_kategori_ref'] = $this->input->post('kategori');
-                $data_news['id_user_ref'] = $this->session->userdata('data_user')['id_user'];
+                $data_news['id_user_ref'] = $this->session->userdata('data_user')['id_instansi'];
+                $data_news['id_instansi_ref'] = $this->session->userdata('data_user')['id_instansi'];
                 $data_news['link'] = url_title($this->input->post('judul'), 'dash', true);
                 if (isset($_FILES['file_name'])) {
                     $image = $this->upload_logo($_FILES);
@@ -119,7 +121,7 @@ class Instansi extends MX_Controller
                         $data_news['img'] = $image['asli'];
                         if ($this->db->insert('tb_news',$data_news)) {
                             $ret['status'] = 1;
-                            $ret['url'] = site_url('admin/news');
+                            $ret['url'] = site_url('instansi/berita');
                             $this->session->set_flashdata("notif","Data Berhasil di Masukan");
                         }
                     }
@@ -128,7 +130,7 @@ class Instansi extends MX_Controller
                     // $data_news['img'] = $image['asli'];
                     if ($this->db->insert('tb_news',$data_news)) {
                         $ret['status'] = 1;
-                        $ret['url'] = site_url('admin/news');
+                        $ret['url'] = site_url('instansi/berita');
                         $this->session->set_flashdata("notif","Data Berhasil di Masukan");
                     }
                 }
@@ -155,11 +157,81 @@ class Instansi extends MX_Controller
         $this->data['kategori'] = $this->db->get('tb_kategori_news')->result_array();
         $this->data['news'] = $this->db->get('tb_news')->result_array();
         $this->data['breadcumb'] = 'Add News';
-        $this->ciparser->new_parse('template_instansi','modules_admin', 'news/news_layout',$this->data);
+        $this->ciparser->new_parse('template_instansi','modules_instansi', 'news_layout',$this->data);
+    }
+
+    public function edit(){
+        $url = $this->uri->segment_array();
+        $id = end($url);
+        $this->data['news'] = $this->db->get_where('tb_news',array('id_news'=>$id))->row_array();
+        if ($this->input->server('REQUEST_METHOD') == "POST") {
+            $ret['state'] = 0;
+            $ret['status'] = 0;
+            $this->form_validation->set_error_delimiters('','');
+            $this->form_validation->set_rules('judul', 'Judul Berita', 'trim|required');
+            $this->form_validation->set_rules('content', 'Content Berita', 'trim|required');
+            $this->form_validation->set_rules('kategori', 'Kategori Berita', 'trim|required');
+            if ($this->form_validation->run() == true) {
+                $ret['state'] = 1;
+                $data_news['judul'] = $this->input->post('judul');
+                $data_news['content'] = $this->input->post('content');
+                $data_news['id_kategori_ref'] = $this->input->post('kategori');
+                $data_news['id_user_ref'] = $this->session->userdata('data_user')['id_instansi'];
+                $data_news['id_instansi_ref'] = $this->session->userdata('data_user')['id_instansi'];
+                $data_news['link'] = url_title($this->input->post('judul'), 'dash', true);
+                if (isset($_FILES['file_name'])) {
+                    $image = $this->upload_logo($_FILES);
+                    if (isset($image['error'])) {
+                        $ret['notif'] = $image;
+                    }else{
+                        $data_news['img'] = $image['asli'];
+                        if (file_exists(FCPATH."assets/media/".$this->data['news']['img'])) {
+                            @chmod(FCPATH."assets/media/".$this->data['news']['img'], 0777);
+                            unlink(FCPATH."assets/media/".$this->data['news']['img']);
+                        }
+                        if (file_exists(FCPATH."assets/media/thumbnail/".$this->data['news']['img'])) {
+                            @chmod(FCPATH."assets/media/thumbnail/".$this->data['news']['img'], 0777);
+                            unlink(FCPATH."assets/media/thumbnail/".$this->data['news']['img']);
+                        }
+                        if (file_exists(FCPATH."assets/media/crop/".$this->data['news']['img'])) {
+                            @chmod(FCPATH."assets/media/crop/".$this->data['news']['img'], 0777);
+                            unlink(FCPATH."assets/media/crop/".$this->data['news']['img']);
+                        }
+                    }
+                }
+                if ($this->db->update('tb_news',$data_news,array('id_news'=>$id))) {
+                    $ret['status'] = 1;
+                    $ret['url'] = site_url('instansi/berita');
+                    $this->session->set_flashdata("notif","Data Berhasil di Masukan");
+                }
+                
+            
+                
+            }
+            $ret['notif']['judul'] = form_error('judul');
+            $ret['notif']['content'] = form_error('content');
+            $ret['notif']['kategori'] = form_error('kategori');
+            echo json_encode($ret);
+            exit();
+        }
+        $this->load->library('ckeditor');
+        $this->ckeditor->basePath = base_url().'assets/ckeditor/';
+        /*$this->ckeditor->config['toolbar'] = array(
+                        array( 'Source', '-', 'Bold', 'Italic', 'Underline', '-','Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo','-','NumberedList','BulletedList','Link' )
+                                                            );*/
+        $this->ckeditor->config['language'] = 'eng';
+        $this->ckeditor->config['width'] = '1024px';
+        $this->ckeditor->config['height'] = '300px'; 
+        $this->data['view'] = 'edit';
+        $this->data['breadcumb'] = 'Edit News';
+        $this->data['kategori'] = $this->db->get('tb_kategori_news')->result_array();
+        
+        $this->ciparser->new_parse('template_instansi','modules_instansi', 'news_layout',$this->data);
     }
 
     public function ajax_list()
     {
+        $this->load->model('news_model');
         $list = $this->news_model->get_datatables();
         $data = array();
         $no = $_POST['start'];
@@ -169,12 +241,10 @@ class Instansi extends MX_Controller
             $no++;
             if ($news->is_aktif == 1) {
                 $aktif = '<span class="text-success">Enable</span>';
-                $button = '<button class="btn btn-default btn-sm btn_status" id="'.$news->id_news.'"> <span class="text-danger">Disabled</span> </button>
-                            <a href="'.site_url("admin/news/edit").'/'.$news->id_news.'"><button class="btn btn-info btn-sm" id="edit" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil"></i></button></a>';
+                $button = '<a href="'.site_url("instansi/edit").'/'.$news->id_news.'"><button class="btn btn-info btn-sm" id="edit" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil"></i></button></a>';
             }else{
                 $aktif = '<span class="text-Success">Disable</span>';
-                $button = '<button class="btn btn-default btn-sm btn_status" id="'.$news->id_news.'"> <span class="text-danger">Disabled</span> </button>
-                            <a href="'.site_url("admin/news/edit").'/'.$news->id_news.'"><button class="btn btn-info btn-sm" id="edit" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil"></i></button></a>';
+                $button = '<a href="'.site_url("instansi/edit").'/'.$news->id_news.'"><button class="btn btn-info btn-sm" id="edit" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil"></i></button></a>';
             }
             $row = array();
             $row[] = $no;
@@ -196,6 +266,79 @@ class Instansi extends MX_Controller
                 );
         //output to json format
         echo json_encode($output);
+    }
+
+    public function upload_logo($logo){             
+        
+        $imagename = $logo['file_name']['name'];
+        $ext = strtolower($this->_getExtension($imagename));
+        $config['upload_path']          = FCPATH."assets/media/";
+        $config['allowed_types']        = 'gif|jpg|png';
+        $config['max_size']             = 2048;
+        $config['max_width']            = 1024;
+        $config['min_width']            = 200;
+        $config['file_name']            = time().".".$ext;
+
+        $this->load->library('upload', $config);
+
+        if ( ! $this->upload->do_upload('file_name'))
+        {
+            $data_upload['error'] = $this->upload->display_errors();
+        }
+        else
+        {
+            $upload_data = $this->upload->data();
+            $data_upload['asli'] = $upload_data['file_name'];
+            if ($upload_data['image_width'] > 768 ) {
+                $data = array('upload_data' => $this->upload->data());
+                $config_r['image_library'] = 'GD2';
+                $config_r['source_image'] = FCPATH."assets/media/".$upload_data['file_name'];
+                // $config_r['create_thumb'] = TRUE;
+                $config_r['maintain_ratio'] = TRUE;
+                $config_r['width']         = 150;
+                $config_r['new_image'] = FCPATH."assets/media/thumbnail/".$upload_data['file_name'];
+
+                $this->load->library('image_lib', $config_r);
+
+                $this->image_lib->resize();
+                if ( ! $this->image_lib->resize())
+                {
+                        $data_upload['error'] = $this->image_lib->display_errors();
+                }else{
+                        // echo "berhasil resize";
+                        $data_upload['resize'] = site_url('assets/media/thumbnail/')."/".$upload_data['file_name'];
+                        
+                }
+            }
+            if ($upload_data['image_width'] > 768) {
+                $config_c['image_library'] = 'GD2';
+                $config_c['new_image'] = FCPATH."assets/media/crop/".$upload_data['file_name'];
+                $config_c['source_image'] = FCPATH."assets/media/".$upload_data['file_name'];
+                $config_c['x_axis'] = 100;
+                $config_c['y_axis'] = 60;
+
+                $this->image_lib->initialize($config_c);
+
+                if ( ! $this->image_lib->crop())
+                {
+                        $data_upload['error'] = $this->image_lib->display_errors();
+                }else{
+                        // echo "berhasil Crop";
+                        $data_upload['crop'] = site_url('assets/media/crop/')."/".$upload_data['file_name'];
+                }
+            }
+        }
+        return $data_upload;
+    }
+
+    function _getExtension($str){
+        $i = strrpos($str,".");
+        if (!$i){
+            return "";
+        }   
+        $l = strlen($str) - $i;
+        $ext = substr($str,$i+1,$l);
+        return $ext;
     }
 
     public function logout(){

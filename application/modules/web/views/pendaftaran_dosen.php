@@ -94,7 +94,7 @@
                             <div class="other-registery">
                               <div class="fb">
                                 <a href="<?php echo $fb_data; ?>">
-                                  <button class="btn btn-primary"><i class="fa fa-facebook"></i> Daftar Dengan Faceook</button>
+                                  <button class="btn btn-primary"><i class="fa fa-facebook"></i> Daftar Dengan Facebook</button>
                                 </a>
                                 <!-- <button class="btn btn-primary"><i class="fa fa-facebook"></i> Daftar Dengan Faceook</button> -->
                               </div>

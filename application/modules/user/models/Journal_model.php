@@ -16,13 +16,13 @@ class Journal_model extends CI_Model
     private function _get_datatables_query()
     {
         $user = $this->session->userdata('data_user');
-        $sql = "SELECT * FROM tb_journal j JOIN tb_volume v ON j.id_journal = v.id_journal_ref JOIN tb_no_volume n ON v.id_volume = n.id_volume_ref JOIN tb_artikel a ON n.id_no_volume = a.id_no_volume_ref JOIN tb_author au ON a.id_artikel = au.id_artikel_ref";
-        $this->db->query($sql);
-        $this->db->from($this->table);
+        /*$sql = "SELECT * FROM tb_journal j JOIN tb_volume v ON j.id_journal = v.id_journal_ref JOIN tb_no_volume n ON v.id_volume = n.id_volume_ref JOIN tb_artikel a ON n.id_no_volume = a.id_no_volume_ref JOIN tb_author au ON a.id_artikel = au.id_artikel_ref";
+        $this->db->query($sql);*/
+        $this->db->from($this->table);/*
         $this->db->join('tb_volume', 'id_journal = id_journal_ref');
         $this->db->join('tb_no_volume', 'id_volume = id_volume_ref');
         $this->db->join('tb_artikel', 'id_no_volume = id_no_volume_ref');
-        $this->db->join('tb_author', 'id_artikel = id_artikel_ref');
+        $this->db->join('tb_author', 'id_artikel = id_artikel_ref');*/
         // $this->db->where('id_instansi_ref', $user['id_instansi']);
  
         $i = 0;

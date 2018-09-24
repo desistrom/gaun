@@ -124,7 +124,7 @@
                             <a href="<?php echo $fb_data; ?>">
                             <!-- <a href="<?php //echo $fb_data['loginUrl']; ?>"> -->
                             <!-- <a href="<?php //echo site_url('user/login_user/login_fb'); ?>"> -->
-                              <button class="btn btn-primary" type="button"><i class="fa fa-facebook"></i> Login Dengan Faceook</button>
+                              <button class="btn btn-primary" type="button"><i class="fa fa-facebook"></i> Login Dengan Facebook</button>
                             </a>
                             <!-- <button class="btn btn-primary"><i class="fa fa-facebook"></i> Daftar Dengan Faceook</button> -->
                           </div>

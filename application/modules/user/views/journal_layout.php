@@ -55,6 +55,58 @@
     				</tbody>
     			</table>
     		</div>
+    <div class="modal" tabindex="-1" role="dialog" id="modalDetail">
+      <div class="modal-dialog" role="document" style="margin-top: 75px">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title">Success</h3>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+          	<ul>
+          		<li>ISSN : <span id="issn_view"></span></li>
+          		<li>Visitor : <span id="visitor_view"></span></li>
+          	</ul>
+            <div class="table-responsive">
+            	<table class="table table-striped">
+            		<thead>
+            			<th>Volume & Nomor</th>
+            			<th>Publish</th>
+            			<th>Artikel</th>
+            		</thead>
+            	</table>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    		<?php if ($this->session->flashdata('notif') != '') { ?>
+    <div class="modal" tabindex="-1" role="dialog" id="modalSuccess">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title">Success</h3>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p><?=$this->session->flashdata('notif');?></p>
+          </div>
+          <div class="modal-footer">
+            <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  <?php } ?>
     		<?php }elseif($view == 'add'){ ?>
     			<form role="form">
 <div class="col col-md-8 col-sm-8 col-xs-12" style="padding-top: 1em;">
@@ -99,18 +151,13 @@
         <div class="error" id="ntf_issn"></div>
       </div>
       <div class="form-group">
-      <label>Futured Image Event</label>
+      <label>Futured Image Journal</label>
       <div class="col col-md-12 form-goup-file">
         <div class="input-file-right"><label class="btn btn-success btn-choose-foto" for="file_name"><i class="fa fa-upload" ></i>Choose File</label></div>
         <div class="input-file-left"><input type="file" class="form-control file" name="file_name" id="file_name"></div> 
         <div><i>*for best result use 450x240 px. <br> Max file size 400KB, Width 200px - 1024px. <br>Allowed file type : jpeg, jpg, png, gif.</i></div> 
         <div class="error" id="ntf_file_name"></div> 
         <div class="error" id="ntf_error"></div> 
-      </div>
-      <div class="form-group">
-      	<label>Nama</label>
-      	<input type="text" name="nama[]" class="form-control nama">
-      	<div class="error" id="ntf_nama"></div>
       </div>
     </div>
   <!--     <div class="form-group">
@@ -176,7 +223,26 @@
             });
       });
     });
-    $('#modalSuccess').modal('show');
+
+    $('body').on('click','.detail', function(){
+      // $('#progresLoading').modal('show');
+      $('#modalDetail').modal('show');
+      var id = $(this).attr('id');
+      $('.modal-backdrop').remove();
+      // $.ajax({
+      //     url : window.location.href,
+      //     dataType : 'json',
+      //     type : 'POST',
+      //     data : {'id' : id},
+      //     async : false,
+      //     cache : false ,
+      //     contentType : false , 
+      //     processData : false
+      // }).done(function(data){
+          
+      // });
+    });
+    // $('#modalSuccess').modal('show');
   });
 </script>
 <script type="text/javascript">

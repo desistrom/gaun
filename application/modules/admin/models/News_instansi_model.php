@@ -1,6 +1,6 @@
 <?php
 
-class News_model extends CI_Model 
+class News_instansi_model extends CI_Model 
 {
     var $table = 'tb_news';
     var $column_order = array(null, 'Judul','nm_kategori','link'); //set column field database for datatable orderable
@@ -19,7 +19,8 @@ class News_model extends CI_Model
          // $this->db->query($sql);
         $this->db->from($this->table);
         $this->db->join('tb_kategori_news', 'id_kategori_news = id_kategori_ref');
-        $this->db->where('id_instansi_ref IS NULL', null, false);
+        $this->db->join('tb_instansi', 'id_instansi = id_instansi_ref');
+        $this->db->where('id_instansi_ref IS NOT NULL', null, false);
  
         $i = 0;
      
@@ -74,7 +75,7 @@ class News_model extends CI_Model
     public function count_all()
     {
         $this->db->from($this->table);
-        $this->db->where('id_instansi_ref IS NULL', null, false);
+        $this->db->where('id_instansi_ref IS NOT NULL', null, false);
         return $this->db->count_all_results();
     }
 

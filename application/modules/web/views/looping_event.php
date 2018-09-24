@@ -15,7 +15,7 @@
                                 <div class="col-md-4"><i class="fa fa-clock-o"></i> <?=date('H:i', strtotime($value['start_event']));?> - <?=date('H:i',strtotime($value['end_event']));?></div>
                                 <div class="col-md-4"><i class="fa fa-map-marker"></i> <?=$value['tempat_event'];?></div>
                             </div>
-                            <a href="<?php echo site_url('web/event/detail_event/'.$value['id_event']); ?>" class="btn btn-danger btn-read-more" type="button"  >Read More</a>
+                            <a href="<?php echo site_url('event/'.$value['id_event']); ?>" class="btn btn-danger btn-read-more" type="button"  >Read More</a>
                         </div>
                     </div>
                 <?php endforeach; }else{ return false; }?>

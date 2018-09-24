@@ -63,6 +63,8 @@ $route['keanggotaan/pendaftaran'] = 'web/keanggotaan/pendaftaran';
 $route['keanggotaan/benefit'] = 'web/keanggotaan/benefit';
 $route['keanggotaan'] = 'web/keanggotaan';
 $route['keanggotaan/(:any)'] = 'web/keanggotaan/$1';
+$route['event/(:any)'] = 'web/event/detail_event/$1';
+$route['event'] = 'web/event';
 
 $route['api/invoice'] = 'admin/check_module/getInvoiceById';
 $route['api/invoice/(:any)'] = 'admin/check_module/getInvoiceById?id=2';

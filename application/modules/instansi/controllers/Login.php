@@ -43,7 +43,7 @@ class Login extends MX_Controller
                     $url = URL_GET_TOKEN;
                     $method = 'POST';
                     $token = "";
-                    $ret['url'] = site_url('instansi/dashboard');
+                    $ret['url'] = site_url('instansi');
 
                 }else{
                     $ret['notif']['login'] = 'username or password worng';

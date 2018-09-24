@@ -1,11 +1,11 @@
 <?php
 
-class News_model extends CI_Model 
+class Event_model extends CI_Model 
 {
-    var $table = 'tb_news';
-    var $column_order = array(null, 'Judul','nm_kategori','link'); //set column field database for datatable orderable
-    var $column_search = array('Judul','nm_kategori','link'); //set column field database for datatable searchable 
-    var $order = array('id_news' => 'asc'); // default order 
+    var $table = 'tb_event';
+    var $column_order = array(null, 'judul_event','tgl_event','tempat_event'); //set column field database for datatable orderable
+    var $column_search = array('judul_event','tgl_event','tempat_event'); //set column field database for datatable searchable 
+    var $order = array('id_event' => 'asc'); // default order 
  
     public function __construct()
     {
@@ -15,11 +15,11 @@ class News_model extends CI_Model
  
     private function _get_datatables_query()
     {
-         // $sql = "SELECT * FROM tb_news n join tb_kategori_news k on n.id_kategori_ref = k.id_kategori_news where id_instansi_ref IS NULL";
-         // $this->db->query($sql);
+        // $user = $this->session->userdata('data_user');
+         // $sql = "SELECT * FROM tb_news n join tb_kategori_news k on n.id_kategori_ref = k.id_kategori_news";
         $this->db->from($this->table);
-        $this->db->join('tb_kategori_news', 'id_kategori_news = id_kategori_ref');
-        $this->db->where('id_instansi_ref IS NULL', null, false);
+        $this->db->join('tb_instansi', 'id_instansi = id_instansi_ref');
+        // $this->db->where('id_instansi_ref', $user['id_instansi']);
  
         $i = 0;
      
@@ -74,10 +74,9 @@ class News_model extends CI_Model
     public function count_all()
     {
         $this->db->from($this->table);
-        $this->db->where('id_instansi_ref IS NULL', null, false);
         return $this->db->count_all_results();
     }
-
+/*
     public function news_comment($id){
         $sql = "SELECT n.judul, c.nama, c.email, c.content FROM tb_comment c JOIN tb_news n ON c.id_berita = n.id_news WHERE c.id_berita = ?";
         if ($this->db->query($sql,$id)->num_rows() > 0) {
@@ -85,6 +84,6 @@ class News_model extends CI_Model
             exit();
         }
         return false;
-    }
+    }*/
    
 }

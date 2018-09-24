@@ -480,6 +480,7 @@ class Instansi extends MX_Controller
     public function logout(){
         // $this->session->sess_destroy();
         $this->session->unset_userdata('data_user');
+        $this->session->unset_userdata('instansi_login');
         redirect(site_url('instansi/login'));
     }
 }

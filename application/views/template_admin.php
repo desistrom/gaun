@@ -284,6 +284,7 @@
           <ul class="treeview-menu">
             <li <?php if(current_url() == site_url('admin/kategori_news')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/kategori_news');?>"><i class="material-icons">featured_play_list</i> Kategori Berita </a></li>
             <li <?php if(current_url() == site_url('admin/news')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/news');?>"><i class="material-icons">chrome_reader_mode</i> List Berita</a></li>
+            <li <?php if(current_url() == site_url('admin/news/instansi')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/news/instansi');?>"><i class="material-icons">chrome_reader_mode</i> List Berita Instansi</a></li>
           </ul>
         </li>
 

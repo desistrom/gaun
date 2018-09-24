@@ -17,7 +17,7 @@ class News extends MX_Controller  {
 		// echo $rss;
 		// return false;
 		$this->data['view'] = 'list';
-		$sql = "SELECT * FROM tb_news n join tb_kategori_news k on n.id_kategori_ref = k.id_kategori_news";
+		$sql = "SELECT * FROM tb_news n join tb_kategori_news k on n.id_kategori_ref = k.id_kategori_news where id_instansi_ref IS NULL";
 		$this->data['news'] = $this->db->query($sql)->result_array();
 		$this->data['breadcumb'] = 'List News';
 		$this->ciparser->new_parse('template_admin','modules_admin', 'news/news_layout',$this->data);
@@ -169,6 +169,17 @@ class News extends MX_Controller  {
 			echo json_encode("finish");
 			exit();
 		}
+	}
+
+	public function instansi(){
+		// $rss = file_get_contents('https://rss.kontan.co.id/news/analisis');
+		// echo $rss;
+		// return false;
+		$this->data['view'] = 'list';
+		// $sql = "SELECT * FROM tb_news n join tb_kategori_news k on n.id_kategori_ref = k.id_kategori_news where id_instansi_ref != NULL";
+		// $this->data['news'] = $this->db->query($sql)->result_array();
+		$this->data['breadcumb'] = 'List News';
+		$this->ciparser->new_parse('template_admin','modules_admin', 'news/news_instansi_layout',$this->data);
 	}
 
 	public function get_rss(){
@@ -372,6 +383,48 @@ class News extends MX_Controller  {
                         "draw" => $_POST['draw'],
                         "recordsTotal" => $this->news_model->count_all(),
                         "recordsFiltered" => $this->news_model->count_filtered(),
+                        "data" => $data,
+                );
+        //output to json format
+        echo json_encode($output);
+    }
+
+    public function ajax_list_instansi()
+    {
+    	$this->load->model('news_instansi_model');
+        $list = $this->news_instansi_model->get_datatables();
+        $data = array();
+        $no = $_POST['start'];
+        $aktif = '';
+        $button = '';
+        foreach ($list as $news) {
+            $no++;
+            if ($news->is_aktif == 1) {
+            	$aktif = '<span class="text-success">Enable</span>';
+            	$button = '<button class="btn btn-default btn-sm btn_status" id="'.$news->id_news.'"> <span class="text-danger">Disabled</span> </button>
+							';
+            }else{
+            	$aktif = '<span class="text-Success">Disable</span>';
+            	$button = '<button class="btn btn-default btn-sm btn_status" id="'.$news->id_news.'"> <span class="text-danger">Enable</span> </button>
+							';
+            }
+            $row = array();
+            $row[] = $no;
+            $row[] = '<div class="comment" id="'.$news->id_news.'">'.$news->judul.'</div>';
+            $row[] = word_limiter($news->content, 5);
+            $row[] = $news->nm_kategori;
+            $row[] = $news->created;
+            $row[] = $news->nm_instansi;
+            $row[] = $aktif;
+            $row[] = $button;
+ 
+            $data[] = $row;
+        }
+ 
+        $output = array(
+                        "draw" => $_POST['draw'],
+                        "recordsTotal" => $this->news_instansi_model->count_all(),
+                        "recordsFiltered" => $this->news_instansi_model->count_filtered(),
                         "data" => $data,
                 );
         //output to json format

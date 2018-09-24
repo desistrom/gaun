@@ -1,6 +1,6 @@
 <?php if($news != ''){ foreach ($news as $key => $value) : ?>
     <div class="col col-md-12 col-sm-12 col-xs-12 none-padding list-artikel">
-        <div class="col col-md-6 col-sm-12 col-xs-12 none-padding img-news"><img class="img-responsive" src="<?php $a = explode('//', $value['gambar']); if(isset($a[1])){ echo $value['gambar']; }else{ echo base_url().'assets/media/'.$value['gambar']; } ?>"></div>
+        <div class="col col-md-6 col-sm-12 col-xs-12 none-padding img-news"><img class="img-responsive" src="<?php $a = explode('//', $value['gambar']); if(isset($a[1])){ echo $value['gambar']; }else{ if ($value['gambar'] =='') { echo base_url()."assets/images/logo/IDREN-2.png";}else{ echo base_url().'assets/media/'.$value['gambar']; } } ?>"></div>
         <div class="col col-md-6 col-sm-12 col-xs-12 desrip-news">
             <h4 class="title-news"><?php echo $value['title']; ?></h4>
              <?php echo word_limiter($value['news_content'],20); ?> 

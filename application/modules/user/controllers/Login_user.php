@@ -96,6 +96,7 @@ class Login_user extends MX_Controller  {
         );
         // print_r($this->session->userdata('fb_data'));
         // $fb_data = $this->session->userdata('fb_data');
+        $this->data['url'] = site_url('web/keanggotaan/pendaftaran_dosen');
         $this->data['fb_data'] = $loginUrl;
         $this->data['breadcumb'] = 'Dosen';
         $this->data['loginURL'] = $this->google->loginURL();
@@ -172,6 +173,7 @@ class Login_user extends MX_Controller  {
             'script_captcha' => $this->recaptcha->getScriptTag(), // javascript recaptcha ditaruh di head
         );
         $this->data['fb_data'] = $loginUrl;
+        $this->data['url'] = site_url('web/keanggotaan/pendaftaran_mahasiswa');
         $this->data['breadcumb'] = 'Mahasiswa';
         $this->data['loginURL'] = $this->google->loginURL();
         // $this->load->view('login-user',$this->data);

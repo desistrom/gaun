@@ -163,7 +163,7 @@
                                       </form>
                                       <div><a style="color: #0a7fff; font-style: italic;" href="<?=site_url('user/login_user/reset_password')?>"><u>Forgot Password</u></a></div>
                                       <div class="text-right" style="padding-top: 10px;">
-                                      	<a class="btn btn-post btn-register btn-primary " type="button" id="btn_register" style="float: left;">Register</a>
+                                      	<a href="<?=$url;?>" class="btn btn-post btn-register btn-primary " type="button" style="float: left;">Register</a>
                                       	<a class="btn btn-post" type="button" id="btn_register">Login</a>
                                       </div>
                                       <!-- <div class="text-left"><a class="btn btn-post col-md-12" type="button" id="btn_register">Submit</a></div> -->

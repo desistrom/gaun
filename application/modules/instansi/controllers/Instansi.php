@@ -14,9 +14,12 @@ class Instansi extends MX_Controller
         $this->load->helper('api');
         $this->load->library('Recaptcha');
         $this->load->module('Token');
+        if ($this->session->userdata('instansi_login') != true) {
+            redirect('instansi/login');
+        }
     }
 
-    public function dashboard(){
+    public function index(){
         $this->data['user']['nama'] = '';
         $this->data['breadcumb'] = '';
         $this->ciparser->new_parse('template_instansi','modules_instansi', 'dashboard_layout',$this->data);

@@ -37,7 +37,7 @@ class Login extends MX_Controller
                     $data_user = $data->row_array();
                     $this->session->set_userdata('data_user', $data_user);
                     // $this->session->set_userdata('previlage', $data_user['id_role_ref']);
-                    $this->session->set_userdata('is_login', true);
+                    $this->session->set_userdata('instansi_login', true);
                     $data_token['username'] = $username;
                     $data_token['password'] = $password;
                     $url = URL_GET_TOKEN;

@@ -45,7 +45,7 @@ class News extends CI_Controller  {
         // $b = api_helper('',$url,$methode,'');
         $sql = "SELECT n.id_news as newsId, n.created as tanggal,n.judul as title, n.content as news_content, u.name as author, k.nm_kategori as kategori, n.link as sumber, n.img as gambar
             FROM tb_news n join tb_kategori_news k on n.id_kategori_ref = k.id_kategori_news 
-            join tb_user u on n.id_user_ref = u.id_user where n.is_aktif = 1 ORDER BY n.id_news DESC";
+            left join tb_user u on n.id_user_ref = u.id_user left join tb_instansi i on n.id_instansi_ref = i.id_instansi where n.is_aktif = 1 ORDER BY n.id_news DESC";
         $news = $this->db->query($sql)->result_array();
         // foreach ($news as $key => $value) {
         //     if ($value['kategori'] != 'rss' && $value['gambar'] != '') {
@@ -66,7 +66,7 @@ class News extends CI_Controller  {
             // $a = api_helper('',$url,$methode,'');
             $sql_paging = "SELECT n.id_news as newsId, n.created as tanggal,n.judul as title, n.content as news_content, u.name as author, k.nm_kategori as kategori, n.link as sumber, n.img as gambar
                 FROM tb_news n join tb_kategori_news k on n.id_kategori_ref = k.id_kategori_news 
-                join tb_user u on n.id_user_ref = u.id_user where n.is_aktif = 1 ORDER BY n.id_news DESC  LIMIT ".$start.",4 ";
+                left join tb_user u on n.id_user_ref = u.id_user left join tb_instansi i on n.id_instansi_ref = i.id_instansi where n.is_aktif = 1 ORDER BY n.id_news DESC  LIMIT ".$start.",4 ";
             // $this->data['news']=$a['data'];
             $pagging_news = $this->db->query($sql_paging)->result_array();
             // foreach ($pagging_news as $key => $value) {
@@ -87,7 +87,7 @@ class News extends CI_Controller  {
             // $a = api_helper('',$url,$methode,'');
             $sql_paging = "SELECT n.id_news as newsId, n.created as tanggal,n.judul as title, n.content as news_content, u.name as author, k.nm_kategori as kategori, n.link as sumber, n.img as gambar
                 FROM tb_news n join tb_kategori_news k on n.id_kategori_ref = k.id_kategori_news 
-                join tb_user u on n.id_user_ref = u.id_user where n.is_aktif = 1 ORDER BY n.id_news DESC  LIMIT 0,4 ";
+                left join tb_user u on n.id_user_ref = u.id_user left join tb_instansi i on n.id_instansi_ref = i.id_instansi where n.is_aktif = 1 ORDER BY n.id_news DESC  LIMIT 0,4 ";
             // $this->data['news']=$a['data'];
             $pagging_news = $this->db->query($sql_paging)->result_array();
             
@@ -112,7 +112,7 @@ class News extends CI_Controller  {
         // $a = api_helper('',$url,$methode,$token);
         $sql = "SELECT n.id_news as newsId, n.created as tanggal, n.judul as title, n.content as news_content, u.name as author, k.nm_kategori as kategori, n.link as sumber, n.img as gambar 
             FROM tb_news n join tb_kategori_news k on n.id_kategori_ref = k.id_kategori_news 
-            join tb_user u on n.id_user_ref = u.id_user where n.is_aktif = 1 AND n.link = '".$id."'";
+            left join tb_user u on n.id_user_ref = u.id_user left join tb_instansi i on n.id_instansi_ref = i.id_instansi where n.is_aktif = 1 AND n.link = '".$id."'";
         $a = $this->db->query($sql)->row_array();
         // print_r($a);
         if ($a!= '') {
@@ -121,7 +121,7 @@ class News extends CI_Controller  {
         // $b = api_helper($token,$url_allnews,$methode,$token);
         $sql = "SELECT n.id_news as newsId, n.created as tanggal,n.judul as title, n.content as news_content, u.name as author, k.nm_kategori as kategori, n.link as sumber, n.img as gambar
             FROM tb_news n join tb_kategori_news k on n.id_kategori_ref = k.id_kategori_news 
-            join tb_user u on n.id_user_ref = u.id_user where n.is_aktif = 1 ORDER BY n.id_news DESC";
+            left join tb_user u on n.id_user_ref = u.id_user left join tb_instansi i on n.id_instansi_ref = i.id_instansi where n.is_aktif = 1 ORDER BY n.id_news DESC";
         $b = $this->db->query($sql)->result_array();
         $gambar = '';
         $c = explode('/', $a['gambar']); if(isset($c[1])){ $gambar = $a['gambar']; }else{ $gambar = base_url().'assets/media/'.$a['gambar']; }

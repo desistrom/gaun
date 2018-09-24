@@ -353,7 +353,7 @@ class News extends MX_Controller  {
 							<a href="'.site_url("admin/news/edit").'/'.$news->id_news.'"><button class="btn btn-info btn-sm" id="edit" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil"></i></button></a>';
             }else{
             	$aktif = '<span class="text-Success">Disable</span>';
-            	$button = '<button class="btn btn-default btn-sm btn_status" id="'.$news->id_news.'"> <span class="text-danger">Disabled</span> </button>
+            	$button = '<button class="btn btn-default btn-sm btn_status" id="'.$news->id_news.'"> <span class="text-danger">Enable</span> </button>
 							<a href="'.site_url("admin/news/edit").'/'.$news->id_news.'"><button class="btn btn-info btn-sm" id="edit" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil"></i></button></a>';
             }
             $row = array();

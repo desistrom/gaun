@@ -532,7 +532,7 @@ class Keanggotaan extends MX_Controller  {
                 $data['name_from'] = 'IDREN support';
                 $data['email_to'] = $user['email'];
                 $data['subject'] = 'Request reset Password';
-                $data['content'] = 'Ini Adalah link reset Password anda<br/>'.site_url('user/login_user/reset?data='.$reset);
+                $data['content'] = 'Ini Adalah link reset Password anda<br/>'.site_url('user/instansi/login/reset?data='.$reset);
                 if (email_send($data) == true) {
                     $this->db->update('tb_instansi',array('reset'=>$reset),array('id_instansi'=>$user['id_instansi']));
                     $user_data = 'success';

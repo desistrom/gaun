@@ -91,9 +91,18 @@
           </a>
 
         </li>
-        <li class="treeview <?php if(current_url() == site_url('admin/about')){ ?> active <?php } ?>">
+        <li class="treeview <?php if(current_url() == site_url('instansi/berita')){ ?> active <?php } ?>">
           <a href="<?=site_url('instansi/berita');?>">
             <i class="fa fa-newspaper-o"></i> <span>Berita</span>
+            <span class="pull-right-container">
+
+            </span>
+          </a>
+        </li>
+
+        <li class="treeview <?php if(current_url() == site_url('instansi/event')){ ?> active <?php } ?>">
+          <a href="<?=site_url('instansi/event');?>">
+            <i class="fa fa-bookmark"></i> <span>Event</span>
             <span class="pull-right-container">
 
             </span>

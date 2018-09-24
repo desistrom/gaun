@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>w1</title>
+    <title>Dashboard User</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
     <link rel="stylesheet" href="<?=base_url();?>assets/user/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?=base_url();?>assets/user/fonts/font-awesome.min.css">
@@ -19,7 +19,7 @@
            <nav class="navbar navbar-fixed-top " id="main-navigation">
       <div class="">
             <div class="container-fluid">
-              <div class="navbar-header"><a href="index.html" class="navbar-brand navbar-link"><img class="logo" src="<?=base_url();?>assets/user/img/IDREN-2.png" /> </a>
+              <div class="navbar-header"><a href="index.html" class="navbar-brand navbar-link"><img class="logo" src="<?=base_url();?>assets/user/img/logo_idren_white.png" /> </a>
                   <button data-toggle="collapse" data-target="#navcol-1" class="navbar-toggle collapsed"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
               </div>
               <div class="collapse navbar-collapse" id="navcol-1">
@@ -58,8 +58,8 @@
 
                   </ul>
                   <ul class="nav navbar-nav navbar-right navbar-log">
-                    <li><a href="#">User</a></li>
-                    <li><a href="<?=site_url('user/login_user/logout');?>"><i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
+                    <li><a href="#" class="logout">User</a></li>
+                    <li><a href="<?=site_url('user/login_user/logout');?>" class="logout"><i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
                   </ul>
               </div>
           </div>

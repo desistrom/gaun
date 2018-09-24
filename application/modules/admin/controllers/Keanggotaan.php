@@ -509,8 +509,41 @@ class Keanggotaan extends MX_Controller  {
 		$html .= '<li> Phone : '.$data['phone'].'</li>';
 		$html .= '<li> Website : '.$data['website'].'</li>';
 		$html .= '<li> Logo : <img src="'.base_url().'media/'.$data['gambar'].'" width="120px" /></li>';
+		$html .= '<button class="btn btn-success btn-sm btn_reset" id="'.$data['id_instansi'].'"><i class="fa fa-key"></i> reset</button>';
 		echo json_encode($html);
 		exit();
+	}
+
+	public function reset($id){
+		$ret['state'] = 0;
+        $ret['status'] = 0;
+        // $this->form_validation->set_error_delimiters('', '');
+        // $this->form_validation->set_rules('email','E-Mail', 'required');
+        // if ($this->form_validation->run() == true) {
+            // $input = $this->input->post();
+            $sql = $this->db->get_where('tb_instansi',array('id_instansi'=>$id));
+            // if ($sql->num_rows() > 0) {
+                $ret['state'] = 1;
+                $user = $sql->row_array();
+                $mail = sha1($user['email']);
+                $reset = $mail.$user['password'];
+                $this->load->helper('email_send_helper');
+                $data['email_from'] = 'support@IDREN';
+                $data['name_from'] = 'IDREN support';
+                $data['email_to'] = $user['email'];
+                $data['subject'] = 'Request reset Password';
+                $data['content'] = 'Ini Adalah link reset Password anda<br/>'.site_url('user/login_user/reset?data='.$reset);
+                if (email_send($data) == true) {
+                    $this->db->update('tb_instansi',array('reset'=>$reset),array('id_instansi'=>$user['id_instansi']));
+                    $user_data = 'success';
+                    $ret['status'] = 1;
+                    $this->session->set_flashdata("header","Request Reset Password Berhasil");
+                    $this->session->set_flashdata("notif","Email Request Reset Password berhasil dikirim ke E-mail anda, Silahkan kunjungi link yang kami berikan");
+                    $ret['url'] = site_url('admin/keanggotaan/instansi');
+                    // redirect(site_url('dashboard/reset_password'));
+                }
+        echo json_encode($ret);
+        // exit();
 	}
 
 	public function delete_instansi(){

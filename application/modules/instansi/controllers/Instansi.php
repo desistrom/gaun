@@ -16,70 +16,10 @@ class Instansi extends MX_Controller
         $this->load->module('Token');
     }
 
-    public function index(){
-    	if($this->input->method() == 'post'){
-            $ret['state'] = 0;
-            $ret['status'] = 0;
-            $this->form_validation->set_error_delimiters('', '');
-            $this->form_validation->set_rules('username','username', 'required');
-            $this->form_validation->set_rules('password','password', 'required');
-            $this->form_validation->set_rules('g-recaptcha-response','Pleas Insert Captcha', 'required');
-            $recaptcha = $this->input->post('g-recaptcha-response');
-            $response = $this->recaptcha->verifyResponse($recaptcha);
-            /*print_r($response);
-            return false;*/
-            // $response['success'] = 1;
-            if ($this->form_validation->run() == true && $response['success'] == 1) {
-                $ret['state'] = 1;
-                $username = $this->input->post('username');
-                $password = sha1($this->input->post('password'));
-                $sql = "SELECT * FROM tb_instansi WHERE username = ? AND password = ?";
-                $data = $this->db->query($sql,[$username,$password]);
-                if ($data->num_rows() == 1) {
-                    $ret['status'] = 1;
-                    $data_user = $data->row_array();
-                    $this->session->set_userdata('data_user', $data_user);
-                    // $this->session->set_userdata('previlage', $data_user['id_role_ref']);
-                    $this->session->set_userdata('is_login', true);
-                    $data_token['username'] = $username;
-                    $data_token['password'] = $password;
-                    $url = URL_GET_TOKEN;
-                    $method = 'POST';
-                    $token = "";
-            		$ret['url'] = site_url('instansi/dashboard');
-
-            	}else{
-                    $ret['notif']['login'] = 'username or password worng';
-                }
-            }else{
-                if ($response['success'] == '') {
-                    $ret['notif']['g-recaptcha-response'] = 'Captcha Expired';
-                }
-            }
-            $ret['notif']['username'] = form_error('username');
-            $ret['notif']['password'] = form_error('password');
-            $ret['notif']['g-recaptcha-response'] = form_error('g-recaptcha-response');
-            echo  json_encode($ret);
-            exit();
-        }
-    	$this->data['captcha'] = $this->recaptcha->getWidget();
-        $this->data['action'] = site_url('login');
-        $this->data['script_captcha'] = $this->recaptcha->getScriptTag();
-    	$this->load->view('login_layout',$this->data);
-    }
-
     public function dashboard(){
         $this->data['user']['nama'] = '';
         $this->data['breadcumb'] = '';
         $this->ciparser->new_parse('template_instansi','modules_instansi', 'dashboard_layout',$this->data);
-    }
-
-    public function event(){
-        $this->ciparser->new_parse('template_instansi','modules_instansi', 'event_layout',$this->data);
-    }
-
-    public function add_event(){
-        $this->ciparser->new_parse('template_instansi','modules_instansi', 'event_layout',$this->data);
     }
 
     public function berita(){
@@ -229,6 +169,160 @@ class Instansi extends MX_Controller
         $this->ciparser->new_parse('template_instansi','modules_instansi', 'news_layout',$this->data);
     }
 
+    public function event(){
+        $this->data['view'] = 'list';
+        $this->data['breadcumb'] = 'List Events';
+        $this->ciparser->new_parse('template_instansi','modules_instansi', 'event_layout',$this->data);
+    }
+
+    public function add_event(){
+        $user = $this->session->userdata('data_user');
+        if ($this->input->server('REQUEST_METHOD') == "POST") {
+            $ret['state'] = 0;
+            $ret['status'] = 0;
+            $this->form_validation->set_error_delimiters('','');
+            $this->form_validation->set_rules('judul', 'Judul Event', 'trim|required');
+            $this->form_validation->set_rules('content', 'Content Event', 'trim|required');
+            $this->form_validation->set_rules('tempat', 'Lokasi Evet', 'trim|required');
+            $this->form_validation->set_rules('tgl_event', 'Tanggal Event', 'trim|required');
+            $this->form_validation->set_rules('start_event', 'Start Event', 'trim|required');
+            $this->form_validation->set_rules('end_event', 'End Event', 'trim|required');
+            if ($this->form_validation->run() == true) {
+                $ret['state'] = 1;
+                $data_news['judul_event'] = $this->input->post('judul');
+                $data_news['deskripsi_event'] = $this->input->post('content');
+                $data_news['tempat_event'] = $this->input->post('tempat');
+                $data_news['tgl_event'] = $this->input->post('tgl_event');
+                $data_news['start_event'] = $this->input->post('start_event');
+                $data_news['end_event'] = $this->input->post('end_event');
+                $data_news['id_instansi_ref'] = $this->session->userdata('data_user')['id_instansi'];
+                // $data_news['link'] = url_title($this->input->post('judul'), 'dash', true);
+                if (isset($_FILES['file_name'])) {
+                    $image = $this->upload_logo($_FILES);
+                    if (isset($image['error'])) {
+                        $ret['notif'] = $image;
+                    }else{
+                        $ret['state'] = 1;
+                        $data_news['futured_image'] = $image['asli'];
+                        if ($this->db->insert('tb_event',$data_news)) {
+                            $ret['status'] = 1;
+                            $ret['url'] = site_url('instansi/event');
+                            $this->session->set_flashdata("notif","Data Berhasil di Masukan");
+                        }
+                    }
+                }else{
+                    $ret['state'] = 1;
+                    // $data_news['img'] = $image['asli'];
+                    if ($this->db->insert('tb_event',$data_news)) {
+                        $ret['status'] = 1;
+                        $ret['url'] = site_url('instansi/event');
+                        $this->session->set_flashdata("notif","Data Berhasil di Masukan");
+                    }
+                }
+            }
+            $ret['notif']['judul'] = form_error('judul');
+            $ret['notif']['content'] = form_error('content');
+            $ret['notif']['tempat'] = form_error('tempat');
+            $ret['notif']['tgl_event'] = form_error('tgl_event');
+            $ret['notif']['start_event'] = form_error('start_event');
+            $ret['notif']['end_event'] = form_error('end_event');
+            // if (!isset($_FILES['file_name'])) {
+            //  $ret['notif']['file_name'] = "Please Select File";
+            // }
+            echo json_encode($ret);
+            exit();
+        }
+        $this->load->library('ckeditor');
+        $this->ckeditor->basePath = base_url().'assets/ckeditor/';
+        /*$this->ckeditor->config['toolbar'] = array(
+                        array( 'Source', '-', 'Bold', 'Italic', 'Underline', '-','Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo','-','NumberedList','BulletedList','Link' )
+                                                            );*/
+        $this->ckeditor->config['language'] = 'eng';
+        $this->ckeditor->config['width'] = '1024px';
+        $this->ckeditor->config['height'] = '300px'; 
+        $this->data['view'] = 'add';
+        // $this->data['kategori'] = $this->db->get('tb_kategori_news')->result_array();
+        // $this->data['news'] = $this->db->get('tb_news')->result_array();
+        $this->data['breadcumb'] = 'Add Event';
+        $this->ciparser->new_parse('template_instansi','modules_instansi', 'event_layout',$this->data);
+    }
+
+    public function edit_event(){
+        $url = $this->uri->segment_array();
+        $id = end($url);
+        $this->data['news'] = $this->db->get_where('tb_event',array('id_event'=>$id))->row_array();
+        if ($this->input->server('REQUEST_METHOD') == "POST") {
+            $ret['state'] = 0;
+            $ret['status'] = 0;
+            $this->form_validation->set_error_delimiters('','');
+            $this->form_validation->set_rules('judul', 'Judul Event', 'trim|required');
+            $this->form_validation->set_rules('content', 'Content Event', 'trim|required');
+            $this->form_validation->set_rules('tempat', 'Lokasi Evet', 'trim|required');
+            $this->form_validation->set_rules('tgl_event', 'Tanggal Event', 'trim|required');
+            $this->form_validation->set_rules('start_event', 'Start Event', 'trim|required');
+            $this->form_validation->set_rules('end_event', 'End Event', 'trim|required');
+            if ($this->form_validation->run() == true) {
+                $ret['state'] = 1;
+                $data_news['judul_event'] = $this->input->post('judul');
+                $data_news['deskripsi_event'] = $this->input->post('content');
+                $data_news['tempat_event'] = $this->input->post('tempat');
+                $data_news['tgl_event'] = $this->input->post('tgl_event');
+                $data_news['start_event'] = $this->input->post('start_event');
+                $data_news['end_event'] = $this->input->post('end_event');
+                $data_news['id_instansi_ref'] = $this->session->userdata('data_user')['id_instansi'];
+                if (isset($_FILES['file_name'])) {
+                    $image = $this->upload_logo($_FILES);
+                    if (isset($image['error'])) {
+                        $ret['notif'] = $image;
+                    }else{
+                        $data_news['futured_image'] = $image['asli'];
+                        if (file_exists(FCPATH."assets/media/".$this->data['news']['futured_image'])) {
+                            @chmod(FCPATH."assets/media/".$this->data['news']['futured_image'], 0777);
+                            unlink(FCPATH."assets/media/".$this->data['news']['futured_image']);
+                        }
+                        if (file_exists(FCPATH."assets/media/thumbnail/".$this->data['news']['futured_image'])) {
+                            @chmod(FCPATH."assets/media/thumbnail/".$this->data['news']['futured_image'], 0777);
+                            unlink(FCPATH."assets/media/thumbnail/".$this->data['news']['futured_image']);
+                        }
+                        if (file_exists(FCPATH."assets/media/crop/".$this->data['news']['futured_image'])) {
+                            @chmod(FCPATH."assets/media/crop/".$this->data['news']['futured_image'], 0777);
+                            unlink(FCPATH."assets/media/crop/".$this->data['news']['futured_image']);
+                        }
+                    }
+                }
+                if ($this->db->update('tb_event',$data_news,array('id_event'=>$id))) {
+                    $ret['status'] = 1;
+                    $ret['url'] = site_url('instansi/event');
+                    $this->session->set_flashdata("notif","Data Berhasil di Masukan");
+                }
+                
+            
+                
+            }
+            $ret['notif']['judul'] = form_error('judul');
+            $ret['notif']['content'] = form_error('content');
+            $ret['notif']['tempat'] = form_error('tempat');
+            $ret['notif']['tgl_event'] = form_error('tgl_event');
+            $ret['notif']['start_event'] = form_error('start_event');
+            $ret['notif']['end_event'] = form_error('end_event');
+            echo json_encode($ret);
+            exit();
+        }
+        $this->load->library('ckeditor');
+        $this->ckeditor->basePath = base_url().'assets/ckeditor/';
+        /*$this->ckeditor->config['toolbar'] = array(
+                        array( 'Source', '-', 'Bold', 'Italic', 'Underline', '-','Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo','-','NumberedList','BulletedList','Link' )
+                                                            );*/
+        $this->ckeditor->config['language'] = 'eng';
+        $this->ckeditor->config['width'] = '1024px';
+        $this->ckeditor->config['height'] = '300px'; 
+        $this->data['view'] = 'edit';
+        $this->data['breadcumb'] = 'Edit Event';
+        // $this->data['kategori'] = $this->db->get('tb_kategori_news')->result_array();
+        
+        $this->ciparser->new_parse('template_instansi','modules_instansi', 'event_layout',$this->data);
+    }
+
     public function ajax_list()
     {
         $this->load->model('news_model');
@@ -262,6 +356,45 @@ class Instansi extends MX_Controller
                         "draw" => $_POST['draw'],
                         "recordsTotal" => $this->news_model->count_all(),
                         "recordsFiltered" => $this->news_model->count_filtered(),
+                        "data" => $data,
+                );
+        //output to json format
+        echo json_encode($output);
+    }
+
+    public function ajax_list_event()
+    {
+        $this->load->model('event_model');
+        $list = $this->event_model->get_datatables();
+        $data = array();
+        $no = $_POST['start'];
+        $aktif = '';
+        $button = '';
+        foreach ($list as $event) {
+            $no++;
+            // if ($event->is_aktif == 1) {
+            //     $aktif = '<span class="text-success">Enable</span>';
+            //     $button = '<a href="'.site_url("instansi/edit").'/'.$event->id_event.'"><button class="btn btn-info btn-sm" id="edit" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil"></i></button></a>';
+            // }else{
+            //     $aktif = '<span class="text-Success">Disable</span>';
+                $button = '<a href="'.site_url("instansi/edit_event").'/'.$event->id_event.'"><button class="btn btn-info btn-sm" id="edit" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil"></i></button></a>';
+            // }
+            $row = array();
+            $row[] = $no;
+            $row[] = '<div class="comment" id="'.$event->id_event.'">'.$event->judul_event.'</div>';
+            $row[] = word_limiter($event->deskripsi_event, 5);
+            $row[] = $event->tempat_event;
+            $row[] = $event->tgl_event;
+            $row[] = $event->start_event.' - '.$event->end_event;
+            $row[] = $button;
+ 
+            $data[] = $row;
+        }
+ 
+        $output = array(
+                        "draw" => $_POST['draw'],
+                        "recordsTotal" => $this->event_model->count_all(),
+                        "recordsFiltered" => $this->event_model->count_filtered(),
                         "data" => $data,
                 );
         //output to json format
@@ -344,6 +477,6 @@ class Instansi extends MX_Controller
     public function logout(){
         // $this->session->sess_destroy();
         $this->session->unset_userdata('data_user');
-        redirect(site_url('instansi'));
+        redirect(site_url('instansi/login'));
     }
 }

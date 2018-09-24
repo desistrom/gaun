@@ -65,7 +65,7 @@
 		  <div class="modal-dialog" role="document">
 		    <div class="modal-content">
 		      <div class="modal-header">
-		        <h3 class="modal-title">Success</h3>
+		        <h3 class="modal-title"><?php if ($this->session->flashdata('header') != '') { echo $this->session->flashdata('header'); }else{ ?>Success<?php } ?></h3>
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 		          <span aria-hidden="true">&times;</span>
 		        </button>
@@ -81,7 +81,7 @@
 		  </div>
 		</div>
 		<?php } ?>
-<div class="modal fade" id="progresLoading" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="progresLoading" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="vertical-alignment-helper">
         <div class="modal-dialog vertical-align-center">
             <div class="modal-content">
@@ -261,12 +261,6 @@
 			              <div class="error" id="ntf_error"></div> 
 			            </div>
 			      </div>
-			      <!-- <div class="form-group">
-			      	<label>Logo Instansi</label>
-			        <input type="file" class="form-control" name="userfile" id="userfile">
-			        <div class="error" id="ntf_userfile"></div>
-			        <div class="error" id="ntf_error"></div>
-			      </div> -->
 
 			      <?php if ($instansi['gambar'] != ''): ?>
 			      	<img width="450px" src="<?=base_url().'media/'.$instansi['gambar'];?>">
@@ -409,6 +403,29 @@
 	        }, 3000);
 	      });
   		}
+    });
+
+    $('body').on('click','.btn_reset',function(){
+    	var id = $(this).attr('id');
+    	$('#detail_modal').modal('hide');
+    	$('#progresLoading').modal('show');
+    	console.log(id);
+    	// return false;
+    	$.ajax({
+          url : base_url+"admin/keanggotaan/reset/"+id,
+          dataType : 'json',
+          type : 'POST',
+          data : {'id' : id},
+          // async : false
+      }).done(function(data){
+      	setTimeout(function(){  
+	      	// console.log(data);
+	      	if(data.status == 1){
+	      		$('#progresLoading').modal('hide');
+		        window.location.href = data.url;
+		    }
+        }, 2000);
+      });
     });
 
     $('#modalSuccess').modal('show');

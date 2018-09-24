@@ -77,6 +77,15 @@
           padding: 15px 0;
           margin:0;
         }
+        .btn-register{
+        	background: #5AA7DF;
+        	background-color: #5AA7DF
+        }
+        .content-comment a.btn.btn-register{
+        	background: #5AA7DF;
+        	background-color: #5AA7DF;
+        	color:white;
+        }
         @media (max-width:1300px) {
           div.container-fluid{
             padding: 0 15px;
@@ -101,6 +110,7 @@
         .detail_news{
           margin-top: 9em;
         }
+        .
     </style>   
     <section class="detail_news" style="background-color: #F2F2F2;">
         
@@ -152,7 +162,11 @@
                                       </div>
                                       </form>
                                       <div><a style="color: #0a7fff; font-style: italic;" href="<?=site_url('user/login_user/reset_password')?>"><u>Forgot Password</u></a></div>
-                                      <div class="text-right"><a class="btn btn-post" type="button" id="btn_register">Submit</a></div>
+                                      <div class="text-right" style="padding-top: 10px;">
+                                      	<a class="btn btn-post btn-register btn-primary " type="button" id="btn_register" style="float: left;">Register</a>
+                                      	<a class="btn btn-post" type="button" id="btn_register">Login</a>
+                                      </div>
+                                      <!-- <div class="text-left"><a class="btn btn-post col-md-12" type="button" id="btn_register">Submit</a></div> -->
                                       
                                   </div>
                               </div>

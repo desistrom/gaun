@@ -22,7 +22,7 @@ class Dashboard extends MX_Controller  {
     	$data = $this->session->userdata('user');
     	// print_r($data);
 
-    	if ($this->db->get_where('tb_pengguna',array('id_pengguna'=>$data))->row_array()['id_role_ref'] == 1) {
+    	if ($this->db->get_where('tb_pengguna',array('id_pengguna'=>$data))->row_array()['id_role_ref'] == 0) {
     		$user = $this->db->get_where('tb_mahasiswa',array('id_pengguna_ref'=>$data))->row_array();
     		# code...
     	}else{

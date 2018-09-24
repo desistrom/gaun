@@ -68,12 +68,18 @@
             </label>
           </div>
         </div>
+      </div>
+      <div class="row">
         <!-- /.col -->
+        <div class="col-xs-8">
+          <a href="<?=site_url('instansi/login/reset_password');?>">Forgot Password</a>
+        </div>
         <div class="col-xs-4">
           <button type="button" class="btn btn-primary btn-block btn-flat" id="login">Sign In</button>
         </div>
-        <!-- /.col -->
+        
       </div>
+        <!-- /.col -->
     </form>
 
   </div>

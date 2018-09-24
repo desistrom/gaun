@@ -61,7 +61,7 @@
         <nav class="navbar navbar-fixed-top " id="main-navigation">
       <div class="">
             <div class="container-fluid">
-              <div class="navbar-header"><a href="<?php echo site_url('web/home'); ?>" class="navbar-brand navbar-link"><img class="logo" src="<?=base_url().logo_helper()['image'];?>" alt="logo idren"/> </a>
+              <div class="navbar-header"><a href="<?php echo site_url(); ?>" class="navbar-brand navbar-link"><img class="logo" src="<?=base_url().logo_helper()['image'];?>" alt="logo idren"/> </a>
                   <button data-toggle="collapse" data-target="#navcol-1" class="navbar-toggle collapsed"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
               </div>
               <div class="collapse navbar-collapse" id="navcol-1">

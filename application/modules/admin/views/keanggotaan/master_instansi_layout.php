@@ -168,7 +168,7 @@
 			        <input type="texr" class="form-control" name="username" id="username" rows="3" placeholder="Enter Username ..." >
 			        <div class="error" id="ntf_username"></div>
 			      </div>
-
+<!-- 
 			      <div class="form-group">
 			      <label>Password</label>
 			        <input type="password" class="form-control" name="password" id="password" value="" placeholder="Enter Password ...">
@@ -179,7 +179,7 @@
 			      <label>Re type Password</label>
 			        <input type="password" class="form-control" name="repassword" id="repassword" value="" placeholder="Enter Re type Password ...">
 			        <div class="error" id="ntf_repassword"></div>
-			      </div>
+			      </div> -->
 			       <div class="form-group">
 			            <label>Logo Instansi</label>
 			            <div class="col col-md-12 form-goup-file">

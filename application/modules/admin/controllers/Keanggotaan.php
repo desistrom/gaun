@@ -27,8 +27,8 @@ class Keanggotaan extends MX_Controller  {
 			$this->form_validation->set_error_delimiters('','');
 			$this->form_validation->set_rules('name','Nama Lengkap','trim|required');
 			$this->form_validation->set_rules('username','Username','trim|required');
-			$this->form_validation->set_rules('password','Passowrd','trim|required');
-			$this->form_validation->set_rules('repassword','Re - Passowrd','trim|required|matches[password]');
+			// $this->form_validation->set_rules('password','Passowrd','trim|required');
+			// $this->form_validation->set_rules('repassword','Re - Passowrd','trim|required|matches[password]');
 			$this->form_validation->set_rules('email','email','trim|required');
 			$this->form_validation->set_rules('phone','phone','trim|required');
 			$this->form_validation->set_rules('instansi','Instansi','trim|required');
@@ -55,8 +55,8 @@ class Keanggotaan extends MX_Controller  {
 			}
 			$ret['notif']['name'] = form_error('name');
 			$ret['notif']['username'] = form_error('username');
-			$ret['notif']['password'] = form_error('password');
-			$ret['notif']['repassword'] = form_error('repassword');
+			// $ret['notif']['password'] = form_error('password');
+			// $ret['notif']['repassword'] = form_error('repassword');
 			$ret['notif']['email'] = form_error('email');
 			$ret['notif']['phone'] = form_error('phone');
 			$ret['notif']['instansi'] = form_error('instansi');
@@ -374,7 +374,7 @@ class Keanggotaan extends MX_Controller  {
 			$this->form_validation->set_rules('email','Email','trim|required');
 			$this->form_validation->set_rules('jenis','Kategori Instansi','trim|required');
 			$this->form_validation->set_rules('username','Username','trim|required');
-			$this->form_validation->set_rules('password','Passowrd','trim|required');
+			// $this->form_validation->set_rules('password','Passowrd','trim|required');
 			// $this->form_validation->set_rules('sort','Urutan','trim|numeric');
 			if ($this->form_validation->run() == true && isset($_FILES['userfile'])) {
 				$ret['state'] = 1;
@@ -385,7 +385,7 @@ class Keanggotaan extends MX_Controller  {
 				$data_instansi['username'] = $this->input->post('username');
 				$data_instansi['email'] = $this->input->post('email');
 				$data_instansi['id_jenis_instansi'] = $this->input->post('jenis');
-				$data_instansi['password'] = $this->input->post('password');
+				$data_instansi['password'] = sha1('password'.$data_instansi['username']);
 				if ($this->input->post('sort') == '') {
 					$data_instansi['sort'] = NULL;
 				}
@@ -396,7 +396,7 @@ class Keanggotaan extends MX_Controller  {
 					$data_instansi['gambar'] = $data_gambar['asli'];
 					if ($this->db->insert('tb_instansi',$data_instansi)) {
 						$ret['status'] = 1;
-						$ret['url'] = site_url('admin/keanggotaan/instansi');
+						$ret['url'] = site_url('admin/keanggotaan/instansi_request');
 						$this->session->set_flashdata("notif","Data Berhasil di Masukan");
 					}
 				}
@@ -408,7 +408,7 @@ class Keanggotaan extends MX_Controller  {
 			$ret['notif']['username'] = form_error('username');
 			$ret['notif']['jenis'] = form_error('jenis');
 			$ret['notif']['email'] = form_error('email');
-			$ret['notif']['password'] = form_error('password');
+			// $ret['notif']['password'] = form_error('password');
 			// $ret['notif']['sort'] = form_error('sort');
 			if (!isset($_FILES['userfile'])) {
 				$ret['notif']['userfile'] = "Please Select File";
@@ -855,14 +855,14 @@ class Keanggotaan extends MX_Controller  {
 	        $data_email['email_from'] = $sender['email'];
 	        $data_email['name_from'] = $sender['nama_user'];
 	        $data_email['email_to'] = $data['email'];
-	        $data_email['subject'] = "Permintaan Sedang di Proces";
+	        $data_email['subject'] = "Permintaan Sedang di Proses";
 	        $content = '';
-	        $content .= "<td>Nama Instansi </td><td>:</td> ".$data['nm_instansi']."</td>";
-	        $content .= "<td>Username </td><td>:</td> ".$data['username']."</td>";
+	        $content .= "<tr><td>Nama Instansi </td><td>:</td> ".$data['nm_instansi']."</td></tr>";
+	        $content .= "<tr><td>Username </td><td>:</td> ".$data['username']."</td></tr>";
 	        // $content .= "<td>Password</td><td>:</td> ".$data['password']."</td>";
-	        $content .= "<td>Email</td><td>:</td> ".$data['email']."</td>";
-	        $content .= "<td>Website</td><td>:</td> ".$data['website']."</td>";
-	        $content .= "<td>Alamat</td><td>:</td> ".$data['alamat']."</td>";
+	        $content .= "<tr><td>Email</td><td>:</td> ".$data['email']."</td></tr>";
+	        $content .= "<tr><td>Website</td><td>:</td> ".$data['website']."</td></tr>";
+	        $content .= "<tr><td>Alamat</td><td>:</td> ".$data['alamat']."</td></tr>";
 	        $data_email['content'] = str_replace("content_email", $content, $final);
 	        if (email_send($data_email) == true) {
     			$this->db->update('tb_instansi',array('status'=>1),array('id_instansi'=>$id));
@@ -870,7 +870,7 @@ class Keanggotaan extends MX_Controller  {
 	    		$ret['url'] = site_url('admin/keanggotaan/instansi_request');
 	        }
     	}elseif($status==1){
-    		$template = $this->db->get_where('tb_template_email',array('id_kategori_email_ref'=>2,'status'=>1))->row_array()['source_code'];
+    		$template = $this->db->get_where('tb_template_email',array('id_kategori_email_ref'=>3,'status'=>1))->row_array()['source_code'];
 	        $final = str_replace("Email_User", $data['username'], $template);
 	        $password = '';
 	        // $final = str_replace("subject_email", "Done", $final);
@@ -879,22 +879,22 @@ class Keanggotaan extends MX_Controller  {
 	        $data_email['email_from'] = $sender['email'];
 	        $data_email['name_from'] = $sender['nama_user'];
 	        $data_email['email_to'] = $data['email'];
-	        $data_email['subject'] = "Permintaan Sudah di Proces";
+	        $data_email['subject'] = "Permintaan Sudah di Proses";
 	        $content = '';
-	        $content .= "<td>Nama Instansi</td><td>:</td> ".$data['nm_instansi']."</td>";
-	        $content .= "<td>Username</td><td>:</td> ".$data['username']."</td>";
+	        $content .= "<tr><td>Nama Instansi</td><td>:</td> ".$data['nm_instansi']."</td></tr>";
+	        $content .= "<tr><td>Username</td><td>:</td> ".$data['username']."</td></tr>";
 	        if ($data['password'] == sha1('password'.$data['username'])) {
 	        	$status_pass = 1;
 	        	$password = $this->generate();
 				$data['password'] = sha1($password);
-	        	$content .= "<td>Password</td><td>:</td> ".$password."</td>";
+	        	$content .= "<tr><td>Password</td><td>:</td> ".$password."</td></tr>";
 			}
-	        $content .= "<td>Email</td><td>:</td> ".$data['email']."</td>";
-	        $content .= "<td>Website</td><td>:</td> ".$data['website']."</td>";
-	        $content .= "<td>Alamat</td><td>:</td> ".$data['alamat']."</td>";
+	        $content .= "<tr><td>Email</td><td>:</td> ".$data['email']."</td></tr>";
+	        $content .= "<tr><td>Website</td><td>:</td> ".$data['website']."</td></tr>";
+	        $content .= "<tr><td>Alamat</td><td>:</td> ".$data['alamat']."</td></tr>";
 	        $data_email['content'] = str_replace("content_email", $content, $final);
 	        if (email_send($data_email) == true) {
-	        	if (isset($status_pass) || $status_pass == 1) {
+	        	if (isset($status_pass)) {
 	        		$this->db->update('tb_instansi',array('status'=>2,'password'=>$password),array('id_instansi'=>$id));
 	        	}else{
 	    			$this->db->update('tb_instansi',array('status'=>2),array('id_instansi'=>$id));

@@ -57,7 +57,7 @@
 	<?php }else{ ?>
 
 		<div class="box-header with-border">
-		    <h3 class="box-title">Edit Kategori</h3>
+		    <h3 class="box-title">Edit Template</h3>
 		  </div>
 		  <!-- /.box-header -->
 		  <div class="box-body">
@@ -65,7 +65,7 @@
 		      <!-- text input -->
 
 		      <div class="form-group">
-		        <label>Kategori</label>
+		        <label>Template</label>
 		        <textarea class="form-control" name="template" id="template" rows="20"><?php if ($kategori['source_code'] != '') {
 		        	echo $kategori['source_code'];
 		        } ?></textarea>

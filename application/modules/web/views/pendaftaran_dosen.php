@@ -8,12 +8,12 @@
         }
          .google{
           display: inline-block;
-          margin-left: 10px;
+          margin-left: 5px;
           float: right;
         }
         .fb{
           display: inline-block;
-            margin-right: 10px;
+            margin-right: 5px;
             float: left;
         }
         .fb .btn{

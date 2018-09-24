@@ -52,7 +52,7 @@
         <label>Username</label>
         <input type="texr" class="form-control" name="username" id="username" rows="3" placeholder="Enter Username ..." >
         <div class="error" id="ntf_username"></div>
-      </div>
+      </div><!-- 
 
       <div class="form-group">
       <label>Password</label>
@@ -64,7 +64,7 @@
       <label>Re type Password</label>
         <input type="password" class="form-control" name="repassword" id="repassword" value="" placeholder="Enter Re type Password ...">
         <div class="error" id="ntf_repassword"></div>
-      </div>
+      </div> -->
 
       <div class="form-group">
       <label>E - Mail</label>
@@ -119,8 +119,8 @@
       form_data.append('userfile',data_file);
       form_data.append('name',$('#name').val());
       form_data.append('username',$('#username').val());
-      form_data.append('password',$('#password').val());
-      form_data.append('repassword',$('#repassword').val());
+      // form_data.append('password',$('#password').val());
+      // form_data.append('repassword',$('#repassword').val());
       form_data.append('email',$('#email').val());
       form_data.append('phone',$('#phone').val());
       form_data.append('instansi',$('#instansi').val());

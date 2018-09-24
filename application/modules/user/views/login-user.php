@@ -86,6 +86,11 @@
         	background-color: #5AA7DF;
         	color:white;
         }
+        .error{
+          background-color: white;
+          color: black!important;
+          margin-top: 4px;
+        }
         @media (max-width:1300px) {
           div.container-fluid{
             padding: 0 15px;

@@ -371,9 +371,9 @@ class Keanggotaan extends MX_Controller  {
 			$this->form_validation->set_rules('website','Website','trim|required');
 			$this->form_validation->set_rules('alamat','Alamat','trim|required');
 			$this->form_validation->set_rules('phone','phone','trim|required');
-			$this->form_validation->set_rules('email','Email','trim|required');
+			$this->form_validation->set_rules('email','Email','trim|required|is_unique[tb_instansi.email]');
 			$this->form_validation->set_rules('jenis','Kategori Instansi','trim|required');
-			$this->form_validation->set_rules('username','Username','trim|required');
+			$this->form_validation->set_rules('username','Username','trim|required|is_unique[tb_instansi.username]');
 			// $this->form_validation->set_rules('password','Passowrd','trim|required');
 			// $this->form_validation->set_rules('sort','Urutan','trim|numeric');
 			if ($this->form_validation->run() == true && isset($_FILES['userfile'])) {

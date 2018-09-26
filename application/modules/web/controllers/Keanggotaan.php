@@ -139,10 +139,10 @@ class Keanggotaan extends MX_Controller  {
             $this->form_validation->set_error_delimiters('','');
             $this->form_validation->set_rules('instansi','Institute Name','trim|required');
             $this->form_validation->set_rules('address','Address Name','trim|required');
-            $this->form_validation->set_rules('email','Email','trim|required');
+            $this->form_validation->set_rules('email','Email','trim|required|is_unique[tb_instansi.email]');
             $this->form_validation->set_rules('phone','Phone','trim|required');
             $this->form_validation->set_rules('website','Website','trim|required');
-            $this->form_validation->set_rules('username','Username','trim|required');
+            $this->form_validation->set_rules('username','Username','trim|required|is_unique[tb_instansi.username]');
             // $this->form_validation->set_rules('password','Passowrd','trim|required');
             // $this->form_validation->set_rules('repassword','Re - Passowrd','trim|required|matches[password]');
             $this->form_validation->set_rules('g-recaptcha-response','Pleas Insert Captcha', 'required');

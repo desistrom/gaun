@@ -137,19 +137,12 @@ class Login_user extends MX_Controller  {
                     $this->session->set_userdata('previlage', $user_data['id_role_ref']);
                     $this->session->set_userdata('user_login', true);
                     $this->session->set_userdata('user',$user_data['id_pengguna']);
-                    // $this->session->set_flashdata("header","Registrasi Berhasil");
-                    // $this->session->set_flashdata("notif","Registrasi Anda sedang kami Proses, tunggu konfirmasi selanjutnya dari Admin");
                     $data_token['username'] = $username;
                     $data_token['password'] = $password;
                     $url = URL_GET_TOKEN;
                     $method = 'POST';
                     $token = "";
                     $this->db->update('tb_pengguna',array('is_login'=>1),array('id_pengguna'=>$user_data['id_pengguna']));
-                    // $result = api_helper(json_encode($data_token),$url,$method,$token);
-                    // print_r($result);
-                    // setcookie('user',json_encode($result['token']), time()+"3600","/");
-                    // print_r($data_token);
-                    // $this->session->set_userdata('token', $result['token']);
                     $ret['url'] = site_url('user/dashboard');
 
                 }else{
@@ -181,9 +174,6 @@ class Login_user extends MX_Controller  {
     }
 
     public function facebook(){
-        // if(!session_id()) {
-        //     session_start();
-        // }
 
         $fb = new Facebook\Facebook([
               'app_id' => FACEBOOK_APP_ID, // Replace {app-id} with your app id

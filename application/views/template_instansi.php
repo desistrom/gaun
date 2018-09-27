@@ -109,6 +109,20 @@
           </a>
         </li>
 
+        <li class=" treeview <?php if(current_url() == site_url('instansi/journal') || current_url() == site_url('instansi/journal/accepted') || current_url() == site_url('instansi/journal/ignored')){ ?>  active <?php } ?>">
+          <a href="#">
+            <i class="fa fa-book"></i>  <span>Journal</span>
+            <span class="pull-right-container">
+
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li <?php if(current_url() == site_url('instansi/journal')){ ?> class="active" <?php } ?>><a href="<?=site_url('instansi/journal');?>"><i class="fa fa-plus"></i> Request Journal</a></li>
+            <li <?php if(current_url() == site_url('instansi/journal/accepted')){ ?> class="active" <?php } ?>><a href="<?=site_url('instansi/journal/accepted');?>"><i class="fa fa-check"></i> Journal Accepted </a></li>
+            <li <?php if(current_url() == site_url('instansi/journal/rejected')){ ?> class="active" <?php } ?>><a href="<?=site_url('instansi/journal/rejected');?>"><i class="fa fa-times"></i> Journal Rejected </a></li>
+          </ul>
+        </li>
         
       </ul>
     </section>

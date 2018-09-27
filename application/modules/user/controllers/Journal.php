@@ -49,13 +49,15 @@ class Journal extends MX_Controller
             $this->form_validation->set_error_delimiters('','');
             $this->form_validation->set_rules('judul', 'Judul Journal', 'trim|required');
             $this->form_validation->set_rules('content', 'Deskripsi Journal', 'trim|required');
-            $this->form_validation->set_rules('issn', 'ISSN Journal', 'trim|required');
+            $this->form_validation->set_rules('kategori', 'kategori Journal', 'trim|required');
             
             if ($this->form_validation->run() == true) {
                 $ret['state'] = 1;
                 $data_news['judul'] = $this->input->post('judul');
                 $data_news['deskripsi'] = $this->input->post('content');
                 $data_news['issn'] = $this->input->post('issn');
+                $data_news['id_kategori_ref'] = $this->input->post('kategori');
+                $data_news['id_user_ref'] = $this->data['user']['id_pengguna'];
                 if (isset($_FILES['file_name'])) {
                     $image = $this->upload_logo($_FILES);
                     if (isset($image['error'])) {
@@ -69,19 +71,11 @@ class Journal extends MX_Controller
                             $this->session->set_flashdata("notif","Data Berhasil di Masukan");
                         }
                     }
-                }else{
-                    $ret['state'] = 1;
-                    // $data_news['img'] = $image['asli'];
-                    if ($this->db->insert('tb_event',$data_news)) {
-                        $ret['status'] = 1;
-                        $ret['url'] = site_url('instansi/event');
-                        $this->session->set_flashdata("notif","Data Berhasil di Masukan");
-                    }
                 }
             }
             $ret['notif']['judul'] = form_error('judul');
             $ret['notif']['content'] = form_error('content');
-            $ret['notif']['issn'] = form_error('issn');
+            $ret['notif']['kategori'] = form_error('kategori');
             if (!isset($_FILES['file_name'])) {
              $ret['notif']['file_name'] = "Please Select File";
             }
@@ -97,6 +91,7 @@ class Journal extends MX_Controller
         $this->ckeditor->config['width'] = '656px';
         $this->ckeditor->config['height'] = '300px'; 
         $this->data['view'] = 'add';
+        $this->data['kategori'] = $this->db->get('tb_kategori_journal')->result_array();
         $this->ciparser->new_parse('template_user','modules_user', 'journal_layout',$this->data);
     }
 
@@ -132,6 +127,8 @@ class Journal extends MX_Controller
             $this->form_validation->set_rules('no_volume', 'No Volume Artikel', 'trim|required');
             $this->form_validation->set_rules('keyword', 'Keywords Artikel', 'trim|required');
             $this->form_validation->set_rules('ref', 'References Artikel', 'trim|required');
+            $this->form_validation->set_rules('nama', 'Nama Autho', 'trim|required');
+            $this->form_validation->set_rules('jabatan', 'Jabatan Author', 'trim|required');
             
             if ($this->form_validation->run() == true) {
                 $ret['state'] = 1;
@@ -141,6 +138,12 @@ class Journal extends MX_Controller
                 $data_news['references'] = $this->input->post('ref');
                 $data_news['id_user_ref'] = $this->data['user']['id_pengguna'];
                 $data_news['id_no_volume_ref'] = $this->input->post('no_volume');
+                $cekjournal = $this->db->get_where('tb_journal',array('id_journal'=>$this->input->post('journal')))->row_array();
+                if ($cekjournal['status'] == 1 ) {
+                    $ret['notif']['journal'] = 'Journal dalam tahap persetujuan, tidak dapat menambah artikel baru';
+                    echo json_encode($ret);
+                    exit();
+                }
                 if (isset($_FILES['file_name'])) {
                     $file = $this->upload_file($_FILES);
                     if (isset($file['error'])) {
@@ -158,7 +161,7 @@ class Journal extends MX_Controller
                                     $data_author['jabatan'] = $jabatan[$i];
                                     $this->db->insert('tb_author',$data_author);
                                     $ret['status'] = 1;
-                                    $ret['url'] = site_url('user/journal');
+                                    $ret['url'] = site_url('user/journal/list_artikel');
                                     $this->session->set_flashdata("notif","Data Berhasil di Masukan");
                                 }
                             }
@@ -173,6 +176,8 @@ class Journal extends MX_Controller
             $ret['notif']['no_volume'] = form_error('no_volume');
             $ret['notif']['keyword'] = form_error('keyword');
             $ret['notif']['ref'] = form_error('ref');
+            $ret['notif']['nama'] = form_error('nama');
+            $ret['notif']['jabatan'] = form_error('jabatan');
             if (!isset($_FILES['file_name'])) {
              $ret['notif']['file_name'] = "Please Select File";
             }
@@ -278,9 +283,46 @@ class Journal extends MX_Controller
         echo json_encode($html);
     }
 
+    public function submit($id){
+        $sql = 'SELECT * FROM tb_journal j JOIN tb_volume v ON j.id_journal = v.id_journal_ref JOIN tb_no_volume n ON v.id_volume = n.id_volume_ref JOIN tb_artikel a ON n.id_no_volume = a.id_no_volume_ref where j.id_journal = ?';
+        if ($this->db->query($sql,$id)->num_rows() > 0) {
+            if ($this->db->update('tb_journal',array('status'=>1),array('id_journal'=>$id))) {
+                if ($this->db->update('tb_volume',array('status'=>1),array('id_journal_ref'=>$id))) {
+                    $this->session->set_flashdata('header','Sukes');
+                    $this->session->set_flashdata('notif','Journal berhasil disubmit');
+                    redirect('user/journal');
+                }
+            }else{
+                $this->session->set_flashdata('header','Gagal');
+                $this->session->set_flashdata('notif','Journal gagal disubmit');
+                redirect('user/journal');
+            }
+        }else{
+            $this->session->set_flashdata('header','Gagal');
+            $this->session->set_flashdata('notif','Journal tidak memiliki artikel');
+            redirect('user/journal');
+        }
+    }
+
     public function list_artikel(){
         $this->data['view'] = 'list';
         $this->ciparser->new_parse('template_user','modules_user', 'artikel_layout',$this->data);
+    }
+
+    public function detail_artikel($id){
+        $sql = "SELECT * FROM tb_journal j JOIN tb_volume v ON j.id_journal = v.id_journal_ref JOIN tb_no_volume n ON v.id_volume = n.id_volume_ref JOIN tb_artikel a ON n.id_no_volume = a.id_no_volume_ref where id_artikel = ?";
+        $artikel = $this->db->query($sql,$id)->row_array();
+
+        $sql_author = 'SELECT * FROM tb_author where id_artikel_ref = ?';
+        $author = $this->db->query($sql_author,$id)->result_array();
+        $artikel['nama'] = '';
+        foreach ($author as $key => $value) {
+            $artikel['nama'] .= '<li>'.$value['nama'].'</li>';
+            $artikel['nama'] .= '<li>'.$value['jabatan'].'</li>';
+            $artikel['nama'] .= '<br>';
+        }
+        // print_r($artikel);
+        echo json_encode($artikel);
     }
 
     public function volume(){
@@ -304,17 +346,17 @@ class Journal extends MX_Controller
         foreach ($list as $news) {
             $no++;
             if ($news->status == 1) {
-                $aktif = '<span class="text-success">Enable</span>';
-                $button = '<a href="'.site_url("user/journal/Edit").'/'.$news->id_journal.'"><button class="btn btn-info btn-sm" id="edit" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil"></i></button></a>';
+                $aktif = '<span class="text-success">Pending</span>';
+                $button = '<a href="'.site_url("user/journal/Edit").'/'.$news->id_journal.'"><button class="btn btn-info btn-sm" id="edit" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil"></i></button></a> <a href="#"><button class="btn btn-warning btn-sm" id="2" data-toggle="tooltip" title="Pending"><i class="fa fa-clock-o"></i></button></a>';
             }else{
                 $aktif = '<span class="text-Success">Disable</span>';
-                $button = '<a href="'.site_url("user/journal/edit").'/'.$news->id_journal.'"><button class="btn btn-info btn-sm" id="edit" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil"></i></button></a>';
+                $button = '<a href="'.site_url("user/journal/edit").'/'.$news->id_journal.'"><button class="btn btn-info btn-sm" id="edit" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil"></i></button></a> <a href="'.site_url("user/journal/submit").'/'.$news->id_journal.'"><button class="btn btn-info btn-sm" id="2" data-toggle="tooltip" title="Submit"><i class="fa fa-upload "></i></button></a>';
             }
             $row = array();
             $row[] = $no;
             $row[] = '<div class="detail" id="'.$news->id_journal.'">'.word_limiter($news->judul,10).'</div>';
             $row[] = '<div class="detail" id="'.$news->id_journal.'">'.$news->issn.'</div>';
-            $row[] = word_limiter($news->deskripsi, 10);
+            $row[] = word_limiter($news->deskripsi, 5);
             $row[] = $news->visitor;
             $row[] = $aktif;
             $row[] = $button;
@@ -352,7 +394,7 @@ class Journal extends MX_Controller
             $row = array();
             $row[] = $no;
             $row[] = '<div class="detail" id="'.$news->id_artikel.'">'.word_limiter($news->judul,10).'</div>';
-            $row[] = '<div class="detail" id="'.$news->nomor.'">'.$news->nomor.'</div>';
+            $row[] = $news->nomor;
             $row[] = $news->volume;
             $row[] = $news->judul_journal;
             $row[] = $aktif;
@@ -451,19 +493,26 @@ class Journal extends MX_Controller
     }
 
     public function upload_file($file){
+        $imagename = $file['file_name']['name'];
+        $ext = strtolower($this->_getExtension($imagename));
         $config['upload_path']          = FCPATH.'./assets/file/';
         $config['allowed_types']        = 'pdf|doc|docx';
+        $config['file_name']            = time().".".$ext;
 
         $this->load->library('upload', $config);
 
         if ( ! $this->upload->do_upload('file_name'))
         {
                 // $error = array('error' => $this->upload->display_errors());
+            $ret['error'] = $this->upload->display_errors();
+            // $ret['status'] = 0;
 
-            return $this->upload->display_errors();
+            return $ret;
         }
         else
         {
+            $ret['message'] = $this->upload->data('file_name');
+            $ret['status'] = 0;
             return $this->upload->data('file_name');
         }
     }

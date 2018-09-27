@@ -13,6 +13,24 @@
     <link rel="stylesheet" href="<?=base_url();?>assets/user/bootstrap/datatables/dataTables.bootstrap.css">
     <link rel="stylesheet" href="<?=base_url();?>assets/user/css/css.css">
     <link rel="stylesheet" href="<?=base_url();?>assets/user/css/admin-user.css">
+    <style type="text/css">
+    .nav li.dropdown .link_dropdown{
+      border:none;
+      color: white;
+    }
+     .nav li.dropdown.active .link_dropdown{
+      border-bottom:solid 3px white;
+    }
+ /*     .modal-backdrop.in{
+    position: relative!important;
+  }
+  .modal-content{
+    margin-top: 6em;
+  }*/
+    </style>
+    <script type="text/javascript">
+      var base_url = '<?=base_url()?>';
+    </script>
 </head>
 
 <body>
@@ -25,14 +43,24 @@
               <div class="collapse navbar-collapse" id="navcol-1">
 
                   <ul class="nav navbar-nav navbar-right">
-                      <li class="dropdown active"><a class="link_dropdown"  href="<?=site_url('user/dashboard');?>" class="dropdown-toggle">Home </a>
-                          <ul class="drop-menu open active  col col-md-2" role="menu">
+                      <li class="dropdown <?php if(current_url() == site_url('user/dashboard') || current_url() == site_url('user/dashboard/profil') || current_url() == site_url('user/dashboard/change_password')){ ?>active <?php }else{ ?>not-active <?php } ?>"><a class="link_dropdown"  href="<?=site_url('user/dashboard');?>" class="dropdown-toggle">Home </a>
+                          <ul class="drop-menu <?php if(current_url() == site_url('user/dashboard') || current_url() == site_url('user/dashboard/profil') || current_url() == site_url('user/dashboard/change_password')){ ?> open active <?php }else{ ?> not-active <?php } ?> col col-md-2" role="menu">
                               <li><a href="<?=site_url('user/dashboard');?>"> <i class="fa fa-home"></i>Dashboard</a></li>
                               <li><a href="<?=site_url('user/dashboard/profil');?>"> <i class="fa fa-user"></i>Profil</a></li>
                               <li><a href="<?=site_url('user/dashboard/change_password');?>"> <i class="fa fa-gear"></i>change password</a></li>
 
                           </ul>
                         </li>
+
+                      <li class="dropdown <?php if(current_url() == site_url('user/journal') || current_url() == site_url('user/journal/artikel') || current_url() == site_url('user/journal/volume') || current_url() == site_url('user/journal/list_nomor') || current_url() == site_url('user/journal/list_artikel')){ ?>active <?php }else{ ?>not-active <?php } ?>"><a class="link_dropdown"  href="<?=site_url('user/journal');?>" class="dropdown-toggle">Journal </a>
+                          <ul class="drop-menu <?php if(current_url() == site_url('user/journal') || current_url() == site_url('user/journal/artikel') || current_url() == site_url('user/journal/volume') || current_url() == site_url('user/journal/list_nomor') || current_url() == site_url('user/journal/list_artikel')){ ?>open active <?php }else{ ?>not-active<?php } ?> col col-md-2" role="menu">
+                              <li><a href="<?=site_url('user/journal');?>"> <i class="fa fa-home"></i>Journal</a></li>
+                              <li><a href="<?=site_url('user/journal/volume');?>"> <i class="fa fa-user"></i>Volume</a></li>
+                              <li><a href="<?=site_url('user/journal/list_nomor');?>"> <i class="fa fa-gear"></i>No Volume</a></li>
+                              <li><a href="<?=site_url('user/journal/list_artikel');?>"> <i class="fa fa-gear"></i>Artikel</a></li>
+
+                          </ul>
+                      </li>
                    <!--  <li class="dropdown not-active"><a class="link_dropdown"  href="datatable.html" class="dropdown-toggle">tables </a>
                           <ul class="drop-menu sub-menu not-active  col col-md-2" >
                               <li><a href="datatable.html">Data tables</a></li>

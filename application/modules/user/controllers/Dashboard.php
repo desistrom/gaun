@@ -98,11 +98,12 @@ class Dashboard extends MX_Controller  {
                 $data_user['jeniskelamin'] = $input['jk'];
                 $data_user['no_hp'] = $input['hp'];
                 $data_user['alamat'] = $input['alamat'];
-                $data_user['instansi'] = $input['instansi'];
                 if ($role == 'tb_mahasiswa') {
                     $data_user['angkatan'] = $input['angkatan'];
                     $data_user['jurusan'] = $input['jurusan'];
                 }
+                $data_pengguna['id_instansi_ref'] = $input['instansi'];
+                $this->db->update('tb_pengguna',$data_pengguna,array('id_pengguna'=>$data));
                 if ($this->db->update($role,$data_user,array('id_pengguna_ref'=>$data))) {
                     $ret['status'] = 1;
                     $ret['url'] = site_url('user/dashboard/profil');

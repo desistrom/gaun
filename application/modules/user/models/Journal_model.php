@@ -101,7 +101,7 @@ class Journal_model extends CI_Model
         $user = $this->session->userdata('data_user');
         /*$sql = "SELECT * FROM tb_journal j JOIN tb_volume v ON j.id_journal = v.id_journal_ref JOIN tb_no_volume n ON v.id_volume = n.id_volume_ref JOIN tb_artikel a ON n.id_no_volume = a.id_no_volume_ref JOIN tb_author au ON a.id_artikel = au.id_artikel_ref";
         $this->db->query($sql);*/
-        $this->db->select('tb_artikel.*,tb_volume.*,tb_no_volume.*,tb_journal.judul as judul_journal');
+        $this->db->select('tb_artikel.*,tb_volume.volume,tb_no_volume.nomor,tb_journal.judul as judul_journal');
         $this->db->from($this->table_artikel);
         $this->db->join('tb_no_volume', 'id_no_volume_ref = id_no_volume');
         $this->db->join('tb_volume', 'id_volume_ref = id_volume');

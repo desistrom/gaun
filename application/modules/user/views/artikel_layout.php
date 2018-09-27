@@ -56,62 +56,7 @@
     				</tbody>
     			</table>
     		</div>
-    <div class="modal" tabindex="-1" role="dialog" id="modalDetail">
-      <div class="modal-dialog" role="document" style="margin-top: 75px">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h3 class="modal-title">Success</h3>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-          <div class="text-right">
-            <button class="btn btn-success btn-add-artikel" type="button" id=""><i class="fa fa-plus"></i> Add Artikel</button>
-          </div>
-          	<ul>
-          		<li>ISSN : <span id="issn_view"></span></li>
-          		<li>Visitor : <span id="visitor_view"></span></li>
-          	</ul>
-            <div class="table-responsive">
-            	<table class="table table-striped">
-            		<thead>
-            			<th>Volume</th>
-            			<th>Jumlah No Volume</th>
-            			<th>Jumlah Artikel</th>
-            		</thead>
-                <tbody></tbody>
-            	</table>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    		<?php if ($this->session->flashdata('notif') != '') { ?>
-    <div class="modal" tabindex="-1" role="dialog" id="modalSuccess">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h3 class="modal-title">Success</h3>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <p><?=$this->session->flashdata('notif');?></p>
-          </div>
-          <div class="modal-footer">
-            <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  <?php } ?>
+    		
     		<?php }elseif($view == 'add'){ ?>
           <form role="form">
 <div class="col col-md-8 col-sm-8 col-xs-12" style="padding-top: 1em;">
@@ -157,7 +102,7 @@
             <option value="<?=$value['id_journal']?>"><?=$value['judul'];?></option>
           <?php endforeach ?>
         </select>
-        <div class="error" id="ntf_volume"></div>
+        <div class="error" id="ntf_journal"></div>
       </div>
       <div class="form-group">
         <label>Volume Jurnal</label>
@@ -251,6 +196,36 @@
       </div>
     </div>
   <?php } ?>
+<div class="modal" tabindex="-1" role="dialog" id="modalDetail">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title"></h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <label>Volume</label>
+      <div class="form-control-static" id="volume"></div>
+      <label>Nomor Volume</label>
+      <div class="form-control-static" id="nomor"></div>
+      <label>Abstraksi</label>
+      <div class="form-control-static" id="abs"></div>
+      <label>Author</label>
+      <div id="author"></div>
+      <label>Keyword</label>
+      <div id="keyword"></div>
+      <label>File</label>
+      <div id="file"></div>
+      </div>
+      <div class="modal-footer">
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 <script src="<?=base_url().'assets/js/jquery-3.2.1.min.js';?>"></script>
 <script src="<?=base_url();?>assets/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?=base_url();?>assets/datatables/js/dataTables.bootstrap.min.js"></script>
@@ -329,23 +304,25 @@
     });
 
     $('body').on('click','.detail', function(){
-      // $('#progresLoading').modal('show');
       var id = $(this).attr('id');
+      // var status = 1;
+      // console.log(id);
       $.ajax({
-          url : base_url+'user/journal/detail_journal/'+id,
-          dataType : 'json',
-          async : false,
-          cache : false ,
-          contentType : false , 
-          processData : false
+        url : base_url+'user/journal/detail_artikel/'+id,
+        data : {'id' : id},
+        dataType: 'json',
+        type : 'POST'
       }).done(function(data){
-        console.log(data);
-        $('#modalDetail .btn-add-artikel').attr('id',data.id);
-        $('#modalDetail #issn_view').html(data.issn);
-        $('#modalDetail #visitor_view').html(data.visitor);
-        $('#modalDetail tbody').html(data.table);
+        $('#modalDetail h3').html(data.judul);
+        $('#modalDetail #abs').html(data.abstrak);
+        $('#modalDetail #author').html(data.nama);
+        $('#modalDetail #volume').html(data.volume);
+        $('#modalDetail #nomor').html(data.nomor);
+        $('#modalDetail #keyword').html(data.keyword);
+        $('#modalDetail #file').html('<a href="'+base_url+'assets/file/'+data.file+'" class="btn btn-success"><i class="fa fa-download"></i></a>');
         $('#modalDetail').modal('show');
-        $('.modal-backdrop').remove();
+        // window.location.href = data.url;
+
       });
     });
 

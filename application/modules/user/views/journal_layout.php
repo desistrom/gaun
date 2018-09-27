@@ -40,6 +40,7 @@
     <div class="box-content">
     	<div class="row">
     	<?php if($view == 'list'){ ?>
+      <a href="<?=site_url('user/journal/add');?>" class="btn btn-success"><i class="fa fa-plus"></i> Journal</a>
     		<div class="table-responsive">
     			<table class="table table-striped" id="table">
     				<thead>
@@ -109,7 +110,7 @@
       <!-- text input -->
       <div class="form-group">
         <label>Judul Journal</label>
-        <input type="text" name="judul" class="form-control" id="judul" placeholder="Enter Judul Event ..." value="">
+        <input type="text" name="judul" class="form-control" id="judul" placeholder="Enter Judul Journal ..." value="">
         <div class="error" id="ntf_judul"></div>
       </div>
       <div class="form-group">
@@ -134,8 +135,18 @@
       <!-- textarea -->
       <div class="form-group">
         <label>ISSN JOURNAL</label>
-        <input type="text" name="issn" class="form-control" placeholder="Lokasi Event" id="issn">
+        <input type="text" name="issn" class="form-control" placeholder="ISSN Journal" id="issn">
         <div class="error" id="ntf_issn"></div>
+      </div>
+      <div class="form-group">
+        <label>Kategori JOURNAL</label>
+        <select class="form-control" name="kategori" id="kategori">
+          <option value="">-- Pilih Kategori --</option>
+          <?php foreach ($kategori as $key => $value): ?>
+            <option value="<?=$value['id_kategori'];?>"><?=$value['nama'];?></option>
+          <?php endforeach ?>
+        </select>
+        <div class="error" id="ntf_kategori"></div>
       </div>
       <div class="form-group">
       <label>Futured Image Journal</label>
@@ -159,113 +170,6 @@
 </div>
 </div>
   </form>
-    		<?php }elseif($view == 'add_artikel'){ ?>
-          <form role="form">
-<div class="col col-md-8 col-sm-8 col-xs-12" style="padding-top: 1em;">
-  <div class="panel">
-    <div class="panel-header" style="background-color:  #F5F5F5;">
-        <div class="box-header with-border">
-    <h3 class="box-title"> Artikel Content</h3>
-  </div>
-    </div>
-    <div class="panel-body"><!-- /.box-header -->
-  <div class="box-body">
-    
-      <!-- text input -->
-      <div class="form-group">
-        <label>Judul Artikel</label>
-        <input type="text" name="judul" class="form-control" id="judul" placeholder="Enter Judul Event ..." value="">
-        <div class="error" id="ntf_judul"></div>
-      </div>
-      <div class="form-group">
-      <label>Abstraksi Artikel</label>
-      <?php echo $this->ckeditor->editor("content", "" ); ?>
-        <input type="hidden" name="content" id="content">
-        <div class="error" id="ntf_content"></div>
-      </div>
-  </div></div>
-
-  </div>
-
-</div>
-<div class="col col-md-4 col-sm-4 col-xs-12" style="padding-top: 1em;">
-  <div class="panel ">
-      <div class="panel-header" style="background-color:  #F5F5F5;">
-        <div class="box-header with-border">
-        <h3 class="box-title">Artikel Setting</h3>
-      </div>
-    </div>
-    <div class="panel-body">
-      <!-- textarea -->
-      <div class="form-group">
-        <label>Volume Jurnal</label>
-        <select class="form-control" name="volume" id="volume">
-          <option value="">-- Pilih Volume --</option>
-          <?php foreach ($volume as $key => $value): ?>
-            <option value="<?=$value['id_volume']?>">Volume <?=$value['volume'];?></option>  
-          <?php endforeach ?>
-        </select>
-        <div class="error" id="ntf_volume"></div>
-      </div>
-
-      <div class="form-group">
-        <label>No Volume Jurnal</label>
-        <select class="form-control" name="no_volume" id="no_volume">
-          <option value="">-- Pilih No Volume --</option>
-        </select>
-        <div class="error" id="ntf_no_volume"></div>
-      </div>
-
-    <div class="form-group">
-      <label>Keyword</label>
-      <input type="text" name="keyword" class="form-control" id="keyword" placeholder="Enter keyword Artikel ..." value="">
-      <div class="error" id="ntf_keyword"></div>
-    </div>
-
-    <div class="form-group">
-      <label>Refernces</label>
-      <textarea name="ref" class="form-control" id="ref" placeholder="Enter Refernces Artikel"></textarea>
-      <div class="error" id="ntf_ref"></div>
-    </div>
-
-      <div class="form-group">
-      <label>File Artikel</label>
-      <div class="col col-md-12 form-goup-file">
-        <div class="input-file-right"><label class="btn btn-success btn-choose-foto" for="file_name"><i class="fa fa-upload" ></i>Choose File</label></div>
-        <div class="input-file-left"><input type="file" class="form-control file" name="file_name" id="file_name"></div> 
-        <div>Max file size 100MB <br>Allowed file type : pdf, docx</i></div> 
-        <div class="error" id="ntf_file_name"></div> 
-        <div class="error" id="ntf_error"></div> 
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label>Nama Author</label>
-      <input type="text" name="nama" class="form-control nama" id="nama" placeholder="Enter Nama Author ..." value="">
-      <div class="error" id="ntf_nama"></div>
-    </div>
-
-    <div class="form-group">
-      <label>Jabatan Author</label>
-      <input type="text" name="jabatan" class="form-control jabatan" id="jabatan" placeholder="Enter Jabatan Author ..." value="">
-      <div class="error" id="ntf_jabatan"></div>
-    </div>
-    <div class="more"></div>
-    <dir class="text-right">
-      <button class="btn btn-info btn_more" type="button"><i class="fa fa-plus"></i> Add More</button>
-    </dir>
-  <!--     <div class="form-group">
-        <label>Gambar Berita</label>
-        <input type="file" name="file_name" class="form-control" id="file_name">
-        <div class="error" id="ntf_file_name"></div>
-      </div> -->
-       <button type="button" class="btn btn-primary" id="submit_artikel">Submit</button>
-    </div>
-
-
-</div>
-</div>
-  </form>
     		<?php } ?>
     	</div>
     </div>
@@ -276,7 +180,7 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h3 class="modal-title">Success</h3>
+            <h3 class="modal-title"><?php if ($this->session->flashdata('header') != '') { echo $this->session->flashdata('header'); }else{ echo "Sukses"; } ?></h3>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -305,6 +209,7 @@
       form_data.append('judul', $('#judul').val());
       form_data.append('issn', $('#issn').val());
       form_data.append('content', $('#content').val());
+      form_data.append('kategori', $('#kategori').val());
       // form_data.append('tgl_event', $('#tgl_event').val());
       // form_data.append('start_event', $('#start_event').val());
       // form_data.append('end_event', $('#end_event').val());

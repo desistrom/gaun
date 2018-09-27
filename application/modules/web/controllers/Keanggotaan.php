@@ -366,10 +366,10 @@ class Keanggotaan extends MX_Controller  {
                 $data_user['username'] = $data_input['username'];
                 $data_user['id_role_ref'] = 1;
                 $data_user['password'] = sha1($this->generate());
+                $data_user['id_instansi_ref'] = $data_input['instansi'];
                  if ($this->db->insert('tb_pengguna',$data_user)) {
                     $id = $this->db->insert_id();
                     $dosen['id_pengguna_ref'] = $id;
-                    $dosen['instansi'] = $data_input['instansi'];
                     $dosen['no_hp'] = $data_input['no_hp'];
                     $dosen['nama'] = $data_input['name'];
                     if ($this->db->insert('tb_dosen',$dosen)) {
@@ -451,10 +451,10 @@ terima kasih";
                 $data_user['username'] = $data_input['username'];
                 $data_user['id_role_ref'] = 0;
                 $data_user['password'] = sha1($this->generate());
+                $data_user['id_instansi_ref'] = $data_input['instansi'];
                  if ($this->db->insert('tb_pengguna',$data_user)) {
                     $id = $this->db->insert_id();
                     $mahasiswa['id_pengguna_ref'] = $id;
-                    $mahasiswa['instansi'] = $data_input['instansi'];
                     $mahasiswa['no_hp'] = $data_input['no_hp'];
                     $mahasiswa['nama'] = $data_input['name'];
                     if ($this->db->insert('tb_mahasiswa',$mahasiswa)) {

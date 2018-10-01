@@ -130,15 +130,20 @@ class Journal extends MX_Controller
         $no = $_POST['start'];
         // $aktif = 'Pending';
         $button = '';
+        $btn = '';
         foreach ($list as $news) {
             $no++;
-        // if ($news->status == 1) {
-                // $aktif = '<span class="text-success">Enable</span>';
-                $button = '<button class="btn btn-info btn-sm btn-acc" id="'.$news->id_journal.'" data-toggle="tooltip" title="accept"><i class="fa fa-check"></i> Accepted</button> <button class="btn btn-danger btn-sm btn-ign" id="'.$news->id_journal.'" data-toggle="tooltip" title="Ignore"><i class="fa fa-times"></i> Ignored</button> <a href="'.site_url('instansi/journal/artikel').'/'.$news->id_journal.'" class="btn btn-success btn-sm"><i class="fa fa-link"></i>Detail</a>';
-            // }else{
-            //     $aktif = '<span class="text-Success">Disable</span>';
-            //     $button = '<a href="'.site_url("user/journal/artikel_edit").'/'.$news->id_artikel.'"><button class="btn btn-info btn-sm" id="edit" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil"></i></button></a>';
-            // }
+        if ($news->status == 1) {
+                $aktif = '<span class="text-default">Pending</span>';
+            }else{
+                if ($news->status == 2) {
+                $btn = '<button class="btn btn-info btn-sm btn-hide" id="'.$news->id_journal.'" data-toggle="tooltip" title="accept"><i class="fa fa-eye"></i> Show</button>';
+                $aktif = '<span class="text-Success">Aktif</span>';
+                    # code...
+                }
+                // $button = '<a href="'.site_url("user/journal/artikel_edit").'/'.$news->id_artikel.'"><button class="btn btn-info btn-sm" id="edit" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil"></i></button></a>';
+            }
+                $button = '<a href="'.site_url('instansi/journal/artikel').'/'.$news->id_journal.'" class="btn btn-success btn-sm"><i class="fa fa-link"></i>Detail</a>';
             $row = array();
             $row[] = $no;
             $row[] = '<div class="detail">'.word_limiter($news->judul,10).'</div>';
@@ -156,7 +161,8 @@ class Journal extends MX_Controller
                 $nama = $this->db->get_where('tb_dosen',array('id_pengguna_ref'=>$news->id_pengguna))->row_array()['nama'];
             }
             $row[] = $nama;
-            $row[] = $button;
+            $row[] = $aktif;
+            $row[] = $btn.$button;
  
             $data[] = $row;
         }

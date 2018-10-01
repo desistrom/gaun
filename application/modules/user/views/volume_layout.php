@@ -38,6 +38,7 @@
     </div>
     <div class="box-content">
     	<div class="row">
+        <div class="col col-md-12 col0sm-12 col-xs-12">
     	<?php if($view == 'list'){ ?>
       <a href="<?=site_url('user/journal/add_volume');?>" class="btn btn-success"><i class="fa fa-plus"></i> Add Volume</a>
     		<div class="table-responsive">
@@ -88,6 +89,7 @@
   </form>
     		
     		<?php } ?>
+      </div>
     	</div>
     </div>
 </div>

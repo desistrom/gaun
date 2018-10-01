@@ -21,6 +21,15 @@
      .nav li.dropdown.active .link_dropdown{
       border-bottom:solid 3px white;
     }
+    .sub-drop-menu{
+            line-height: 50px;
+   list-style: none;
+    text-decoration: none;
+      }
+      .li-submenu.li-not-open .sub-drop-menu{
+        display: none;
+        transition: 0.5s;
+      }
  /*     .modal-backdrop.in{
     position: relative!important;
   }
@@ -52,12 +61,30 @@
                           </ul>
                         </li>
 
-                      <li class="dropdown <?php if(current_url() == site_url('user/journal') || current_url() == site_url('user/journal/artikel') || current_url() == site_url('user/journal/volume') || current_url() == site_url('user/journal/list_nomor') || current_url() == site_url('user/journal/list_artikel')){ ?>active <?php }else{ ?>not-active <?php } ?>"><a class="link_dropdown"  href="<?=site_url('user/journal');?>" class="dropdown-toggle">Journal </a>
-                          <ul class="drop-menu <?php if(current_url() == site_url('user/journal') || current_url() == site_url('user/journal/artikel') || current_url() == site_url('user/journal/volume') || current_url() == site_url('user/journal/list_nomor') || current_url() == site_url('user/journal/list_artikel')){ ?>open active <?php }else{ ?>not-active<?php } ?> col col-md-2" role="menu">
-                              <li><a href="<?=site_url('user/journal');?>"> <i class="fa fa-home"></i>Journal</a></li>
-                              <li><a href="<?=site_url('user/journal/volume');?>"> <i class="fa fa-user"></i>Volume</a></li>
-                              <li><a href="<?=site_url('user/journal/list_nomor');?>"> <i class="fa fa-gear"></i>No Volume</a></li>
-                              <li><a href="<?=site_url('user/journal/list_artikel');?>"> <i class="fa fa-gear"></i>Artikel</a></li>
+                      <li class="dropdown <?php if(current_url() == site_url('user/journal') || current_url() == site_url('user/journal/artikel') || current_url() == site_url('user/journal/volume') || current_url() == site_url('user/journal/list_nomor') || current_url() == site_url('user/journal/list_artikel') || current_url() == site_url('user/journal/add_artikel') || current_url() == site_url('user/journal/add_no_volume') || current_url() == site_url('user/journal/add_volume') || current_url() == site_url('user/journal/add')){ ?>active <?php }else{ ?>not-active <?php } ?>"><a class="link_dropdown"  href="<?=site_url('user/journal');?>" class="dropdown-toggle">Journal </a>
+                          <ul class="drop-menu <?php if(current_url() == site_url('user/journal') || current_url() == site_url('user/journal/artikel') || current_url() == site_url('user/journal/volume') || current_url() == site_url('user/journal/list_nomor') || current_url() == site_url('user/journal/list_artikel') || current_url() == site_url('user/journal/add_artikel') || current_url() == site_url('user/journal/add_no_volume') || current_url() == site_url('user/journal/add_volume') || current_url() == site_url('user/journal/add')){ ?>open active <?php }else{ ?>not-active<?php } ?> col col-md-2" role="menu">
+                              <li><a href="<?=site_url('user/journal');?>" <?php if(current_url() == site_url('user/journal') || current_url() == site_url('user/journal/add')){ ?> class="active" <?php } ?> > <i class="fa fa-home"></i>Journal</a></li>
+                              <li><a href="<?=site_url('user/journal/volume');?>" <?php if(current_url() == site_url('user/journal/volume') || current_url() == site_url('user/journal/add_volume')){ ?> class="active" <?php } ?>> <i class="fa fa-user"></i>Volume</a></li>
+                              <li><a href="<?=site_url('user/journal/list_nomor');?>" <?php if(current_url() == site_url('user/journal/list_nomor') || current_url() == site_url('user/journal/add_no_volume')){ ?> class="active" <?php } ?>> <i class="fa fa-gear"></i>No Volume</a></li>
+                              <li class="li-submenu li-not-open" ><a href="<?=site_url('user/journal/list_artikel');?>" <?php if(current_url() == site_url('user/journal/list_artikel') || current_url() == site_url('user/journal/add_artikel')){ ?> class="active" <?php } ?>> <i class="fa fa-gear"></i>Artikel</a>
+                                <ul class="sub-drop-menu active" >
+                                    <li><a href="index.html">
+                 
+       
+                                        List Artikel
+                                    </a>
+                                  </li>
+                                    <li><a href="#">
+                                       
+                                        Apcepted
+                                    </a></li>
+                                    <li><a href="#">
+                                       
+                                        Rejected
+                                    </a></li>
+
+                                </ul>
+                              </li>
 
                           </ul>
                       </li>
@@ -131,6 +158,17 @@
                     $(".drop-menu").removeClass("active").addClass("not-active");
                     $(this).find(".drop-menu").addClass("active").removeClass("not-active"); 
 
+                }
+            });
+              $(".li-submenu").click(function(){
+
+                // console.log("a");
+                if ($(this).hasClass("li-not-open")) {
+                    $(this).removeClass("li-not-open").addClass("active");
+                   
+
+                }else{
+                  $(this).removeClass("active").addClass("li-not-open");
                 }
             });
             $(".dropdown").click(function(){

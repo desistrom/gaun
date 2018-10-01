@@ -42,17 +42,16 @@
 <div class="box">
 	<div class="box-body">
 		<div class="col col-md-12 col-sm-12 col-xs-12" style="padding-left: 0; margin-bottom: 15px;">
-			<a href="<?=site_url('instansi/add_berita');?>" class="btn btn-success">Tambah News</a>
+			<!-- <a href="<?=site_url('instansi/add_berita');?>" class="btn btn-success">Tambah News</a> -->
 		</div>
 		<div class="col col-md-12 col-xs-12 table-responsive">
 			<table class="table table-bordered  dataTable" id="table">
 				<thead>
 					<th>No.</th>
-          <th>Journal</th>
-          <th>ISSN</th>
-          <th>Deskripsi</th>
-          <th>Image</th>
-          <th>Publisher</th>
+          <th>Judul Artikel</th>
+          <th>Volume</th>
+          <th>No. Journal</th>
+          <!-- <th>Journal</th> -->
           <th>Status</th>
           <th>Action</th>
 				</thead>
@@ -68,7 +67,7 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h3 class="modal-title">Success</h3>
+            <h3 class="modal-title"><?=$this->session->flashdata('header');?></h3>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -98,7 +97,7 @@
             <p>Do You Want To Accept This Article ?</p>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary">Yes</button>
+            <button type="button" class="btn btn-primary btn-acc_action">Yes</button>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           </div>
         </div>
@@ -122,23 +121,35 @@
             <div class="error" id="ntf_reason"></div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary">Yes</button>
+            <button type="button" class="btn btn-primary btn-ign_action">Yes</button>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           </div>
         </div>
       </div>
     </div>
 <?php } ?>
-<div class="modal" tabindex="-1" role="dialog" id="modal_comment">
+<div class="modal" tabindex="-1" role="dialog" id="modalDetail">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h3 class="modal-title">Success</h3>
+        <h3 class="modal-title"></h3>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <!-- <span aria-hidden="true">&times;</span> -->
+          <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
+      <label>Volume</label>
+      <div class="form-control-static" id="volume"></div>
+      <label>Nomor Volume</label>
+      <div class="form-control-static" id="nomor"></div>
+      <label>Abstraksi</label>
+      <div class="form-control-static" id="abs"></div>
+      <label>Author</label>
+      <div id="author"></div>
+      <label>Keyword</label>
+      <div id="keyword"></div>
+      <label>File</label>
+      <div id="file"></div>
       </div>
       <div class="modal-footer">
         <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
@@ -175,6 +186,7 @@
   $(document).ready(function () {
     $('body').on('click','.btn-acc', function(){
       var id = $(this).attr('id');
+      console.log(id);
       $('#modalacc #id').val(id);
       $('#modalacc').modal('show');
     });
@@ -183,6 +195,59 @@
       var id = $(this).attr('id');
       $('#modalign #id').val(id);
       $('#modalign').modal('show');
+    });
+
+    $('body').on('click','.btn-acc_action', function(){
+      var id = $('#modalacc #id').val();
+      var status = 1;
+      // console.log(id);
+      $.ajax({
+        url : base_url+'journal/admin/response_artikel/'+'<?=$id;?>',
+        data : {'id' : id, 'status' : status},
+        dataType: 'json',
+        type : 'POST'
+      }).done(function(data){
+        window.location.href = data.url;
+      });
+    });
+
+
+    $('body').on('click','.btn-ign_action', function(){
+      var id = $('#modalign #id').val();
+      var status = 2;
+      var reason = $('#reason').val();
+      // console.log(id);
+      $.ajax({
+        url : base_url+'journal/admin/response_artikel/'+'<?=$id;?>',
+        data : {'id' : id, 'status' : status, 'reason' : reason},
+        dataType: 'json',
+        type : 'POST'
+      }).done(function(data){
+        window.location.href = data.url;
+      });
+      // $('#modalign').modal('show');
+    });
+    $('body').on('click','.btn-detail', function(){
+      var id = $(this).attr('id');
+      // var status = 1;
+      // console.log(id);
+      $.ajax({
+        url : base_url+'journal/admin/detail_artikel/'+id,
+        data : {'id' : id},
+        dataType: 'json',
+        type : 'POST'
+      }).done(function(data){
+        $('#modalDetail h3').html(data.judul);
+        $('#modalDetail #abs').html(data.abstrak);
+        $('#modalDetail #author').html(data.nama);
+        $('#modalDetail #volume').html(data.volume);
+        $('#modalDetail #nomor').html(data.nomor);
+        $('#modalDetail #keyword').html(data.keyword);
+        $('#modalDetail #file').html('<a href="'+base_url+'assets/file/'+data.file+'" class="btn btn-success"><i class="fa fa-download"></i></a>');
+        $('#modalDetail').modal('show');
+        // window.location.href = data.url;
+
+      });
     });
     $('#modalSuccess').modal('show');
   });
@@ -202,7 +267,7 @@ $(document).ready(function() {
  
         // Load data for the table's content from an Ajax source
         "ajax": {
-            "url": "<?php echo site_url('instansi/journal/ajax_list_journal')?>",
+            "url": "<?php echo site_url('journal/admin/ajax_list/'.$id)?>",
             "type": "POST"
         },
  

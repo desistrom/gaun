@@ -100,7 +100,11 @@ ul.drop-menu {
 .dropdown .drop-menu.active li a{
  /* padding-left: 0 ;*/
 }
-
+ul.drop-menu li a.active {
+    color: #E72A2A;
+    border-right: solid 5px #E72A2A;
+    background-color: white;
+}
 .drop-menu li a {
     display: block;
     padding: 3px 20px;
@@ -168,6 +172,8 @@ ul.drop-menu li a {
 .box-content{
   background-color: white;
   padding: 15px;
+  height: auto;
+  overflow: hidden;
 }
 .title-box{
   background-color: white;
@@ -179,6 +185,17 @@ ul.drop-menu li a {
 .title-box h3{
   margin:0;
   color: #A2A2A2;
+}
+.right-content .filter-box-thumbnail{
+  padding: 10px;
+}
+.right-content .box-thumbnail{
+  border-radius: 5px;
+  overflow: hidden;
+  background-color: white;
+  border:solid 1px #A2A2A2;
+  transition: 0.7s;
+  background-color: white;
 }
 .pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover{
   background-color: #E42529;
@@ -514,7 +531,7 @@ div.dataTables_length label{
 .small-box:hover .icon {
   font-size: 95px;
 }
-@media (max-width:1300px) {
+@media (max-width:777px) {
   .left-content{
     display: none;
   }
@@ -544,4 +561,5 @@ div.dataTables_length label{
     top: 100%;
     padding-left: 30px;
 }
+
 }

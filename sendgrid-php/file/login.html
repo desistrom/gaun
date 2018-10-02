@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jurnal idren</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+     <link rel="stylesheet" href="assets/css/Navbar-with-mega-menu.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <style type="text/css">
+    body{
+    	background-color: #F2F2F2;
+    }
+    .wraper-login .login-center{
+    	display: inline-block;
+    	/*background-color: #770505;*/
+    }
+
+    .input {
+	position: relative;
+	z-index: 1;
+	display: inline-block;
+	margin: 1em 0 0 0;
+	max-width: 100%;
+	width: 100%;
+	vertical-align: top;
+}
+
+.input__field {
+	position: relative;
+	display: block;
+	float: right;
+	padding: 0.8em;
+	border-radius: 5px;
+	width: 60%;
+	border: none;
+	border-radius: 0;
+	background: #f0f0f0;
+	color: #aaa;
+	/*font-weight: bold;*/
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	-webkit-appearance: none; /* for box shadows to show on iOS */
+}
+
+.input__field:focus {
+	outline: none;
+}
+
+.input__label {
+	display: inline-block;
+	float: right;
+	padding: 0 1em;
+	width: 40%;
+	color: #6a7989;
+	font-weight: bold;
+	font-size: 83.25%;
+	-webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.input__label-content {
+	position: relative;
+	display: block;
+	padding: 1.6em 0;
+	width: 100%;
+}
+
+.graphic {
+	position: absolute;
+	top: 0;
+	left: 0;
+	fill: none;
+}
+
+.icon {
+	color: #ddd;
+	font-size: 150%;
+}
+
+/* Individual styles */
+
+ /* Chisato */
+
+.input--chisato {
+	padding-top: 1em;
+}
+
+.input__field--chisato {
+	width: 100%;
+	padding: 0.8em 0.5em;
+		border-radius: 5px;
+	background: transparent;
+	border: 1px solid;
+	color: #b5b5b5;
+	-webkit-transition: border-color 0.25s;
+	transition: border-color 0.25s;
+}
+
+.input__label--chisato {
+	width: 100%;
+	position: absolute;
+	top: 0;
+	text-align: left;
+	overflow: hidden;
+	padding: 0;
+	margin-top: -6px;
+	pointer-events: none;
+	-webkit-transform: translate3d(0, 3em, 0);
+	transform: translate3d(0, 3em, 0);
+}
+
+.input__label-content--chisato {
+	padding: 0 1em;
+	font-weight: 400;
+	color: #b5b5b5;
+}
+
+.input__label-content--chisato::after {
+	content: attr(data-content);
+	position: absolute;
+	top: -200%;
+	left: 0;
+	color: #b5b5b5;
+	font-weight: 400;
+}
+
+.input__field--chisato:focus,
+.input--filled .input__field--chisato {
+	border-color: #5AA7DF;
+	box-shadow: 0px 0px 3px 0 #5AA7DF;
+}
+
+.input__field--chisato:focus + .input__label--chisato,
+.input--filled .input__label--chisato {
+	-webkit-animation: anim-chisato-1 0.25s forwards;
+	animation: anim-chisato-1 0.25s forwards;
+	margin: 0;
+	margin-top: 4px;
+    margin-left: 5px;
+    background-color: white;
+    display: inline-block;
+    width: 71px;
+    padding-left: 9px;
+}
+
+.input__field--chisato:focus + .input__label--chisato .input__label-content--chisato,
+.input--filled .input__label-content--chisato {
+	-webkit-animation: anim-chisato-2 0.25s forwards ease-in;
+	animation: anim-chisato-2 0.25s forwards ease-in;
+}
+
+@-webkit-keyframes anim-chisato-1 {
+	0%, 70% {
+		-webkit-transform: translate3d(0, 3em, 0);
+		transform: translate3d(0, 3em, 0);
+	}
+	71%, 100% {
+		-webkit-transform: translate3d(0, 0, 0);
+		transform: translate3d(0, 0, 0);
+	}
+}
+
+@-webkit-keyframes anim-chisato-2 {
+	0% {
+		-webkit-transform: translate3d(0, 0, 0);
+		transform: translate3d(0, 0, 0);
+	}
+	70%, 71% {
+		-webkit-transform: translate3d(0, 125%, 0);
+		transform: translate3d(0, 125%, 0);
+		opacity: 0;
+		-webkit-animation-timing-function: ease-out;
+	}
+	100% {
+		color: transparent;
+		-webkit-transform: translate3d(0, 200%, 0);
+		transform: translate3d(0, 200%, 0);
+	}
+}
+
+@keyframes anim-chisato-1 {
+	0%, 70% {
+		-webkit-transform: translate3d(0, 3em, 0);
+		transform: translate3d(0, 3em, 0);
+	}
+	71%, 100% {
+		-webkit-transform: translate3d(0, 0, 0);
+		transform: translate3d(0, 0, 0);
+	}
+}
+
+@keyframes anim-chisato-2 {
+	0% {
+		-webkit-transform: translate3d(0, 0, 0);
+		transform: translate3d(0, 0, 0);
+	}
+	70%, 71% {
+		-webkit-transform: translate3d(0, 125%, 0);
+		transform: translate3d(0, 125%, 0);
+		opacity: 0;
+		-webkit-animation-timing-function: ease-out;
+	}
+	100% {
+		color: transparent;
+		-webkit-transform: translate3d(0, 200%, 0);
+		transform: translate3d(0, 200%, 0);
+	}
+}
+
+.wraper-login .form-login{
+	box-shadow: 2px 2px 3px 0 #bdbdbd;
+	background-color: white;
+	padding: 15px;
+	border-radius: 5PX;
+}
+.wraper-login{
+	padding-top: 1em;
+}
+.wraper-login .login-center{
+	/*background-color: #FDD5D5;*/
+	padding: 15px 0;
+
+}
+ .wraper-login .btn-sign_in{
+ 	margin-top: 1em;
+ 	width: 100%;
+ 	background:#C71111;
+ 	padding: 15px;
+ } 
+ .wraper-login .btn-sign_in:hover,
+  .wraper-login .btn-sign_in:focus,
+   .wraper-login .btn-sign_in:active{
+ 	background:#770505;
+ }
+ .wraper-login .form-sosmed{
+ 	background-color: white;
+ 	height: 19.3em;
+ 
+ 	padding: 15px;
+ }
+ .wraper-login .form-sosmed .btn{
+ 	width: 100%;
+ 	padding-top: 17px;
+ 	padding-bottom: 17px;
+ }
+ .wraper-login .title-sosmed{
+ 	padding-bottom: 1em;
+ }
+ .wraper-login .btn-google {
+ 	/*margin-top: 15px;
+ 	border: solid 1px #959595;*/
+ }
+ .wraper-login .btn-google img{
+padding-right: 6px;
+width: 20px;
+ }
+  .wraper-login .btn-fb img{
+padding-right: 6px;
+margin-top: -2px;
+width: 20px;
+ }
+ .line-or{
+ 	color: #9E9E9E;
+ 	border-top:1px solid #A2A2A2;
+ 	margin-top: 15px;
+ 	margin-bottom: 30px;
+ }
+ .line-text{
+ 	font-size: 20px;
+ 	color:  #9E9E9E;
+ }
+ .btn-account-social{
+ 	width: 100%;
+ 	border-radius: 20px;
+ 	box-shadow: 2px 2px 3px 0 #bdbdbd;
+ 	padding: 10px;
+ 	margin-bottom: 7px;
+ }
+ .btn-account-social.btn-fb{
+ 	background-color: #5AA7DF;
+ 	color: white;
+ }
+  .btn-account-social.btn-fb:hover{
+  	background-color: #247AB8;
+  }
+ .btn-account-social.btn-google{
+ 	background-color: white;
+ 	color: #A2A2A2;
+ }
+  .btn-account-social.btn-google:hover{
+ 	background-color: #F9F9F9;
+ }
+ .inline-block{
+ 	display: inline-block;
+ }
+.logo_google{
+	padding:0;
+}
+.forgot-pass{
+	padding-top: 10px;
+}
+.forgot-pass a{
+	color: #C71111;
+
+}
+.sub_logo_login{
+	padding: 10px;
+}
+.logo_login{
+	width: 100px;
+	display: inline-block;
+
+}
+.title-login {
+	font-weight: 600;
+	color: #A2A2A2;
+}
+.title-login_2 {
+	color: #A2A2A2;
+	padding-bottom: 15px;
+}
+</style>
+</head>
+
+<body>
+	<div class="wraper-login">
+		<div class="container-fluid">
+			<div class="row" style="text-align: center;">
+				<div class="col col-md-4 col-sm-4 col-xs-12"></div>
+				<div class="col col-md-4 col-sm-4 col-xs-12 login-center none-padding" >
+					<form>
+						<h2 class="title-login text-center">Sign In</h2>
+						<div class="sub_logo_login">
+							<img src="assets/img/logo.png" class="logo_login">
+						</div>
+						<h3 class="title-login_2 text-center">with your social network</h3>
+						<div class="col col-md-12 col-sm-12 col-xs-12 none-padding">
+							<div class="col col-md-6 col-sm-6 col-xs-6">
+								<a href="#" class="btn btn-account-social btn-google">
+									<div class="inline-block filter-logo-login">
+										<img src="assets/img/logo_google.png" class="logo_google">
+									</div>
+									<div class="inline-block">google</div>
+								</a>
+							</div>
+							<div class="col col-md-6 col-sm-6 col-xs-6">
+								<a href="#" class="btn btn-account-social btn-fb">
+									<div class="inline-block">
+										<img src="assets/img/facebook.png" class="logo_google">
+									</div>
+									<div class="inline-block">Facebook</div>
+								</a>
+							</div>
+						</div>
+						<div class="col col-md-12 col-sm-12 col-xs-12 ">
+							<div class="col col-md-5 col-sm-5 col-xs-5"><hr class="line-or"></div>
+							<div class="col col-md-2 col-sm-2 col-xs-2 line-text">Or</div>
+							<div class="col col-md-5 col-sm-5 col-xs-5"><hr class="line-or"></div>
+						</div>
+						<div class="col col-md-12 col-sm-12 col-xs-12 ">
+							<div class="form-login text-left">
+							<!-- <h4 class="text-left">Sign In</h4> -->
+							<span class="input input--chisato">
+								<input class="input__field input__field--chisato" type="text" id="input-13" />
+								<label class="input__label input__label--chisato" for="input-13">
+									<span class="input__label-content input__label-content--chisato" data-content="username"> <span class="sub-label">username</span> </span>
+								</label>
+							</span>
+							<span class="input input--chisato">
+								<input class="input__field input__field--chisato" type="text" id="input-14" />
+								<label class="input__label input__label--chisato" for="input-14">
+									<span class="input__label-content input__label-content--chisato" data-content="password"><span class="sub-label">password</span></span>
+								</label>
+							</span>
+							<a href="#" class="btn btn-danger btn-sign_in">Sign In</a>
+							<div class="forgot-pass">
+								<a href="#">Forgot Password</a>
+							</div>
+
+							</div>
+						</div>
+						<!-- <div class="col col-md-6 col-sm-6 col-xs-12">
+							<div class="form-sosmed">
+								<h4 class="text-left title-sosmed">Sign In with social Account</h4>
+								<div>
+									<a href="#" class="btn btn-primary">Facebook</a>	
+								</div>
+								<div>
+									
+									<a href="#" class="btn btn-google"><img src="assets/img/logo_google.png" width="20px"> Google</a>
+								
+										
+								</div>
+								
+							</div>
+						</div> -->
+					</form>
+				</div>
+				<div class="col col-md-4 col-sm-4 col-xs-12"></div>
+			</div>
+		</div>
+	</div>
+
+
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    	<script src="assets/js/classie.js"></script>
+    <script>
+			(function() {
+				// trim polyfill : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/Trim
+				if (!String.prototype.trim) {
+					(function() {
+						// Make sure we trim BOM and NBSP
+						var rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
+						String.prototype.trim = function() {
+							return this.replace(rtrim, '');
+						};
+					})();
+				}
+
+				[].slice.call( document.querySelectorAll( 'input.input__field' ) ).forEach( function( inputEl ) {
+					// in case the input is already filled..
+					if( inputEl.value.trim() !== '' ) {
+						classie.add( inputEl.parentNode, 'input--filled' );
+					}
+
+					// events:
+					inputEl.addEventListener( 'focus', onInputFocus );
+					inputEl.addEventListener( 'blur', onInputBlur );
+				} );
+
+				function onInputFocus( ev ) {
+					classie.add( ev.target.parentNode, 'input--filled' );
+				}
+
+				function onInputBlur( ev ) {
+					if( ev.target.value.trim() === '' ) {
+						classie.remove( ev.target.parentNode, 'input--filled' );
+					}
+				}
+			})();
+		</script>
+</body>
+
+</html>

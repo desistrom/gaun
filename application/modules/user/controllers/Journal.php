@@ -207,19 +207,6 @@ class Journal extends MX_Controller
         $sql = "SELECT * FROM tb_journal j JOIN tb_volume v ON j.id_journal = v.id_journal_ref where j.id_journal = ".$id;
         $data = $this->db->query($sql,$id)->result_array();
         $this->data['volume'] = $data;
-        // $ret['id'] = $id;
-        // $ret['issn'] = $data[0]['issn'];
-        // $ret['visitor'] = $data[0]['visitor'];
-        // print_r($sql);
-        // $ret['table'] = '';
-        // foreach ($data as $key => $value) {
-        //     $ret['table'] .= '<tr>';
-        //     $ret['table'] .= '<td>'.$value['volume'].'</td>';
-        //     $ret['table'] .= '<td>'.$value['no_volume'].'</td>';
-        //     $ret['table'] .= '<td>'.$value['artikel'].'</td>';
-        //     $ret['table'] .= '<tr>';
-        // }
-        // echo json_encode($ret);
         $this->ciparser->new_parse('template_user','modules_user', 'detail_jurnal_layout',$this->data);
 
     }

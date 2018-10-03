@@ -88,6 +88,9 @@ class Journal extends MX_Controller
         $aktif = '';
         $button = '';
         foreach ($list as $news) {
+            $aktif = '';
+        $button = '';
+        $aktif = '';
             $no++;
             if ($news->status==1) {
                 $aktif = '<span class="text-success"><b>Accepted</b></span>';                
@@ -132,6 +135,8 @@ class Journal extends MX_Controller
         $button = '';
         $btn = '';
         foreach ($list as $news) {
+            $button = '';
+        $btn = '';
             $no++;
         if ($news->status == 1) {
                 $aktif = '<span class="text-default">Pending</span>';

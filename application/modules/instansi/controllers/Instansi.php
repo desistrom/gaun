@@ -11,15 +11,18 @@ class Instansi extends MX_Controller
     function __construct()
     {
     	// $this->load->model('login_model');
-        $this->load->helper('api');
-        $this->load->library('Recaptcha');
-        $this->load->module('Token');
-        if ($this->session->userdata('instansi_login') != true) {
+        // $this->load->helper('api');
+        // $this->load->library('Recaptcha');
+        // $this->load->module('Token');
+        if ($this->session->userdata('instansi_login') == false) {
             redirect('instansi/login');
         }
     }
 
     public function index(){
+        // print_r($this->session->userdata('data_user'));
+        // print_r('asda');
+        // echo CI_VERSION;
         $this->data['user']['nama'] = '';
         $this->data['breadcumb'] = '';
         $this->ciparser->new_parse('template_instansi','modules_instansi', 'dashboard_layout',$this->data);

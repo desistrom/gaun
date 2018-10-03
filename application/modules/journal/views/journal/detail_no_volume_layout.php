@@ -14,7 +14,7 @@
 					</ul>
 			</div>
 			<div class="sidebar">
-				<h4>Last Update</h4>
+				<h4>LAst Update</h4>
 				<div class="line-sidebar-title">
 					
 				</div>
@@ -39,12 +39,12 @@
 			<div class="line-sub-title-jurnal"></div>
 			<ul class="list-unstyled list-info-jurnal">
 				<li><?=$journal[0]['issn'];?></li>
-				<!-- <li>Volume 5 / Nomor : 1 / Published : 2016-12</li> -->
+				<li>Volume <?=$journal[0]['volume'];?>/ Nomor : <?=$journal[0]['nomor'];?> / Published : <?=$journal[0]['publish'];?></li>
 			</ul>
 			<ul class="list-unstyled list-detail-jurnal">
 				<?php foreach ($journal as $key => $value): ?>
-					<li><a href="<?=site_url('journal/detail_volume/'.$value['id_volume']);?>">
-						<span>Volume </span> <?=$value['volume'];?></a></li>
+					<li><a href="<?=site_url('journal/detail_artikel/'.$value['id_artikel']);?>">
+						<span>Artikel </span> <?=$value['artikel'];?></a></li>
 				<?php endforeach ?>
 			</ul>
 		</div>

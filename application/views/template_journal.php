@@ -10,6 +10,9 @@
      <link rel="stylesheet" href="<?=base_url();?>mockup_statis/assets/css/Navbar-with-mega-menu.css">
     <link rel="stylesheet" href="<?=base_url();?>mockup_statis/assets/css/styles.css">
     <style type="text/css">
+		   .navbar-nav > li > .dropdown-menu {
+		    right: 0!important;
+		}
     
 </style>
 <script type="text/javascript">
@@ -38,10 +41,16 @@
 
                           </ul>
                         </li> -->
-                      <li role="presentation" class=""><a href="login.html"> <i class="fa fa-list-ul" aria-hidden="true"></i> Kategori</a></li>
-                      <li role="presentation" class=""><a href="login.html"> <i class="fa fa-sign-in" aria-hidden="true"></i> Login</a></li>
+                     <li class="dropdown open"><a data-toggle="dropdown" aria-expanded="true" href="#" class="dropdown-toggle"><span class="fa fa-list-ul"></span> Kategori </a>
+		                 <ul class="dropdown-menu">
+		                 	<li></li>
+		                 	<li><a href="#">kesehatan</a></li>
+		                 	
+		                 </ul>
+		             </li>
+                      <li role="presentation" class=""><a href="#"> <i class="fa fa-sign-in" aria-hidden="true"></i> Login</a></li>
 
-                      <li role="presentation" class="active"><a href="page-search.html"> <i class="fa fa-search"></i> Search</a></li>
+                      <li role="presentation" class="active"><a href="#"> <i class="fa fa-search"></i> Search</a></li>
                       
 
                   </ul>

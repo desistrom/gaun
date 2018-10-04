@@ -40,7 +40,7 @@
 </style>
 <div class="col col-md-10 col-sm-10 col-xs-12 right-content" style="">
     <div class=" title-box">
-		<h3 class="title">Detail Volume</h3>
+		<h3 class="title">Detail Artikel</h3>
     </div>
     <div class="box-content">
     	<div class="row">
@@ -96,8 +96,12 @@
 									</ul>
 
 									<div class="filter-btn-download">
-										<div class="inline-block"><a href="#" class="btn btn-danger btn-abstract-download">Abstract Download </a></div>
-										<div class="inline-block"><a href="<?=site_url('assets/file/'.$artikel['file']);?>" class="btn btn-danger btn-download">Download</a></div>
+										<?php if($artikel['abstract_file'] != ''){?> 
+										<div class="inline-block"><a href="<?=site_url('user/journal/downloads_abs/'.$artikel['id_artikel']);?>" class="btn btn-danger btn-abstract-download">Abstract Download </a></div>
+										<?php }?>
+										<?php if($artikel['file'] != ''){?> 
+										<div class="inline-block"><a href="<?=site_url('user/journal/downloads/'.$artikel['id_artikel']);?>" class="btn btn-danger btn-download">Download</a></div>
+										<?php }?>
 									</div>
 
 
@@ -107,29 +111,23 @@
 									<div class="  line-sub-title-jurnal" style="margin-bottom: 2em;"></div>
 									<div class="col col-md-3 col-sm-4 col-xs-12 sub-left-content none-padding">
 									<div class="filter-cover-jurnal">
-										<img src="assets/img/jur-1.jpg" class="cover-jurnal-img">
+										<img src="<?=base_url();?>assets/media/<?=$artikel['futured_image'];?>" class="cover-jurnal-img">
 									</div>
 								</div>
 								<div class="col col-md-9 col-sm-8 col-xs-12 sub-right-content">
-									<h4>Jurnal Psikologi Pendidikan dan Perkembangan</h4>
+									<h4><?=$artikel['journal'];?></h4>
 									<div class="line-sub-title-jurnal"></div>
 									<ul class="list-unstyled list-info-jurnal" style="margin-bottom: 1em;">
-										<li>ISSN : 2301-7104</li>
-										<li>Volume 5 / Nomor : 1 / Published : 2016-12</li>
+										<li>ISSN : <?=$artikel['issn'];?></li>
+										<li>Volume <?=$artikel['volume'];?> / Nomor : <?=$artikel['nomor'];?> / Published : <?=$artikel['publish'];?></li>
 									</ul>
 									<ul class="list-unstyled list-detail-jurnal">
-										<li><a href="#">
-											<span>1 . </span> Hubungan antara school bonding dengan kecenderungan melakukan bullying pada siswa sekolah menengah atas
-										</a></li>
-										<li><a href="#">
-											<span>2 . </span> Perbedaan kemandirian pada remaja yang berstatus sebagai anak tunggal ditinjau dari persepsi pola asuh orangtua
-										</a></li>
-										<li><a href="#">
-											<span>3 . </span> Perbedaan student well-being ditinjau dari persepsi siswa terhadap perilaku internasional guru
-										</a></li>
-										<li><a href="#">
-											<span>5 . </span> Strategi orang tua dalam mengoptimalkan potensi seni anak berbakat istimewa
-										</a></li>
+										<?php foreach ($no_vol as $key => $value): ?>
+						                    <li><a href="<?=site_url('user/journal/detail_artikel/'.$value['id_artikel']); ?>">
+						                      <!-- <?=site_url('user/journal/detail_artikel/'.$value['id_artikel']);?> -->
+						                      Artikel : <?=$value['artikel'];?>
+						                    </a></li>
+						                <?php endforeach ?>
 										
 										
 

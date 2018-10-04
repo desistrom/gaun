@@ -88,8 +88,12 @@
 			</ul>
 
 			<div class="filter-btn-download">
-				<div class="inline-block"><a href="#" class="btn btn-danger btn-abstract-download">Abstract Download </a></div>
-				<div class="inline-block"><a href="#" class="btn btn-danger btn-download">Download</a></div>
+				<?php if($journal['abstract_file'] != ''){?> 
+				<div class="inline-block"><a href="<?=site_url('journal/downloads_abs/'.$journal['id_artikel']);?>" class="btn btn-danger btn-abstract-download">Abstract Download </a></div>
+				<?php }?>
+				<?php if($journal['file'] != ''){?> 
+				<div class="inline-block"><a href="<?=site_url('journal/downloads/'.$journal['id_artikel']);?>" class="btn btn-danger btn-download">Download</a></div>
+				<?php }?>
 			</div>
 
 

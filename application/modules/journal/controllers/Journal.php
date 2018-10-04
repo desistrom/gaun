@@ -97,4 +97,24 @@ class Journal extends MX_Controller
         $this->ciparser->new_parse('template_journal','modules_journal','journal/detail_artikel_layout',$this->data);
     }
 
+    public function downloads($id=null){
+        $art = $this->db->get_where('tb_artikel',array('id_artikel'=>$id))->row_array();
+       
+        $data['total'] = $art['total'] + 1;
+        $data['anonym'] = $art['anonym'] + 1;
+        $data['total_download'] = $art['total_download'] + 1;
+        $this->db->update('tb_artikel',$data,array('id_artikel'=>$id));
+        redirect(site_url('assets/file/'.$art['file']));
+    }
+
+    public function downloads_abs($id=null){
+        $art = $this->db->get_where('tb_artikel',array('id_artikel'=>$id))->row_array();
+
+        $data['anonym_abs'] = $art['anonym_abs'] + 1;
+        $data['total_abs'] = $art['total_abs'] + 1;
+        $data['total_download'] = $art['total_download'] + 1;
+        $this->db->update('tb_artikel',$data,array('id_artikel'=>$id));
+        redirect(site_url('assets/file/'.$art['abstract_file']));
+    }
+
 }

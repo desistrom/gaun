@@ -204,7 +204,7 @@ class Journal extends MX_Controller
     }
 
     public function detail_journal($id=null){
-        $sql = "SELECT * FROM tb_journal j JOIN tb_volume v ON j.id_journal = v.id_journal_ref where j.id_journal = ".$id;
+        $sql = "SELECT j.*, v.id_volume, v.volume FROM tb_journal j JOIN tb_volume v ON j.id_journal = v.id_journal_ref where j.id_journal = ".$id;
         $data = $this->db->query($sql,$id)->result_array();
         $this->data['volume'] = $data;
         $this->ciparser->new_parse('template_user','modules_user', 'detail_jurnal_layout',$this->data);
@@ -212,7 +212,7 @@ class Journal extends MX_Controller
     }
 
     public function detail_volume($id=null){
-        $sql = 'SELECT * FROM tb_journal j JOIN tb_volume v ON j.id_journal = v.id_journal_ref JOIN tb_no_volume n ON v.id_volume = n.id_volume_ref where id_volume = ?';
+        $sql = 'SELECT j.*, v.id_volume, v.volume, n.* FROM tb_journal j JOIN tb_volume v ON j.id_journal = v.id_journal_ref JOIN tb_no_volume n ON v.id_volume = n.id_volume_ref where id_volume = ?';
         $data = $this->db->query($sql,$id)->result_array();
         $this->data['no_volume'] = $data;
         $this->ciparser->new_parse('template_user','modules_user', 'detail_volume_layout',$this->data);
@@ -587,6 +587,9 @@ class Journal extends MX_Controller
         // echo json_encode($artikel);
         $this->data['artikel'] = $artikel;
         $this->data['author'] = $author;
+        $sql = 'SELECT *, a.judul as artikel, j.status as jstatus FROM tb_journal j JOIN tb_volume v ON j.id_journal = v.id_journal_ref JOIN tb_no_volume n ON v.id_volume = n.id_volume_ref join tb_artikel a ON n.id_no_volume = a.id_no_volume_ref where id_no_volume = ?';
+        $data_v = $this->db->query($sql,$artikel['id_no_volume'])->result_array();
+        $this->data['no_vol'] = $data_v;
         $this->ciparser->new_parse('template_user','modules_user', 'detail_artikel_jurnal_layout',$this->data);
     }
 
@@ -872,12 +875,43 @@ class Journal extends MX_Controller
         return $ext;
     }
 
-    // public function detail_jurnal(){
-       
-    //     $this->ciparser->new_parse('template_user','modules_user', 'detail_jurnal_layout');
-    // }
-    // public function detail_artikel_jurnal(){
-       
-    //     $this->ciparser->new_parse('template_user','modules_user', 'detail_artikel_jurnal_layout');
-    // }
+    public function downloads($id=null){
+        $downartikel = $this->db->get_where('tb_instansi',array('id_instansi'=>$this->data['user']['id_instansi_ref']))->row_array();
+        $art = $this->db->get_where('tb_artikel',array('id_artikel'=>$id))->row_array();
+        if ($downartikel['id_jenis_instansi'] == 1) {
+            $data['university'] = $art['university'] + 1;
+        }elseif ($downartikel['id_jenis_instansi'] == 2) {
+            $data['business'] = $art['business'] + 1;
+        }elseif ($downartikel['id_jenis_instansi'] == 3) {
+            $data['goverment'] = $art['goverment'] + 1;
+        }elseif ($downartikel['id_jenis_instansi'] == 4) {
+            $data['comunity'] = $art['comunity'] + 1;
+        }else{
+            $data['media'] = $art['media'] + 1;
+        }
+        $data['total'] = $art['total'] + 1;
+        $data['total_download'] = $art['total_download'] + 1;
+        $this->db->update('tb_artikel',$data,array('id_artikel'=>$id));
+        redirect(site_url('assets/file/'.$art['file']));
+    }
+
+    public function downloads_abs($id=null){
+        $downartikel = $this->db->get_where('tb_instansi',array('id_instansi'=>$this->data['user']['id_instansi_ref']))->row_array();
+        $art = $this->db->get_where('tb_artikel',array('id_artikel'=>$id))->row_array();
+        if ($downartikel['id_jenis_instansi'] == 1) {
+            $data['university_abs'] = $art['university_abs'] + 1;
+        }elseif ($downartikel['id_jenis_instansi'] == 2) {
+            $data['business_abs'] = $art['business_abs'] + 1;
+        }elseif ($downartikel['id_jenis_instansi'] == 3) {
+            $data['goverment_abs'] = $art['goverment_abs'] + 1;
+        }elseif ($downartikel['id_jenis_instansi'] == 4) {
+            $data['comunity_abs'] = $art['comunity_abs'] + 1;
+        }else{
+            $data['media_abs'] = $art['media_abs'] + 1;
+        }
+        $data['total_abs'] = $art['total_abs'] + 1;
+        $data['total_download'] = $art['total_download'] + 1;
+        $this->db->update('tb_artikel',$data,array('id_artikel'=>$id));
+        redirect(site_url('assets/file/'.$art['abstract_file']));
+    }
 }

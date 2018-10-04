@@ -158,10 +158,11 @@ margin-top: -11px;
                     </div>
                     <div class="footer-box-thumbnail">
                       <div class="sub-footer-box-thumbnail">
-                        <h5>status : publish</h5>
+                        <h5>status : <?php if($value['status'] == 0 ){ echo "Unsubmited";}elseif($value['status'] == 1){ echo "Pending"; }elseif($value['status'] == 2){echo "Accepted";}else{ echo "Ignored";} ?></h5>
                       </div>
                       <div class="sub-footer-box-thumbnail float-right" >
-                        <a href="#" class="btn btn-warning btn-clock-o"> <i class="fa fa-clock-o"></i> </a>
+                        <?php if($value['status'] == 0 ){ ?> <a href="<?=site_url('user/journal/submit/'.$value['id_journal']);?>" class="btn btn-primary"> <i class="fa fa-upload"></i> </a> <?php }elseif($value['status'] == 1){?> <a href="#" class="btn btn-warning"> <i class="fa fa-clock-o"></i> </a> <?php }elseif($value['status'] == 2){ ?> <a href="#" class="btn btn-success"> <i class="fa fa-check"></i> </a> <?php }else{ ?> <a href="#" class="btn btn-danger"> <i class="fa fa-times"></i> </a> <?php } ?>
+                        
                         <a href="#" class="btn btn-success btn-upload"> <i class="fa fa-check"></i> </a>
                       </div>
                       
@@ -170,6 +171,27 @@ margin-top: -11px;
               </div>
               
             <?php endforeach ?>
+            <?php if ($this->session->flashdata('notif') != '') { ?>
+    <div class="modal" tabindex="-1" role="dialog" id="modalSuccess">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title"><?php if ($this->session->flashdata('header') != '') { echo $this->session->flashdata('header'); }else{ echo "Sukses"; } ?></h3>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p><?=$this->session->flashdata('notif');?></p>
+          </div>
+          <div class="modal-footer">
+            <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  <?php } ?>
               <!-- <div class="filter-box-thumbnail col-md-3 col-sm-3 col-xs-12 " style="">
                 <div class="box-thumbnail">
                   <div class="header-box-thumbnail">
@@ -244,4 +266,9 @@ margin-top: -11px;
 
     </div>
 </div>
-
+<script src="<?=base_url().'assets/js/jquery-3.2.1.min.js';?>"></script>
+<script src="<?=base_url();?>assets/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="<?=base_url();?>assets/datatables/js/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript">
+  $('#modalSuccess').modal('show');
+</script>

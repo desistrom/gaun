@@ -157,6 +157,19 @@
         </div>
 
         <div class="form-group">
+          <label>File Abstrak</label>
+          <div class="col col-md-12 form-goup-file">
+            <div class="input-file-right">
+              <label class="btn btn-success btn-choose-foto" for="file_name_abs"><i class="fa fa-upload" ></i>Choose File</label>
+            </div>
+            <div class="input-file-left"><input type="file" class="form-control file" name="file_name_abs" id="file_name_abs"></div> 
+            <div><i>Max file size 100MB <br>Allowed file type : pdf, docx</i></div> 
+            <div class="error" id="ntf_file_name_abs"></div> 
+            <div class="error" id="ntf_abs_error"></div> 
+          </div>
+        </div>
+
+        <div class="form-group">
           <label>Nama Author</label>
           <input type="text" name="nama" class="form-control nama" id="nama" placeholder="Enter Nama Author ..." value="">
           <div class="error" id="ntf_nama"></div>
@@ -288,6 +301,18 @@
             <div class="error" id="ntf_error"></div> 
           </div>
         </div>
+        <div class="form-group">
+          <label>File Abstrak</label>
+          <div class="col col-md-12 form-goup-file">
+            <div class="input-file-right">
+              <label class="btn btn-success btn-choose-foto" for="file_name_abs"><i class="fa fa-upload" ></i>Choose File</label>
+            </div>
+            <div class="input-file-left"><input type="file" class="form-control file" name="file_name_abs" id="file_name_abs"></div> 
+            <div><i>Max file size 100MB <br>Allowed file type : pdf, docx</i></div> 
+            <div class="error" id="ntf_file_name_abs"></div> 
+            <div class="error" id="ntf_abs_error"></div> 
+          </div>
+        </div>
         <?php foreach ($author as $key => $value): ?>
         <div class="card_<?=$value['id_author'];?>" style="margin-bottom: 10px">
         <div class="form-group">
@@ -385,6 +410,7 @@
   $(document).ready(function () {
     
     $('body').on('click','#submit_artikel', function(){
+      $('.error').html('');
       $('#progresLoading').modal('show');
       var nama = [];
       var jabatan = [];
@@ -398,6 +424,7 @@
       });
       console.log(nama);
       var file_data = $('#file_name').prop('files')[0];
+      var file_data_abs = $('#file_name_abs').prop('files')[0];
       $('#content').val(CKEDITOR.instances.content.getData());
       $('#ref').val(CKEDITOR.instances.references.getData());
       form_data.append('judul', $('#judul').val());
@@ -409,7 +436,7 @@
       form_data.append('ref', $('#ref').val());
       form_data.append('nama', nama);
       form_data.append('jabatan', jabatan);
-      if ($('agree').is(':checked')) {
+      if ($('#agree').is(':checked')) {
 
       }else{
         $('.error').show();
@@ -423,6 +450,7 @@
       // form_data.append('start_event', $('#start_event').val());
       // form_data.append('end_event', $('#end_event').val());
       form_data.append('file_name', file_data);
+      form_data.append('file_name_abs', file_data_abs);
       $.ajax({
           url : window.location.href,
           dataType : 'json',

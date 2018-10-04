@@ -13,52 +13,117 @@ class User extends MX_Controller
 	}
 
 	public function index(){
+        // print_r($this->session->userdata('data_user'));
 		$this->data['user']['nama'] = '';
-        $this->data['breadcumb'] = 'Journal';
+        $this->data['breadcumb'] = 'List User';
         $this->data['view'] = 'list';
         $this->ciparser->new_parse('template_instansi','modules_instansi', 'list_user_layout',$this->data);
 	}
 
-	public function ajax_list($id)
+    public function add(){
+        $user = $this->session->userdata('data_user');
+        if($this->input->method() == 'post'){
+            $ret['state'] = 0;
+            $ret['status'] = 0;
+            $this->form_validation->set_error_delimiters('', '');
+            $this->form_validation->set_rules('username','username', 'required|is_unique[tb_journal_user.username]');
+            $this->form_validation->set_rules('password','Password', 'required');
+            $this->form_validation->set_rules('repassword','Re - Password', 'required|matches[password]');
+            if ($this->form_validation->run() == true) {
+                $ret['state'] = 1;
+                $input = $this->input->post();
+                $data['username'] = $input['username'];
+                $data['password'] = $input['password'];
+                $data['id_instansi'] = $user['id_instansi'];
+                if ($this->db->insert('tb_journal_user',$data)) {
+                    $ret['status'] = 1;
+                    $ret['url'] = site_url('instansi/user');
+                    $this->session->set_flashdata('notif','Insert Berhasil');
+                }
+            }
+            $ret['notif']['username'] = form_error('username');
+            $ret['notif']['password'] = form_error('password');
+            $ret['notif']['repassword'] = form_error('repassword');
+            echo  json_encode($ret);
+            exit();
+        }
+        $this->data['breadcumb'] = 'Add User';
+        $this->data['view'] = 'add';
+        $this->ciparser->new_parse('template_instansi','modules_instansi', 'list_user_layout',$this->data);
+    }
+
+    public function edit($id=null){
+        $user = $this->session->userdata('data_user');
+        $uj = $this->db->get_where('tb_journal_user',array('id_journal_user'=>$id))->row_array();
+        if($this->input->method() == 'post'){
+            $ret['state'] = 0;
+            $ret['status'] = 0;
+            $this->form_validation->set_error_delimiters('', '');
+                $input = $this->input->post();
+            if($input['username'] != $uj['username']){
+                $this->form_validation->set_rules('username','username', 'required|is_unique[tb_journal_user.username]');
+            }else{
+                $this->form_validation->set_rules('username','username', 'required');              
+            }
+            $this->form_validation->set_rules('password','Password', '');
+            $this->form_validation->set_rules('repassword','Re - Password', 'matches[password]');
+            if ($this->form_validation->run() == true) {
+                $ret['state'] = 1;
+                $data['username'] = $input['username'];
+                if ($input['password'] != '') {
+                    $data['password'] = $input['password'];
+                }
+                if ($this->db->update('tb_journal_user',$data,array('id_journal_user'=>$id))) {
+                    $ret['status'] = 1;
+                    $ret['url'] = site_url('instansi/user');
+                    $this->session->set_flashdata('notif','Update Berhasil');
+                }
+            }
+            $ret['notif']['username'] = form_error('username');
+            $ret['notif']['password'] = form_error('password');
+            $ret['notif']['repassword'] = form_error('repassword');
+            echo  json_encode($ret);
+            exit();
+        }
+        $this->data['breadcumb'] = 'Add User';
+        $this->data['view'] = 'edit';
+        $this->data['user'] = $uj;
+        $this->ciparser->new_parse('template_instansi','modules_instansi', 'list_user_layout',$this->data);
+    }
+
+	public function ajax_list()
     {
-        $this->load->model('journal_model');
-        $list = $this->journal_model->get_datatables($id);
+        $this->load->model('user_model');
+        $list = $this->user_model->get_datatables();
         $data = array();
         $no = $_POST['start'];
         $aktif = '';
         $button = '';
         foreach ($list as $news) {
-            $aktif = '';
         $button = '';
         $aktif = '';
             $no++;
             if ($news->status==1) {
-                $aktif = '<span class="text-success"><b>Accepted</b></span>';                
+                $aktif = '<span class="text-success"><b>Enabled</b></span>';
+                $btn = '<button class="btn btn-danger btn-sm btn-sts" id="'.$news->id_journal_user.'" data-toggle="tooltip" title="Disable"><i class="fa fa-eye-slash"></i> Disable</button>';
             }else{
-                if($news->status == 0){
-                    $aktif = '<span class="text-defafult"><b>Pending</b></span>';
-                }else{
-                    $aktif = '<span class="text-danger"><b>Ignored</b></span>';
-                }
-                $button = '<button class="btn btn-info btn-sm btn-acc" id="'.$news->id_artikel.'" data-toggle="tooltip" title="accept"><i class="fa fa-check"></i> Accepted</button> <button class="btn btn-danger btn-sm btn-ign" id="'.$news->id_artikel.'" data-toggle="tooltip" title="Ignore"><i class="fa fa-times"></i> Ignored</button>';
+                $aktif = '<span class="text-danger"><b>Disabled</b></span>';
+                $btn = '<button class="btn btn-danger btn-sm btn-sts" id="'.$news->id_journal_user.'" data-toggle="tooltip" title="Enabled"><i class="fa fa-eye"></i> Enable</button>';
             }
-            $button .= ' <button class="btn btn-success btn-sm btn-detail" id="'.$news->id_artikel.'"><i class="fa fa-eye"></i> Detail</button>';
+            $button .= ' <a href="'.site_url('instansi/user/edit/'.$news->id_journal_user).'" class="btn btn-success btn-sm btn-detail" id="'.$news->id_journal_user.'"><i class="fa fa-pencil"></i> Edit</button>';
             $row = array();
             $row[] = $no;
-            $row[] = '<div class="detail" id="'.$news->id_artikel.'">'.word_limiter($news->judul,10).'</div>';
-            $row[] = $news->volume;
-            $row[] = $news->nomor;
-            // $row[] = $news->judul_journal;
+            $row[] = '<div class="detail" id="'.$news->id_journal_user.'">'.word_limiter($news->username,10).'</div>';
             $row[] = $aktif;
-            $row[] = $button;
+            $row[] = $btn.' '.$button;
  
             $data[] = $row;
         }
  
         $output = array(
                         "draw" => $_POST['draw'],
-                        "recordsTotal" => $this->journal_model->count_all(),
-                        "recordsFiltered" => $this->journal_model->count_filtered($id),
+                        "recordsTotal" => $this->user_model->count_all(),
+                        "recordsFiltered" => $this->user_model->count_filtered(),
                         "data" => $data,
                 );
         //output to json format

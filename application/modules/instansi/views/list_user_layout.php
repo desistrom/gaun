@@ -42,17 +42,14 @@
 <div class="box">
 	<div class="box-body">
 		<div class="col col-md-12 col-sm-12 col-xs-12" style="padding-left: 0; margin-bottom: 15px;">
-			<a href="<?=site_url('instansi/add_event');?>" class="btn btn-success">Tambah User Journal</a>
+			<a href="<?=site_url('instansi/user/add');?>" class="btn btn-success">Tambah User Journal</a>
 		</div>
 		<div class="col col-md-12 col-xs-12 table-responsive">
 			<table class="table table-bordered  dataTable" id="table">
 				<thead>
 					<th>No</th>
-					<th>Judul</th>
-					<th>Deskripsi</th>
-          <th>Tempat</th>
-          <th>Tanggal</th>
-          <th>Waktu</th>
+					<th>Username</th>
+					<th>status</th>
 					<th>Opsi</th>
 				</thead>
 				<tbody>
@@ -85,168 +82,69 @@
   <?php } ?>
 <?php }elseif ($view == 'add') { ?>
 <form role="form">
-<div class="col col-md-8 col-sm-8 col-xs-12" style="padding-top: 1em;">
-  <div class="panel">
-    <div class="panel-header" style="background-color:  #F5F5F5;">
-        <div class="box-header with-border">
-    <h3 class="box-title"> Event Content</h3>
-  </div>
-    </div>
-    <div class="panel-body"><!-- /.box-header -->
-  <div class="box-body">
-    
-      <!-- text input -->
-      <div class="form-group">
-        <label>Judul Event</label>
-        <input type="text" name="judul" class="form-control" id="judul" placeholder="Enter Judul Event ..." value="">
-        <div class="error" id="ntf_judul"></div>
-      </div>
-      <div class="form-group">
-      <label>Content Event</label>
-      <?php echo $this->ckeditor->editor("content", "" ); ?>
-        <input type="hidden" name="content" id="content">
-        <div class="error" id="ntf_content"></div>
-      </div>
-  </div></div>
-
-  </div>
-
-</div>
-<div class="col col-md-4 col-sm-4 col-xs-12" style="padding-top: 1em;">
-  <div class="panel ">
+  <div class="col col-md-12 col-sm-12 col-xs-12" style="padding-top: 1em;">
+    <div class="panel">
       <div class="panel-header" style="background-color:  #F5F5F5;">
-        <div class="box-header with-border">
-        <h3 class="box-title">Event Setting</h3>
+          <div class="box-header with-border">
+            <h3 class="box-title"> Add User</h3>
+          </div>
+      </div>
+      <div class="panel-body"><!-- /.box-header -->
+        <div class="box-body">
+          <div class="form-group">
+            <label>Username</label>
+            <input type="text" name="username" class="form-control" id="username" placeholder="Enter Username ..." value="">
+            <div class="error" id="ntf_username"></div>
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" name="password" id="password" class="form-control">
+            <div class="error" id="ntf_password"></div>
+          </div>
+          <div class="form-group">
+            <label>Re-type Password</label>
+            <input type="password" name="repassword" id="repassword" class="form-control">
+            <div class="error" id="ntf_repassword"></div>
+          </div>
+         <button type="button" class="btn btn-primary" id="submit">Submit</button>
+        </div>
       </div>
     </div>
-    <div class="panel-body">
-      <!-- textarea -->
-      <div class="form-group">
-        <label>Lokasi Event</label>
-        <input type="text" name="tempat" class="form-control" placeholder="Lokasi Event" id="tempat">
-        <div class="error" id="ntf_tempat"></div>
-      </div>
-      <div class="form-group">
-        <label>Tanggal Event</label>
-          <input type="date" name="tgl_event" class="form-control" id="tgl_event">
-        <div class="error" id="ntf_tgl_event"></div>
-      </div>
-      <div class="form-group">
-        <label>Start Event</label>
-          <input type="time" name="start_event" class="form-control" id="start_event">
-        <div class="error" id="ntf_start_event"></div>
-      </div>
-      <div class="form-group">
-        <label>End Event</label>
-          <input type="time" name="end_event" class="form-control" id="end_event">
-        <div class="error" id="ntf_end_event"></div>
-      </div>
-      <div class="form-group">
-      <label>Futured Image Event</label>
-      <div class="col col-md-12 form-goup-file">
-        <div class="input-file-right"><label class="btn btn-success btn-choose-foto" for="file_name"><i class="fa fa-upload" ></i>Choose File</label></div>
-        <div class="input-file-left"><input type="file" class="form-control file" name="file_name" id="file_name"></div> 
-        <div><i>*for best result use 450x240 px. <br> Max file size 400KB, Width 200px - 1024px. <br>Allowed file type : jpeg, jpg, png, gif.</i></div> 
-        <div class="error" id="ntf_file_name"></div> 
-        <div class="error" id="ntf_error"></div> 
-      </div>
-    </div>
-  <!--     <div class="form-group">
-        <label>Gambar Berita</label>
-        <input type="file" name="file_name" class="form-control" id="file_name">
-        <div class="error" id="ntf_file_name"></div>
-      </div> -->
-       <button type="button" class="btn btn-primary" id="submit">Submit</button>
-    </div>
-
-
-</div>
-</div>
-  </form>
+  </div>
+</form>
   
 <?php }else{ ?>
-  <!-- /.box-header -->
 <form role="form">
-<div class="col col-md-8 col-sm-8 col-xs-12" style="padding-top: 1em;">
-  <div class="panel">
-    <div class="panel-header" style="background-color:  #F5F5F5;">
-        <div class="box-header with-border">
-    <h3 class="box-title"> Event Content</h3>
-  </div>
-    </div>
-    <div class="panel-body"><!-- /.box-header -->
-  <div class="box-body">
-    
-      <!-- text input -->
-      <div class="form-group">
-        <label>Judul Event</label>
-        <input type="text" name="judul" class="form-control" id="judul" placeholder="Enter Judul Berita ..." value="<?=$news['judul_event'];?>">
-        <div class="error" id="ntf_judul"></div>
-      </div>
-      <div class="form-group">
-      <label>Content Event</label>
-      <?php echo $this->ckeditor->editor("content", $news['deskripsi_event'] ); ?>
-        <input type="hidden" name="content" id="content">
-        <div class="error" id="ntf_content"></div>
-      </div>
-  </div></div>
-
-  </div>
-
-</div>
-<div class="col col-md-4 col-sm-4 col-xs-12" style="padding-top: 1em;">
-  <div class="panel ">
+  <div class="col col-md-12 col-sm-12 col-xs-12" style="padding-top: 1em;">
+    <div class="panel">
       <div class="panel-header" style="background-color:  #F5F5F5;">
-        <div class="box-header with-border">
-        <h3 class="box-title">Event Setting</h3>
+          <div class="box-header with-border">
+            <h3 class="box-title"> Add User</h3>
+          </div>
+      </div>
+      <div class="panel-body"><!-- /.box-header -->
+        <div class="box-body">
+          <div class="form-group">
+            <label>Username</label>
+            <input type="text" name="username" class="form-control" id="username" placeholder="Enter Username ..." value="<?=$user['username']?>">
+            <div class="error" id="ntf_username"></div>
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" name="password" id="password" class="form-control">
+            <div class="error" id="ntf_password"></div>
+          </div>
+          <div class="form-group">
+            <label>Re-type Password</label>
+            <input type="password" name="repassword" id="repassword" class="form-control">
+            <div class="error" id="ntf_repassword"></div>
+          </div>
+         <button type="button" class="btn btn-primary" id="submit">Submit</button>
+        </div>
       </div>
     </div>
-    <div class="panel-body">
-      <!-- textarea -->
-      <div class="form-group">
-        <label>Lokasi Event</label>
-        <input type="text" name="tempat" class="form-control" placeholder="Lokasi Event" id="tempat" value="<?=$news['tempat_event'];?>">
-        <div class="error" id="ntf_tempat"></div>
-      </div>
-      <div class="form-group">
-        <label>Tanggal Event</label>
-          <input type="date" name="tgl_event" class="form-control" id="tgl_event" value="<?=$news['tgl_event'];?>">
-        <div class="error" id="ntf_tgl_event"></div>
-      </div>
-      <div class="form-group">
-        <label>Start Event</label>
-          <input type="time" name="start_event" class="form-control" id="start_event" value="<?=$news['start_event'];?>">
-        <div class="error" id="ntf_start_event"></div>
-      </div>
-      <div class="form-group">
-        <label>End Event</label>
-          <input type="time" name="end_event" class="form-control" id="end_event" value="<?=$news['end_event'];?>">
-        <div class="error" id="ntf_end_event"></div>
-      </div>
-      <div class="form-group">
-      <label>Futured Image Event</label>
-      <div class="col col-md-12 form-goup-file">
-        <div class="input-file-right"><label class="btn btn-success btn-choose-foto" for="file_name"><i class="fa fa-upload" ></i>Choose File</label></div>
-        <div class="input-file-left"><input type="file" class="form-control file" name="file_name" id="file_name"></div> 
-        <div><i>*for best result use 450x240 px. <br> Max file size 400KB, Width 200px - 1024px. <br>Allowed file type : jpeg, jpg, png, gif.</i></div> 
-        <div class="error" id="ntf_file_name"></div> 
-      </div>
-    </div>
-     <!--  <div class="form-group">
-        <label>Gambar Berita</label>
-        <input type="file" name="file_name" class="form-control" id="file_name">
-        <div class="error" id="ntf_file_name"></div>
-      </div> -->
-      <?php if ($news['futured_image'] != ''): $images = explode("/", $news['futured_image']); ?>
-        <img style="width: 100%; margin-bottom: 10px;" src="<?php if (isset($images[1])) { echo $news['futured_image']; }else{ echo base_url().'assets/media/'.$news['futured_image']; } ?>">
-      <?php endif ?>
-       <button type="button" class="btn btn-primary" id="submit">Submit</button>
-    </div>
-
-
-</div>
-</div>
-  </form>
+  </div>
+</form>
 <?php } ?>
 <div class="modal" tabindex="-1" role="dialog" id="modal_comment">
   <div class="modal-dialog modal-lg" role="document">
@@ -295,15 +193,9 @@
     $('body').on('click','#submit', function(){
       $('#progresLoading').modal('show');
       var form_data = new FormData();
-      var file_data = $('#file_name').prop('files')[0];
-      $('#content').val(CKEDITOR.instances.content.getData());
-      form_data.append('judul', $('#judul').val());
-      form_data.append('tempat', $('#tempat').val());
-      form_data.append('content', $('#content').val());
-      form_data.append('tgl_event', $('#tgl_event').val());
-      form_data.append('start_event', $('#start_event').val());
-      form_data.append('end_event', $('#end_event').val());
-      form_data.append('file_name', file_data);
+      form_data.append('username', $('#username').val());
+      form_data.append('password', $('#password').val());
+      form_data.append('repassword', $('#repassword').val());
       $.ajax({
           url : window.location.href,
           dataType : 'json',
@@ -345,36 +237,6 @@
         window.location.href = window.location.href;
       });
     });
-    function slugify(text)
-    {
-      return text.toString().toLowerCase()
-        .replace(/\s+/g, '-')           // Replace spaces with -
-        .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
-        .replace(/\-\-+/g, '-')         // Replace multiple - with single -
-        .replace(/^-+/, '')             // Trim - from start of text
-        .replace(/-+$/, '');            // Trim - from end of text
-    }
-    $('#judul').keyup(function () {
-      var slug = slugify($('#judul').val());
-      $('#slug').val(slug);
-    });
-    $('body').on('click','.comment',function(){
-      var id = $(this).attr('id');
-      $.ajax({
-          url : base_url+'admin/news/comment_ajax',
-          dataType : 'json',
-          type : 'POST',
-          data : {'id' : id}
-      }).done(function(data){
-        console.log(data);
-        $('#modal_comment .modal-body').html(data);
-        $('#modal_comment').modal('show');
-        // window.location.href = window.location.href;
-      });
-    });
-    $('body').on('click','.btn_rss', function () {
-      $('#progresLoading').modal('show');
-    });
     $('#modalSuccess').modal('show');
   });
 </script>
@@ -393,7 +255,7 @@ $(document).ready(function() {
  
         // Load data for the table's content from an Ajax source
         "ajax": {
-            "url": "<?php echo site_url('instansi/ajax_list_event')?>",
+            "url": "<?php echo site_url('instansi/user/ajax_list')?>",
             "type": "POST"
         },
  

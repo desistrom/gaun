@@ -3,9 +3,9 @@
 class User_model extends CI_Model 
 {
     var $table = 'tb_journal_user';
-    var $column_order = array(null, 'judul_event','tgl_event','tempat_event'); //set column field database for datatable orderable
-    var $column_search = array('judul_event','tgl_event','tempat_event'); //set column field database for datatable searchable 
-    var $order = array('id_event' => 'asc'); // default order 
+    var $column_order = array(null, 'username','status'); //set column field database for datatable orderable
+    var $column_search = array('username','status'); //set column field database for datatable searchable 
+    var $order = array('id_journal_user' => 'asc'); // default order 
  
     public function __construct()
     {
@@ -19,7 +19,7 @@ class User_model extends CI_Model
          // $sql = "SELECT * FROM tb_news n join tb_kategori_news k on n.id_kategori_ref = k.id_kategori_news";
         $this->db->from($this->table);
         // $this->db->join('tb_kategori_news', 'id_kategori_news = id_kategori_ref');
-        $this->db->where('id_instansi_ref', $user['id_instansi']);
+        $this->db->where('id_instansi', $user['id_instansi']);
  
         $i = 0;
      

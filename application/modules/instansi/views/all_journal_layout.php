@@ -303,24 +303,10 @@ color: #D10909!important;
                     <div class="header-box-thumbnail">
                       <img class="thumbnail-cover" src="<?=base_url();?>assets/media/<?=$value['futured_image'];?>">
                       <div class="filter-button-action">
-                        <!-- <div>
-                          <a href="<?=site_url('user/journal/edit/'.$value['id_journal']);?>">
-                            <div class="btn-action">
-                              <i class="fa fa-pencil"></i>
-                              
-                            </div>
-                          </a>
-                        </div> -->
-                        <div>
-                          <!-- <div class="btn-action">
-                            <a href="#"><i class="fa fa-pencil"></i></a>
-                            
-                          </div> -->
-                        </div>
                       </div>
                     </div>
                     <div class="body-box-thumbnail">
-                      <h5 class="title-thumbnail"><a href="<?=site_url('user/journal/detail_journal/'.$value['id_journal']);?>"><?=$value['judul'];?></a></h5>
+                      <h5 class="title-thumbnail"><a href="<?=site_url('instansi/journal/detail_journal/'.$value['id_journal']);?>"><?=$value['judul'];?></a></h5>
                       <h6><?=$value['jumlah'];?> Volume</h6>
                     </div>
                     <div class="footer-box-thumbnail">
@@ -328,6 +314,7 @@ color: #D10909!important;
                         <h5>status : <?php if($value['status'] == 0 ){ echo "Unsubmited";}elseif($value['status'] == 1){ echo "Pending"; }elseif($value['status'] == 2){echo "Accepted";}else{ echo "Ignored";} ?></h5>
                       </div>
                       <div class="sub-footer-box-thumbnail float-right" >
+                        
                       </div>
                       
                     </div>
@@ -356,75 +343,6 @@ color: #D10909!important;
       </div>
     </div>
   <?php } ?>
-              <!-- <div class="filter-box-thumbnail col-md-3 col-sm-3 col-xs-12 " style="">
-                <div class="box-thumbnail">
-                  <div class="header-box-thumbnail">
-                    <img class="thumbnail-cover" src="<?=base_url();?>mockup_statis/assets/img/jur-3.jpg">
-                    <div class="filter-button-action">
-                      <div>
-                        <a href="#">
-                          <div class="btn-action">
-                            <i class="fa fa-pencil"></i>
-                            
-                          </div>
-                        </a>
-                      </div>
-                      <div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="body-box-thumbnail">
-                    <h5 class="title-thumbnail"><a href="<?=site_url('user/journal/detail_jurnal');?>">Jurnal Psikologi Pendidikan dan Perkembangan</a></h5>
-                    <h6>vol.5</h6>
-                  </div>
-                </div>
-             </div>  -->
-              <!-- <div class="filter-box-thumbnail col-md-3 col-sm-3 col-xs-12 " style="">
-                <div class="box-thumbnail">
-                  <div class="header-box-thumbnail">
-                    <img class="thumbnail-cover" src="<?=base_url();?>mockup_statis/assets/img/jur-3.jpg">
-                    <div class="filter-button-action">
-                      <div>
-                        <a href="#">
-                          <div class="btn-action">
-                            <i class="fa fa-pencil"></i>
-                            
-                          </div>
-                        </a>
-                      </div>
-                      <div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="body-box-thumbnail">
-                    <h5 class="title-thumbnail"><a href="<?=site_url('user/journal/detail_jurnal');?>">Jurnal Psikologi Pendidikan dan Perkembangan</a></h5>
-                    <h6>vol.5</h6>
-                  </div>
-                </div>
-             </div> -->
-              <!-- <div class="filter-box-thumbnail col-md-3 col-sm-3 col-xs-12 " style="">
-                <div class="box-thumbnail">
-                  <div class="header-box-thumbnail">
-                    <img class="thumbnail-cover" src="<?=base_url();?>mockup_statis/assets/img/jur-3.jpg">
-                    <div class="filter-button-action">
-                      <div>
-                        <a href="#">
-                          <div class="btn-action">
-                            <i class="fa fa-pencil"></i>
-                            
-                          </div>
-                        </a>
-                      </div>
-                      <div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="body-box-thumbnail">
-                    <h5 class="title-thumbnail"><a href="<?=site_url('user/journal/detail_jurnal');?>">Jurnal Psikologi Pendidikan dan Perkembangan</a></h5>
-                    <h6>vol.5</h6>
-                  </div>
-                </div>
-             </div> -->
            </div>
     		</div>
 

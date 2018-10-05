@@ -259,7 +259,7 @@ class Journal extends MX_Controller
                 if (isset($_FILES['file_name']) && isset($_FILES['file_name_abs'])) {
                     $file = $this->upload_file($_FILES['file_name']);
                     $file_abs = $this->upload_file($_FILES['file_name_abs']);
-                    if (isset($file['error']) && isset($file_abs['abs_error'])) {
+                    if (isset($file['error']) || isset($file_abs['abs_error'])) {
                         $ret['notif'] = $file;
                         $ret['notif'] = $file_abs;
                     }else{
@@ -499,7 +499,7 @@ class Journal extends MX_Controller
         }
         $this->data['view'] = 'add';
         // $this->data['breadcumb'] = $journal['judul'];
-        $journal = $this->db->get('tb_journal')->result_array();
+        $journal = $this->db->get_where('tb_journal',array('id_user_ref'=>$this->data['user']['id_pengguna']))->result_array();
         // $volume = $this->db->get('tb_volume')->result_array();
         $this->data['journal'] = $journal;
         $this->ciparser->new_parse('template_user','modules_user', 'volume_layout',$this->data);
@@ -533,7 +533,7 @@ class Journal extends MX_Controller
             exit();
         }
         $this->data['view'] = 'add';
-        $journal = $this->db->get('tb_journal')->result_array();
+        $journal = $this->db->get_where('tb_journal',array('id_user_ref'=>$this->data['user']['id_pengguna']))->result_array();
         $this->data['journal'] = $journal;
         $this->ciparser->new_parse('template_user','modules_user', 'nomor_layout',$this->data);
     }

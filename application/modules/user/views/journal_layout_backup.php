@@ -149,7 +149,7 @@
         <div class="error" id="ntf_kategori"></div>
       </div>
       <div class="form-group">
-      <label>Futured Image Journal</label>
+      <label>Journal Cover</label>
       <div class="col col-md-12 form-goup-file">
         <div class="input-file-right"><label class="btn btn-success btn-choose-foto" for="file_name"><i class="fa fa-upload" ></i>Choose File</label></div>
         <div class="input-file-left"><input type="file" class="form-control file" name="file_name" id="file_name"></div> 
@@ -227,7 +227,7 @@
         <div class="error" id="ntf_kategori"></div>
       </div>
       <div class="form-group">
-      <label>Futured Image Journal</label>
+      <label>Journal Cover</label>
       <div class="col col-md-12 form-goup-file">
         <div class="input-file-right"><label class="btn btn-success btn-choose-foto" for="file_name"><i class="fa fa-upload" ></i>Choose File</label></div>
         <div class="input-file-left"><input type="file" class="form-control file" name="file_name" id="file_name"></div> 

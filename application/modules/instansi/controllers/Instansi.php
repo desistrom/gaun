@@ -21,9 +21,10 @@ class Instansi extends MX_Controller
 
     public function index(){
         // print_r($this->session->userdata('data_user'));
+        $ins = $this->session->userdata('data_user');
         // print_r('asda');
         // echo CI_VERSION;
-        $this->data['user']['nama'] = '';
+        $this->data['user']['nama'] = $ins['nm_instansi'];
         $this->data['breadcumb'] = '';
         $this->ciparser->new_parse('template_instansi','modules_instansi', 'dashboard_layout',$this->data);
     }

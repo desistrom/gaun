@@ -39,7 +39,7 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="<?=base_url();?>" class="logo" style="background:white;">
+    <a href="<?=site_url('instansi');?>" class="logo" style="background:white;">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>IDren</b></span>
       <!-- logo for regular state and mobile devices -->
@@ -111,7 +111,7 @@
 
         <li class="treeview <?php if(current_url() == site_url('instansi/user')){ ?> active <?php } ?>">
           <a href="<?=site_url('instansi/user');?>">
-            <i class="fa fa-user"></i> <span>User Journal</span>
+            <i class="fa fa-user"></i> <span>Admin Journal</span>
             <span class="pull-right-container">
 
             </span>
@@ -146,7 +146,7 @@
           </ul>
         </li>
 
-        <li class=" treeview <?php if(current_url() == site_url('instansi/journal') || current_url() == site_url('instansi/journal/accepted') || current_url() == site_url('instansi/journal/ignored')){ ?>  active <?php } ?>">
+        <!-- <li class=" treeview <?php if(current_url() == site_url('instansi/journal') || current_url() == site_url('instansi/journal/accepted') || current_url() == site_url('instansi/journal/ignored')){ ?>  active <?php } ?>">
           <a href="#">
             <i class="fa fa-book"></i>  <span>Journal</span>
             <span class="pull-right-container">
@@ -159,7 +159,7 @@
             <li <?php if(current_url() == site_url('instansi/journal/accepted')){ ?> class="active" <?php } ?>><a href="<?=site_url('instansi/journal/accepted');?>"><i class="fa fa-check"></i> Journal Accepted </a></li>
             <li <?php if(current_url() == site_url('instansi/journal/rejected')){ ?> class="active" <?php } ?>><a href="<?=site_url('instansi/journal/rejected');?>"><i class="fa fa-times"></i> Journal Rejected </a></li>
           </ul>
-        </li>
+        </li> -->
         
       </ul>
     </section>

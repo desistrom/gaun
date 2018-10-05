@@ -46,7 +46,7 @@ class Login extends MX_Controller
                     $ret['url'] = site_url('journal/admin');
 
                 }else{
-                    $ret['notif']['login'] = 'username or password worng';
+                    $ret['notif']['login'] = 'username or password wrong';
                 }
             }else{
                 if ($response['success'] == '') {

@@ -28,21 +28,35 @@ class User extends MX_Controller
             $this->form_validation->set_error_delimiters('', '');
             $this->form_validation->set_rules('username','username', 'required|is_unique[tb_journal_user.username]');
             $this->form_validation->set_rules('password','Password', 'required');
+            $this->form_validation->set_rules('email','Email', 'required');
             $this->form_validation->set_rules('repassword','Re - Password', 'required|matches[password]');
             if ($this->form_validation->run() == true) {
                 $ret['state'] = 1;
                 $input = $this->input->post();
                 $data['username'] = $input['username'];
-                $data['password'] = $input['password'];
+                $data['email'] = $input['email'];
+                $data['password'] = sha1($input['password']);
                 $data['id_instansi'] = $user['id_instansi'];
                 if ($this->db->insert('tb_journal_user',$data)) {
                     $ret['status'] = 1;
                     $ret['url'] = site_url('instansi/user');
-                    $this->session->set_flashdata('notif','Insert Berhasil');
+                    // $this->session->set_flashdata('notif','Insert Berhasil');
+                    $this->load->helper('email_send_helper');
+                    $data['email_from'] = 'support@IDREN';
+                    $data['name_from'] = 'Admin Support';
+                    $data['email_to'] = $data['email'];
+                    $data['subject'] = 'Pendaftaran Berhasil';
+                    $data['content'] = 'Halo <br>h3>berikut data login anda:</h3><br><li>Username : '.$data['username'].'</li><li>Password : '.$input['password'].'</li><b>login dashboard bisa di akses di link berikut : </b>'.site_url('journal/admin').'<br><center>terimakasih</center>';
+                    if (email_send($data) == true) {
+                        $user_data = 'success';
+                        $this->session->set_flashdata("header","Registrasi Berhasil");
+                        $this->session->set_flashdata("notif","Registrasi Anda sedang kami Proses, tunggu konfirmasi selanjutnya dari Admin");
+                    }
                 }
             }
             $ret['notif']['username'] = form_error('username');
             $ret['notif']['password'] = form_error('password');
+            $ret['notif']['email'] = form_error('email');
             $ret['notif']['repassword'] = form_error('repassword');
             echo  json_encode($ret);
             exit();

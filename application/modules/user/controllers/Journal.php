@@ -63,8 +63,8 @@ class Journal extends MX_Controller
     }
 
     public function katalog($param=null){
-        $sql = "SELECT * FROM tb_journal WHERE id_user_ref = ? AND judul LIKE '".$param."%'";
-        $journal = $this->db->query($sql,$this->data['user']['id_pengguna'])->result_array();
+        $sql = "SELECT * FROM tb_journal WHERE status = 2 AND judul LIKE '".$param."%'";
+        $journal = $this->db->query($sql)->result_array();
         foreach ($journal as $key => $value) {
             $jumlah = $this->db->get_where('tb_volume',array('id_journal_ref'=>$value['id_journal']))->num_rows();
             $journal[$key]['jumlah'] = $jumlah;
@@ -76,8 +76,8 @@ class Journal extends MX_Controller
     }
 
     public function search($param=null){
-        $sql = "SELECT * FROM tb_journal WHERE id_user_ref = ? AND judul LIKE '%".$param."%'";
-        $journal = $this->db->query($sql,$this->data['user']['id_pengguna'])->result_array();
+        $sql = "SELECT * FROM tb_journal WHERE status = 2 AND judul LIKE '%".$param."%'";
+        $journal = $this->db->query($sql)->result_array();
         foreach ($journal as $key => $value) {
             $jumlah = $this->db->get_where('tb_volume',array('id_journal_ref'=>$value['id_journal']))->num_rows();
             $journal[$key]['jumlah'] = $jumlah;

@@ -913,6 +913,7 @@ class Journal extends MX_Controller
 
     public function upload_file_abstract($file){
         $imagename = $file['name'];
+        ini_set('max_file_uploads', 3);
         // return $imagename;
         // exit();
         $ext = strtolower($this->_getExtension($imagename));
@@ -941,7 +942,7 @@ class Journal extends MX_Controller
 
     public function upload_file($file){
         $imagename = $file['name'];
-        
+        ini_set('max_file_uploads', 3);
         $ext = strtolower($this->_getExtension($imagename));
         $config['upload_path']          = FCPATH.'./assets/file/';
         $config['allowed_types']        = 'pdf|doc|docx';

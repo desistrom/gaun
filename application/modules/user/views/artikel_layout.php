@@ -1,4 +1,4 @@
-<style type="text/css">
+#deta<style type="text/css">
 	.form-goup-file{
     height: auto;
     overflow: hidden;
@@ -39,7 +39,7 @@
     <div class="box-content">
     	<div class="row">
     	<?php if($view == 'list'){ ?>
-      <a href="<?=site_url('user/journal/add_artikel');?>" class="btn btn-success"><i class="fa fa-plus"></i> Add Artikel</a>
+      <a href="<?=site_url('user/journal/add_artikel');?>" class="btn btn-success" style="margin-left: 15px;"><i class="fa fa-plus"></i> Add Artikel</a>
     		<div class="table-responsive">
     			<table class="table table-striped" id="table">
     				<thead>
@@ -575,25 +575,7 @@
 
     $('body').on('click','.detail', function(){
       var id = $(this).attr('id');
-      // var status = 1;
-      // console.log(id);
-      $.ajax({
-        url : base_url+'user/journal/detail_artikel/'+id,
-        data : {'id' : id},
-        dataType: 'json',
-        type : 'POST'
-      }).done(function(data){
-        $('#modalDetail h3').html(data.judul);
-        $('#modalDetail #abs').html(data.abstrak);
-        $('#modalDetail #author').html(data.nama);
-        $('#modalDetail #volume').html(data.volume);
-        $('#modalDetail #nomor').html(data.nomor);
-        $('#modalDetail #keyword').html(data.keyword);
-        $('#modalDetail #file').html('<a href="'+base_url+'assets/file/'+data.file+'" class="btn btn-success"><i class="fa fa-download"></i></a>');
-        $('#modalDetail').modal('show');
-        // window.location.href = data.url;
-
-      });
+        window.location.href = base_url+'user/journal/detail_artikel/'+id;
     });
 
     $('body').on('click','#volume', function(){

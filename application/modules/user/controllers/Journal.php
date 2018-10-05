@@ -227,7 +227,8 @@ class Journal extends MX_Controller
 
     public function add_artikel(){
         if ($this->input->server('REQUEST_METHOD') == "POST") {
-            // print_r($this->data['user'])
+            $nama_c = str_replace(',', '', $this->input->post('nama'));
+            $jabatan_c = str_replace(",","", $this->input->post('jabatan'));
             $ret['state'] = 0;
             $ret['status'] = 0;
             $this->form_validation->set_error_delimiters('','');
@@ -241,7 +242,7 @@ class Journal extends MX_Controller
             $this->form_validation->set_rules('nama', 'Nama Autho', 'trim|required');
             $this->form_validation->set_rules('jabatan', 'Jabatan Author', 'trim|required');
             
-            if ($this->form_validation->run() == true) {
+            if ($this->form_validation->run() == true && $nama_c !='' && $jabatan_c != '') {
                 $ret['state'] = 1;
                 $data_news['judul'] = $this->input->post('judul');
                 $data_news['abstrak'] = $this->input->post('content');
@@ -271,12 +272,14 @@ class Journal extends MX_Controller
                             $jabatan = explode(",", $this->input->post('jabatan'));
                             for ($i=0; $i < count($nama) ; $i++) { 
                                 $data_author['nama'] = $nama[$i];
-                                if (isset($jabatan[$i]) && $jabatan[$i] != '') {
-                                    $data_author['jabatan'] = $jabatan[$i];
-                                    $this->db->insert('tb_author',$data_author);
-                                    $ret['status'] = 1;
-                                    $ret['url'] = site_url('user/journal/list_artikel');
-                                    $this->session->set_flashdata("notif","Data Berhasil di Masukan");
+                                if($nama[$i] != ''){
+                                    if (isset($jabatan[$i]) && $jabatan[$i] != '') {
+                                        $data_author['jabatan'] = $jabatan[$i];
+                                        $this->db->insert('tb_author',$data_author);
+                                        $ret['status'] = 1;
+                                        $ret['url'] = site_url('user/journal/list_artikel');
+                                        $this->session->set_flashdata("notif","Data Berhasil di Masukan");
+                                    }
                                 }
                             }
                         }
@@ -292,6 +295,12 @@ class Journal extends MX_Controller
             $ret['notif']['ref'] = form_error('ref');
             $ret['notif']['nama'] = form_error('nama');
             $ret['notif']['jabatan'] = form_error('jabatan');
+            if ($nama_c == '') {
+                $ret['notif']['nama'] = 'please fill one column';
+            }
+            if ($jabatan_c == '') {
+                $ret['notif']['jabatan'] = 'please fill one column';
+            }
             if (!isset($_FILES['file_name'])) {
              $ret['notif']['file_name'] = "Please Select File";
             }
@@ -339,10 +348,12 @@ class Journal extends MX_Controller
                 $data_news['abstrak'] = $this->input->post('content');
                 $data_news['keyword'] = $this->input->post('keyword');
                 $data_news['references'] = $this->input->post('ref');
+                $data_news['status'] = 0;
                 $data_news['id_user_ref'] = $this->data['user']['id_pengguna'];
                 $data_news['id_no_volume_ref'] = $this->input->post('no_volume');
                 $cekjournal = $this->db->get_where('tb_journal',array('id_journal'=>$this->input->post('journal')))->row_array();
                 if ($cekjournal['status'] == 1 ) {
+                    // $this->db->update('tb_journal',array('status'=>0))
                     $ret['notif']['journal'] = 'Journal dalam tahap persetujuan, tidak dapat menambah artikel baru';
                     echo json_encode($ret);
                     exit();
@@ -571,6 +582,21 @@ class Journal extends MX_Controller
         $this->ciparser->new_parse('template_user','modules_user', 'artikel_layout',$this->data);
     }
 
+    public function list_artikel_accepted(){
+        $this->data['view'] = 'list';
+        $this->ciparser->new_parse('template_user','modules_user', 'artikel_accepted_layout',$this->data);
+    }
+
+    public function list_download(){
+        $this->data['view'] = 'list';
+        $this->ciparser->new_parse('template_user','modules_user', 'artikel_download_layout',$this->data);
+    }
+
+    public function list_artikel_rejected(){
+        $this->data['view'] = 'list';
+        $this->ciparser->new_parse('template_user','modules_user', 'artikel_rejected_layout',$this->data);
+    }
+
     public function detail_artikel($id=null){
         $sql = "SELECT *, j.judul as journal FROM tb_journal j JOIN tb_volume v ON j.id_journal = v.id_journal_ref JOIN tb_no_volume n ON v.id_volume = n.id_volume_ref JOIN tb_artikel a ON n.id_no_volume = a.id_no_volume_ref where id_artikel = ?";
         $artikel = $this->db->query($sql,$id)->row_array();
@@ -601,6 +627,11 @@ class Journal extends MX_Controller
     public function list_nomor(){
         $this->data['view'] = 'list';
         $this->ciparser->new_parse('template_user','modules_user', 'nomor_layout',$this->data);
+    }
+
+    public function reason($id=null){
+        $a = $this->db->get_where('tb_artikel',array('id_artikel'=>$id))->row_array()['reason'];
+        echo json_encode($a);
     }
 
     public function ajax_list()
@@ -661,7 +692,11 @@ class Journal extends MX_Controller
                     $button = '<a href="'.site_url("user/journal/edit_artikel").'/'.$news->id_artikel.'"><button class="btn btn-info btn-sm" id="edit" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil"></i></button></a>';
                 }else{
                     $button = '';
-                    $aktif = '<span class="text-default">Disable</span>';
+                    if ($news->reason != '') {
+                        $aktif = '<span class="text-warning">Repaired</span>';
+                    }else{
+                        $aktif = '<span class="text-default">Disable</span>';
+                    }
                     if($news->status_journal != 1 ){
                         $button = '<a href="'.site_url("user/journal/edit_artikel").'/'.$news->id_artikel.'"><button class="btn btn-info btn-sm" id="edit" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil"></i></button></a>';
                     }
@@ -690,6 +725,107 @@ class Journal extends MX_Controller
         echo json_encode($output);
     }
 
+    public function ajax_list_artikel_accepted()
+    {
+        
+        $list = $this->journal_model->get_datatables_artikel_accepted();
+        $data = array();
+        $no = $_POST['start'];
+        $aktif = '';
+        $button = '';
+        foreach ($list as $news) {
+            $no++;
+            $aktif = '<span class="text-success">Accepted</span>';
+            // $button = '<a href="'.site_url("user/journal/edit_artikel").'/'.$news->id_artikel.'"><button class="btn btn-info btn-sm" id="edit" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil"></i></button></a>';
+            $row = array();
+            $row[] = $no;
+            $row[] = '<div class="detail" id="'.$news->id_artikel.'" style="cursor:pointer;"><u>'.word_limiter($news->judul,10).'</u></div>';
+            $row[] = $news->nomor;
+            $row[] = $news->volume;
+            $row[] = $news->judul_journal;
+            $row[] = $aktif;
+            $row[] = $button;
+ 
+            $data[] = $row;
+        }
+ 
+        $output = array(
+                        "draw" => $_POST['draw'],
+                        "recordsTotal" => $this->journal_model->count_all_artikel_accepted(),
+                        "recordsFiltered" => $this->journal_model->count_filtered_artikel_accepted(),
+                        "data" => $data,
+                );
+        //output to json format
+        echo json_encode($output);
+    }
+
+    public function ajax_list_artikel_rejected()
+    {
+        
+        $list = $this->journal_model->get_datatables_artikel_rejected();
+        $data = array();
+        $no = $_POST['start'];
+        $aktif = '';
+        $button = '';
+        foreach ($list as $news) {
+            $no++;
+            $aktif = '<span class="text-danger">Rejected</span>';
+            $button = '<a href="'.site_url("user/journal/edit_artikel").'/'.$news->id_artikel.'"><button class="btn btn-info btn-sm" id="edit" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil"></i></button></a>';
+            $btn = '<button class="btn btn-danger btn-sm btn-reason" id="'.$news->id_artikel.'" data-toggle="tooltip" title="Reason"><i class="fa fa-comment"></i></button>';
+            $row = array();
+            $row[] = $no;
+            $row[] = '<div class="detail" id="'.$news->id_artikel.'" style="cursor:pointer;"><u>'.word_limiter($news->judul,10).'</u></div>';
+            $row[] = $news->nomor;
+            $row[] = $news->volume;
+            $row[] = $news->judul_journal;
+            $row[] = $aktif;
+            $row[] = $button.$btn;
+ 
+            $data[] = $row;
+        }
+ 
+        $output = array(
+                        "draw" => $_POST['draw'],
+                        "recordsTotal" => $this->journal_model->count_all_artikel_rejected(),
+                        "recordsFiltered" => $this->journal_model->count_filtered_artikel_rejected(),
+                        "data" => $data,
+                );
+        //output to json format
+        echo json_encode($output);
+    }
+
+    public function ajax_list_artikel_download()
+    {
+        
+        $list = $this->journal_model->get_datatables_artikel_accepted();
+        $data = array();
+        $no = $_POST['start'];
+        $aktif = '';
+        $button = '';
+        foreach ($list as $news) {
+            $no++;
+            if($news->total_download != ''){$total = $news->total_download;}else{$total = 0;}
+            $row = array();
+            $row[] = $no;
+            $row[] = '<div class="detail" id="'.$news->id_artikel.'" style="cursor:pointer;"><u>'.word_limiter($news->judul,10).'</u></div>';
+            $row[] = $news->nomor;
+            $row[] = $news->volume;
+            $row[] = $news->judul_journal;
+            $row[] = $total;
+ 
+            $data[] = $row;
+        }
+ 
+        $output = array(
+                        "draw" => $_POST['draw'],
+                        "recordsTotal" => $this->journal_model->count_all_artikel_accepted(),
+                        "recordsFiltered" => $this->journal_model->count_filtered_artikel_accepted(),
+                        "data" => $data,
+                );
+        //output to json format
+        echo json_encode($output);
+    }
+
     public function ajax_list_volume()
     {
         
@@ -700,18 +836,9 @@ class Journal extends MX_Controller
         $button = '';
         foreach ($list as $news) {
             $no++;
-            // if ($news->status == 1) {
-            //     $aktif = '<span class="text-success">Enable</span>';
-            //     $button = '<a href="'.site_url("user/journal/Edit").'/'.$news->id_journal.'"><button class="btn btn-info btn-sm" id="edit" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil"></i></button></a>';
-            // }else{
-                // $aktif = '<span class="text-Success">Disable</span>';
-                $button = '<a href="'.site_url("user/journal/edit").'/'.$news->id_journal.'"><button class="btn btn-info btn-sm" id="edit" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil"></i></button></a>';
-            // }
+            $button = '<a href="'.site_url("user/journal/edit").'/'.$news->id_journal.'"><button class="btn btn-info btn-sm" id="edit" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil"></i></button></a>';
             $row = array();
             $row[] = $no;
-            // $row[] = '<div class="detail" id="'.$news->id_journal.'">'.word_limiter($news->judul,10).'</div>';
-            // $row[] = '<div class="detail" id="'.$news->id_journal.'">'.$news->issn.'</div>';
-            // $row[] = word_limiter($news->deskripsi, 10);
             $row[] = $news->volume;
             $row[] = $news->judul;
             $row[] = $button;

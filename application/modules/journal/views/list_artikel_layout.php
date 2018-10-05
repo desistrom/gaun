@@ -158,7 +158,25 @@
     </div>
   </div>
 </div>
-
+<div class="modal" tabindex="-1" role="dialog" id="modalReason">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Reason</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p></p>
+      </div>
+      <div class="modal-footer">
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="modal fade" id="progresLoading" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="vertical-alignment-helper">
         <div class="modal-dialog vertical-align-center">
@@ -249,6 +267,23 @@
 
       });
     });
+
+    $('body').on('click','.btn-reason',function(){
+      var id = $(this).attr('id');
+      $.ajax({
+          url : base_url+'user/journal/reason/'+id,
+          dataType : 'json',
+          async : false,
+          cache : false ,
+          contentType : false , 
+          processData : false
+      }).done(function(data){
+        console.log(data);
+        $('#modalReason .modal-body').html(data);
+        $('#modalReason').modal('show');
+      });
+    });
+
     $('#modalSuccess').modal('show');
   });
 </script>

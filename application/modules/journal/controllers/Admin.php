@@ -29,8 +29,9 @@ class Admin extends MX_Controller
     }
 
     public function artikel($id){
+        $j = $this->db->get_where('tb_journal',array('id_journal'=>$id))->row_array();
         $this->data['user']['nama'] = '';
-        $this->data['breadcumb'] = 'List Artikel';
+        $this->data['breadcumb'] = 'List Artikel '.$j['judul'];
         $this->data['view'] = 'list';
         $this->data['id'] = $id;
         $this->ciparser->new_parse('template_admin_journal','modules_journal', 'list_artikel_layout',$this->data);
@@ -109,6 +110,11 @@ class Admin extends MX_Controller
         $this->ciparser->new_parse('template_admin_journal','modules_journal', 'list_journal_rejected_layout',$this->data);
     }
 
+    public function reason($id=null){
+        $a = $this->db->get_where('tb_artikel',array('id_artikel'=>$id))->row_array()['reason'];
+        echo json_encode($a);
+    }
+
     public function ajax_list($id=null)
     {
         $this->load->model('journal_model');
@@ -116,20 +122,29 @@ class Admin extends MX_Controller
         $data = array();
         $no = $_POST['start'];
         $aktif = '';
-        $button = '';
         foreach ($list as $news) {
+        $button = '';
+        $btn_ign = '';
             $no++;
             if ($news->status==1) {
                 $aktif = '<span class="text-success"><b>Accepted</b></span>';                
             }else{
                 if($news->status == 0){
-                    $aktif = '<span class="text-defafult"><b>Pending</b></span>';
+                    if ($news->reason != '') {
+                        $aktif = '<span class="text-warning"><b>Repaired</b></span>';
+                        $btn_ign = '<button class="btn btn-danger btn-sm btn-ign" id="'.$news->id_artikel.'" data-toggle="tooltip" title="Ignore"><i class="fa fa-times"></i> Ignored</button> ';
+                    }else{
+                        $aktif = '<span class="text-defafult"><b>Pending</b></span>';
+                        $btn_ign = '<button class="btn btn-danger btn-sm btn-ign" id="'.$news->id_artikel.'" data-toggle="tooltip" title="Ignore"><i class="fa fa-times"></i> Ignored</button> ';
+                    }
+                    
                 }else{
                     $aktif = '<span class="text-danger"><b>Ignored</b></span>';
                 }
-                $button = '<button class="btn btn-info btn-sm btn-acc" id="'.$news->id_artikel.'" data-toggle="tooltip" title="accept"><i class="fa fa-check"></i> Accepted</button> <button class="btn btn-danger btn-sm btn-ign" id="'.$news->id_artikel.'" data-toggle="tooltip" title="Ignore"><i class="fa fa-times"></i> Ignored</button>';
+                $button = '<button class="btn btn-info btn-sm btn-acc" id="'.$news->id_artikel.'" data-toggle="tooltip" title="accept"><i class="fa fa-check"></i> Accepted</button>';
             }
             $button .= ' <button class="btn btn-success btn-sm btn-detail" id="'.$news->id_artikel.'"><i class="fa fa-eye"></i> Detail</button>';
+            $button .= ' <button class="btn btn-warning btn-sm btn-reason" id="'.$news->id_artikel.'"><i class="fa fa-comment-o"></i> Reason</button>';
             $row = array();
             $row[] = $no;
             $row[] = '<div class="detail" id="'.$news->id_artikel.'">'.word_limiter($news->judul,10).'</div>';
@@ -137,7 +152,7 @@ class Admin extends MX_Controller
             $row[] = $news->nomor;
             // $row[] = $news->judul_journal;
             $row[] = $aktif;
-            $row[] = $button;
+            $row[] = $btn_ign.$button;
  
             $data[] = $row;
         }
@@ -274,7 +289,7 @@ class Admin extends MX_Controller
         foreach ($list as $news) {
             $no++;
         if ($news->status == 1) {
-                $aktif = '<span class="text-default">Rejected</span>';
+                $aktif = '<span class="text-danger">Rejected</span>';
             }else{
                 if ($news->status == 2) {
                 $btn = '<button class="btn btn-info btn-sm btn-hide" id="'.$news->id_journal.'" data-toggle="tooltip" title="accept"><i class="fa fa-eye"></i> Show</button>';

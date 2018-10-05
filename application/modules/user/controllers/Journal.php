@@ -241,6 +241,7 @@ class Journal extends MX_Controller
             $this->form_validation->set_rules('ref', 'References Artikel', 'trim|required');
             $this->form_validation->set_rules('nama', 'Nama Autho', 'trim|required');
             $this->form_validation->set_rules('jabatan', 'Jabatan Author', 'trim|required');
+            $this->form_validation->set_rules('agree', 'agrrement', 'trim|required');
             
             if ($this->form_validation->run() == true && $nama_c !='' && $jabatan_c != '') {
                 $ret['state'] = 1;
@@ -257,8 +258,13 @@ class Journal extends MX_Controller
                     exit();
                 }
                 if (isset($_FILES['file_name']) && isset($_FILES['file_name_abs'])) {
+                    print_r($_FILES['file_name']);
+                    print_r($_FILES['file_name_abs']);
                     $file = $this->upload_file($_FILES['file_name']);
                     $file_abs = $this->upload_file($_FILES['file_name_abs']);
+                    print_r($file);
+                    print_r($file_abs);
+                    return false;
                     if (isset($file['error']) || isset($file_abs['abs_error'])) {
                         $ret['notif'] = $file;
                         $ret['notif'] = $file_abs;
@@ -293,6 +299,7 @@ class Journal extends MX_Controller
             $ret['notif']['no_volume'] = form_error('no_volume');
             $ret['notif']['keyword'] = form_error('keyword');
             $ret['notif']['ref'] = form_error('ref');
+            $ret['notif']['agree'] = form_error('agree');
             $ret['notif']['nama'] = form_error('nama');
             $ret['notif']['jabatan'] = form_error('jabatan');
             if ($nama_c == '') {
@@ -339,6 +346,7 @@ class Journal extends MX_Controller
             $this->form_validation->set_rules('no_volume', 'No Volume Artikel', 'trim|required');
             $this->form_validation->set_rules('keyword', 'Keywords Artikel', 'trim|required');
             $this->form_validation->set_rules('ref', 'References Artikel', 'trim|required');
+            $this->form_validation->set_rules('agree', 'agrrement', 'trim|required');
             // $this->form_validation->set_rules('nama', 'Nama Autho', 'trim|required');
             // $this->form_validation->set_rules('jabatan', 'Jabatan Author', 'trim|required');
             
@@ -414,6 +422,7 @@ class Journal extends MX_Controller
             $ret['notif']['no_volume'] = form_error('no_volume');
             $ret['notif']['keyword'] = form_error('keyword');
             $ret['notif']['ref'] = form_error('ref');
+            $ret['notif']['agree'] = form_error('agree');
             // $ret['notif']['nama'] = form_error('nama');
             // $ret['notif']['jabatan'] = form_error('jabatan');
             // if (!isset($_FILES['file_name'])) {
@@ -896,40 +905,18 @@ class Journal extends MX_Controller
         echo json_encode($output);
     }
 
-    public function upload_file($file){
-        $imagename = $file['name'];
-        $ext = strtolower($this->_getExtension($imagename));
-        $config['upload_path']          = FCPATH.'./assets/file/';
-        $config['allowed_types']        = 'pdf|doc|docx';
-        $config['file_name']            = time().".".$ext;
-
-        $this->load->library('upload', $config);
-
-        if ( ! $this->upload->do_upload('file_name'))
-        {
-                // $error = array('error' => $this->upload->display_errors());
-            $ret['error'] = $this->upload->display_errors();
-            // $ret['status'] = 0;
-
-            return $ret;
-        }
-        else
-        {
-            $ret['message'] = $this->upload->data('file_name');
-            $ret['status'] = 0;
-            return $this->upload->data('file_name');
-        }
-    }
-
     public function upload_file_abstract($file){
         $imagename = $file['name'];
+        // return $imagename;
+        // exit();
         $ext = strtolower($this->_getExtension($imagename));
         $config['upload_path']          = FCPATH.'./assets/file/abstract/';
         $config['allowed_types']        = 'pdf|doc|docx';
         $config['file_name']            = time().".".$ext;
-
+        // return $config['file_name'];
+        // exit();
         $this->load->library('upload', $config);
-
+        $this->upload->initialize($config);
         if ( ! $this->upload->do_upload('file_name_abs'))
         {
                 // $error = array('error' => $this->upload->display_errors());
@@ -942,9 +929,38 @@ class Journal extends MX_Controller
         {
             $ret['message'] = $this->upload->data('file_name');
             $ret['status'] = 0;
-            return $this->upload->data('file_name');
+            return $this->upload->data();
         }
     }
+
+    public function upload_file($file){
+        $imagename = $file['name'];
+        
+        $ext = strtolower($this->_getExtension($imagename));
+        $config['upload_path']          = FCPATH.'./assets/file/';
+        $config['allowed_types']        = 'pdf|doc|docx';
+        $config['file_name']            = time().".".$ext;
+        // return $config['file_name'];
+        // exit();
+        $this->load->library('upload', $config);
+        $this->upload->initialize($config);
+        if ( ! $this->upload->do_upload('file_name'))
+        {
+                // $error = array('error' => $this->upload->display_errors());
+            $ret['error'] = $this->upload->display_errors();
+            // $ret['status'] = 0;
+
+            return $ret;
+        }
+        else
+        {
+            $ret['message'] = $this->upload->data('file_name');
+            $ret['status'] = 0;
+            return $this->upload->data();
+        }
+    }
+
+    
 
     public function upload_logo($logo){             
         

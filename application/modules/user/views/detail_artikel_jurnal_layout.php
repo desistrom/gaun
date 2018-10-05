@@ -37,6 +37,9 @@
 .list-detail-jurnal li a{
     color: #A2A2A2;
 }
+.line-sub-title-jurnal{
+	width: 80px;
+}
 </style>
 <div class="col col-md-10 col-sm-10 col-xs-12 right-content" style="">
     <div class=" title-box">
@@ -111,7 +114,7 @@
 									<div class="  line-sub-title-jurnal" style="margin-bottom: 2em;"></div>
 									<div class="col col-md-3 col-sm-4 col-xs-12 sub-left-content none-padding">
 									<div class="filter-cover-jurnal">
-										<img src="<?=base_url();?>assets/media/<?=$artikel['futured_image'];?>" class="cover-jurnal-img">
+										<img src="<?=base_url();?>assets/media/<?=$artikel['futured_image'];?>" class="cover-jurnal-img" style="width: 100%;">
 									</div>
 								</div>
 								<div class="col col-md-9 col-sm-8 col-xs-12 sub-right-content">

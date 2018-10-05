@@ -297,6 +297,13 @@ color: #D10909!important;
                 </form> -->
               </div>
             </div>
+            <?php if (count($journal) == 0) { ?>
+              <div class="filter-box-thumbnail col-md-3 col-sm-3 col-xs-12 " style="">
+                <div class="box-thumbnail">
+                  <h3>No Data Found</h3>
+                </div>
+              </div>
+            <?php } ?>
             <?php foreach ($journal as $key => $value): ?>
               <div class="filter-box-thumbnail col-md-3 col-sm-3 col-xs-12 " style="">
                   <div class="box-thumbnail">
@@ -433,9 +440,9 @@ color: #D10909!important;
 
     </div>
 </div>
-<script src="<?=base_url().'assets/js/jquery-3.2.1.min.js';?>"></script>
-<script src="<?=base_url();?>assets/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="<?=base_url();?>assets/datatables/js/dataTables.bootstrap.min.js"></script>
+<!-- <script src="<?=base_url().'assets/js/jquery-3.2.1.min.js';?>"></script> -->
+<!-- <script src="<?=base_url();?>assets/datatables.net/js/jquery.dataTables.min.js"></script> -->
+<!-- <script src="<?=base_url();?>assets/datatables/js/dataTables.bootstrap.min.js"></script> -->
 <script type="text/javascript">
       $(document).ready(function() {
         $('body').on('click','.btn-search',function(){

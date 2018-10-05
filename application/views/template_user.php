@@ -67,22 +67,22 @@
                               <li><a href="<?=site_url('user/journal');?>" <?php if(current_url() == site_url('user/journal') || current_url() == site_url('user/journal/add')){ ?> class="active" <?php } ?> > <i class="fa fa-home"></i>my Journal</a></li>
                               <li><a href="<?=site_url('user/journal/volume');?>" <?php if(current_url() == site_url('user/journal/volume') || current_url() == site_url('user/journal/add_volume')){ ?> class="active" <?php } ?>> <i class="fa fa-user"></i>Volume</a></li>
                               <li><a href="<?=site_url('user/journal/list_nomor');?>" <?php if(current_url() == site_url('user/journal/list_nomor') || current_url() == site_url('user/journal/add_no_volume')){ ?> class="active" <?php } ?>> <i class="fa fa-gear"></i>No Volume</a></li>
-                              <li class="li-submenu li-not-open" ><a href="#" <?php if(current_url() == site_url('user/journal/list_artikel') || current_url() == site_url('user/journal/add_artikel') || current_url() == site_url('user/journal/list_artikel_rejected') || current_url() == site_url('user/journal/list_artikel_accepted') || current_url() == site_url('user/journal/list_download')){ ?> class="active" <?php } ?>> <i class="fa fa-gear"></i>Artikel</a>
+                              <li class="li-submenu <?php if(current_url() == site_url('user/journal/list_artikel') || current_url() == site_url('user/journal/add_artikel') || current_url() == site_url('user/journal/list_artikel_rejected') || current_url() == site_url('user/journal/list_artikel_accepted') || current_url() == site_url('user/journal/list_download')){ ?> active <?php }else{ ?> li-not-open<?php } ?>" ><a href="#" <?php if(current_url() == site_url('user/journal/list_artikel') || current_url() == site_url('user/journal/add_artikel') || current_url() == site_url('user/journal/list_artikel_rejected') || current_url() == site_url('user/journal/list_artikel_accepted') || current_url() == site_url('user/journal/list_download')){ ?> class="active" <?php } ?>> <i class="fa fa-gear"></i>Artikel</a>
                                 <ul class="sub-drop-menu active" >
-                                    <li><a href="<?=site_url('user/journal/list_artikel');?>">
+                                    <li><a <?php if(current_url() == site_url('user/journal/list_artikel') ){ ?> class="active"<?php } ?> href="<?=site_url('user/journal/list_artikel');?>">
                                         List Artikel
                                     </a>
                                   </li>
-                                    <li><a href="<?=site_url('user/journal/list_artikel_accepted');?>">
+                                    <li><a <?php if(current_url() == site_url('user/journal/list_artikel_accepted') ){ ?> class="active"<?php } ?> href="<?=site_url('user/journal/list_artikel_accepted');?>">
                                        
-                                        Apcepted
+                                        Accepted
                                     </a></li>
-                                    <li><a href="<?=site_url('user/journal/list_artikel_rejected');?>">
+                                    <li><a <?php if(current_url() == site_url('user/journal/list_artikel_rejected') ){ ?> class="active"<?php } ?> href="<?=site_url('user/journal/list_artikel_rejected');?>">
                                        
                                         Rejected
                                     </a></li>
 
-                                    <li><a href="<?=site_url('user/journal/list_download');?>">
+                                    <li><a <?php if(current_url() == site_url('user/journal/list_download') ){ ?> class="active"<?php } ?> href="<?=site_url('user/journal/list_download');?>">
                                        
                                         Download
                                     </a></li>

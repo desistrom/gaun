@@ -457,7 +457,7 @@
       form_data.append('nama', nama);
       form_data.append('jabatan', jabatan);
       if ($('#agree').is(':checked')) {
-        form_data.append('check', 1);
+        form_data.append('agree', 1);
       }
       // console.log($('#ref').val());
       // return false;

@@ -258,16 +258,22 @@ class Journal extends MX_Controller
                     exit();
                 }
                 if (isset($_FILES['file_name']) && isset($_FILES['file_name_abs'])) {
-                    print_r($_FILES['file_name']);
-                    print_r($_FILES['file_name_abs']);
+                    // print_r($_FILES['file_name']);
+                    // print_r($_FILES['file_name_abs']);
                     $file = $this->upload_file($_FILES['file_name']);
                     $file_abs = $this->upload_file($_FILES['file_name_abs']);
-                    print_r($file);
-                    print_r($file_abs);
-                    return false;
+                    // print_r($file);
+                    // print_r($file_abs);
+                    // return false;
                     if (isset($file['error']) || isset($file_abs['abs_error'])) {
+                        if (isset($file['error'])) {
+                            # code...
                         $ret['notif'] = $file;
+                        }
+                        if (isset($file_abs['abs_error'])) {
+                            # code...
                         $ret['notif'] = $file_abs;
+                        }
                     }else{
                         $ret['state'] = 1;
                         $data_news['file'] = $file;
@@ -929,7 +935,7 @@ class Journal extends MX_Controller
         {
             $ret['message'] = $this->upload->data('file_name');
             $ret['status'] = 0;
-            return $this->upload->data();
+            return $this->upload->data('file_name');
         }
     }
 
@@ -956,7 +962,7 @@ class Journal extends MX_Controller
         {
             $ret['message'] = $this->upload->data('file_name');
             $ret['status'] = 0;
-            return $this->upload->data();
+            return $this->upload->data('file_name');
         }
     }
 

@@ -118,6 +118,7 @@
           </a>
         </li>
 
+
         <li class=" treeview <?php if(current_url() == site_url('instansi/pengguna/list_dosen') || current_url() == site_url('instansi/pengguna/list_mahasiswa')){ ?>  active <?php } ?>">
           <a href="#">
             <i class="fa fa-user"></i>  <span>Civitas</span>

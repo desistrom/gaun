@@ -27,7 +27,7 @@ class User extends MX_Controller
             $ret['status'] = 0;
             $this->form_validation->set_error_delimiters('', '');
             $this->form_validation->set_rules('username','username', 'required|is_unique[tb_journal_user.username]');
-            $this->form_validation->set_rules('password','Password', 'required');
+            $this->form_validation->set_rules('password','Password', 'required|is_unique[tb_journal_user.email]');
             $this->form_validation->set_rules('email','Email', 'required');
             $this->form_validation->set_rules('repassword','Re - Password', 'required|matches[password]');
             if ($this->form_validation->run() == true) {
@@ -50,7 +50,7 @@ class User extends MX_Controller
                     if (email_send($data) == true) {
                         $user_data = 'success';
                         $this->session->set_flashdata("header","Registrasi Berhasil");
-                        $this->session->set_flashdata("notif","Registrasi Anda sedang kami Proses, tunggu konfirmasi selanjutnya dari Admin");
+                        $this->session->set_flashdata("notif","Create admin Journal Berhasil");
                     }
                 }
             }

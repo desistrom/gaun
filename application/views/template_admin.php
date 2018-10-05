@@ -240,6 +240,16 @@
           </ul>
         </li>
 
+
+        <li class="treeview <?php if(current_url() == site_url('instansi/journal')){ ?> active <?php } ?>">
+          <a href="<?=site_url('instansi/journal');?>">
+            <i class="fa fa-gears"></i> <span>Kategori Journal</span>
+            <span class="pull-right-container">
+
+            </span>
+          </a>
+        </li>
+
         <li class=" treeview <?php if(current_url() == site_url('admin/keanggotaan/setting') || current_url() == site_url('admin/keanggotaan/index') || current_url() == site_url('admin/keanggotaan/instansi') || current_url() == site_url('admin/keanggotaan/setting_reg') || current_url() == site_url('admin/keanggotaan/index') || current_url() == site_url('admin/keanggotaan/instansi') || current_url() == site_url('admin/keanggotaan/instansi_request')){ ?> active <?php } ?>">
           <a href="#">
             <i class="fa fa-users"></i>  <span>Keanggotaan</span>

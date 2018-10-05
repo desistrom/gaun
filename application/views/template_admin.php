@@ -242,7 +242,7 @@
 
 
         <li class="treeview <?php if(current_url() == site_url('instansi/journal')){ ?> active <?php } ?>">
-          <a href="<?=site_url('instansi/journal');?>">
+          <a href="<?=site_url('admin/journal');?>">
             <i class="fa fa-gears"></i> <span>Kategori Journal</span>
             <span class="pull-right-container">
 

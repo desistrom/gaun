@@ -48,16 +48,23 @@ class Journal extends MX_Controller
         $this->ciparser->new_parse('template_user','modules_user', 'journal_layout',$this->data);
     }
 
+    public function all_journal(){
+        
+        $sql = "SELECT * FROM tb_journal Where status = 2";
+        $journal = $this->db->query($sql)->result_array();
+        foreach ($journal as $key => $value) {
+            $jumlah = $this->db->get_where('tb_volume',array('id_journal_ref'=>$value['id_journal']))->num_rows();
+            $journal[$key]['jumlah'] = $jumlah;
+        }
+        // print_r($journal);
+        $this->data['view'] = 'list';
+        $this->data['journal'] = $journal;
+        $this->ciparser->new_parse('template_user','modules_user', 'all_journal_layout',$this->data);
+    }
+
     public function katalog($param=null){
         $sql = "SELECT * FROM tb_journal WHERE id_user_ref = ? AND judul LIKE '".$param."%'";
         $journal = $this->db->query($sql,$this->data['user']['id_pengguna'])->result_array();
-        // print_r($journal);
-        // $list = $this->journal_model->get_datatables();
-        // if (current_url() == ) {
-        //     echo "string";
-        // }
-        // print_r(current_url());
-        // print_r($list);
         foreach ($journal as $key => $value) {
             $jumlah = $this->db->get_where('tb_volume',array('id_journal_ref'=>$value['id_journal']))->num_rows();
             $journal[$key]['jumlah'] = $jumlah;
@@ -71,13 +78,6 @@ class Journal extends MX_Controller
     public function search($param=null){
         $sql = "SELECT * FROM tb_journal WHERE id_user_ref = ? AND judul LIKE '%".$param."%'";
         $journal = $this->db->query($sql,$this->data['user']['id_pengguna'])->result_array();
-        // print_r($journal);
-        // $list = $this->journal_model->get_datatables();
-        // if (current_url() == ) {
-        //     echo "string";
-        // }
-        // print_r(current_url());
-        // print_r($list);
         foreach ($journal as $key => $value) {
             $jumlah = $this->db->get_where('tb_volume',array('id_journal_ref'=>$value['id_journal']))->num_rows();
             $journal[$key]['jumlah'] = $jumlah;

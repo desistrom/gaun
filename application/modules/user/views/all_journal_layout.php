@@ -275,13 +275,13 @@ color: #D10909!important;
             <!-- <div class="col col-md-3 col-sm-2 col-xs-12 left-cat">
               Catalog :
             </div> -->
-            <!-- <div class="col col-md-12 col-sm-12 col-xs-12 right-cat">
+            <div class="col col-md-12 col-sm-12 col-xs-12 right-cat">
               <ul class="filter-catalog">
                 <?php foreach (range('a', 'z') as $char) {
                 echo '<li><a href="'.site_url("user/journal/katalog/".$char).'"> '.strtoupper($char).' </a></li>';
               } ?>
               </ul>
-            </div> -->
+            </div>
           </div>
         </div>
       </section>
@@ -291,10 +291,10 @@ color: #D10909!important;
             <div class="col col-md-12 col-sm-12 col-xs-12" style="padding-bottom: 30px;">
               <div class="col-md-4 col-sm-5 col-xs-12"><a href="<?=site_url('user/journal/add');?>" class="btn btn-success">Add Jurnal</a></div>
               <div class="col col-md-8 col-sm-7 col-xs-12">
-                <!-- <form method="get" class="text-right" >
+                <form method="get" class="text-right" >
                     <div class="input-search input-search-left"><input type="text" class="form-control" name="data" id="search" placeholder="Cari"></div>
                     <div class="input-search input-search-right"><button type="button" class="btn btn-danger btn-search"><i class="fa fa-search"></i></button></div>
-                </form> -->
+                </form>
               </div>
             </div>
             <?php foreach ($journal as $key => $value): ?>
@@ -303,14 +303,14 @@ color: #D10909!important;
                     <div class="header-box-thumbnail">
                       <img class="thumbnail-cover" src="<?=base_url();?>assets/media/<?=$value['futured_image'];?>">
                       <div class="filter-button-action">
-                        <div>
+                        <!-- <div>
                           <a href="<?=site_url('user/journal/edit/'.$value['id_journal']);?>">
                             <div class="btn-action">
                               <i class="fa fa-pencil"></i>
                               
                             </div>
                           </a>
-                        </div>
+                        </div> -->
                         <div>
                           <!-- <div class="btn-action">
                             <a href="#"><i class="fa fa-pencil"></i></a>

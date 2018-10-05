@@ -20,13 +20,19 @@ class Admin extends MX_Controller
     }
 
     public function index(){
-        $user = $this->session->userdata('data_user_journal');
-        // print_r($user);
-        $ins = $this->db->get_where('tb_instansi',array('id_instansi'=>$user['id_instansi']))->row_array();
-        $this->data['user']['nama'] = $ins['nm_instansi'];
+        
         $this->data['breadcumb'] = 'Journal';
         $this->data['view'] = 'list';
         $this->ciparser->new_parse('template_admin_journal','modules_journal', 'list_journal_layout',$this->data);
+    }
+
+    public function dashboard(){
+        $user = $this->session->userdata('data_user_journal');
+        // print_r($user);
+        $this->data['breadcumb'] = 'Journal';
+        $ins = $this->db->get_where('tb_instansi',array('id_instansi'=>$user['id_instansi']))->row_array();
+        $this->data['user']['nama'] = $ins['nm_instansi'];
+        $this->ciparser->new_parse('template_admin_journal','modules_journal', 'dashboard_layout',$this->data);
     }
 
     public function artikel($id){

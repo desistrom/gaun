@@ -82,8 +82,8 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
         <li class="header">MAIN NAVIGATION</li>
-        <li class=" treeview <?php if(current_url() == site_url('journal/admin/home')){ ?> active <?php } ?>">
-          <a href="<?=site_url('journal/admin');?>">
+        <li class=" treeview <?php if(current_url() == site_url('journal/admin/dashboard')){ ?> active <?php } ?>">
+          <a href="<?=site_url('journal/admin/dashboard');?>">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
             <span class="pull-right-container">
 
@@ -91,7 +91,7 @@
           </a>
 
         </li>
-        <li class=" treeview <?php if(current_url() == site_url('journal/admin') || current_url() == site_url('journal/admin/accepted') || current_url() == site_url('journal/admin/ignored')){ ?>  active <?php } ?>">
+        <li class=" treeview <?php if(current_url() == site_url('journal/admin/') || current_url() == site_url('journal/admin/accepted') || current_url() == site_url('journal/admin/ignored')){ ?>  active <?php } ?>">
           <a href="#">
             <i class="fa fa-book"></i>  <span>Journal</span>
             <span class="pull-right-container">

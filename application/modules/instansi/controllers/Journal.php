@@ -181,4 +181,47 @@ class Journal extends MX_Controller
         //output to json format
         echo json_encode($output);
     }
+
+    public function all_journal(){
+        
+        $sql = "SELECT * FROM tb_journal Where status = 2";
+        $journal = $this->db->query($sql)->result_array();
+        foreach ($journal as $key => $value) {
+            $jumlah = $this->db->get_where('tb_volume',array('id_journal_ref'=>$value['id_journal']))->num_rows();
+            $journal[$key]['jumlah'] = $jumlah;
+        }
+        // print_r($journal);
+        $this->data['view'] = 'list';
+        $this->data['breadcumb'] = 'All Journal';
+        $this->data['journal'] = $journal;
+        $this->ciparser->new_parse('template_instansi','modules_user', 'all_journal_layout',$this->data);
+    }
+
+    public function katalog($param=null){
+        $sql = "SELECT * FROM tb_journal WHERE id_user_ref = ? AND judul LIKE '".$param."%'";
+        $journal = $this->db->query($sql,$this->data['user']['id_pengguna'])->result_array();
+        foreach ($journal as $key => $value) {
+            $jumlah = $this->db->get_where('tb_volume',array('id_journal_ref'=>$value['id_journal']))->num_rows();
+            $journal[$key]['jumlah'] = $jumlah;
+        }
+        // print_r($journal);
+        $this->data['view'] = 'list';
+        $this->data['breadcumb'] = 'All Journal';
+        $this->data['journal'] = $journal;
+        $this->ciparser->new_parse('template_instansi','modules_user', 'journal_layout',$this->data);
+    }
+
+    public function search($param=null){
+        $sql = "SELECT * FROM tb_journal WHERE id_user_ref = ? AND judul LIKE '%".$param."%'";
+        $journal = $this->db->query($sql,$this->data['user']['id_pengguna'])->result_array();
+        foreach ($journal as $key => $value) {
+            $jumlah = $this->db->get_where('tb_volume',array('id_journal_ref'=>$value['id_journal']))->num_rows();
+            $journal[$key]['jumlah'] = $jumlah;
+        }
+        // print_r($journal);
+        $this->data['view'] = 'list';
+        $this->data['breadcumb'] = 'All Journal';
+        $this->data['journal'] = $journal;
+        $this->ciparser->new_parse('template_instansi','modules_user', 'journal_layout',$this->data);
+    }
 }

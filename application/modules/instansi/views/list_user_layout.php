@@ -42,7 +42,7 @@
 <div class="box">
 	<div class="box-body">
 		<div class="col col-md-12 col-sm-12 col-xs-12" style="padding-left: 0; margin-bottom: 15px;">
-			<a href="<?=site_url('instansi/user/add');?>" class="btn btn-success">Tambah User Journal</a>
+			<a href="<?=site_url('instansi/user/add');?>" class="btn btn-success">Tambah Admin Journal</a>
 		</div>
 		<div class="col col-md-12 col-xs-12 table-responsive">
 			<table class="table table-bordered  dataTable" id="table">
@@ -95,6 +95,11 @@
             <label>Username</label>
             <input type="text" name="username" class="form-control" id="username" placeholder="Enter Username ..." value="">
             <div class="error" id="ntf_username"></div>
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="text" name="email" class="form-control" id="email" placeholder="Enter Username ..." value="">
+            <div class="error" id="ntf_email"></div>
           </div>
           <div class="form-group">
             <label>Password</label>
@@ -194,6 +199,7 @@
       $('#progresLoading').modal('show');
       var form_data = new FormData();
       form_data.append('username', $('#username').val());
+      form_data.append('email', $('#email').val());
       form_data.append('password', $('#password').val());
       form_data.append('repassword', $('#repassword').val());
       $.ajax({

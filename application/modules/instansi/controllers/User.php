@@ -124,7 +124,7 @@ class User extends MX_Controller
                 $aktif = '<span class="text-danger"><b>Disabled</b></span>';
                 $btn = '<button class="btn btn-danger btn-sm btn-sts" id="'.$news->id_journal_user.'" data-toggle="tooltip" title="Enabled"><i class="fa fa-eye"></i> Enable</button>';
             }
-            $button .= ' <a href="'.site_url('instansi/user/edit/'.$news->id_journal_user).'" class="btn btn-success btn-sm btn-detail" id="'.$news->id_journal_user.'"><i class="fa fa-pencil"></i> Edit</button>';
+            // $button .= ' <a href="'.site_url('instansi/user/edit/'.$news->id_journal_user).'" class="btn btn-success btn-sm btn-detail" id="'.$news->id_journal_user.'"><i class="fa fa-pencil"></i> Edit</button>';
             $row = array();
             $row[] = $no;
             $row[] = '<div class="detail" id="'.$news->id_journal_user.'">'.word_limiter($news->username,10).'</div>';

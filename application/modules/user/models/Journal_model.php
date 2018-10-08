@@ -9,7 +9,7 @@ class Journal_model extends CI_Model
 
     var $table_artikel = 'tb_artikel';
     var $column_order_artikel = array(null, 'judul','abstrak','keyword','references'); //set column field database for datatable orderable
-    var $column_search_artikel = array('judul','abstrak','keyword','references'); //set column field database for datatable searchable 
+    var $column_search_artikel = array('tb_artikel.judul','abstrak','keyword','references'); //set column field database for datatable searchable 
     var $order_artikel = array('judul' => 'asc'); // default order 
 
     var $table_volume = 'tb_volume';

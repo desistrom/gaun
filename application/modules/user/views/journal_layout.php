@@ -298,11 +298,9 @@ color: #D10909!important;
               </div>
             </div>
             <?php if (count($journal) == 0) { ?>
-              <div class="filter-box-thumbnail col-md-3 col-sm-3 col-xs-12 " style="">
-                <div class="box-thumbnail">
-                  <h3>No Data Found</h3>
-                </div>
-              </div>
+              <div class="jumbotron">
+  <h2 style="color: #A8A8A8;text-align: center;">Data Not found</h2>
+</div>
             <?php } ?>
             <?php foreach ($journal as $key => $value): ?>
               <div class="filter-box-thumbnail col-md-3 col-sm-3 col-xs-12 " style="">
@@ -335,7 +333,7 @@ color: #D10909!important;
                         <h5>status : <?php if($value['status'] == 0 ){ echo "Unsubmited";}elseif($value['status'] == 1){ echo "Pending"; }elseif($value['status'] == 2){echo "Accepted";}else{ echo "Ignored";} ?></h5>
                       </div>
                       <div class="sub-footer-box-thumbnail float-right" >
-                        <?php if($value['status'] == 0 ){ ?> <a href="<?=site_url('user/journal/submit/'.$value['id_journal']);?>" class="btn btn-primary"> <i class="fa fa-upload"></i> </a> <?php }elseif($value['status'] == 1){?> <a href="#" class="btn btn-warning"> <i class="fa fa-clock-o"></i> </a> <?php }elseif($value['status'] == 2){ ?> <a href="#" class="btn btn-success"> <i class="fa fa-check"></i> </a> <?php }else{ ?> <a href="#" class="btn btn-danger"> <i class="fa fa-times"></i> </a> <?php } ?>
+                        <?php if($value['status'] == 0 ){ ?> <a href="#" id="<?=$value['id_journal'];?>" class="btn btn-primary btn-submit"> <i class="fa fa-upload"></i> </a> <?php }elseif($value['status'] == 1){?> <a href="#" class="btn btn-warning"> <i class="fa fa-clock-o"></i> </a> <?php }elseif($value['status'] == 2){ ?> <a href="#" class="btn btn-success"> <i class="fa fa-check"></i> </a> <?php }else{ ?> <a href="#" class="btn btn-danger"> <i class="fa fa-times"></i> </a> <?php } ?>
                         
                         <a href="#" class="btn btn-success btn-upload"> <i class="fa fa-check"></i> </a>
                       </div>
@@ -346,26 +344,7 @@ color: #D10909!important;
               
             <?php endforeach ?>
             <?php if ($this->session->flashdata('notif') != '') { ?>
-    <div class="modal" tabindex="-1" role="dialog" id="modalSuccess">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h3 class="modal-title"><?php if ($this->session->flashdata('header') != '') { echo $this->session->flashdata('header'); }else{ echo "Sukses"; } ?></h3>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <p><?=$this->session->flashdata('notif');?></p>
-          </div>
-          <div class="modal-footer">
-            <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  <?php } ?>
+
               <!-- <div class="filter-box-thumbnail col-md-3 col-sm-3 col-xs-12 " style="">
                 <div class="box-thumbnail">
                   <div class="header-box-thumbnail">
@@ -440,15 +419,57 @@ color: #D10909!important;
 
     </div>
 </div>
+    <div class="modal" tabindex="-1" role="dialog" id="modalSuccess">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title"><?php if ($this->session->flashdata('header') != '') { echo $this->session->flashdata('header'); }else{ echo "Sukses"; } ?></h3>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p><?=$this->session->flashdata('notif');?></p>
+          </div>
+          <div class="modal-footer">
+            <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  <?php } ?>
+  <div class="modal fade" id="progresLoading" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center">
+            <div class="modal-content">
+                <div class="modal-body">
+                  <div class="box box-danger">
+                      <div class="box-header">
+                      </div>
+                      <div class="box-body">
+                      </div>
+                      <div class="overlay" style="text-align: center;">
+                        <i class="fa fa-refresh fa-spin fa-3x"></i>
+                      </div>
+                  </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+  </div>
 <!-- <script src="<?=base_url().'assets/js/jquery-3.2.1.min.js';?>"></script> -->
 <!-- <script src="<?=base_url();?>assets/datatables.net/js/jquery.dataTables.min.js"></script> -->
 <!-- <script src="<?=base_url();?>assets/datatables/js/dataTables.bootstrap.min.js"></script> -->
 <script type="text/javascript">
       $(document).ready(function() {
-        $('body').on('click','.btn-search',function(){
+        $('body').on('click','.btn-submit',function(){
           console.log('hmm');
-          var search = $('#search').val();
-          window.location.href = base_url+'user/journal/search/'+search;
+          var id = $(this).attr('id');
+          $('#progresLoading').modal('show');
+          setTimeout(function(){ window.location.href = base_url+'user/journal/submit/'+id; }, 2000);
+          
         });
       });
   $('#modalSuccess').modal('show');

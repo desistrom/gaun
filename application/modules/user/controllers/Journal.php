@@ -72,7 +72,7 @@ class Journal extends MX_Controller
         // print_r($journal);
         $this->data['view'] = 'list';
         $this->data['journal'] = $journal;
-        $this->ciparser->new_parse('template_user','modules_user', 'journal_layout',$this->data);
+        $this->ciparser->new_parse('template_user','modules_user', 'all_journal_layout',$this->data);
     }
 
     public function search($param=null){
@@ -85,7 +85,7 @@ class Journal extends MX_Controller
         // print_r($journal);
         $this->data['view'] = 'list';
         $this->data['journal'] = $journal;
-        $this->ciparser->new_parse('template_user','modules_user', 'journal_layout',$this->data);
+        $this->ciparser->new_parse('template_user','modules_user', 'all_journal_layout',$this->data);
     }
 
     public function add(){

@@ -88,7 +88,7 @@ $autoload['drivers'] = array();
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array('url','encrypt_decrypt','general_helper','jwt', "authorization","date",'text','logo');
+$autoload['helper'] = array('url','encrypt_decrypt','general_helper', "authorization","date",'text','logo');
 
 
 /*
@@ -104,7 +104,7 @@ $autoload['helper'] = array('url','encrypt_decrypt','general_helper','jwt', "aut
 |
 */
 
-$autoload['config'] = array('jwt');
+$autoload['config'] = array();
 
 
 /*

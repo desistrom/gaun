@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Journal IDREN</title>
+     <link rel="shortcut icon" href="<?=base_url();?>media/favicon.ico">
     <link rel="stylesheet" href="<?=base_url();?>mockup_statis/assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?=base_url();?>mockup_statis/assets/fonts/font-awesome.min.css">
      <link rel="stylesheet" href="<?=base_url();?>mockup_statis/assets/css/Navbar-with-mega-menu.css">
@@ -13,7 +14,17 @@
 		   .navbar-nav > li > .dropdown-menu {
 		    right: 0!important;
 		}
-    
+		.cover-jurnal-img{
+			width: 100%;
+		}
+    .list-info-jurnal{
+    	margin-bottom: 2em;
+    }
+    .content-wrap {
+	  
+	    margin-top: 0;
+
+	}
 </style>
 <script type="text/javascript">
 	var base_url = '<?=base_url();?>';
@@ -34,24 +45,24 @@
 
                   <ul class="nav navbar-nav navbar-right">
                       <li role="presentation" class="active"><a href="<?=site_url('journal');?>"> <i class="fa fa-home"></i> Home</a></li>
-                     <!--  <li class="dropdown"><a data-toggle="dropdown" aria-expanded="false" href="#" class="dropdown-toggle">Kategori <span class="fa fa-angle-down"></span></a>
+                      <li class="dropdown"><a data-toggle="dropdown" aria-expanded="false" href="#" class="dropdown-toggle"><span class="fa fa-list-ul"></span> Kategori <span class="fa fa-angle-down"></span></a>
                           <ul class="dropdown-menu" role="menu">
-                              <li><a href="#">Kategori 1</a></li>
-                              <li><a href="#">Kategori 2</a></li>
+                              <li><a href="#">Kesehatan</a></li>
+                             
 
                           </ul>
-                        </li> -->
-                     <li class="dropdown open"><a data-toggle="dropdown" aria-expanded="true" href="#" class="dropdown-toggle"><span class="fa fa-list-ul"></span> Kategori </a>
+                        </li>
+                     <!-- <li class="dropdown open"><a data-toggle="dropdown" aria-expanded="true" href="#" class="dropdown-toggle"><span class="fa fa-list-ul"></span> Kategori </a>
 		                 <ul class="dropdown-menu">
 		                 	<li></li>
 		                 	<li><a href="#">kesehatan</a></li>
 		                 	
 		                 </ul>
-		             </li>
-                      <li role="presentation" class=""><a href="#"> <i class="fa fa-sign-in" aria-hidden="true"></i> Login</a></li>
+		             </li> -->
+                     <!--  <li role="presentation" class=""><a href="#"> <i class="fa fa-sign-in" aria-hidden="true"></i> Login</a></li>
 
                       <li role="presentation" class="active"><a href="#"> <i class="fa fa-search"></i> Search</a></li>
-                      
+                       -->
 
                   </ul>
               </div>

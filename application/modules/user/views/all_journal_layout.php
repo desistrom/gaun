@@ -289,7 +289,7 @@ color: #D10909!important;
     	<div class="row">
     	     <div class="col col-md-12 col-sm-12 col-xs-2">
             <div class="col col-md-12 col-sm-12 col-xs-12" style="padding-bottom: 30px;">
-              <!-- <div class="col-md-4 col-sm-5 col-xs-12"><a href="<?=site_url('user/journal/add');?>" class="btn btn-success">Add Jurnal</a></div> -->
+              <div class="col-md-4 col-sm-5 col-xs-12"><!-- <a href="<?=site_url('user/journal/add');?>" class="btn btn-success">Add Jurnal</a> --></div> 
               <div class="col col-md-8 col-sm-7 col-xs-12">
                 <form method="get" class="text-right" >
                     <div class="input-search input-search-left"><input type="text" class="form-control" name="data" id="search" placeholder="Cari"></div>
@@ -298,10 +298,8 @@ color: #D10909!important;
               </div>
             </div>
             <?php if (count($journal) == 0) { ?>
-              <div class="filter-box-thumbnail col-md-3 col-sm-3 col-xs-12 " style="">
-                <div class="box-thumbnail">
-                  <h3>No Data Found</h3>
-                </div>
+              <div class="jumbotron">
+                <h2 style="color: #A8A8A8;text-align: center;">Data Not found</h2>
               </div>
             <?php } ?>
             <?php foreach ($journal as $key => $value): ?>

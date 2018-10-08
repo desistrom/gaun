@@ -11,9 +11,10 @@ class Login extends MX_Controller
     function __construct()
     {
     	// $this->load->model('login_model');
-        $this->load->helper('api');
+        // $this->load->helper('api');
         $this->load->library('Recaptcha');
         $this->load->module('Token');
+        // $this->load->library('jwt');
     }
 
     public function index(){
@@ -42,23 +43,25 @@ class Login extends MX_Controller
                     $this->session->set_userdata('data_user', $data_user);
                     $this->session->set_userdata('previlage', $data_user['id_role_ref']);
                     $this->session->set_userdata('is_login', true);
-                    $data_token['username'] = $username;
-                    $data_token['password'] = $password;
+                    $data_token = $username;
+                    // $data_token['password'] = $password;
                     $url = URL_GET_TOKEN;
                     $method = 'POST';
                     $token = "";
+                    $a = $this->generate_token($data_token);
                     // $this->load->library('../modules/login/controllers/token');
                     // $a modules::run('module/jwt/token_post', $data_token);
                     // $result = api_helper(json_encode($data_token),$url,$method,$token);
                     // $result = file_get_contents(site_url('login/token/token').'/'.$username.'/'.$password);
                     // $token_jwt = json_decode($result,true);
-                    /*$a = $this->token->token_get($username,$password);
-                    print_r($a);
-                    return false;*/
+                    // $a = $this->token->token_get($username,$password);
+                    // print_r($a);
+                    // return false;
                     // print_r($result);
                     // print_r($data_token);
             		// $this->session->set_userdata('token', $data_token);
-            		$ret['url'] = site_url('login/token/token').'/'.$username.'/'.$password;
+                    setcookie('token',$a,time() + (3600 * 30), "/");
+            		$ret['url'] = site_url('admin');
 
             	}else{
                     $ret['notif']['login'] = 'username or password worng';
@@ -101,28 +104,33 @@ class Login extends MX_Controller
         return $output['token'];
     }
 
-    public function hmm(){
-        $request = new HttpRequest();
-        $request->setUrl('http://localhost/idren/login/jwt/token');
-        $request->setMethod(HTTP_METH_POST);
+    public function generate_token($user_id){
+        $this->load->library("JWT");
+        $CONSUMER_KEY = 'ingDLMRuGe9UKHRNjs7cYckS2yul4lc3';
+        $CONSUMER_SECRET = 'junaedi19981101';
+        $CONSUMER_TTL = 86400;
+        $token =  $this->jwt->encode(array(
+          'consumerKey'=>$CONSUMER_KEY,
+          'userId'=>$user_id,
+          'issuedAt'=>date(DATE_ISO8601, strtotime("now")),
+          'ttl'=>$CONSUMER_TTL
+        ), $CONSUMER_SECRET);
+        // $token = 'a';
+        return $token;
+    }
 
-        $request->setHeaders(array(
-          'postman-token' => '5ec9b16c-3eda-96af-a06d-186577f2e75e',
-          'cache-control' => 'no-cache',
-          'content-type' => 'application/json'
-        ));
-
-        $request->setBody('{
-          "username" : "admin",
-          "password" : "qwerty"
-        }');
-
-        try {
-          $response = $request->send();
-
-          echo $response->getBody();
-        } catch (HttpException $ex) {
-          echo $ex;
+    public function decode_token(){
+        $this->load->library("JWT");
+        // $CONSUMER_KEY = 'ingDLMRuGe9UKHRNjs7cYckS2yul4lc3';
+        $CONSUMER_SECRET = 'junaedi19981101';
+        // $CONSUMER_TTL = 86400;
+        $token = $_COOKIE['token'];
+        $data =  $this->jwt->decode($token, $CONSUMER_SECRET);
+        // $token = 'a';
+        if (is_object($data)) {
+            return true;
+        }else{
+            return false;
         }
     }
 }

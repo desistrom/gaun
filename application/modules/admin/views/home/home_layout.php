@@ -147,3 +147,26 @@
     <a href="<?=site_url('admin/menu/page');?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
   </div>
 </div>
+  <!-- <div class="box-body">
+              <div class="row">
+                <div class="col-md-8">
+                  <div class="chart-responsive">
+                    <canvas id="pieChart" height="150"></canvas>
+                  </div>
+
+                </div>
+
+                <div class="col-md-4">
+                  <ul class="chart-legend clearfix">
+                    <li><i class="fa fa-circle-o text-red"></i> Chrome</li>
+                    <li><i class="fa fa-circle-o text-green"></i> IE</li>
+                    <li><i class="fa fa-circle-o text-yellow"></i> FireFox</li>
+                    <li><i class="fa fa-circle-o text-aqua"></i> Safari</li>
+                    <li><i class="fa fa-circle-o text-light-blue"></i> Opera</li>
+                    <li><i class="fa fa-circle-o text-gray"></i> Navigator</li>
+                  </ul>
+                </div>
+          
+              </div>
+   
+            </div> -->

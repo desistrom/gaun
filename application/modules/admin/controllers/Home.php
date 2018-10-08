@@ -12,9 +12,12 @@ class Home extends CI_Controller  {
 	var $data = array();
     function __construct() {
         parent::__construct();
-        $this->load->helper(array('form', 'url'));
+        $this->load->helper(array('form', 'url','check_token'));
         $this->load->model('home_model');
         if ($this->session->userdata('is_login') == false) {
+        	redirect(site_url('login'));
+        }
+        if(check_token() != true){
         	redirect(site_url('login'));
         }
         /*$token = $this->session->userdata('token');
@@ -47,11 +50,30 @@ class Home extends CI_Controller  {
     	$this->data['news'] = $this->db->get('tb_news')->num_rows();
     	$this->data['page'] = $this->db->get('tb_general_page')->num_rows();
     	$this->data['video'] = $this->db->get_where('tb_galery',array('type'=>'video'))->num_rows();
+    	$jdosen = $this->db->get_where('tb_pengguna',array('is_login'=>1,'id_role_ref'=>1))->result_array();
+    	foreach ($jdosen as $key => $value) {
+	    	$last = $value['last_login'];
+	    	$endtime = strtotime("+30 minutes", strtotime($last));
+	    	$now = date('H:i:s');
+	    	if ($endtime < $now) {
+	    		$this->db->update('tb_pengguna',array('is_login'=>0),array('id_pengguna'=>$value['id_pengguna']));
+	    	}
+    	}
     	$this->data['dosen'] = $this->db->get_where('tb_pengguna',array('is_login'=>1,'id_role_ref'=>1))->num_rows();
+    	$jmahasiswa = $this->db->get_where('tb_pengguna',array('is_login'=>1,'id_role_ref'=>0))->result_array();
+    	foreach ($jmahasiswa as $key => $value) {
+	    	$last = $value['last_login'];
+	    	$endtime = strtotime("+30 minutes", strtotime($last));
+	    	$now = date('H:i:s');
+	    	if ($endtime < $now) {
+	    		$this->db->update('tb_pengguna',array('is_login'=>0),array('id_pengguna'=>$value['id_pengguna']));
+	    	}
+    	}
     	$this->data['mahasiswa'] = $this->db->get_where('tb_pengguna',array('is_login'=>1,'id_role_ref'=>0))->num_rows();
     	$this->data['jdosen'] = $this->db->get_where('tb_pengguna',array('status'=>1,'id_role_ref'=>1))->num_rows();
     	$this->data['jmahasiswa'] = $this->db->get_where('tb_pengguna',array('status'=>1,'id_role_ref'=>0))->num_rows();
     	$this->data['picture'] = $this->db->get_where('tb_galery',array('type'=>'image'))->num_rows();
+
     	$this->ciparser->new_parse('template_admin','modules_admin', 'home/home_layout',$this->data);
     }
 

@@ -1,4 +1,9 @@
-<div class="col col-md-12 col-sm-12 col-xs-12 none-padding content-wrap">
+		<section class="content-page detail-jurnal col-md-12 col-sm-12 col-xs-12 none-padding">
+			<div class="container-fluid">
+				
+
+					<div class="row">
+						<div class="col col-md-12 col-sm-12 col-xs-12 none-padding content-wrap">
 	<div class="col col-ms-12 col-sm-12 col-xs-12">
 		<h4 class="title-content-wrap">Table Of Content <?=$journal[0]['judul'];?></h4>
 	</div>
@@ -50,3 +55,7 @@
 		</div>
 	</div>
 </div>
+					</div>
+
+			</div>
+		</section>

@@ -66,7 +66,8 @@ class Login_user extends MX_Controller  {
                     $url = URL_GET_TOKEN;
                     $method = 'POST';
                     $token = "";
-                    $this->db->update('tb_pengguna',array('is_login'=>1),array('id_pengguna'=>$user_data['id_pengguna']));
+                    $waktu = date('H:i:s');
+                    $this->db->update('tb_pengguna',array('is_login'=>1,'last_login'=>$waktu),array('id_pengguna'=>$user_data['id_pengguna']));
                     // $result = api_helper(json_encode($data_token),$url,$method,$token);
                     // print_r($result);
                     // setcookie('user',json_encode($result['token']), time()+"3600","/");
@@ -142,7 +143,8 @@ class Login_user extends MX_Controller  {
                     $url = URL_GET_TOKEN;
                     $method = 'POST';
                     $token = "";
-                    $this->db->update('tb_pengguna',array('is_login'=>1),array('id_pengguna'=>$user_data['id_pengguna']));
+                    $waktu = date('H:i:s');
+                    $this->db->update('tb_pengguna',array('is_login'=>1,'last_login'=>$waktu),array('id_pengguna'=>$user_data['id_pengguna']));
                     $ret['url'] = site_url('user/dashboard');
 
                 }else{
@@ -301,6 +303,8 @@ terima kasih";
                 }else{
 	                $this->session->set_userdata('user_login',true);
 	                $this->session->set_userdata('user',$userID);
+                    $waktu = date('H:i:s');
+                    $this->db->update('tb_pengguna',array('is_login'=>1,'last_login'=>$waktu),array('id_pengguna'=>$userID));
 	                redirect(site_url('user/dashboard'));
                 }
             }
@@ -355,6 +359,8 @@ terima kasih";
                 }else{
 	                $this->session->set_userdata('user_login',true);
 	                $this->session->set_userdata('user',$userID);
+                    $waktu = date('H:i:s');
+                    $this->db->update('tb_pengguna',array('is_login'=>1,'last_login'=>$waktu),array('id_pengguna'=>$userID));
 	                redirect(site_url('user/dashboard'));
                 }
             }
@@ -487,6 +493,8 @@ terima kasih";
                 }else{
                     $this->session->set_userdata('user_login',true);
                     $this->session->set_userdata('user',$userID);
+                    $waktu = date('H:i:s');
+                    $this->db->update('tb_pengguna',array('is_login'=>1,'last_login'=>$waktu),array('id_pengguna'=>$userID));
                     redirect(site_url('user/dashboard'));
                 }
             }
@@ -537,6 +545,8 @@ terima kasih";
                 }else{
                     $this->session->set_userdata('user_login',true);
                     $this->session->set_userdata('user',$userID);
+                    $waktu = date('H:i:s');
+                    $this->db->update('tb_pengguna',array('is_login'=>1,'last_login'=>$waktu),array('id_pengguna'=>$userID));
                     redirect(site_url('user/dashboard'));
                 }
             }

@@ -1,6 +1,12 @@
-<div class="col col-md-12 col-sm-12 col-xs-12 none-padding content-wrap">
+<section class="content-page sub-detail-jurnal col-md-12 col-sm-12 col-xs-12 none-padding">
+			<div class="container-fluid">
+				
+
+					<div class="row">
+						<div class="col col-md-12 col-sm-12 col-xs-12 none-padding content-wrap">
+							<div class="col col-md-12 col-sm-12 col-xs-12 none-padding content-wrap">
 	<div class="col col-ms-12 col-sm-12 col-xs-12">
-		<h4 class="title-content-wrap">Table Of Content JPPP</h4>
+		<h4 class="title-content-wrap">Table Of Content <?=$journal['journal'];?></h4>
 	</div>
 	<div class="col col-md-3 col-sm-4 col-xs-12 right-content-wrap">
 		<div class="flter-side-bar">
@@ -37,8 +43,8 @@
 		</div>
 	</div>
 	<div class="col col-md-9 col-sm-8 col-xs-12 left-content-wrap ">
-		<h4><?=$journal['journal'];?></h4>
-			<div class="line-sub-title-jurnal"></div>
+		<h4 class="text-red title-sub-detail-jurnal"><?=$journal['journal'];?></h4>
+			<div class="bg-red line-sub-title-jurnal"></div>
 			<ul class="list-unstyled list-info-jurnal">
 				<li><?=$journal['issn'];?></li>
 				<li>Volume <?=$journal['volume'];?>/ Nomor : <?=$journal['nomor'];?> / Published : <?=$journal['publish'];?></li>
@@ -133,3 +139,9 @@
 		
 	</div>
 </div>
+						</div>
+					</div>
+
+			</div>
+		</section>
+	</div>

@@ -182,7 +182,7 @@
           <div class="error" id="ntf_nama"></div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" style="border-bottom: solid #A8A8A8 1px;padding-bottom: 15px; ">
           <label>Jabatan Author</label>
           <input type="text" name="jabatan" class="form-control jabatan" id="jabatan" placeholder="Enter Jabatan Author ..." value="">
           <div class="error" id="ntf_jabatan"></div>
@@ -328,7 +328,7 @@
           <div class="error" id="ntf_nama_<?=$value['id_author'];?>"></div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" style="border-bottom: solid #A8A8A8 1px;padding-bottom: 15px; ">
           <label>Jabatan Author</label>
           <input type="text" name="jabatan" class="form-control jabatan_<?=$value['id_author'];?>" id="jabatan_<?=$value['id_author'];?>" placeholder="Enter Jabatan Author ..." value="<?=$value['jabatan'];?>" disabled="true">
           <div class="error" id="ntf_jabatan_<?=$value['id_author'];?>"></div>
@@ -591,7 +591,7 @@
     });
 
     $('body').on('click','.btn_more',function(){
-      var html = '<div class="form-group"> <label>Nama Author</label> <input type="text" name="nama" class="form-control nama" id="nama" placeholder="Enter Nama Author ..." value=""> <div class="error" id="ntf_nama"></div></div><div class="form-group"> <label>Jabatan Author</label> <input type="text" name="jabatan" class="form-control jabatan" id="jabatan" placeholder="Enter Jabatan Author ..." value=""> <div class="error" id="ntf_jabatan"></div></div>';
+      var html = '<div class="form-group" > <label>Nama Author</label> <input type="text" name="nama" class="form-control nama" id="nama" placeholder="Enter Nama Author ..." value=""> <div class="error" id="ntf_nama"></div></div><div class="form-group" style="border-bottom: solid #A8A8A8 1px;padding-bottom:15px; "> <label>Jabatan Author</label> <input type="text" name="jabatan" class="form-control jabatan" id="jabatan" placeholder="Enter Jabatan Author ..." value=""> <div class="error" id="ntf_jabatan"></div></div>';
       $('.more').append(html);
     });
 

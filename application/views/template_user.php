@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard User</title>
+    <link rel="shortcut icon" href="<?=base_url();?>media/favicon.ico">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
     <link rel="stylesheet" href="<?=base_url();?>assets/user/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?=base_url();?>assets/user/fonts/font-awesome.min.css">
@@ -63,8 +64,30 @@
 
                       <li class="dropdown <?php if(current_url() == site_url('user/journal') || current_url() == site_url('user/journal/artikel') || current_url() == site_url('user/journal/volume') || current_url() == site_url('user/journal/list_nomor') || current_url() == site_url('user/journal/list_artikel') || current_url() == site_url('user/journal/add_artikel') || current_url() == site_url('user/journal/add_no_volume') || current_url() == site_url('user/journal/add_volume') || current_url() == site_url('user/journal/add') || current_url() == site_url('user/journal/list_artikel_rejected') || current_url() == site_url('user/journal/list_artikel_accepted') || current_url() == site_url('user/journal/list_download') || current_url() == site_url('user/journal/all_journal')){ ?>active <?php }else{ ?>not-active <?php } ?>"><a class="link_dropdown"  href="<?=site_url('user/journal');?>" class="dropdown-toggle">Journal </a>
                           <ul class="drop-menu <?php if(current_url() == site_url('user/journal') || current_url() == site_url('user/journal/artikel') || current_url() == site_url('user/journal/volume') || current_url() == site_url('user/journal/list_nomor') || current_url() == site_url('user/journal/list_artikel') || current_url() == site_url('user/journal/add_artikel') || current_url() == site_url('user/journal/add_no_volume') || current_url() == site_url('user/journal/add_volume') || current_url() == site_url('user/journal/add') || current_url() == site_url('user/journal/list_artikel_rejected') || current_url() == site_url('user/journal/list_artikel_accepted') || current_url() == site_url('user/journal/list_download')|| current_url() == site_url('user/journal/all_journal')){ ?>open active <?php }else{ ?>not-active<?php } ?> col col-md-2" role="menu">
+                             <li class="li-submenu li-not-open"><a href="#"> <i class="fa fa-plus"></i>Add</a>
+                                <ul class="sub-drop-menu active" >
+                                    <li><a href="<?=site_url('user/journal/add');?>">
+                                        Add Journal
+                                    </a>
+                                  </li>
+                                    <li><a href="<?=site_url('user/journal/add_no_volume');?>">
+                                       
+                                        Add No Volume
+                                    </a></li>
+                                    <li><a href="<?=site_url('user/journal/add_volume');?>">
+                                       
+                                        Add volume
+                                    </a></li>
+
+                                    <li><a href="<?=site_url('user/journal/add_artikel');?>">
+                                       
+                                        Add Artikel
+                                    </a></li>
+
+                                </ul>
+                              </li>
                             <li><a href="<?=site_url('user/journal/all_journal');?>" <?php if(current_url() == site_url('user/journal/all_journal')){ ?> class="active" <?php } ?> > <i class="fa fa-home"></i>All Journal</a></li>
-                              <li><a href="<?=site_url('user/journal');?>" <?php if(current_url() == site_url('user/journal') || current_url() == site_url('user/journal/add')){ ?> class="active" <?php } ?> > <i class="fa fa-home"></i>my Journal</a></li>
+                              <li><a href="<?=site_url('user/journal');?>" <?php if(current_url() == site_url('user/journal') || current_url() == site_url('user/journal/add')){ ?> class="active" <?php } ?> > <i class="fa fa-book"></i>my Journal</a></li>
                               <li><a href="<?=site_url('user/journal/volume');?>" <?php if(current_url() == site_url('user/journal/volume') || current_url() == site_url('user/journal/add_volume')){ ?> class="active" <?php } ?>> <i class="fa fa-user"></i>Volume</a></li>
                               <li><a href="<?=site_url('user/journal/list_nomor');?>" <?php if(current_url() == site_url('user/journal/list_nomor') || current_url() == site_url('user/journal/add_no_volume')){ ?> class="active" <?php } ?>> <i class="fa fa-gear"></i>No Volume</a></li>
                               <li class="li-submenu <?php if(current_url() == site_url('user/journal/list_artikel') || current_url() == site_url('user/journal/add_artikel') || current_url() == site_url('user/journal/list_artikel_rejected') || current_url() == site_url('user/journal/list_artikel_accepted') || current_url() == site_url('user/journal/list_download')){ ?> active <?php }else{ ?> li-not-open<?php } ?>" ><a href="#" <?php if(current_url() == site_url('user/journal/list_artikel') || current_url() == site_url('user/journal/add_artikel') || current_url() == site_url('user/journal/list_artikel_rejected') || current_url() == site_url('user/journal/list_artikel_accepted') || current_url() == site_url('user/journal/list_download')){ ?> class="active" <?php } ?>> <i class="fa fa-gear"></i>Artikel</a>

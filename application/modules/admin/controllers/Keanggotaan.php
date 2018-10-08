@@ -504,6 +504,7 @@ class Keanggotaan extends MX_Controller  {
 		$data = $this->db->get_where('tb_instansi',array('id_instansi'=>$id))->row_array();
 		$html = '';
 		$html .= '<li> Nama : '.$data['nm_instansi'].'</li>';
+		$html .= '<li> Username : '.$data['username'].'</li>';
 		$html .= '<li> E-mail : '.$data['email'].'</li>';
 		$html .= '<li> Alamat : '.$data['alamat'].'</li>';
 		$html .= '<li> Phone : '.$data['phone'].'</li>';

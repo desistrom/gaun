@@ -30,6 +30,13 @@
   .fa-upload{
     padding-right: 10px;
   }
+  .box-content{
+    background-color: transparent;
+  }
+  .panel-header{
+     border-bottom: solid 1px #A8A8A8;
+    padding-left: 15px;
+  }
 </style>
 <link rel="stylesheet" href="<?=base_url();?>assets/datatables/css/dataTables.bootstrap.min.css">
 <div class="col col-md-10 col-sm-10 col-xs-12 right-content" style="">
@@ -61,7 +68,7 @@
 <form role="form">
   <div class="col col-md-8 col-sm-8 col-xs-12" style="padding-top: 1em;">
     <div class="panel">
-      <div class="panel-header" style="background-color:  #F5F5F5;">
+      <div class="panel-header">
           <div class="box-header with-border">
       <h3 class="box-title"> Artikel Content</h3>
     </div>
@@ -88,7 +95,7 @@
   </div>
   <div class="col col-md-4 col-sm-4 col-xs-12" style="padding-top: 1em;">
     <div class="panel ">
-        <div class="panel-header" style="background-color:  #F5F5F5;">
+        <div class="panel-header"">
           <div class="box-header with-border">
           <h3 class="box-title">Artikel Setting</h3>
         </div>
@@ -204,7 +211,7 @@
 <form role="form">
   <div class="col col-md-8 col-sm-8 col-xs-12" style="padding-top: 1em;">
     <div class="panel">
-      <div class="panel-header" style="background-color:  #F5F5F5;">
+      <div class="panel-header" >
           <div class="box-header with-border">
       <h3 class="box-title"> Artikel Content</h3>
     </div>
@@ -231,7 +238,7 @@
   </div>
   <div class="col col-md-4 col-sm-4 col-xs-12" style="padding-top: 1em;">
     <div class="panel ">
-        <div class="panel-header" style="background-color:  #F5F5F5;">
+        <div class="panel-header" ">
           <div class="box-header with-border">
           <h3 class="box-title">Artikel Setting</h3>
         </div>

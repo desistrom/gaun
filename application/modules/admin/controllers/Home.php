@@ -53,12 +53,15 @@ class Home extends CI_Controller  {
     	$jdosen = $this->db->get_where('tb_pengguna',array('is_login'=>1,'id_role_ref'=>1))->result_array();
     	foreach ($jdosen as $key => $value) {
 	    	$last = $value['last_login'];
-	    	$endtime = strtotime("+30 minutes", strtotime($last));
-	    	$now = date('H:i:s');
-	    	if ($endtime < $now) {
-	    		$this->db->update('tb_pengguna',array('is_login'=>0),array('id_pengguna'=>$value['id_pengguna']));
+	    	$endtime = date('Y-m-d H:i:s',strtotime('+30 minutes',strtotime($last)));
+	    	$times = date('Y-m-d H:i:s', strtotime($endtime));
+	    	$now = date('Y-m-d H:i:s');
+	    	// print_r($times.' - '.$now);
+	    	if ($times < $now) {
+	    		$this->db->update('tb_pengguna',array('is_login'=>0,'last_login'=>null),array('id_pengguna'=>$value['id_pengguna']));
 	    	}
     	}
+    	// print_r($jdosen);
     	$this->data['dosen'] = $this->db->get_where('tb_pengguna',array('is_login'=>1,'id_role_ref'=>1))->num_rows();
     	$jmahasiswa = $this->db->get_where('tb_pengguna',array('is_login'=>1,'id_role_ref'=>0))->result_array();
     	foreach ($jmahasiswa as $key => $value) {

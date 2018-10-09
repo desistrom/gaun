@@ -18,7 +18,7 @@ class Dashboard extends MX_Controller  {
 
 	}
     public function index() {
-      
+        // print_r($this->general->status());
     	$data = $this->session->userdata('user');
     	// print_r($data);
 

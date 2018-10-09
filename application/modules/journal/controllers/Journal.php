@@ -117,4 +117,8 @@ class Journal extends MX_Controller
         redirect(site_url('assets/file/'.$art['abstract_file']));
     }
 
+    public function other(){
+        $this->ciparser->new_parse('template_journal','modules_journal','journal/other_layout',$this->data);
+    }
+
 }

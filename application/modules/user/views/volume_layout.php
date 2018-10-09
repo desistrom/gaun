@@ -114,7 +114,27 @@
       </div>
     </div>
   <?php } ?>
-<script src="<?=base_url().'assets/js/jquery-3.2.1.min.js';?>"></script>
+  <div class="modal fade" id="progresLoading" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center">
+            <div class="modal-content">
+                <div class="modal-body">
+                  <div class="box box-danger">
+                      <div class="box-header">
+                      </div>
+                      <div class="box-body">
+                      </div>
+                      <div class="overlay">
+                        <i class="fa fa-refresh fa-spin"></i>
+                      </div>
+                  </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <script src="<?=base_url().'assets/js/jquery-3.2.1.min.js';?>"></script> -->
 <script src="<?=base_url();?>assets/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?=base_url();?>assets/datatables/js/dataTables.bootstrap.min.js"></script>
 <script type="text/javascript">
@@ -153,27 +173,6 @@
             });
       });
 
-    });
-
-    $('body').on('click','.detail', function(){
-      // $('#progresLoading').modal('show');
-      var id = $(this).attr('id');
-      $.ajax({
-          url : base_url+'user/journal/detail_journal/'+id,
-          dataType : 'json',
-          async : false,
-          cache : false ,
-          contentType : false , 
-          processData : false
-      }).done(function(data){
-        console.log(data);
-        $('#modalDetail .btn-add-artikel').attr('id',data.id);
-        $('#modalDetail #issn_view').html(data.issn);
-        $('#modalDetail #visitor_view').html(data.visitor);
-        $('#modalDetail tbody').html(data.table);
-        $('#modalDetail').modal('show');
-        $('.modal-backdrop').remove();
-      });
     });
     $('#modalSuccess').modal('show');
   });

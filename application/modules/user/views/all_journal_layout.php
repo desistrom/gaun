@@ -298,9 +298,14 @@ color: #D10909!important;
               </div>
             </div>
             <?php if (count($journal) == 0) { ?>
-              <div class="jumbotron">
+              <div class="col col-md-12 col-sm-12 col-xs-12">
+                <div class="jumbotron">
                 <h2 style="color: #A8A8A8;text-align: center;">Data Not found</h2>
               </div>
+              </div>
+             <!--  <div class="jumbotron">
+                <h2 style="color: #A8A8A8;text-align: center;">Data Not found</h2>
+              </div> -->
             <?php } ?>
             <?php foreach ($journal as $key => $value): ?>
               <div class="filter-box-thumbnail col-md-3 col-sm-3 col-xs-12 " style="">

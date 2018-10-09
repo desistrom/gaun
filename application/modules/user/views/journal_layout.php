@@ -263,6 +263,12 @@ color: #D10909!important;
 .input-search {
   display: inline-block;
 }
+div.container-fluid.footer-bottom{
+  left: 0;
+}
+.myjurnal{
+  float: right;
+}
 </style>
 
 <div class="col col-md-10 col-sm-10 col-xs-12 right-content" style="">
@@ -343,7 +349,7 @@ color: #D10909!important;
               </div>
               
             <?php endforeach ?>
-            <?php if ($this->session->flashdata('notif') != '') { ?>
+            
 
               <!-- <div class="filter-box-thumbnail col-md-3 col-sm-3 col-xs-12 " style="">
                 <div class="box-thumbnail">
@@ -419,6 +425,7 @@ color: #D10909!important;
 
     </div>
 </div>
+<?php if ($this->session->flashdata('notif') != '') { ?>
     <div class="modal" tabindex="-1" role="dialog" id="modalSuccess">
       <div class="modal-dialog" role="document">
         <div class="modal-content">

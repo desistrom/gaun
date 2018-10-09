@@ -39,7 +39,7 @@
     <div class="box-content">
       <div class="row">
       <?php if($view == 'list'){ ?>
-      <a href="<?=site_url('user/journal/add_artikel');?>" class="btn btn-success" style="margin-left: 15px;"><i class="fa fa-plus"></i> Add Artikel</a>
+      <!-- <a href="<?=site_url('user/journal/add_artikel');?>" class="btn btn-success" style="margin-left: 15px;"><i class="fa fa-plus"></i> Add Artikel</a> -->
         <div class="table-responsive">
           <table class="table table-striped" id="table">
             <thead>

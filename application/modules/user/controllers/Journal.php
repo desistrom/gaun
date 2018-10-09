@@ -261,18 +261,17 @@ class Journal extends MX_Controller
                     // print_r($_FILES['file_name']);
                     // print_r($_FILES['file_name_abs']);
                     $file = $this->upload_file($_FILES['file_name']);
-                    $file_abs = $this->upload_file($_FILES['file_name_abs']);
+                    $file_abs = $this->upload_file_abstract($_FILES['file_name_abs']);
                     // print_r($file);
                     // print_r($file_abs);
                     // return false;
                     if (isset($file['error']) || isset($file_abs['abs_error'])) {
                         if (isset($file['error'])) {
-                            # code...
-                        $ret['notif'] = $file;
+                            $ret['notif'] = $file;
                         }
                         if (isset($file_abs['abs_error'])) {
-                            # code...
-                        $ret['notif'] = $file_abs;
+                            $ret['notif'] = $file_abs;
+                            print_r($file_abs);
                         }
                     }else{
                         $ret['state'] = 1;
@@ -340,6 +339,8 @@ class Journal extends MX_Controller
     }
 
     public function edit_artikel($id=null){
+        $sql = "SELECT * FROM tb_journal j JOIN tb_volume v ON j.id_journal = v.id_journal_ref JOIN tb_no_volume n ON v.id_volume = n.id_volume_ref JOIN tb_artikel a ON n.id_no_volume = a.id_no_volume_ref where id_artikel = ?";
+        $artikel = $this->db->query($sql,$id)->row_array();
         if ($this->input->server('REQUEST_METHOD') == "POST") {
             // print_r($this->data['user'])
             $ret['state'] = 0;
@@ -375,6 +376,10 @@ class Journal extends MX_Controller
                 $ret['state_file'] = 1;
                 $ret['state_abs'] = 1;
                 if (isset($_FILES['file_name'])) {
+                    if (file_exists(FCPATH."assets/file/".$artikel['file'])) {
+                        @chmod(FCPATH."assets/file/".$artikel['file'], 0777);
+                        unlink(FCPATH."assets/file/".$artikel['file']);
+                    }
                     $file = $this->upload_file($_FILES['file_name']);
                     // $ret['bbb'] = $file;
                     if (isset($file['error'])) {
@@ -386,6 +391,10 @@ class Journal extends MX_Controller
                     }
                 }
                 if(isset($_FILES['file_name_abs'])){
+                    if (file_exists(FCPATH."assets/file/abstract/".$artikel['abstract_file'])) {
+                        @chmod(FCPATH."assets/file/abstract/".$artikel['abstract_file'], 0777);
+                        unlink(FCPATH."assets/file/abstract/".$artikel['abstract_file']);
+                    }
                     $file_abs = $this->upload_file_abstract($_FILES['file_name_abs']);
                     // $ret['aaa'] = $file_abs;
                     if (isset($file_abs['abs_error'])) {
@@ -437,8 +446,7 @@ class Journal extends MX_Controller
             echo json_encode($ret);
             exit();
         }
-        $sql = "SELECT * FROM tb_journal j JOIN tb_volume v ON j.id_journal = v.id_journal_ref JOIN tb_no_volume n ON v.id_volume = n.id_volume_ref JOIN tb_artikel a ON n.id_no_volume = a.id_no_volume_ref where id_artikel = ?";
-        $artikel = $this->db->query($sql,$id)->row_array();
+        
         // $author = '';
         $sql_author = 'SELECT * FROM tb_author where id_artikel_ref = ?';
         $author = $this->db->query($sql_author,$id)->result_array();
@@ -710,7 +718,12 @@ class Journal extends MX_Controller
                     if ($news->reason != '') {
                         $aktif = '<span class="text-warning">Repaired</span>';
                     }else{
-                        $aktif = '<span class="text-default">Disable</span>';
+                        if ($news->status_journal == 1) {
+                            $aktif = '<span class="text-default">Submited</span>';
+                        }else{
+                            $aktif = '<span class="text-default">Unsubmited</span>';
+                        }
+                        
                     }
                     if($news->status_journal != 1 ){
                         $button = '<a href="'.site_url("user/journal/edit_artikel").'/'.$news->id_artikel.'"><button class="btn btn-info btn-sm" id="edit" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil"></i></button></a>';

@@ -71,6 +71,7 @@ class Dashboard extends MX_Controller  {
         // print_r($data);
         $user = $this->db->get_where('tb_pengguna',array('id_pengguna'=>$data))->row_array();
         $role = '';
+        $this->data['instansi'] = $user['id_instansi_ref'];
         if ($user['id_role_ref'] == 1) {
             $role = 'tb_dosen';
             $this->data['user'] = $this->db->get_where('tb_dosen',array('id_pengguna_ref'=>$data))->row_array();

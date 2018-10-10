@@ -434,22 +434,23 @@ class News extends MX_Controller  {
     public function comment_ajax(){
     	$id = $this->input->post('id');
     	$comment = $this->news_model->news_comment($id);
+    	// print_r($comment);
     	$data = '<table class="table table-bordered  dataTable" id="example2">
 			<thead>
 				<th>No</th>
 				<th>News</th>
 				<th>From</th>
 				<th>Email</th>
-				<th>Subject</th>
+				<th>Content</th>
 			</thead>
 			<tbody>';
-			if(!empty($comment)){ foreach ($comment as $key => $value):
+			if(is_array($comment)){ foreach ($comment as $key => $value):
 				$data .= '<tr>
 					<td>'.($key+1).'</td>
 					<td><div class="judul">'.$value['judul'].'</div></td>
 					<td><div class="from">'.$value['nama'].'</div></td>
 					<td><div class="email">'.$value['email'].'</div></td>
-					<td><div class="subject">'.word_limiter($value['content'],5).'</div></td>
+					<td><div class="subject">'.$value['content'].'</div></td>
 				</tr>';
 			endforeach; }
 			$data .= '</tbody>

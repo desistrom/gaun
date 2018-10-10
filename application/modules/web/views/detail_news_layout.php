@@ -111,7 +111,7 @@
                 <h2>Comment </h2></div>
             <div class="col-md-5 col-sm-12 col-xs-12 sub-comment">
                 <div class="col col-md-12 col-sm-12 col-xs-12 none-padding filter-comment">
-                    <?php if(isset($comment['data'])){ if($comment['data'] != 'data not found'){ foreach ($comment['data'] as $key => $value): ?>
+                    <?php if(isset($comment)){ foreach ($comment as $key => $value): ?>
                     <div class="comment-left col col-md-2 col-sm-2 col-xs-2 none-padding">
                         <div class="user text-center"><i class="fa fa-user"></i></div>
                     </div>
@@ -119,7 +119,7 @@
                         <h4><?=$value['nama'];?><span class="date-comment"><!-- <?=$value['email'];?> --></span></h4>
                         <p><?=$value['content'];?></p>
                     </div>
-                    <?php endforeach; } } ?>
+                    <?php endforeach; } ?>
                 </div>
             </div>
             <div class="col-md-7 col-sm-12 col-xs-12 right-comment">
@@ -148,7 +148,7 @@
                               <?php echo $captcha // tampilkan recaptcha ?>
                               <div class="error" id="ntf_g-recaptcha-response" style="position: relative;"></div>
                             </div>
-                            <input type="hidden" name="id_berita" value="<?=$detail_news['newsId'];?>">
+                            <input type="hidden" name="id_berita" value="<?=$detail_news['sumber'];?>">
                             <div class="text-right"><button class="btn btn-post" type="button">Post Comment</button></div>
                         </div>
                     </form>
@@ -172,7 +172,7 @@
                       if(data.state == 1){
                         if (data.status == 1) {
                           window.location.href = window.location.href;
-                          $('#form_comment')[0].reset();
+                          // $('#form_comment')[0].reset();
                         }
                       }
                         $.each(data.notif,function(key,value){
@@ -180,6 +180,7 @@
                         $('#ntf_'+ key).html(value);
                         $('#ntf_'+ key).css({'color':'white', 'font-style':'italic'});
                         });
+                        grecaptcha.reset();
                   });
             });
         });

@@ -271,7 +271,7 @@
     $('body').on('click','.btn-reason',function(){
       var id = $(this).attr('id');
       $.ajax({
-          url : base_url+'user/journal/reason/'+id,
+          url : base_url+'journal/admin/reason/'+id,
           dataType : 'json',
           async : false,
           cache : false ,

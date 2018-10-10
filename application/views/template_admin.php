@@ -610,7 +610,9 @@
 <script src="<?=base_url();?>assets/js/jquery-ui.min.js"></script>
 <script src="<?=base_url();?>assets/js/bootstrap.min.js"></script>
 <script src="<?=base_url();?>assets/js/Chart.min.js"></script>
+<?php if(current_url() == site_url('admin')){ ?>
 <script src="<?=base_url();?>assets/js/dashboard2.js"></script>
+<?php } ?>
 <script src="<?=base_url();?>assets/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?=base_url();?>assets/datatables/js/dataTables.bootstrap.min.js"></script>
 <script type="text/javascript">

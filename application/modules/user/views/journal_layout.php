@@ -266,9 +266,9 @@ color: #D10909!important;
 div.container-fluid.footer-bottom{
   left: 0;
 }
-.myjurnal{
+/*.myjurnal{
   float: right;
-}
+}*/
 </style>
 
 <div class="col col-md-10 col-sm-10 col-xs-12 right-content" style="">
@@ -304,9 +304,11 @@ div.container-fluid.footer-bottom{
               </div>
             </div>
             <?php if (count($journal) == 0) { ?>
-              <div class="jumbotron">
+        <div class="col sol-md12 col-am-12 col-xs-12">
+                  <div class="jumbotron">
   <h2 style="color: #A8A8A8;text-align: center;">Data Not found</h2>
 </div>
+        </div>
             <?php } ?>
             <?php foreach ($journal as $key => $value): ?>
               <div class="filter-box-thumbnail col-md-3 col-sm-3 col-xs-12 " style="">

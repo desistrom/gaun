@@ -243,7 +243,7 @@
         <div class="error" id="ntf_file_name"></div> 
         <div class="error" id="ntf_error"></div> 
       </div>
-      <img src="<?=base_url();?>assets/media/<?=$journal['futured_image'];?>">
+      <img src="<?=base_url();?>assets/media/<?=$journal['futured_image'];?>" style="width: 100%;" >
     </div>
   <!--     <div class="form-group">
         <label>Gambar Berita</label>

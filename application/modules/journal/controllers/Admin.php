@@ -112,7 +112,7 @@ class Admin extends MX_Controller
 
     public function rejected(){
         $this->data['user']['nama'] = '';
-        $this->data['breadcumb'] = 'Journal Accepted';
+        $this->data['breadcumb'] = 'Journal Rejected';
         $this->data['view'] = 'list';
         $this->ciparser->new_parse('template_admin_journal','modules_journal', 'list_journal_rejected_layout',$this->data);
     }

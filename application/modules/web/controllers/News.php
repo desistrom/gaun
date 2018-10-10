@@ -142,7 +142,7 @@ class News extends CI_Controller  {
        // $url_page = $this->uri->segment_array();
        // $slug = end($url_page);
        // $idnews = $this->db->get_where('tb_news',$url_page)->row_array()['id_news'];
-       $this->data['comment'] = $this->db->get_where('tb_comment',array('id_berita'=>$id))->result_array();;
+       $this->data['comment'] = $this->db->get_where('tb_comment',array('slug'=>$id))->result_array();
        // print_r($this->data['comment']);
    
         $this->ciparser->new_parse('template_frontend','modules_web', 'detail_news_layout',$this->data);
@@ -170,7 +170,7 @@ class News extends CI_Controller  {
                 $data_nama['nama'] = $this->input->post('nama');
                 $data_nama['email'] = $this->input->post('email');
                 $data_nama['content'] = $this->input->post('content');
-                $data_nama['id_berita'] = $this->input->post('id_berita');
+                $data_nama['slug'] = $this->input->post('id_berita');
                 if ($this->db->insert('tb_comment',$data_nama)) {
                     $ret['status'] = 1;
                     // $ret['url'] = site_url('')

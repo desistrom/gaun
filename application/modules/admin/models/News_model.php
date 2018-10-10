@@ -79,9 +79,10 @@ class News_model extends CI_Model
     }
 
     public function news_comment($id){
-        $sql = "SELECT n.judul, c.nama, c.email, c.content FROM tb_comment c JOIN tb_news n ON c.id_berita = n.id_news WHERE c.id_berita = ?";
-        if ($this->db->query($sql,$id)->num_rows() > 0) {
-            return $this->db->query($sql,$id)->result_array();
+        $news = $this->db->get_where('tb_news',array('id_news'=>$id))->row_array();
+        $sql = "SELECT n.judul, c.nama, c.email, c.content FROM tb_comment c JOIN tb_news n ON c.slug = n.link WHERE c.slug = ?";
+        if ($this->db->query($sql,$news['link'])->num_rows() > 0) {
+            return $this->db->query($sql,$news['link'])->result_array();
             exit();
         }
         return false;

@@ -34,7 +34,7 @@
           <select class="form-control" name="instansi">
             <option value="">-- Pilih Instansi --</option> 
             <?php foreach ($instansi as $key => $value): ?>
-              <option <?php if ($user['instansi'] == $value['id_instansi']): ?> selected <?php endif ?>  value="<?=$value['id_instansi'];?>"><?=$value['nm_instansi'];?></option>   
+              <option <?php if ($instansi == $value['id_instansi']): ?> selected <?php endif ?>  value="<?=$value['id_instansi'];?>"><?=$value['nm_instansi'];?></option>   
             <?php endforeach ?>
           </select>
           <div class="error" id="ntf_instansi"></div>

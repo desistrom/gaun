@@ -19,7 +19,7 @@
 					</ul>
 			</div>
 			<div class="sidebar">
-				<h4>LAst Update</h4>
+				<h4>Last Update</h4>
 				<div class="line-sidebar-title">
 					
 				</div>

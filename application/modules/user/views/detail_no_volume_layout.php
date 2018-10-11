@@ -151,7 +151,7 @@
 
 <div class="col col-md-10 col-sm-10 col-xs-12 right-content" style="">
     <div class=" title-box">
-		<h3 class="title">Detail Volume</h3>
+		<h3 class="title">Detail Nomor Volume</h3>
     </div>
     <div class="box-content">
     	<div class="row">

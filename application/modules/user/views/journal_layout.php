@@ -295,7 +295,9 @@ div.container-fluid.footer-bottom{
     	<div class="row">
     	     <div class="col col-md-12 col-sm-12 col-xs-2">
             <div class="col col-md-12 col-sm-12 col-xs-12" style="padding-bottom: 30px;">
+            <?php if(!is_null($this->general->status())){ ?>
               <div class="col-md-4 col-sm-5 col-xs-12"><a href="<?=site_url('user/journal/add');?>" class="btn btn-success">Add Jurnal</a></div>
+              <?php } ?>
               <div class="col col-md-8 col-sm-7 col-xs-12">
                 <!-- <form method="get" class="text-right" >
                     <div class="input-search input-search-left"><input type="text" class="form-control" name="data" id="search" placeholder="Cari"></div>

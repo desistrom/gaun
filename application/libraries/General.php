@@ -87,5 +87,14 @@ class General
       return $title;
     }
 
+    public function status(){
+      $data = $this->CI->session->userdata('user');
+      // print_r($data);
+
+      $user = $this->CI->db->get_where('tb_pengguna',array('id_pengguna'=>$data))->row_array()['id_instansi_ref'];
+
+      return $user;
+    }
+
 
 }

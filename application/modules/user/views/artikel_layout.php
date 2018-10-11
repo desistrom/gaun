@@ -37,6 +37,9 @@
      border-bottom: solid 1px #A8A8A8;
     padding-left: 15px;
   }
+  #cke_references{
+    width: 100%!important;
+  }
 </style>
 <link rel="stylesheet" href="<?=base_url();?>assets/datatables/css/dataTables.bootstrap.min.css">
 <div class="col col-md-10 col-sm-10 col-xs-12 right-content" style="">
@@ -88,6 +91,27 @@
           <input type="hidden" name="content" id="content">
           <div class="error" id="ntf_content"></div>
         </div>
+         <div class="form-group">
+          <label>Keyword</label>
+          <input type="text" name="keyword" class="form-control" id="keyword" placeholder="Enter keyword Artikel ..." value="">
+          <div class="error" id="ntf_keyword"></div>
+        </div>
+
+        <div class="form-group">
+          <label>Refernces</label>
+          <?php
+          $this->ckeditor->basePath = base_url().'assets/ckeditor/';
+        $this->ckeditor->config['toolbar'] = array(
+                        array( 'Source', '-', 'Bold', 'Italic', 'Underline', '-','Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo','-','NumberedList','BulletedList','Link' )
+                                                            );
+        $this->ckeditor->config['language'] = 'eng';
+        $this->ckeditor->config['width'] = '297px';
+        $this->ckeditor->config['height'] = '300px'; 
+           ?>
+          <?php echo $this->ckeditor->editor("references", "" ); ?>
+          <input type="hidden" name="references" id="ref">
+          <div class="error" id="ntf_ref"></div>
+       </div>
     </div></div>
 
     </div>
@@ -128,27 +152,7 @@
           <div class="error" id="ntf_no_volume"></div>
         </div>
 
-        <div class="form-group">
-          <label>Keyword</label>
-          <input type="text" name="keyword" class="form-control" id="keyword" placeholder="Enter keyword Artikel ..." value="">
-          <div class="error" id="ntf_keyword"></div>
-        </div>
-
-        <div class="form-group">
-          <label>Refernces</label>
-          <?php
-          $this->ckeditor->basePath = base_url().'assets/ckeditor/';
-        $this->ckeditor->config['toolbar'] = array(
-                        array( 'Source', '-', 'Bold', 'Italic', 'Underline', '-','Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo','-','NumberedList','BulletedList','Link' )
-                                                            );
-        $this->ckeditor->config['language'] = 'eng';
-        $this->ckeditor->config['width'] = '297px';
-        $this->ckeditor->config['height'] = '300px'; 
-           ?>
-          <?php echo $this->ckeditor->editor("references", "" ); ?>
-          <input type="hidden" name="references" id="ref">
-          <div class="error" id="ntf_ref"></div>
-       </div>
+       
 
         <div class="form-group">
           <label>File Artikel</label>
@@ -176,30 +180,38 @@
           </div>
         </div>
 
-        <div class="form-group">
-          <label>Nama Author</label>
-          <input type="text" name="nama" class="form-control nama" id="nama" placeholder="Enter Nama Author ..." value="">
-          <div class="error" id="ntf_nama"></div>
-        </div>
+        <div class="col col-md-12 col-sm-12 col-xs-12" style="padding: 10px;border:solid #A8A8A8 1px; margin-top:15px;">
+          <div class="form-group">
+            <label>Nama Author</label>
+            <input type="text" name="nama" class="form-control nama" id="nama" placeholder="Enter Nama Author ..." value="">
+            <div class="error" id="ntf_nama"></div>
+          </div>
 
-        <div class="form-group" style="border-bottom: solid #A8A8A8 1px;padding-bottom: 15px; ">
-          <label>Jabatan Author</label>
-          <input type="text" name="jabatan" class="form-control jabatan" id="jabatan" placeholder="Enter Jabatan Author ..." value="">
-          <div class="error" id="ntf_jabatan"></div>
+          <div class="form-group" style=" ">
+            <label>Jabatan Author</label>
+            <input type="text" name="jabatan" class="form-control jabatan" id="jabatan" placeholder="Enter Jabatan Author ..." value="">
+            <div class="error" id="ntf_jabatan"></div>
+          </div>
         </div>
 
         <div class="more"></div>
-        <div class="text-right">
-          <button class="btn btn-info btn_more" type="button"><i class="fa fa-plus"></i> Add More</button>
+        <div class="text-right" >
+          <button class="btn btn-info btn_more" type="button" style="margin-top: 15px;"><i class="fa fa-plus"></i> Add More</button>
         </div>
     <!--     <div class="form-group">
           <label>Gambar Berita</label>
           <input type="file" name="file_name" class="form-control" id="file_name">
           <div class="error" id="ntf_file_name"></div>
         </div> -->
-        <div class="form-group">
-          <input type="checkbox" name="agree" id="agree" value="1">
-          <p class="form-control-static">Saya Telah membaca dan menyetujui semua persayratan dan peraturan yang di ajukan</p>
+        <div class="form-group" style="padding-top: 15px;" >
+          <table>
+            <tr>
+              <td><input type="checkbox" name="agree" id="agree" value="1" style="float: left;margin-top: -1.5em; margin-right: 5px;"></td>
+              <td><p class="form-control-static" style="background-color: red;color: white;padding: 0;">Saya Telah membaca dan menyetujui semua persayratan dan peraturan yang di ajukan</p></td>
+            </tr>
+          </table>
+          
+          
           <div class="error" id="ntf_agree"></div>
         </div>
          <button type="button" class="btn btn-primary" id="submit_artikel">Submit</button>
@@ -231,6 +243,28 @@
           <input type="hidden" name="content" id="content">
           <div class="error" id="ntf_content"></div>
         </div>
+            <div class="form-group">
+          <label>Keyword</label>
+          <input type="text" name="keyword" class="form-control" id="keyword" placeholder="Enter keyword Artikel ..." value="<?=$artikel['keyword'];?>">
+          <div class="error" id="ntf_keyword"></div>
+        </div>
+
+        <div class="form-group">
+          <label>References</label>
+          <?php
+          $this->ckeditor->basePath = base_url().'assets/ckeditor/';
+        $this->ckeditor->config['toolbar'] = array(
+                        array( 'Source', '-', 'Bold', 'Italic', 'Underline', '-','Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo','-','NumberedList','BulletedList','Link' )
+                                                            );
+        $this->ckeditor->config['language'] = 'eng';
+        $this->ckeditor->config['width'] = '297px';
+        $this->ckeditor->config['height'] = '300px'; 
+           ?>
+          <?php echo $this->ckeditor->editor("references", $artikel['references'] ); ?>
+          <input type="hidden" name="references" id="ref">
+          <!-- <textarea name="ref" class="form-control" id="ref" placeholder="Enter Refernces Artikel"><?=$artikel['references'];?></textarea> -->
+          <div class="error" id="ntf_ref"></div>
+       </div>
     </div></div>
 
     </div>
@@ -273,28 +307,7 @@
           <div class="error" id="ntf_no_volume"></div>
         </div>
 
-        <div class="form-group">
-          <label>Keyword</label>
-          <input type="text" name="keyword" class="form-control" id="keyword" placeholder="Enter keyword Artikel ..." value="<?=$artikel['keyword'];?>">
-          <div class="error" id="ntf_keyword"></div>
-        </div>
-
-        <div class="form-group">
-          <label>References</label>
-          <?php
-          $this->ckeditor->basePath = base_url().'assets/ckeditor/';
-        $this->ckeditor->config['toolbar'] = array(
-                        array( 'Source', '-', 'Bold', 'Italic', 'Underline', '-','Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo','-','NumberedList','BulletedList','Link' )
-                                                            );
-        $this->ckeditor->config['language'] = 'eng';
-        $this->ckeditor->config['width'] = '297px';
-        $this->ckeditor->config['height'] = '300px'; 
-           ?>
-          <?php echo $this->ckeditor->editor("references", $artikel['references'] ); ?>
-          <input type="hidden" name="references" id="ref">
-          <!-- <textarea name="ref" class="form-control" id="ref" placeholder="Enter Refernces Artikel"><?=$artikel['references'];?></textarea> -->
-          <div class="error" id="ntf_ref"></div>
-       </div>
+    
 
         <div class="form-group">
           <label>File Artikel</label>
@@ -322,23 +335,25 @@
         </div>
         <?php foreach ($author as $key => $value): ?>
         <div class="card_<?=$value['id_author'];?>" style="margin-bottom: 10px">
+          <div class="col col-md-12 col-sm-12 col-xs-12" style="padding: 10px;border:solid #A8A8A8 1px; margin-top:15px;">
         <div class="form-group">
           <label>Nama Author</label>
           <input type="text" name="nama" class="form-control nama_<?=$value['id_author'];?>" id="nama_<?=$value['id_author'];?>" placeholder="Enter Nama Author ..." value="<?=$value['nama'];?>" disabled="true">
           <div class="error" id="ntf_nama_<?=$value['id_author'];?>"></div>
         </div>
 
-        <div class="form-group" style="border-bottom: solid #A8A8A8 1px;padding-bottom: 15px; ">
+        <div class="form-group" >
           <label>Jabatan Author</label>
           <input type="text" name="jabatan" class="form-control jabatan_<?=$value['id_author'];?>" id="jabatan_<?=$value['id_author'];?>" placeholder="Enter Jabatan Author ..." value="<?=$value['jabatan'];?>" disabled="true">
           <div class="error" id="ntf_jabatan_<?=$value['id_author'];?>"></div>
         </div>
+      </div>
         <button class="btn btn-danger btn-delete btn-xs" type="button" id="<?=$value['id_author'];?>">delete</button><button class="btn btn-info btn-edit btn-xs" type="button" id="<?=$value['id_author'];?>" style="float: right">edit</button>
         </div>
         <?php endforeach ?>
         <div class="more"></div>
         <div class="text-right">
-          <button class="btn btn-info btn_more" type="button"><i class="fa fa-plus"></i> Add More</button>
+          <button class="btn btn-info btn_more" type="button" style="margin: 15px 0;"><i class="fa fa-plus"></i> Add More</button>
         </div>
     <!--     <div class="form-group">
           <label>Gambar Berita</label>
@@ -346,8 +361,18 @@
           <div class="error" id="ntf_file_name"></div>
         </div> -->
         <div class="form-group">
-          <input type="checkbox" name="agree" id="agree" value="1">
-          <p class="form-control-static">Saya Telah membaca dan menyetujui semua persayratan dan peraturan yang di ajukan</p>
+          <table style="padding-top: 15px;">
+            <tr>
+              <td>
+                <input type="checkbox" name="agree" id="agree" value="1" style="float: left;margin-top: -1.5em; margin-right: 5px;">
+              </td>
+              <td>
+                <p class="form-control-static" style="background-color: red;color: white;padding: 0;">Saya Telah membaca dan menyetujui semua persayratan dan peraturan yang di ajukan</p>
+              </td>
+            </tr>
+          </table>
+          
+          
           <div class="error" id="ntf_agree"></div>
         </div>
          <button type="button" class="btn btn-primary" id="submit_artikel">Submit</button>
@@ -591,7 +616,7 @@
     });
 
     $('body').on('click','.btn_more',function(){
-      var html = '<div class="form-group" > <label>Nama Author</label> <input type="text" name="nama" class="form-control nama" id="nama" placeholder="Enter Nama Author ..." value=""> <div class="error" id="ntf_nama"></div></div><div class="form-group" style="border-bottom: solid #A8A8A8 1px;padding-bottom:15px; "> <label>Jabatan Author</label> <input type="text" name="jabatan" class="form-control jabatan" id="jabatan" placeholder="Enter Jabatan Author ..." value=""> <div class="error" id="ntf_jabatan"></div></div>';
+      var html = '<div class="col col-md-12 col-sm-12 col-xs-12" style="padding: 10px;border:solid #A8A8A8 1px; margin-top:15px;"><div class="form-group" > <label>Nama Author</label> <input type="text" name="nama" class="form-control nama" id="nama" placeholder="Enter Nama Author ..." value=""> <div class="error" id="ntf_nama"></div></div><div class="form-group" > <label>Jabatan Author</label> <input type="text" name="jabatan" class="form-control jabatan" id="jabatan" placeholder="Enter Jabatan Author ..." value=""> <div class="error" id="ntf_jabatan"></div></div></div>';
       $('.more').append(html);
     });
 

@@ -124,9 +124,10 @@ ul.drop-menu.drop_2 li.btn-add-menu  a:hover {
 
                           </ul>
                         </li>
-                        <?php $url = $this->uri->segment_array(); if(!is_null($this->general->status())){ ?>
+                        <?php $url = $this->uri->segment_array();  ?>
                       <li class="dropdown <?php if($url[2] == 'journal' || current_url() == site_url('user/journal') || current_url() == site_url('user/journal/artikel') || current_url() == site_url('user/journal/volume') || current_url() == site_url('user/journal/list_nomor') || current_url() == site_url('user/journal/list_artikel') || current_url() == site_url('user/journal/add_artikel') || current_url() == site_url('user/journal/add_no_volume') || current_url() == site_url('user/journal/add_volume') || current_url() == site_url('user/journal/add') || current_url() == site_url('user/journal/list_artikel_rejected') || current_url() == site_url('user/journal/list_artikel_accepted') || current_url() == site_url('user/journal/list_download') || current_url() == site_url('user/journal/all_journal')){ ?>active <?php }else{ ?>not-active <?php } ?>"><a class="link_dropdown"  href="<?=site_url('user/journal');?>" class="dropdown-toggle">Journal </a>
                           <ul class="drop-menu  drop_2 <?php if($url[2] == 'journal' || current_url() == site_url('user/journal') || current_url() == site_url('user/journal/artikel') || current_url() == site_url('user/journal/volume') || current_url() == site_url('user/journal/list_nomor') || current_url() == site_url('user/journal/list_artikel') || current_url() == site_url('user/journal/add_artikel') || current_url() == site_url('user/journal/add_no_volume') || current_url() == site_url('user/journal/add_volume') || current_url() == site_url('user/journal/add') || current_url() == site_url('user/journal/list_artikel_rejected') || current_url() == site_url('user/journal/list_artikel_accepted') || current_url() == site_url('user/journal/list_download')|| current_url() == site_url('user/journal/all_journal')){ ?>open active <?php }else{ ?>not-active<?php } ?> col col-md-2" role="menu">
+                          <?php if(!is_null($this->general->status())){ ?>
                              <li class="li-submenu li-not-open btn-add-menu"><a href="#"> <i class="fa fa-plus"></i>Add</a>
                                 <ul class="sub-drop-menu active sub-menu-add" >
                                     <li><a href="<?=site_url('user/journal/add');?>">
@@ -149,9 +150,13 @@ ul.drop-menu.drop_2 li.btn-add-menu  a:hover {
 
                                 </ul>
                               </li>
+                            <?php } ?>
                             <li><a href="<?=site_url('user/journal/all_journal');?>" <?php if(current_url() == site_url('user/journal/all_journal')){ ?> class="active" <?php } ?> > <i class="fa fa-home"></i>All Journal</a></li>
+
                               <li><a href="<?=site_url('user/journal');?>" <?php if(current_url() == site_url('user/journal') || current_url() == site_url('user/journal/add')){ ?> class="active" <?php } ?> > <i class="fa fa-book"></i>my Journal</a></li>
+                              <?php if(!is_null($this->general->status())){ ?>
                               <li><a href="<?=site_url('user/journal/volume');?>" <?php if(current_url() == site_url('user/journal/volume') || current_url() == site_url('user/journal/add_volume')){ ?> class="active" <?php } ?>> <i class="fa fa-user"></i>Volume</a></li>
+                              
                               <li><a href="<?=site_url('user/journal/list_nomor');?>" <?php if(current_url() == site_url('user/journal/list_nomor') || current_url() == site_url('user/journal/add_no_volume')){ ?> class="active" <?php } ?>> <i class="fa fa-list"></i>No Volume</a></li>
                               <li class="li-submenu <?php if(current_url() == site_url('user/journal/list_artikel') || current_url() == site_url('user/journal/add_artikel') || current_url() == site_url('user/journal/list_artikel_rejected') || current_url() == site_url('user/journal/list_artikel_accepted') || current_url() == site_url('user/journal/list_download')){ ?> active <?php }else{ ?> li-not-open<?php } ?>" ><a href="#" <?php if(current_url() == site_url('user/journal/list_artikel') || current_url() == site_url('user/journal/add_artikel') || current_url() == site_url('user/journal/list_artikel_rejected') || current_url() == site_url('user/journal/list_artikel_accepted') || current_url() == site_url('user/journal/list_download')){ ?> class="active" <?php } ?>> <i class="fa fa-gear"></i>Artikel</a>
                                 <ul class="sub-drop-menu active" >
@@ -170,15 +175,15 @@ ul.drop-menu.drop_2 li.btn-add-menu  a:hover {
 
                                     <li><a <?php if(current_url() == site_url('user/journal/list_download') ){ ?> class="active"<?php } ?> href="<?=site_url('user/journal/list_download');?>">
                                        
-                                        Download
+                                      Artikel terdownload
                                     </a></li>
 
                                 </ul>
                               </li>
-
+                              <?php } ?>
                           </ul>
                       </li>
-                    <?php } ?>
+                    
                    <!--  <li class="dropdown not-active"><a class="link_dropdown"  href="datatable.html" class="dropdown-toggle">tables </a>
                           <ul class="drop-menu sub-menu not-active  col col-md-2" >
                               <li><a href="datatable.html">Data tables</a></li>

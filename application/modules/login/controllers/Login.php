@@ -105,7 +105,7 @@ class Login extends MX_Controller
     }
 
     public function generate_token($user_id){
-        $this->load->library("JWT");
+        $this->load->library("jwt");
         $CONSUMER_KEY = 'ingDLMRuGe9UKHRNjs7cYckS2yul4lc3';
         $CONSUMER_SECRET = 'junaedi19981101';
         $CONSUMER_TTL = 86400;

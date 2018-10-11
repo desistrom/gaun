@@ -70,8 +70,9 @@ class Dashboard extends MX_Controller  {
                 $data = $this->session->userdata('user');
         // print_r($data);
         $user = $this->db->get_where('tb_pengguna',array('id_pengguna'=>$data))->row_array();
+        $this->data['instansi_id'] = $user['id_instansi_ref'];
+        $this->data['ins_us'] = $this->db->get_where('tb_instansi',array('id_instansi'=>$user['id_instansi_ref']))->row_array()['nm_instansi'];
         $role = '';
-        $this->data['instansi'] = $user['id_instansi_ref'];
         if ($user['id_role_ref'] == 1) {
             $role = 'tb_dosen';
             $this->data['user'] = $this->db->get_where('tb_dosen',array('id_pengguna_ref'=>$data))->row_array();
@@ -87,7 +88,9 @@ class Dashboard extends MX_Controller  {
             $this->form_validation->set_rules('jk','Jenis Kelamin', 'required');
             $this->form_validation->set_rules('hp','Nomor HP', 'required');
             $this->form_validation->set_rules('alamat','Alamat', 'required');
+            if(is_null($this->general->status())){
             $this->form_validation->set_rules('instansi','Instansi', 'required');
+            }
             if ($role == 'tb_mahasiswa') {
             $this->form_validation->set_rules('angkatan','Tahun Angkatan', 'required');
             $this->form_validation->set_rules('jurusan','Jurusan', 'required');
@@ -103,19 +106,23 @@ class Dashboard extends MX_Controller  {
                     $data_user['angkatan'] = $input['angkatan'];
                     $data_user['jurusan'] = $input['jurusan'];
                 }
+                if(is_null($this->general->status())){
                 $data_pengguna['id_instansi_ref'] = $input['instansi'];
                 $this->db->update('tb_pengguna',$data_pengguna,array('id_pengguna'=>$data));
+                }
                 if ($this->db->update($role,$data_user,array('id_pengguna_ref'=>$data))) {
                     $ret['status'] = 1;
                     $ret['url'] = site_url('user/dashboard/profil');
-                    $this->session->set_flashdata("notif","1");
+                    $this->session->set_flashdata("notif","berhasil");
                 }
             }
             $ret['notif']['nam'] = form_error('nam');
             $ret['notif']['jk'] = form_error('jk');
             $ret['notif']['hp'] = form_error('hp');
             $ret['notif']['alamat'] = form_error('alamat');
+            if(is_null($this->general->status())){
             $ret['notif']['instansi'] = form_error('instansi');
+            }
             if ($role == 'tb_mahasiswa') {
                 $ret['notif']['angkatan'] = form_error('angkatan');
                 $ret['notif']['jurusan'] = form_error('jurusan');

@@ -2,7 +2,11 @@
     <div class=" title-box">
       <h3>Profil</h3>
     </div>
-
+    <?php if(is_null($this->general->status())){ ?>
+    <div class="alert alert-danger" role="alert">
+      Setelah menyimpan profil, anda tidak bisa mengganti instansi lagi.
+    </div>
+    <?php } ?>
     <div class="box-content">
     	<form>
     		<div class="form-group">
@@ -29,16 +33,23 @@
           <textarea class="form-control" name="alamat"><?=$user['alamat'];?></textarea>
           <div class="error" id="ntf_alamat"></div>
         </div>
+        <?php if(is_null($this->general->status())){ ?>
         <div class="form-group">
           <label>Instansi</label>
           <select class="form-control" name="instansi">
             <option value="">-- Pilih Instansi --</option> 
             <?php foreach ($instansi as $key => $value): ?>
-              <option <?php if ($instansi == $value['id_instansi']): ?> selected <?php endif ?>  value="<?=$value['id_instansi'];?>"><?=$value['nm_instansi'];?></option>   
+              <option <?php if ($instansi_id == $value['id_instansi']): ?> selected <?php endif ?>  value="<?=$value['id_instansi'];?>"><?=$value['nm_instansi'];?></option>   
             <?php endforeach ?>
           </select>
           <div class="error" id="ntf_instansi"></div>
         </div>
+        <?php }else{ ?>
+        <div class="form-group">
+        <label>Instansi</label>
+          <p class="form-controll-static"><?=$ins_us;?></p>
+        </div>
+        <?php } ?>
         <?php if ($role == 'tb_mahasiswa'): ?>
           <div class="form-group">
           <label>Tahun Angkatan</label>
@@ -68,7 +79,7 @@
         </div>
       </div>
     </div>
-<script src="<?=base_url();?>assets/js/jquery.min.js"></script>
+<!-- <script src="<?=base_url();?>assets/js/jquery.min.js"></script> -->
 <script type="text/javascript">
    var base_url = "<?=base_url();?>"
     $(document).ready(function(){

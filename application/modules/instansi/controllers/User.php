@@ -105,6 +105,18 @@ class User extends MX_Controller
         $this->ciparser->new_parse('template_instansi','modules_instansi', 'list_user_layout',$this->data);
     }
 
+    public function status($id=null){
+        $data = $this->db->get_where('tb_journal_user')->row_array();
+        if ($data['status'] == 1) {
+            $this->db->update('tb_journal_user',array('status'=>0),array('id_journal_user'=>$id));
+            $this->session->set_flashdata('notif','User berhasil di nonaktifkan');
+        }else{
+            $this->db->update('tb_journal_user',array('status'=>1),array('id_journal_user'=>$id));
+            $this->session->set_flashdata('notif','User berhasil di aktifkan');
+        }
+        redirect(site_url('instansi/user'));
+    }
+
 	public function ajax_list()
     {
         $this->load->model('user_model');
@@ -119,10 +131,10 @@ class User extends MX_Controller
             $no++;
             if ($news->status==1) {
                 $aktif = '<span class="text-success"><b>Enabled</b></span>';
-                $btn = '<button class="btn btn-danger btn-sm btn-sts" id="'.$news->id_journal_user.'" data-toggle="tooltip" title="Disable"><i class="fa fa-eye-slash"></i> Disable</button>';
+                $btn = '<a href="'.site_url("instansi/user/status/".$news->id_journal_user).'" class="btn btn-danger btn-sm btn-sts" id="'.$news->id_journal_user.'" data-toggle="tooltip" title="Disable"><i class="fa fa-eye-slash"></i> Disable</a>';
             }else{
                 $aktif = '<span class="text-danger"><b>Disabled</b></span>';
-                $btn = '<button class="btn btn-danger btn-sm btn-sts" id="'.$news->id_journal_user.'" data-toggle="tooltip" title="Enabled"><i class="fa fa-eye"></i> Enable</button>';
+                $btn = '<a href="'.site_url("instansi/user/status/".$news->id_journal_user).'" class="btn btn-info btn-sm btn-sts" id="'.$news->id_journal_user.'" data-toggle="tooltip" title="Enabled"><i class="fa fa-eye"></i> Enable</a>';
             }
             // $button .= ' <a href="'.site_url('instansi/user/edit/'.$news->id_journal_user).'" class="btn btn-success btn-sm btn-detail" id="'.$news->id_journal_user.'"><i class="fa fa-pencil"></i> Edit</button>';
             $row = array();

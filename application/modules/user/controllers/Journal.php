@@ -528,6 +528,41 @@ class Journal extends MX_Controller
         $this->ciparser->new_parse('template_user','modules_user', 'volume_layout',$this->data);
     }
 
+    public function edit_volume($id=null){
+        if ($this->input->server('REQUEST_METHOD') == "POST") {
+            // print_r($this->data['user'])
+            $ret['state'] = 0;
+            $ret['status'] = 0;
+            $this->form_validation->set_error_delimiters('','');
+            $this->form_validation->set_rules('volume', 'Nomor Volume', 'trim|required');
+            // $this->form_validation->set_rules('journal', 'Journal Volume', 'trim|required');
+            
+            if ($this->form_validation->run() == true) {
+                $ret['state'] = 1;
+                $data_news['volume'] = $this->input->post('volume');
+                // $data_news['id_journal_ref'] = $this->input->post('journal');
+                if ($this->db->update('tb_volume',$data_news,array('id_volume'=>$id))) {
+                    $ret['status'] = 1;
+                    $ret['url'] = site_url('user/journal/volume');
+                    $this->session->set_flashdata("notif","Data Berhasil di Masukan");
+                }
+            }
+            $ret['notif']['volume'] = form_error('volume');
+            // $ret['notif']['journal'] = form_error('journal');
+            echo json_encode($ret);
+            exit();
+        }
+        $this->data['view'] = 'edit';
+        // $this->data['breadcumb'] = $journal['judul'];
+        $journal = $this->db->get_where('tb_journal',array('id_user_ref'=>$this->data['user']['id_pengguna']))->result_array();
+        // $volume = $this->db->get('tb_volume')->result_array();
+        $sql = "SELECT * FROM tb_volume WHERE id_volume = ?";
+        $no = $this->db->query($sql,$id)->row_array();
+        $this->data['volume'] = $no;
+        $this->data['journal'] = $journal;
+        $this->ciparser->new_parse('template_user','modules_user', 'volume_layout',$this->data);
+    }
+
     public function add_no_volume(){
         if ($this->input->server('REQUEST_METHOD') == "POST") {
             // print_r($this->data['user'])
@@ -556,6 +591,42 @@ class Journal extends MX_Controller
             exit();
         }
         $this->data['view'] = 'add';
+        $journal = $this->db->get_where('tb_journal',array('id_user_ref'=>$this->data['user']['id_pengguna']))->result_array();
+        $this->data['journal'] = $journal;
+        $this->ciparser->new_parse('template_user','modules_user', 'nomor_layout',$this->data);
+    }
+
+    public function edit_no_volume($id=null){
+        if ($this->input->server('REQUEST_METHOD') == "POST") {
+            // print_r($this->data['user'])
+            $ret['state'] = 0;
+            $ret['status'] = 0;
+            $this->form_validation->set_error_delimiters('','');
+            $this->form_validation->set_rules('nomor', 'Nomor Volume', 'trim|required');
+            // $this->form_validation->set_rules('volume', 'Volume', 'trim|required');
+            // $this->form_validation->set_rules('journal', 'Journal Volume', 'trim|required');
+            
+            if ($this->form_validation->run() == true) {
+                $ret['state'] = 1;
+                $data_news['nomor'] = $this->input->post('nomor');
+                // $data_news['id_volume_ref'] = $this->input->post('volume');
+                // $data_news['publish'] = date('Y-m-d');
+                if ($this->db->update('tb_no_volume',$data_news,array('id_no_volume'=>$id))) {
+                    $ret['status'] = 1;
+                    $ret['url'] = site_url('user/journal/list_nomor');
+                    $this->session->set_flashdata("notif","Data Berhasil di Masukan");
+                }
+            }
+            $ret['notif']['nomor'] = form_error('nomor');
+            // $ret['notif']['volume'] = form_error('volume');
+            // $ret['notif']['journal'] = form_error('journal');
+            echo json_encode($ret);
+            exit();
+        }
+        $sql = "SELECT * FROM tb_no_volume n join tb_volume v WHERE id_no_volume = ?";
+        $no = $this->db->query($sql,$id)->row_array();
+        $this->data['nomor'] = $no;
+        $this->data['view'] = 'edit';
         $journal = $this->db->get_where('tb_journal',array('id_user_ref'=>$this->data['user']['id_pengguna']))->result_array();
         $this->data['journal'] = $journal;
         $this->ciparser->new_parse('template_user','modules_user', 'nomor_layout',$this->data);
@@ -864,7 +935,7 @@ class Journal extends MX_Controller
         $button = '';
         foreach ($list as $news) {
             $no++;
-            $button = '<a href="'.site_url("user/journal/edit").'/'.$news->id_journal.'"><button class="btn btn-info btn-sm" id="edit" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil"></i></button></a>';
+            $button = '<a href="'.site_url("user/journal/edit_volume").'/'.$news->id_journal.'"><button class="btn btn-info btn-sm" id="edit" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil"></i></button></a>';
             $row = array();
             $row[] = $no;
             $row[] = $news->volume;
@@ -899,7 +970,7 @@ class Journal extends MX_Controller
             //     $button = '<a href="'.site_url("user/journal/Edit").'/'.$news->id_journal.'"><button class="btn btn-info btn-sm" id="edit" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil"></i></button></a>';
             // }else{
                 // $aktif = '<span class="text-Success">Disable</span>';
-                $button = '<a href="'.site_url("user/journal/edit").'/'.$news->id_journal.'"><button class="btn btn-info btn-sm" id="edit" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil"></i></button></a>';
+                $button = '<a href="'.site_url("user/journal/edit_no_volume").'/'.$news->id_journal.'"><button class="btn btn-info btn-sm" id="edit" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil"></i></button></a>';
             // }
             $row = array();
             $row[] = $no;

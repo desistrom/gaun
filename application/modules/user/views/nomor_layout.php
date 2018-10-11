@@ -96,7 +96,30 @@
 </div>
 </div>
   </form>
-    		<?php } ?>
+    		<?php }else{ ?>
+<form role="form">
+<div class="col col-md-12 col-sm-12 col-xs-12" style="padding-top: 1em;">
+  <div class="panel ">
+      <div class="panel-header" style="background-color:  #F5F5F5;">
+        <div class="box-header with-border">
+        <h3 class="box-title">Volume</h3>
+      </div>
+    </div>
+    <div class="panel-body">
+      <!-- textarea -->
+      <div class="form-group">
+        <label>No Volume</label>
+        <input type="text" name="noro" class="form-control" placeholder="No Volume" id="nomor" value="<?=$nomor['nomor']?>">
+        <div class="error" id="ntf_volume"></div>
+      </div>
+       <button type="button" class="btn btn-primary" id="submit">Submit</button>
+    </div>
+
+
+</div>
+</div>
+  </form>
+        <?php } ?>
       </div>
     	</div>
     </div>

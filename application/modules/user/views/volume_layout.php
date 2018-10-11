@@ -55,40 +55,64 @@
     			</table>
     		</div>
     		<?php }elseif($view == 'add'){ ?>
-    			<form role="form">
-<div class="col col-md-12 col-sm-12 col-xs-12" style="padding-top: 1em;">
-  <div class="panel ">
-      <div class="panel-header" style="background-color:  #F5F5F5;">
-        <div class="box-header with-border">
-        <h3 class="box-title">Volume</h3>
+<form role="form">
+  <div class="col col-md-12 col-sm-12 col-xs-12" style="padding-top: 1em;">
+    <div class="panel ">
+        <div class="panel-header" style="background-color:  #F5F5F5;">
+          <div class="box-header with-border">
+          <h3 class="box-title">Volume</h3>
+        </div>
       </div>
-    </div>
-    <div class="panel-body">
-      <!-- textarea -->
-      <div class="form-group">
-        <label>Volume</label>
-        <input type="text" name="volume" class="form-control" placeholder="No Volume" id="volume">
-        <div class="error" id="ntf_volume"></div>
+      <div class="panel-body">
+        <!-- textarea -->
+        <div class="form-group">
+          <label>Volume</label>
+          <input type="text" name="volume" class="form-control" placeholder="No Volume" id="volume">
+          <div class="error" id="ntf_volume"></div>
+        </div>
+        <div class="form-group">
+          <label>Jurnal</label>
+          <select class="form-control" name="journal" id="journal">
+            <option value="">-- Pilih Journal --</option>
+            <?php foreach ($journal as $key => $value): ?>
+              <option value="<?=$value['id_journal']?>"><?=$value['judul'];?></option>
+            <?php endforeach ?>
+          </select>
+          <div class="error" id="ntf_journal"></div>
+        </div>
+         <button type="button" class="btn btn-primary" id="submit">Submit</button>
       </div>
-      <div class="form-group">
-        <label>Jurnal</label>
-        <select class="form-control" name="journal" id="journal">
-          <option value="">-- Pilih Journal --</option>
-          <?php foreach ($journal as $key => $value): ?>
-            <option value="<?=$value['id_journal']?>"><?=$value['judul'];?></option>
-          <?php endforeach ?>
-        </select>
-        <div class="error" id="ntf_journal"></div>
-      </div>
-       <button type="button" class="btn btn-primary" id="submit">Submit</button>
-    </div>
 
 
-</div>
-</div>
-  </form>
+    </div>
+  </div>
+</form>
     		
-    		<?php } ?>
+    		<?php }else{ ?> 
+<form role="form">
+  <div class="col col-md-12 col-sm-12 col-xs-12" style="padding-top: 1em;">
+    <div class="panel ">
+        <div class="panel-header" style="background-color:  #F5F5F5;">
+          <div class="box-header with-border">
+          <h3 class="box-title">Volume</h3>
+        </div>
+      </div>
+      <div class="panel-body">
+        <!-- textarea -->
+        <div class="form-group">
+          <label>Volume</label>
+          <input type="text" name="volume" class="form-control" placeholder="No Volume" id="volume" value="<?=$volume['volume'];?>">
+          <div class="error" id="ntf_volume"></div>
+        </div>
+         <button type="button" class="btn btn-primary" id="submit">Submit</button>
+      </div>
+
+
+    </div>
+  </div>
+</form>
+
+        <?php } ?>
       </div>
     	</div>
     </div>

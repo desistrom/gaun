@@ -232,6 +232,51 @@
           .sidebar ul li{
             padding: 0!important;
           }
+              .new-input{
+      background-color: #EEE8E8;
+    }
+    .btn-green{
+      background-color: #269913;
+    }
+    .form-goup-file{
+    height: auto;
+    overflow: hidden;
+    padding: 0;
+  }
+  .form-goup-file div{
+    display: inline-block;
+  }
+  .form-goup-file .input-file-left{
+    width: 100%;
+  }
+  .form-goup-file .input-file-left input{
+  width: 100%;
+  }
+  .form-goup-file .input-file-right{
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+  .form-goup-file .input-file-right .btn-choose-foto{
+    height: 34px;
+    width: 105px;
+    border-radius: 0;
+    padding-left: 7px;
+  }
+  .logo-fav{
+    width: 100px;
+  }
+  .fa-upload{
+    padding-right: 10px;
+  }
+  .box-content{
+    background-color: transparent;
+  }
+  .panel .panel-header{
+    border-bottom: solid 1px #A8A8A8;
+    padding-left: 15px;
+    
+  }
   </style>
   <script src="<?=base_url();?>assets/js/jquery-2.2.3.min.js"></script>
   <script src="<?=base_url();?>assets/js/jquery-ui.min.js"></script>
@@ -375,9 +420,9 @@
           <ul class="treeview-menu">
             <li class="active"><a href="<?=site_url('journal/admin/dashboard');?>"><i class="fa fa-circle-o"></i> Create & Edit Journal</a></li>
 
-            <li class=""><a href="#"><i class="fa fa-circle-o"></i> Volume </a></li>
+            <li class=""><a href="<?=site_url('journal/admin/volume');?>"><i class="fa fa-circle-o"></i> Volume </a></li>
 
-            <li class=""><a href="#"><i class="fa fa-circle-o"></i>No Volume</a></li>
+            <li class=""><a href="<?=site_url('journal/admin/novolume');?>"><i class="fa fa-circle-o"></i>No Volume</a></li>
           </ul>
         </li>
          <!-- <li class=" treeview <?php if(current_url() == site_url('journal/admin/dashboard')){ ?> active <?php } ?>">

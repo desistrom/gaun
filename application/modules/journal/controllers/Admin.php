@@ -975,4 +975,21 @@ class Admin extends MX_Controller
         $this->ckeditor->config['height'] = '300px'; 
         $this->ciparser->new_parse('template_admin_journal','modules_journal', 'create_journal_layout');
     }
+
+     public function volume(){
+    
+        $this->ciparser->new_parse('template_admin_journal','modules_journal', 'volume_layout');
+    }
+     public function create_volume(){
+    
+        $this->ciparser->new_parse('template_admin_journal','modules_journal', 'create_volume_layout');
+    }
+    public function novolume(){
+    
+        $this->ciparser->new_parse('template_admin_journal','modules_journal', 'no_volume_layout');
+    }
+    public function create_novolume(){
+    
+        $this->ciparser->new_parse('template_admin_journal','modules_journal', 'create_no_volume_layout');
+    }
 }

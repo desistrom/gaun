@@ -2,7 +2,7 @@
 <div class="box">
 	<div class="box-body">
 		<div class="col col-md-12 col-sm-12 col-xs-12" style="padding-left: 0; margin-bottom: 15px;">
-			<a href="<?=site_url('admin/pengguna/report');?>" class="btn btn-success"><i class="fa fa-table"></i> Download report</a>
+			<a href="<?=site_url('admin/pengguna/report');?>" class="btn btn-bg"><i class="fa fa-table"></i> Download report</a>
 		</div>
 		<div class="col col-md-12 col-xs-12 table-responsive">
 	<table class="table table-bordered  dataTable" id="table">

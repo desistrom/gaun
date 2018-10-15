@@ -1,4 +1,4 @@
-#deta<style type="text/css">
+<style type="text/css">
 	.form-goup-file{
     height: auto;
     overflow: hidden;
@@ -42,7 +42,7 @@
   }
 </style>
 <link rel="stylesheet" href="<?=base_url();?>assets/datatables/css/dataTables.bootstrap.min.css">
-<div class="col col-md-10 col-sm-10 col-xs-12 right-content" style="">
+<div class="col col-md-12 col-sm-12 col-xs-12 right-content" style="padding: 0 30px;">
     <div class=" title-box">
 		<h3 class="title">Artikel</h3>
     </div>
@@ -82,7 +82,7 @@
         <!-- text input -->
         <div class="form-group">
           <label>Judul Artikel</label>
-          <input type="text" name="judul" class="form-control" id="judul" placeholder="Enter Judul Event ..." value="">
+          <input type="text" name="judul" class="form-control new-input" id="judul" placeholder="Enter Judul Event ..." value="">
           <div class="error" id="ntf_judul"></div>
         </div>
         <div class="form-group">
@@ -93,7 +93,7 @@
         </div>
          <div class="form-group">
           <label>Keyword</label>
-          <input type="text" name="keyword" class="form-control" id="keyword" placeholder="Enter keyword Artikel ..." value="">
+          <input type="text" name="keyword" class="form-control new-input" id="keyword" placeholder="Enter keyword Artikel ..." value="">
           <div class="error" id="ntf_keyword"></div>
         </div>
 
@@ -126,7 +126,7 @@
       <div class="panel-body">
         <div class="form-group">
           <label>Journal</label>
-          <select class="form-control" name="journal" id="journal">
+          <select class="form-control new-input" name="journal" id="journal">
             <option value="">-- Pilih Journal --</option>
             <?php foreach ($journal as $key => $value): ?>
               <option value="<?=$value['id_journal']?>"><?=$value['judul'];?></option>
@@ -136,7 +136,7 @@
         </div>
         <div class="form-group">
           <label>Volume Jurnal</label>
-          <select class="form-control" name="volume" id="volume">
+          <select class="form-control new-input" name="volume" id="volume">
             <option value="">-- Pilih Volume --</option>
             
           </select>
@@ -145,7 +145,7 @@
 
         <div class="form-group">
           <label>No Volume Jurnal</label>
-          <select class="form-control" name="no_volume" id="no_volume">
+          <select class="form-control new-input" name="no_volume" id="no_volume">
             <option value="">-- Pilih No Volume --</option>
           </select>
           <div class="error" id="ntf_no_volume"></div>
@@ -157,9 +157,9 @@
           <label>File Artikel</label>
           <div class="col col-md-12 form-goup-file">
             <div class="input-file-right">
-              <label class="btn btn-success btn-choose-foto" for="file_name"><i class="fa fa-upload" ></i>Choose File</label>
+              <label class="btn btn-success btn-choose-foto btn-warning btn-bg" for="file_name"><i class="fa fa-upload" ></i>Choose File</label>
             </div>
-            <div class="input-file-left"><input type="file" class="form-control file" name="file_name" id="file_name"></div> 
+            <div class="input-file-left"><input type="file" class="form-control file new-input" name="file_name" id="file_name"></div> 
             <div><i>Max file size 100MB <br>Allowed file type : pdf, docx</i></div> 
             <div class="error" id="ntf_file_name"></div> 
             <div class="error" id="ntf_error"></div> 
@@ -170,9 +170,9 @@
           <label>File Abstrak</label>
           <div class="col col-md-12 form-goup-file">
             <div class="input-file-right">
-              <label class="btn btn-success btn-choose-foto" for="file_name_abs"><i class="fa fa-upload" ></i>Choose File</label>
+              <label class="btn btn-success btn-choose-foto btn-warning btn-bg" for="file_name_abs"><i class="fa fa-upload" ></i>Choose File</label>
             </div>
-            <div class="input-file-left"><input type="file" class="form-control file" name="file_name_abs" id="file_name_abs"></div> 
+            <div class="input-file-left"><input type="file" class="form-control file new-input" name="file_name_abs" id="file_name_abs"></div> 
             <div><i>Max file size 100MB <br>Allowed file type : pdf, docx</i></div> 
             <div class="error" id="ntf_file_name_abs"></div> 
             <div class="error" id="ntf_abs_error"></div> 
@@ -182,20 +182,20 @@
         <div class="col col-md-12 col-sm-12 col-xs-12" style="padding: 10px;border:solid #A8A8A8 1px; margin-top:15px;">
           <div class="form-group">
             <label>Nama Author</label>
-            <input type="text" name="nama" class="form-control nama" id="nama" placeholder="Enter Nama Author ..." value="">
+            <input type="text" name="nama" class="form-control nama new-input" id="nama" placeholder="Enter Nama Author ..." value="">
             <div class="error" id="ntf_nama"></div>
           </div>
 
           <div class="form-group" style=" ">
             <label>Jabatan Author</label>
-            <input type="text" name="jabatan" class="form-control jabatan" id="jabatan" placeholder="Enter Jabatan Author ..." value="">
+            <input type="text" name="jabatan" class="form-control jabatan new-input" id="jabatan" placeholder="Enter Jabatan Author ..." value="">
             <div class="error" id="ntf_jabatan"></div>
           </div>
         </div>
 
         <div class="more"></div>
         <div class="text-right" >
-          <button class="btn btn-info btn_more" type="button" style="margin-top: 15px;"><i class="fa fa-plus"></i> Add More</button>
+          <button class="btn btn-warning btn-bg btn_more" type="button" style="margin-top: 15px;"><i class="fa fa-plus"></i> Add More</button>
         </div>
     <!--     <div class="form-group">
           <label>Gambar Berita</label>
@@ -204,16 +204,16 @@
         </div> -->
         <div class="form-group" style="padding-top: 15px;" >
           <table>
-            <tr>
-              <td><input type="checkbox" name="agree" id="agree" value="1" style="float: left;margin-top: -1.5em; margin-right: 5px;"></td>
-              <td><p class="form-control-static" style="background-color: red;color: white;padding: 0;">Saya Telah membaca dan menyetujui semua persayratan dan peraturan yang di ajukan</p></td>
+            <tr style="background-color: #EF7314;padding: 10px;">
+              <td style="padding-top:15px;padding-left: 10px;"><input type="checkbox" name="agree" id="agree" value="1" style="float: left;margin-top: -1.5em; margin-right: 5px;"></td>
+              <td><p class="form-control-static" style="color: white;padding: 0;">Saya Telah membaca dan menyetujui semua persayratan dan peraturan yang di ajukan</p></td>
             </tr>
           </table>
           
           
           <div class="error" id="ntf_agree"></div>
         </div>
-         <button type="button" class="btn btn-primary" id="submit_artikel">Submit</button>
+         <button type="button" class="btn btn-warning btn-bg" id="submit_artikel">Submit</button>
       </div>
     </div>
   </div>
@@ -361,12 +361,12 @@
         </div> -->
         <div class="form-group">
           <table style="padding-top: 15px;">
-            <tr>
-              <td>
+            <tr style="background-color: #EF7314;padding: 10px;">
+              <td style="padding-top:15px;padding-left: 10px;">
                 <input type="checkbox" name="agree" id="agree" value="1" style="float: left;margin-top: -1.5em; margin-right: 5px;">
               </td>
               <td>
-                <p class="form-control-static" style="background-color: red;color: white;padding: 0;">Saya Telah membaca dan menyetujui semua persayratan dan peraturan yang di ajukan</p>
+                <p class="form-control-static" style="color: white;padding: 0;">Saya Telah membaca dan menyetujui semua persayratan dan peraturan yang di ajukan</p>
               </td>
             </tr>
           </table>

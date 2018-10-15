@@ -11,6 +11,9 @@ class Journal extends MX_Controller
         /*$this->load->helper('api');
         $this->load->library('Recaptcha');
         $this->load->module('Token');*/
+        if ($this->session->userdata('user_login') != true) {
+            redirect('user/login_user');
+        }
         $this->load->model('journal_model');
         $data = $this->session->userdata('user');
         // print_r($data);
@@ -42,8 +45,31 @@ class Journal extends MX_Controller
             $jumlah = $this->db->get_where('tb_volume',array('id_journal_ref'=>$value['id_journal']))->num_rows();
             $journal[$key]['jumlah'] = $jumlah;
         }
+        $this->db->select('tb_artikel.*,tb_volume.volume,tb_no_volume.publish,tb_journal.judul as judul_journal');
+        $this->db->from('tb_artikel');
+        $this->db->join('tb_no_volume', 'id_no_volume_ref = id_no_volume');
+        $this->db->join('tb_volume', 'id_volume_ref = id_volume');
+        $this->db->join('tb_journal', 'id_journal_ref = id_journal');
+        // $this->db->join('tb_pengguna', 'tb_journal.id_user_ref = id_pengguna');
+        $this->db->where('tb_journal.id_user_ref',$this->data['user']['id_pengguna']);
+        $this->db->order_by('id_artikel', 'desc');
+        $this->db->limit('4');
+        $a = $this->db->get()->result_array();
+        // print_r($a);
+        foreach ($a as $key => $value) {
+            $author = $this->db->get_where('tb_author',array('id_artikel_ref'=>$value['id_artikel']))->result_array();
+            $a[$key]['author'] = $author[0]['nama'];
+            /*if ($value['status_user'] == 0) {
+                $p = $this->db->get_where('tb_mahasiswa',array('id_pengguna_ref'=>$value['id_pengguna']))->row_array();*/
+                $a[$key]['publisher'] = $this->data['user']['nama'];
+            /*}else{
+                $p = $this->db->get_where('tb_dosen',array('id_pengguna_ref'=>$value['id_pengguna']))->row_array();
+                $a[$key]['publisher'] = $p['nama'];
+            }*/
+        }
         // print_r($journal);
         $this->data['view'] = 'list';
+        $this->data['artikel'] = $a;
         $this->data['journal'] = $journal;
         $this->ciparser->new_parse('template_user','modules_user', 'journal_layout',$this->data);
     }

@@ -42,7 +42,7 @@
 <div class="box">
 	<div class="box-body">
 		<div class="col col-md-12 col-sm-12 col-xs-12" style="padding-left: 0; margin-bottom: 15px;">
-			<a href="<?=site_url('instansi/user/add');?>" class="btn btn-success">Tambah Admin Journal</a>
+			<a href="<?=site_url('instansi/user/add');?>" class="btn btn-bg">Tambah Admin Journal</a>
 		</div>
 		<div class="col col-md-12 col-xs-12 table-responsive">
 			<table class="table table-bordered  dataTable" id="table">
@@ -111,7 +111,7 @@
             <input type="password" name="repassword" id="repassword" class="form-control">
             <div class="error" id="ntf_repassword"></div>
           </div>
-         <button type="button" class="btn btn-primary" id="submit">Submit</button>
+         <button type="button" class="btn btn-bg" id="submit">Submit</button>
         </div>
       </div>
     </div>
@@ -144,7 +144,7 @@
             <input type="password" name="repassword" id="repassword" class="form-control">
             <div class="error" id="ntf_repassword"></div>
           </div>
-         <button type="button" class="btn btn-primary" id="submit">Submit</button>
+         <button type="button" class="btn btn-bg" id="submit">Submit</button>
         </div>
       </div>
     </div>

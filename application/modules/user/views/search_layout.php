@@ -10,6 +10,58 @@
 		padding: 2em 15px;
 		background-color: #CBCBCB;
 	}
+	.sec-accordion{
+		padding: 3em 3em;
+	}
+	.sec-accordion .panel-heading{
+		padding: 1.5em;
+		background-color: #E1E1E1;
+		border-radius: 20px;
+		border:none;
+	}
+	.sec-accordion .panel-heading h4{
+		font-size: 24px;
+		font-weight: 600;
+		color: #5B5D5C;
+
+	}
+	.panel-default{
+		border:none;
+	}
+	.panel-default>.panel-heading+.panel-collapse>.panel-body{
+		border:white;
+	}
+	.box-header{
+		height: 150px;
+		padding: 15px 0;
+		overflow: hidden;
+	}
+	.box-body{
+		padding: 0 ;
+
+	}
+	.box-body-left{
+		background-color: yellow;
+		padding: 15px;
+	}
+	.box-body-left h4{
+		padding-left: 20px;
+	}
+		.box-body{
+		border-bottom-left-radius: 20px;
+	    height: auto;
+	    overflow: hidden;
+	    border-bottom-right-radius: 20px;
+	}
+	.img-logo{
+		border-top-left-radius: 20px;
+	    border-top-right-radius: 20px;
+	}
+	a:hover, a:active, a:focus{
+		color: #EF7314;
+	}
+
+
 </style>
 <div class="col col-md-12 col-sm-12 col-xs-12 sec-search ">
 	<form>
@@ -58,50 +110,84 @@
 	</form>
 	
 </div>
-<div class="col col-md-12 col-sm-12 col-xs-12">
-		<div class="accordion" id="accordionExample">
-  <div class="card">
-    <div class="card-header" id="headingOne">
-      <h5 class="mb-0">
-        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-          Collapsible Group Item #1
-        </button>
-      </h5>
+<div class="col col-md-12 col-sm-12 col-xs-12 sec-accordion">
+	<div class="panel-group" id="accordion">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse1" style="width: 100%;">Journal Nasional<i class="fa fa-angle-down" style="float: right;"></i></a>
+        </h4>
+      </div>
+      <div id="collapse1" class="panel-collapse collapse in">
+        <div class="panel-body">
+        	<div class="col col-md-4 col-sm-4 col-xs-12 filter-box">
+        		<div class="box-header">
+        			<img src="http://192.168.88.15/idren/assets/media/1539161415.jpg" class="img-responsive img-logo">
+        		</div>
+        		<div class="box-body">
+        			<div class="col col-md-9 col-sm8 col-xs-7 none-padding box-body-left">
+        				<h4>Universitas Indonesia</h4>
+        			</div>
+        			<div class="col col-md-3 col-sm-4 col-xs-5 none-padding">
+        				<h4 class="text-center">150</h4>
+        			</div>
+        		</div>
+        	</div>
+        	<div class="col col-md-4 col-sm-4 col-xs-12 filter-box">
+        		<div class="box-header">
+        			<img src="http://192.168.88.15/idren/assets/media/1539161415.jpg" class="img-responsive img-logo">
+        		</div>
+        		<div class="box-body">
+        			<div class="col col-md-9 col-sm-8 col-xs-7 none-padding box-body-left" style="background-color: blue;color: white;">
+        				<h4>Universitas Indonesia</h4>
+        			</div>
+        			<div class="col col-md-3 col-sm-4 col-xs-5 none-padding">
+        				<h4 class="text-center">150</h4>
+        			</div>
+        		</div>
+        	</div>
+        </div>
+      </div>
     </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse2" style="width: 100%;">Journal Internasional <i class="fa fa-angle-down" style="float: right;"></i></a>
+          
+        </h4>
+      </div>
+      <div id="collapse2" class="panel-collapse collapse">
+        <div class="panel-body">
+        	<div class="col col-md-4 col-sm-4 col-xs-12 filter-box">
+        		<div class="box-header">
+        			<img src="http://192.168.88.15/idren/assets/media/1539161415.jpg" class="img-responsive img-logo">
+        		</div>
+        		<div class="box-body">
+        			<div class="col col-md-9 col-sm8 col-xs-7 none-padding box-body-left">
+        				<h4>Universitas Indonesia</h4>
+        			</div>
+        			<div class="col col-md-3 col-sm-4 col-xs-5 none-padding">
+        				<h4 class="text-center">150</h4>
+        			</div>
+        		</div>
+        	</div>
+        	<div class="col col-md-4 col-sm-4 col-xs-12 filter-box">
+        		<div class="box-header">
+        			<img src="http://192.168.88.15/idren/assets/media/1539161415.jpg" class="img-responsive img-logo">
+        		</div>
+        		<div class="box-body">
+        			<div class="col col-md-9 col-sm-8 col-xs-7 none-padding box-body-left" style="background-color: blue;color: white;">
+        				<h4>Universitas Indonesia</h4>
+        			</div>
+        			<div class="col col-md-3 col-sm-4 col-xs-5 none-padding">
+        				<h4 class="text-center">150</h4>
+        			</div>
+        		</div>
+        	</div>
+        </div>
+      </div>
+    </div>
+  
+  </div> 
 
-    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-      <div class="card-body">
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-      </div>
-    </div>
-  </div>
-  <div class="card">
-    <div class="card-header" id="headingTwo">
-      <h5 class="mb-0">
-        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-          Collapsible Group Item #2
-        </button>
-      </h5>
-    </div>
-    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-      <div class="card-body">
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-      </div>
-    </div>
-  </div>
-  <div class="card">
-    <div class="card-header" id="headingThree">
-      <h5 class="mb-0">
-        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-          Collapsible Group Item #3
-        </button>
-      </h5>
-    </div>
-    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-      <div class="card-body">
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-      </div>
-    </div>
-  </div>
 </div>
-	</div>

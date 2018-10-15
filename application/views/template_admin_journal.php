@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Admin Journal</title>
+   <link rel="shortcut icon" href="<?=base_url();?>media/favicon.ico">
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
@@ -285,6 +286,12 @@
   .table{
     margin-top: 15px;
   }
+  .btn-bg{
+    background-color: #2BA417;
+  }
+  .box-thumbnail{
+    border:solid #CBCBCB 1px;
+  }
   </style>
   <script src="<?=base_url();?>assets/js/jquery-2.2.3.min.js"></script>
   <script src="<?=base_url();?>assets/js/jquery-ui.min.js"></script>
@@ -304,7 +311,7 @@
     <!-- Logo -->
     <a href="#" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>A</b>LT</span>
+      <span class="logo-mini"><b>ID</b></span>
       <!-- logo for regular state and mobile devices -->
       <span class="logo-lg"><b>Admin</b></span>
     </a>
@@ -377,7 +384,24 @@
               <li class="footer"><a href="#">View all</a></li>
             </ul>
           </li> -->
-        <li class="dropdown user user-menu">
+          <li class="dropdown user user-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <span class="hidden-xs" style="color: black;">Admin <i class="fa fa-angle-down" aria-hidden="true"></i></span>
+               <img src="<?=base_url();?>media/favicon.ico" class="user-image" alt="User Image">
+            </a>
+            <ul class="dropdown-menu" style="width: 100%!important;">
+      
+  
+
+              <li class="user-footer" >
+           
+                <div class="pull-right" style="width: 100%;">
+                  <a href="<?=site_url('journal/login/logout');?>" class="btn btn-success btn-flat btn-bg" style="width: 100%;">Sign out</a>
+                </div>
+              </li>
+            </ul>
+          </li>
+        <!-- <li class="dropdown user user-menu">
             <a href="#">
               <img src="<?=base_url();?>media/favicon.ico" class="user-image" alt="User Image">
               <span class="hidden-xs">Admin</span>
@@ -385,7 +409,7 @@
           </li>
           <li>
             <a href="<?=site_url('journal/login/logout');?>"><i class="fa fa-power-off"></i> LogOut</a>
-          </li>
+          </li> -->
          <!--  <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <span class="hidden-xs">Alexander Pierce <i class="fa fa-angle-down" aria-hidden="true"></i></span>

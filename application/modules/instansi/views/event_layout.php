@@ -42,7 +42,7 @@
 <div class="box">
 	<div class="box-body">
 		<div class="col col-md-12 col-sm-12 col-xs-12" style="padding-left: 0; margin-bottom: 15px;">
-			<a href="<?=site_url('instansi/add_event');?>" class="btn btn-success">Tambah Event</a>
+			<a href="<?=site_url('instansi/add_event');?>" class="btn btn-bg">Tambah Event</a>
 		</div>
 		<div class="col col-md-12 col-xs-12 table-responsive">
 			<table class="table table-bordered  dataTable" id="table">
@@ -144,7 +144,7 @@
       <div class="form-group">
       <label>Futured Image Event</label>
       <div class="col col-md-12 form-goup-file">
-        <div class="input-file-right"><label class="btn btn-success btn-choose-foto" for="file_name"><i class="fa fa-upload" ></i>Choose File</label></div>
+        <div class="input-file-right"><label class="btn btn-bg btn-choose-foto" for="file_name"><i class="fa fa-upload" ></i>Choose File</label></div>
         <div class="input-file-left"><input type="file" class="form-control file" name="file_name" id="file_name"></div> 
         <div><i>*for best result use 450x240 px. <br> Max file size 400KB, Width 200px - 1024px. <br>Allowed file type : jpeg, jpg, png, gif.</i></div> 
         <div class="error" id="ntf_file_name"></div> 
@@ -156,7 +156,7 @@
         <input type="file" name="file_name" class="form-control" id="file_name">
         <div class="error" id="ntf_file_name"></div>
       </div> -->
-       <button type="button" class="btn btn-primary" id="submit">Submit</button>
+       <button type="button" class="btn btn-bg" id="submit">Submit</button>
     </div>
 
 
@@ -226,7 +226,7 @@
       <div class="form-group">
       <label>Futured Image Event</label>
       <div class="col col-md-12 form-goup-file">
-        <div class="input-file-right"><label class="btn btn-success btn-choose-foto" for="file_name"><i class="fa fa-upload" ></i>Choose File</label></div>
+        <div class="input-file-right"><label class="btn btn-bg btn-choose-foto" for="file_name"><i class="fa fa-upload" ></i>Choose File</label></div>
         <div class="input-file-left"><input type="file" class="form-control file" name="file_name" id="file_name"></div> 
         <div><i>*for best result use 450x240 px. <br> Max file size 400KB, Width 200px - 1024px. <br>Allowed file type : jpeg, jpg, png, gif.</i></div> 
         <div class="error" id="ntf_file_name"></div> 
@@ -240,7 +240,7 @@
       <?php if ($news['futured_image'] != ''): $images = explode("/", $news['futured_image']); ?>
         <img style="width: 100%; margin-bottom: 10px;" src="<?php if (isset($images[1])) { echo $news['futured_image']; }else{ echo base_url().'assets/media/'.$news['futured_image']; } ?>">
       <?php endif ?>
-       <button type="button" class="btn btn-primary" id="submit">Submit</button>
+       <button type="button" class="btn btn-bg" id="submit">Submit</button>
     </div>
 
 

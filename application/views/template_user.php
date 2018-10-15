@@ -296,6 +296,9 @@
   .fa-upload{
     padding-right: 0!important;
   }
+  .box-thumbnail{
+    border:solid 1px #CBCBCB;
+  }
   </style>
   <script src="<?=base_url();?>assets/js/jquery-2.2.3.min.js"></script>
   <script src="<?=base_url();?>assets/js/jquery-ui.min.js"></script>
@@ -307,6 +310,9 @@
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
+   <script type="text/javascript">
+      var base_url = '<?=base_url()?>';
+    </script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -315,9 +321,9 @@
     <!-- Logo -->
     <a href="#" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>A</b>LT</span>
+      <span class="logo-mini"><b></b></span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Admin</b></span>
+      <span class="logo-lg"><b>Member</b></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -388,7 +394,7 @@
               <li class="footer"><a href="#">View all</a></li>
             </ul>
           </li> -->
-        <li class="dropdown user user-menu">
+     <!--    <li class="dropdown user user-menu">
             <a href="#">
               <img src="<?=base_url();?>media/favicon.ico" class="user-image" alt="User Image">
               <span class="hidden-xs">Admin</span>
@@ -396,11 +402,11 @@
           </li>
           <li>
             <a href="<?=site_url('journal/login/logout');?>"><i class="fa fa-power-off"></i> LogOut</a>
-          </li>
-         <!--  <li class="dropdown user user-menu">
+          </li> -->
+          <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <span class="hidden-xs">Alexander Pierce <i class="fa fa-angle-down" aria-hidden="true"></i></span>
-              <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+              <span class="hidden-xs" style="color: black;">Admin <i class="fa fa-angle-down" aria-hidden="true"></i></span>
+               <img src="<?=base_url();?>media/favicon.ico" class="user-image" alt="User Image">
             </a>
             <ul class="dropdown-menu" style="width: 100%!important;">
       
@@ -409,11 +415,11 @@
               <li class="user-footer" >
            
                 <div class="pull-right" style="width: 100%;">
-                  <a href="#" class="btn btn-default btn-flat" style="width: 100%;">Sign out</a>
+                  <a href="<?=site_url('journal/login/logout');?>" class="btn btn-warning btn-flat btn-bg" style="width: 100%;">Sign out</a>
                 </div>
               </li>
             </ul>
-          </li> -->
+          </li>
           <!-- Control Sidebar Toggle Button -->
          <!--  <li>
             <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
@@ -490,7 +496,7 @@
         </li>
         <li>
           <a href="<?=site_url('user/journal/search_journal');?>">
-            <i class="fa fa-home"></i> <span>search Journal</span>
+            <i class="fa fa-search"></i> <span>search Journal</span>
           </a>
         </li>
         <li class=" treeview" style="margin-top: 5px;">

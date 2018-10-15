@@ -361,30 +361,32 @@ div.container-fluid.footer-bottom{
                   <h4>My Artikel#</h4>
                 </div>
                 <div class="artikel-header artikel-right">
-                <a href="<?=site_url('journal/admin/add_artikel');?>" class="btn btn-warning btn-bg">Create</a> 
+                <a href="<?=site_url('user/journal/add_artikel');?>" class="btn btn-warning btn-bg">Create</a> 
                 </div>
               </div>
             </div>
             <div class="sub-content-artikel-body">
+              <?php foreach ($artikel as $key => $value): ?>
               <div class="col col-md-6 col-sm-6 col-xs-12 list-artikel">
                 <div class="artikel-body artikel-body-left">
                   <i class="fa fa-files-o" aria-hidden="true"></i>
                 </div>
                 <div class="artikel-body artikel-body-right">
                   <ul class="list-unstyled">
-                    <li>Author : .................................................................................</li>
-                    <li>Date Published : ...................................................................</li>
-                    <li>Publisher : ............................................................................</li>
-                    <li>Volume : ...............................................................................</li>
+                    <li title="<?=word_limiter($value['judul'],3);?>">Artikel : <?=word_limiter($value['judul'],3);?></li>
+                    <li>Author : <?=$value['author'];?>...</li>
+                    <li>Date Published : <?=$value['publish'];?></li>
+                    <li>Publisher : <?=$value['publisher'];?></li>
                   </ul>
                 </div>
                 <div class="artikel-body artikel-body-icedit">
-                  <a href="#">
+                  <a href="<?=site_url('user/journal/edit_artikel/'.$value['id_artikel']);?>" title="edit">
                     <i class="fa fa-pencil" aria-hidden="true"></i>
                   </a>
                   
                 </div>     
-              </div>
+              </div>              
+            <?php endforeach ?>
     
             </div>
           </div>
@@ -433,7 +435,7 @@ div.container-fluid.footer-bottom{
         </div>
     </div>
   </div>
-      <script src="<?=base_url();?>assets/admin-jur/bootstrap/js/bootstrap.min.js"></script>
+      <!-- <script src="<?=base_url();?>assets/admin-jur/bootstrap/js/bootstrap.min.js"></script> -->
       <script src="<?=base_url();?>assets/admin-jur/plugins/owlcarousel/owl.carousel.js"></script>
       <script>
             $(document).ready(function() {

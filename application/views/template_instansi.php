@@ -28,22 +28,111 @@
     .material-icons{
       font-size: 18px !important;
     }
+    .sidebar-form.form-search{
+      /*width: 60%;*/
+      display: inline-block;
+      margin: 6px 0 0 0;
+    }
+    .sub-search{
+      display: inline-table;
+    }
+    .slimScrollDiv{
+      height: auto!important;
+    }
+    .sub-message{
+      height: auto!important;
+    }
+    .navbar-nav>.user-menu .user-image{
+      float: right;
+      margin-left: 20px;
+    }
+    .skin-blue .main-header .navbar{
+      background-color: white;
+      border-bottom: solid 1px #CBCBCB;
+    }
+    .mb-notifi{
+          padding: 15px;
+          border-bottom: solid red 1px;
+        }
+        .skin-blue .main-header .navbar .nav>li>a{
+          color: #D6D6E0;
+        }
+        .skin-blue .main-header .logo{
+          background-color: #859980;
+        }
+        .skin-blue .main-header .logo:hover{
+           background-color: #859980;
+        }
+        .sidebar-menu>li{
+          background-color: #7F00FF;
+          margin-bottom: 6px;
+        }
+        .skin-blue .sidebar-menu>li>a{
+          color: white;
+        }
+        .skin-blue .sidebar-menu>li:hover>a, .skin-blue .sidebar-menu>li.active>a {
+          color: #fff;
+          background: #7F00FF;
+          border-left-color: #0B0200;
+      }
+      .skin-blue .wrapper, .skin-blue .main-sidebar, .skin-blue .left-side{
+        background-color: #CBCBCB;
+      }
+      .skin-blue .sidebar-menu>li>.treeview-menu{
+        background:#7F00FF;
+      }
+      .skin-blue .treeview-menu>li>a{
+        color: white;
+      }
+      .skin-blue .main-header .navbar .sidebar-toggle{
+        color: #0B0200;
+      }
+      .skin-blue .sidebar-form input[type="text"], .skin-blue .sidebar-form .btn{
+        background-color: white;
+      }
+      .skin-blue .sidebar-menu>li.header{
+        background-color: #CBCBCB;
+        color: white;
+      }
+      .skin-blue .main-header .navbar .sidebar-toggle:hover{
+        background-color: #616C7F;
+      }
+      .skin-blue .sidebar-form{
+        border:none;
+      }
+      .content-wrapper, .right-side{
+        background-color: white;
+      }
+      .none-padding{
+        padding: 0!important;
+      }
+      .sidebar-menu .treeview-menu>li>a{
+        padding: 15px 5px 15px 15px;
+      }
+      .btn-bg{
+        background-color: #7F00FF;
+        color: white;
+      }
+      .btn-bg:hover{
+        background-color: #6B0DC9;
+        color: white;
+      }
   </style>
   
     <script type="text/javascript">
       var base_url = "<?=base_url();?>";
     </script>
 </head>
-<body class="hold-transition skin-red sidebar-mini">
+<body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="<?=site_url('instansi');?>" class="logo" style="background:white;">
-      <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>IDren</b></span>
+    <a href="<?=site_url('instansi');?>" class="logo" style="background:#8892A4;">
+       <!-- mini logo for sidebar mini 50x50 pixels -->
+      <span class="logo-mini"><b></b></span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><img style="width: 100px;" src="<?=base_url();?>assets/images/logo/Asset_16@4x.png"></span>
+      <span class="logo-lg"><b>Instansi</b></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -56,18 +145,34 @@
         <ul class="nav navbar-nav">
 
 
+           <li class="dropdown user user-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <span class="hidden-xs" style="color: black;">Admin <i class="fa fa-angle-down" aria-hidden="true"></i></span>
+               <img src="<?=base_url();?>media/favicon.ico" class="user-image" alt="User Image">
+            </a>
+            <ul class="dropdown-menu" style="width: 100%!important;">
+      
+  
 
+              <li class="user-footer" >
+           
+                <div class="pull-right" style="width: 100%;">
+                  <a href="<?=site_url('instansi/logout');?>" class="btn  btn-flat btn-bg" style="width: 100%;">Sign out</a>
+                </div>
+              </li>
+            </ul>
+          </li>
           <!-- User Account: style can be found in dropdown.less -->
-          <li class="dropdown user user-menu">
+          <!-- <li class="dropdown user user-menu">
             <a href="<?=site_url('admin/logo/profile');?>">
               <img src="<?=base_url();?>media/favicon.ico" class="user-image" alt="User Image">
               <span class="hidden-xs">Admin</span>
             </a>
-          </li>
+          </li> -->
           <!-- Control Sidebar Toggle Button -->
-          <li>
+         <!--  <li>
             <a href="<?=site_url('instansi/logout');?>"><i class="fa fa-power-off"></i> LogOut</a>
-          </li>
+          </li> -->
         </ul>
       </div>
     </nav>
@@ -81,7 +186,7 @@
       <!-- /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
-        <li class="header">MAIN NAVIGATION</li>
+        <!-- <li class="header">MAIN NAVIGATION</li> -->
         <li class=" treeview <?php if(current_url() == site_url('admin/home')){ ?> active <?php } ?>">
           <a href="<?=site_url('instansi');?>">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
@@ -199,7 +304,7 @@
     <div class="pull-right hidden-xs">
       <b>Version</b> 2.4.0
     </div>
-    <strong>Copyright &copy; 2014-2016 <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights
+    <strong>Copyright &copy; 2018 <a href="#">IDren</a>.</strong> All rights
     reserved.
   </footer>
 

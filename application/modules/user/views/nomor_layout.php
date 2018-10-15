@@ -32,7 +32,7 @@
   }
 </style>
 <link rel="stylesheet" href="<?=base_url();?>assets/datatables/css/dataTables.bootstrap.min.css">
-<div class="col col-md-10 col-sm-10 col-xs-12 right-content" style="">
+<div class="col col-md-12 col-sm-12 col-xs-12 right-content" style="padding: 0 30px;">
     <div class=" title-box">
 		<h3 class="title">Nomor Volume</h3>
     </div>
@@ -40,7 +40,9 @@
     	<div class="row">
         <div class="col col-md-12 col-sm-12 col-xs-12">
     	<?php if($view == 'list'){ ?>
-      <a href="<?=site_url('user/journal/add_no_volume');?>" class="btn btn-success"><i class="fa fa-plus"></i> Add No Volume</a>
+      <div class="form-group">
+        <a href="<?=site_url('user/journal/add_no_volume');?>" class="btn btn-warning btn-bg"><i class="fa fa-plus"></i> Add No Volume</a>
+      </div>
     		<div class="table-responsive">
     			<table class="table table-striped" id="table">
     				<thead>
@@ -69,12 +71,12 @@
       <!-- textarea -->
       <div class="form-group">
         <label>No Volume</label>
-        <input type="text" name="noro" class="form-control" placeholder="No Volume" id="nomor">
+        <input type="text" name="noro" class="form-control new-input" placeholder="No Volume" id="nomor">
         <div class="error" id="ntf_volume"></div>
       </div>
       <div class="form-group">
         <label>Jurnal</label>
-        <select class="form-control" name="journal" id="journal">
+        <select class="form-control new-input" name="journal" id="journal">
           <option value="">-- Pilih Journal --</option>
           <?php foreach ($journal as $key => $value): ?>
             <option value="<?=$value['id_journal']?>"><?=$value['judul'];?></option>
@@ -84,12 +86,12 @@
       </div>
       <div class="form-group">
         <label>Volume</label>
-        <select class="form-control" name="volume" id="volume">
+        <select class="form-control new-input" name="volume" id="volume">
           <option value="">-- Pilih Volume --</option>
         </select>
         <div class="error" id="ntf_volume"></div>
       </div>
-       <button type="button" class="btn btn-primary" id="submit">Submit</button>
+       <button type="button" class="btn btn-warning btn-bg" id="submit">Submit</button>
     </div>
 
 
@@ -109,10 +111,10 @@
       <!-- textarea -->
       <div class="form-group">
         <label>No Volume</label>
-        <input type="text" name="noro" class="form-control" placeholder="No Volume" id="nomor" value="<?=$nomor['nomor']?>">
+        <input type="text" name="noro" class="form-control new-input" placeholder="No Volume" id="nomor" value="<?=$nomor['nomor']?>">
         <div class="error" id="ntf_volume"></div>
       </div>
-       <button type="button" class="btn btn-primary" id="submit">Submit</button>
+       <button type="button" class="btn btn-warning btn-bg" id="submit">Submit</button>
     </div>
 
 

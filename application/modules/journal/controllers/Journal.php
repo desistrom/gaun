@@ -120,5 +120,6 @@ class Journal extends MX_Controller
     public function other(){
         $this->ciparser->new_parse('template_journal','modules_journal','journal/other_layout',$this->data);
     }
+    
 
 }

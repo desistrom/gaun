@@ -1,4 +1,4 @@
-#deta<style type="text/css">
+<style type="text/css">
 	.form-goup-file{
     height: auto;
     overflow: hidden;
@@ -32,7 +32,7 @@
   }
 </style>
 <link rel="stylesheet" href="<?=base_url();?>assets/datatables/css/dataTables.bootstrap.min.css">
-<div class="col col-md-10 col-sm-10 col-xs-12 right-content" style="">
+<div class="col col-md-12 col-sm-12 col-xs-12 right-content" style="padding: 0 30px;">
     <div class=" title-box">
 		<h3 class="title">Artikel</h3>
     </div>

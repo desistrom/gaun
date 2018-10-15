@@ -41,7 +41,7 @@
 
 </style>
 <link rel="stylesheet" href="<?=base_url();?>assets/datatables/css/dataTables.bootstrap.min.css">
-<div class="col col-md-12 col-sm-12 col-xs-12 right-content" style="">
+<div class="col col-md-12 col-sm-12 col-xs-12 right-content" style="padding: 0 30px;">
     <div class=" title-box">
 		<h3 class="title"><?php if(isset($breadcumb)){ ?><?=$breadcumb;?><?php }else{ ?> Journal <?php } ?></h3>
     </div>
@@ -118,7 +118,7 @@
       <!-- text input -->
       <div class="form-group">
         <label>Judul Journal</label>
-        <input type="text" name="judul" class="form-control" id="judul" placeholder="Enter Judul Journal ..." value="">
+        <input type="text" name="judul" class="form-control new-input" id="judul" placeholder="Enter Judul Journal ..." value="">
         <div class="error" id="ntf_judul"></div>
       </div>
       <div class="form-group">
@@ -143,12 +143,12 @@
       <!-- textarea -->
       <div class="form-group">
         <label>ISSN JOURNAL</label>
-        <input type="text" name="issn" class="form-control" placeholder="ISSN Journal" id="issn">
+        <input type="text" name="issn" class="form-control new-input" placeholder="ISSN Journal" id="issn">
         <div class="error" id="ntf_issn"></div>
       </div>
       <div class="form-group">
         <label>Kategori JOURNAL</label>
-        <select class="form-control" name="kategori" id="kategori">
+        <select class="form-control new-input" name="kategori" id="kategori">
           <option value="">-- Pilih Kategori --</option>
           <?php foreach ($kategori as $key => $value): ?>
             <option value="<?=$value['id_kategori'];?>"><?=$value['nama'];?></option>
@@ -159,8 +159,8 @@
       <div class="form-group">
       <label>Journal Cover</label>
       <div class="col col-md-12 form-goup-file">
-        <div class="input-file-right"><label class="btn btn-success btn-choose-foto" for="file_name"><i class="fa fa-upload" ></i>Choose File</label></div>
-        <div class="input-file-left"><input type="file" class="form-control file" name="file_name" id="file_name"></div> 
+        <div class="input-file-right"><label class="btn btn-success btn-choose-foto btn-warning btn-bg" for="file_name"><i class="fa fa-upload" ></i>Choose File</label></div>
+        <div class="input-file-left"><input type="file" class="form-control file new-input" name="file_name" id="file_name"></div> 
         <div><i>*for best result use 450x240 px. <br> Max file size 400KB, Width 200px - 1024px. <br>Allowed file type : jpeg, jpg, png, gif.</i></div> 
         <div class="error" id="ntf_file_name"></div> 
         <div class="error" id="ntf_error"></div> 
@@ -172,7 +172,7 @@
         <input type="file" name="file_name" class="form-control" id="file_name">
         <div class="error" id="ntf_file_name"></div>
       </div> -->
-       <button type="button" class="btn btn-primary" id="submit">Submit</button>
+       <button type="button" class="btn btn-warning btn-bg" id="submit">Submit</button>
     </div>
 
 
@@ -194,7 +194,7 @@
       <!-- text input -->
       <div class="form-group">
         <label>Judul Journal</label>
-        <input type="text" name="judul" class="form-control" id="judul" placeholder="Enter Judul Journal ..." value="<?=$journal['judul'];?>">
+        <input type="text" name="judul" class="form-control new-input" id="judul" placeholder="Enter Judul Journal ..." value="<?=$journal['judul'];?>">
         <div class="error" id="ntf_judul"></div>
       </div>
       <div class="form-group">
@@ -219,12 +219,12 @@
       <!-- textarea -->
       <div class="form-group">
         <label>ISSN JOURNAL</label>
-        <input type="text" name="issn" class="form-control" placeholder="ISSN Journal" id="issn" value="<?=$journal['issn'];?>">
+        <input type="text" name="issn" class="form-control new-input" placeholder="ISSN Journal" id="issn" value="<?=$journal['issn'];?>">
         <div class="error" id="ntf_issn"></div>
       </div>
       <div class="form-group">
         <label>Kategori JOURNAL</label>
-        <select class="form-control" name="kategori" id="kategori">
+        <select class="form-control new-input" name="kategori" id="kategori">
           <option value="">-- Pilih Kategori --</option>
           <?php foreach ($kategori as $key => $value): ?>
             <option <?php if ($journal['id_kategori_ref'] == $value['id_kategori']): ?>
@@ -237,8 +237,8 @@
       <div class="form-group">
       <label>Journal Cover</label>
       <div class="col col-md-12 form-goup-file">
-        <div class="input-file-right"><label class="btn btn-success btn-choose-foto" for="file_name"><i class="fa fa-upload" ></i>Choose File</label></div>
-        <div class="input-file-left"><input type="file" class="form-control file" name="file_name" id="file_name"></div> 
+        <div class="input-file-right"><label class="btn btn-success btn-choose-foto btn-bg btn-warning" for="file_name"><i class="fa fa-upload" ></i>Choose File</label></div>
+        <div class="input-file-left"><input type="file" class="form-control file new-input" name="file_name" id="file_name"></div> 
         <div><i>*for best result use 450x240 px. <br> Max file size 400KB, Width 200px - 1024px. <br>Allowed file type : jpeg, jpg, png, gif.</i></div> 
         <div class="error" id="ntf_file_name"></div> 
         <div class="error" id="ntf_error"></div> 
@@ -250,7 +250,7 @@
         <input type="file" name="file_name" class="form-control" id="file_name">
         <div class="error" id="ntf_file_name"></div>
       </div> -->
-       <button type="button" class="btn btn-primary" id="submit">Submit</button>
+       <button type="button" class="btn btn-warning btn-bg" id="submit">Submit</button>
     </div>
 
 

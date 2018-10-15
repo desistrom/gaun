@@ -307,7 +307,7 @@ div.container-fluid.footer-bottom{
                   <h4>My Journal#</h4>
                 </div>
                 <div class="journal-header journal-right">
-                  <a href="<?=site_url('user/journal/add');?>" class="btn btn-warning btn-create">Create</a>
+                  <a href="<?=site_url('user/journal/add');?>" class="btn btn-warning btn-bg">Create</a>
                 </div>
               </div>
               <div class="col col-md-12 col-sm-12 col-xs-12 none-padding">
@@ -321,7 +321,7 @@ div.container-fluid.footer-bottom{
                               <img class="thumbnail-cover" src="<?=base_url();?>assets/media/<?=$value['futured_image'];?>">
                               <div class="filter-button-action">
                                 <div>
-                                  <a href="#">
+                                  <a href="<?=site_url('user/journal/edit/'.$value['id_journal']);?>">
                                     <div class="btn-action">
                                       <i class="fa fa-pencil"></i>
                                       
@@ -333,7 +333,10 @@ div.container-fluid.footer-bottom{
                             <div class="body-box-thumbnail">
                               <h5 class="title-thumbnail"><a href="#"><?=$value['judul'];?></a> </h5>
                               <div class="col col-md-12 col-sm-12 col-xs-12 none-padding box-btn-info-journal">
-                                <a href="#" class="btn btn-primary btn-info-journal" style="padding:0 15px;float: right;"><i class="fa fa-upload none-padding" ></i></a>
+                                <!-- <a href="#" class="btn btn-primary btn-info-journal" style="padding:0 15px;float: right;"><i class="fa fa-upload none-padding" ></i></a> -->
+                                <?php if($value['status'] == 0 ){ ?> <a href="#"  style="padding:0 15px;float: right;" id="<?=$value['id_journal'];?>" class="btn btn-primary btn-submit"> <i class="fa fa-upload"></i> </a> <?php }elseif($value['status'] == 1){?> <a style="padding:0 15px;float: right;" href="#" class="btn btn-warning"> <i class="fa fa-clock-o"></i> </a> <?php }elseif($value['status'] == 2){ ?> <a style="padding:0 15px;float: right;" href="#" class="btn btn-success"> <i class="fa fa-check"></i> </a> <?php }else{ ?> <a style="padding:0 15px;float: right;" href="#" class="btn btn-danger"> <i class="fa fa-times"></i> </a> <?php } ?>
+                        
+                        <a href="#" class="btn btn-success btn-upload" style="padding:0 15px;float: right;"> <i class="fa fa-check"></i> </a>
                               </div>
 
                             </div>
@@ -358,7 +361,7 @@ div.container-fluid.footer-bottom{
                   <h4>My Artikel#</h4>
                 </div>
                 <div class="artikel-header artikel-right">
-                <a href="<?=site_url('journal/admin/add_artikel');?>" class="btn btn-warning btn-create">Create</a> 
+                <a href="<?=site_url('journal/admin/add_artikel');?>" class="btn btn-warning btn-bg">Create</a> 
                 </div>
               </div>
             </div>
@@ -387,6 +390,49 @@ div.container-fluid.footer-bottom{
           </div>
         </div>
       </div>
+
+
+      <?php if ($this->session->flashdata('notif') != '') { ?>
+    <div class="modal" tabindex="-1" role="dialog" id="modalSuccess">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title"><?php if ($this->session->flashdata('header') != '') { echo $this->session->flashdata('header'); }else{ echo "Sukses"; } ?></h3>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p><?=$this->session->flashdata('notif');?></p>
+          </div>
+          <div class="modal-footer">
+            <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  <?php } ?>
+  <div class="modal fade" id="progresLoading" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center">
+            <div class="modal-content">
+                <div class="modal-body">
+                  <div class="box box-danger">
+                      <div class="box-header">
+                      </div>
+                      <div class="box-body">
+                      </div>
+                      <div class="overlay" style="text-align: center;">
+                        <i class="fa fa-refresh fa-spin fa-3x"></i>
+                      </div>
+                  </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+  </div>
       <script src="<?=base_url();?>assets/admin-jur/bootstrap/js/bootstrap.min.js"></script>
       <script src="<?=base_url();?>assets/admin-jur/plugins/owlcarousel/owl.carousel.js"></script>
       <script>
@@ -412,3 +458,15 @@ div.container-fluid.footer-bottom{
               })
             })
           </script>
+          <script type="text/javascript">
+            $(document).ready(function() {
+              $('body').on('click','.btn-submit',function(){
+                console.log('hmm');
+                var id = $(this).attr('id');
+                $('#progresLoading').modal('show');
+                setTimeout(function(){ window.location.href = base_url+'user/journal/submit/'+id; }, 2000);
+                
+              });
+            });
+        $('#modalSuccess').modal('show');
+      </script>

@@ -1148,4 +1148,8 @@ class Journal extends MX_Controller
         $this->db->update('tb_artikel',$data,array('id_artikel'=>$id));
         redirect(site_url('assets/file/'.$art['abstract_file']));
     }
+     public function search_journal(){
+    
+        $this->ciparser->new_parse('template_user','modules_user', 'search_layout');
+    }
 }

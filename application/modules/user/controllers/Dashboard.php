@@ -136,10 +136,7 @@ class Dashboard extends MX_Controller  {
         $this->data['instansi'] = $this->db->get_where('tb_instansi',array('id_jenis_instansi'=>5,'status'=>2))->result_array();
         $this->ciparser->new_parse('template_user','modules_user', 'profil_layout',$this->data);
     }
-   public function search(){
-    
-        $this->ciparser->new_parse('template_user','modules_user', 'search_layout');
-    }
+  
 
 
 

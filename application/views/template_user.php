@@ -285,6 +285,17 @@
   .table{
     margin-top: 15px;
   }
+  .btn-bg{
+    background-color: #EF7314;
+    background:#EF7314;
+  }
+  .btn-bg:hover{
+    background-color: #D7660F;
+    background:#D7660F;
+  }
+  .fa-upload{
+    padding-right: 0!important;
+  }
   </style>
   <script src="<?=base_url();?>assets/js/jquery-2.2.3.min.js"></script>
   <script src="<?=base_url();?>assets/js/jquery-ui.min.js"></script>
@@ -425,12 +436,12 @@
         </li>
         <li>
           <a href="<?=site_url('user/journal/all_journal');?>">
-            <i class="fa fa-home"></i> <span>All Journal</span>
+            <i class="fa fa-copy"></i> <span>All Journal</span>
           </a>
         </li>
        <li class=" treeview" style="margin-top: 5px;">
           <a href="#">
-            <i class="fa fa-home"></i> <span>My Journal</span>
+            <i class="fa fa-book"></i> <span>My Journal</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -465,21 +476,21 @@
         </li> -->
         <li class=" treeview <?php if(current_url() == site_url('journal/admin/') || current_url() == site_url('journal/admin/accepted') || current_url() == site_url('journal/admin/rejected')){ ?>  active <?php } ?>">
           <a href="#">
-            <i class="fa fa-book"></i>  <span>Journal</span>
+            <i class="fa fa-file"></i>  <span>Artikel</span>
             <span class="pull-right-container">
 
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class=""><a href="<?=site_url('user/journal/list_artikel_accepted');?>"><i class="fa fa-circle-o"></i> Journal Accepted </a></li>
-            <li class=""><a href="<?=site_url('user/journal/list_artikel_rejected');?>"><i class="fa fa-circle-o"></i> Journal Rejected </a></li>
-            <li class=""><a href="<?=site_url('user/journal/list_download');?>"><i class="fa fa-circle-o"></i> Journal Terdownload </a></li>
+            <li class=""><a href="<?=site_url('user/journal/list_artikel_accepted');?>"><i class="fa fa-circle-o"></i> Accepted </a></li>
+            <li class=""><a href="<?=site_url('user/journal/list_artikel_rejected');?>"><i class="fa fa-circle-o"></i> Rejected </a></li>
+            <li class=""><a href="<?=site_url('user/journal/list_download');?>"><i class="fa fa-circle-o"></i> Terdownload </a></li>
           </ul>
         </li>
         <li>
-          <a href="<?=site_url('user/journal/search');?>">
-            <i class="fa fa-home"></i> <span>All Journal</span>
+          <a href="<?=site_url('user/journal/search_journal');?>">
+            <i class="fa fa-home"></i> <span>search Journal</span>
           </a>
         </li>
         <li class=" treeview" style="margin-top: 5px;">
@@ -520,9 +531,9 @@
 
        <footer class="main-footer">
     <div class="pull-right hidden-xs">
-      <b>Version</b> 2.4.0
+<!--       <b>Version</b> 2.4.0 -->
     </div>
-    <strong>Copyright &copy; 2014-2016 <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights
+    <strong>Copyright &copy; 2018 <a href="https://idren.id">IDren</a>.</strong> All rights
     reserved.
   </footer>
 

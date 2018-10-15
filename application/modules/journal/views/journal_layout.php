@@ -301,7 +301,33 @@ div.container-fluid.footer-bottom{
               <div class="col col-md-12 col-sm-12 col-xs-12 none-padding">
                 <div class="col col-md-9 col-sm-8 col-xs-6 list-journal">
                   <div class="owl-carousel owl-theme">
+                    <?php foreach ($journal as $key => $value): ?>
                       <div class="item">
+                        <div class="filter-box-thumbnail col-md-12 col-sm-12 col-xs-12 " style="">
+                          <div class="box-thumbnail">
+                            <div class="header-box-thumbnail">
+                              <img class="thumbnail-cover" src="<?=base_url();?>assets/media/<?=$value['futured_image'];?>">
+                              <div class="filter-button-action">
+                                <div>
+                                  <a href="<?=site_url('journal/admin/edit/'.$value['id_journal']);?>">
+                                    <div class="btn-action">
+                                      <i class="fa fa-pencil"></i>
+                                      
+                                    </div>
+                                  </a>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="body-box-thumbnail">
+                              <h5 class="title-thumbnail"><a href="#"><?=$value['judul'];?></a></h5>
+
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                    <?php endforeach ?>
+                      <!-- <div class="item">
                         <div class="filter-box-thumbnail col-md-12 col-sm-12 col-xs-12 " style="">
                           <div class="box-thumbnail">
                             <div class="header-box-thumbnail">
@@ -323,79 +349,7 @@ div.container-fluid.footer-bottom{
                             </div>
 
                           </div>
-                      </div>
-                      </div>
-                      <div class="item">
-                        <div class="filter-box-thumbnail col-md-12 col-sm-12 col-xs-12 " style="">
-                          <div class="box-thumbnail">
-                            <div class="header-box-thumbnail">
-                              <img class="thumbnail-cover" src="<?=base_url();?>assets/images/3.jpg">
-                              <div class="filter-button-action">
-                                <div>
-                                  <a href="#">
-                                    <div class="btn-action">
-                                      <i class="fa fa-pencil"></i>
-                                      
-                                    </div>
-                                  </a>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="body-box-thumbnail">
-                              <h5 class="title-thumbnail"><a href="#">isue 1</a></h5>
-
-                            </div>
-
-                          </div>
-                      </div>
-                      </div>
-                      <div class="item">
-                        <div class="filter-box-thumbnail col-md-12 col-sm-12 col-xs-12 " style="">
-                          <div class="box-thumbnail">
-                            <div class="header-box-thumbnail">
-                              <img class="thumbnail-cover" src="<?=base_url();?>assets/images/3.jpg">
-                              <div class="filter-button-action">
-                                <div>
-                                  <a href="#">
-                                    <div class="btn-action">
-                                      <i class="fa fa-pencil"></i>
-                                      
-                                    </div>
-                                  </a>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="body-box-thumbnail">
-                              <h5 class="title-thumbnail"><a href="#">isue 1</a></h5>
-
-                            </div>
-
-                          </div>
-                      </div>
-                      </div>
-                      <div class="item">
-                        <div class="filter-box-thumbnail col-md-12 col-sm-12 col-xs-12 " style="">
-                          <div class="box-thumbnail">
-                            <div class="header-box-thumbnail">
-                              <img class="thumbnail-cover" src="<?=base_url();?>assets/images/3.jpg">
-                              <div class="filter-button-action">
-                                <div>
-                                  <a href="#">
-                                    <div class="btn-action">
-                                      <i class="fa fa-pencil"></i>
-                                      
-                                    </div>
-                                  </a>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="body-box-thumbnail">
-                              <h5 class="title-thumbnail"><a href="#">isue 1</a></h5>
-
-                            </div>
-
-                          </div>
-                      </div>
+                        </div>
                       </div>
                       <div class="item">
                         <div class="filter-box-thumbnail col-md-12 col-sm-12 col-xs-12 " style="">
@@ -419,7 +373,7 @@ div.container-fluid.footer-bottom{
                             </div>
 
                           </div>
-                      </div>
+                        </div>
                       </div>
                       <div class="item">
                         <div class="filter-box-thumbnail col-md-12 col-sm-12 col-xs-12 " style="">
@@ -443,8 +397,56 @@ div.container-fluid.footer-bottom{
                             </div>
 
                           </div>
+                        </div>
                       </div>
+                      <div class="item">
+                        <div class="filter-box-thumbnail col-md-12 col-sm-12 col-xs-12 " style="">
+                          <div class="box-thumbnail">
+                            <div class="header-box-thumbnail">
+                              <img class="thumbnail-cover" src="<?=base_url();?>assets/images/3.jpg">
+                              <div class="filter-button-action">
+                                <div>
+                                  <a href="#">
+                                    <div class="btn-action">
+                                      <i class="fa fa-pencil"></i>
+                                      
+                                    </div>
+                                  </a>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="body-box-thumbnail">
+                              <h5 class="title-thumbnail"><a href="#">isue 1</a></h5>
+
+                            </div>
+
+                          </div>
+                        </div>
                       </div>
+                      <div class="item">
+                        <div class="filter-box-thumbnail col-md-12 col-sm-12 col-xs-12 " style="">
+                          <div class="box-thumbnail">
+                            <div class="header-box-thumbnail">
+                              <img class="thumbnail-cover" src="<?=base_url();?>assets/images/3.jpg">
+                              <div class="filter-button-action">
+                                <div>
+                                  <a href="#">
+                                    <div class="btn-action">
+                                      <i class="fa fa-pencil"></i>
+                                      
+                                    </div>
+                                  </a>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="body-box-thumbnail">
+                              <h5 class="title-thumbnail"><a href="#">isue 1</a></h5>
+
+                            </div>
+
+                          </div>
+                        </div>
+                      </div> -->
                      
                     
                   </div>

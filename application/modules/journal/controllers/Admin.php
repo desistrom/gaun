@@ -81,6 +81,7 @@ class Admin extends MX_Controller
             $this->form_validation->set_rules('judul', 'Judul Journal', 'trim|required');
             $this->form_validation->set_rules('content', 'Deskripsi Journal', 'trim|required');
             $this->form_validation->set_rules('kategori', 'kategori Journal', 'trim|required');
+            $this->form_validation->set_rules('user', 'user Journal', 'trim|required');
             
             if ($this->form_validation->run() == true) {
                 $ret['state'] = 1;
@@ -88,7 +89,7 @@ class Admin extends MX_Controller
                 $data_news['deskripsi'] = $this->input->post('content');
                 $data_news['issn'] = $this->input->post('issn');
                 $data_news['id_kategori_ref'] = $this->input->post('kategori');
-                $data_news['id_user_ref'] = $this->data['user']['id_pengguna'];
+                $data_news['id_user_ref'] = $this->input->post('user');
                 if (isset($_FILES['file_name'])) {
                     $image = $this->upload_logo($_FILES);
                     if (isset($image['error'])) {
@@ -98,7 +99,7 @@ class Admin extends MX_Controller
                         $data_news['futured_image'] = $image['asli'];
                         if ($this->db->insert('tb_journal',$data_news)) {
                             $ret['status'] = 1;
-                            $ret['url'] = site_url('user/journal');
+                            $ret['url'] = site_url('journal/admin/dashboard');
                             $this->session->set_flashdata("notif","Data Berhasil di Masukan");
                         }
                     }
@@ -107,6 +108,7 @@ class Admin extends MX_Controller
             $ret['notif']['judul'] = form_error('judul');
             $ret['notif']['content'] = form_error('content');
             $ret['notif']['kategori'] = form_error('kategori');
+            $ret['notif']['user'] = form_error('user');
             if (!isset($_FILES['file_name'])) {
              $ret['notif']['file_name'] = "Please Select File";
             }
@@ -123,6 +125,18 @@ class Admin extends MX_Controller
         $this->ckeditor->config['height'] = '300px'; 
         $this->data['view'] = 'add';
         $this->data['kategori'] = $this->db->get('tb_kategori_journal')->result_array();
+        $user = $this->session->userdata('data_user_journal');
+        $us =  $this->db->get_where('tb_pengguna',array('id_instansi_ref'=>$user['id_instansi']))->result_array();
+        foreach ($us as $key => $value) {
+            if ($value['status'] == 0) {
+                $m = $this->db->get_where('tb_mahasiswa',array('id_pengguna_ref'=>$value['id_pengguna']))->row_array();
+                $us[$key]['nama'] = $m['nama'];
+            }else{
+                $d = $this->db->get_where('tb_dosen',array('id_pengguna_ref'=>$value['id_pengguna']))->row_array();
+                $us[$key]['nama'] = $d['nama'];
+            }
+        }
+        $this->data['user'] = $us;
         $this->ciparser->new_parse('template_admin_journal','modules_journal', 'journal_action',$this->data);
     }
 
@@ -234,7 +248,8 @@ class Admin extends MX_Controller
                 $data_news['abstrak'] = $this->input->post('content');
                 $data_news['keyword'] = $this->input->post('keyword');
                 $data_news['references'] = $this->input->post('ref');
-                $data_news['id_user_ref'] = $this->data['user']['id_pengguna'];
+                $us = $this->db->get_where('tb_journal',array('id_journal'=>$this->input->post('journal')))->row_array();
+                $data_news['id_user_ref'] = $us['id_user_ref'];
                 $data_news['id_no_volume_ref'] = $this->input->post('no_volume');
                 $cekjournal = $this->db->get_where('tb_journal',array('id_journal'=>$this->input->post('journal')))->row_array();
                 if ($cekjournal['status'] == 1 ) {
@@ -771,7 +786,7 @@ class Admin extends MX_Controller
                 }
                 // $button = '<button class="btn btn-info btn-sm btn-acc" id="'.$news->id_artikel.'" data-toggle="tooltip" title="accept"><i class="fa fa-check"></i> Accepted</button>';
             }
-            $button .= ' <button class="btn btn-success btn-sm btn-detail" id="'.$news->id_artikel.'"><i class="fa fa-eye"></i> Detail</button>';
+            // $button .= ' <button class="btn btn-success btn-sm btn-detail" id="'.$news->id_artikel.'"><i class="fa fa-eye"></i> Detail</button>';
             if (!is_null($news->reason)) {
                 $button .= ' <button class="btn btn-warning btn-sm btn-reason" id="'.$news->id_artikel.'"><i class="fa fa-comment-o"></i> Reason</button>';
             }
@@ -961,6 +976,118 @@ class Admin extends MX_Controller
                 );
         //output to json format
         echo json_encode($output);
+    }
+
+    public function upload_file_abstract($file){
+        $imagename = $file['name'];
+        ini_set('max_file_uploads', 3);
+        // return $imagename;
+        // exit();
+        $ext = strtolower($this->_getExtension($imagename));
+        $config['upload_path']          = FCPATH.'./assets/file/abstract/';
+        $config['allowed_types']        = 'pdf|doc|docx';
+        $config['file_name']            = time().".".$ext;
+        // return $config['file_name'];
+        // exit();
+        $this->load->library('upload', $config);
+        $this->upload->initialize($config);
+        if ( ! $this->upload->do_upload('file_name_abs'))
+        {
+                // $error = array('error' => $this->upload->display_errors());
+            $ret['abs_error'] = $this->upload->display_errors();
+            // $ret['status'] = 0;
+
+            return $ret;
+        }
+        else
+        {
+            $ret['message'] = $this->upload->data('file_name');
+            $ret['status'] = 0;
+            return $this->upload->data('file_name');
+        }
+    }
+
+    public function upload_file($file){
+        $imagename = $file['name'];
+        ini_set('max_file_uploads', 3);
+        $ext = strtolower($this->_getExtension($imagename));
+        $config['upload_path']          = FCPATH.'./assets/file/';
+        $config['allowed_types']        = 'pdf|doc|docx';
+        $config['file_name']            = time().".".$ext;
+        // return $config['file_name'];
+        // exit();
+        $this->load->library('upload', $config);
+        $this->upload->initialize($config);
+        if ( ! $this->upload->do_upload('file_name'))
+        {
+                // $error = array('error' => $this->upload->display_errors());
+            $ret['error'] = $this->upload->display_errors();
+            // $ret['status'] = 0;
+
+            return $ret;
+        }
+        else
+        {
+            $ret['message'] = $this->upload->data('file_name');
+            $ret['status'] = 0;
+            return $this->upload->data('file_name');
+        }
+    }
+
+    public function upload_logo($logo){             
+        
+        $imagename = $logo['file_name']['name'];
+        $ext = strtolower($this->_getExtension($imagename));
+        $config['upload_path']          = FCPATH."assets/media/";
+        $config['allowed_types']        = 'gif|jpg|png';
+        $config['max_size']             = 2048;
+        $config['max_width']            = 1024;
+        $config['min_width']            = 200;
+        $config['file_name']            = time().".".$ext;
+
+        $this->load->library('upload', $config);
+
+        if ( ! $this->upload->do_upload('file_name'))
+        {
+            $data_upload['error'] = $this->upload->display_errors();
+        }
+        else
+        {
+            $upload_data = $this->upload->data();
+            $data_upload['asli'] = $upload_data['file_name'];
+            if ($upload_data['image_width'] > 420 ) {
+                $data = array('upload_data' => $this->upload->data());
+                $config_r['image_library'] = 'GD2';
+                $config_r['source_image'] = FCPATH."assets/media/".$upload_data['file_name'];
+                // $config_r['create_thumb'] = TRUE;
+                $config_r['maintain_ratio'] = TRUE;
+                $config_r['width']         = 420;
+                $config_r['new_image'] = FCPATH."assets/media/thumbnail/".$upload_data['file_name'];
+
+                $this->load->library('image_lib', $config_r);
+
+                $this->image_lib->resize();
+                if ( ! $this->image_lib->resize())
+                {
+                        $data_upload['error'] = $this->image_lib->display_errors();
+                }else{
+                        // echo "berhasil resize";
+                        $data_upload['resize'] = site_url('assets/media/thumbnail/')."/".$upload_data['file_name'];
+                        
+                }
+            }
+        }
+        return $data_upload;
+    }
+
+    function _getExtension($str){
+        $i = strrpos($str,".");
+        if (!$i){
+            return "";
+        }   
+        $l = strlen($str) - $i;
+        $ext = substr($str,$i+1,$l);
+        return $ext;
     }
 
      public function create_journal(){

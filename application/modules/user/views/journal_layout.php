@@ -1,5 +1,5 @@
 <style type="text/css">
-	.form-goup-file{
+  .form-goup-file{
     height: auto;
     overflow: hidden;
     padding: 0;
@@ -30,21 +30,24 @@
   .fa-upload{
     padding-right: 10px;
   }
-   .right-content .box-thumbnail .header-box-thumbnail{
+   
+   .box-thumbnail .header-box-thumbnail{
     height: 150px;
     overflow: hidden;
     padding: 6px;
     position: relative;
     background-color: white;
    }
-     .right-content .box-thumbnail .header-box-thumbnail .filter-button-action{
+    
+     .box-thumbnail .header-box-thumbnail .filter-button-action{
       
 
        top: 0;
        width: 100%;
        text-align: right;
      }
-   .right-content .box-thumbnail .header-box-thumbnail .btn-action{
+  
+   .box-thumbnail .header-box-thumbnail .btn-action{
     height: 30px;
     width: 30px;
     background-color: #5AA7DF;
@@ -58,50 +61,60 @@
     animation-delay: 0.2s;
     text-align: center;
    }
-   .right-content .box-thumbnail .header-box-thumbnail .btn-action{
+  
+   .box-thumbnail .header-box-thumbnail .btn-action{
     padding-top: 6px;
     display: inline-block;
     color: white;
    }
-    .right-content .box-thumbnail:hover .header-box-thumbnail .btn-action{
+   
+    .box-thumbnail:hover .header-box-thumbnail .btn-action{
       right: 0;
       
     }
-    .right-content .box-thumbnail:hover{
+   
+    .box-thumbnail:hover{
          box-shadow: 1px 1px 2px 0 #000000;
     }
-   .right-content .box-thumbnail .header-box-thumbnail .btn-action a i{
+  
+   .box-thumbnail .header-box-thumbnail .btn-action a i{
     color: white;
    }
-   .right-content .box-thumbnail .header-box-thumbnail .btn-action:hover{
+  
+   .box-thumbnail .header-box-thumbnail .btn-action:hover{
     background-color: #247AB8;
    }
-  .right-content .box-thumbnail .thumbnail-cover{
+ 
+  .box-thumbnail .thumbnail-cover{
     width: 100%;
   }
-   .right-content .box-thumbnail .body-box-thumbnail{
+  
+   .box-thumbnail .body-box-thumbnail{
     padding: 10px 10px;
     background-color: white;
 margin-top: -11px;
    }
-   .right-content .box-thumbnail .footer-box-thumbnail{
+  
+   .box-thumbnail .footer-box-thumbnail{
     padding: 5px 10px;
     background-color: #F7F7F7;
 
    }
-.right-content .box-thumbnail  .title-thumbnail a{
+    .box-thumbnail  .title-thumbnail a{
   text-decoration: none;
   text-align: center;
   color: #7B7B7B;
   font-size: 12px;
   font-weight: 600;
 }
-.right-content .box-thumbnail .body-box-thumbnail{
+ .box-thumbnail .body-box-thumbnail{
   color: #A2A2A2;
   font-size: 10px;
+  height: 100px;
+  overflow: hidden;
   font-weight: 400;
 }
-.right-content .box-thumbnail{
+ .box-thumbnail{
    background-color: #F7F7F7
 }
 .sub-footer-box-thumbnail{
@@ -269,219 +282,133 @@ div.container-fluid.footer-bottom{
 /*.myjurnal{
   float: right;
 }*/
+.owl-carousel .owl-stage-outer{
+  padding: 15px 0;
+}
+.box-thumbnail{
+  /*min-height: 240px;*/
+  background-color: white;
+  position: relative;
+}
+.box-btn-info-journal{
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
 </style>
+ <link rel="stylesheet" href="<?=base_url();?>assets/admin-jur/plugins/owlcarousel/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="<?=base_url();?>assets/admin-jur/plugins/owlcarousel/assets/owl.theme.default.min.css">
+ <div class="row">
+        <div class="col col-md-12 col-sm-12 col-xs-12">
+          <div class="sub-content-journal">
+            <div class="sub-content-journal-header">
+              <div class="col col-md-12 col-sm-12 col-xs-12">
+                <div class="journal-header journal-left">
+                  <h4>My Journal#</h4>
+                </div>
+                <div class="journal-header journal-right">
+                  <a href="<?=site_url('user/journal/add');?>" class="btn btn-warning btn-create">Create</a>
+                </div>
+              </div>
+              <div class="col col-md-12 col-sm-12 col-xs-12 none-padding">
+                <div class="col col-md-9 col-sm-8 col-xs-6 list-journal">
+                  <div class="owl-carousel owl-theme">
+                    <?php foreach ($journal as $key => $value): ?>
+                      <div class="item">
+                        <div class="filter-box-thumbnail col-md-12 col-sm-12 col-xs-12 " style="">
+                          <div class="box-thumbnail">
+                            <div class="header-box-thumbnail">
+                              <img class="thumbnail-cover" src="<?=base_url();?>assets/media/<?=$value['futured_image'];?>">
+                              <div class="filter-button-action">
+                                <div>
+                                  <a href="#">
+                                    <div class="btn-action">
+                                      <i class="fa fa-pencil"></i>
+                                      
+                                    </div>
+                                  </a>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="body-box-thumbnail">
+                              <h5 class="title-thumbnail"><a href="#"><?=$value['judul'];?></a> </h5>
+                              <div class="col col-md-12 col-sm-12 col-xs-12 none-padding box-btn-info-journal">
+                                <a href="#" class="btn btn-primary btn-info-journal" style="padding:0 15px;float: right;"><i class="fa fa-upload none-padding" ></i></a>
+                              </div>
 
-<div class="col col-md-10 col-sm-10 col-xs-12 right-content" style="">
-    <div class=" title-box">
-		<h3 class="title">Jurnal</h3>
-    </div>
-    <section class="catalog col-md-12 col-sm-12 col-xs-12 ">
-        <div class="container-fluid">
-          <div class="row">
-            <!-- <div class="col col-md-3 col-sm-2 col-xs-12 left-cat">
-              Catalog :
-            </div> -->
-            <!-- <div class="col col-md-12 col-sm-12 col-xs-12 right-cat">
-              <ul class="filter-catalog">
-                <?php foreach (range('a', 'z') as $char) {
-                echo '<li><a href="'.site_url("user/journal/katalog/".$char).'"> '.strtoupper($char).' </a></li>';
-              } ?>
-              </ul>
-            </div> -->
-          </div>
-        </div>
-      </section>
-    <div class="box-content">
-    	<div class="row">
-    	     <div class="col col-md-12 col-sm-12 col-xs-2">
-            <div class="col col-md-12 col-sm-12 col-xs-12" style="padding-bottom: 30px;">
-            <?php if(!is_null($this->general->status())){ ?>
-              <div class="col-md-4 col-sm-5 col-xs-12"><a href="<?=site_url('user/journal/add');?>" class="btn btn-success">Add Jurnal</a></div>
-              <?php } ?>
-              <div class="col col-md-8 col-sm-7 col-xs-12">
-                <!-- <form method="get" class="text-right" >
-                    <div class="input-search input-search-left"><input type="text" class="form-control" name="data" id="search" placeholder="Cari"></div>
-                    <div class="input-search input-search-right"><button type="button" class="btn btn-danger btn-search"><i class="fa fa-search"></i></button></div>
-                </form> -->
+                            </div>
+
+                          </div>
+                      </div>
+                      </div>
+                       <?php endforeach ?>
+                      
+                     
+                    
+                  </div>
+                  <span class="txt-seemore">see more</span>
+                </div>
               </div>
             </div>
-            <?php if (count($journal) == 0) { ?>
-        <div class="col sol-md12 col-am-12 col-xs-12">
-                  <div class="jumbotron">
-  <h2 style="color: #A8A8A8;text-align: center;">Data Not found</h2>
-</div>
-        </div>
-            <?php } ?>
-            <?php foreach ($journal as $key => $value): ?>
-              <div class="filter-box-thumbnail col-md-3 col-sm-3 col-xs-12 " style="">
-                  <div class="box-thumbnail">
-                    <div class="header-box-thumbnail">
-                      <img class="thumbnail-cover" src="<?=base_url();?>assets/media/<?=$value['futured_image'];?>">
-                      <div class="filter-button-action">
-                        <div>
-                          <a href="<?=site_url('user/journal/edit/'.$value['id_journal']);?>">
-                            <div class="btn-action">
-                              <i class="fa fa-pencil"></i>
-                              
-                            </div>
-                          </a>
-                        </div>
-                        <div>
-                          <!-- <div class="btn-action">
-                            <a href="#"><i class="fa fa-pencil"></i></a>
-                            
-                          </div> -->
-                        </div>
-                      </div>
-                    </div>
-                    <div class="body-box-thumbnail">
-                      <h5 class="title-thumbnail"><a href="<?=site_url('user/journal/detail_journal/'.$value['id_journal']);?>"><?=$value['judul'];?></a></h5>
-                      <h6><?=$value['jumlah'];?> Volume</h6>
-                    </div>
-                    <div class="footer-box-thumbnail">
-                      <div class="sub-footer-box-thumbnail">
-                        <h5>status : <?php if($value['status'] == 0 ){ echo "Unsubmited";}elseif($value['status'] == 1){ echo "Pending"; }elseif($value['status'] == 2){echo "Accepted";}else{ echo "Ignored";} ?></h5>
-                      </div>
-                      <div class="sub-footer-box-thumbnail float-right" >
-                        <?php if($value['status'] == 0 ){ ?> <a href="#" id="<?=$value['id_journal'];?>" class="btn btn-primary btn-submit"> <i class="fa fa-upload"></i> </a> <?php }elseif($value['status'] == 1){?> <a href="#" class="btn btn-warning"> <i class="fa fa-clock-o"></i> </a> <?php }elseif($value['status'] == 2){ ?> <a href="#" class="btn btn-success"> <i class="fa fa-check"></i> </a> <?php }else{ ?> <a href="#" class="btn btn-danger"> <i class="fa fa-times"></i> </a> <?php } ?>
-                        
-                        <a href="#" class="btn btn-success btn-upload"> <i class="fa fa-check"></i> </a>
-                      </div>
-                      
-                    </div>
-                  </div>
+          </div>
+          <div class="sub-content-artikel">
+            <div class="sub-content-artikel-header">
+              <div class="col col-md-12 col-sm-12 col-xs-12">
+                <div class="artikel-header artikel-left">
+                  <h4>My Artikel#</h4>
+                </div>
+                <div class="artikel-header artikel-right">
+                <a href="<?=site_url('journal/admin/add_artikel');?>" class="btn btn-warning btn-create">Create</a> 
+                </div>
               </div>
-              
-            <?php endforeach ?>
-            
-
-              <!-- <div class="filter-box-thumbnail col-md-3 col-sm-3 col-xs-12 " style="">
-                <div class="box-thumbnail">
-                  <div class="header-box-thumbnail">
-                    <img class="thumbnail-cover" src="<?=base_url();?>mockup_statis/assets/img/jur-3.jpg">
-                    <div class="filter-button-action">
-                      <div>
-                        <a href="#">
-                          <div class="btn-action">
-                            <i class="fa fa-pencil"></i>
-                            
-                          </div>
-                        </a>
-                      </div>
-                      <div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="body-box-thumbnail">
-                    <h5 class="title-thumbnail"><a href="<?=site_url('user/journal/detail_jurnal');?>">Jurnal Psikologi Pendidikan dan Perkembangan</a></h5>
-                    <h6>vol.5</h6>
-                  </div>
+            </div>
+            <div class="sub-content-artikel-body">
+              <div class="col col-md-6 col-sm-6 col-xs-12 list-artikel">
+                <div class="artikel-body artikel-body-left">
+                  <i class="fa fa-files-o" aria-hidden="true"></i>
                 </div>
-             </div>  -->
-              <!-- <div class="filter-box-thumbnail col-md-3 col-sm-3 col-xs-12 " style="">
-                <div class="box-thumbnail">
-                  <div class="header-box-thumbnail">
-                    <img class="thumbnail-cover" src="<?=base_url();?>mockup_statis/assets/img/jur-3.jpg">
-                    <div class="filter-button-action">
-                      <div>
-                        <a href="#">
-                          <div class="btn-action">
-                            <i class="fa fa-pencil"></i>
-                            
-                          </div>
-                        </a>
-                      </div>
-                      <div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="body-box-thumbnail">
-                    <h5 class="title-thumbnail"><a href="<?=site_url('user/journal/detail_jurnal');?>">Jurnal Psikologi Pendidikan dan Perkembangan</a></h5>
-                    <h6>vol.5</h6>
-                  </div>
+                <div class="artikel-body artikel-body-right">
+                  <ul class="list-unstyled">
+                    <li>Author : .................................................................................</li>
+                    <li>Date Published : ...................................................................</li>
+                    <li>Publisher : ............................................................................</li>
+                    <li>Volume : ...............................................................................</li>
+                  </ul>
                 </div>
-             </div> -->
-              <!-- <div class="filter-box-thumbnail col-md-3 col-sm-3 col-xs-12 " style="">
-                <div class="box-thumbnail">
-                  <div class="header-box-thumbnail">
-                    <img class="thumbnail-cover" src="<?=base_url();?>mockup_statis/assets/img/jur-3.jpg">
-                    <div class="filter-button-action">
-                      <div>
-                        <a href="#">
-                          <div class="btn-action">
-                            <i class="fa fa-pencil"></i>
-                            
-                          </div>
-                        </a>
-                      </div>
-                      <div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="body-box-thumbnail">
-                    <h5 class="title-thumbnail"><a href="<?=site_url('user/journal/detail_jurnal');?>">Jurnal Psikologi Pendidikan dan Perkembangan</a></h5>
-                    <h6>vol.5</h6>
-                  </div>
-                </div>
-             </div> -->
-           </div>
-    		</div>
-
-    </div>
-</div>
-<?php if ($this->session->flashdata('notif') != '') { ?>
-    <div class="modal" tabindex="-1" role="dialog" id="modalSuccess">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h3 class="modal-title"><?php if ($this->session->flashdata('header') != '') { echo $this->session->flashdata('header'); }else{ echo "Sukses"; } ?></h3>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <p><?=$this->session->flashdata('notif');?></p>
-          </div>
-          <div class="modal-footer">
-            <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <div class="artikel-body artikel-body-icedit">
+                  <a href="#">
+                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                  </a>
+                  
+                </div>     
+              </div>
+    
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  <?php } ?>
-  <div class="modal fade" id="progresLoading" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="vertical-alignment-helper">
-        <div class="modal-dialog vertical-align-center">
-            <div class="modal-content">
-                <div class="modal-body">
-                  <div class="box box-danger">
-                      <div class="box-header">
-                      </div>
-                      <div class="box-body">
-                      </div>
-                      <div class="overlay" style="text-align: center;">
-                        <i class="fa fa-refresh fa-spin fa-3x"></i>
-                      </div>
-                  </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-  </div>
-<!-- <script src="<?=base_url().'assets/js/jquery-3.2.1.min.js';?>"></script> -->
-<!-- <script src="<?=base_url();?>assets/datatables.net/js/jquery.dataTables.min.js"></script> -->
-<!-- <script src="<?=base_url();?>assets/datatables/js/dataTables.bootstrap.min.js"></script> -->
-<script type="text/javascript">
-      $(document).ready(function() {
-        $('body').on('click','.btn-submit',function(){
-          console.log('hmm');
-          var id = $(this).attr('id');
-          $('#progresLoading').modal('show');
-          setTimeout(function(){ window.location.href = base_url+'user/journal/submit/'+id; }, 2000);
-          
-        });
-      });
-  $('#modalSuccess').modal('show');
-</script>
+      <script src="<?=base_url();?>assets/admin-jur/bootstrap/js/bootstrap.min.js"></script>
+      <script src="<?=base_url();?>assets/admin-jur/plugins/owlcarousel/owl.carousel.js"></script>
+      <script>
+            $(document).ready(function() {
+              var owl = $('.owl-carousel');
+              owl.owlCarousel({
+                margin: 10,
+                nav: true,
+                loop: true,
+                autoplayTimeout: 1000,
+                autoplayHoverPause: true,
+                responsive: {
+                  0: {
+                    items: 1
+                  },
+                  600: {
+                    items: 4
+                  },
+                  1000: {
+                    items: 4
+                  }
+                }
+              })
+            })
+          </script>

@@ -41,7 +41,7 @@
 
 </style>
 <link rel="stylesheet" href="<?=base_url();?>assets/datatables/css/dataTables.bootstrap.min.css">
-<div class="col col-md-10 col-sm-10 col-xs-12 right-content" style="">
+<div class="col col-md-12 col-sm-12 col-xs-12 right-content" style="">
     <div class=" title-box">
 		<h3 class="title"><?php if(isset($breadcumb)){ ?><?=$breadcumb;?><?php }else{ ?> Journal <?php } ?></h3>
     </div>

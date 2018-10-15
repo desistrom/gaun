@@ -1,5 +1,5 @@
 <style type="text/css">
-	.form-goup-file{
+  .form-goup-file{
     height: auto;
     overflow: hidden;
     padding: 0;
@@ -271,9 +271,9 @@ div.container-fluid.footer-bottom{
 }*/
 </style>
 
-<div class="col col-md-12 col-sm-12 col-xs-12 right-content" style="">
+<div class="col col-md-10 col-sm-10 col-xs-12 right-content" style="">
     <div class=" title-box">
-		<!-- <h3 class="title">Jurnal</h3> -->
+    <h3 class="title">Jurnal</h3>
     </div>
     <section class="catalog col-md-12 col-sm-12 col-xs-12 ">
         <div class="container-fluid">
@@ -292,10 +292,12 @@ div.container-fluid.footer-bottom{
         </div>
       </section>
     <div class="box-content">
-    	<div class="row">
-    	     <div class="col col-md-12 col-sm-12 col-xs-2">
+      <div class="row">
+           <div class="col col-md-12 col-sm-12 col-xs-2">
             <div class="col col-md-12 col-sm-12 col-xs-12" style="padding-bottom: 30px;">
+            <?php if(!is_null($this->general->status())){ ?>
               <div class="col-md-4 col-sm-5 col-xs-12"><a href="<?=site_url('user/journal/add');?>" class="btn btn-success">Add Jurnal</a></div>
+              <?php } ?>
               <div class="col col-md-8 col-sm-7 col-xs-12">
                 <!-- <form method="get" class="text-right" >
                     <div class="input-search input-search-left"><input type="text" class="form-control" name="data" id="search" placeholder="Cari"></div>
@@ -304,7 +306,7 @@ div.container-fluid.footer-bottom{
               </div>
             </div>
             <?php if (count($journal) == 0) { ?>
-        <div class="col sol-md-12 col-am-12 col-xs-12">
+        <div class="col sol-md12 col-am-12 col-xs-12">
                   <div class="jumbotron">
   <h2 style="color: #A8A8A8;text-align: center;">Data Not found</h2>
 </div>
@@ -323,6 +325,12 @@ div.container-fluid.footer-bottom{
                               
                             </div>
                           </a>
+                        </div>
+                        <div>
+                          <!-- <div class="btn-action">
+                            <a href="#"><i class="fa fa-pencil"></i></a>
+                            
+                          </div> -->
                         </div>
                       </div>
                     </div>
@@ -343,9 +351,81 @@ div.container-fluid.footer-bottom{
                     </div>
                   </div>
               </div>
+              
             <?php endforeach ?>
+            
+
+              <!-- <div class="filter-box-thumbnail col-md-3 col-sm-3 col-xs-12 " style="">
+                <div class="box-thumbnail">
+                  <div class="header-box-thumbnail">
+                    <img class="thumbnail-cover" src="<?=base_url();?>mockup_statis/assets/img/jur-3.jpg">
+                    <div class="filter-button-action">
+                      <div>
+                        <a href="#">
+                          <div class="btn-action">
+                            <i class="fa fa-pencil"></i>
+                            
+                          </div>
+                        </a>
+                      </div>
+                      <div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="body-box-thumbnail">
+                    <h5 class="title-thumbnail"><a href="<?=site_url('user/journal/detail_jurnal');?>">Jurnal Psikologi Pendidikan dan Perkembangan</a></h5>
+                    <h6>vol.5</h6>
+                  </div>
+                </div>
+             </div>  -->
+              <!-- <div class="filter-box-thumbnail col-md-3 col-sm-3 col-xs-12 " style="">
+                <div class="box-thumbnail">
+                  <div class="header-box-thumbnail">
+                    <img class="thumbnail-cover" src="<?=base_url();?>mockup_statis/assets/img/jur-3.jpg">
+                    <div class="filter-button-action">
+                      <div>
+                        <a href="#">
+                          <div class="btn-action">
+                            <i class="fa fa-pencil"></i>
+                            
+                          </div>
+                        </a>
+                      </div>
+                      <div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="body-box-thumbnail">
+                    <h5 class="title-thumbnail"><a href="<?=site_url('user/journal/detail_jurnal');?>">Jurnal Psikologi Pendidikan dan Perkembangan</a></h5>
+                    <h6>vol.5</h6>
+                  </div>
+                </div>
+             </div> -->
+              <!-- <div class="filter-box-thumbnail col-md-3 col-sm-3 col-xs-12 " style="">
+                <div class="box-thumbnail">
+                  <div class="header-box-thumbnail">
+                    <img class="thumbnail-cover" src="<?=base_url();?>mockup_statis/assets/img/jur-3.jpg">
+                    <div class="filter-button-action">
+                      <div>
+                        <a href="#">
+                          <div class="btn-action">
+                            <i class="fa fa-pencil"></i>
+                            
+                          </div>
+                        </a>
+                      </div>
+                      <div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="body-box-thumbnail">
+                    <h5 class="title-thumbnail"><a href="<?=site_url('user/journal/detail_jurnal');?>">Jurnal Psikologi Pendidikan dan Perkembangan</a></h5>
+                    <h6>vol.5</h6>
+                  </div>
+                </div>
+             </div> -->
            </div>
-    		</div>
+        </div>
 
     </div>
 </div>

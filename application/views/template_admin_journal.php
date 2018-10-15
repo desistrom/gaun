@@ -277,6 +277,13 @@
     padding-left: 15px;
     
   }
+  .table thead{
+    background-color: #269913;
+    color: white;
+  }
+  .table{
+    margin-top: 15px;
+  }
   </style>
   <script src="<?=base_url();?>assets/js/jquery-2.2.3.min.js"></script>
   <script src="<?=base_url();?>assets/js/jquery-ui.min.js"></script>

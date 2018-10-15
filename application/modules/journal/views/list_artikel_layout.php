@@ -33,12 +33,134 @@
   .fa-upload{
     padding-right: 10px;
   }
+   .box-thumbnail .header-box-thumbnail{
+    height: 190px;
+    overflow: hidden;
+    padding: 6px;
+    position: relative;
+    background-color: white;
+   }
+    
+     .box-thumbnail .header-box-thumbnail .filter-button-action{
+      
+
+       top: 0;
+       width: 100%;
+       text-align: right;
+     }
+  
+   .box-thumbnail .header-box-thumbnail .btn-action{
+    height: 30px;
+    width: 30px;
+    background-color: #5AA7DF;
+    box-shadow: 2px 2px 3px 0 #000000;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    right: -4em;
+    margin:7px;
+    transition: 0.4s;
+    animation-delay: 0.2s;
+    text-align: center;
+   }
+  
+   .box-thumbnail .header-box-thumbnail .btn-action{
+    padding-top: 6px;
+    display: inline-block;
+    color: white;
+   }
+   
+    .box-thumbnail:hover .header-box-thumbnail .btn-action{
+      right: 0;
+      
+    }
+  /* 
+    .box-thumbnail:hover{
+         box-shadow: 1px 1px 2px 0 #000000;
+    }
+  */
+   .box-thumbnail .header-box-thumbnail .btn-action a i{
+    color: white;
+   }
+  
+   .box-thumbnail .header-box-thumbnail .btn-action:hover{
+    background-color: #247AB8;
+   }
+ 
+  .box-thumbnail .thumbnail-cover{
+    width: 100%;
+  }
+  
+   .box-thumbnail .body-box-thumbnail{
+    padding: 10px 10px;
+    background-color: white;
+margin-top: -11px;
+   }
+  
+   .box-thumbnail .footer-box-thumbnail{
+    padding: 5px 10px;
+    background-color: #F7F7F7;
+
+   }
+    .box-thumbnail  .title-thumbnail a{
+  text-decoration: none;
+  text-align: center;
+  color: #7B7B7B;
+  font-size: 14px;
+  font-weight: 600;
+}
+ .box-thumbnail .body-box-thumbnail{
+  color: #A2A2A2;
+  font-size: 10px;
+  font-weight: 400;
+}
+ .box-thumbnail{
+   background-color: #F7F7F7
+}
+.sub-footer-box-thumbnail{
+  display: inline-block;
+}
+.sub-footer-box-thumbnail .btn{
+  padding-top: 2px;
+  padding-bottom: 0;
+  margin-top: 5px;
+}
+.float-right{
+  float: right;
+}
+.btn-upload{
+  display: none;
+}
 </style>
 
 <?php if ($view == 'list') { ?>
 <link rel="stylesheet" href="<?=base_url();?>assets/datatables/css/dataTables.bootstrap.min.css">
+<div class="col col-md-12 col-sm-12 col-s-12">
+  <div class="filter-box-thumbnail col-md-3 col-sm-3 col-xs-3 " style="padding-bottom: 2em;">
+        <div class="box-thumbnail" style="border:solid 1px #CBCBCB;">
+          <div class="header-box-thumbnail">
+            <img class="thumbnail-cover" src="<?=base_url();?>assets/media/<?=$journal['futured_image'];?>">
+            <!-- <div class="filter-button-action">
+              <div>
+                <a href="#">
+                  <div class="btn-action">
+                    <i class="fa fa-pencil"></i>
+                    
+                  </div>
+                </a>
+              </div>
+            </div> -->
+          </div>
+          <div class="body-box-thumbnail">
+            <h4 class="title-thumbnail"><a href="#"><?=$journal['judul']?></a></h4>
+
+          </div>
+
+        </div>
+      </div>
+</div>
 <div class="col col-md-12 col-sm-12 col-xs-12">
-  
+ 
 <div class="box">
 	<div class="box-body">
 		<div class="col col-md-12 col-sm-12 col-xs-12" style="padding-left: 0; margin-bottom: 15px;">

@@ -467,25 +467,27 @@ div.container-fluid.footer-bottom{
               </div>
             </div>
             <div class="sub-content-artikel-body">
+            <?php foreach ($artikel as $key => $value): ?>
               <div class="col col-md-6 col-sm-6 col-xs-12 list-artikel">
                 <div class="artikel-body artikel-body-left">
                   <i class="fa fa-files-o" aria-hidden="true"></i>
                 </div>
                 <div class="artikel-body artikel-body-right">
                   <ul class="list-unstyled">
-                    <li>Author : .................................................................................</li>
-                    <li>Date Published : ...................................................................</li>
-                    <li>Publisher : ............................................................................</li>
-                    <li>Volume : ...............................................................................</li>
+                    <li>Artikel : <?=word_limiter($value['judul'],3);?></li>
+                    <li>Author : <?=$value['author'];?>...</li>
+                    <li>Date Published : <?=$value['publish'];?></li>
+                    <li>Publisher : <?=$value['publisher'];?></li>
                   </ul>
                 </div>
                 <div class="artikel-body artikel-body-icedit">
-                  <a href="#">
+                  <a href="<?=site_url('journal/admin/edit_artikel/'.$value['id_artikel']);?>">
                     <i class="fa fa-pencil" aria-hidden="true"></i>
                   </a>
                   
                 </div>     
-              </div>
+              </div>              
+            <?php endforeach ?>
     
             </div>
           </div>

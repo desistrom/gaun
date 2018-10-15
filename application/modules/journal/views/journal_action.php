@@ -61,10 +61,11 @@
                   <label for="judul journal" class="  text-left">judul journal</label>
 
                   <div class="">
-                    <input type="text" class="form-control new-input" id="judul" placeholder="judul journal">
+                    <input type="text" class="form-control new-input" id="judul" placeholder="judul journal" value="<?php $a=''; if(isset($journal)){ echo $journal['judul']; $a=$journal['deskripsi']; } ?>">
                     <div class="error" id="ntf_judul"></div>
                   </div>
                 </div>
+                <?php if(!isset($journal)){ ?>
                 <div class="form-group">
                   <label>User Author</label>
                   <select class="form-control select2" style="width: 100%;" id="user">
@@ -75,11 +76,12 @@
                   </select>
                   <div class="error" id="ntf_user"></div>
                 </div>
+                <?php } ?>
                 <div class="form-group">
                   <label for="judul journal" class="  text-left">Deskripsi</label>
 
                   <div class="">
-                    <?php echo $this->ckeditor->editor("content","" ); ?>
+                    <?php echo $this->ckeditor->editor("content",$a ); ?>
                     <input type="hidden" name="content" id="content">
                     <div class="error" id="ntf_content"></div>
                   </div>
@@ -98,7 +100,7 @@
                 <label for="judul journal" class="  text-left">ISSN journal</label>
 
                 <div class="">
-                  <input type="text" class="form-control new-input" id="issn" placeholder="ISSN journal">
+                  <input type="text" class="form-control new-input" id="issn" placeholder="ISSN journal" value="<?php if(!isset($journal)){ $journal['issn']; }?>">
                 </div>
               </div>
               <div class="form-group">
@@ -108,7 +110,7 @@
                   <select class="form-control new-input" id="kategori" placeholder="Kategori journal">
                     <option value="">--Pilih Kategori--</option>
                     <?php foreach ($kategori as $key => $value): ?>
-                      <option value="<?=$value['id_kategori'];?>"><?=$value['nama'];?></option>  
+                      <option <?php if(isset($journal)){ if($journal['id_kategori_ref'] == $value['id_kategori']){ ?> selected <?php } } ?> value="<?=$value['id_kategori'];?>"><?=$value['nama'];?></option>  
                     <?php endforeach ?>
                   </select>
                   <div class="error" id="ntf_kategori"></div>
@@ -125,6 +127,9 @@
         <div class="error" id="ntf_error"></div> 
                   </div>
                   </div>
+                  <?php if(isset($journal)){ ?>
+                  <img src="<?=base_url();?>assets/media/<?=$journal['futured_image'];?>" style="width: 100%;" >
+                  <?php } ?>
                 </div>
               </div>
             </div>

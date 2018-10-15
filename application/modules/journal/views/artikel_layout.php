@@ -84,14 +84,15 @@
                 <label for="keyword" class="  text-left">Keyword</label>
                 <div class="">
                   <input type="text" class="form-control new-input" id="keyword" placeholder="Keyword">
+                  <div class="error" id="ntf_keyword"></div>
                 </div>
               </div>
               <div class="form-group">
                   <label for="judul journal" class="  text-left">references</label>
                   <div class="">
                     <?php echo $this->ckeditor->editor("references","" ); ?>
-                    <input type="hidden" name="references" id="references">
-                    <div class="error" id="ntf_references"></div>
+                    <input type="hidden" name="references" id="ref">
+                    <div class="error" id="ntf_ref"></div>
                   </div>
                 </div>
               </div>
@@ -109,7 +110,7 @@
 
                 <div class="">
                   <select class="form-control new-input" id="journal" placeholder="journal">
-                    <option>--Pilih Journal--</option>
+                    <option value="">--Pilih Journal--</option>
                     <?php foreach ($journal as $key => $value): ?>
                       <option value="<?=$value['id_journal']?>"><?=$value['judul'];?></option>
                     <?php endforeach ?>
@@ -121,9 +122,7 @@
                 <label for="volume" class="  text-left">volume</label>
                 <div class="">
                   <select class="form-control new-input" id="volume" placeholder="volume">
-                    <option>--Pilih Journal--</option>
-                    <option>Volume 1</option>
-                    <option>Volume 2</option>
+                    <option value="">--Pilih Journal--</option>
                   </select>
                   <div class="error" id="ntf_volume"></div>
                 </div>   
@@ -133,9 +132,7 @@
 
                 <div class="">
                   <select class="form-control new-input" id="no_volume" placeholder="No Volume">
-                    <option>--Pilih Journal--</option>
-                    <option>No Volume 1</option>
-                    <option>No Volume 2</option>
+                    <option value="">--Pilih Journal--</option>
                   </select>
                   <div class="error" id="ntf_no_volume"></div>
                 </div>   
@@ -146,6 +143,9 @@
                     <div class="col col-md-12 form-goup-file">
                     <div class="input-file-right text-left"><label class="btn btn-success btn-choose-foto btn-green" style="text-align: left;" for="file_name"><i class="fa fa-paperclip" ></i> Choose File</label></div>
                     <div class="input-file-left"><input type="file" class="form-control file new-input" name="file_name" id="file_name"></div> 
+                  <div><i>Max file size 100MB <br>Allowed file type : pdf, docx</i></div> 
+            <div class="error" id="ntf_file_name"></div> 
+            <div class="error" id="ntf_error"></div>
                   </div>
                   </div>
                 </div>
@@ -153,9 +153,11 @@
                   <label for="gambar_journal" class="  text-left">Abstrak file</label>
                   <div class="">
                     <div class="col col-md-12 form-goup-file">
-                    <div class="input-file-right text-left"><label class="btn btn-success btn-choose-foto btn-green" style="text-align: left;" for="file_name"><i class="fa fa-paperclip" ></i> Choose File</label></div>
-                    <div class="input-file-left"><input type="file" class="form-control file new-input" name="file_name" id="file_name"></div> 
-                    
+                    <div class="input-file-right text-left"><label class="btn btn-success btn-choose-foto btn-green" style="text-align: left;" for="file_name_abs"><i class="fa fa-paperclip" ></i> Choose File</label></div>
+                    <div class="input-file-left"><input type="file" class="form-control file new-input" name="file_name_abs" id="file_name_abs"></div> 
+                    <div><i>Max file size 100MB <br>Allowed file type : pdf, docx</i></div> 
+            <div class="error" id="ntf_file_name_abs"></div> 
+            <div class="error" id="ntf_abs_error"></div>
                   </div>
                   </div>
                 </div>
@@ -168,15 +170,16 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="jabatan_name" class="text-left">Jabatan Author</label>
+                    <label for="jabatan" class="text-left">Jabatan Author</label>
                     <div class="">
-                      <input type="text" class="form-control new-input jabatab" id="jabatan_name" placeholder="Jabatan Author">
+                      <input type="text" class="form-control new-input jabatan" id="jabatan" placeholder="Jabatan Author">
                       <div class="error" id="ntf_jabatan"></div>
                     </div>
                   </div>
                </div>
+               <div class="more"></div>
                <div class="form-group form-file" style="margin-top: 15px;">
-                    <button type="submit" class="btn btn-success btn-green pull-right btn_more"><i class="fa fa-plus"></i> Add more</button>
+                    <button type="submit" class="btn btn_more btn-success btn-green pull-right"><i class="fa fa-plus"></i> Add more</button>
               </div>
               <div class="form-group">
                 <table style="padding-top: 15px;">
@@ -351,21 +354,9 @@
       });
     });
 
-    $('body').on('click','.btn-add-artikel',function(){
-      var id = $(this).attr('id');
-      console.log(id);
-      console.log('id');
-      window.location.href = base_url+'user/journal/add_artikel/'+id;
-    });
-
     $('body').on('click','.btn_more',function(){
-      var html = '<div class="box-author"> <div class="form-group"> <label for="author_name" class="text-left">Nama Author</label> <div class=""> <input type="text" class="form-control new-input nama" id="author_name" placeholder="Nama Author"> <div class="error" id="ntf_nama"></div></div></div><div class="form-group"> <label for="jabatan_name" class="text-left">Jabatan Author</label> <div class=""> <input type="text" class="form-control new-input jabatab" id="jabatan_name" placeholder="Jabatan Author"> <div class="error" id="ntf_jabatan"></div></div></div></div>';
+      var html = '<div class="box-author"> <div class="form-group"> <label for="author_name" class="text-left">Nama Author</label> <div class=""> <input type="text" class="form-control new-input nama" id="author_name" placeholder="Nama Author"> <div class="error" id="ntf_nama"></div></div></div><div class="form-group"> <label for="jabatan" class="text-left">Jabatan Author</label> <div class=""> <input type="text" class="form-control new-input jabatan" id="jabatan" placeholder="Jabatan Author"> <div class="error" id="ntf_jabatan"></div></div></div></div>';
       $('.more').append(html);
-    });
-
-    $('body').on('click','.detail', function(){
-      var id = $(this).attr('id');
-        window.location.href = base_url+'user/journal/detail_artikel/'+id;
     });
 
     $('body').on('click','#volume', function(){
@@ -375,7 +366,7 @@
 
       }
       $.ajax({
-          url : base_url+'user/journal/no_volume/'+id,
+          url : base_url+'journal/admin/no_volume/'+id,
           dataType : 'json',
           async : false,
           cache : false ,
@@ -394,7 +385,7 @@
         return false;
       }
       $.ajax({
-          url : base_url+'user/journal/select_volume/'+id,
+          url : base_url+'journal/admin/select_volume/'+id,
           dataType : 'json',
           async : false,
           cache : false ,

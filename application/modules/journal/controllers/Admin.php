@@ -50,10 +50,32 @@ class Admin extends MX_Controller
             $jumlah = $this->db->get_where('tb_volume',array('id_journal_ref'=>$value['id_journal']))->num_rows();
             $journal[$key]['jumlah'] = $jumlah;
         }
-        // print_r($journal);
+        $this->db->select('tb_artikel.*,tb_volume.volume,tb_no_volume.publish,tb_journal.judul as judul_journal,tb_pengguna.status as status_user,tb_pengguna.id_pengguna');
+        $this->db->from('tb_artikel');
+        $this->db->join('tb_no_volume', 'id_no_volume_ref = id_no_volume');
+        $this->db->join('tb_volume', 'id_volume_ref = id_volume');
+        $this->db->join('tb_journal', 'id_journal_ref = id_journal');
+        $this->db->join('tb_pengguna', 'tb_journal.id_user_ref = id_pengguna');
+        $this->db->where('tb_pengguna.id_instansi_ref',$user['id_instansi']);
+        $this->db->order_by('id_artikel', 'desc');
+        $this->db->limit('4');
+        $a = $this->db->get()->result_array();
+        // print_r($a);
+        foreach ($a as $key => $value) {
+            $author = $this->db->get_where('tb_author',array('id_artikel_ref'=>$value['id_artikel']))->result_array();
+            $a[$key]['author'] = $author[0]['nama'];
+            if ($value['status_user'] == 0) {
+                $p = $this->db->get_where('tb_mahasiswa',array('id_pengguna_ref'=>$value['id_pengguna']))->row_array();
+                $a[$key]['publisher'] = $p['nama'];
+            }else{
+                $p = $this->db->get_where('tb_dosen',array('id_pengguna_ref'=>$value['id_pengguna']))->row_array();
+                $a[$key]['publisher'] = $p['nama'];
+            }
+        }
         $this->data['breadcumb'] = 'My Journal';
         $this->data['view'] = 'list';
         $this->data['journal'] = $journal;
+        $this->data['artikel'] = $a;
         $this->ciparser->new_parse('template_admin_journal','modules_journal', 'journal_layout',$this->data);
     }
 
@@ -140,7 +162,7 @@ class Admin extends MX_Controller
         $this->ciparser->new_parse('template_admin_journal','modules_journal', 'journal_action',$this->data);
     }
 
-    public function edit($id){
+    public function edit($id=null){
         if ($this->input->server('REQUEST_METHOD') == "POST") {
             $ret['state'] = 0;
             $ret['status'] = 0;
@@ -155,7 +177,7 @@ class Admin extends MX_Controller
                 $data_news['deskripsi'] = $this->input->post('content');
                 $data_news['issn'] = $this->input->post('issn');
                 $data_news['id_kategori_ref'] = $this->input->post('kategori');
-                $data_news['id_user_ref'] = $this->data['user']['id_pengguna'];
+                // $data_news['id_user_ref'] = $this->data['user']['id_pengguna'];
                 if (isset($_FILES['file_name'])) {
                     $image = $this->upload_logo($_FILES);
                     if (isset($image['error'])) {
@@ -165,7 +187,7 @@ class Admin extends MX_Controller
                         $data_news['futured_image'] = $image['asli'];
                         if ($this->db->update('tb_journal',$data_news,array('id_journal'=>$id))) {
                             $ret['status'] = 1;
-                            $ret['url'] = site_url('user/journal');
+                            $ret['url'] = site_url('journal/admin/dashboard');
                             $this->session->set_flashdata("notif","Data Berhasil di Masukan");
                         }
                     }
@@ -174,7 +196,7 @@ class Admin extends MX_Controller
                     // $data_news['futured_image'] = $image['asli'];
                     if ($this->db->update('tb_journal',$data_news,array('id_journal'=>$id))) {
                         $ret['status'] = 1;
-                        $ret['url'] = site_url('user/journal');
+                        $ret['url'] = site_url('journal/admin/dashboard');
                         $this->session->set_flashdata("notif","Data Berhasil di Masukan");
                     }
                 }
@@ -199,7 +221,7 @@ class Admin extends MX_Controller
         $this->data['view'] = 'edit';
         $this->data['journal'] = $this->db->get_where('tb_journal',array('id_journal'=>$id))->row_array();
         $this->data['kategori'] = $this->db->get('tb_kategori_journal')->result_array();
-        $this->ciparser->new_parse('template_user','modules_user', 'journal_layout_backup',$this->data);
+        $this->ciparser->new_parse('template_admin_journal','modules_journal', 'journal_action',$this->data);
     }
 
     public function detail_journal($id=null){
@@ -288,7 +310,7 @@ class Admin extends MX_Controller
                                         $data_author['jabatan'] = $jabatan[$i];
                                         $this->db->insert('tb_author',$data_author);
                                         $ret['status'] = 1;
-                                        $ret['url'] = site_url('user/journal/list_artikel');
+                                        $ret['url'] = site_url('journal/admin');
                                         $this->session->set_flashdata("notif","Data Berhasil di Masukan");
                                     }
                                 }
@@ -364,7 +386,7 @@ class Admin extends MX_Controller
                 $data_news['keyword'] = $this->input->post('keyword');
                 $data_news['references'] = $this->input->post('ref');
                 $data_news['status'] = 0;
-                $data_news['id_user_ref'] = $this->data['user']['id_pengguna'];
+                // $data_news['id_user_ref'] = $this->data['user']['id_pengguna'];
                 $data_news['id_no_volume_ref'] = $this->input->post('no_volume');
                 $cekjournal = $this->db->get_where('tb_journal',array('id_journal'=>$this->input->post('journal')))->row_array();
                 if ($cekjournal['status'] == 1 ) {
@@ -418,13 +440,13 @@ class Admin extends MX_Controller
                                     $data_author['jabatan'] = $jabatan[$i];
                                     $this->db->insert('tb_author',$data_author);
                                     $ret['status'] = 1;
-                                    $ret['url'] = site_url('user/journal/list_artikel');
+                                    $ret['url'] = site_url('journal/admin/dashboard');
                                     $this->session->set_flashdata("notif","Data Berhasil di Masukan");
                                 }
                             }
                         }else{
                             $ret['status'] = 1;
-                            $ret['url'] = site_url('user/journal/list_artikel');
+                            $ret['url'] = site_url('journal/admin/dashboard');
                             $this->session->set_flashdata("notif","Data Berhasil di Masukan");
                         }
                     }
@@ -465,7 +487,7 @@ class Admin extends MX_Controller
         $this->data['artikel'] = $artikel;
         $this->data['author'] = $author;
         $this->data['journal'] = $journal;
-        $this->ciparser->new_parse('template_user','modules_user', 'artikel_layout',$this->data);
+        $this->ciparser->new_parse('template_admin_journal','modules_journal', 'artikel_layout_edit',$this->data);
     }
 
     public function save_author($id=null){
@@ -511,7 +533,7 @@ class Admin extends MX_Controller
                 $data_news['id_journal_ref'] = $this->input->post('journal');
                 if ($this->db->insert('tb_volume',$data_news)) {
                     $ret['status'] = 1;
-                    $ret['url'] = site_url('user/journal/volume');
+                    $ret['url'] = site_url('journal/admin/volume');
                     $this->session->set_flashdata("notif","Data Berhasil di Masukan");
                 }
             }
@@ -522,10 +544,12 @@ class Admin extends MX_Controller
         }
         $this->data['view'] = 'add';
         // $this->data['breadcumb'] = $journal['judul'];
-        $journal = $this->db->get_where('tb_journal',array('id_user_ref'=>$this->data['user']['id_pengguna']))->result_array();
+        $user = $this->session->userdata('data_user_journal');
+        $sql = "SELECT j.* FROM tb_journal j join tb_pengguna p on j.id_user_ref = p.id_pengguna Where id_instansi_ref = ?";
+        $journal = $this->db->query($sql,$user['id_instansi'])->result_array();
         // $volume = $this->db->get('tb_volume')->result_array();
         $this->data['journal'] = $journal;
-        $this->ciparser->new_parse('template_user','modules_user', 'volume_layout',$this->data);
+        $this->ciparser->new_parse('template_admin_journal','modules_journal', 'create_volume_layout',$this->data);
     }
 
     public function edit_volume($id=null){
@@ -580,7 +604,7 @@ class Admin extends MX_Controller
                 $data_news['publish'] = date('Y-m-d');
                 if ($this->db->insert('tb_no_volume',$data_news)) {
                     $ret['status'] = 1;
-                    $ret['url'] = site_url('user/journal/list_nomor');
+                    $ret['url'] = site_url('journal/admin/novolume');
                     $this->session->set_flashdata("notif","Data Berhasil di Masukan");
                 }
             }
@@ -591,9 +615,11 @@ class Admin extends MX_Controller
             exit();
         }
         $this->data['view'] = 'add';
-        $journal = $this->db->get_where('tb_journal',array('id_user_ref'=>$this->data['user']['id_pengguna']))->result_array();
+        $user = $this->session->userdata('data_user_journal');
+        $sql = "SELECT j.* FROM tb_journal j join tb_pengguna p on j.id_user_ref = p.id_pengguna Where id_instansi_ref = ?";
+        $journal = $this->db->query($sql,$user['id_instansi'])->result_array();
         $this->data['journal'] = $journal;
-        $this->ciparser->new_parse('template_user','modules_user', 'nomor_layout',$this->data);
+        $this->ciparser->new_parse('template_admin_journal','modules_journal', 'create_no_volume_layout',$this->data);
     }
 
     public function edit_no_volume($id=null){
@@ -671,12 +697,13 @@ class Admin extends MX_Controller
         }
     }
 
-    public function artikel($id){
-        $j = $this->db->get_where('tb_journal',array('id_journal'=>$id))->row_array();
-        $this->data['user']['nama'] = '';
-        $this->data['breadcumb'] = 'List Artikel '.$j['judul'];
+    public function artikel($id=null){
+        $user = $this->session->userdata('data_user_journal');
+        $sql = "SELECT j.* FROM tb_journal j join tb_pengguna p on j.id_user_ref = p.id_pengguna Where id_journal = ?";
+        $journal = $this->db->query($sql,$id)->row_array();
         $this->data['view'] = 'list';
         $this->data['id'] = $id;
+        $this->data['journal'] = $journal;
         $this->ciparser->new_parse('template_admin_journal','modules_journal', 'list_artikel_layout',$this->data);
     }
 
@@ -784,13 +811,12 @@ class Admin extends MX_Controller
                 }else{
                     $aktif = '<span class="text-danger"><b>Ignored</b></span>';
                 }
-                // $button = '<button class="btn btn-info btn-sm btn-acc" id="'.$news->id_artikel.'" data-toggle="tooltip" title="accept"><i class="fa fa-check"></i> Accepted</button>';
+                $button = '<button class="btn btn-info btn-sm btn-acc" id="'.$news->id_artikel.'" data-toggle="tooltip" title="accept"><i class="fa fa-check"></i> Accepted</button>';
             }
             // $button .= ' <button class="btn btn-success btn-sm btn-detail" id="'.$news->id_artikel.'"><i class="fa fa-eye"></i> Detail</button>';
             if (!is_null($news->reason)) {
                 $button .= ' <button class="btn btn-warning btn-sm btn-reason" id="'.$news->id_artikel.'"><i class="fa fa-comment-o"></i> Reason</button>';
             }
-            
             $row = array();
             $row[] = $no;
             $row[] = '<div class="btn-detail" id="'.$news->id_artikel.'" style="cursor:pointer;"><u>'.word_limiter($news->judul,10).' <i class="fa fa-external-link" aria-hidden="true"></i></u></div>';
@@ -972,6 +998,67 @@ class Admin extends MX_Controller
                         "draw" => $_POST['draw'],
                         "recordsTotal" => $this->journal_model->count_all_journal_rejected(),
                         "recordsFiltered" => $this->journal_model->count_filtered_journal_rejected(),
+                        "data" => $data,
+                );
+        //output to json format
+        echo json_encode($output);
+    }
+
+    public function ajax_list_volume()
+    {
+        $this->load->model('journal_model');
+        $list = $this->journal_model->get_datatables_volume();
+        $data = array();
+        $no = $_POST['start'];
+        $aktif = '';
+        $button = '';
+        foreach ($list as $news) {
+            $no++;
+            $button = '<a href="'.site_url("user/journal/edit_volume").'/'.$news->id_journal.'"><button class="btn btn-info btn-sm" id="edit" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil"></i></button></a>';
+            $row = array();
+            $row[] = $no;
+            $row[] = $news->volume;
+            $row[] = $news->judul;
+            $row[] = $button;
+ 
+            $data[] = $row;
+        }
+ 
+        $output = array(
+                        "draw" => $_POST['draw'],
+                        "recordsTotal" => $this->journal_model->count_all_volume(),
+                        "recordsFiltered" => $this->journal_model->count_filtered_volume(),
+                        "data" => $data,
+                );
+        //output to json format
+        echo json_encode($output);
+    }
+
+    public function ajax_list_no_volume()
+    {
+        $this->load->model('journal_model');
+        $list = $this->journal_model->get_datatables_no_volume();
+        $data = array();
+        $no = $_POST['start'];
+        $aktif = '';
+        $button = '';
+        foreach ($list as $news) {
+            $no++;
+                $button = '<a href="'.site_url("user/journal/edit_no_volume").'/'.$news->id_journal.'"><button class="btn btn-info btn-sm" id="edit" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil"></i></button></a>';
+            $row = array();
+            $row[] = $no;
+            $row[] = $news->nomor;
+            $row[] = $news->volume;
+            $row[] = $news->judul;
+            $row[] = $button;
+ 
+            $data[] = $row;
+        }
+ 
+        $output = array(
+                        "draw" => $_POST['draw'],
+                        "recordsTotal" => $this->journal_model->count_all_no_volume(),
+                        "recordsFiltered" => $this->journal_model->count_filtered_no_volume(),
                         "data" => $data,
                 );
         //output to json format

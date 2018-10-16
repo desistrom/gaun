@@ -489,6 +489,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
+          	<li class=""><a href="<?=site_url('user/journal/list_artikel');?>"><i class="fa fa-circle-o"></i> List Artikel </a></li>
             <li class=""><a href="<?=site_url('user/journal/list_artikel_accepted');?>"><i class="fa fa-circle-o"></i> Accepted </a></li>
             <li class=""><a href="<?=site_url('user/journal/list_artikel_rejected');?>"><i class="fa fa-circle-o"></i> Rejected </a></li>
             <li class=""><a href="<?=site_url('user/journal/list_download');?>"><i class="fa fa-circle-o"></i> Terdownload </a></li>

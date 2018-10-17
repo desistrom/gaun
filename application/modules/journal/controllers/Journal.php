@@ -7,7 +7,42 @@ class Journal extends MX_Controller
 
     function __construct()
     {
-        
+
+    }
+
+    public function add_slug(){
+         $data = $this->db->get('tb_journal')->result_array();
+    foreach ($data as $key => $value) {
+             $data_j['slug'] = $this->slugify($value['judul']);
+             $this->db->update('tb_journal',$data_j,array('id_journal'=>$value['id_journal']));
+         }
+     }
+
+    public static function slugify($text)
+    {
+      // replace non letter or digits by -
+      $text = preg_replace('~[^\pL\d]+~u', '-', $text);
+
+      // transliterate
+      $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
+
+      // remove unwanted characters
+      $text = preg_replace('~[^-\w]+~', '', $text);
+
+      // trim
+      $text = trim($text, '-');
+
+      // remove duplicate -
+      $text = preg_replace('~-+~', '-', $text);
+
+      // lowercase
+      $text = strtolower($text);
+
+      if (empty($text)) {
+        return 'n-a';
+      }
+
+      return $text;
     }
 
     public function index(){
@@ -121,7 +156,7 @@ class Journal extends MX_Controller
 
     public function downloads($id=null){
         $art = $this->db->get_where('tb_artikel',array('id_artikel'=>$id))->row_array();
-       
+
         $data['total'] = $art['total'] + 1;
         $data['anonym'] = $art['anonym'] + 1;
         $data['total_download'] = $art['total_download'] + 1;
@@ -142,6 +177,6 @@ class Journal extends MX_Controller
     public function other(){
         $this->ciparser->new_parse('template_journal','modules_journal','journal/other_layout',$this->data);
     }
-    
+
 
 }

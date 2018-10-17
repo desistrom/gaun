@@ -479,7 +479,7 @@ define('URL_GET_DATA_FOTO_V2','http://192.168.88.157/idren/api/v3/getDataFoto');
 define('URL_GET_FOUNDER_V2','http://192.168.88.157/idren/api/v3/founder');*/
 define('URL_GET_TOKEN','https://idren.id/api/v2/token');
 
-define('URL_API','http://localhost/idren/');
+define('URL_API','https://idren.id/');
 define('URL_INSERT_DOSEN','http://localhost/idren/api/v3/insert_dosen');
 define('URL_INSERT_MAHASISWA','http://localhost/idren/api/v3/insert_mahasiswa');
 $link = $_SERVER['PHP_SELF'];
@@ -491,8 +491,10 @@ if ($page == 'login_user') {
 define('PAGE', $page);
 define('DOMAIN', $_SERVER['SERVER_NAME']);
 
-define('FACEBOOK_APP_ID','302252023926695');
-define('FACEBOOK_APP_SECRET','999ef92004da6a852f4cde38515db024');
+
+# developer putra rieskha fb project
+define('FACEBOOK_APP_ID','319748982117890');
+define('FACEBOOK_APP_SECRET','4d063c711fd365851f01c2c5172a7aeb');
 
 // define('FACEBOOK_APP_ID','1051145755094888');
 // define('FACEBOOK_APP_SECRET','9a62276f3da309bd71c9cc75dc1eae0a');

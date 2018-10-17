@@ -309,19 +309,9 @@ div.container-fluid.footer-bottom{
                           <div class="box-thumbnail">
                             <div class="header-box-thumbnail">
                               <img class="thumbnail-cover" src="<?=base_url();?>assets/media/<?=$value['futured_image'];?>">
-                              <!-- <div class="filter-button-action">
-                                <div>
-                                  <a href="#">
-                                    <div class="btn-action">
-                                      <i class="fa fa-pencil"></i>
-                                      
-                                    </div>
-                                  </a>
-                                </div>
-                              </div> -->
                             </div>
                             <div class="body-box-thumbnail">
-                              <h5 class="title-thumbnail"><a href="#"><?=$value['judul'];?></a> </h5>
+                              <h5 class="title-thumbnail"><a href="<?=site_url('user/journal/detail_journal/'.$value['id_journal']);?>"><?=$value['judul'];?></a> </h5>
                               <div class="col col-md-12 col-sm-12 col-xs-12 none-padding">
                                 <a href="#" style="float: right;color: #EF7314;text-decoration: none;font-size: 20px;"><i class="fa fa-download"></i></a>
                               </div>
@@ -332,9 +322,6 @@ div.container-fluid.footer-bottom{
                       </div>
                       </div>
                        <?php endforeach ?>
-                      
-                     
-                    
                   </div>
                   <span class="txt-seemore">see more</span>
                 </div>
@@ -353,25 +340,27 @@ div.container-fluid.footer-bottom{
               </div>
             </div>
             <div class="sub-content-artikel-body">
+              <?php foreach ($artikel as $key => $value): ?>
               <div class="col col-md-6 col-sm-6 col-xs-12 list-artikel">
                 <div class="artikel-body artikel-body-left">
                   <i class="fa fa-files-o" aria-hidden="true"></i>
                 </div>
                 <div class="artikel-body artikel-body-right">
                   <ul class="list-unstyled">
-                    <li>Author : .................................................................................</li>
-                    <li>Date Published : ...................................................................</li>
-                    <li>Publisher : ............................................................................</li>
-                    <li>Volume : ...............................................................................</li>
+                    <li title="<?=word_limiter($value['judul'],3);?>">Artikel : <?=word_limiter($value['judul'],3);?></li>
+                    <li>Author : <?=$value['author'];?>...</li>
+                    <li>Date Published : <?=$value['publish'];?></li>
+                    <li>Publisher : <?=$value['publisher'];?></li>
                   </ul>
                 </div>
                 <div class="artikel-body artikel-body-icedit">
-                  <a href="#">
-                    <i class="fa fa-download" aria-hidden="true"></i>
+                  <a href="<?=site_url('user/journal/edit_artikel/'.$value['id_artikel']);?>" title="edit">
+                    <i class="fa fa-pencil" aria-hidden="true"></i>
                   </a>
                   
                 </div>     
-              </div>
+              </div>              
+            <?php endforeach ?>
     
             </div>
           </div>
@@ -385,7 +374,7 @@ div.container-fluid.footer-bottom{
               owl.owlCarousel({
                 margin: 10,
                 nav: true,
-                loop: true,
+                loop: false,
                 autoplayTimeout: 1000,
                 autoplayHoverPause: true,
                 responsive: {

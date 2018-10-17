@@ -33,7 +33,7 @@
           <textarea class="form-control" name="alamat"><?=$user['alamat'];?></textarea>
           <div class="error" id="ntf_alamat"></div>
         </div>
-        <?php if(is_null($this->general->status())){ ?>
+        <?php if(is_null($this->general->status()) || $this->general->status() == ''){ ?>
         <div class="form-group">
           <label>Instansi</label>
           <select class="form-control" name="instansi">

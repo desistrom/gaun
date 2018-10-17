@@ -161,7 +161,7 @@
                   </div>
                   </div>
                 </div>
-               <div class="box-author">
+               <div class="box-author" style="margin-bottom: 15px;">
                   <div class="form-group">
                     <label for="author_name" class="text-left">Nama Author</label>
                     <div class="">
@@ -355,7 +355,7 @@
     });
 
     $('body').on('click','.btn_more',function(){
-      var html = '<div class="box-author"> <div class="form-group"> <label for="author_name" class="text-left">Nama Author</label> <div class=""> <input type="text" class="form-control new-input nama" id="author_name" placeholder="Nama Author"> <div class="error" id="ntf_nama"></div></div></div><div class="form-group"> <label for="jabatan" class="text-left">Jabatan Author</label> <div class=""> <input type="text" class="form-control new-input jabatan" id="jabatan" placeholder="Jabatan Author"> <div class="error" id="ntf_jabatan"></div></div></div></div>';
+      var html = '<div class="box-author" style="margin-bottom: 15px;"> <div class="form-group"> <label for="author_name" class="text-left">Nama Author</label> <div class=""> <input type="text" class="form-control new-input nama" id="author_name" placeholder="Nama Author"> <div class="error" id="ntf_nama"></div></div></div><div class="form-group"> <label for="jabatan" class="text-left">Jabatan Author</label> <div class=""> <input type="text" class="form-control new-input jabatan" id="jabatan" placeholder="Jabatan Author"> <div class="error" id="ntf_jabatan"></div></div></div></div>';
       $('.more').append(html);
     });
 

@@ -48,6 +48,18 @@ class Journal extends MX_Controller
         $this->ciparser->new_parse('template_journal','modules_journal','journal/home_layout',$this->data);
     }
 
+    public function kategori($param=null){
+        $sql = "SELECT * FROM tb_kategori_journal k join tb_journal j on k.id_kategori = j.id_kategori_ref WHERE j.status = 2 AND k.nama = '".$param."'";
+        $journal = $this->db->query($sql)->result_array();
+        foreach ($journal as $key => $value) {
+            $jumlah = $this->db->get_where('tb_volume',array('id_journal_ref'=>$value['id_journal']))->num_rows();
+            $journal[$key]['jumlah'] = $jumlah;
+        }
+        $this->data['view'] = 'list';
+        $this->data['journal'] = $journal;
+        $this->ciparser->new_parse('template_journal','modules_journal','journal/home_layout',$this->data);
+    }
+
     public function detail_journal($id=null){
     	$sql = "SELECT * FROM tb_journal j JOIN tb_volume v ON j.id_journal = v.id_journal_ref where j.status = 2 and j.id_journal = ".$id;
         $data = $this->db->query($sql,$id)->result_array();

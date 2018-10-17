@@ -55,19 +55,11 @@ class Journal extends MX_Controller
         $this->db->order_by('id_artikel', 'desc');
         $this->db->limit('4');
         $a = $this->db->get()->result_array();
-        // print_r($a);
         foreach ($a as $key => $value) {
             $author = $this->db->get_where('tb_author',array('id_artikel_ref'=>$value['id_artikel']))->result_array();
             $a[$key]['author'] = $author[0]['nama'];
-            /*if ($value['status_user'] == 0) {
-                $p = $this->db->get_where('tb_mahasiswa',array('id_pengguna_ref'=>$value['id_pengguna']))->row_array();*/
                 $a[$key]['publisher'] = $this->data['user']['nama'];
-            /*}else{
-                $p = $this->db->get_where('tb_dosen',array('id_pengguna_ref'=>$value['id_pengguna']))->row_array();
-                $a[$key]['publisher'] = $p['nama'];
-            }*/
         }
-        // print_r($journal);
         $this->data['view'] = 'list';
         $this->data['artikel'] = $a;
         $this->data['journal'] = $journal;
@@ -78,12 +70,28 @@ class Journal extends MX_Controller
         
         $sql = "SELECT * FROM tb_journal Where status = 2";
         $journal = $this->db->query($sql)->result_array();
-        foreach ($journal as $key => $value) {
-            $jumlah = $this->db->get_where('tb_volume',array('id_journal_ref'=>$value['id_journal']))->num_rows();
-            $journal[$key]['jumlah'] = $jumlah;
-        }
+        // foreach ($journal as $key => $value) {
+        //     $jumlah = $this->db->get_where('tb_volume',array('id_journal_ref'=>$value['id_journal']))->num_rows();
+        //     $journal[$key]['jumlah'] = $jumlah;
+        // }
         // print_r($journal);
+        $this->db->select('tb_artikel.*,tb_volume.volume,tb_no_volume.publish,tb_journal.judul as judul_journal');
+        $this->db->from('tb_artikel');
+        $this->db->join('tb_no_volume', 'id_no_volume_ref = id_no_volume');
+        $this->db->join('tb_volume', 'id_volume_ref = id_volume');
+        $this->db->join('tb_journal', 'id_journal_ref = id_journal');
+        // $this->db->join('tb_pengguna', 'tb_journal.id_user_ref = id_pengguna');
+        $this->db->where('tb_journal.status',2);
+        $this->db->order_by('id_artikel', 'desc');
+        $this->db->limit('4');
+        $a = $this->db->get()->result_array();
+        foreach ($a as $key => $value) {
+            $author = $this->db->get_where('tb_author',array('id_artikel_ref'=>$value['id_artikel']))->result_array();
+            $a[$key]['author'] = $author[0]['nama'];
+                $a[$key]['publisher'] = $this->data['user']['nama'];
+        }
         $this->data['view'] = 'list';
+        $this->data['artikel'] = $a;
         $this->data['journal'] = $journal;
         $this->ciparser->new_parse('template_user','modules_user', 'all_journal_layout',$this->data);
     }
@@ -358,7 +366,7 @@ class Journal extends MX_Controller
         $this->ckeditor->config['height'] = '300px'; 
         $this->data['view'] = 'add';
         // $this->data['breadcumb'] = $journal['judul'];
-        $journal = $this->db->get('tb_journal')->result_array();
+        $journal = $this->db->get_where('tb_journal',array('id_user_ref'=>$this->data['user']['id_pengguna']))->result_array();
         // $volume = $this->db->get('tb_volume')->result_array();
         $this->data['journal'] = $journal;
         $this->ciparser->new_parse('template_user','modules_user', 'artikel_layout',$this->data);

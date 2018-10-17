@@ -47,7 +47,10 @@
                       <li role="presentation" class="active"><a href="<?=site_url('journal');?>"> <i class="fa fa-home"></i> Home</a></li>
                       <li class="dropdown"><a data-toggle="dropdown" aria-expanded="false" href="#" class="dropdown-toggle"><span class="fa fa-list-ul"></span> Kategori <span class="fa fa-angle-down"></span></a>
                           <ul class="dropdown-menu" role="menu">
-                              <li><a href="#">Kesehatan</a></li>
+                          <?php foreach ($this->general->kategori() as $key => $value): ?>
+                              <li><a href="<?=site_url('journal/kategori/'.$value['nama']);?>"><?=$value['nama'];?></a></li>
+                          	
+                          <?php endforeach ?>
                              
 
                           </ul>
@@ -93,10 +96,10 @@
 					</div>
 					<div class="col col-md-12 col-sm-12 col-xs-12 right-title text-center">
 						<div class="form-group">
-			                <form method="#" action="#">
+			                <!-- <form method="#" action="#"> -->
 			                    <div class="input-search input-search-left"><input type="text" class="form-control" name="search" id="search" placeholder="Cari"></div>
 			                    <div class="input-search input-search-right"><button type="button" class="btn btn-danger btn-search"><i class="fa fa-search"></i> Search</button></div>
-			                </form>
+			                <!-- </form> -->
 			              </div>
 					</div>
 				</div>
@@ -241,10 +244,18 @@ Development Team of Scientific Journals</li>
     <script type="text/javascript">
     	$(document).ready(function() {
     		$('body').on('click','.btn-search',function(){
-    			console.log('hmm');
+    			search();    			
+    		});
+    		$('body').on('keypress','#search',function(e) {
+			    if(e.which == 13) {
+			        search(); 
+			    }
+			});
+
+    		function search(){
     			var search = $('#search').val();
     			window.location.href = base_url+'journal/search/'+search;
-    		});
+    		}
     	});
     </script>
 </body>

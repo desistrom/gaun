@@ -96,5 +96,14 @@ class General
       return $user;
     }
 
+    public function kategori(){
+      // $data = $this->CI->session->userdata('user');
+      // print_r($data);
+
+      $kat = $this->CI->db->get('tb_kategori_journal')->result_array();
+
+      return $kat;
+    }
+
 
 }

@@ -24,12 +24,21 @@ class Dashboard extends MX_Controller  {
 
     	if ($this->db->get_where('tb_pengguna',array('id_pengguna'=>$data))->row_array()['id_role_ref'] == 0) {
     		$user = $this->db->get_where('tb_mahasiswa',array('id_pengguna_ref'=>$data))->row_array();
-    		# code...
     	}else{
     		$user = $this->db->get_where('tb_dosen',array('id_pengguna_ref'=>$data))->row_array();
     	}
     	$this->data['user'] = $user;
+        $journal = $this->db->get_where('tb_journal',array('id_user_ref'=>$data))->result_array();
+        $this->data['journal'] = count($journal);
+        $this->db->select('tb_artikel.*,tb_volume.volume,tb_no_volume.nomor,tb_journal.judul as judul_journal,tb_journal.status as status_journal');
+        $this->db->from('tb_artikel');
+        $this->db->join('tb_no_volume', 'id_no_volume_ref = id_no_volume');
+        $this->db->join('tb_volume', 'id_volume_ref = id_volume');
+        $this->db->join('tb_journal', 'id_journal_ref = id_journal');
+        $this->db->where('tb_journal.id_user_ref',$this->session->userdata('user'));
+        $artikel = $this->db->get()->result_array();
     	// print_r($user);
+        $this->data['artikel'] = count($artikel);
         $this->ciparser->new_parse('template_user','modules_user', 'dashboard_layout',$this->data);
     }
 

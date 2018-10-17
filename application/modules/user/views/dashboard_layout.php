@@ -18,12 +18,12 @@
                   <!-- small box -->
                   <div class="small-box bg-green">
                     <div class="inner">
-                      <h3>53</h3>
+                      <h3><?=$journal;?></h3>
 
                       <p>Journal</p>
                     </div>
                     <div class="icon">
-                      <i class="glyphicon glyphicon-education"></i>
+                      <i class="fa fa-book"></i>
                     </div>
                     <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                   </div>
@@ -33,31 +33,17 @@
                   <!-- small box -->
                   <div class="small-box bg-yellow">
                     <div class="inner">
-                      <h3>44</h3>
+                      <h3><?=$artikel;?></h3>
 
-                      <p>Video</p>
+                      <p>Artikel</p>
                     </div>
                     <div class="icon">
-                      <i class="fa fa-users"></i>
+                      <i class="fa fa-newspaper-o"></i>
                     </div>
                     <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                   </div>
                 </div>
                 <!-- ./col -->
-                <div class="col-lg-3 col-xs-12">
-                  <!-- small box -->
-                  <div class="small-box bg-red">
-                    <div class="inner">
-                      <h3>65</h3>
-
-                      <p>E-book</p>
-                    </div>
-                    <div class="icon">
-                      <i class="glyphicon glyphicon-education"></i>
-                    </div>
-                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-                  </div>
-                </div>
                 <!-- ./col -->
               </div>
             </div>

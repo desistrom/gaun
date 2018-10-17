@@ -19,7 +19,7 @@
 				<h5>Jumlah Volume : <?=$value['jumlah'];?></h5>
 				<!-- <h5>2016 - 12</h5> -->
 			</div>
-			<a href="detail.html" class="link_detail"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></a>
+			<a href="<?=site_url('journal/detail_journal/'.$value['id_journal']);?>" class="link_detail"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></a>
 		</div>
 	</div>
 <?php endforeach ?>

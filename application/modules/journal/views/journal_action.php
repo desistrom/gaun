@@ -100,7 +100,7 @@
                 <label for="judul journal" class="  text-left">ISSN journal</label>
 
                 <div class="">
-                  <input type="text" class="form-control new-input" id="issn" placeholder="ISSN journal" value="<?php if(!isset($journal)){ $journal['issn']; }?>">
+                  <input type="text" class="form-control new-input" id="issn" placeholder="ISSN journal" value="<?php if(isset($journal)){ $journal['issn']; }?>">
                 </div>
               </div>
               <div class="form-group">

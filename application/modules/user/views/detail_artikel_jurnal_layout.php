@@ -31,7 +31,7 @@
 .btn-download,
 .btn-abstract-download{
   padding: 1em 3em;
-  background:#D10909;
+  background:#EF7314;
   margin-right: 15px;
 }
 .list-detail-jurnal li a{
@@ -49,7 +49,7 @@
     	<div class="row">
     	     <div class="col col-md-12 col-sm-12 col-xs-2">
     	     	<h4 class="text-red title-sub-detail-jurnal"><?=$artikel['journal'];?></h4>
-									<div class=" bg-red line-sub-title-jurnal"></div>
+									<div class=" btn-bg line-sub-title-jurnal"></div>
 									<ul class="list-unstyled list-info-jurnal">
 										<li>ISSN : <?=$artikel['issn'];?></li>
 										<li>Volume <?=$artikel['volume'];?> / Nomor : <?=$artikel['nomor'];?> / Published : <?=$artikel['publish'];?></li>
@@ -100,10 +100,10 @@
 
 									<div class="filter-btn-download">
 										<?php if($artikel['abstract_file'] != ''){?> 
-										<div class="inline-block"><a href="<?=site_url('user/journal/downloads_abs/'.$artikel['id_artikel']);?>" class="btn btn-danger btn-abstract-download">Abstract Download </a></div>
+										<div class="inline-block"><a href="<?=site_url('user/journal/downloads_abs/'.$artikel['id_artikel']);?>" class="btn btn-warning btn-bg btn-abstract-download">Abstract Download </a></div>
 										<?php }?>
 										<?php if($artikel['file'] != ''){?> 
-										<div class="inline-block"><a href="<?=site_url('user/journal/downloads/'.$artikel['id_artikel']);?>" class="btn btn-danger btn-download">Download</a></div>
+										<div class="inline-block"><a href="<?=site_url('user/journal/downloads/'.$artikel['id_artikel']);?>" class="btn btn-warning btn-bg btn-download">Download</a></div>
 										<?php }?>
 									</div>
 

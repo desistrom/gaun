@@ -49,7 +49,7 @@
     <div class="box-content">
     	<div class="row">
     	<?php if($view == 'list'){ ?>
-      <a href="<?=site_url('user/journal/add_artikel');?>" class="btn btn-success" style="margin-left: 15px;"><i class="fa fa-plus"></i> Add Artikel</a>
+      <a href="<?=site_url('user/journal/add_artikel');?>" class="btn btn-warning btn-bg" style="margin-bottom: 15px;"><i class="fa fa-plus"></i> Add Artikel</a>
     		<div class="table-responsive">
     			<table class="table table-striped" id="table">
     				<thead>
@@ -233,7 +233,7 @@
         <!-- text input -->
         <div class="form-group">
           <label>Judul Artikel</label>
-          <input type="text" name="judul" class="form-control" id="judul" placeholder="Enter Judul Event ..." value="<?=$artikel['judul'];?>">
+          <input type="text" name="judul" class="form-control new-input" id="judul" placeholder="Enter Judul Event ..." value="<?=$artikel['judul'];?>">
           <div class="error" id="ntf_judul"></div>
         </div>
         <div class="form-group">
@@ -244,7 +244,7 @@
         </div>
             <div class="form-group">
           <label>Keyword</label>
-          <input type="text" name="keyword" class="form-control" id="keyword" placeholder="Enter keyword Artikel ..." value="<?=$artikel['keyword'];?>">
+          <input type="text" name="keyword" class="form-control new-input" id="keyword" placeholder="Enter keyword Artikel ..." value="<?=$artikel['keyword'];?>">
           <div class="error" id="ntf_keyword"></div>
         </div>
 
@@ -279,7 +279,7 @@
       <div class="panel-body">
         <div class="form-group">
           <label>Journal</label>
-          <select class="form-control" name="journal" id="journal">
+          <select class="form-control new-input" name="journal" id="journal">
             <option value="">-- Pilih Journal --</option>
             <?php foreach ($journal as $key => $value): ?>
               <option <?php if($artikel['id_journal_ref'] = $value['id_journal']){ echo "selected"; } ?> value="<?=$value['id_journal']?>"><?=$value['judul'];?></option>
@@ -289,7 +289,7 @@
         </div>
         <div class="form-group">
           <label>Volume Jurnal</label>
-          <select class="form-control" name="volume" id="volume">
+          <select class="form-control new-input" name="volume" id="volume">
             <option value="">-- Pilih Volume --</option>
             <option selected value="<?=$artikel['id_volume'];?>">Volume. <?=$artikel['volume'];?></option>
             
@@ -299,7 +299,7 @@
 
         <div class="form-group">
           <label>No Volume Jurnal</label>
-          <select class="form-control" name="no_volume" id="no_volume">
+          <select class="form-control new-input" name="no_volume" id="no_volume">
             <option value="">-- Pilih No Volume --</option>
             <option selected value="<?=$artikel['id_no_volume'];?>">No. <?=$artikel['nomor'];?></option>
           </select>
@@ -312,9 +312,9 @@
           <label>File Artikel</label>
           <div class="col col-md-12 form-goup-file">
             <div class="input-file-right">
-              <label class="btn btn-success btn-choose-foto" for="file_name"><i class="fa fa-upload" ></i>Choose File</label>
+              <label class="btn btn-warning btn-choose-foto btn-bg" for="file_name"><i class="fa fa-upload" ></i>Choose File</label>
             </div>
-            <div class="input-file-left"><input type="file" class="form-control file" name="file_name" id="file_name"></div> 
+            <div class="input-file-left"><input type="file" class="form-control file new-input" name="file_name" id="file_name"></div> 
             <div><i>Max file size 100MB <br>Allowed file type : pdf, docx</i></div> 
             <div class="error" id="ntf_file_name"></div> 
             <div class="error" id="ntf_error"></div> 
@@ -324,9 +324,9 @@
           <label>File Abstrak</label>
           <div class="col col-md-12 form-goup-file">
             <div class="input-file-right">
-              <label class="btn btn-success btn-choose-foto" for="file_name_abs"><i class="fa fa-upload" ></i>Choose File</label>
+              <label class="btn btn-warning btn-choose-foto btn-bg" for="file_name_abs"><i class="fa fa-upload" ></i>Choose File</label>
             </div>
-            <div class="input-file-left"><input type="file" class="form-control file" name="file_name_abs" id="file_name_abs"></div> 
+            <div class="input-file-left"><input type="file" class="form-control file new-input" name="file_name_abs" id="file_name_abs"></div> 
             <div><i>Max file size 100MB <br>Allowed file type : pdf, docx</i></div> 
             <div class="error" id="ntf_file_name_abs"></div> 
             <div class="error" id="ntf_abs_error"></div> 
@@ -337,13 +337,13 @@
           <div class="col col-md-12 col-sm-12 col-xs-12" style="padding: 10px;border:solid #A8A8A8 1px; margin-top:15px;">
         <div class="form-group">
           <label>Nama Author</label>
-          <input type="text" name="nama" class="form-control nama_<?=$value['id_author'];?>" id="nama_<?=$value['id_author'];?>" placeholder="Enter Nama Author ..." value="<?=$value['nama'];?>" disabled="true">
+          <input type="text" name="nama" class="form-control new-input nama_<?=$value['id_author'];?>" id="nama_<?=$value['id_author'];?>" placeholder="Enter Nama Author ..." value="<?=$value['nama'];?>" disabled="true">
           <div class="error" id="ntf_nama_<?=$value['id_author'];?>"></div>
         </div>
 
         <div class="form-group" >
           <label>Jabatan Author</label>
-          <input type="text" name="jabatan" class="form-control jabatan_<?=$value['id_author'];?>" id="jabatan_<?=$value['id_author'];?>" placeholder="Enter Jabatan Author ..." value="<?=$value['jabatan'];?>" disabled="true">
+          <input type="text" name="jabatan" class="form-control new-input jabatan_<?=$value['id_author'];?>" id="jabatan_<?=$value['id_author'];?>" placeholder="Enter Jabatan Author ..." value="<?=$value['jabatan'];?>" disabled="true">
           <div class="error" id="ntf_jabatan_<?=$value['id_author'];?>"></div>
         </div>
       </div>
@@ -615,7 +615,7 @@
     });
 
     $('body').on('click','.btn_more',function(){
-      var html = '<div class="col col-md-12 col-sm-12 col-xs-12" style="padding: 10px;border:solid #A8A8A8 1px; margin-top:15px;"><div class="form-group" > <label>Nama Author</label> <input type="text" name="nama" class="form-control nama" id="nama" placeholder="Enter Nama Author ..." value=""> <div class="error" id="ntf_nama"></div></div><div class="form-group" > <label>Jabatan Author</label> <input type="text" name="jabatan" class="form-control jabatan" id="jabatan" placeholder="Enter Jabatan Author ..." value=""> <div class="error" id="ntf_jabatan"></div></div></div>';
+      var html = '<div class="col col-md-12 col-sm-12 col-xs-12" style="padding: 10px;border:solid #A8A8A8 1px; margin-top:15px;"><div class="form-group" > <label>Nama Author</label> <input type="text" name="nama" class="form-control nama new-input" id="nama" placeholder="Enter Nama Author ..." value=""> <div class="error" id="ntf_nama"></div></div><div class="form-group" > <label>Jabatan Author</label> <input type="text" name="jabatan" class="form-control jabatan new-input" id="jabatan" placeholder="Enter Jabatan Author ..." value=""> <div class="error" id="ntf_jabatan"></div></div></div>';
       $('.more').append(html);
     });
 

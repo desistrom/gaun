@@ -1213,13 +1213,13 @@ class Admin extends MX_Controller
         $this->ciparser->new_parse('template_admin_journal','modules_journal', 'create_no_volume_layout');
     }
 
-    // public function add_slug(){
-    //     $data = $this->db->get('tb_journal')->result_array();
-    //     foreach ($data as $key => $value) {
-    //         $data_j['slug'] = $this->slugify($value['judul']);
-    //         $this->db->update('tb_journal',$data_j,array('id_journal'=>$value['id_journal']));
-    //     }
-    // }
+    public function add_slug(){
+         $data = $this->db->get('tb_journal')->result_array();
+    foreach ($data as $key => $value) {
+             $data_j['slug'] = $this->slugify($value['judul']);
+             $this->db->update('tb_journal',$data_j,array('id_journal'=>$value['id_journal']));
+         }
+     }
 
     public static function slugify($text)
     {

@@ -134,6 +134,7 @@ class Journal extends MX_Controller
             if ($this->form_validation->run() == true) {
                 $ret['state'] = 1;
                 $data_news['judul'] = $this->input->post('judul');
+                $data_news['slug'] = $this->slugify($this->input->post('judul'));
                 $data_news['deskripsi'] = $this->input->post('content');
                 $data_news['issn'] = $this->input->post('issn');
                 $data_news['id_kategori_ref'] = $this->input->post('kategori');
@@ -187,6 +188,7 @@ class Journal extends MX_Controller
             if ($this->form_validation->run() == true) {
                 $ret['state'] = 1;
                 $data_news['judul'] = $this->input->post('judul');
+                $data_news['slug'] = $this->slugify($this->input->post('judul'));
                 $data_news['deskripsi'] = $this->input->post('content');
                 $data_news['issn'] = $this->input->post('issn');
                 $data_news['id_kategori_ref'] = $this->input->post('kategori');
@@ -494,7 +496,7 @@ class Journal extends MX_Controller
         $this->ckeditor->config['height'] = '300px'; 
         $this->data['view'] = 'edit';
         // $this->data['breadcumb'] = $journal['judul'];
-        $journal = $this->db->get('tb_journal')->result_array();
+        $journal = $this->db->get_where('tb_journal',array('id_user_ref'=>$this->data['user']['id_pengguna']))->result_array();
         // $volume = $this->db->get('tb_volume')->result_array();
         $this->data['artikel'] = $artikel;
         $this->data['author'] = $author;
@@ -1185,5 +1187,32 @@ class Journal extends MX_Controller
      public function search_journal(){
     
         $this->ciparser->new_parse('template_user','modules_user', 'search_layout');
+    }
+
+    public static function slugify($text)
+    {
+      // replace non letter or digits by -
+      $text = preg_replace('~[^\pL\d]+~u', '-', $text);
+
+      // transliterate
+      $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
+
+      // remove unwanted characters
+      $text = preg_replace('~[^-\w]+~', '', $text);
+
+      // trim
+      $text = trim($text, '-');
+
+      // remove duplicate -
+      $text = preg_replace('~-+~', '-', $text);
+
+      // lowercase
+      $text = strtolower($text);
+
+      if (empty($text)) {
+        return 'n-a';
+      }
+
+      return $text;
     }
 }

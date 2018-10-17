@@ -35,7 +35,7 @@
 				<ul class="list-unstyled">
 						<?php foreach ($last as $key => $value): ?>
 						<li>
-							<a href="<?=site_url('journal/detail_journal/'.$value['id_journal']);?>"><?=$value['judul'];?></a>
+							<a href="<?=site_url('journal/detail_journal/'.$value['slug']);?>"><?=$value['judul'];?></a>
 						</li>
 					<?php endforeach ?>
 					</ul>

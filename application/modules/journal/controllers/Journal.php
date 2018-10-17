@@ -60,9 +60,19 @@ class Journal extends MX_Controller
         $this->ciparser->new_parse('template_journal','modules_journal','journal/home_layout',$this->data);
     }
 
-    public function detail_journal($id=null){
+    public function detail_journal_back($id=null){
     	$sql = "SELECT * FROM tb_journal j JOIN tb_volume v ON j.id_journal = v.id_journal_ref where j.status = 2 and j.id_journal = ".$id;
         $data = $this->db->query($sql,$id)->result_array();
+        $this->data['journal'] = $data;
+        $sql = "SELECT * FROM tb_journal where status = 2 order by id_journal asc limit 4";
+        $last = $this->db->query($sql)->result_array();
+        $this->data['last'] = $last;
+        $this->ciparser->new_parse('template_journal','modules_journal','journal/detail_journal_layout',$this->data);
+    }
+
+    public function detail_journal($slug=null){
+        $sql = "SELECT * FROM tb_journal j JOIN tb_volume v ON j.id_journal = v.id_journal_ref where j.status = 2 and j.slug = '".$slug."'";
+        $data = $this->db->query($sql)->result_array();
         $this->data['journal'] = $data;
         $sql = "SELECT * FROM tb_journal where status = 2 order by id_journal asc limit 4";
         $last = $this->db->query($sql)->result_array();

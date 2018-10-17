@@ -26,6 +26,22 @@
     .login-box-body h1{
       text-align: center;font-size: 36px;margin: 0 0 1em 0;color: #2B679C; font-family: 'Roboto', sans-serif;
     }
+     .btn-bg{
+      background:#7F00FF;
+      border-color: #7F00FF;
+      color: white;
+    }
+    .btn-bg:active, .btn-bg:focus, .btn-bg:hover{
+      background:#640FB9;
+      color: white;
+      border-color: #640FB9;
+    }
+
+    .login-box, .register-box {
+    width: 360px;
+    margin: 0 auto;
+   padding-top: 2em;
+}
   </style>
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -34,7 +50,7 @@
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
 </head>
-<body class="hold-transition login-page">
+<body class="hold-transition login-page" style="background-image: url('<?=base_url();?>assets/images/btn-instansi.png');background-size: cover;">
 <div class="login-box">
   
   <div class="login-logo">
@@ -42,7 +58,7 @@
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
-      <h1 style="">LOGIN Instansi</h1>
+      <h1 style="">Login Instansi</h1>
     <form>
       
       
@@ -60,7 +76,7 @@
         <?php echo $captcha // tampilkan recaptcha ?>
         <div class="error" id="ntf_g-recaptcha-response"></div>
       </div>
-      <div class="row">
+ <!--      <div class="row">
         <div class="col-xs-8">
           <div class="checkbox icheck">
             <label>
@@ -68,14 +84,14 @@
             </label>
           </div>
         </div>
-      </div>
+      </div> -->
       <div class="row">
         <!-- /.col -->
-        <div class="col-xs-8">
-          <a href="<?=site_url('instansi/login/reset_password');?>">Forgot Password</a>
-        </div>
-        <div class="col-xs-4">
-          <button type="button" class="btn btn-primary btn-block btn-flat" id="login">Sign In</button>
+        <!-- <div class="col-xs-8"> -->
+          <!-- <a href="<?=site_url('instansi/login/reset_password');?>">Forgot Password</a> -->
+        <!-- </div> -->
+        <div class="col-xs-4" style="float: right;">
+          <button type="button" class="btn  btn-block btn-flat btn-bg" id="login">Sign In</button>
         </div>
         
       </div>

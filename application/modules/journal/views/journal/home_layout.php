@@ -15,11 +15,11 @@
 				<img class="img-responsive thumbnail-jurnal" src="<?=base_url();?>assets/media/<?=$value['futured_image'];?>">
 			</div>
 			<div class="box-body">
-				<h5><a href="<?=site_url('journal/detail_journal/'.$value['id_journal']);?>"><?=$value['judul'];?></a></h5>
+				<h5><a href="<?=site_url('journal/detail_journal/'.$value['slug']);?>"><?=$value['judul'];?></a></h5>
 				<h5>Jumlah Volume : <?=$value['jumlah'];?></h5>
 				<!-- <h5>2016 - 12</h5> -->
 			</div>
-			<a href="<?=site_url('journal/detail_journal/'.$value['id_journal']);?>" class="link_detail"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></a>
+			<a href="<?=site_url('journal/detail_journal/'.$value['slug']);?>" class="link_detail"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></a>
 		</div>
 	</div>
 <?php endforeach ?>

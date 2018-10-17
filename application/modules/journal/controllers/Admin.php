@@ -108,6 +108,7 @@ class Admin extends MX_Controller
             if ($this->form_validation->run() == true) {
                 $ret['state'] = 1;
                 $data_news['judul'] = $this->input->post('judul');
+                $data_news['slug'] = $this->slugify($this->input->post('judul'));
                 $data_news['deskripsi'] = $this->input->post('content');
                 $data_news['issn'] = $this->input->post('issn');
                 $data_news['id_kategori_ref'] = $this->input->post('kategori');
@@ -174,6 +175,7 @@ class Admin extends MX_Controller
             if ($this->form_validation->run() == true) {
                 $ret['state'] = 1;
                 $data_news['judul'] = $this->input->post('judul');
+                $data_news['slug'] = $this->slugify($this->input->post('judul'));
                 $data_news['deskripsi'] = $this->input->post('content');
                 $data_news['issn'] = $this->input->post('issn');
                 $data_news['id_kategori_ref'] = $this->input->post('kategori');
@@ -354,7 +356,9 @@ class Admin extends MX_Controller
         $this->ckeditor->config['height'] = '300px'; 
         $this->data['view'] = 'add';
         // $this->data['breadcumb'] = $journal['judul'];
-        $journal = $this->db->get('tb_journal')->result_array();
+        $user = $this->session->userdata('data_user_journal');
+        $sql = "SELECT j.* FROM tb_journal j join tb_pengguna p on j.id_user_ref = p.id_pengguna Where id_instansi_ref = ?";
+        $journal = $this->db->query($sql,$user['id_instansi'])->result_array();
         // $volume = $this->db->get('tb_volume')->result_array();
         $this->data['journal'] = $journal;
         $this->ciparser->new_parse('template_admin_journal','modules_journal', 'artikel_layout',$this->data);
@@ -482,7 +486,9 @@ class Admin extends MX_Controller
         $this->ckeditor->config['height'] = '300px'; 
         $this->data['view'] = 'edit';
         // $this->data['breadcumb'] = $journal['judul'];
-        $journal = $this->db->get('tb_journal')->result_array();
+        $user = $this->session->userdata('data_user_journal');
+        $sql = "SELECT j.* FROM tb_journal j join tb_pengguna p on j.id_user_ref = p.id_pengguna Where id_instansi_ref = ?";
+        $journal = $this->db->query($sql,$user['id_instansi'])->result_array();
         // $volume = $this->db->get('tb_volume')->result_array();
         $this->data['artikel'] = $artikel;
         $this->data['author'] = $author;
@@ -1205,5 +1211,40 @@ class Admin extends MX_Controller
     public function create_novolume(){
     
         $this->ciparser->new_parse('template_admin_journal','modules_journal', 'create_no_volume_layout');
+    }
+
+    // public function add_slug(){
+    //     $data = $this->db->get('tb_journal')->result_array();
+    //     foreach ($data as $key => $value) {
+    //         $data_j['slug'] = $this->slugify($value['judul']);
+    //         $this->db->update('tb_journal',$data_j,array('id_journal'=>$value['id_journal']));
+    //     }
+    // }
+
+    public static function slugify($text)
+    {
+      // replace non letter or digits by -
+      $text = preg_replace('~[^\pL\d]+~u', '-', $text);
+
+      // transliterate
+      $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
+
+      // remove unwanted characters
+      $text = preg_replace('~[^-\w]+~', '', $text);
+
+      // trim
+      $text = trim($text, '-');
+
+      // remove duplicate -
+      $text = preg_replace('~-+~', '-', $text);
+
+      // lowercase
+      $text = strtolower($text);
+
+      if (empty($text)) {
+        return 'n-a';
+      }
+
+      return $text;
     }
 }

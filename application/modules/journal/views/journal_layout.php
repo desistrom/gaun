@@ -501,7 +501,7 @@ div.container-fluid.footer-bottom{
               owl.owlCarousel({
                 margin: 10,
                 nav: true,
-                loop: true,
+                loop: false,
                 autoplayTimeout: 1000,
                 autoplayHoverPause: true,
                 responsive: {

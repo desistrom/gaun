@@ -545,7 +545,7 @@ terima kasih";
             header('HTTP/1.0 400 Bad Request');
             echo 'Bad request';
           }
-          echo '<a href="{site_url()}">Back to Balaisehat</a>';
+          echo '<a href="{site_url("web/keanggotaan/pendaftaran_dosen")}">Back to Register Dosen</a>';
           exit;
         }
         // Logged in

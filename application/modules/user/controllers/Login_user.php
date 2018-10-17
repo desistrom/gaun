@@ -189,12 +189,12 @@ class Login_user extends MX_Controller  {
         } catch(Facebook\Exceptions\FacebookResponseException $e) {
               // When Graph returns an error
               echo 'Graph returned an error: ' . $e->getMessage();
-              echo '<a href="{site_url("user/login_user")}">Back to Balaisehat</a>';
+              echo '<a href="{site_url("user/login_user")}">Back to Login Dosen</a>';
           exit;
         } catch(Facebook\Exceptions\FacebookSDKException $e) {
               // When validation fails or other local issues
               echo 'Facebook SDK returned an error: ' . $e->getMessage();
-              echo '<a href="{site_url()}">Back to Balaisehat</a>';
+              echo '<a href="{site_url("user/login_user")}">Back to Login Dosen</a>';
               exit;
         }
         if (!isset($accessToken)) {
@@ -208,7 +208,7 @@ class Login_user extends MX_Controller  {
             header('HTTP/1.0 400 Bad Request');
             echo 'Bad request';
           }
-          echo '<a href="{site_url()}">Back to Balaisehat</a>';
+          echo '<a href="{site_url("user/login_user")}">Back to Login Dosen</a>';
           exit;
         }
         // Logged in
@@ -235,7 +235,7 @@ class Login_user extends MX_Controller  {
             $accessToken = $oAuth2Client->getLongLivedAccessToken($accessToken);
           } catch (Facebook\Exceptions\FacebookSDKException $e) {
             echo "<p>Error getting long-lived access token: " . $e->getMessage() . "</p>\n\n";
-            echo '<a href="{site_url()}">Back to Balaisehat</a>';
+            echo '<a href="{site_url("user/login_user")}">Back to Login Dosen</a>';
             exit;
           }
         }
@@ -249,11 +249,11 @@ class Login_user extends MX_Controller  {
               $response = $fb->get('/me?fields=id,name,email,first_name,last_name,birthday,location,gender', $accessToken);
             } catch(Facebook\Exceptions\FacebookResponseException $e) {
                 echo 'Graph returned an error: ' . $e->getMessage();
-                echo '<a href="{site_url()}">Back to Balaisehat</a>';
+                echo '<a href="{site_url("user/login_user")}">Back to Login Dosen</a>';
                 exit;
             } catch(Facebook\Exceptions\FacebookSDKException $e) {
                 echo 'Facebook SDK returned an error: ' . $e->getMessage();
-                echo '<a href="{site_url()}">Back to Balaisehat</a>';
+                echo '<a href="{site_url("user/login_user")}">Back to Login Dosen</a>';
                 exit;
             }
             $me = $response->getGraphUser();
@@ -379,12 +379,12 @@ terima kasih";
         } catch(Facebook\Exceptions\FacebookResponseException $e) {
               // When Graph returns an error
               echo 'Graph returned an error: ' . $e->getMessage();
-              echo '<a href="{site_url("user/login_user")}">Back to Balaisehat</a>';
+              echo '<a href="{site_url("user/login_user/login_mahasiswa")}">Back to Login Mahasiswa</a>';
           exit;
         } catch(Facebook\Exceptions\FacebookSDKException $e) {
               // When validation fails or other local issues
               echo 'Facebook SDK returned an error: ' . $e->getMessage();
-              echo '<a href="{site_url()}">Back to Balaisehat</a>';
+              echo '<a href="{site_url("user/login_user/login_mahasiswa")}">Back to Login Mahasiswa</a>';
               exit;
         }
         if (!isset($accessToken)) {
@@ -398,7 +398,7 @@ terima kasih";
             header('HTTP/1.0 400 Bad Request');
             echo 'Bad request';
           }
-          echo '<a href="{site_url()}">Back to Balaisehat</a>';
+          echo '<a href="{site_url("user/login_user/login_mahasiswa")}">Back to Login Mahasiswa</a>';
           exit;
         }
         // Logged in
@@ -425,7 +425,7 @@ terima kasih";
             $accessToken = $oAuth2Client->getLongLivedAccessToken($accessToken);
           } catch (Facebook\Exceptions\FacebookSDKException $e) {
             echo "<p>Error getting long-lived access token: " . $e->getMessage() . "</p>\n\n";
-            echo '<a href="{site_url()}">Back to Balaisehat</a>';
+            echo '<a href="{site_url("user/login_user/login_mahasiswa")}">Back to Login Mahasiswa</a>';
             exit;
           }
         }
@@ -439,11 +439,11 @@ terima kasih";
               $response = $fb->get('/me?fields=id,name,email,first_name,last_name,birthday,location,gender', $accessToken);
             } catch(Facebook\Exceptions\FacebookResponseException $e) {
                 echo 'Graph returned an error: ' . $e->getMessage();
-                echo '<a href="{site_url()}">Back to Balaisehat</a>';
+                echo '<a href="{site_url("user/login_user/login_mahasiswa")}">Back to Login Mahasiswa</a>';
                 exit;
             } catch(Facebook\Exceptions\FacebookSDKException $e) {
                 echo 'Facebook SDK returned an error: ' . $e->getMessage();
-                echo '<a href="{site_url()}">Back to Balaisehat</a>';
+                echo '<a href="{site_url("user/login_user/login_mahasiswa")}">Back to Login Mahasiswa</a>';
                 exit;
             }
             $me = $response->getGraphUser();

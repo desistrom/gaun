@@ -33,7 +33,7 @@ class Login_user extends MX_Controller  {
                   'app_secret' => FACEBOOK_APP_SECRET,
                   'default_graph_version' => 'v2.2',
             ]);
-            $helper = $fb->getRedirectLoginHelper();
+            $helper = $fb->getRedirectLoginHelper(); if (isset($_GET['state'])) { $helper->getPersistentDataHandler()->set('state', $_GET['state']); }
             $permissions = ['email'];
             $loginUrl = $helper->getLoginUrl(site_url('user/login_user/facebook'), $permissions);
             $loginUrl = htmlspecialchars($loginUrl);
@@ -122,7 +122,7 @@ class Login_user extends MX_Controller  {
                   'app_secret' => FACEBOOK_APP_SECRET,
                   'default_graph_version' => 'v2.2',
             ]);
-            $helper = $fb->getRedirectLoginHelper();
+            $helper = $fb->getRedirectLoginHelper(); if (isset($_GET['state'])) { $helper->getPersistentDataHandler()->set('state', $_GET['state']); }
             $permissions = ['email'];
             $loginUrl = $helper->getLoginUrl(site_url('user/login_user/facebook_mahasiswa'), $permissions);
             $loginUrl = htmlspecialchars($loginUrl);
@@ -200,7 +200,7 @@ class Login_user extends MX_Controller  {
               'app_secret' => FACEBOOK_APP_SECRET,
               'default_graph_version' => 'v2.2',
         ]);
-        $helper = $fb->getRedirectLoginHelper();
+        $helper = $fb->getRedirectLoginHelper(); if (isset($_GET['state'])) { $helper->getPersistentDataHandler()->set('state', $_GET['state']); }
 
         try {
           $accessToken = $helper->getAccessToken();
@@ -405,7 +405,7 @@ terima kasih";
               'app_secret' => FACEBOOK_APP_SECRET,
               'default_graph_version' => 'v2.2',
         ]);
-        $helper = $fb->getRedirectLoginHelper();
+        $helper = $fb->getRedirectLoginHelper(); if (isset($_GET['state'])) { $helper->getPersistentDataHandler()->set('state', $_GET['state']); }
 
         try {
           $accessToken = $helper->getAccessToken();

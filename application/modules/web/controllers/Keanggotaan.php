@@ -543,7 +543,7 @@ terima kasih";
               redirect('web/keanggotaan/error'.'/'.$url.'/'.$this->data['error']);
               exit;
         }
-        if (isset($accessToken)) {
+        if (!isset($accessToken)) {
           if ($helper->getError()) {
             // header('HTTP/1.0 401 Unauthorized');
             $this->data['error'] = "Error: " . $helper->getError() . "\n";

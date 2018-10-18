@@ -289,6 +289,11 @@ class Login_user extends MX_Controller  {
                 exit;
             }
             $me = $response->getGraphUser();
+            if ($me->getProperty('email') == null || $me->getProperty('email') == '') {
+                echo "Tidak ada email yang tertaut dengan Facebook anda, silahkan menggunakan akun lain";
+                echo "Back to idren";
+                exit();
+            }
         // $this->load->library('facebook','user/login_user/facebook');
         // $userData = array();
         // $ret['status'] = 0;
@@ -307,8 +312,8 @@ class Login_user extends MX_Controller  {
             $userData['gender'] = $me->getProperty('gender');
             $userID = $this->user->checkUser($userData);
             // Check user data insert or update status
-            $this->load->helper('email_send_helper');
             if ($userID == 'insert') {
+                $this->load->helper('email_send_helper');
                 $data['email_from'] = 'support@IDREN';
                 $data['name_from'] = 'IDREN support';
                 $data['email_to'] = $userData['email'];
@@ -491,6 +496,12 @@ terima kasih";
                 exit;
             }
             $me = $response->getGraphUser();
+            if ($me->getProperty('email') == null || $me->getProperty('email') == '') {
+                echo "Tidak ada email yang tertaut dengan Facebook anda, silahkan menggunakan akun lain";
+                echo "Back to idren";
+                exit();
+            }
+
         // $this->load->library('facebook','user/login_user/facebook');
         // $userData = array();
         // $ret['status'] = 0;
@@ -509,8 +520,8 @@ terima kasih";
             $userData['gender'] = $me->getProperty('gender');
             $userID = $this->user->checkUser($userData);
             // Check user data insert or update status
-            $this->load->helper('email_send_helper');
             if ($userID == 'insert') {
+                $this->load->helper('email_send_helper');
                 $data['email_from'] = 'support@IDREN';
                 $data['name_from'] = 'IDREN support';
                 $data['email_to'] = $userData['email'];

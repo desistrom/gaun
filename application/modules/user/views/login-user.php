@@ -205,21 +205,21 @@
         </div>
     </div>
 </div>
-    <?php if($this->session->flashdata("notif") != ''){ ?>
+    <?php if($this->session->userdata("notif") != ''){ ?>
     <div id="regSukses" class="modal fade modal-register" role="dialog" >
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h2 class="modal-title text-center" style="color:#CF090A; "><?=$this->session->flashdata("header");?></h2>
+            <h2 class="modal-title text-center" style="color:#CF090A; "><?=$this->session->userdata("header");?></h2>
           </div>
           <div class="modal-body">
-            <p class="text-center"><?=$this->session->flashdata("notif");?></p>
+            <p class="text-center"><?=$this->session->userdata("notif");?></p>
           </div>
         </div>
       </div>
     </div>
-    <?php } ?>
+    <?php } $this->session->unset_userdata('notif'); $this->session->unset_userdata('header'); ?>
     <script>(function(d, s, id) {
       var js, fjs = d.getElementsByTagName(s)[0];
       if (d.getElementById(id)) return;

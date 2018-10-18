@@ -316,23 +316,23 @@ class Login_user extends MX_Controller  {
                 $data['content'] = 'Halo '.$userData['first_name']." ".$userData['last_name']."<br> request akun anda sedang diproses, silakan ditunggu.<br>admin kami akan mengirimkan email notifikasi aktivasi akun anda dalam 1 x 24 jam dari waktu pendaftaran.<br>terima kasih";
                 if (email_send($data) == true) {
                     $user_data = 'success';
-                    $this->session->set_flashdata("header","Registrasi Berhasil");
-                    $this->session->set_flashdata("notif","Registrasi Anda sedang kami Proses, tunggu konfirmasi selanjutnya dari Admin");
+                    $this->session->set_userdata("header","Registrasi Berhasil");
+                    $this->session->set_userdata("notif","Registrasi Anda sedang kami Proses, tunggu konfirmasi selanjutnya dari Admin");
                     redirect(site_url('user/login_user'));
                 }
             }else{
                 if ($userID == 'no') {
-	                $this->session->set_flashdata("header","Login Gagal");
-	                $this->session->set_flashdata("notif","Akun Anda belum aktif, silahkan menunggu konformasi dari admin");
+	                $this->session->set_userdata("header","Login Gagal");
+	                $this->session->set_userdata("notif","Akun Anda belum aktif, silahkan menunggu konformasi dari admin");
 	                redirect(site_url('user/login_user'));
 
                 }elseif ($userID == 'salah') {
-                    $this->session->set_flashdata("header","Login Gagal");
-                    $this->session->set_flashdata("notif","Akun Anda tidak memiliki akses, silahkan menggunakan akun lain");
+                    $this->session->set_userdata("header","Login Gagal");
+                    $this->session->set_userdata("notif","Akun Anda tidak memiliki akses, silahkan menggunakan akun lain");
                     redirect(site_url('user/login_user'));
                 }elseif ($userID == 'email') {
-                    $this->session->set_flashdata("header","Login Gagal");
-                    $this->session->set_flashdata("notif","Tidak ada email yang tertaut dengan Facebook anda, silahkan menggunakan akun lain");
+                    $this->session->set_userdata("header","Login Gagal");
+                    $this->session->set_userdata("notif","Tidak ada email yang tertaut dengan Facebook anda, silahkan menggunakan akun lain");
                     redirect(site_url('user/login_user'));
                 }else{
 	                $this->session->set_userdata('user_login',true);
@@ -520,23 +520,23 @@ admin kami akan mengirimkan email notifikasi aktivasi akun anda dalam 1 x 24 jam
 terima kasih";
                 if (email_send($data) == true) {
                     $user_data = 'success';
-                    $this->session->set_flashdata("header","Registrasi Berhasil");
-                    $this->session->set_flashdata("notif","Registrasi Anda sedang kami Proses, tunggu konfirmasi selanjutnya dari Admin");
+                    $this->session->set_userdata("header","Registrasi Berhasil");
+                    $this->session->set_userdata("notif","Registrasi Anda sedang kami Proses, tunggu konfirmasi selanjutnya dari Admin");
                     redirect(site_url('user/login_user/login_mahasiswa'));
                 }
             }else{
                 if ($userID == 'no') {
-                    $this->session->set_flashdata("header","Login Gagal");
-                    $this->session->set_flashdata("notif","Akun Anda pernah belum aktif, silahkan menunggu konformasi dari admin");
+                    $this->session->set_userdata("header","Login Gagal");
+                    $this->session->set_userdata("notif","Akun Anda pernah belum aktif, silahkan menunggu konformasi dari admin");
                     redirect(site_url('user/login_user/login_mahasiswa'));
 
                 }elseif ($userID == 'salah') {
-                    $this->session->set_flashdata("header","Login Gagal");
-                    $this->session->set_flashdata("notif","Akun Anda tidak memiliki akses, silahkan menggunakan akun lain");
+                    $this->session->set_userdata("header","Login Gagal");
+                    $this->session->set_userdata("notif","Akun Anda tidak memiliki akses, silahkan menggunakan akun lain");
                     redirect(site_url('user/login_user/login_mahasiswa'));
                 }elseif ($userID == 'email') {
-                    $this->session->set_flashdata("header","Login Gagal");
-                    $this->session->set_flashdata("notif","Tidak ada email yang tertaut dengan Facebook anda, silahkan menggunakan akun lain");
+                    $this->session->set_userdata("header","Login Gagal");
+                    $this->session->set_userdata("notif","Tidak ada email yang tertaut dengan Facebook anda, silahkan menggunakan akun lain");
                     redirect(site_url('user/login_user'));
                 }else{
                     $this->session->set_userdata('user_login',true);

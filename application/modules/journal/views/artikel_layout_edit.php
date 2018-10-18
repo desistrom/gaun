@@ -1,3 +1,15 @@
+<style type="text/css">
+  .btn-create-new{
+    float: right;
+    border-radius: 4px;
+    padding: 3px 10px;
+
+  }
+  .form-group{
+    height: auto;
+    overflow: hidden;
+  }
+</style>
 <form role="form">
   <div class="col col-md-8 col-sm-8 col-xs-12" style="padding-top: 1em;">
     <div class="panel">
@@ -68,21 +80,23 @@
         </div>
         <div class="form-group">
           <label>Volume Jurnal</label>
-          <select class="form-control" name="volume" id="volume">
+          <select class="form-control" name="volume" id="volume" style="margin-bottom: 10px;">
             <option value="">-- Pilih Volume --</option>
             <option selected value="<?=$artikel['id_volume'];?>">Volume. <?=$artikel['volume'];?></option>
             
           </select>
           <div class="error" id="ntf_volume"></div>
+          <a href="<?=site_url('journal/admin/volume');?>" class="btn-bg btn-success btn-create-new"><i>Create New Volume</i></a>
         </div>
 
         <div class="form-group">
           <label>No Volume Jurnal</label>
-          <select class="form-control" name="no_volume" id="no_volume">
+          <select class="form-control" name="no_volume" id="no_volume" style="margin-bottom: 10px;">
             <option value="">-- Pilih No Volume --</option>
             <option selected value="<?=$artikel['id_no_volume'];?>">No. <?=$artikel['nomor'];?></option>
           </select>
           <div class="error" id="ntf_no_volume"></div>
+          <a href="<?=site_url('journal/admin/novolume');?>" class="btn-bg btn-success btn-create-new"><i>Create New No Volume</i></a>
         </div>
 
     
@@ -140,7 +154,7 @@
         </div> -->
         <div class="form-group">
           <table style="padding-top: 15px;">
-            <tr style="background-color: #EF7314;padding: 10px;">
+            <tr style="background-color: #2BA417;padding: 10px;">
               <td style="padding-top:15px;padding-left: 10px;">
                 <input type="checkbox" name="agree" id="agree" value="1" style="float: left;margin-top: -1.5em; margin-right: 5px;">
               </td>

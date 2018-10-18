@@ -321,7 +321,7 @@
       <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
         <span class="sr-only">Toggle navigation</span>
       </a>
-      <div class="sub-search">
+    <!--   <div class="sub-search">
          <form action="#" method="get" class="sidebar-form form-search">
         <div class="input-group">
               <span class="input-group-btn">
@@ -331,7 +331,7 @@
           <input type="text" name="q" class="form-control" placeholder="Search...">
         </div>
       </form>
-      </div>
+      </div> -->
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           <!-- Messages: style can be found in dropdown.less-->
@@ -442,9 +442,22 @@
       <!-- Sidebar user panel -->
       <ul class="sidebar-menu">
         <!-- <li class="header">MAIN NAVIGATION</li> -->
+        <li class=" treeview" style="margin-top: 5px;">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>Create Volume & No Volume</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class=""><a href="<?=site_url('journal/admin/volume');?>"><i class="fa fa-circle-o"></i> Volume </a></li>
+
+            <li class=""><a href="<?=site_url('journal/admin/novolume');?>"><i class="fa fa-circle-o"></i>No Volume</a></li>
+          </ul>
+        </li>
        <li class=" treeview" style="margin-top: 5px;">
           <a href="#">
-            <i class="fa fa-home"></i> <span>My Journal</span>
+            <i class="fa fa-file-o"></i> <span>My Journal</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -452,9 +465,6 @@
           <ul class="treeview-menu">
             <li class="active"><a href="<?=site_url('journal/admin/dashboard');?>"><i class="fa fa-circle-o"></i> Create & Edit Journal</a></li>
 
-            <li class=""><a href="<?=site_url('journal/admin/volume');?>"><i class="fa fa-circle-o"></i> Volume </a></li>
-
-            <li class=""><a href="<?=site_url('journal/admin/novolume');?>"><i class="fa fa-circle-o"></i>No Volume</a></li>
           </ul>
         </li>
          <!-- <li class=" treeview <?php if(current_url() == site_url('journal/admin/dashboard')){ ?> active <?php } ?>">

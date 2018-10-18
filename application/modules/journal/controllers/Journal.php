@@ -174,8 +174,15 @@ class Journal extends MX_Controller
         redirect(site_url('assets/file/'.$art['abstract_file']));
     }
 
-    public function other(){
-        $this->ciparser->new_parse('template_journal','modules_journal','journal/other_layout',$this->data);
+    public function logins($id=null){
+        $this->session->set_flashdata('lgn','1');
+        // print_r($id);
+        // return false;
+        if ($id == 1) {
+            redirect(site_url('user/login_user'));
+        }else{
+            redirect(site_url('user/login_user/login_mahasiswa'));
+        }
     }
 
 

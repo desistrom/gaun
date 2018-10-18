@@ -31,7 +31,7 @@
                 <li><?php echo $error;?>.</li>
             </ul>
             <div>
-                <a href="<?php echo site_url('web/keanggotaan/'.$url);?>" class="btn btn-danger btn-back">Back</a>
+                <a href="<?php echo site_url('user/login_user/'.$url);?>" class="btn btn-danger btn-back">Back</a>
             </div>
         </div>
       </div>

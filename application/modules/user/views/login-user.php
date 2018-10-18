@@ -36,10 +36,10 @@
             float: left;
         }
         .fb .btn{
-          padding: 10px 40px;
+          padding: 10px 20px;
         }
         .google .btn{
-          padding: 10px 40px;
+          padding: 10px 20px;
         }
         .other-registery{
           text-align: center;
@@ -115,7 +115,9 @@
         .detail_news{
           margin-top: 9em;
         }
-        .
+        .nav li a.active.btn-gabung:hover{
+          border:none;
+        }
     </style>   
     <section class="detail_news" style="background-color: #F2F2F2;">
         
@@ -166,7 +168,7 @@
                                         <div class="error" id="ntf_g-recaptcha-response" style="position: relative;"></div>
                                       </div>
                                       </form>
-                                      <div><a style="color: #0a7fff; font-style: italic;" href="<?=site_url('user/login_user/reset_password')?>"><u>Forgot Password</u></a></div>
+                                      <div><a style="color: white; font-style: italic;" href="<?=site_url('user/login_user/reset_password')?>"><u>Forgot Password</u></a></div>
                                       <div class="text-right" style="padding-top: 10px;">
                                       	<a href="<?=$url;?>" class="btn btn-post btn-register btn-primary " type="button" style="float: left;">Register</a>
                                       	<a class="btn btn-post" type="button" id="btn_register">Login</a>

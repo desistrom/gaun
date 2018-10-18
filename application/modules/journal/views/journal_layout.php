@@ -493,7 +493,7 @@ div.container-fluid.footer-bottom{
           </div>
         </div>
       </div>
-      <script src="<?=base_url();?>assets/admin-jur/bootstrap/js/bootstrap.min.js"></script>
+      <!-- <script src="<?=base_url();?>assets/admin-jur/bootstrap/js/bootstrap.min.js"></script> -->
       <script src="<?=base_url();?>assets/admin-jur/plugins/owlcarousel/owl.carousel.js"></script>
       <script>
             $(document).ready(function() {

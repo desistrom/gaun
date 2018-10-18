@@ -56,6 +56,16 @@
     height: auto;
     overflow: hidden;
   }
+   .btn-create-new{
+    float: right;
+    border-radius: 4px;
+    padding: 3px 10px;
+
+  }
+  .form-group{
+    height: auto;
+    overflow: hidden;
+  }
 </style>
 <div class="col col-md-8">
           <!-- Horizontal Form -->
@@ -121,20 +131,22 @@
               <div class="form-group">
                 <label for="volume" class="  text-left">volume</label>
                 <div class="">
-                  <select class="form-control new-input" id="volume" placeholder="volume">
+                  <select class="form-control new-input" id="volume" placeholder="volume" style="margin-bottom: 10px;">
                     <option value="">--Pilih Journal--</option>
                   </select>
                   <div class="error" id="ntf_volume"></div>
+                   <a href="<?=site_url('journal/admin/volume');?>" class="btn-bg btn-success btn-create-new"><i>Create New Volume</i></a>
                 </div>   
               </div>
               <div class="form-group">
                 <label for="no_volume" class="  text-left">No Volume</label>
 
                 <div class="">
-                  <select class="form-control new-input" id="no_volume" placeholder="No Volume">
+                  <select class="form-control new-input" id="no_volume" placeholder="No Volume" style="margin-bottom: 10px;">
                     <option value="">--Pilih Journal--</option>
                   </select>
                   <div class="error" id="ntf_no_volume"></div>
+                  <a href="<?=site_url('journal/admin/novolume');?>" class="btn-bg btn-success btn-create-new"><i>Create New No Volume</i></a>
                 </div>   
               </div>
                 <div class="form-group form-file">
@@ -181,7 +193,18 @@
                <div class="form-group form-file" style="margin-top: 15px;">
                     <button type="submit" class="btn btn_more btn-success btn-green pull-right"><i class="fa fa-plus"></i> Add more</button>
               </div>
-              <div class="form-group">
+              <div class="form-group" style="padding-top: 15px;" >
+          <table>
+            <tr style="background-color: #269913;padding: 10px;">
+              <td style="padding-top:15px;padding-left: 10px;"><input type="checkbox" name="agree" id="agree" value="1" style="float: left;margin-top: -1.5em; margin-right: 5px;"></td>
+              <td><p class="form-control-static" style="color: white;padding: 0;">Saya Telah membaca dan menyetujui semua persayratan dan peraturan yang di ajukan</p></td>
+            </tr>
+          </table>
+          
+          
+          <div class="error" id="ntf_agree"></div>
+        </div>
+             <!--  <div class="form-group">
                 <table style="padding-top: 15px;">
                   <tr>
                     <td>
@@ -195,7 +218,7 @@
                 
                 
                 <div class="error" id="ntf_agree"></div>
-              </div>
+              </div> -->
             </div>
               <div class="box-footer">
                 <button type="button" class="btn btn-success btn-green pull-right " id="submit_artikel">Save</button>

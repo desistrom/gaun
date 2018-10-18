@@ -25,6 +25,15 @@
 	    margin-top: 0;
 
 	}
+	.nav li a.btn-gabung{
+    background-color: #D10909;
+   
+
+    color: white;
+	}
+	.nav li a.btn-gabung:hover{
+		 box-shadow: 3px 3px 1px 0 #bdbdbd;
+	}
 </style>
 <script type="text/javascript">
 	var base_url = '<?=base_url();?>';
@@ -33,7 +42,7 @@
 
 <body>
 	<div class="col col-md-12 col-sm-12 col-xs-12 none-padding filter-wraper">
-		<div class="wraper col col-md-12 col-sm-12 col-xs-12">
+		<div class="wraper_journal col col-md-12 col-sm-12 col-xs-12">
 		<header class="col col-md-12 col-sm-12 col-xs-12 none-padding ">
 		
 		 <nav class="navbar  " id="main-navigation">
@@ -55,6 +64,13 @@
 
                           </ul>
                         </li>
+                        <li class="dropdown  sub-btn-gabung"><a data-toggle="dropdown" aria-expanded="false" href="#" class="dropdown-toggle active btn-gabung">Login <span class="fa fa-angle-down"></span></a>
+                          <ul class="dropdown-menu" role="menu">
+                              <li><a href="#" class="journal_log" id="1">Dosen</a></li>
+                              <li><a href="#" class="journal_log" id="2">Mahasiswa</a></li>
+
+                          </ul>
+                        </li>
                      <!-- <li class="dropdown open"><a data-toggle="dropdown" aria-expanded="true" href="#" class="dropdown-toggle"><span class="fa fa-list-ul"></span> Kategori </a>
 		                 <ul class="dropdown-menu">
 		                 	<li></li>
@@ -72,6 +88,7 @@
           </div>
   		</nav>
 		</header>
+		<?php if(!isset($captcha)){?>
 			<section class="catalog col-md-12 col-sm-12 col-xs-12 ">
 				<div class="container-fluid">
 					<div class="row">
@@ -106,7 +123,7 @@
 				
 			</div>
 		</section>
-	
+	<?php } ?>
 		<section class="content-page col-md-12 col-sm-12 col-xs-12 none-padding">
 			<div class="container-fluid">
 				
@@ -189,40 +206,30 @@
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col col-md-3 col-sm-6 col-xs-12 sub-footer">
-						<h4>New Artikel</h4>
-						<div class="line-head"></div>
-						<ul>
-							<li>Pengembangan Kebijakan Public Service Partnership Melalui CSR di Kabupaten Jombang
-
-Vol. 2 / No. 2 / Published : 2010-02 / Jurnal Jejaring Administrasi Publik</li>
-						</ul>
+						<h4 class="title-footer">Didukung oleh</h4>
+                    <ul class="list-inline">
+                        <li><img src="<?=base_url();?>assets/images/logo/logo-ristek.png" class="logo-sponsor logo2" alt="logo sponsor"></li>
+                        <li><img src="<?=base_url();?>assets/images/logo/logo-telkom.png" class="logo-sponsor" alt="logo sponsor"></li>
+                    </ul>
 					</div>
-					<div class="col col-md-3 col-sm-6 col-xs-12 sub-footer">
-						<h4>Information</h4>
-						<div class="line-head"></div>
-						<ul>
-							<li>Vision & Mission, Goals
-Development Team of Scientific Journals</li>
-						</ul>
-					</div>
-					<div class="col col-md-3 col-sm-6 col-xs-12 sub-footer">
-						<h4>Other Link</h4>
-						<div class="line-head"></div>
-						<ul>
-							<li>Link 1</li>
-							<li>Link 2</li>
-							<li>Link 3</li>
-							<li>Link 4</li>
-						</ul>
+					<div class="col col-md-6 col-sm-6 col-xs-12 sub-footer text-center">
+						<h4>Kantor Pusat</h4>
+						<div style="height: auto;overflow: hidden;"><div class="line-head"></div></div>
+						<div class="col col-md-6 col-sm-6 col-xs-12">
+							Kemenristekdikti Gedung D Lt 7, Jl. Jenderal Sudirman, Pintu I Senayan, Jakarta  Telp: 021-57946073
+						</div>
+						<div class="col col-md-6 col-sm-6 col-xs-12">
+							Menara Multimedia Telkom 13th Jl. Kebon Sirih 10-12  Jakarta Telp. 021-3866006 ext. 1310
+						</div>
 					</div>
 					<div class="col col-md-3 col-sm-6 col-xs-12 sub-footer">
 						<h4>Statistic</h4>
 						<div class="line-head"></div>
-						<ul>
-							<li>Visitor : 23000</li>
-							<li>Visitor today : 1200</li>
-						
-						</ul>
+						<!-- <div class="col col-12 col-sm-12 col-xs-12"> -->
+							<!-- Histats.com  START (html only)-->
+								<!-- Histats.com  START (html only)-->
+  				 <!-- Histats.com  (div with counter) --><div id="histats_counter"></div>
+						<!-- </div> -->
 					</div>
 				</div>
 
@@ -256,8 +263,25 @@ Development Team of Scientific Journals</li>
     			var search = $('#search').val();
     			window.location.href = base_url+'journal/search/'+search;
     		}
+
+    		$('body').on('click','.journal_log', function(){
+    			var id = $(this).attr('id');
+    			window.location.href = base_url+'journal/logins/'+id;
+    		});
     	});
     </script>
+    <!-- Histats.com  START  (aync)-->
+<script type="text/javascript">var _Hasync= _Hasync|| [];
+_Hasync.push(['Histats.start', '1,4162846,4,306,118,60,00011001']);
+_Hasync.push(['Histats.fasi', '1']);
+_Hasync.push(['Histats.track_hits', '']);
+(function() {
+var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
+hs.src = ('//s10.histats.com/js15_as.js');
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
+})();</script>
+<noscript><a href="/" target="_blank"><img  src="//sstatic1.histats.com/0.gif?4162846&101" alt="free geoip" border="0"></a></noscript>
+<!-- Histats.com  END  -->
 </body>
 
 </html>

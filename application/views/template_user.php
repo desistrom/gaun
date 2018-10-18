@@ -331,7 +331,7 @@
       <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
         <span class="sr-only">Toggle navigation</span>
       </a>
-      <div class="sub-search">
+      <!-- <div class="sub-search">
          <form action="#" method="get" class="sidebar-form form-search">
         <div class="input-group">
               <span class="input-group-btn">
@@ -341,7 +341,7 @@
           <input type="text" name="q" class="form-control" placeholder="Search...">
         </div>
       </form>
-      </div>
+      </div> -->
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           <!-- Messages: style can be found in dropdown.less-->
@@ -415,7 +415,7 @@
               <li class="user-footer" >
            
                 <div class="pull-right" style="width: 100%;">
-                  <a href="<?=site_url('journal/login/logout');?>" class="btn btn-warning btn-flat btn-bg" style="width: 100%;">Sign out</a>
+                  <a href="<?=site_url('user/login_user/logout');?>" class="btn btn-warning btn-flat btn-bg" style="width: 100%;">Sign out</a>
                 </div>
               </li>
             </ul>
@@ -460,6 +460,28 @@
             <li class=""><a href="<?=site_url('user/journal/list_nomor');?>"><i class="fa fa-circle-o"></i>No Volume</a></li>
           </ul>
         </li>
+        <li class=" treeview" style="margin-top: 5px;">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>Volume</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class=""><a href="<?=site_url('user/journal/volume');?>"><i class="fa fa-circle-o"></i>Create & Edit Volume </a></li>
+          </ul>
+        </li>
+        <li class=" treeview" style="margin-top: 5px;">
+          <a href="#">
+            <i class="fa fa-list-ol"></i> <span>No Volume</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class=""><a href="<?=site_url('user/journal/list_nomor');?>"><i class="fa fa-circle-o"></i>Create & Edit No Volume</a></li>
+          </ul>
+        </li>
          <!-- <li class=" treeview <?php if(current_url() == site_url('journal/admin/dashboard')){ ?> active <?php } ?>">
           <a href="<?=site_url('journal/admin/dashboard');?>">
             <i class="fa fa-dashboard"></i> <span>My Journal</span>
@@ -496,7 +518,7 @@
           </ul>
         </li>
         <li>
-          <a href="<?=site_url('user/journal/search_journal');?>">
+          <a href="<?=site_url('user/journal/search');?>">
             <i class="fa fa-search"></i> <span>search Journal</span>
           </a>
         </li>

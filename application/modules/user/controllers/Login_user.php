@@ -102,7 +102,12 @@ class Login_user extends MX_Controller  {
         $this->data['breadcumb'] = 'Dosen';
         $this->data['loginURL'] = $this->google->loginURL();
         // $this->load->view('login-user',$this->data);
-        $this->ciparser->new_parse('template_frontend','modules_user', 'login-user',$this->data);
+        if ($this->session->flashdata('lgn') != '') {
+            $this->session->set_flashdata('lgn','1');
+            $this->ciparser->new_parse('template_journal','modules_user', 'login-user',$this->data);
+        }else{
+            $this->ciparser->new_parse('template_frontend','modules_user', 'login-user',$this->data);            
+        }
     }
 
     public function login_mahasiswa() {
@@ -172,11 +177,20 @@ class Login_user extends MX_Controller  {
         $this->data['breadcumb'] = 'Mahasiswa';
         $this->data['loginURL'] = $this->google->loginURL();
         // $this->load->view('login-user',$this->data);
-        $this->ciparser->new_parse('template_frontend','modules_user', 'login-user',$this->data);
+        if ($this->session->flashdata('lgn') != '') {
+            $this->session->set_flashdata('lgn','1');
+            $this->ciparser->new_parse('template_journal','modules_user', 'login-user',$this->data);
+        }else{
+            $this->ciparser->new_parse('template_frontend','modules_user', 'login-user',$this->data);            
+        }
     }
 
     public function facebook(){
-
+        if (!isset($_SESSION)) {
+            if(!session_id()) {
+                session_start();
+            }
+        }
         $fb = new Facebook\Facebook([
               'app_id' => FACEBOOK_APP_ID, // Replace {app-id} with your app id
               'app_secret' => FACEBOOK_APP_SECRET,
@@ -188,27 +202,38 @@ class Login_user extends MX_Controller  {
           $accessToken = $helper->getAccessToken();
         } catch(Facebook\Exceptions\FacebookResponseException $e) {
               // When Graph returns an error
-              echo 'Graph returned an error: ' . $e->getMessage();
-              echo '<a href="{site_url("user/login_user")}">Back to Login Dosen</a>';
+              $this->data['error'] = $e->getMessage();
+              $url = 'index';
+              redirect('user/login_user/error'.'/'.$url.'/'.$this->data['error']);
           exit;
         } catch(Facebook\Exceptions\FacebookSDKException $e) {
               // When validation fails or other local issues
-              echo 'Facebook SDK returned an error: ' . $e->getMessage();
-              echo '<a href="{site_url("user/login_user")}">Back to Login Dosen</a>';
+              $this->data['error'] = $e->getMessage();
+              $url = 'index';
+              redirect('user/login_user/error'.'/'.$url.'/'.$this->data['error']);
               exit;
         }
         if (!isset($accessToken)) {
           if ($helper->getError()) {
-            header('HTTP/1.0 401 Unauthorized');
-            echo "Error: " . $helper->getError() . "\n";
-            echo "Error Code: " . $helper->getErrorCode() . "\n";
-            echo "Error Reason: " . $helper->getErrorReason() . "\n";
-            echo "Error Description: " . $helper->getErrorDescription() . "\n";
+            // header('HTTP/1.0 401 Unauthorized');
+            $this->data['error'] = "Error: " . $helper->getError() . "\n";
+            $this->data['error'] .= "Error Code: " . $helper->getErrorCode() . "\n";
+            $this->data['error'] .= "Error Reason: " . $helper->getErrorReason() . "\n";
+            $this->data['error'] .= "Error Description: " . $helper->getErrorDescription() . "\n";
           } else {
-            header('HTTP/1.0 400 Bad Request');
-            echo 'Bad request';
+            // header('HTTP/1.0 400 Bad Request');
+            $this->data['error'] = 'Bad request';
           }
-          echo '<a href="{site_url("user/login_user")}">Back to Login Dosen</a>';
+          // $this->data['error'] = 'Facebook SDK returned an error: ' . $e->getMessage();
+              // $this->data['url'] = '<a href="{site_url("user/login_user")}">Back to Login Dosen</a>';
+              // $html = str_replace('error_content', 'asd', $web);
+              // $html = str_replace('url_back', $url, $html);
+              // echo $html;
+              $url = 'index';
+              redirect('user/login_user/error'.'/'.$url.'/'.$this->data['error']);
+              // $a = $this->error($this->data['error'],$url);
+              // echo $a;
+              // $this->ciparser->new_parse('template_frontend','modules_user', 'error_layout',$this->data);     
           exit;
         }
         // Logged in
@@ -234,8 +259,9 @@ class Login_user extends MX_Controller  {
           try {
             $accessToken = $oAuth2Client->getLongLivedAccessToken($accessToken);
           } catch (Facebook\Exceptions\FacebookSDKException $e) {
-            echo "<p>Error getting long-lived access token: " . $e->getMessage() . "</p>\n\n";
-            echo '<a href="{site_url("user/login_user")}">Back to Login Dosen</a>';
+            $this->data['error'] = $e->getMessage();
+            $url = 'index';
+            redirect('user/login_user/error'.'/'.$url.'/'.$this->data['error']);
             exit;
           }
         }
@@ -248,12 +274,14 @@ class Login_user extends MX_Controller  {
             // Returns a `Facebook\FacebookResponse` object
               $response = $fb->get('/me?fields=id,name,email,first_name,last_name,birthday,location,gender', $accessToken);
             } catch(Facebook\Exceptions\FacebookResponseException $e) {
-                echo 'Graph returned an error: ' . $e->getMessage();
-                echo '<a href="{site_url("user/login_user")}">Back to Login Dosen</a>';
+                $this->data['error'] = $e->getMessage();
+                $url = 'index';
+                redirect('user/login_user/error'.'/'.$url.'/'.$this->data['error']);
                 exit;
             } catch(Facebook\Exceptions\FacebookSDKException $e) {
-                echo 'Facebook SDK returned an error: ' . $e->getMessage();
-                echo '<a href="{site_url("user/login_user")}">Back to Login Dosen</a>';
+                $this->data['error'] = $e->getMessage();
+                $url = 'index';
+                redirect('user/login_user/error'.'/'.$url.'/'.$this->data['error']);
                 exit;
             }
             $me = $response->getGraphUser();
@@ -281,9 +309,7 @@ class Login_user extends MX_Controller  {
                 $data['name_from'] = 'IDREN support';
                 $data['email_to'] = $userData['email'];
                 $data['subject'] = 'Pendaftaran Berhasil';
-                $data['content'] = 'Halo '.$userData['first_name']." ".$userData['last_name']."<br> request akun anda sedang diproses, silakan ditunggu.<br>
-admin kami akan mengirimkan email notifikasi aktivasi akun anda dalam 1 x 24 jam dari waktu pendaftaran.<br>
-terima kasih";
+                $data['content'] = 'Halo '.$userData['first_name']." ".$userData['last_name']."<br> request akun anda sedang diproses, silakan ditunggu.<br>admin kami akan mengirimkan email notifikasi aktivasi akun anda dalam 1 x 24 jam dari waktu pendaftaran.<br>terima kasih";
                 if (email_send($data) == true) {
                     $user_data = 'success';
                     $this->session->set_flashdata("header","Registrasi Berhasil");
@@ -378,27 +404,31 @@ terima kasih";
           $accessToken = $helper->getAccessToken();
         } catch(Facebook\Exceptions\FacebookResponseException $e) {
               // When Graph returns an error
-              echo 'Graph returned an error: ' . $e->getMessage();
-              echo '<a href="{site_url("user/login_user/login_mahasiswa")}">Back to Login Mahasiswa</a>';
+            $this->data['error'] = $e->getMessage();
+            $url = 'login_mahasiswa';
+            redirect('user/login_user/error'.'/'.$url.'/'.$this->data['error']);
           exit;
         } catch(Facebook\Exceptions\FacebookSDKException $e) {
               // When validation fails or other local issues
-              echo 'Facebook SDK returned an error: ' . $e->getMessage();
-              echo '<a href="{site_url("user/login_user/login_mahasiswa")}">Back to Login Mahasiswa</a>';
+              $this->data['error'] = $e->getMessage();
+            $url = 'login_mahasiswa';
+            redirect('user/login_user/error'.'/'.$url.'/'.$this->data['error']);
               exit;
         }
         if (!isset($accessToken)) {
           if ($helper->getError()) {
-            header('HTTP/1.0 401 Unauthorized');
-            echo "Error: " . $helper->getError() . "\n";
-            echo "Error Code: " . $helper->getErrorCode() . "\n";
-            echo "Error Reason: " . $helper->getErrorReason() . "\n";
-            echo "Error Description: " . $helper->getErrorDescription() . "\n";
+            // header('HTTP/1.0 401 Unauthorized');
+             $this->data['error'] = "Error: " . $helper->getError() . "\n";
+             $this->data['error'] .= "Error Code: " . $helper->getErrorCode() . "\n";
+             $this->data['error'] .= "Error Reason: " . $helper->getErrorReason() . "\n";
+             $this->data['error'] .= "Error Description: " . $helper->getErrorDescription() . "\n";
           } else {
-            header('HTTP/1.0 400 Bad Request');
-            echo 'Bad request';
+            // header('HTTP/1.0 400 Bad Request');
+             $this->data['error'] = 'Bad request';
           }
-          echo '<a href="{site_url("user/login_user/login_mahasiswa")}">Back to Login Mahasiswa</a>';
+          $this->data['error'] = $e->getMessage();
+            $url = 'login_mahasiswa';
+            redirect('user/login_user/error'.'/'.$url.'/'.$this->data['error']);
           exit;
         }
         // Logged in
@@ -424,8 +454,9 @@ terima kasih";
           try {
             $accessToken = $oAuth2Client->getLongLivedAccessToken($accessToken);
           } catch (Facebook\Exceptions\FacebookSDKException $e) {
-            echo "<p>Error getting long-lived access token: " . $e->getMessage() . "</p>\n\n";
-            echo '<a href="{site_url("user/login_user/login_mahasiswa")}">Back to Login Mahasiswa</a>';
+            $this->data['error'] = $e->getMessage();
+            $url = 'login_mahasiswa';
+            redirect('user/login_user/error'.'/'.$url.'/'.$this->data['error']);
             exit;
           }
         }
@@ -438,12 +469,14 @@ terima kasih";
             // Returns a `Facebook\FacebookResponse` object
               $response = $fb->get('/me?fields=id,name,email,first_name,last_name,birthday,location,gender', $accessToken);
             } catch(Facebook\Exceptions\FacebookResponseException $e) {
-                echo 'Graph returned an error: ' . $e->getMessage();
-                echo '<a href="{site_url("user/login_user/login_mahasiswa")}">Back to Login Mahasiswa</a>';
+                $this->data['error'] = $e->getMessage();
+            $url = 'login_mahasiswa';
+            redirect('user/login_user/error'.'/'.$url.'/'.$this->data['error']);
                 exit;
             } catch(Facebook\Exceptions\FacebookSDKException $e) {
-                echo 'Facebook SDK returned an error: ' . $e->getMessage();
-                echo '<a href="{site_url("user/login_user/login_mahasiswa")}">Back to Login Mahasiswa</a>';
+                $this->data['error'] = $e->getMessage();
+            $url = 'login_mahasiswa';
+            redirect('user/login_user/error'.'/'.$url.'/'.$this->data['error']);
                 exit;
             }
             $me = $response->getGraphUser();
@@ -685,6 +718,13 @@ terima kasih";
 
     public function link_expired(){
         echo "<h2>Link expired</h2><h3><a href='".site_url('user/login_user/reset_password')."'>Back to Reset Password</a>";
+    }
+
+    public function error($url=null,$error=null){
+        $a = urldecode($error);
+        $this->data['url'] = $url;
+        $this->data['error'] = $a;
+        $this->ciparser->new_parse('template_frontend','modules_user', 'error_layout',$this->data);    
     }
 
 

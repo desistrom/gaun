@@ -37,8 +37,20 @@
      border-bottom: solid 1px #A8A8A8;
     padding-left: 15px;
   }
+  .btn-bg{
+      }
   #cke_references{
     width: 100%!important;
+  }
+  .btn-create-new{
+    float: right;
+    border-radius: 4px;
+    padding: 3px 10px;
+
+  }
+  .form-group{
+    height: auto;
+    overflow: hidden;
   }
 </style>
 <link rel="stylesheet" href="<?=base_url();?>assets/datatables/css/dataTables.bootstrap.min.css">
@@ -136,19 +148,20 @@
         </div>
         <div class="form-group">
           <label>Volume Jurnal</label>
-          <select class="form-control new-input" name="volume" id="volume">
-            <option value="">-- Pilih Volume --</option>
-            
+          <select class="form-control new-input" name="volume" id="volume" style="margin-bottom: 10px;">
+            <option value="">-- Pilih Volume --</option>   
           </select>
           <div class="error" id="ntf_volume"></div>
+          <a href="<?=site_url('user/journal/add_volume');?>" class="btn-bg btn-warning btn-create-new"><i>Create New Volume</i></a>
         </div>
 
         <div class="form-group">
           <label>No Volume Jurnal</label>
-          <select class="form-control new-input" name="no_volume" id="no_volume">
+          <select class="form-control new-input" name="no_volume" id="no_volume" style="margin-bottom: 10px;">
             <option value="">-- Pilih No Volume --</option>
           </select>
           <div class="error" id="ntf_no_volume"></div>
+          <a href="<?=site_url('user/journal/add_no_volume');?>" class="btn-bg btn-warning btn-create-new"><i>Create New No Volume</i></a>
         </div>
 
        
@@ -289,21 +302,23 @@
         </div>
         <div class="form-group">
           <label>Volume Jurnal</label>
-          <select class="form-control new-input" name="volume" id="volume">
+          <select class="form-control new-input" name="volume" id="volume" style="margin-bottom: 10px;">
             <option value="">-- Pilih Volume --</option>
             <option selected value="<?=$artikel['id_volume'];?>">Volume. <?=$artikel['volume'];?></option>
             
           </select>
           <div class="error" id="ntf_volume"></div>
+          <a href="<?=site_url('user/journal/add_volume');?>" class="btn-bg btn-warning btn-create-new"><i>Create New Volume</i></a>
         </div>
 
         <div class="form-group">
           <label>No Volume Jurnal</label>
-          <select class="form-control new-input" name="no_volume" id="no_volume">
+          <select class="form-control new-input" name="no_volume" id="no_volume" style="margin-bottom: 10px;">
             <option value="">-- Pilih No Volume --</option>
             <option selected value="<?=$artikel['id_no_volume'];?>">No. <?=$artikel['nomor'];?></option>
           </select>
           <div class="error" id="ntf_no_volume"></div>
+          <a href="<?=site_url('user/journal/add_no_volume');?>" class="btn-bg btn-warning btn-create-new"><i>Create New No Volume</i></a>
         </div>
 
     

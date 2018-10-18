@@ -1,5 +1,23 @@
 <link rel="stylesheet" href="<?=base_url();?>assets/css/style_home.min.css?t=<?=time();?>"> 
-
+<style type="text/css">
+    .btn-go-journal{
+        margin-top: 1em;
+    background-color: #D10909;
+    box-shadow: -2px 3px 18px 0 #bdbdbd;
+    padding: 18px 35px;
+    color: white;
+    outline: none;
+    font-family: 'Nunito Sans',sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    text-align: left;
+    padding: 9px 30px;
+    }
+    .btn-go-journal:hover{
+   background-color: #760A0A;
+    color: white;
+    }
+</style>
  <section class="hero" style="">
         <div class="container-fluid">
             <div class="row">
@@ -15,6 +33,7 @@
                     <p> <?php echo $hero['deskripsi']; ?></p>
                  
                     <a href="<?php echo site_url('web/layanan'); ?>" class="btn  btn-pelajari" type="button">Pelajari lebih lanjut <i class="fa fa-long-arrow-right"></i></a>
+                    <a href="<?=site_url('journal');?>" class="btn  btn-go-journal" type="button">Upload Journal Anda &<br> Download Journal Kami  <i class="fa fa-long-arrow-right"></i></a>
                 </div>
               <!--   <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="arrow-line">

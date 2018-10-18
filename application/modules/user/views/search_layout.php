@@ -1,7 +1,7 @@
 <style type="text/css">
 	.sub-date{
 		display: inline-block;
-		width: 100px;
+		/*width: 100px;*/
 	}
 	.form-search{
 		margin-bottom: 15px;
@@ -66,15 +66,15 @@
 <div class="col col-md-12 col-sm-12 col-xs-12 sec-search ">
 	<form>
 		
-		<div class="col col-md-3 col-sm-6 col-xs-12">
+		<div class="col col-md-4 col-sm-6 col-xs-12">
 			<div class="form-group">
 		        <div class="form-search"><label>Date</label></div>
 		        <div class="sub-date">
-		        	<input type="text"  class="form-control " >
+		        	<input type="month" name="start" class="form-control" >
 		        </div>
-		        <span style="padding: 0 10px;"> To </span>
+		        <span style="padding: 0 5px;"> To </span>
 		        <div class="sub-date">
-		        	<input type="text"  class="form-control " >
+		        	<input type="month" name="end" class="form-control" >
 		        </div>
 		        <div class="error" id="ntf_volume"></div>
 		      </div>
@@ -82,13 +82,16 @@
 		<div class="col col-md-3 col-sm-6 col-xs-12">
 			<div class="form-group">
 		        <div class="form-search"><label>Kategori</label></div>
-		   		<select class="form-control ">
-		   			<option>kategori 1</option>
+		   		<select class="form-control " name="kategori" id="kategori">
+		   			<option value="">-- Kategori --</option>
+		   			<?php foreach ($kategori as $key => $value): ?>
+		   				<option value="<?=$value['id_kategori'];?>"><?=$value['nama'];?></option>
+		   			<?php endforeach ?>
 		   		</select>
 		        <div class="error" id="ntf_kategori"></div>
 		     </div>
 		</div>
-		<div class="col col-md-3 col-sm-6 col-xs-12">
+		<!-- <div class="col col-md-3 col-sm-6 col-xs-12">
 			<div class="form-group">
 		        <div class="form-search"><label>Database</label></div>
 		   		<select class="form-control ">
@@ -96,11 +99,11 @@
 		   		</select>
 		        <div class="error" id="ntf_database"></div>
 		     </div>
-		</div>
+		</div> -->
 		<div class="col col-md-3 col-sm-6 col-xs-12">
 			<div class="form-group">
 		        <div class="form-search"><label>Title</label></div>
-		   		<input type="text" name="" class="form-control ">
+		   		<input type="text" name="search" class="form-control" id="search">
 		        <div class="error" id="ntf_title"></div>
 		     </div>
 		     <div class="form-group">
@@ -120,20 +123,22 @@
       </div>
       <div id="collapse1" class="panel-collapse collapse in">
         <div class="panel-body">
-        	<div class="col col-md-4 col-sm-4 col-xs-12 filter-box">
-        		<div class="box-header">
-        			<img src="http://192.168.88.15/idren/assets/media/1539161415.jpg" class="img-responsive img-logo">
-        		</div>
-        		<div class="box-body">
-        			<div class="col col-md-9 col-sm8 col-xs-7 none-padding box-body-left">
-        				<h4>Universitas Indonesia</h4>
-        			</div>
-        			<div class="col col-md-3 col-sm-4 col-xs-5 none-padding">
-        				<h4 class="text-center">150</h4>
-        			</div>
-        		</div>
-        	</div>
-        	<div class="col col-md-4 col-sm-4 col-xs-12 filter-box">
+        	<?php foreach ($journal as $key => $value): ?>
+	        	<div class="col col-md-4 col-sm-4 col-xs-12 filter-box">
+	        		<div class="box-header">
+	        			<img src="<?=base_url();?>media/<?=$value['gambar']?>" class="img-responsive img-logo">
+	        		</div>
+	        		<div class="box-body">
+	        			<div class="col col-md-9 col-sm8 col-xs-7 none-padding box-body-left">
+	        				<h4><?=$value['nm_instansi']?></h4>
+	        			</div>
+	        			<div class="col col-md-3 col-sm-4 col-xs-5 none-padding">
+	        				<h4 class="text-center"><?=$value['jumlah'];?></h4>
+	        			</div>
+	        		</div>
+	        	</div>        		
+        	<?php endforeach ?>
+        	<!-- <div class="col col-md-4 col-sm-4 col-xs-12 filter-box">
         		<div class="box-header">
         			<img src="http://192.168.88.15/idren/assets/media/1539161415.jpg" class="img-responsive img-logo">
         		</div>
@@ -145,11 +150,11 @@
         				<h4 class="text-center">150</h4>
         			</div>
         		</div>
-        	</div>
+        	</div> -->
         </div>
       </div>
     </div>
-    <div class="panel panel-default">
+    <!-- <div class="panel panel-default">
       <div class="panel-heading">
         <h4 class="panel-title">
           <a data-toggle="collapse" data-parent="#accordion" href="#collapse2" style="width: 100%;">Journal Internasional <i class="fa fa-angle-down" style="float: right;"></i></a>
@@ -186,8 +191,18 @@
         	</div>
         </div>
       </div>
-    </div>
+    </div> -->
   
   </div> 
 
 </div>
+<script type="text/javascript">
+      $(document).ready(function() {
+        $('body').on('click','.btn-search',function(){
+          console.log('hmm');
+          var search = $('#search').val();
+          window.location.href = base_url+'user/journal/search/'+search;
+        });
+      });
+  $('#modalSuccess').modal('show');
+</script>

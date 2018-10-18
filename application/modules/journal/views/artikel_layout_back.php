@@ -1,4 +1,4 @@
-#deta<style type="text/css">
+<style type="text/css">
 	.form-goup-file{
     height: auto;
     overflow: hidden;

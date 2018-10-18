@@ -514,6 +514,11 @@ terima kasih";
     }
 
     public function facebook(){
+        if (!isset($_SESSION)) {
+            if(!session_id()) {
+                session_start();
+            }
+        }
         $fb = new Facebook\Facebook([
               'app_id' => FACEBOOK_APP_ID, // Replace {app-id} with your app id
               'app_secret' => FACEBOOK_APP_SECRET,
@@ -525,27 +530,33 @@ terima kasih";
           $accessToken = $helper->getAccessToken();
         } catch(Facebook\Exceptions\FacebookResponseException $e) {
               // When Graph returns an error
-              echo 'Graph returned an error: ' . $e->getMessage();
-              echo '<a href="{site_url("web/keanggotaan/pendaftaran_dosen")}">Back to Register Dosen</a>';
+              // echo 'Graph returned an error: ' . $e->getMessage();
+              // echo '<a href="{site_url("web/keanggotaan/pendaftaran_dosen")}">Back to Register Dosen</a>';
+              $this->data['error'] = $e->getMessage();
+              $url = 'pendaftaran_dosen';
+              redirect('web/keanggotaan/error'.'/'.$url.'/'.$this->data['error']);
           exit;
         } catch(Facebook\Exceptions\FacebookSDKException $e) {
               // When validation fails or other local issues
-              echo 'Facebook SDK returned an error: ' . $e->getMessage();
-              echo '<a href="{site_url("web/keanggotaan/pendaftaran_dosen")}">Back to Register Dosen</a>';
+              $this->data['error'] = $e->getMessage();
+              $url = 'pendaftaran_dosen';
+              redirect('web/keanggotaan/error'.'/'.$url.'/'.$this->data['error']);
               exit;
         }
-        if (!isset($accessToken)) {
+        if (isset($accessToken)) {
           if ($helper->getError()) {
-            header('HTTP/1.0 401 Unauthorized');
-            echo "Error: " . $helper->getError() . "\n";
-            echo "Error Code: " . $helper->getErrorCode() . "\n";
-            echo "Error Reason: " . $helper->getErrorReason() . "\n";
-            echo "Error Description: " . $helper->getErrorDescription() . "\n";
+            // header('HTTP/1.0 401 Unauthorized');
+            $this->data['error'] = "Error: " . $helper->getError() . "\n";
+            $this->data['error'] .= "Error Code: " . $helper->getErrorCode() . "\n";
+            $this->data['error'] .= "Error Reason: " . $helper->getErrorReason() . "\n";
+            $this->data['error'] .= "Error Description: " . $helper->getErrorDescription() . "\n";
           } else {
-            header('HTTP/1.0 400 Bad Request');
-            echo 'Bad request';
+            // header('HTTP/1.0 400 Bad Request');
+            $this->data['error'] = 'Bad request';
           }
-          echo '<a href="{site_url("web/keanggotaan/pendaftaran_dosen")}">Back to Register Dosen</a>';
+          // $this->data['error'] = $e->getMessage();
+              $url = 'pendaftaran_dosen';
+              redirect('web/keanggotaan/error'.'/'.$url.'/'.$this->data['error']);
           exit;
         }
         // Logged in
@@ -571,8 +582,9 @@ terima kasih";
           try {
             $accessToken = $oAuth2Client->getLongLivedAccessToken($accessToken);
           } catch (Facebook\Exceptions\FacebookSDKException $e) {
-            echo "<p>Error getting long-lived access token: " . $e->getMessage() . "</p>\n\n";
-            echo '<a href="{site_url("web/keanggotaan/pendaftaran_dosen")}">Back to Register Dosen</a>';
+            $this->data['error'] = $e->getMessage();
+              $url = 'pendaftaran_dosen';
+              redirect('web/keanggotaan/error'.'/'.$url.'/'.$this->data['error']);
             exit;
           }
         }
@@ -585,12 +597,14 @@ terima kasih";
             // Returns a `Facebook\FacebookResponse` object
               $response = $fb->get('/me?fields=id,name,email,first_name,last_name,birthday,location,gender', $accessToken);
             } catch(Facebook\Exceptions\FacebookResponseException $e) {
-                echo 'Graph returned an error: ' . $e->getMessage();
-                echo '<a href="{site_url("web/keanggotaan/pendaftaran_dosen")}">Back to Register Dosen</a>';
+                $this->data['error'] = $e->getMessage();
+              $url = 'pendaftaran_dosen';
+              redirect('web/keanggotaan/error'.'/'.$url.'/'.$this->data['error']);
                 exit;
             } catch(Facebook\Exceptions\FacebookSDKException $e) {
-                echo 'Facebook SDK returned an error: ' . $e->getMessage();
-                echo '<a href="{site_url("web/keanggotaan/pendaftaran_dosen")}">Back to Register Dosen</a>';
+                $this->data['error'] = $e->getMessage();
+              $url = 'pendaftaran_dosen';
+              redirect('web/keanggotaan/error'.'/'.$url.'/'.$this->data['error']);
                 exit;
             }
             $me = $response->getGraphUser();
@@ -685,27 +699,31 @@ terima kasih";
           $accessToken = $helper->getAccessToken();
         } catch(Facebook\Exceptions\FacebookResponseException $e) {
               // When Graph returns an error
-              echo 'Graph returned an error: ' . $e->getMessage();
-              echo '<a href="{site_url("web/keanggotaan/pendaftaran_mahasiswa")}">Back to Register Mahasiswa</a>';
+              $this->data['error'] = $e->getMessage();
+              $url = 'pendaftaran_mahasiswa';
+              redirect('web/keanggotaan/error'.'/'.$url.'/'.$this->data['error']);
           exit;
         } catch(Facebook\Exceptions\FacebookSDKException $e) {
               // When validation fails or other local issues
-              echo 'Facebook SDK returned an error: ' . $e->getMessage();
-              echo '<a href="{site_url("web/keanggotaan/pendaftaran_mahasiswa")}">Back to Register Mahasiswa</a>';
+              $this->data['error'] = $e->getMessage();
+              $url = 'pendaftaran_mahasiswa';
+              redirect('web/keanggotaan/error'.'/'.$url.'/'.$this->data['error']);
               exit;
         }
         if (!isset($accessToken)) {
           if ($helper->getError()) {
-            header('HTTP/1.0 401 Unauthorized');
-            echo "Error: " . $helper->getError() . "\n";
-            echo "Error Code: " . $helper->getErrorCode() . "\n";
-            echo "Error Reason: " . $helper->getErrorReason() . "\n";
-            echo "Error Description: " . $helper->getErrorDescription() . "\n";
+            // header('HTTP/1.0 401 Unauthorized');
+            $this->data['error'] = "Error: " . $helper->getError() . "\n";
+            $this->data['error'] .= "Error Code: " . $helper->getErrorCode() . "\n";
+            $this->data['error'] .= "Error Reason: " . $helper->getErrorReason() . "\n";
+            $this->data['error'] .= "Error Description: " . $helper->getErrorDescription() . "\n";
           } else {
-            header('HTTP/1.0 400 Bad Request');
-            echo 'Bad request';
+            // header('HTTP/1.0 400 Bad Request');
+            $this->data['error'] = 'Bad request';
           }
-          echo '<a href="{site_url("web/keanggotaan/pendaftaran_mahasiswa")}">Back to Register Mahasiswa</a>';
+          // $this->data['error'] = $e->getMessage();
+              $url = 'pendaftaran_mahasiswa';
+              redirect('web/keanggotaan/error'.'/'.$url.'/'.$this->data['error']);
           exit;
         }
         // Logged in
@@ -731,8 +749,9 @@ terima kasih";
           try {
             $accessToken = $oAuth2Client->getLongLivedAccessToken($accessToken);
           } catch (Facebook\Exceptions\FacebookSDKException $e) {
-            echo "<p>Error getting long-lived access token: " . $e->getMessage() . "</p>\n\n";
-            echo '<a href="{site_url("web/keanggotaan/pendaftaran_mahasiswa")}">Back to Register Mahasiswa</a>';
+            $this->data['error'] = $e->getMessage();
+              $url = 'pendaftaran_mahasiswa';
+              redirect('web/keanggotaan/error'.'/'.$url.'/'.$this->data['error']);
             exit;
           }
         }
@@ -745,12 +764,14 @@ terima kasih";
             // Returns a `Facebook\FacebookResponse` object
               $response = $fb->get('/me?fields=id,name,email,first_name,last_name,birthday,location,gender', $accessToken);
             } catch(Facebook\Exceptions\FacebookResponseException $e) {
-                echo 'Graph returned an error: ' . $e->getMessage();
-                echo '<a href="{site_url("web/keanggotaan/pendaftaran_mahasiswa")}">Back to Register Mahasiswa</a>';
+                $this->data['error'] = $e->getMessage();
+              $url = 'pendaftaran_mahasiswa';
+              redirect('web/keanggotaan/error'.'/'.$url.'/'.$this->data['error']);
                 exit;
             } catch(Facebook\Exceptions\FacebookSDKException $e) {
-                echo 'Facebook SDK returned an error: ' . $e->getMessage();
-                echo '<a href="{site_url("web/keanggotaan/pendaftaran_mahasiswa")}">Back to Register Mahasiswa</a>';
+                $this->data['error'] = $e->getMessage();
+              $url = 'pendaftaran_mahasiswa';
+              redirect('web/keanggotaan/error'.'/'.$url.'/'.$this->data['error']);
                 exit;
             }
             $me = $response->getGraphUser();
@@ -853,6 +874,13 @@ terima kasih";
                 $this->session->set_flashdata("notif","Registrasi Anda sedang kami Proses, tunggu konfirmasi selanjutnya dari Admin");
                 redirect(site_url('web/keanggotaan/pendaftaran_mahasiswa'));
             }
+    }
+
+    public function error($url=null,$error=null){
+        $a = urldecode($error);
+        $this->data['url'] = $url;
+        $this->data['error'] = $a;
+        $this->ciparser->new_parse('template_frontend','modules_web', 'error_layout',$this->data);    
     }
 }
 

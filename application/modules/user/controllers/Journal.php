@@ -109,17 +109,50 @@ class Journal extends MX_Controller
         $this->ciparser->new_parse('template_user','modules_user', 'all_journal_layout',$this->data);
     }
 
-    public function search($param=null){
-        $sql = "SELECT * FROM tb_journal WHERE status = 2 AND judul LIKE '%".$param."%'";
-        $journal = $this->db->query($sql)->result_array();
-        foreach ($journal as $key => $value) {
-            $jumlah = $this->db->get_where('tb_volume',array('id_journal_ref'=>$value['id_journal']))->num_rows();
-            $journal[$key]['jumlah'] = $jumlah;
+    public function search(){
+        if (isset($_GET['start']) || isset($_GET['end']) || isset($_GET['kategori']) || isset($_GET['search'])) {
+            $input = $this->input->get();
+            
+            $param['judul'] = $input['search'];
+            $sql = "SELECT * FROM tb_instansi i join tb_pengguna p on i.id_instansi = p.id_instansi_ref join tb_journal j on p.id_pengguna = j.id_user_ref join tb_volume v on j.id_journal = v.id_journal_ref join tb_no_volume n on v.id_volume = n.id_volume_ref WHERE j.status = 2 AND judul LIKE '%".$param['judul']."%'";
+            if ($input['kategori'] != '') {
+                $param['kategori'] = $input['kategori'];
+                $sql .= " OR id_kategori_ref = ".$param['kategori']."";
+            }
+            if ($input['start'] != '' && $input['end'] != '') {
+                $param['start'] = date('Y-m-d', strtotime($input['start']));
+                $param['end'] = date('Y-m-d', strtotime($input['end']));
+                $sql .= " OR  n.publish between ".$param['start']." AND ".$param['end'];
+            }
+            $sql .= " GROUP BY id_instansi";
+            $journal = $this->db->query($sql)->result_array();
+            foreach ($journal as $key => $value) {
+                $sql = "SELECT * FROM tb_instansi i join tb_pengguna p on i.id_instansi = p.id_instansi_ref join tb_journal j on p.id_pengguna = j.id_user_ref join tb_volume v on j.id_journal = v.id_journal_ref join tb_no_volume n on v.id_volume = n.id_volume_ref WHERE j.status = 2 AND judul LIKE '%".$param['judul']."%'";
+                $sql .= " AND id_instansi = ? ";
+                if ($input['kategori'] != '') {
+                    $param['kategori'] = $input['kategori'];
+                    $sql .= " AND id_kategori_ref = ".$param['kategori']."";
+                }
+                if ($input['start'] != '' && $input['end'] != '') {
+                    $param['start'] = date('Y-m-d', strtotime($input['start']));
+                    $param['end'] = date('Y-m-d', strtotime($input['end']));
+                    $sql .= " AND n.publish between ".$param['start']." AND ".$param['end'];
+                }
+                $sql .= " GROUP BY id_journal";
+                $jumlah = $this->db->query($sql,$value['id_instansi'])->num_rows();
+                $journal[$key]['jumlah'] = $jumlah;
+            }
+        }else{
+            $journal = array();
         }
         // print_r($journal);
+        // if ($param==null) {
+        //     $journal = array();
+        // }
         $this->data['view'] = 'list';
+        $this->data['kategori'] = $this->db->get('tb_kategori_journal')->result_array();
         $this->data['journal'] = $journal;
-        $this->ciparser->new_parse('template_user','modules_user', 'all_journal_layout',$this->data);
+        $this->ciparser->new_parse('template_user','modules_user', 'search_layout',$this->data);
     }
 
     public function add(){
@@ -1214,5 +1247,58 @@ class Journal extends MX_Controller
       }
 
       return $text;
+    }
+
+    public function download_journal($id=null){
+        $this->load->library('zip');
+        $sql = "SELECT *, j.judul as journal FROM tb_journal j JOIN tb_volume v ON j.id_journal = v.id_journal_ref JOIN tb_no_volume n ON v.id_volume = n.id_volume_ref JOIN tb_artikel a ON n.id_no_volume = a.id_no_volume_ref where id_journal = ?";
+        $artikel = $this->db->query($sql,$id)->result_array();
+        $this->zip->read_file(FCPATH.'assets/media/'.$artikel[0]['futured_image']);
+        foreach ($artikel as $key => $value) {
+
+            $downartikel = $this->db->get_where('tb_instansi',array('id_instansi'=>$this->data['user']['id_instansi_ref']))->row_array();
+            $art = $this->db->get_where('tb_artikel',array('id_artikel'=>$value['id_artikel']))->row_array();
+            if ($downartikel['id_jenis_instansi'] == 1) {
+                $data['university_abs'] = $art['university_abs'] + 1;
+            }elseif ($downartikel['id_jenis_instansi'] == 2) {
+                $data['business_abs'] = $art['business_abs'] + 1;
+            }elseif ($downartikel['id_jenis_instansi'] == 3) {
+                $data['goverment_abs'] = $art['goverment_abs'] + 1;
+            }elseif ($downartikel['id_jenis_instansi'] == 4) {
+                $data['comunity_abs'] = $art['comunity_abs'] + 1;
+            }else{
+                $data['media_abs'] = $art['media_abs'] + 1;
+            }
+            $data['total_abs'] = $art['total_abs'] + 1;
+            $data['total_download'] = $art['total_download'] + 1;
+            $this->db->update('tb_artikel',$data,array('id_artikel'=>$value['id_artikel']));
+
+            $art = $this->db->get_where('tb_artikel',array('id_artikel'=>$value['id_artikel']))->row_array();
+            if ($downartikel['id_jenis_instansi'] == 1) {
+                $data['university'] = $art['university'] + 1;
+            }elseif ($downartikel['id_jenis_instansi'] == 2) {
+                $data['business'] = $art['business'] + 1;
+            }elseif ($downartikel['id_jenis_instansi'] == 3) {
+                $data['goverment'] = $art['goverment'] + 1;
+            }elseif ($downartikel['id_jenis_instansi'] == 4) {
+                $data['comunity'] = $art['comunity'] + 1;
+            }else{
+                $data['media'] = $art['media'] + 1;
+            }
+            $data['total'] = $art['total'] + 1;
+            $data['total_download'] = $art['total_download'] + 1;
+            $this->db->update('tb_artikel',$data,array('id_artikel'=>$value['id_artikel']));
+
+            $this->zip->read_file(FCPATH.'assets/file/'.$value['file']);
+            $this->zip->read_file(FCPATH.'assets/file/abstract/'.$value['abstract_file']);
+        }
+        $this->zip->download('journal.zip');
+    }
+
+
+
+    public function detail_search(){
+        
+        $this->ciparser->new_parse('template_user','modules_user', 'detail_search_layout');
     }
 }

@@ -24,6 +24,9 @@ class Login_user extends MX_Controller  {
     public function index() {
         // $this->load->library('facebook','user/login_user/facebook');
         // $this->fb_dosen();
+        if(!session_id()) {
+            session_start();
+        }
             $this->load->library('google',URL_API.'user/login_user/google/');
             $fb = new Facebook\Facebook([
                   'app_id' => FACEBOOK_APP_ID, // Replace {app-id} with your app id
@@ -111,6 +114,9 @@ class Login_user extends MX_Controller  {
     }
 
     public function login_mahasiswa() {
+        if(!session_id()) {
+            session_start();
+        }
         $fb = new Facebook\Facebook([
                   'app_id' => FACEBOOK_APP_ID, // Replace {app-id} with your app id
                   'app_secret' => FACEBOOK_APP_SECRET,

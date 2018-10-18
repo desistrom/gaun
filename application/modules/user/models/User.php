@@ -31,23 +31,27 @@ class User extends CI_Model{
         }else{
             // $data['created'] = date("Y-m-d H:i:s");
             // $data['modified']= date("Y-m-d H:i:s");
-            $pengguna['oauth_id'] = $data['oauth_id'];
-            $pengguna['oauth_provider'] = $data['oauth_provider'];
-            $pengguna['email'] = $data['email'];
-            $pengguna['username'] = $data['email'];
-            $pengguna['id_role_ref'] = $data['id_role_ref'];
-            $pengguna['password'] = sha1($data['oauth_id']);
-            $insert = $this->db->insert($this->tableName,$pengguna);
-            $userID = $this->db->insert_id();
-            $dosen['nama'] = $data['first_name']." ".$data['last_name'];
-            $dosen['jeniskelamin'] = $data['gender'] == 'male'?'L':'P';
-            $dosen['id_pengguna_ref'] = $userID;
-            if ($data['id_role_ref'] == 1) {
-                $this->db->insert('tb_dosen',$dosen);
+            if ($data['email'] == '') {
+                $user_data='email';
             }else{
-                $this->db->insert('tb_mahasiswa',$dosen);
+                $pengguna['oauth_id'] = $data['oauth_id'];
+                $pengguna['oauth_provider'] = $data['oauth_provider'];
+                $pengguna['email'] = $data['email'];
+                $pengguna['username'] = $data['email'];
+                $pengguna['id_role_ref'] = $data['id_role_ref'];
+                $pengguna['password'] = sha1($data['oauth_id']);
+                $insert = $this->db->insert($this->tableName,$pengguna);
+                $userID = $this->db->insert_id();
+                $dosen['nama'] = $data['first_name']." ".$data['last_name'];
+                $dosen['jeniskelamin'] = $data['gender'] == 'male'?'L':'P';
+                $dosen['id_pengguna_ref'] = $userID;
+                if ($data['id_role_ref'] == 1) {
+                    $this->db->insert('tb_dosen',$dosen);
+                }else{
+                    $this->db->insert('tb_mahasiswa',$dosen);
+                }
+                $user_data = 'insert';
             }
-            $user_data = 'insert';
         }
 
         return $user_data?$user_data:false;

@@ -330,6 +330,10 @@ class Login_user extends MX_Controller  {
                     $this->session->set_flashdata("header","Login Gagal");
                     $this->session->set_flashdata("notif","Akun Anda tidak memiliki akses, silahkan menggunakan akun lain");
                     redirect(site_url('user/login_user'));
+                }elseif ($userID == 'email') {
+                    $this->session->set_flashdata("header","Login Gagal");
+                    $this->session->set_flashdata("notif","Tidak ada email yang tertaut dengan Facebook anda, silahkan menggunakan akun lain");
+                    redirect(site_url('user/login_user'));
                 }else{
 	                $this->session->set_userdata('user_login',true);
 	                $this->session->set_userdata('user',$userID);
@@ -530,6 +534,10 @@ terima kasih";
                     $this->session->set_flashdata("header","Login Gagal");
                     $this->session->set_flashdata("notif","Akun Anda tidak memiliki akses, silahkan menggunakan akun lain");
                     redirect(site_url('user/login_user/login_mahasiswa'));
+                }elseif ($userID == 'email') {
+                    $this->session->set_flashdata("header","Login Gagal");
+                    $this->session->set_flashdata("notif","Tidak ada email yang tertaut dengan Facebook anda, silahkan menggunakan akun lain");
+                    redirect(site_url('user/login_user'));
                 }else{
                     $this->session->set_userdata('user_login',true);
                     $this->session->set_userdata('user',$userID);

@@ -1329,4 +1329,10 @@ class Journal extends MX_Controller
 
         echo json_encode($html);
     }
+     public function detail_all_journal(){
+        $this->ciparser->new_parse('template_user','modules_user', 'detail_all_journal_layout');
+    }
+    public function detail_myjournal(){
+        $this->ciparser->new_parse('template_user','modules_user', 'detail_myjournal_layout');
+    }
 }

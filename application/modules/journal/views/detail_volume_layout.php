@@ -151,7 +151,7 @@
 
 <div class="col col-md-10 col-sm-10 col-xs-12 right-content" style="">
     <div class=" title-box">
-		<h3 class="title">Detail Volume <?=$no_volume[0]['volume'];?></h3>
+		<h3 class="title">Detail Volume</h3>
     </div>
     <div class="box-content">
     	<div class="row">
@@ -167,11 +167,11 @@
                   <ul class="list-unstyled list-info-jurnal">
                   <li>Volume : <?=$no_volume[0]['volume'];?></li>
                     <li>Status : <?php if($no_volume[0]['status'] == 0){ echo "Disabled";}elseif($no_volume[0]['status'] == 1){ echo "Pending"; }else{ echo "Submited";} ?></li>
-                    <li>Action : <?php if($no_volume[0]['status'] == 0){ ?><a href="<?=site_url('user/journal/submit/'.$no_volume[0]['id_journal']);?>" class="btn btn-primary btn-upload"> <i class="fa fa-upload"></i> </a><?php }elseif($no_volume[0]['status'] == 1){ ?><a href="#" class="btn btn-warning btn-clock-o"> <i class="fa fa-clock-o"></i> </a><?php }else{ ?><a href="#" class="btn btn-success btn-upload"> <i class="fa fa-check"></i> </a> <?php } ?></li>
+                    <li>Action : <?php if($no_volume[0]['status'] == 0){ ?><a href="<?=site_url('journal/admin/submit/'.$no_volume[0]['id_journal']);?>" class="btn btn-primary btn-upload"> <i class="fa fa-upload"></i> </a><?php }elseif($no_volume[0]['status'] == 1){ ?><a href="#" class="btn btn-warning btn-clock-o"> <i class="fa fa-clock-o"></i> </a><?php }else{ ?><a href="#" class="btn btn-success btn-upload"> <i class="fa fa-check"></i> </a> <?php } ?></li>
                   </ul>
                   <ul class="list-unstyled list-detail-jurnal">
                   <?php foreach ($no_volume as $key => $value): ?>
-                    <li><a href="<?=site_url('user/journal/detail_no_volume/'.$value['id_no_volume']);?>">
+                    <li><a href="<?=site_url('journal/admin/detail_no_volume/'.$value['id_no_volume']);?>">
                       Nomor Volume : <?=$value['nomor'];?>
                     </a></li>
                   <?php endforeach ?>

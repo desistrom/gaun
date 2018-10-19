@@ -5,7 +5,7 @@
 					<div class="row">
 						<div class="col col-md-12 col-sm-12 col-xs-12 none-padding content-wrap">
 	<div class="col col-ms-12 col-sm-12 col-xs-12">
-		<h4 class="title-content-wrap">Table Of Content <?=$journal[0]['judul'];?></h4>
+		<h4 class="title-content-wrap">Table Of Content <?=$journal[0]['judul'];?> <i class="fa fa-angle-double-right" aria-hidden="true"></i> volume <?=$journal[0]['volume'];?></h4>
 	</div>
 	<div class="col col-md-3 col-sm-4 col-xs-12 right-content-wrap">
 		<div class="flter-side-bar">

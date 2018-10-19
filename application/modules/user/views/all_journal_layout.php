@@ -323,7 +323,7 @@ div.container-fluid.footer-bottom{
                       </div>
                        <?php endforeach ?>
                   </div>
-                  <span class="txt-seemore">see more</span>
+                  <a href="<?=site_url('user/journal/detail_all_journal');?>" class="txt-seemore">Load more</a>
                 </div>
               </div>
             </div>

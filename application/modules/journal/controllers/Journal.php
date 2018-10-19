@@ -174,6 +174,30 @@ class Journal extends MX_Controller
         redirect(site_url('assets/file/'.$art['abstract_file']));
     }
 
+    public function download_journal($id=null){
+        $this->load->library('zip');
+        $sql = "SELECT *, j.judul as journal FROM tb_journal j JOIN tb_volume v ON j.id_journal = v.id_journal_ref JOIN tb_no_volume n ON v.id_volume = n.id_volume_ref JOIN tb_artikel a ON n.id_no_volume = a.id_no_volume_ref where id_journal = ?";
+        $artikel = $this->db->query($sql,$id)->result_array();
+        $this->zip->read_file(FCPATH.'assets/media/'.$artikel[0]['futured_image']);
+        foreach ($artikel as $key => $value) {
+
+            $art = $this->db->get_where('tb_artikel',array('id_artikel'=>$value['id_artikel']))->row_array();
+
+            $data['total'] = $art['total'] + 1;
+            $data['anonym'] = $art['anonym'] + 1;
+
+            $data['anonym_abs'] = $art['anonym_abs'] + 1;
+            $data['total_abs'] = $art['total_abs'] + 1;
+            $data['total_download'] = $art['total_download'] + 2;
+            $this->db->update('tb_artikel',$data,array('id_artikel'=>$id));
+            $this->db->update('tb_artikel',$data,array('id_artikel'=>$value['id_artikel']));
+
+            $this->zip->read_file(FCPATH.'assets/file/'.$value['file']);
+            $this->zip->read_file(FCPATH.'assets/file/abstract/'.$value['abstract_file']);
+        }
+        $this->zip->download('journal.zip');
+    }
+
     public function logins($id=null){
         $this->session->set_flashdata('lgn','1');
         // print_r($id);

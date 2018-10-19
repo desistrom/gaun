@@ -319,7 +319,7 @@ div.container-fluid.footer-bottom{
                               </div>
                             </div>
                             <div class="body-box-thumbnail">
-                              <h5 class="title-thumbnail"><a href="#"><?=$value['judul'];?></a></h5>
+                              <h5 class="title-thumbnail"><a href="<?php echo site_url('journal/admin/detail_journal/'.$value['id_journal']);?>"><?=$value['judul'];?></a></h5>
 
                             </div>
 

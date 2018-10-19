@@ -311,7 +311,7 @@ div.container-fluid.footer-bottom{
                 </div>
               </div>
               <div class="col col-md-12 col-sm-12 col-xs-12 none-padding">
-                <div class="col col-md-9 col-sm-8 col-xs-6 list-journal">
+                <div class="col col-md-12 col-sm-12 col-xs-12 list-journal">
                   <div class="owl-carousel owl-theme">
                     <?php foreach ($journal as $key => $value): ?>
                       <div class="item">
@@ -349,7 +349,7 @@ div.container-fluid.footer-bottom{
                      
                     
                   </div>
-                  <span class="txt-seemore">see more</span>
+                  <a href="<?=site_url('user/journal/detail_myjournal');?>" class="txt-seemore">Load more</a>
                 </div>
               </div>
             </div>
@@ -443,7 +443,7 @@ div.container-fluid.footer-bottom{
               owl.owlCarousel({
                 margin: 10,
                 nav: true,
-                loop: true,
+                // loop: true,
                 autoplayTimeout: 1000,
                 autoplayHoverPause: true,
                 responsive: {

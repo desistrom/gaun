@@ -209,7 +209,7 @@
 						<h4 class="title-footer">Didukung oleh</h4>
                     <ul class="list-inline">
                         <li><img src="<?=base_url();?>assets/images/logo/logo-ristek.png" class="logo-sponsor logo2" alt="logo sponsor"></li>
-                        <li><img src="<?=base_url();?>assets/images/logo/logo-telkom.png" class="logo-sponsor" alt="logo sponsor"></li>
+                        <li><img src="<?=base_url();?>assets/images/logo/logo-telkom-white.png" class="logo-sponsor" alt="logo sponsor"></li>
                     </ul>
 					</div>
 					<div class="col col-md-6 col-sm-6 col-xs-12 sub-footer text-center">

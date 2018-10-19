@@ -25,7 +25,7 @@
 <?php endforeach ?>
 </div>
 <div class="col col-md-12 col-sm-12 col-xs-12 text-center" style="padding: 20px 15px;">
-              	<button class="btn btn-warning btn-bg"> Load More</button>
+              	<button class="btn btn-danger btn-bg"> Load More</button>
               </div>
 <input type="hidden" name="limit" id="limit" value="12">
 <input type="hidden" name="ofset" id="ofset" value="12">

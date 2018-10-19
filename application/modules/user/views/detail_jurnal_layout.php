@@ -171,7 +171,7 @@
                   <ul class="list-unstyled list-detail-jurnal">
                   <?php foreach ($volume as $key => $value): ?>
                     <li><a href="<?=site_url('user/journal/detail_volume/'.$value['id_volume']);?>">
-                      Volume <?=$value['volume'];?>
+                      Volume : <?=$value['volume'];?>
                     </a></li>
                   <?php endforeach ?>
                     <!-- <li><a href="sub-detail.html">

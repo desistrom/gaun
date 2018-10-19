@@ -453,7 +453,8 @@ terima kasih";
               // When validation fails or other local issues
               $this->data['error'] = $e->getMessage();
             $url = 'login_mahasiswa';
-            redirect('user/login_user/error'.'/'.$url.'/'.$this->data['error']);
+            $this->session->set_flashdata('notif',$this->data['error']);
+            redirect('user/login_user/error'.'/'.$url);
               exit;
         }
         if (!isset($accessToken)) {
@@ -500,7 +501,8 @@ terima kasih";
             $this->data['error'] = $e->getMessage();
             $this->session->set_flashdata('notif',$this->data['error']);
             $url = 'login_mahasiswa';
-            redirect('user/login_user/error'.'/'.$url.'/'.$this->data['error']);
+            $this->session->set_flashdata('notif',$this->data['error']);
+            redirect('user/login_user/error'.'/'.$url);
             exit;
           }
         }
@@ -515,13 +517,15 @@ terima kasih";
             } catch(Facebook\Exceptions\FacebookResponseException $e) {
                 $this->data['error'] = $e->getMessage();
             $url = 'login_mahasiswa';
-            redirect('user/login_user/error'.'/'.$url.'/'.$this->data['error']);
+            $this->session->set_flashdata('notif',$this->data['error']);
+            redirect('user/login_user/error'.'/'.$url);
                 exit;
             } catch(Facebook\Exceptions\FacebookSDKException $e) {
                 $this->data['error'] = $e->getMessage();
             $this->session->set_flashdata('notif',$this->data['error']);
             $url = 'login_mahasiswa';
-            redirect('user/login_user/error'.'/'.$url.'/'.$this->data['error']);
+            $this->session->set_flashdata('notif',$this->data['error']);
+            redirect('user/login_user/error'.'/'.$url);
                 exit;
             }
             $me = $response->getGraphUser();
@@ -530,7 +534,8 @@ terima kasih";
                 $this->data['error'] = urlencode("Tidak ada email yang tertaut dengan Facebook anda, silahkan menggunakan akun lain");
             $this->session->set_flashdata('notif',$this->data['error']);
                 $url = 'login_mahasiswa';
-                redirect('user/login_user/error'.'/'.$url.'/'.$this->data['error']);
+                $this->session->set_flashdata('notif',$this->data['error']);
+            redirect('user/login_user/error'.'/'.$url);
                 exit();
             }
 
@@ -566,9 +571,10 @@ terima kasih";
                     /*$this->session->set_userdata("header","Registrasi Berhasil");
                     $this->session->set_userdata("notif","Registrasi Anda sedang kami Proses, tunggu konfirmasi selanjutnya dari Admin");*/
                     $this->data['error'] = "Registrasi Anda sedang kami Proses, tunggu konfirmasi selanjutnya dari Admin";
-                    $this->session->set_flashdata('notif',$this->data['error']);
+                    // $this->session->set_flashdata('notif',$this->data['error']);
                     $url = 'login_mahasiswa';
-                    redirect('user/login_user/error'.'/'.$url.'/'.$this->data['error']);
+                    $this->session->set_flashdata('notif',$this->data['error']);
+            redirect('user/login_user/error'.'/'.$url);
                 }
             }else{
                 if ($userID == 'no') {
@@ -585,14 +591,14 @@ terima kasih";
                     $this->data['error'] = "Akun Anda tidak memiliki akses, silahkan menggunakan akun lain";
                     $this->session->set_flashdata('notif',$this->data['error']);
                     $url = 'login_mahasiswa';
-                    redirect('user/login_user/error'.'/'.$url.'/'.$this->data['error']);
+                    redirect('user/login_user/error'.'/'.$url);
                 }elseif ($userID == 'email') {
                     /*$this->session->set_userdata("header","Login Gagal");
                     $this->session->set_userdata("notif","Tidak ada email yang tertaut dengan Facebook anda, silahkan menggunakan akun lain");*/
                     $this->data['error'] = "Tidak ada email yang tertaut dengan Facebook anda, silahkan menggunakan akun lain";
                     $this->session->set_flashdata('notif',$this->data['error']);
                     $url = 'login_mahasiswa';
-                    redirect('user/login_user/error'.'/'.$url.'/'.$this->data['error']);
+                    redirect('user/login_user/error'.'/'.$url);
                 }else{
                     $this->session->set_userdata('user_login',true);
                     $this->session->set_userdata('user',$userID);

@@ -7,7 +7,7 @@
                 <div class="row">
                   <div class="col col-md-12 col-sm-12 col-xs-12">
                         <h4 class="welcome">
-                        <?=$user['nama'];?>
+                        <?=$user;?>
                       </h4>
                       <hr>
                   </div>
@@ -18,14 +18,14 @@
                   <!-- small box -->
                   <div class="small-box bg-green">
                     <div class="inner">
-                      <h3>53</h3>
+                      <h3><?php echo $active;?></h3>
 
-                      <p>Journal</p>
+                      <p>Journal Active</p>
                     </div>
                     <div class="icon">
-                      <i class="glyphicon glyphicon-education"></i>
+                      <i class="fa fa-check"></i>
                     </div>
-                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                    <a href="<?php echo site_url('journal/admin/accepted');?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                   </div>
                 </div>
                 <!-- ./col -->
@@ -33,14 +33,14 @@
                   <!-- small box -->
                   <div class="small-box bg-yellow">
                     <div class="inner">
-                      <h3>44</h3>
+                      <h3><?php echo $pending;?></h3>
 
-                      <p>Video</p>
+                      <p>Journal Pending</p>
                     </div>
                     <div class="icon">
-                      <i class="fa fa-users"></i>
+                      <i class="fa fa-clock-o"></i>
                     </div>
-                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                    <a href="<?php echo site_url('journal/admin');?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                   </div>
                 </div>
                 <!-- ./col -->
@@ -48,14 +48,14 @@
                   <!-- small box -->
                   <div class="small-box bg-red">
                     <div class="inner">
-                      <h3>65</h3>
+                      <h3><?php echo $ignore;?></h3>
 
-                      <p>E-book</p>
+                      <p>Journal Ignore</p>
                     </div>
                     <div class="icon">
-                      <i class="glyphicon glyphicon-education"></i>
+                      <i class="fa fa-times"></i>
                     </div>
-                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                    <a href="<?php echo site_url('journal/admin/rejected');?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                   </div>
                 </div>
                 <!-- ./col -->

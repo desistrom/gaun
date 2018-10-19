@@ -531,17 +531,18 @@ terima kasih";
               // echo 'Graph returned an error: ' . $e->getMessage();
               // echo '<a href="{site_url("web/keanggotaan/pendaftaran_dosen")}">Back to Register Dosen</a>';
               $this->data['error'] = $e->getMessage();
-              $url = 'pendaftaran_dosen';
-              redirect('web/keanggotaan/error'.'/'.$url.'/'.$this->data['error']);
+              $url = 'pendaftaran_dosen';;
               $this->session->set_flashdata('notif',$this->data['error']);
-              $url = 'index';
+              
               redirect('web/keanggotaan/error'.'/'.$url);
           exit;
         } catch(Facebook\Exceptions\FacebookSDKException $e) {
               // When validation fails or other local issues
               $this->data['error'] = $e->getMessage();
               $url = 'pendaftaran_dosen';
-              redirect('web/keanggotaan/error'.'/'.$url.'/'.$this->data['error']);
+              $this->session->set_flashdata('notif',$this->data['error']);
+              
+              redirect('web/keanggotaan/error'.'/'.$url);
               exit;
         }
         if (!isset($accessToken)) {
@@ -557,7 +558,9 @@ terima kasih";
           }
           // $this->data['error'] = $e->getMessage();
               $url = 'pendaftaran_dosen';
-              redirect('web/keanggotaan/error'.'/'.$url.'/'.$this->data['error']);
+              
+              $this->session->set_flashdata('notif',$this->data['error']);
+              redirect('web/keanggotaan/error'.'/'.$url);
           exit;
         }
         // Logged in
@@ -585,7 +588,9 @@ terima kasih";
           } catch (Facebook\Exceptions\FacebookSDKException $e) {
             $this->data['error'] = $e->getMessage();
               $url = 'pendaftaran_dosen';
-              redirect('web/keanggotaan/error'.'/'.$url.'/'.$this->data['error']);
+              $this->session->set_flashdata('notif',$this->data['error']);
+              
+              redirect('web/keanggotaan/error'.'/'.$url);
             exit;
           }
         }
@@ -600,15 +605,27 @@ terima kasih";
             } catch(Facebook\Exceptions\FacebookResponseException $e) {
                 $this->data['error'] = $e->getMessage();
               $url = 'pendaftaran_dosen';
-              redirect('web/keanggotaan/error'.'/'.$url.'/'.$this->data['error']);
+              $this->session->set_flashdata('notif',$this->data['error']);
+              
+              redirect('web/keanggotaan/error'.'/'.$url);
                 exit;
             } catch(Facebook\Exceptions\FacebookSDKException $e) {
                 $this->data['error'] = $e->getMessage();
               $url = 'pendaftaran_dosen';
-              redirect('web/keanggotaan/error'.'/'.$url.'/'.$this->data['error']);
+              $this->session->set_flashdata('notif',$this->data['error']);
+              
+              redirect('web/keanggotaan/error'.'/'.$url);
                 exit;
             }
             $me = $response->getGraphUser();
+            if ($me->getProperty('email') == null || $me->getProperty('email') == '') {
+                // echo 
+                $this->data['error'] = urlencode("Tidak ada email yang tertaut dengan Facebook anda, silahkan menggunakan akun lain");
+            $this->session->set_flashdata('notif',$this->data['error']);
+                $url = 'login_mahasiswa';
+                redirect('web/keanggotaan/error'.'/'.$url);
+                exit();
+            }
         // $this->load->library('facebook','user/login_user/facebook');
         // $userData = array();
         // $ret['status'] = 0;

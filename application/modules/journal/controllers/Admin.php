@@ -26,6 +26,28 @@ class Admin extends MX_Controller
         $this->ciparser->new_parse('template_admin_journal','modules_journal', 'list_journal_layout',$this->data);
     }
 
+    public function home(){
+        $user = $this->session->userdata('data_user_journal');
+        $data = $this->db->get_where('tb_instansi',array('id_instansi'=>$user['id_instansi']))->row_array();
+        // print_r($user['id_instansi']);
+        $sql = "SELECT j.* FROM tb_journal j join tb_pengguna p on j.id_user_ref = p.id_pengguna Where id_instansi_ref = ? and j.status = 2";
+        $journal = $this->db->query($sql,$user['id_instansi'])->num_rows();
+        $active = $journal;
+        $sql = "SELECT j.* FROM tb_journal j join tb_pengguna p on j.id_user_ref = p.id_pengguna Where id_instansi_ref = ? and j.status = 1";
+        $journal = $this->db->query($sql,$user['id_instansi'])->num_rows();
+        $pending = $journal;
+        $sql = "SELECT j.* FROM tb_journal j join tb_pengguna p on j.id_user_ref = p.id_pengguna Where id_instansi_ref = ? and j.status = 3";
+        $journal = $this->db->query($sql,$user['id_instansi'])->num_rows();
+        $ignore = $journal;
+        $this->data['breadcumb'] = 'Journal';
+        $this->data['view'] = 'list';
+        $this->data['active'] = $active;
+        $this->data['pending'] = $pending;
+        $this->data['ignore'] = $ignore;
+        $this->data['user'] = $data['nm_instansi'];
+        $this->ciparser->new_parse('template_admin_journal','modules_journal', 'dashboard_layout',$this->data);
+    }
+
     public function myjournal()
     {
         $user = $this->session->userdata('data_user_journal');
@@ -230,7 +252,7 @@ class Admin extends MX_Controller
         $sql = "SELECT j.*, v.id_volume, v.volume FROM tb_journal j JOIN tb_volume v ON j.id_journal = v.id_journal_ref where j.id_journal = ".$id;
         $data = $this->db->query($sql,$id)->result_array();
         $this->data['volume'] = $data;
-        $this->ciparser->new_parse('template_user','modules_user', 'detail_jurnal_layout',$this->data);
+        $this->ciparser->new_parse('template_admin_journal','modules_journal', 'detail_journal_layout',$this->data);
 
     }
 
@@ -238,14 +260,14 @@ class Admin extends MX_Controller
         $sql = 'SELECT j.*, v.id_volume, v.volume, n.* FROM tb_journal j JOIN tb_volume v ON j.id_journal = v.id_journal_ref JOIN tb_no_volume n ON v.id_volume = n.id_volume_ref where id_volume = ?';
         $data = $this->db->query($sql,$id)->result_array();
         $this->data['no_volume'] = $data;
-        $this->ciparser->new_parse('template_user','modules_user', 'detail_volume_layout',$this->data);
+        $this->ciparser->new_parse('template_admin_journal','modules_journal', 'detail_volume_layout',$this->data);
     }
 
     public function detail_no_volume($id=null){
         $sql = 'SELECT *, a.judul as artikel, j.status as jstatus FROM tb_journal j JOIN tb_volume v ON j.id_journal = v.id_journal_ref JOIN tb_no_volume n ON v.id_volume = n.id_volume_ref join tb_artikel a ON n.id_no_volume = a.id_no_volume_ref where id_no_volume = ?';
         $data = $this->db->query($sql,$id)->result_array();
         $this->data['artikel'] = $data;
-        $this->ciparser->new_parse('template_user','modules_user', 'detail_no_volume_layout',$this->data);
+        $this->ciparser->new_parse('template_admin_journal','modules_journal', 'detail_no_volume_layout',$this->data);
     }
 
     public function add_artikel(){
@@ -592,7 +614,7 @@ class Admin extends MX_Controller
         $no = $this->db->query($sql,$id)->row_array();
         $this->data['volume'] = $no;
         $this->data['journal'] = $journal;
-        $this->ciparser->new_parse('template_admin_journal','modules_user', 'volume_layout',$this->data);
+        $this->ciparser->new_parse('template_admin_journal','modules_journal', 'volume_layout',$this->data);
     }
 
     public function add_no_volume(){
@@ -658,7 +680,7 @@ class Admin extends MX_Controller
         $sql = "SELECT j.* FROM tb_journal j join tb_pengguna p on j.id_user_ref = p.id_pengguna Where id_instansi_ref = ?";
         $journal = $this->db->query($sql,$user['id_instansi'])->result_array();
         $this->data['journal'] = $journal;
-        $this->ciparser->new_parse('template_admin_journal','modules_user', 'nomor_layout',$this->data);
+        $this->ciparser->new_parse('template_admin_journal','modules_journal', 'nomor_layout',$this->data);
     }
 
     public function no_volume($id){
@@ -708,6 +730,31 @@ class Admin extends MX_Controller
         $this->data['id'] = $id;
         $this->data['journal'] = $journal;
         $this->ciparser->new_parse('template_admin_journal','modules_journal', 'list_artikel_layout',$this->data);
+    }
+
+    public function detail_artikel_journal($id=null){
+        $sql = "SELECT *, j.judul as journal FROM tb_journal j JOIN tb_volume v ON j.id_journal = v.id_journal_ref JOIN tb_no_volume n ON v.id_volume = n.id_volume_ref JOIN tb_artikel a ON n.id_no_volume = a.id_no_volume_ref where id_artikel = ?";
+        $artikel = $this->db->query($sql,$id)->row_array();
+
+        $sql_author = 'SELECT * FROM tb_author where id_artikel_ref = ?';
+        $author = $this->db->query($sql_author,$id)->result_array();
+        // $artikel['nama'] = '';
+        // foreach ($author as $key => $value) {
+        //     $artikel['nama'] .= '<li>'.$value['nama'].'</li>';
+        //     $artikel['nama'] .= '<li>'.$value['jabatan'].'</li>';
+        //     $artikel['nama'] .= '<br>';
+        // }
+        // print_r($artikel);
+        // echo json_encode($artikel);
+        $this->data['artikel'] = $artikel;
+        $this->data['author'] = $author;
+        $sql = 'SELECT *, a.judul as artikel, j.status as jstatus FROM tb_journal j JOIN tb_volume v ON j.id_journal = v.id_journal_ref JOIN tb_no_volume n ON v.id_volume = n.id_volume_ref join tb_artikel a ON n.id_no_volume = a.id_no_volume_ref where id_no_volume = ?';
+        $data_v = $this->db->query($sql,$artikel['id_no_volume'])->result_array();
+        $this->data['volume'] = $data_v;
+        $sql = 'SELECT *, a.judul as artikel, j.status as jstatus FROM tb_journal j JOIN tb_volume v ON j.id_journal = v.id_journal_ref JOIN tb_no_volume n ON v.id_volume = n.id_volume_ref join tb_artikel a ON n.id_no_volume = a.id_no_volume_ref where id_no_volume = ?';
+        $data_v = $this->db->query($sql,$artikel['id_no_volume'])->result_array();
+        $this->data['no_vol'] = $data_v;
+        $this->ciparser->new_parse('template_admin_journal','modules_journal', 'detail_artikel_layout',$this->data);
     }
 
     public function detail_artikel($id){

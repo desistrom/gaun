@@ -181,7 +181,7 @@
         font-weight: 600;
       }
       .sub-content-journal .sub-content-journal-header .list-journal{
-        padding: 15px ;
+        padding: 15px 10em;
       }
       .sub-content-journal .sub-content-journal-header .list-journal .item{
       
@@ -200,9 +200,12 @@
         margin: 0;
       }
       .sub-content-journal .sub-content-journal-header .list-journal .owl-nav{
-        position: absolute;
+      /*  position: absolute;
         right: -2em;
-        top: 40%;
+        top: 40%;*/
+      }
+      .sub-content-journal .sub-content-journal-header .list-journal .owl-nav .owl-prev.disabled{
+        display: none;
       }
       .sub-content-journal .sub-content-journal-header .list-journal .owl-nav .owl-next{
         font-size: 71px;
@@ -211,20 +214,39 @@
         height: 50px;
         border-radius: 50%;
         background-color:#CBCBCB; 
-        margin-right: -0.7em;
+        /*margin-right: -0.7em;*/
+        position: absolute;
         margin-top: -0.2em;
+        right:-1em; 
+        top: 47%;
+      }
+      .sub-content-journal .sub-content-journal-header .list-journal .owl-nav .owl-prev{
+        font-size: 71px;
+        font-weight: 600;
+        left:-1em;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color:#CBCBCB; 
+        /*margin-left: -0.7em;*/
+        position: absolute;
+        margin-top: -0.2em;
+        top: 47%;
       }
       .sub-content-journal .sub-content-journal-header .list-journal .owl-nav .owl-next span{
         position: absolute;
         margin-top: -0.81em;
         margin-left: -9px;
       }
-      .sub-content-journal .sub-content-journal-header .list-journal .owl-nav .owl-prev{
-        display: none;
+      .sub-content-journal .sub-content-journal-header .list-journal .owl-nav .owl-prev span{
+        position: absolute;
+        margin-top: -0.81em;
+        left: 14px;
+        margin-right: -12px;
       }
       .txt-seemore{
             position: absolute;
-              right: -4.5em;
+              right: 3.5em;
               margin-top: -4em;
               font-size: 16px;
               font-weight: 600;
@@ -445,22 +467,7 @@
             <i class="fa fa-copy"></i> <span>All Journal</span>
           </a>
         </li>
-       <li class=" treeview" style="margin-top: 5px;">
-          <a href="#">
-            <i class="fa fa-book"></i> <span>My Journal</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li class="active"><a href="<?=site_url('user/journal');?>"><i class="fa fa-circle-o"></i> Create & Edit Journal</a></li>
-
-            <li class=""><a href="<?=site_url('user/journal/volume');?>"><i class="fa fa-circle-o"></i> Volume </a></li>
-
-            <li class=""><a href="<?=site_url('user/journal/list_nomor');?>"><i class="fa fa-circle-o"></i>No Volume</a></li>
-          </ul>
-        </li>
-        <li class=" treeview" style="margin-top: 5px;">
+         <li class=" treeview" style="margin-top: 5px;">
           <a href="#">
             <i class="fa fa-list"></i> <span>Volume</span>
             <span class="pull-right-container">
@@ -482,6 +489,22 @@
             <li class=""><a href="<?=site_url('user/journal/list_nomor');?>"><i class="fa fa-circle-o"></i>Create & Edit No Volume</a></li>
           </ul>
         </li>
+       <li class=" treeview" style="margin-top: 5px;">
+          <a href="#">
+            <i class="fa fa-book"></i> <span>My Journal</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="active"><a href="<?=site_url('user/journal');?>"><i class="fa fa-circle-o"></i> Create & Edit Journal</a></li>
+<!-- 
+            <li class=""><a href="<?=site_url('user/journal/volume');?>"><i class="fa fa-circle-o"></i> Volume </a></li>
+
+            <li class=""><a href="<?=site_url('user/journal/list_nomor');?>"><i class="fa fa-circle-o"></i>No Volume</a></li> -->
+          </ul>
+        </li>
+       
          <!-- <li class=" treeview <?php if(current_url() == site_url('journal/admin/dashboard')){ ?> active <?php } ?>">
           <a href="<?=site_url('journal/admin/dashboard');?>">
             <i class="fa fa-dashboard"></i> <span>My Journal</span>

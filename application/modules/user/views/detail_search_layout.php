@@ -277,22 +277,23 @@ color: #D10909!important;
     <div class="box-content">
     	<div class="row">
 
-              
-              <div class="filter-box-thumbnail col-md-3 col-sm-3 col-xs-12 " style="">
-                  <div class="box-thumbnail">
-                    <div class="header-box-thumbnail">
-                      <img class="thumbnail-cover" src="<?=base_url();?>mockup_statis/assets/img/jur-3.jpg">
-                    </div>
-                    <div class="body-box-thumbnail">
-                      <h5 class="title-thumbnail"><a href="#">urnal Psikologi Pendidikan dan Perkembangan</a> </h5>
-                      <div class="col col-md-12 col-sm-12 col-xs-12 none-padding">
-                        <a href="#" style="float: right;color: #EF7314;text-decoration: none;font-size: 20px;"><i class="fa fa-download"></i></a>
+              <?php foreach ($journal as $key => $value): ?>
+                <div class="filter-box-thumbnail col-md-3 col-sm-3 col-xs-12 " style="">
+                    <div class="box-thumbnail">
+                      <div class="header-box-thumbnail">
+                        <img class="thumbnail-cover" src="<?=base_url();?>assets/media/<?php echo $value['futured_image'];?>">
+                      </div>
+                      <div class="body-box-thumbnail">
+                        <h5 class="title-thumbnail"><a href="#">Journal Psikologi Pendidikan dan Perkembangan</a> </h5>
+                        <div class="col col-md-12 col-sm-12 col-xs-12 none-padding">
+                          <a href="#" style="float: right;color: #EF7314;text-decoration: none;font-size: 20px;"><i class="fa fa-download"></i></a>
+                        </div>
+
                       </div>
 
                     </div>
-
-                  </div>
-              </div>
+                </div>
+              <?php endforeach ?>
               <div class="col col-md-12 col-sm-12 col-xs-12 text-center" style="padding: 20px 15px;">
               	<button class="btn btn-warning btn-bg"> Load More</button>
               </div>

@@ -131,12 +131,12 @@ class Journal extends MX_Controller
                 $sql .= " AND id_instansi = ? ";
                 if ($input['kategori'] != '') {
                     $param['kategori'] = $input['kategori'];
-                    $sql .= " AND id_kategori_ref = ".$param['kategori']."";
+                    $sql .= " OR id_kategori_ref = ".$param['kategori']."";
                 }
                 if ($input['start'] != '' && $input['end'] != '') {
                     $param['start'] = date('Y-m-d', strtotime($input['start']));
                     $param['end'] = date('Y-m-d', strtotime($input['end']));
-                    $sql .= " AND n.publish between ".$param['start']." AND ".$param['end'];
+                    $sql .= " OR n.publish between ".$param['start']." AND ".$param['end'];
                 }
                 $sql .= " GROUP BY id_journal";
                 $jumlah = $this->db->query($sql,$value['id_instansi'])->num_rows();
@@ -1297,8 +1297,10 @@ class Journal extends MX_Controller
 
 
 
-    public function detail_search(){
-        
-        $this->ciparser->new_parse('template_user','modules_user', 'detail_search_layout');
+    public function detail_search($id=null){
+        $sql = "SELECT j.* FROM tb_journal j join tb_pengguna p on j.id_user_ref = p.id_pengguna Where j.status = 2 and id_instansi_ref = ?";
+        $journal = $this->db->query($sql,$id)->result_array();
+        $this->data['journal'] = $journal;
+        $this->ciparser->new_parse('template_user','modules_user', 'detail_search_layout',$this->data);
     }
 }

@@ -70,11 +70,11 @@
 			<div class="form-group">
 		        <div class="form-search"><label>Date</label></div>
 		        <div class="sub-date">
-		        	<input type="month" name="start" class="form-control" >
+		        	<input type="date" name="start" class="form-control" >
 		        </div>
 		        <span style="padding: 0 5px;"> To </span>
 		        <div class="sub-date">
-		        	<input type="month" name="end" class="form-control" >
+		        	<input type="date" name="end" class="form-control" >
 		        </div>
 		        <div class="error" id="ntf_volume"></div>
 		      </div>
@@ -91,15 +91,6 @@
 		        <div class="error" id="ntf_kategori"></div>
 		     </div>
 		</div>
-		<!-- <div class="col col-md-3 col-sm-6 col-xs-12">
-			<div class="form-group">
-		        <div class="form-search"><label>Database</label></div>
-		   		<select class="form-control ">
-		   			<option>kategori 1</option>
-		   		</select>
-		        <div class="error" id="ntf_database"></div>
-		     </div>
-		</div> -->
 		<div class="col col-md-3 col-sm-6 col-xs-12">
 			<div class="form-group">
 		        <div class="form-search"><label>Title</label></div>
@@ -130,7 +121,7 @@
 	        		</div>
 	        		<div class="box-body">
 	        			<div class="col col-md-9 col-sm8 col-xs-7 none-padding box-body-left">
-	        				<h4><?=$value['nm_instansi']?></h4>
+	        				<h4><a href="<?php echo site_url('user/journal/detail_search/'.$value['id_instansi']);?>"><?=$value['nm_instansi']?><a/</h4>
 	        			</div>
 	        			<div class="col col-md-3 col-sm-4 col-xs-5 none-padding">
 	        				<h4 class="text-center"><?=$value['jumlah'];?></h4>
@@ -138,19 +129,6 @@
 	        		</div>
 	        	</div>        		
         	<?php endforeach ?>
-        	<!-- <div class="col col-md-4 col-sm-4 col-xs-12 filter-box">
-        		<div class="box-header">
-        			<img src="http://192.168.88.15/idren/assets/media/1539161415.jpg" class="img-responsive img-logo">
-        		</div>
-        		<div class="box-body">
-        			<div class="col col-md-9 col-sm-8 col-xs-7 none-padding box-body-left" style="background-color: blue;color: white;">
-        				<h4>Universitas Indonesia</h4>
-        			</div>
-        			<div class="col col-md-3 col-sm-4 col-xs-5 none-padding">
-        				<h4 class="text-center">150</h4>
-        			</div>
-        		</div>
-        	</div> -->
         </div>
       </div>
     </div>

@@ -290,7 +290,7 @@ class Login_user extends MX_Controller  {
             }
             $me = $response->getGraphUser();
             if ($me->getProperty('email') == null || $me->getProperty('email') == '') {
-                $this->data['error'] = "Tidak ada email yang tertaut dengan Facebook anda, silahkan menggunakan akun lain";
+                $this->data['error'] = urlencode("Tidak ada email yang tertaut dengan Facebook anda, silahkan menggunakan akun lain");
                 $url = 'index';
                 redirect('user/login_user/error'.'/'.$url.'/'.$this->data['error']);
                 exit();
@@ -506,7 +506,7 @@ terima kasih";
             $me = $response->getGraphUser();
             if ($me->getProperty('email') == null || $me->getProperty('email') == '') {
                 // echo 
-                $this->data['error'] = "Tidak ada email yang tertaut dengan Facebook anda, silahkan menggunakan akun lain";
+                $this->data['error'] = urlencode("Tidak ada email yang tertaut dengan Facebook anda, silahkan menggunakan akun lain");
                 $url = 'login_mahasiswa';
                 redirect('user/login_user/error'.'/'.$url.'/'.$this->data['error']);
                 exit();

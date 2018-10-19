@@ -98,7 +98,7 @@
 		        <div class="error" id="ntf_title"></div>
 		     </div>
 		     <div class="form-group">
-		     	<button class="btn btn-warning btn-bg" style="float: right;">Sbmit</button>
+		     	<button class="btn btn-warning btn-bg" style="float: right;">Submit</button>
 		     </div>
 		</div>
 	</form>

@@ -66,7 +66,7 @@
 <div class="col col-md-12 col-sm-12 col-xs-12 sec-search ">
 	<form>
 		
-		<div class="col col-md-4 col-sm-6 col-xs-12">
+		<div class="col col-md-5 col-sm-6 col-xs-12">
 			<div class="form-group">
 		        <div class="form-search"><label>Date</label></div>
 		        <div class="sub-date">

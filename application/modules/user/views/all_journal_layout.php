@@ -301,7 +301,7 @@ div.container-fluid.footer-bottom{
                 </div>
               </div>
               <div class="col col-md-12 col-sm-12 col-xs-12 none-padding">
-                <div class="col col-md-9 col-sm-8 col-xs-6 list-journal">
+                <div class="col col-md-12 col-sm-12 col-xs-12 list-journal">
                   <div class="owl-carousel owl-theme">
                     <?php foreach ($journal as $key => $value): ?>
                       <div class="item">

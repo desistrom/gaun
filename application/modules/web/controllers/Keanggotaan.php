@@ -533,6 +533,9 @@ terima kasih";
               $this->data['error'] = $e->getMessage();
               $url = 'pendaftaran_dosen';
               redirect('web/keanggotaan/error'.'/'.$url.'/'.$this->data['error']);
+              $this->session->set_flashdata('notif',$this->data['error']);
+              $url = 'index';
+              redirect('web/keanggotaan/error'.'/'.$url);
           exit;
         } catch(Facebook\Exceptions\FacebookSDKException $e) {
               // When validation fails or other local issues

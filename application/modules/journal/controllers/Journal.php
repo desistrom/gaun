@@ -46,7 +46,7 @@ class Journal extends MX_Controller
     }
 
     public function index(){
-    	$sql = "SELECT * FROM tb_journal Where status = 2";
+    	$sql = "SELECT * FROM tb_journal Where status = 2 limit 12";
         $journal = $this->db->query($sql)->result_array();
         foreach ($journal as $key => $value) {
             $jumlah = $this->db->get_where('tb_volume',array('id_journal_ref'=>$value['id_journal']))->num_rows();
@@ -72,7 +72,7 @@ class Journal extends MX_Controller
     }
 
     public function search($param=null){
-        $sql = "SELECT * FROM tb_journal WHERE status = 2 AND judul LIKE '%".$param."%'";
+        $sql = "SELECT * FROM tb_journal WHERE status = 2 AND judul LIKE '%".$param."%' limit 12";
         $journal = $this->db->query($sql)->result_array();
         foreach ($journal as $key => $value) {
             $jumlah = $this->db->get_where('tb_volume',array('id_journal_ref'=>$value['id_journal']))->num_rows();
@@ -183,6 +183,58 @@ class Journal extends MX_Controller
         }else{
             redirect(site_url('user/login_user/login_mahasiswa'));
         }
+    }
+
+    public function loadmore($limit,$ofset){
+        $sql = "SELECT j.* FROM tb_journal j join tb_pengguna p on j.id_user_ref = p.id_pengguna Where j.status = 2 limit ".$limit.",".$ofset;
+        $journal = $this->db->query($sql)->result_array();
+        foreach ($journal as $key => $value) {
+            $jumlah = $this->db->get_where('tb_volume',array('id_journal_ref'=>$value['id_journal']))->num_rows();
+            $journal[$key]['jumlah'] = $jumlah;
+        }
+        $html = '';
+        foreach ($journal as $key => $value) {
+            $html .= '<div class="col col-md-2 col-sm-4 col-xs-12 filter-box-jurnal" >
+                        <div class="box-jurnal" >
+                            <div class="box-header">
+                                <img class="img-responsive thumbnail-jurnal" src="'.base_url().'assets/media/'.$value['futured_image'].'">
+                            </div>
+                            <div class="box-body">
+                                <h5><a href="'.site_url('journal/detail_journal/'.$value['slug']).'">'.$value['judul'].'</a></h5>
+                                <h5>Jumlah Volume : '.$value['jumlah'].'</h5>
+                            </div>
+                            <a href="'.site_url('journal/detail_journal/'.$value['slug']).'" class="link_detail"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></a>
+                        </div>
+                    </div>';
+        }
+
+        echo json_encode($html);
+    }
+
+    public function loadmore_search($id=null,$limit,$ofset){
+        $sql = "SELECT j.* FROM tb_journal j join tb_pengguna p on j.id_user_ref = p.id_pengguna Where j.status = 2 and judul LIKE '%".$id."%' limit ".$limit.",".$ofset;
+        $journal = $this->db->query($sql,$id)->result_array();
+        $html = '';
+        foreach ($journal as $key => $value) {
+            $jumlah = $this->db->get_where('tb_volume',array('id_journal_ref'=>$value['id_journal']))->num_rows();
+            $journal[$key]['jumlah'] = $jumlah;
+        }
+        foreach ($journal as $key => $value) {
+            $html .= '<div class="col col-md-2 col-sm-4 col-xs-12 filter-box-jurnal" >
+                        <div class="box-jurnal" >
+                            <div class="box-header">
+                                <img class="img-responsive thumbnail-jurnal" src="'.base_url().'assets/media/'.$value['futured_image'].'">
+                            </div>
+                            <div class="box-body">
+                                <h5><a href="'.site_url('journal/detail_journal/'.$value['slug']).'">'.$value['judul'].'</a></h5>
+                                <h5>Jumlah Volume : '.$value['jumlah'].'</h5>
+                            </div>
+                            <a href="'.site_url('journal/detail_journal/'.$value['slug']).'" class="link_detail"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></a>
+                        </div>
+                    </div>';
+        }
+
+        echo json_encode($html);
     }
 
 

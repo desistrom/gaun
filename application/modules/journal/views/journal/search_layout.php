@@ -9,15 +9,11 @@
 	<div class="col col-md-2 col-sm-4 col-xs-12 filter-box-jurnal" >
 		<div class="box-jurnal" >
 			<div class="box-header">
-				<!-- <div class="filter-lighten" style="background-color: green;height: 20px;width: 100%;">
-					
-				</div> -->
 				<img class="img-responsive thumbnail-jurnal" src="<?=base_url();?>assets/media/<?=$value['futured_image'];?>">
 			</div>
 			<div class="box-body">
 				<h5><a href="<?=site_url('journal/detail_journal/'.$value['slug']);?>"><?=$value['judul'];?></a></h5>
 				<h5>Jumlah Volume : <?=$value['jumlah'];?></h5>
-				<!-- <h5>2016 - 12</h5> -->
 			</div>
 			<a href="<?=site_url('journal/detail_journal/'.$value['slug']);?>" class="link_detail"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></a>
 		</div>
@@ -36,8 +32,11 @@
       var limit = $('#limit').val();
       var ofset = $('#ofset').val();
       var set = parseInt(limit) + parseInt(ofset);
+      var url = document.URL;
+      var end = get_url(url);
+      console.log(end);
       $.ajax({
-        url : base_url+'journal/loadmore/'+limit+'/'+ofset,
+        url : base_url+'user/journal/loadmore_seach/'+end+'/'+limit+'/'+ofset,
         dataType : 'json'
       }).done(function(data){
         $('.add-data').append(data);

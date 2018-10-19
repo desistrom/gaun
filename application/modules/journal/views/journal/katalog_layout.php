@@ -51,7 +51,7 @@
 		</div>
 		<div class="col col-md-12 col-sm-12 col-xs-12 list-content-catalog head-list-cat  cat-head">List katalog</div><!-- <div class="col col-md-4 col-sm-6 col-xs-12 list-content-catalog head-list-cat cat-head"></div><div class="col col-md-4 col-sm-6 col-xs-12 list-content-catalog head-list-cat cat-head"></div> -->
 		<?php foreach ($journal as $key => $value): ?>
-			<div class="col col-md-4 col-sm-6 col-xs-12 list-content-catalog"> <a href="<?=site_url('journal/detail_journal/'.$value["slug"]);?>"><?=$value['judul'];?></a></div>
+			<div class="col col-md-6 col-sm-6 col-xs-12 list-content-catalog"> <a href="<?=site_url('journal/detail_journal/'.$value["slug"]);?>"><i class="fa fa-book"></i> <?=$value['judul'];?></a></div>
 		<?php endforeach ?>
 		<!-- <div class="col col-md-4 col-sm-6 col-xs-12 list-content-catalog"> <a href="#antibody/anti-inhibin">antibody/anti-inhibin</a>	</div>
 		<div class="col col-md-4 col-sm-6 col-xs-12 list-content-catalog"> <a href="#antibody/anti-inhibin">antibody/anti-inhibin</a>	</div>

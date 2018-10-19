@@ -141,6 +141,7 @@
 }
 .indicator {
     margin-top: 1em;
+    cursor: pointer;
 }
 .sub-menu{
     width: 81%;

@@ -1298,9 +1298,35 @@ class Journal extends MX_Controller
 
 
     public function detail_search($id=null){
-        $sql = "SELECT j.* FROM tb_journal j join tb_pengguna p on j.id_user_ref = p.id_pengguna Where j.status = 2 and id_instansi_ref = ?";
+        $sql = "SELECT j.*,i.nm_instansi FROM tb_journal j join tb_pengguna p on j.id_user_ref = p.id_pengguna join tb_instansi i on p.id_instansi_ref = i.id_instansi Where j.status = 2 and id_instansi = ? limit 0,4";
         $journal = $this->db->query($sql,$id)->result_array();
+        // print_r($journal);
         $this->data['journal'] = $journal;
         $this->ciparser->new_parse('template_user','modules_user', 'detail_search_layout',$this->data);
+    }
+
+    public function loadmore($id=null,$limit,$ofset){
+        $sql = "SELECT j.* FROM tb_journal j join tb_pengguna p on j.id_user_ref = p.id_pengguna Where j.status = 2 and id_instansi_ref = ? limit ".$limit.",".$ofset;
+        $journal = $this->db->query($sql,$id)->result_array();
+        $html = '';
+        foreach ($journal as $key => $value) {
+            $html .= '<div class="filter-box-thumbnail col-md-3 col-sm-3 col-xs-12 " style="">
+                    <div class="box-thumbnail">
+                      <div class="header-box-thumbnail">
+                        <img class="thumbnail-cover" src="'.base_url().'assets/media/'.$value['futured_image'].'">
+                      </div>
+                      <div class="body-box-thumbnail">
+                    <h5 class="title-thumbnail"><a href="'.site_url('user/journal/detail_journal/'.$value['id_journal']).'">'.$value['judul'].'</a> </h5>
+                        <div class="col col-md-12 col-sm-12 col-xs-12 none-padding">
+                          <a href="#" style="float: right;color: #EF7314;text-decoration: none;font-size: 20px;"><i class="fa fa-download"></i></a>
+                        </div>
+
+                      </div>
+
+                    </div>
+                </div>';
+        }
+
+        echo json_encode($html);
     }
 }

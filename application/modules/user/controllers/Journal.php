@@ -1318,7 +1318,7 @@ class Journal extends MX_Controller
                       <div class="body-box-thumbnail">
                     <h5 class="title-thumbnail"><a href="'.site_url('user/journal/detail_journal/'.$value['id_journal']).'">'.$value['judul'].'</a> </h5>
                         <div class="col col-md-12 col-sm-12 col-xs-12 none-padding">
-                          <a href="#" style="float: right;color: #EF7314;text-decoration: none;font-size: 20px;"><i class="fa fa-download"></i></a>
+                          <a href="'.site_url('user/journal/download_journal/'.$value['id_journal']).'" style="float: right;color: #EF7314;text-decoration: none;font-size: 20px;"><i class="fa fa-download"></i></a>
                         </div>
 
                       </div>

@@ -18,6 +18,7 @@ class Login_user extends MX_Controller  {
     // $this->load->library('facebook');
     $this->load->model('user');
     $this->load->helper('api');
+    $this->load->helper('encrypt_decrypt');
         // $this->load->model('Facebook_model','user/login_user/');
 
     }
@@ -207,14 +208,16 @@ class Login_user extends MX_Controller  {
         } catch(Facebook\Exceptions\FacebookResponseException $e) {
               // When Graph returns an error
               $this->data['error'] = $e->getMessage();
+              $this->session->set_flashdata('notif',$this->data['error']);
               $url = 'index';
-              redirect('user/login_user/error'.'/'.$url.'/'.$this->data['error']);
+              redirect('user/login_user/error'.'/'.$url);
           exit;
         } catch(Facebook\Exceptions\FacebookSDKException $e) {
               // When validation fails or other local issues
               $this->data['error'] = $e->getMessage();
+              $this->session->set_flashdata('notif',$this->data['error']);
               $url = 'index';
-              redirect('user/login_user/error'.'/'.$url.'/'.$this->data['error']);
+              redirect('user/login_user/error'.'/'.$url);
               exit;
         }
         if (!isset($accessToken)) {
@@ -224,9 +227,12 @@ class Login_user extends MX_Controller  {
             $this->data['error'] .= "Error Code: " . $helper->getErrorCode() . "\n";
             $this->data['error'] .= "Error Reason: " . $helper->getErrorReason() . "\n";
             $this->data['error'] .= "Error Description: " . $helper->getErrorDescription() . "\n";
+            $text = encrypt_text($this->data['error']);
+            $this->data['error'] = $text;
           } else {
             // header('HTTP/1.0 400 Bad Request');
             $this->data['error'] = 'Bad request';
+              $this->session->set_flashdata('notif',$this->data['error']);
           }
           // $this->data['error'] = 'Facebook SDK returned an error: ' . $e->getMessage();
               // $this->data['url'] = '<a href="{site_url("user/login_user")}">Back to Login Dosen</a>';
@@ -234,7 +240,7 @@ class Login_user extends MX_Controller  {
               // $html = str_replace('url_back', $url, $html);
               // echo $html;
               $url = 'index';
-              redirect('user/login_user/error'.'/'.$url.'/'.$this->data['error']);
+              redirect('user/login_user/error'.'/'.$url);
               // $a = $this->error($this->data['error'],$url);
               // echo $a;
               // $this->ciparser->new_parse('template_frontend','modules_user', 'error_layout',$this->data);     
@@ -264,8 +270,9 @@ class Login_user extends MX_Controller  {
             $accessToken = $oAuth2Client->getLongLivedAccessToken($accessToken);
           } catch (Facebook\Exceptions\FacebookSDKException $e) {
             $this->data['error'] = $e->getMessage();
-            $url = 'index';
-            redirect('user/login_user/error'.'/'.$url.'/'.$this->data['error']);
+            $this->session->set_flashdata('notif',$this->data['error']);
+              $url = 'index';
+              redirect('user/login_user/error'.'/'.$url);
             exit;
           }
         }
@@ -279,20 +286,24 @@ class Login_user extends MX_Controller  {
               $response = $fb->get('/me?fields=id,name,email,first_name,last_name,birthday,location,gender', $accessToken);
             } catch(Facebook\Exceptions\FacebookResponseException $e) {
                 $this->data['error'] = $e->getMessage();
-                $url = 'index';
-                redirect('user/login_user/error'.'/'.$url.'/'.$this->data['error']);
+                $this->session->set_flashdata('notif',$this->data['error']);
+              $url = 'index';
+              redirect('user/login_user/error'.'/'.$url);
                 exit;
             } catch(Facebook\Exceptions\FacebookSDKException $e) {
                 $this->data['error'] = $e->getMessage();
-                $url = 'index';
-                redirect('user/login_user/error'.'/'.$url.'/'.$this->data['error']);
+                $this->session->set_flashdata('notif',$this->data['error']);
+              $url = 'index';
+              redirect('user/login_user/error'.'/'.$url);
                 exit;
             }
             $me = $response->getGraphUser();
             if ($me->getProperty('email') == null || $me->getProperty('email') == '') {
-                $this->data['error'] = urlencode("Tidak ada email yang tertaut dengan Facebook anda, silahkan menggunakan akun lain");
-                $url = 'index';
-                redirect('user/login_user/error'.'/'.$url.'/'.$this->data['error']);
+                $text = "Tidak ada email yang tertaut dengan Facebook anda, silahkan menggunakan akun lain";
+                $this->data['error'] = $text;
+                $this->session->set_flashdata('notif',$this->data['error']);
+              $url = 'index';
+              redirect('user/login_user/error'.'/'.$url);
                 exit();
             }
         // $this->load->library('facebook','user/login_user/facebook');
@@ -322,31 +333,36 @@ class Login_user extends MX_Controller  {
                 $data['content'] = 'Halo '.$userData['first_name']." ".$userData['last_name']."<br> request akun anda sedang diproses, silakan ditunggu.<br>admin kami akan mengirimkan email notifikasi aktivasi akun anda dalam 1 x 24 jam dari waktu pendaftaran.<br>terima kasih";
                 if (email_send($data) == true) {
                     $user_data = 'success';
-                    $this->session->set_userdata("header","Registrasi Berhasil");
-                    $this->session->set_userdata("notif","Registrasi Anda sedang kami Proses, tunggu konfirmasi selanjutnya dari Admin");
+                    // $this->session->set_userdata("header","Registrasi Berhasil");
+                    // $this->session->set_userdata("notif","Registrasi Anda sedang kami Proses, tunggu konfirmasi selanjutnya dari Admin");
                     $this->data['error'] = "Registrasi Anda sedang kami Proses, tunggu konfirmasi selanjutnya dari Admin";
+                    $this->session->set_flashdata('notif',$this->data['error']);
                     $url = 'index';
-                    redirect('user/login_user/error'.'/'.$url.'/'.$this->data['error']);
+                    redirect('user/login_user/error'.'/'.$url);
                 }
             }else{
                 if ($userID == 'no') {
-	                $this->session->set_userdata("header","Login Gagal");
-	                $this->session->set_userdata("notif","Akun Anda belum aktif, silahkan menunggu konformasi dari admin");
+	                // $this->session->set_userdata("header","Login Gagal");
+	                // $this->session->set_flashdata("notif","Akun Anda belum aktif, silahkan menunggu konformasi dari admin");
 	                $this->data['error'] = "Akun Anda belum aktif, silahkan menunggu konformasi dari admin";
+                    $text = encrypt_text($this->data['error']);
+                    $this->session->set_flashdata('notif',$this->data['error']);
                     $url = 'index';
-                    redirect('user/login_user/error'.'/'.$url.'/'.$this->data['error']);
+                    redirect('user/login_user/error'.'/'.$url);
                 }elseif ($userID == 'salah') {
-                    $this->session->set_userdata("header","Login Gagal");
-                    $this->session->set_userdata("notif","Akun Anda tidak memiliki akses, silahkan menggunakan akun lain");
+                    /*$this->session->set_userdata("header","Login Gagal");
+                    $this->session->set_userdata("notif","Akun Anda tidak memiliki akses, silahkan menggunakan akun lain");*/
                     $this->data['error'] = "Akun Anda tidak memiliki akses, silahkan menggunakan akun lain";
+                    $this->session->set_flashdata('notif',$this->data['error']);
                     $url = 'index';
-                    redirect('user/login_user/error'.'/'.$url.'/'.$this->data['error']);
+                    redirect('user/login_user/error'.'/'.$url);
                 }elseif ($userID == 'email') {
-                    $this->session->set_userdata("header","Login Gagal");
-                    $this->session->set_userdata("notif","Tidak ada email yang tertaut dengan Facebook anda, silahkan menggunakan akun lain");
+                    /*$this->session->set_userdata("header","Login Gagal");
+                    $this->session->set_userdata("notif","Tidak ada email yang tertaut dengan Facebook anda, silahkan menggunakan akun lain");*/
                     $this->data['error'] = "Tidak ada email yang tertaut dengan Facebook anda, silahkan menggunakan akun lain";
+                    $this->session->set_flashdata('notif',$this->data['error']);
                     $url = 'index';
-                    redirect('user/login_user/error'.'/'.$url.'/'.$this->data['error']);
+                    redirect('user/login_user/error'.'/'.$url);
                 }else{
 	                $this->session->set_userdata('user_login',true);
 	                $this->session->set_userdata('user',$userID);
@@ -430,7 +446,8 @@ terima kasih";
               // When Graph returns an error
             $this->data['error'] = $e->getMessage();
             $url = 'login_mahasiswa';
-            redirect('user/login_user/error'.'/'.$url.'/'.$this->data['error']);
+            $this->session->set_flashdata('notif',$this->data['error']);
+            redirect('user/login_user/error'.'/'.$url);
           exit;
         } catch(Facebook\Exceptions\FacebookSDKException $e) {
               // When validation fails or other local issues
@@ -446,13 +463,15 @@ terima kasih";
              $this->data['error'] .= "Error Code: " . $helper->getErrorCode() . "\n";
              $this->data['error'] .= "Error Reason: " . $helper->getErrorReason() . "\n";
              $this->data['error'] .= "Error Description: " . $helper->getErrorDescription() . "\n";
+            $this->session->set_flashdata('notif',$this->data['error']);
           } else {
             // header('HTTP/1.0 400 Bad Request');
              $this->data['error'] = 'Bad request';
+            $this->session->set_flashdata('notif',$this->data['error']);
           }
-          $this->data['error'] = $e->getMessage();
-            $url = 'login_mahasiswa';
-            redirect('user/login_user/error'.'/'.$url.'/'.$this->data['error']);
+          $url = 'login_mahasiswa';
+            $this->session->set_flashdata('notif',$this->data['error']);
+            redirect('user/login_user/error'.'/'.$url);
           exit;
         }
         // Logged in
@@ -479,6 +498,7 @@ terima kasih";
             $accessToken = $oAuth2Client->getLongLivedAccessToken($accessToken);
           } catch (Facebook\Exceptions\FacebookSDKException $e) {
             $this->data['error'] = $e->getMessage();
+            $this->session->set_flashdata('notif',$this->data['error']);
             $url = 'login_mahasiswa';
             redirect('user/login_user/error'.'/'.$url.'/'.$this->data['error']);
             exit;
@@ -499,6 +519,7 @@ terima kasih";
                 exit;
             } catch(Facebook\Exceptions\FacebookSDKException $e) {
                 $this->data['error'] = $e->getMessage();
+            $this->session->set_flashdata('notif',$this->data['error']);
             $url = 'login_mahasiswa';
             redirect('user/login_user/error'.'/'.$url.'/'.$this->data['error']);
                 exit;
@@ -507,6 +528,7 @@ terima kasih";
             if ($me->getProperty('email') == null || $me->getProperty('email') == '') {
                 // echo 
                 $this->data['error'] = urlencode("Tidak ada email yang tertaut dengan Facebook anda, silahkan menggunakan akun lain");
+            $this->session->set_flashdata('notif',$this->data['error']);
                 $url = 'login_mahasiswa';
                 redirect('user/login_user/error'.'/'.$url.'/'.$this->data['error']);
                 exit();
@@ -541,30 +563,34 @@ admin kami akan mengirimkan email notifikasi aktivasi akun anda dalam 1 x 24 jam
 terima kasih";
                 if (email_send($data) == true) {
                     $user_data = 'success';
-                    $this->session->set_userdata("header","Registrasi Berhasil");
-                    $this->session->set_userdata("notif","Registrasi Anda sedang kami Proses, tunggu konfirmasi selanjutnya dari Admin");
+                    /*$this->session->set_userdata("header","Registrasi Berhasil");
+                    $this->session->set_userdata("notif","Registrasi Anda sedang kami Proses, tunggu konfirmasi selanjutnya dari Admin");*/
                     $this->data['error'] = "Registrasi Anda sedang kami Proses, tunggu konfirmasi selanjutnya dari Admin";
+                    $this->session->set_flashdata('notif',$this->data['error']);
                     $url = 'login_mahasiswa';
                     redirect('user/login_user/error'.'/'.$url.'/'.$this->data['error']);
                 }
             }else{
                 if ($userID == 'no') {
-                    $this->session->set_userdata("header","Login Gagal");
-                    $this->session->set_userdata("notif","Akun Anda pernah belum aktif, silahkan menunggu konformasi dari admin");
+                    /*$this->session->set_userdata("header","Login Gagal");
+                    $this->session->set_userdata("notif","Akun Anda pernah belum aktif, silahkan menunggu konformasi dari admin");*/
                     $this->data['error'] = "Akun Anda tidak aktif, silahkan menunggu konformasi dari admin";
+                    $this->session->set_flashdata('notif',$this->data['error']);
                     $url = 'login_mahasiswa';
                     redirect('user/login_user/error'.'/'.$url.'/'.$this->data['error']);
 
                 }elseif ($userID == 'salah') {
-                    $this->session->set_userdata("header","Login Gagal");
-                    $this->session->set_userdata("notif","Akun Anda tidak memiliki akses, silahkan menggunakan akun lain");
+                    /*$this->session->set_userdata("header","Login Gagal");
+                    $this->session->set_userdata("notif","Akun Anda tidak memiliki akses, silahkan menggunakan akun lain");*/
                     $this->data['error'] = "Akun Anda tidak memiliki akses, silahkan menggunakan akun lain";
+                    $this->session->set_flashdata('notif',$this->data['error']);
                     $url = 'login_mahasiswa';
                     redirect('user/login_user/error'.'/'.$url.'/'.$this->data['error']);
                 }elseif ($userID == 'email') {
-                    $this->session->set_userdata("header","Login Gagal");
-                    $this->session->set_userdata("notif","Tidak ada email yang tertaut dengan Facebook anda, silahkan menggunakan akun lain");
+                    /*$this->session->set_userdata("header","Login Gagal");
+                    $this->session->set_userdata("notif","Tidak ada email yang tertaut dengan Facebook anda, silahkan menggunakan akun lain");*/
                     $this->data['error'] = "Tidak ada email yang tertaut dengan Facebook anda, silahkan menggunakan akun lain";
+                    $this->session->set_flashdata('notif',$this->data['error']);
                     $url = 'login_mahasiswa';
                     redirect('user/login_user/error'.'/'.$url.'/'.$this->data['error']);
                 }else{
@@ -767,8 +793,9 @@ terima kasih";
     public function error($url=null,$error=null){
         $a = urldecode($error);
         $this->data['url'] = $url;
-        $this->data['error'] = $a;
-        $this->ciparser->new_parse('template_frontend','modules_user', 'error_layout',$this->data);    
+        $this->data['error'] = $this->session->flashdata('notif');
+        $this->ciparser->new_parse('template_frontend','modules_user', 'error_layout',$this->data);
+        // $this->session->unset_userdata('notif'); 
     }
 
 

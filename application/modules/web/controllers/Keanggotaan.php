@@ -514,17 +514,15 @@ terima kasih";
     }
 
     public function facebook(){
-        if (!isset($_SESSION)) {
             if(!session_id()) {
                 session_start();
             }
-        }
         $fb = new Facebook\Facebook([
               'app_id' => FACEBOOK_APP_ID, // Replace {app-id} with your app id
               'app_secret' => FACEBOOK_APP_SECRET,
               'default_graph_version' => 'v2.2',
         ]);
-        $helper = $fb->getRedirectLoginHelper();
+        $helper = $fb->getRedirectLoginHelper(); if (isset($_GET['state'])) { $helper->getPersistentDataHandler()->set('state', $_GET['state']); }
 
         try {
           $accessToken = $helper->getAccessToken();
@@ -693,7 +691,7 @@ terima kasih";
               'app_secret' => FACEBOOK_APP_SECRET,
               'default_graph_version' => 'v2.2',
         ]);
-        $helper = $fb->getRedirectLoginHelper();
+        $helper = $fb->getRedirectLoginHelper(); if (isset($_GET['state'])) { $helper->getPersistentDataHandler()->set('state', $_GET['state']); }
 
         try {
           $accessToken = $helper->getAccessToken();

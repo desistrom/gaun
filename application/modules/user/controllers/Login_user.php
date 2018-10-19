@@ -564,7 +564,7 @@ terima kasih";
                 }elseif ($userID == 'email') {
                     $this->session->set_userdata("header","Login Gagal");
                     $this->session->set_userdata("notif","Tidak ada email yang tertaut dengan Facebook anda, silahkan menggunakan akun lain");
-                    this->data['error'] = "Tidak ada email yang tertaut dengan Facebook anda, silahkan menggunakan akun lain";
+                    $this->data['error'] = "Tidak ada email yang tertaut dengan Facebook anda, silahkan menggunakan akun lain";
                     $url = 'login_mahasiswa';
                     redirect('user/login_user/error'.'/'.$url.'/'.$this->data['error']);
                 }else{

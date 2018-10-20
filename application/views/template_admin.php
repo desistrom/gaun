@@ -33,6 +33,8 @@
     <script type="text/javascript">
       var base_url = "<?=base_url();?>";
     </script>
+     <script src="<?=base_url();?>assets/js/jquery-2.2.3.min.js"></script>
+<!-- <script src="<?=base_url();?>assets/js/jquery-ui.min.js"></script> -->
 </head>
 <body class="hold-transition skin-red sidebar-mini">
 <div class="wrapper">
@@ -601,7 +603,7 @@
 <!-- ./wrapper -->
 
 <!-- jQuery 3 -->
-<script src="<?=base_url();?>assets/js/jquery-2.2.3.min.js"></script>
+<!-- <script src="<?=base_url();?>assets/js/jquery-2.2.3.min.js"></script> -->
 <!-- jQuery UI 1.11.4 -->
 <script src="<?=base_url().'assets/js/select2.min.js';?>"></script>
 <script type="text/javascript">

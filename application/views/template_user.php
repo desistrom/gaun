@@ -160,6 +160,7 @@
         height: auto;
         overflow: hidden;
         margin-top: 15px;
+        padding: 0 10em;
        }
       .sub-content-artikel .sub-content-artikel-body .list-artikel{
         padding: 15px;
@@ -204,9 +205,9 @@
         right: -2em;
         top: 40%;*/
       }
-      .sub-content-journal .sub-content-journal-header .list-journal .owl-nav .owl-prev.disabled{
+     /* .sub-content-journal .sub-content-journal-header .list-journal .owl-nav .owl-prev.disabled{
         display: none;
-      }
+      }*/
       .sub-content-journal .sub-content-journal-header .list-journal .owl-nav .owl-next{
         font-size: 71px;
         font-weight: 600;
@@ -320,6 +321,9 @@
   }
   .box-thumbnail{
     border:solid 1px #CBCBCB;
+  }
+  .pieLabel div{
+    color: black!important;
   }
   </style>
   <script src="<?=base_url();?>assets/js/jquery-2.2.3.min.js"></script>
@@ -541,8 +545,18 @@
           </ul>
         </li>
         <li>
+          <a href="<?=site_url('user/journal/report_download');?>">
+            <i class="fa fa-file-text-o"></i> <span>Report Download</span>
+          </a>
+        </li>
+        <li>
           <a href="<?=site_url('user/journal/search');?>">
             <i class="fa fa-search"></i> <span>search Journal</span>
+          </a>
+        </li>
+        <li>
+          <a href="<?=site_url('user/journal/report_download');?>">
+            <i class="fa fa-file-text-o"></i> <span>Report Download</span>
           </a>
         </li>
         <li class=" treeview" style="margin-top: 5px;">

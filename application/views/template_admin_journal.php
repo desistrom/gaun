@@ -200,7 +200,7 @@
         font-weight: 600;
         margin: 0;
       }
-      .sub-content-journal .sub-content-journal-header .list-journal .owl-nav{
+     /* .sub-content-journal .sub-content-journal-header .list-journal .owl-nav{
         position: absolute;
         right: -2em;
         top: 40%;
@@ -222,7 +222,7 @@
       }
       .sub-content-journal .sub-content-journal-header .list-journal .owl-nav .owl-prev{
         display: none;
-      }
+      }*/
       .txt-seemore{
             position: absolute;
               right: -4.5em;
@@ -292,6 +292,78 @@
   .box-thumbnail{
     border:solid #CBCBCB 1px;
   }
+       .sub-content-journal .sub-content-journal-header .list-journal .item{
+      
+        /*background-color: green;*/
+      }
+      .sub-content-journal .sub-content-journal-header .list-journal .item .box-header{
+          height: 150px;
+          overflow: hidden;
+      }
+      .owl-theme .owl-dots{
+        display: none;
+      }
+      .sub-content-journal .sub-content-journal-header .list-journal .item .title-jurnal{
+        font-size: 14px;
+        font-weight: 600;
+        margin: 0;
+      }
+      .sub-content-journal .sub-content-journal-header .list-journal .owl-nav{
+      /*  position: absolute;
+        right: -2em;
+        top: 40%;*/
+      }
+      .sub-content-journal .sub-content-journal-header .list-journal .owl-nav .owl-prev.disabled{
+        display: none;
+      }
+      .sub-content-journal .sub-content-journal-header .list-journal .owl-nav .owl-next{
+        font-size: 71px;
+        font-weight: 600;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color:#CBCBCB; 
+        /*margin-right: -0.7em;*/
+        position: absolute;
+        margin-top: -0.2em;
+        right:-1em; 
+        top: 47%;
+      }
+      .sub-content-journal .sub-content-journal-header .list-journal .owl-nav .owl-prev{
+        font-size: 71px;
+        font-weight: 600;
+        left:-1em;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color:#CBCBCB; 
+        /*margin-left: -0.7em;*/
+        position: absolute;
+        margin-top: -0.2em;
+        top: 47%;
+      }
+      .sub-content-journal .sub-content-journal-header .list-journal .owl-nav .owl-next span{
+        position: absolute;
+        margin-top: -0.81em;
+        margin-left: -9px;
+      }
+      .sub-content-journal .sub-content-journal-header .list-journal .owl-nav .owl-prev span{
+        position: absolute;
+        margin-top: -0.81em;
+        left: 14px;
+        margin-right: -12px;
+      }
+      .txt-seemore{
+            position: absolute;
+              right: 3.5em;
+              margin-top: -4em;
+              font-size: 16px;
+              font-weight: 600;
+              color: #979797;
+          }
+          .sub-content-journal .sub-content-journal-header .list-journal{
+        padding: 15px 10em;
+      }
   </style>
   <script src="<?=base_url();?>assets/js/jquery-2.2.3.min.js"></script>
   <script src="<?=base_url();?>assets/js/jquery-ui.min.js"></script>
@@ -351,6 +423,16 @@
       <!-- Sidebar user panel -->
       <ul class="sidebar-menu">
         <!-- <li class="header">MAIN NAVIGATION</li> -->
+        <li>
+          <a href="<?=site_url('journal/admin/home');?>">
+            <i class="fa fa-home"></i> <span>Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="<?=site_url('journal/admin/alljournal');?>">
+            <i class="fa fa-copy"></i> <span>All Journal</span>
+          </a>
+        </li>
         <li class="<?php if(current_url() == site_url('journal/admin/volume') || current_url() == site_url('journal/admin/novolume')){ ?> active <?php } ?> treeview" style="margin-top: 5px;">
           <a href="#">
             <i class="fa fa-list"></i> <span>Create Volume & No Volume</span>
@@ -390,6 +472,11 @@
             <li <?php if(current_url() == site_url('journal/admin/rejected')){ ?> class="active" <?php } ?>><a href="<?=site_url('journal/admin/rejected');?>"><i class="fa fa-times"></i> Journal Rejected </a></li>
           </ul>
         </li>
+        <li>
+          <a href="<?=site_url('journal/admin/report_download');?>">
+            <i class="fa fa-file-text-o" aria-hidden="true"></i> <span>Report Download</span>
+          </a>
+        </li>
         
       </ul>
     </section>
@@ -415,8 +502,7 @@
     <div class="pull-right hidden-xs">
       <b>Version</b> 2.4.0
     </div>
-    <strong>Copyright &copy; 2014-2016 <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights
-    reserved.
+    <strong>Copyright &copy; 2018 <a href="https://idren.id">IDren</a>.</strong>
   </footer>
 
   <!-- Control Sidebar -->
@@ -454,6 +540,7 @@
 </script>
 <script src="<?=base_url();?>assets/js/app.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
+
 
 </body>
 </html>

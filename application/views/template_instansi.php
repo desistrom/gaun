@@ -122,6 +122,9 @@
     <script type="text/javascript">
       var base_url = "<?=base_url();?>";
     </script>
+    <script src="<?=base_url();?>assets/js/jquery-2.2.3.min.js"></script>
+<script src="<?=base_url();?>assets/js/jquery-ui.min.js"></script>
+<script src="<?=base_url();?>assets/js/bootstrap.min.js"></script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -222,7 +225,11 @@
             </span>
           </a>
         </li>
-
+         <li>
+          <a href="<?=site_url('instansi/journal/report_download');?>">
+            <i class="fa fa-file-text-o" aria-hidden="true"></i> <span>Report Download</span>
+          </a>
+        </li>
 
         <li class=" treeview <?php if(current_url() == site_url('instansi/pengguna/list_dosen') || current_url() == site_url('instansi/pengguna/list_mahasiswa')){ ?>  active <?php } ?>">
           <a href="#">
@@ -505,15 +512,13 @@
 <!-- ./wrapper -->
 
 <!-- jQuery 3 -->
-<script src="<?=base_url();?>assets/js/jquery-2.2.3.min.js"></script>
+
 <!-- jQuery UI 1.11.4 -->
 <script src="<?=base_url().'assets/js/select2.min.js';?>"></script>
 <script type="text/javascript">
   $('.select2').select2();
 </script>
-<script src="<?=base_url();?>assets/js/jquery-ui.min.js"></script>
-<script src="<?=base_url();?>assets/js/bootstrap.min.js"></script>
-<script src="<?=base_url();?>assets/datatables.net/js/jquery.dataTables.min.js"></script>
+<!-- <script src="<?=base_url();?>assets/datatables.net/js/jquery.dataTables.min.js"></script> -->
 <script src="<?=base_url();?>assets/datatables/js/dataTables.bootstrap.min.js"></script>
 <script type="text/javascript">
   $('#example2').DataTable({

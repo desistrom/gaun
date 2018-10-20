@@ -22,10 +22,14 @@ class Journal_model extends CI_Model
     var $column_search_no_volume = array('nomor','publish'); //set column field database for datatable searchable 
     var $order_no_volume = array('nomor' => 'asc'); // default order 
  
+
+    var $user = array();
+
     public function __construct()
     {
         parent::__construct();
         // $this->load->database();
+        $this->user = data_jwt($_COOKIE['data_user']);
     }
  
     private function _get_datatables_query()
@@ -34,7 +38,7 @@ class Journal_model extends CI_Model
         /*$sql = "SELECT * FROM tb_journal j JOIN tb_volume v ON j.id_journal = v.id_journal_ref JOIN tb_no_volume n ON v.id_volume = n.id_volume_ref JOIN tb_artikel a ON n.id_no_volume = a.id_no_volume_ref JOIN tb_author au ON a.id_artikel = au.id_artikel_ref";
         $this->db->query($sql);*/
         $this->db->from($this->table);
-        $this->db->where('id_user_ref',$this->session->userdata('user'));
+        $this->db->where('id_user_ref',$this->user->user);
         /*
         $this->db->join('tb_volume', 'id_journal = id_journal_ref');
         $this->db->join('tb_no_volume', 'id_volume = id_volume_ref');
@@ -108,7 +112,7 @@ class Journal_model extends CI_Model
         $this->db->join('tb_no_volume', 'id_no_volume_ref = id_no_volume');
         $this->db->join('tb_volume', 'id_volume_ref = id_volume');
         $this->db->join('tb_journal', 'id_journal_ref = id_journal');
-        $this->db->where('tb_journal.id_user_ref',$this->session->userdata('user'));
+        $this->db->where('tb_journal.id_user_ref',$this->user->user);
         // $this->db->join('tb_author', 'id_artikel = id_artikel_ref');
         // $this->db->where('id_instansi_ref', $user['id_instansi']);
  
@@ -178,7 +182,7 @@ class Journal_model extends CI_Model
         $this->db->join('tb_no_volume', 'id_no_volume_ref = id_no_volume');
         $this->db->join('tb_volume', 'id_volume_ref = id_volume');
         $this->db->join('tb_journal', 'id_journal_ref = id_journal');
-        $this->db->where('tb_journal.id_user_ref',$this->session->userdata('user'));
+        $this->db->where('tb_journal.id_user_ref',$this->user->user);
         // $this->db->join('tb_author', 'id_artikel = id_artikel_ref');
         $this->db->where('tb_artikel.status', 1);
  
@@ -250,7 +254,7 @@ class Journal_model extends CI_Model
         $this->db->join('tb_volume', 'id_volume_ref = id_volume');
         $this->db->join('tb_journal', 'id_journal_ref = id_journal');
         // $this->db->join('tb_author', 'id_artikel = id_artikel_ref');
-        $this->db->where('tb_journal.id_user_ref',$this->session->userdata('user'));
+        $this->db->where('tb_journal.id_user_ref',$this->user->user);
         $this->db->where('tb_artikel.status', 2);
  
         $i = 0;
@@ -316,7 +320,7 @@ class Journal_model extends CI_Model
         $this->db->query($sql);*/
         $this->db->from($this->table_volume);
         $this->db->join('tb_journal', 'id_journal = id_journal_ref');
-        $this->db->where('tb_journal.id_user_ref',$this->session->userdata('user'));
+        $this->db->where('tb_journal.id_user_ref',$this->user->user);
         // $this->db->join('tb_no_volume', 'id_volume = id_volume_ref');
         // $this->db->join('tb_volume', 'id_no_volume = id_no_volume_ref');
         // $this->db->join('tb_author', 'id_volume = id_volume_ref');
@@ -386,7 +390,7 @@ class Journal_model extends CI_Model
         $this->db->from($this->table_no_volume);
         $this->db->join('tb_volume', 'id_volume_ref = id_volume');
         $this->db->join('tb_journal', 'id_journal = id_journal_ref');
-        $this->db->where('tb_journal.id_user_ref',$this->session->userdata('user'));
+        $this->db->where('tb_journal.id_user_ref',$this->user->user);
         // $this->db->join('tb_no_no_volume', 'id_no_volume = id_no_volume_ref');
         // $this->db->join('tb_no_volume', 'id_no_no_volume = id_no_no_volume_ref');
         // $this->db->join('tb_author', 'id_no_volume = id_no_volume_ref');

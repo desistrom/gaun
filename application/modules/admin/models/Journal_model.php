@@ -11,19 +11,16 @@ class Journal_model extends CI_Model
     var $column_order_journal = array(null, 'issn','judul','deskripsi','visitor'); //set column field database for datatable orderable
     var $column_search_journal = array('issn','judul','deskripsi','visitor'); //set column field database for datatable searchable 
     var $order_journal = array('judul' => 'asc'); // default order 
-    
-    var $user = array();
-
+ 
     public function __construct()
     {
         parent::__construct();
         // $this->load->database();
-        $this->user = data_jwt($_COOKIE['data_instansi']);
     }
  
     private function _get_datatables_query($id)
     {
-        // $user = $this->user->user;
+        // $user = $this->session->userdata('data_user');
          // $sql = "SELECT * FROM tb_news n join tb_kategori_news k on n.id_kategori_ref = k.id_kategori_news";
         $this->db->select('tb_artikel.*,tb_volume.volume,tb_no_volume.nomor,tb_journal.judul as judul_journal');
         $this->db->from($this->table);
@@ -92,9 +89,9 @@ class Journal_model extends CI_Model
 
     private function _get_datatables_query_journal()
     {
-        $user = $this->user->user;
+        // $user = $this->session->userdata('data_user');
         // $sql = "SELECT * FROM tb_journal n join tb_pengguna k on n.id_user_ref = k.id_pengguna where id_instansi_ref = ?";
-        // if ($this->db->query($sql,$user->id_instansi)) {
+        // if ($this->db->query($sql,$user['id_instansi'])) {
         //     # code...
         // }
         // $this->db->select('tb_artikel.*,tb_volume.*,tb_no_volume.*,tb_journal.judul as judul_journal');
@@ -104,7 +101,7 @@ class Journal_model extends CI_Model
         // $this->db->join('tb_volume', 'id_volume_ref = id_volume');
         // $this->db->join('tb_journal', 'id_journal_ref = id_journal');
         $this->db->where('tb_journal.status', '1');
-        $this->db->where('tb_pengguna.id_instansi_ref', $user->id_instansi);
+        // $this->db->where('tb_pengguna.id_instansi_ref', $user['id_instansi']);
  
         $i = 0;
      
@@ -165,16 +162,16 @@ class Journal_model extends CI_Model
     ###########################
     private function _get_datatables_query_journal_download()
     {
-        $user = $this->user->user;
+        $user = $this->session->userdata('data_user');
         // $sql = "SELECT * FROM tb_journal n join tb_pengguna k on n.id_user_ref = k.id_pengguna where id_instansi_ref = ?";
-        // if ($this->db->query($sql,$user->id_instansi)) {
+        // if ($this->db->query($sql,$user['id_instansi'])) {
         //     # code...
         // }
         // $this->db->select('tb_artikel.*,tb_volume.*,tb_no_volume.*,tb_journal.judul as judul_journal');
         $this->db->from($this->table_journal);
         $this->db->join('tb_pengguna', 'id_user_ref = id_pengguna');
         $this->db->where('tb_journal.status', '2');
-        $this->db->where('tb_pengguna.id_instansi_ref', $user->id_instansi);
+        // $this->db->where('tb_pengguna.id_instansi_ref', $user['id_instansi']);
  
         $i = 0;
      
@@ -228,11 +225,11 @@ class Journal_model extends CI_Model
  
     public function count_all_journal_download()
     {
-        $user = $this->user->user;
+        // $user = $this->session->userdata('data_user');
         $this->db->from($this->table_journal);
         $this->db->join('tb_pengguna', 'id_user_ref = id_pengguna');
         $this->db->where('tb_journal.status', '2');
-        $this->db->where('tb_pengguna.id_instansi_ref', $user->id_instansi);
+        // $this->db->where('tb_pengguna.id_instansi_ref', $user['id_instansi']);
         return $this->db->count_all_results();
     }
    

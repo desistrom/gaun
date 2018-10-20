@@ -7,15 +7,15 @@ class Journal extends MX_Controller
 {
         var $idUser;
         var $data = array();
-
+        var $user = array();
     function __construct()
     {
     	// $this->load->model('login_model');
         // $this->load->helper('api');
         // $this->load->library('Recaptcha');
         // $this->load->module('Token');
-        if ($this->session->userdata('instansi_login') != true) {
-            redirect('instansi/login');
+        if(!isset($_COOKIE['data_instansi']) || decode_token_jwt($_COOKIE['data_instansi']) != true){
+            redirect(site_url('instansi/login'));
         }
     }
 
@@ -182,7 +182,7 @@ class Journal extends MX_Controller
         echo json_encode($output);
     }
 
-    public function all_journal(){
+    /*public function all_journal(){
         
         $sql = "SELECT * FROM tb_journal Where status = 2";
         $journal = $this->db->query($sql)->result_array();
@@ -223,5 +223,165 @@ class Journal extends MX_Controller
         $this->data['breadcumb'] = 'All Journal';
         $this->data['journal'] = $journal;
         $this->ciparser->new_parse('template_instansi','modules_user', 'journal_layout',$this->data);
+    }*/
+
+    public function report_download(){
+        // print_r($this->session->userdata('data_user'));
+        $this->data['breadcumb'] = 'Report Download';
+        $this->data['view'] = 'list';
+        $this->ciparser->new_parse('template_instansi','modules_instansi', 'download_journal_layout',$this->data);
+    }
+
+    public function report_download_journal($id=null){
+        $sql = "SELECT j.* FROM tb_journal j join tb_pengguna p on j.id_user_ref = p.id_pengguna Where id_journal = ?";
+        $journal = $this->db->query($sql,$id)->row_array();
+        if (is_null($journal['university']) || $journal['university'] == '') {
+            $journal['university'] = 0;
+        }
+        if (is_null($journal['goverment']) || $journal['goverment'] == '') {
+            $journal['goverment'] = 0;
+        }
+        if (is_null($journal['business']) || $journal['business'] == '') {
+            $journal['business'] = 0;
+        }
+        if (is_null($journal['media']) || $journal['media'] == '') {
+            $journal['media'] = 0;
+        }
+        if (is_null($journal['comunity']) || $journal['comunity'] == '') {
+            $journal['comunity'] = 0;
+        }
+        $this->data['journal'] = $journal;
+        $this->data['breadcumb'] = 'Report Download';
+        $this->data['view'] = 'list';
+        $this->data['id'] = $id;
+        $this->ciparser->new_parse('template_instansi','modules_instansi', 'download_artikel_layout',$this->data);
+    }
+
+    public function report_download_artikel($id=null){
+        $sql = $this->db->get_where('tb_artikel',array('id_artikel'=>$id))->row_array();
+        if (is_null($sql['university']) || $sql['university'] == '') {
+            $sql['university'] = 0;
+        }
+        if (is_null($sql['goverment']) || $sql['goverment'] == '') {
+            $sql['goverment'] = 0;
+        }
+        if (is_null($sql['business']) || $sql['business'] == '') {
+            $sql['business'] = 0;
+        }
+        if (is_null($sql['media']) || $sql['media'] == '') {
+            $sql['media'] = 0;
+        }
+        if (is_null($sql['comunity']) || $sql['comunity'] == '') {
+            $sql['comunity'] = 0;
+        }
+        if (is_null($sql['anonym']) || $sql['anonym'] == '') {
+            $sql['anonym'] = 0;
+        }
+        if (is_null($sql['total']) || $sql['total'] == '') {
+            $sql['total'] = 0;
+        }
+        if (is_null($sql['university_abs']) || $sql['university_abs'] == '') {
+            $sql['university_abs'] = 0;
+        }
+        if (is_null($sql['goverment_abs']) || $sql['goverment_abs'] == '') {
+            $sql['goverment_abs'] = 0;
+        }
+        if (is_null($sql['business_abs']) || $sql['business_abs'] == '') {
+            $sql['business_abs'] = 0;
+        }
+        if (is_null($sql['media_abs']) || $sql['media_abs'] == '') {
+            $sql['media_abs'] = 0;
+        }
+        if (is_null($sql['comunity_abs']) || $sql['comunity_abs'] == '') {
+            $sql['comunity_abs'] = 0;
+        }
+        if (is_null($sql['anonym_abs']) || $sql['anonym_abs'] == '') {
+            $sql['anonym_abs'] = 0;
+        }
+        if (is_null($sql['total_abs']) || $sql['total_abs'] == '') {
+            $sql['total_abs'] = 0;
+        }
+        if (is_null($sql['total_download']) || $sql['total_download'] == '') {
+            $sql['total_download'] = 0;
+        }
+        $this->data['artikel'] = $sql;
+        $this->data['breadcumb'] = 'Report Download';
+        $this->data['view'] = 'list';
+        $this->ciparser->new_parse('template_instansi','modules_instansi', 'detail_report_download_layout',$this->data);
+    }
+
+    public function ajax_list_journal_download()
+    {
+        $this->load->model('journal_model');
+        $list = $this->journal_model->get_datatables_journal_download();
+        $data = array();
+        $no = $_POST['start'];
+        // $aktif = 'Pending';
+        $button = '';
+        $btn = '';
+        foreach ($list as $news) {
+            $no++;
+            $button = '<a href="'.site_url('instansi/journal/report_download_journal').'/'.$news->id_journal.'" class="btn btn-success btn-sm"><i class="fa fa-link"></i>Detail</a>';
+            $row = array();
+            $row[] = $no;
+            $row[] = '<div class="detail">'.word_limiter($news->judul,10).'</div>';
+            $row[] = '<div class="detail">'.$news->issn.'</div>';
+            if ($news->total_download == '' || is_null($news->total_download)) { $total = 0; }else{ $total = $news->total_download;}
+            $row[] = $total;
+            if ($news->id_role_ref == 0) {
+                $nama = $this->db->get_where('tb_mahasiswa',array('id_pengguna_ref'=>$news->id_pengguna))->row_array()['nama'];
+            }else{
+                $nama = $this->db->get_where('tb_dosen',array('id_pengguna_ref'=>$news->id_pengguna))->row_array()['nama'];
+            }
+            $row[] = $nama;
+            $row[] = $button;
+ 
+            $data[] = $row;
+        }
+ 
+        $output = array(
+                        "draw" => $_POST['draw'],
+                        "recordsTotal" => $this->journal_model->count_all_journal_download(),
+                        "recordsFiltered" => $this->journal_model->count_filtered_journal_download(),
+                        "data" => $data,
+                );
+        //output to json format
+        echo json_encode($output);
+    }
+
+    public function ajax_list_artikel($id=null)
+    {
+        $this->load->model('journal_model');
+        $list = $this->journal_model->get_datatables($id);
+        $data = array();
+        $no = $_POST['start'];
+        $aktif = '';
+        foreach ($list as $news) {
+        $button = '';
+        $btn_ign = '';
+            $no++;
+            $row = array();
+            $row[] = $no;
+            $row[] = '<div class="btn-detail" id="'.$news->id_artikel.'" style="cursor:pointer;"><u>'.word_limiter($news->judul,10).' <i class="fa fa-external-link" aria-hidden="true"></i></u></div>';
+            $row[] = $news->volume;
+            $row[] = $news->nomor;
+            if ($news->total_download == '' || is_null($news->total_download)) { $total = 0; }else{ $total = $news->total_download;}
+            $row[] = $total;
+            $button = '<a href="'.site_url('instansi/journal/report_download_artikel').'/'.$news->id_artikel.'" class="btn btn-success btn-sm"><i class="fa fa-link"></i>Detail</a>';
+            $row[] = $button;
+            // $row[] = $aktif;
+            // $row[] = $btn_ign.$button;
+ 
+            $data[] = $row;
+        }
+ 
+        $output = array(
+                        "draw" => $_POST['draw'],
+                        "recordsTotal" => $this->journal_model->count_all(),
+                        "recordsFiltered" => $this->journal_model->count_filtered($id),
+                        "data" => $data,
+                );
+        //output to json format
+        echo json_encode($output);
     }
 }

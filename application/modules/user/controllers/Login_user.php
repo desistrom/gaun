@@ -59,17 +59,19 @@ class Login_user extends MX_Controller  {
                 if ($data->num_rows() == 1) {
                     $ret['status'] = 1;
                     $user_data = $data->row_array();
-                    $this->session->set_userdata('user_data', $user_data);
-                    $this->session->set_userdata('previlage', $user_data['id_role_ref']);
-                    $this->session->set_userdata('user_login', true);
-                    $this->session->set_userdata('user',$user_data['id_pengguna']);
-                    $this->session->set_flashdata("header","Registrasi Berhasil");
-                    $this->session->set_flashdata("notif","Registrasi Anda sedang kami Proses, tunggu konfirmasi selanjutnya dari Admin");
-                    $data_token['username'] = $username;
+                    // $this->session->set_userdata('user_data', $user_data);
+                    // $this->session->set_userdata('previlage', $user_data['id_role_ref']);
+                    // $this->session->set_userdata('user_login', true);
+                    // $this->session->set_userdata('user',$user_data['id_pengguna']);
+                    // $this->session->set_flashdata("header","Registrasi Berhasil");
+                    // $this->session->set_flashdata("notif","Registrasi Anda sedang kami Proses, tunggu konfirmasi selanjutnya dari Admin");
+                    /*$data_token['username'] = $username;
                     $data_token['password'] = $password;
                     $url = URL_GET_TOKEN;
                     $method = 'POST';
-                    $token = "";
+                    $token = "";*/
+                    $a = generate_token_jwt($user_data['id_pengguna']);
+                    setcookie('data_user',$a,time() + (3600 * 30), "/");
                     $waktu = date('H:i:s');
                     $this->db->update('tb_pengguna',array('is_login'=>1,'last_login'=>$waktu),array('id_pengguna'=>$user_data['id_pengguna']));
                     // $result = api_helper(json_encode($data_token),$url,$method,$token);
@@ -146,15 +148,17 @@ class Login_user extends MX_Controller  {
                 if ($data->num_rows() == 1) {
                     $ret['status'] = 1;
                     $user_data = $data->row_array();
-                    $this->session->set_userdata('user_data', $user_data);
+                    /*$this->session->set_userdata('user_data', $user_data);
                     $this->session->set_userdata('previlage', $user_data['id_role_ref']);
                     $this->session->set_userdata('user_login', true);
-                    $this->session->set_userdata('user',$user_data['id_pengguna']);
-                    $data_token['username'] = $username;
+                    $this->session->set_userdata('user',$user_data['id_pengguna']);*/
+                    /*$data_token['username'] = $username;
                     $data_token['password'] = $password;
                     $url = URL_GET_TOKEN;
                     $method = 'POST';
-                    $token = "";
+                    $token = "";*/
+                    $a = generate_token_jwt($user_data['id_pengguna']);
+                    setcookie('data_user',$a,time() + (3600 * 30), "/");
                     $waktu = date('H:i:s');
                     $this->db->update('tb_pengguna',array('is_login'=>1,'last_login'=>$waktu),array('id_pengguna'=>$user_data['id_pengguna']));
                     $ret['url'] = site_url('user/dashboard');
@@ -364,8 +368,10 @@ class Login_user extends MX_Controller  {
                     $url = 'index';
                     redirect('user/login_user/error'.'/'.$url);
                 }else{
-	                $this->session->set_userdata('user_login',true);
-	                $this->session->set_userdata('user',$userID);
+	                // $this->session->set_userdata('user_login',true);
+	                // $this->session->set_userdata('user',$userID);
+                    $a = generate_token_jwt($userID);
+                    setcookie('data_user',$a,time() + (3600 * 30), "/");
                     $waktu = date('H:i:s');
                     $this->db->update('tb_pengguna',array('is_login'=>1,'last_login'=>$waktu),array('id_pengguna'=>$userID));
 	                redirect(site_url('user/dashboard'));
@@ -420,8 +426,10 @@ terima kasih";
                     $this->session->set_flashdata("notif","Akun Anda tidak memiliki akses, silahkan menggunakan akun lain");
                     redirect(site_url('user/login_user'));
                 }else{
-	                $this->session->set_userdata('user_login',true);
-	                $this->session->set_userdata('user',$userID);
+	                // $this->session->set_userdata('user_login',true);
+	                // $this->session->set_userdata('user',$userID);
+                    $a = generate_token_jwt($userID);
+                    setcookie('data_user',$a,time() + (3600 * 30), "/");
                     $waktu = date('H:i:s');
                     $this->db->update('tb_pengguna',array('is_login'=>1,'last_login'=>$waktu),array('id_pengguna'=>$userID));
 	                redirect(site_url('user/dashboard'));
@@ -600,8 +608,8 @@ terima kasih";
                     $url = 'login_mahasiswa';
                     redirect('user/login_user/error'.'/'.$url);
                 }else{
-                    $this->session->set_userdata('user_login',true);
-                    $this->session->set_userdata('user',$userID);
+                    $a = generate_token_jwt($userID);
+                    setcookie('data_user',$a,time() + (3600 * 30), "/");
                     $waktu = date('H:i:s');
                     $this->db->update('tb_pengguna',array('is_login'=>1,'last_login'=>$waktu),array('id_pengguna'=>$userID));
                     redirect(site_url('user/dashboard'));
@@ -652,8 +660,8 @@ terima kasih";
                     $this->session->set_flashdata("notif","Akun Anda tidak memiliki akses, silahkan menggunakan akun lain");
                     redirect(site_url('user/login_user/login_mahasiswa'));
                 }else{
-                    $this->session->set_userdata('user_login',true);
-                    $this->session->set_userdata('user',$userID);
+                    $a = generate_token_jwt($userID);
+                    setcookie('data_user',$a,time() + (3600 * 30), "/");
                     $waktu = date('H:i:s');
                     $this->db->update('tb_pengguna',array('is_login'=>1,'last_login'=>$waktu),array('id_pengguna'=>$userID));
                     redirect(site_url('user/dashboard'));

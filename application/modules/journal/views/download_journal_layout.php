@@ -36,13 +36,30 @@
 </style>
 
 <?php if ($view == 'list') { ?>
-<link rel="stylesheet" href="<?=base_url();?>assets/datatables/css/dataTables.bootstrap.min.css">
+<link rel="stylesheet" href="<?php echo base_url();?>assets/datatables/css/dataTables.bootstrap.min.css">
+<div class="col col-md-12 col-sm-12 col-xs-12">
+  <h3 class="box-title">Report Download</h3>
+
+</div>
+<div class="col col-md-12 col-sm-12 col-s-12">
+  <div class="box">
+    <div class="box-header with-border">
+          <i class="fa fa-bar-chart-o"></i>
+
+          <h3 class="box-title">Detail Download</h3>
+
+        </div>
+    <div class="box-body">
+      <div id="donut-chart" style="height: 250px;"></div>
+    </div>
+  </div>
+
+</div>
 <div class="col col-md-12 col-sm-12 col-xs-12">
   
 <div class="box">
 	<div class="box-body">
 		<div class="col col-md-12 col-sm-12 col-xs-12" style="padding-left: 0; margin-bottom: 15px;">
-			<a href="<?=site_url('instansi/add_berita');?>" class="btn btn-success">Tambah News</a>
 		</div>
 		<div class="col col-md-12 col-xs-12 table-responsive">
 			<table class="table table-bordered  dataTable" id="table">
@@ -50,10 +67,8 @@
 					<th>No.</th>
           <th>Journal</th>
           <th>ISSN</th>
-          <th>Deskripsi</th>
-          <th>Image</th>
+          <th>Total Download</th>
           <th>Publisher</th>
-          <th>Status</th>
           <th>Action</th>
 				</thead>
 				<tbody>
@@ -63,71 +78,7 @@
 	</div>
 </div>
 </div>
-  <?php if ($this->session->flashdata('notif') != '') { ?>
-    <div class="modal" tabindex="-1" role="dialog" id="modalSuccess">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h3 class="modal-title">Success</h3>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <p><?=$this->session->flashdata('notif');?></p>
-          </div>
-          <div class="modal-footer">
-            <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  <?php } ?>
-  <div class="modal" tabindex="-1" role="dialog" id="modalacc">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h3 class="modal-title">Atention</h3>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <input type="hidden" name="id" id="id" value="">
-            <p>Do You Want To Accept This Article ?</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary">Yes</button>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="modal" tabindex="-1" role="dialog" id="modalign">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h3 class="modal-title">Atention</h3>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <input type="hidden" name="id" id="id" value="">
-            <p>Do You Want To Ignore This Article ?</p>
-            <label>Type your reason</label>
-            <textarea class="form-control" name="reason" id="reason"></textarea>
-            <div class="error" id="ntf_reason"></div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary">Yes</button>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
+  
 <?php } ?>
 <div class="modal" tabindex="-1" role="dialog" id="modal_comment">
   <div class="modal-dialog modal-lg" role="document">
@@ -168,9 +119,16 @@
         </div>
     </div>
 </div>
-<!-- <script src="<?=base_url().'assets/js/jquery-3.2.1.min.js';?>"></script> -->
+<script src="<?=base_url().'assets/js/jquery-3.2.1.min.js';?>"></script>
 <script src="<?=base_url();?>assets/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?=base_url();?>assets/datatables/js/dataTables.bootstrap.min.js"></script>
+       <script src="<?=base_url();?>assets/admin-jur/plugins/flot/jquery.flot.min.js"></script>
+<!-- FLOT RESIZE PLUGIN - allows the chart to redraw when the window is resized -->
+<script src="<?=base_url();?>assets/admin-jur/plugins/flot/jquery.flot.resize.min.js"></script>
+<!-- FLOT PIE PLUGIN - also used to draw donut charts -->
+<script src="<?=base_url();?>assets/admin-jur/plugins/flot/jquery.flot.pie.min.js"></script>
+<!-- FLOT CATEGORIES PLUGIN - Used to draw bar charts -->
+<script src="<?=base_url();?>assets/admin-jur/plugins/flot/jquery.flot.categories.min.js"></script>
 <script type="text/javascript">
   $(document).ready(function () {
     $('body').on('click','.btn-acc', function(){
@@ -202,7 +160,7 @@ $(document).ready(function() {
  
         // Load data for the table's content from an Ajax source
         "ajax": {
-            "url": "<?php echo site_url('instansi/journal/ajax_list_journal')?>",
+            "url": "<?php echo site_url('journal/admin/ajax_list_journal_download')?>",
             "type": "POST"
         },
  
@@ -217,4 +175,57 @@ $(document).ready(function() {
     });
  
 });
+</script>
+<script>
+  $(function () {
+    /*
+
+     * DONUT CHART
+     * -----------
+     */
+
+    var donutData = [
+            {label: "Universitas", data: 10, color: "#BCF4B2"},
+      {label: "Media", data: 10, color: "#7CE969"},
+      {label: "Community", data: 10, color: "#238012"},
+      {label: "Goverment", data: 20, color: "#4EE135"},
+      {label: "Business", data: 20, color: "#35C41C"},
+      // {label: "Series6", data: 50, color: "#04598A"}
+
+    ];
+    $.plot("#donut-chart", donutData, {
+      series: {
+        pie: {
+          show: true,
+          radius: 1,
+          innerRadius: 0.5,
+          label: {
+            show: true,
+            radius: 2 / 3,
+            formatter: labelFormatter,
+            threshold: 0.1
+          }
+
+        }
+      },
+      legend: {
+        show: true
+      }
+    });
+    /*
+     * END DONUT CHART
+     */
+
+  });
+
+  /*
+   * Custom Label formatter
+   * ----------------------
+   */
+  function labelFormatter(label, series) {
+    return '<div style="font-size:13px; text-align:center; padding:2px; color: #fff; font-weight: 600;">'
+        + label
+        + "<br>"
+        + Math.round(series.percent) + "%</div>";
+  }
 </script>

@@ -10,14 +10,18 @@
 class Galery extends MX_Controller  {
 
 	var $data = array();
-
+	var $user = array();
 	public function __construct(){
 		$this->load->model('galery_model');
+		if(!isset($_COOKIE['data_admin']) || decode_token_jwt($_COOKIE['data_admin']) != true){
+        	redirect(site_url('login'));
+        }
+		$this->user = data_jwt($_COOKIE['data_admin']);
 	}
 
 	public function list_image(){
 		$this->data['galery'] = $this->galery_model->getTypeGalery("image");
-		// print_r($this->data['galery']);
+		// print_r();
 		$this->data['breadcumb'] = 'List Image';
 		 $this->ciparser->new_parse('template_admin','modules_admin', 'galery/list_image_layout',$this->data);
 	}
@@ -93,7 +97,7 @@ class Galery extends MX_Controller  {
 				$galery['tgl_upload'] =  date('Y-m-d');
 				$galery['type'] = 'image';
 				$galery['id_album'] = $id;
-				$galery['id_user_ref'] = $this->session->userdata('data_user')['id_user'];
+				$galery['id_user_ref'] = $this->user->user->id_user;
 				// $media['tgl_upload'] = date("D m Y", strtotime($this->input->post('tgl')));
 				if (isset($_FILES['file_names'])) {
 					$filesCount = count($_FILES['file_names']['name']);
@@ -173,7 +177,7 @@ class Galery extends MX_Controller  {
 				$media['id_album'] = $this->input->post('album');
 				$media['tgl_upload'] = date('Y-m-d');
 				$media['type'] = 'image';
-				$media['id_user_ref'] = $this->session->userdata('data_user')['id_user'];
+				$media['id_user_ref'] = $this->user->user->id_user;
 				if (isset($_FILES['file_names'])) {
 					$filesCount = count($_FILES['file_names']['name']);
 					for ($i=0; $i < $filesCount ; $i++) { 
@@ -225,7 +229,7 @@ class Galery extends MX_Controller  {
 				$media['deskripsi'] = $this->input->post('deskripsi');
 				$media['tgl_upload'] = date('Y-m-d');
 				$media['type'] = 'video';
-				$media['id_user_ref'] = $this->session->userdata('data_user')['id_user'];
+				$media['id_user_ref'] = $this->user->user->id_user;
 				$media['file_name'] = $this->input->post('file_name');
 				if ($this->galery_model->insertGalery($media) == true) {
             		$ret['status'] = 1;

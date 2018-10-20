@@ -7,41 +7,42 @@ class Instansi extends MX_Controller
 {
         var $idUser;
         var $data = array();
-
+        var $user = array();
     function __construct()
     {
-    	// $this->load->model('login_model');
-        // $this->load->helper('api');
-        // $this->load->library('Recaptcha');
-        // $this->load->module('Token');
-        if ($this->session->userdata('instansi_login') == false) {
-            redirect('instansi/login');
+    	
+        // if ($this->user->user->('instansi_login') == false) {
+        //     redirect('instansi/login');
+        // }
+        if(!isset($_COOKIE['data_instansi']) || decode_token_jwt($_COOKIE['data_instansi']) != true){
+            redirect(site_url('instansi/login'));
         }
+        $this->user = data_jwt($_COOKIE['data_instansi']);
     }
 
     public function index(){
-        // print_r($this->session->userdata('data_user'));
-        $ins = $this->session->userdata('data_user');
+        // print_r($this->user->user;);
+        $ins = $this->user->user->nm_instansi;
         // print_r('asda');
         // echo CI_VERSION;
-        $this->data['user']['nama'] = $ins['nm_instansi'];
+        $this->data['user']['nama'] = $ins;
         $this->data['breadcumb'] = '';
         $this->ciparser->new_parse('template_instansi','modules_instansi', 'dashboard_layout',$this->data);
     }
 
     public function berita(){
-        $user = $this->session->userdata('data_user');
+        $user = $this->user->user;
         // print_r($user);
         $this->data['view'] = 'list';
         $sql = "SELECT * FROM tb_news n join tb_kategori_news k on n.id_kategori_ref = k.id_kategori_news where id_instansi_ref = ?";
-        $this->data['news'] = $this->db->query($sql,$user['id_instansi'])->result_array();
+        $this->data['news'] = $this->db->query($sql,$user->id_instansi)->result_array();
         // print_r($this->data['news']);
         $this->data['breadcumb'] = 'List News';
         $this->ciparser->new_parse('template_instansi','modules_instansi', 'news_layout',$this->data);
     }
 
     public function add_berita(){
-        $user = $this->session->userdata('data_user');
+        $user = $this->user->user;
         if ($this->input->server('REQUEST_METHOD') == "POST") {
             $ret['state'] = 0;
             $ret['status'] = 0;
@@ -56,8 +57,8 @@ class Instansi extends MX_Controller
                 $data_news['content'] = $this->input->post('content');
                 $data_news['is_aktif'] = $this->input->post('status');
                 $data_news['id_kategori_ref'] = $this->input->post('kategori');
-                $data_news['id_user_ref'] = $this->session->userdata('data_user')['id_instansi'];
-                $data_news['id_instansi_ref'] = $this->session->userdata('data_user')['id_instansi'];
+                $data_news['id_user_ref'] = $this->user->user->id_instansi;
+                $data_news['id_instansi_ref'] = $this->user->user->id_instansi;
                 $data_news['link'] = url_title($this->input->post('judul'), 'dash', true);
                 if (isset($_FILES['file_name'])) {
                     $image = $this->upload_logo($_FILES);
@@ -123,8 +124,8 @@ class Instansi extends MX_Controller
                 $data_news['judul'] = $this->input->post('judul');
                 $data_news['content'] = $this->input->post('content');
                 $data_news['id_kategori_ref'] = $this->input->post('kategori');
-                $data_news['id_user_ref'] = $this->session->userdata('data_user')['id_instansi'];
-                $data_news['id_instansi_ref'] = $this->session->userdata('data_user')['id_instansi'];
+                $data_news['id_user_ref'] = $this->user->user->id_instansi;
+                $data_news['id_instansi_ref'] = $this->user->user->id_instansi;
                 $data_news['link'] = url_title($this->input->post('judul'), 'dash', true);
                 if (isset($_FILES['file_name'])) {
                     $image = $this->upload_logo($_FILES);
@@ -183,7 +184,7 @@ class Instansi extends MX_Controller
     }
 
     public function add_event(){
-        $user = $this->session->userdata('data_user');
+        $user = $this->user->user;
         if ($this->input->server('REQUEST_METHOD') == "POST") {
             $ret['state'] = 0;
             $ret['status'] = 0;
@@ -202,7 +203,7 @@ class Instansi extends MX_Controller
                 $data_news['tgl_event'] = $this->input->post('tgl_event');
                 $data_news['start_event'] = $this->input->post('start_event');
                 $data_news['end_event'] = $this->input->post('end_event');
-                $data_news['id_instansi_ref'] = $this->session->userdata('data_user')['id_instansi'];
+                $data_news['id_instansi_ref'] = $this->user->user->id_instansi;
                 // $data_news['link'] = url_title($this->input->post('judul'), 'dash', true);
                 if (isset($_FILES['file_name'])) {
                     $image = $this->upload_logo($_FILES);
@@ -276,7 +277,7 @@ class Instansi extends MX_Controller
                 $data_news['tgl_event'] = $this->input->post('tgl_event');
                 $data_news['start_event'] = $this->input->post('start_event');
                 $data_news['end_event'] = $this->input->post('end_event');
-                $data_news['id_instansi_ref'] = $this->session->userdata('data_user')['id_instansi'];
+                $data_news['id_instansi_ref'] = $this->user->user->id_instansi;
                 if (isset($_FILES['file_name'])) {
                     $image = $this->upload_logo($_FILES);
                     if (isset($image['error'])) {

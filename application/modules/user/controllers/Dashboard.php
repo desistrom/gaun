@@ -9,17 +9,22 @@
  */
 class Dashboard extends MX_Controller  {
 	var $data = array();
+    var $user = array();
 	function __construct(){
-		if ($this->session->userdata('user_login') != true) {
-			redirect('user/login_user');
-		}
+        if(!isset($_COOKIE['data_user']) || decode_token_jwt($_COOKIE['data_user']) != true){
+            redirect(site_url('user/login_user'));
+        }
+        $this->user = data_jwt($_COOKIE['data_user']);
+		// if ($this->session->userdata('user_login') != true) {
+		// 	redirect('user/login_user');
+		// }
 		$this->load->helper('api');
         $this->load->library('Recaptcha');
 
 	}
     public function index() {
         // print_r($this->general->status());
-    	$data = $this->session->userdata('user');
+    	$data = $this->user->user;
     	// print_r($data);
 
     	if ($this->db->get_where('tb_pengguna',array('id_pengguna'=>$data))->row_array()['id_role_ref'] == 0) {
@@ -35,7 +40,7 @@ class Dashboard extends MX_Controller  {
         $this->db->join('tb_no_volume', 'id_no_volume_ref = id_no_volume');
         $this->db->join('tb_volume', 'id_volume_ref = id_volume');
         $this->db->join('tb_journal', 'id_journal_ref = id_journal');
-        $this->db->where('tb_journal.id_user_ref',$this->session->userdata('user'));
+        $this->db->where('tb_journal.id_user_ref',$this->user->user);
         $artikel = $this->db->get()->result_array();
     	// print_r($user);
         $this->data['artikel'] = count($artikel);
@@ -43,7 +48,7 @@ class Dashboard extends MX_Controller  {
     }
 
     public function change_password(){
-                $data = $this->session->userdata('user');
+                $data = $this->user->user;
         // print_r($data);
         if ($this->input->server('REQUEST_METHOD') == 'POST') {
             $ret['state'] = 0;
@@ -76,7 +81,7 @@ class Dashboard extends MX_Controller  {
     }
 
     public function profil(){
-                $data = $this->session->userdata('user');
+                $data = $this->user->user;
         // print_r($data);
         $user = $this->db->get_where('tb_pengguna',array('id_pengguna'=>$data))->row_array();
         $this->data['instansi_id'] = $user['id_instansi_ref'];

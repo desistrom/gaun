@@ -12,12 +12,12 @@ class Home extends CI_Controller  {
 	var $data = array();
     function __construct() {
         parent::__construct();
-        $this->load->helper(array('form', 'url','check_token'));
+        $this->load->helper(array('form', 'url'));
         $this->load->model('home_model');
-        if ($this->session->userdata('is_login') == false) {
-        	redirect(site_url('login'));
-        }
-        if(check_token() != true){
+        // if ($this->session->userdata('is_login') == false) {
+        // 	redirect(site_url('login'));
+        // }
+        if(!isset($_COOKIE['data_admin']) || decode_token_jwt($_COOKIE['data_admin']) != true){
         	redirect(site_url('login'));
         }
         /*$token = $this->session->userdata('token');
@@ -76,7 +76,18 @@ class Home extends CI_Controller  {
     	$this->data['jdosen'] = $this->db->get_where('tb_pengguna',array('status'=>1,'id_role_ref'=>1))->num_rows();
     	$this->data['jmahasiswa'] = $this->db->get_where('tb_pengguna',array('status'=>1,'id_role_ref'=>0))->num_rows();
     	$this->data['picture'] = $this->db->get_where('tb_galery',array('type'=>'image'))->num_rows();
-
+    	$sql = "SELECT sum(total_download) as total from tb_journal where status = 2";
+    	$total_journal = $this->db->query($sql)->row_array();
+    	if (is_null($total_journal['total']) || $total_journal['total'] == '') {
+    		$total_journal['total'] = 0;
+    	}
+    	$this->data['total_journal'] = $total_journal['total'];
+    	$sql = "SELECT sum(total_download) as total from tb_artikel";
+    	$total_artikel = $this->db->query($sql)->row_array();
+    	if (is_null($total_artikel['total']) || $total_artikel['total'] == '') {
+    		$total_artikel['total'] = 0;
+    	}
+    	$this->data['total_artikel'] = $total_artikel['total'];
     	$this->ciparser->new_parse('template_admin','modules_admin', 'home/home_layout',$this->data);
     }
 

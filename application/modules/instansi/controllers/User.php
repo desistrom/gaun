@@ -8,12 +8,16 @@ class User extends MX_Controller
 
 	var $idUser;
     var $data = array();
+    var $user = array();
 	function __construct(){
-
+        if(!isset($_COOKIE['data_instansi']) || decode_token_jwt($_COOKIE['data_instansi']) != true){
+            redirect(site_url('instansi/login'));
+        }
+        $this->user = data_jwt($_COOKIE['data_instansi']);
 	}
 
 	public function index(){
-        // print_r($this->session->userdata('data_user'));
+        // print_r($this->user->user);
 		$this->data['user']['nama'] = '';
         $this->data['breadcumb'] = 'List User';
         $this->data['view'] = 'list';
@@ -21,7 +25,7 @@ class User extends MX_Controller
 	}
 
     public function add(){
-        $user = $this->session->userdata('data_user');
+        $user = $this->user->user;
         if($this->input->method() == 'post'){
             $ret['state'] = 0;
             $ret['status'] = 0;
@@ -36,7 +40,7 @@ class User extends MX_Controller
                 $data['username'] = $input['username'];
                 $data['email'] = $input['email'];
                 $data['password'] = sha1($input['password']);
-                $data['id_instansi'] = $user['id_instansi'];
+                $data['id_instansi'] = $user->id_instansi;
                 if ($this->db->insert('tb_journal_user',$data)) {
                     $ret['status'] = 1;
                     $ret['url'] = site_url('instansi/user');
@@ -67,7 +71,7 @@ class User extends MX_Controller
     }
 
     public function edit($id=null){
-        $user = $this->session->userdata('data_user');
+        $user = $this->user->user;
         $uj = $this->db->get_where('tb_journal_user',array('id_journal_user'=>$id))->row_array();
         if($this->input->method() == 'post'){
             $ret['state'] = 0;

@@ -331,7 +331,7 @@ div.container-fluid.footer-bottom{
                               </div>
                             </div>
                             <div class="body-box-thumbnail">
-                              <h5 class="title-thumbnail"><a href="#"><?=$value['judul'];?></a> </h5>
+                              <h5 class="title-thumbnail"><a href="<?=site_url('user/journal/detail_journal/'.$value['id_journal']);?>"><?=$value['judul'];?></a> </h5>
                               <div class="col col-md-12 col-sm-12 col-xs-12 none-padding box-btn-info-journal">
                                 <!-- <a href="#" class="btn btn-primary btn-info-journal" style="padding:0 15px;float: right;"><i class="fa fa-upload none-padding" ></i></a> -->
                                 <?php if($value['status'] == 0 ){ ?> <a href="#"  style="padding:0 15px;float: right;" id="<?=$value['id_journal'];?>" class="btn btn-primary btn-submit"> <i class="fa fa-upload"></i> </a> <?php }elseif($value['status'] == 1){?> <a style="padding:0 15px;float: right;" href="#" class="btn btn-warning"> <i class="fa fa-clock-o"></i> </a> <?php }elseif($value['status'] == 2){ ?> <a style="padding:0 15px;float: right;" href="#" class="btn btn-success"> <i class="fa fa-check"></i> </a> <?php }else{ ?> <a style="padding:0 15px;float: right;" href="#" class="btn btn-danger"> <i class="fa fa-times"></i> </a> <?php } ?>

@@ -9,8 +9,12 @@
  */
 class Logo extends MX_Controller  {
 	var $data = array();
+	var $user = array();
 	function __construct(){
-
+		if(!isset($_COOKIE['data_admin']) || decode_token_jwt($_COOKIE['data_admin']) != true){
+        	redirect(site_url('login'));
+        }
+        $this->user = data_jwt($_COOKIE['data_admin']);
 	}
 
 	public function index(){
@@ -99,7 +103,7 @@ class Logo extends MX_Controller  {
 	}
 
 	public function profile(){
-		$id = $this->session->userdata('data_user')['id_user'];
+		$id = $this->user->user->id_user;
 		$this->data['profile'] = $this->db->get_where('tb_user',array('id_user'=>$id))->row_array();
 		if ($this->input->server('REQUEST_METHOD') == 'POST') {
 			$ret['state'] = 0;

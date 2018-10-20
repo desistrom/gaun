@@ -168,7 +168,7 @@
                   <li>Volume : <?=$artikel[0]['volume'];?></li>
                   <li>No Volume : <?=$artikel[0]['nomor'];?></li>
                     <li>Status : <?php if($artikel[0]['jstatus'] == 0){ echo "Disabled";}elseif($artikel[0]['jstatus'] == 1){ echo "Pending"; }else{ echo "Submited";} ?></li>
-                    <li>Action : <?php if($artikel[0]['jstatus'] == 0){ ?><a href="<?=site_url('journal/admin/submit/'.$artikel[0]['id_journal']);?>" class="btn btn-primary btn-upload"> <i class="fa fa-upload"></i> </a><?php }elseif($artikel[0]['jstatus'] == 1){ ?><a href="#" class="btn btn-warning btn-clock-o"> <i class="fa fa-clock-o"></i> </a><?php }else{ ?><a href="#" class="btn btn-success btn-upload"> <i class="fa fa-check"></i> </a> <?php } ?></li>
+                    <!-- <li>Action : <?php if($artikel[0]['jstatus'] == 0){ ?><a href="<?=site_url('journal/admin/submit/'.$artikel[0]['id_journal']);?>" class="btn btn-primary btn-upload"> <i class="fa fa-upload"></i> </a><?php }elseif($artikel[0]['jstatus'] == 1){ ?><a href="#" class="btn btn-warning btn-clock-o"> <i class="fa fa-clock-o"></i> </a><?php }else{ ?><a href="#" class="btn btn-success btn-upload"> <i class="fa fa-check"></i> </a> <?php } ?></li> -->
                   </ul>
                   <ul class="list-unstyled list-detail-jurnal">
                   <?php foreach ($artikel as $key => $value): ?>

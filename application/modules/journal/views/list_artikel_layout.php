@@ -271,7 +271,10 @@ margin-top: -11px;
       <label>Keyword</label>
       <div id="keyword"></div>
       <label>File</label>
+      <label>File Journal</label>
       <div id="file"></div>
+      <label>File abstract Journal</label>
+      <div id="file_abs"></div>
       </div>
       <div class="modal-footer">
         <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
@@ -384,6 +387,7 @@ margin-top: -11px;
         $('#modalDetail #nomor').html(data.nomor);
         $('#modalDetail #keyword').html(data.keyword);
         $('#modalDetail #file').html('<a href="'+base_url+'assets/file/'+data.file+'" class="btn btn-success"><i class="fa fa-download"></i></a>');
+        $('#modalDetail #file_abs').html('<a href="'+base_url+'assets/file/abstract/'+data.abstract_file+'" class="btn btn-success"><i class="fa fa-download"></i></a>');
         $('#modalDetail').modal('show');
         // window.location.href = data.url;
 

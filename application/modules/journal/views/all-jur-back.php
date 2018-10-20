@@ -289,7 +289,7 @@ color: #D10909!important;
     	<div class="row">
     	     <div class="col col-md-12 col-sm-12 col-xs-2">
             <div class="col col-md-12 col-sm-12 col-xs-12" style="padding-bottom: 30px;">
-              <!-- <div class="col-md-4 col-sm-5 col-xs-12"><a href="<?=site_url('user/journal/add');?>" class="btn btn-success">Add Jurnal</a></div> -->
+              <div class="col-md-4 col-sm-5 col-xs-12"><!-- <a href="<?=site_url('user/journal/add');?>" class="btn btn-success">Add Jurnal</a> --></div> 
               <div class="col col-md-8 col-sm-7 col-xs-12">
                 <form method="get" class="text-right" >
                     <div class="input-search input-search-left"><input type="text" class="form-control" name="data" id="search" placeholder="Cari"></div>
@@ -297,16 +297,40 @@ color: #D10909!important;
                 </form>
               </div>
             </div>
+            <?php if (count($journal) == 0) { ?>
+              <div class="col col-md-12 col-sm-12 col-xs-12">
+                <div class="jumbotron">
+                <h2 style="color: #A8A8A8;text-align: center;">Data Not found</h2>
+              </div>
+              </div>
+             <!--  <div class="jumbotron">
+                <h2 style="color: #A8A8A8;text-align: center;">Data Not found</h2>
+              </div> -->
+            <?php } ?>
             <?php foreach ($journal as $key => $value): ?>
               <div class="filter-box-thumbnail col-md-3 col-sm-3 col-xs-12 " style="">
                   <div class="box-thumbnail">
                     <div class="header-box-thumbnail">
                       <img class="thumbnail-cover" src="<?=base_url();?>assets/media/<?=$value['futured_image'];?>">
                       <div class="filter-button-action">
+                        <!-- <div>
+                          <a href="<?=site_url('user/journal/edit/'.$value['id_journal']);?>">
+                            <div class="btn-action">
+                              <i class="fa fa-pencil"></i>
+                              
+                            </div>
+                          </a>
+                        </div> -->
+                        <div>
+                          <!-- <div class="btn-action">
+                            <a href="#"><i class="fa fa-pencil"></i></a>
+                            
+                          </div> -->
+                        </div>
                       </div>
                     </div>
                     <div class="body-box-thumbnail">
-                      <h5 class="title-thumbnail"><a href="<?=site_url('instansi/journal/detail_journal/'.$value['id_journal']);?>"><?=$value['judul'];?></a></h5>
+                      <h5 class="title-thumbnail"><a href="<?=site_url('user/journal/detail_journal/'.$value['id_journal']);?>"><?=$value['judul'];?></a></h5>
                       <h6><?=$value['jumlah'];?> Volume</h6>
                     </div>
                     <div class="footer-box-thumbnail">
@@ -314,7 +338,6 @@ color: #D10909!important;
                         <h5>status : <?php if($value['status'] == 0 ){ echo "Unsubmited";}elseif($value['status'] == 1){ echo "Pending"; }elseif($value['status'] == 2){echo "Accepted";}else{ echo "Ignored";} ?></h5>
                       </div>
                       <div class="sub-footer-box-thumbnail float-right" >
-                        
                       </div>
                       
                     </div>
@@ -343,14 +366,83 @@ color: #D10909!important;
       </div>
     </div>
   <?php } ?>
+              <!-- <div class="filter-box-thumbnail col-md-3 col-sm-3 col-xs-12 " style="">
+                <div class="box-thumbnail">
+                  <div class="header-box-thumbnail">
+                    <img class="thumbnail-cover" src="<?=base_url();?>mockup_statis/assets/img/jur-3.jpg">
+                    <div class="filter-button-action">
+                      <div>
+                        <a href="#">
+                          <div class="btn-action">
+                            <i class="fa fa-pencil"></i>
+                            
+                          </div>
+                        </a>
+                      </div>
+                      <div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="body-box-thumbnail">
+                    <h5 class="title-thumbnail"><a href="<?=site_url('user/journal/detail_jurnal');?>">Jurnal Psikologi Pendidikan dan Perkembangan</a></h5>
+                    <h6>vol.5</h6>
+                  </div>
+                </div>
+             </div>  -->
+              <!-- <div class="filter-box-thumbnail col-md-3 col-sm-3 col-xs-12 " style="">
+                <div class="box-thumbnail">
+                  <div class="header-box-thumbnail">
+                    <img class="thumbnail-cover" src="<?=base_url();?>mockup_statis/assets/img/jur-3.jpg">
+                    <div class="filter-button-action">
+                      <div>
+                        <a href="#">
+                          <div class="btn-action">
+                            <i class="fa fa-pencil"></i>
+                            
+                          </div>
+                        </a>
+                      </div>
+                      <div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="body-box-thumbnail">
+                    <h5 class="title-thumbnail"><a href="<?=site_url('user/journal/detail_jurnal');?>">Jurnal Psikologi Pendidikan dan Perkembangan</a></h5>
+                    <h6>vol.5</h6>
+                  </div>
+                </div>
+             </div> -->
+              <!-- <div class="filter-box-thumbnail col-md-3 col-sm-3 col-xs-12 " style="">
+                <div class="box-thumbnail">
+                  <div class="header-box-thumbnail">
+                    <img class="thumbnail-cover" src="<?=base_url();?>mockup_statis/assets/img/jur-3.jpg">
+                    <div class="filter-button-action">
+                      <div>
+                        <a href="#">
+                          <div class="btn-action">
+                            <i class="fa fa-pencil"></i>
+                            
+                          </div>
+                        </a>
+                      </div>
+                      <div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="body-box-thumbnail">
+                    <h5 class="title-thumbnail"><a href="<?=site_url('user/journal/detail_jurnal');?>">Jurnal Psikologi Pendidikan dan Perkembangan</a></h5>
+                    <h6>vol.5</h6>
+                  </div>
+                </div>
+             </div> -->
            </div>
     		</div>
 
     </div>
 </div>
 <!-- <script src="<?=base_url().'assets/js/jquery-3.2.1.min.js';?>"></script> -->
-<script src="<?=base_url();?>assets/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="<?=base_url();?>assets/datatables/js/dataTables.bootstrap.min.js"></script>
+<!-- <script src="<?=base_url();?>assets/datatables.net/js/jquery.dataTables.min.js"></script> -->
+<!-- <script src="<?=base_url();?>assets/datatables/js/dataTables.bootstrap.min.js"></script> -->
 <script type="text/javascript">
       $(document).ready(function() {
         $('body').on('click','.btn-search',function(){

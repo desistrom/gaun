@@ -10,6 +10,9 @@
 class Pengguna extends MX_Controller  {
 	var $data = array();
 	function __construct(){
+        if(!isset($_COOKIE['data_admin']) || decode_token_jwt($_COOKIE['data_admin']) != true){
+            redirect(site_url('login'));
+        }
 		$this->load->module('login');
 		// if ($this->login->token_check() == 0) {
 		// 	// redirect('login');
@@ -19,14 +22,14 @@ class Pengguna extends MX_Controller  {
 
     public function list_dosen(){
         $this->data['breadcumb'] = 'List Dosen';
-        $sql = "SELECT * FROM tb_pengguna p JOIN tb_dosen d on p.id_pengguna = d.id_pengguna_ref where id_role_ref = 1 AND status = 1";
+        $sql = "SELECT * FROM tb_pengguna p JOIN tb_dosen d on p.id_pengguna = d.id_pengguna_ref join tb_instansi i on p.id_instansi_ref = i.id_instansi where id_role_ref = 1 AND p.status = 1";
         $this->data['user'] = $this->db->query($sql)->result_array();
         $this->ciparser->new_parse('template_admin','modules_admin', 'pengguna/list_layout',$this->data);
     }
 
     public function list_mahasiswa(){
         $this->data['breadcumb'] = 'List Mahasiswa';
-        $sql = "SELECT * FROM tb_pengguna p JOIN tb_mahasiswa d on p.id_pengguna = d.id_pengguna_ref where id_role_ref = 0 AND status = 1";
+        $sql = "SELECT * FROM tb_pengguna p JOIN tb_mahasiswa d on p.id_pengguna = d.id_pengguna_ref join tb_instansi i on p.id_instansi_ref = i.id_instansi where id_role_ref = 0 AND p.status = 1";
         $this->data['user'] = $this->db->query($sql)->result_array();
         $this->ciparser->new_parse('template_admin','modules_admin', 'pengguna/list_layout',$this->data);
     }

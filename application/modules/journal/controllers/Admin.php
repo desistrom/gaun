@@ -7,16 +7,16 @@ class Admin extends MX_Controller
 {
         var $idUser;
         var $data = array();
-
+        var $user = array();
     function __construct()
     {
-    	// $this->load->model('login_model');
-        // $this->load->helper('api');
-        // $this->load->library('Recaptcha');
-        // $this->load->module('Token');
-        if ($this->session->userdata('journal_login') != true) {
-            redirect('journal/login');
+        // if ($this->session->userdata('journal_login') != true) {
+        //     redirect('journal/login');
+        // }
+        if(!isset($_COOKIE['data_journal']) || decode_token_jwt($_COOKIE['data_journal']) != true){
+            redirect(site_url('journal/login'));
         }
+        $this->user = data_jwt($_COOKIE['data_journal']);
     }
 
     public function index(){
@@ -27,17 +27,17 @@ class Admin extends MX_Controller
     }
 
     public function home(){
-        $user = $this->session->userdata('data_user_journal');
-        $data = $this->db->get_where('tb_instansi',array('id_instansi'=>$user['id_instansi']))->row_array();
-        // print_r($user['id_instansi']);
+        $user = $this->user->user;
+        $data = $this->db->get_where('tb_instansi',array('id_instansi'=>$user->id_instansi))->row_array();
+        // print_r($user->id_instansi);
         $sql = "SELECT j.* FROM tb_journal j join tb_pengguna p on j.id_user_ref = p.id_pengguna Where id_instansi_ref = ? and j.status = 2";
-        $journal = $this->db->query($sql,$user['id_instansi'])->num_rows();
+        $journal = $this->db->query($sql,$user->id_instansi)->num_rows();
         $active = $journal;
         $sql = "SELECT j.* FROM tb_journal j join tb_pengguna p on j.id_user_ref = p.id_pengguna Where id_instansi_ref = ? and j.status = 1";
-        $journal = $this->db->query($sql,$user['id_instansi'])->num_rows();
+        $journal = $this->db->query($sql,$user->id_instansi)->num_rows();
         $pending = $journal;
         $sql = "SELECT j.* FROM tb_journal j join tb_pengguna p on j.id_user_ref = p.id_pengguna Where id_instansi_ref = ? and j.status = 3";
-        $journal = $this->db->query($sql,$user['id_instansi'])->num_rows();
+        $journal = $this->db->query($sql,$user->id_instansi)->num_rows();
         $ignore = $journal;
         $this->data['breadcumb'] = 'Journal';
         $this->data['view'] = 'list';
@@ -50,9 +50,9 @@ class Admin extends MX_Controller
 
     public function myjournal()
     {
-        $user = $this->session->userdata('data_user_journal');
+        $user = $this->user->user;
         $sql = "SELECT j.* FROM tb_journal j join tb_pengguna p on j.id_user_ref = p.id_pengguna Where id_instansi_ref = ?";
-        $journal = $this->db->query($sql,$user['id_instansi'])->result_array();
+        $journal = $this->db->query($sql,$user->id_instansi)->result_array();
         foreach ($journal as $key => $value) {
             $jumlah = $this->db->get_where('tb_volume',array('id_journal_ref'=>$value['id_journal']))->num_rows();
             $journal[$key]['jumlah'] = $jumlah;
@@ -65,9 +65,9 @@ class Admin extends MX_Controller
     }
 
     public function dashboard(){
-        $user = $this->session->userdata('data_user_journal');
+        $user = $this->user->user;
         $sql = "SELECT j.* FROM tb_journal j join tb_pengguna p on j.id_user_ref = p.id_pengguna Where id_instansi_ref = ?";
-        $journal = $this->db->query($sql,$user['id_instansi'])->result_array();
+        $journal = $this->db->query($sql,$user->id_instansi)->result_array();
         foreach ($journal as $key => $value) {
             $jumlah = $this->db->get_where('tb_volume',array('id_journal_ref'=>$value['id_journal']))->num_rows();
             $journal[$key]['jumlah'] = $jumlah;
@@ -78,7 +78,7 @@ class Admin extends MX_Controller
         $this->db->join('tb_volume', 'id_volume_ref = id_volume');
         $this->db->join('tb_journal', 'id_journal_ref = id_journal');
         $this->db->join('tb_pengguna', 'tb_journal.id_user_ref = id_pengguna');
-        $this->db->where('tb_pengguna.id_instansi_ref',$user['id_instansi']);
+        $this->db->where('tb_pengguna.id_instansi_ref',$user->id_instansi);
         $this->db->order_by('id_artikel', 'desc');
         $this->db->limit('4');
         $a = $this->db->get()->result_array();
@@ -104,15 +104,30 @@ class Admin extends MX_Controller
     public function alljournal()
     {
         
-        $sql = "SELECT * FROM tb_journal Where status = 2";
+         $sql = "SELECT * FROM tb_journal Where status = 2";
         $journal = $this->db->query($sql)->result_array();
-        foreach ($journal as $key => $value) {
-            $jumlah = $this->db->get_where('tb_volume',array('id_journal_ref'=>$value['id_journal']))->num_rows();
-            $journal[$key]['jumlah'] = $jumlah;
-        }
+        // foreach ($journal as $key => $value) {
+        //     $jumlah = $this->db->get_where('tb_volume',array('id_journal_ref'=>$value['id_journal']))->num_rows();
+        //     $journal[$key]['jumlah'] = $jumlah;
+        // }
         // print_r($journal);
-        $this->data['breadcumb'] = 'All Journal';
+        $this->db->select('tb_artikel.*,tb_volume.volume,tb_no_volume.publish,tb_journal.judul as judul_journal');
+        $this->db->from('tb_artikel');
+        $this->db->join('tb_no_volume', 'id_no_volume_ref = id_no_volume');
+        $this->db->join('tb_volume', 'id_volume_ref = id_volume');
+        $this->db->join('tb_journal', 'id_journal_ref = id_journal');
+        // $this->db->join('tb_pengguna', 'tb_journal.id_user_ref = id_pengguna');
+        $this->db->where('tb_journal.status',2);
+        $this->db->order_by('id_artikel', 'desc');
+        $this->db->limit('4');
+       /* $a = $this->db->get()->result_array();
+        foreach ($a as $key => $value) {
+            $author = $this->db->get_where('tb_author',array('id_artikel_ref'=>$value['id_artikel']))->result_array();
+            $a[$key]['author'] = $author[0]['nama'];
+                $a[$key]['publisher'] = $this->data['user']['nama'];
+        }*/
         $this->data['view'] = 'list';
+        // $this->data['artikel'] = $a;
         $this->data['journal'] = $journal;
         $this->ciparser->new_parse('template_admin_journal','modules_journal', 'all_journal_layout',$this->data);
     }
@@ -170,8 +185,8 @@ class Admin extends MX_Controller
         $this->ckeditor->config['height'] = '300px'; 
         $this->data['view'] = 'add';
         $this->data['kategori'] = $this->db->get('tb_kategori_journal')->result_array();
-        $user = $this->session->userdata('data_user_journal');
-        $us =  $this->db->get_where('tb_pengguna',array('id_instansi_ref'=>$user['id_instansi']))->result_array();
+        $user = $this->user->user;
+        $us =  $this->db->get_where('tb_pengguna',array('id_instansi_ref'=>$user->id_instansi))->result_array();
         foreach ($us as $key => $value) {
             if ($value['status'] == 0) {
                 $m = $this->db->get_where('tb_mahasiswa',array('id_pengguna_ref'=>$value['id_pengguna']))->row_array();
@@ -378,9 +393,9 @@ class Admin extends MX_Controller
         $this->ckeditor->config['height'] = '300px'; 
         $this->data['view'] = 'add';
         // $this->data['breadcumb'] = $journal['judul'];
-        $user = $this->session->userdata('data_user_journal');
+        $user = $this->user->user;
         $sql = "SELECT j.* FROM tb_journal j join tb_pengguna p on j.id_user_ref = p.id_pengguna Where id_instansi_ref = ?";
-        $journal = $this->db->query($sql,$user['id_instansi'])->result_array();
+        $journal = $this->db->query($sql,$user->id_instansi)->result_array();
         // $volume = $this->db->get('tb_volume')->result_array();
         $this->data['journal'] = $journal;
         $this->ciparser->new_parse('template_admin_journal','modules_journal', 'artikel_layout',$this->data);
@@ -508,9 +523,9 @@ class Admin extends MX_Controller
         $this->ckeditor->config['height'] = '300px'; 
         $this->data['view'] = 'edit';
         // $this->data['breadcumb'] = $journal['judul'];
-        $user = $this->session->userdata('data_user_journal');
+        $user = $this->user->user;
         $sql = "SELECT j.* FROM tb_journal j join tb_pengguna p on j.id_user_ref = p.id_pengguna Where id_instansi_ref = ?";
-        $journal = $this->db->query($sql,$user['id_instansi'])->result_array();
+        $journal = $this->db->query($sql,$user->id_instansi)->result_array();
         // $volume = $this->db->get('tb_volume')->result_array();
         $this->data['artikel'] = $artikel;
         $this->data['author'] = $author;
@@ -572,16 +587,16 @@ class Admin extends MX_Controller
         }
         $this->data['view'] = 'add';
         // $this->data['breadcumb'] = $journal['judul'];
-        $user = $this->session->userdata('data_user_journal');
+        $user = $this->user->user;
         $sql = "SELECT j.* FROM tb_journal j join tb_pengguna p on j.id_user_ref = p.id_pengguna Where id_instansi_ref = ?";
-        $journal = $this->db->query($sql,$user['id_instansi'])->result_array();
+        $journal = $this->db->query($sql,$user->id_instansi)->result_array();
         // $volume = $this->db->get('tb_volume')->result_array();
         $this->data['journal'] = $journal;
         $this->ciparser->new_parse('template_admin_journal','modules_journal', 'create_volume_layout',$this->data);
     }
 
     public function edit_volume($id=null){
-        $user = $this->session->userdata('data_user_journal');
+        $user = $this->user->user;
         if ($this->input->server('REQUEST_METHOD') == "POST") {
             // print_r($this->data['user'])
             $ret['state'] = 0;
@@ -608,7 +623,7 @@ class Admin extends MX_Controller
         $this->data['view'] = 'edit';
         // $this->data['breadcumb'] = $journal['judul'];
         $sql = "SELECT j.* FROM tb_journal j join tb_pengguna p on j.id_user_ref = p.id_pengguna Where id_instansi_ref = ?";
-        $journal = $this->db->query($sql,$user['id_instansi'])->result_array();
+        $journal = $this->db->query($sql,$user->id_instansi)->result_array();
         // $volume = $this->db->get('tb_volume')->result_array();
         $sql = "SELECT * FROM tb_volume WHERE id_volume = ?";
         $no = $this->db->query($sql,$id)->row_array();
@@ -645,15 +660,15 @@ class Admin extends MX_Controller
             exit();
         }
         $this->data['view'] = 'add';
-        $user = $this->session->userdata('data_user_journal');
+        $user = $this->user->user;
         $sql = "SELECT j.* FROM tb_journal j join tb_pengguna p on j.id_user_ref = p.id_pengguna Where id_instansi_ref = ?";
-        $journal = $this->db->query($sql,$user['id_instansi'])->result_array();
+        $journal = $this->db->query($sql,$user->id_instansi)->result_array();
         $this->data['journal'] = $journal;
         $this->ciparser->new_parse('template_admin_journal','modules_journal', 'create_no_volume_layout',$this->data);
     }
 
     public function edit_no_volume($id=null){
-        $user = $this->session->userdata('data_user_journal');
+        $user = $this->user->user;
         if ($this->input->server('REQUEST_METHOD') == "POST") {
             $ret['state'] = 0;
             $ret['status'] = 0;
@@ -678,7 +693,7 @@ class Admin extends MX_Controller
         $this->data['nomor'] = $no;
         $this->data['view'] = 'edit';
         $sql = "SELECT j.* FROM tb_journal j join tb_pengguna p on j.id_user_ref = p.id_pengguna Where id_instansi_ref = ?";
-        $journal = $this->db->query($sql,$user['id_instansi'])->result_array();
+        $journal = $this->db->query($sql,$user->id_instansi)->result_array();
         $this->data['journal'] = $journal;
         $this->ciparser->new_parse('template_admin_journal','modules_journal', 'nomor_layout',$this->data);
     }
@@ -723,12 +738,12 @@ class Admin extends MX_Controller
     }
 
     public function artikel($id=null){
-        $user = $this->session->userdata('data_user_journal');
+        $user = $this->user->user;
         $sql = "SELECT j.* FROM tb_journal j join tb_pengguna p on j.id_user_ref = p.id_pengguna Where id_journal = ?";
         $journal = $this->db->query($sql,$id)->row_array();
+        $this->data['journal'] = $journal;
         $this->data['view'] = 'list';
         $this->data['id'] = $id;
-        $this->data['journal'] = $journal;
         $this->ciparser->new_parse('template_admin_journal','modules_journal', 'list_artikel_layout',$this->data);
     }
 
@@ -833,6 +848,93 @@ class Admin extends MX_Controller
     public function reason($id=null){
         $a = $this->db->get_where('tb_artikel',array('id_artikel'=>$id))->row_array()['reason'];
         echo json_encode($a);
+    }
+
+    public function report_download(){
+        $this->data['breadcumb'] = 'Report Download';
+        $this->data['view'] = 'list';
+        $this->ciparser->new_parse('template_admin_journal','modules_journal', 'download_journal_layout',$this->data);
+    }
+
+    public function report_download_journal($id=null){
+        $sql = "SELECT j.* FROM tb_journal j join tb_pengguna p on j.id_user_ref = p.id_pengguna Where id_journal = ?";
+        $journal = $this->db->query($sql,$id)->row_array();
+        if (is_null($journal['university']) || $journal['university'] == '') {
+            $journal['university'] = 0;
+        }
+        if (is_null($journal['goverment']) || $journal['goverment'] == '') {
+            $journal['goverment'] = 0;
+        }
+        if (is_null($journal['business']) || $journal['business'] == '') {
+            $journal['business'] = 0;
+        }
+        if (is_null($journal['media']) || $journal['media'] == '') {
+            $journal['media'] = 0;
+        }
+        if (is_null($journal['comunity']) || $journal['comunity'] == '') {
+            $journal['comunity'] = 0;
+        }
+        if (is_null($journal['anonym']) || $journal['anonym'] == '') {
+            $journal['anonym'] = 0;
+        }
+        $this->data['journal'] = $journal;
+        $this->data['breadcumb'] = 'Report Download';
+        $this->data['view'] = 'list';
+        $this->data['id'] = $id;
+        $this->ciparser->new_parse('template_admin_journal','modules_journal', 'download_artikel_layout',$this->data);
+    }
+
+    public function report_download_artikel($id=null){
+        $sql = $this->db->get_where('tb_artikel',array('id_artikel'=>$id))->row_array();
+        if (is_null($sql['university']) || $sql['university'] == '') {
+            $sql['university'] = 0;
+        }
+        if (is_null($sql['goverment']) || $sql['goverment'] == '') {
+            $sql['goverment'] = 0;
+        }
+        if (is_null($sql['business']) || $sql['business'] == '') {
+            $sql['business'] = 0;
+        }
+        if (is_null($sql['media']) || $sql['media'] == '') {
+            $sql['media'] = 0;
+        }
+        if (is_null($sql['comunity']) || $sql['comunity'] == '') {
+            $sql['comunity'] = 0;
+        }
+        if (is_null($sql['anonym']) || $sql['anonym'] == '') {
+            $sql['anonym'] = 0;
+        }
+        if (is_null($sql['total']) || $sql['total'] == '') {
+            $sql['total'] = 0;
+        }
+        if (is_null($sql['university_abs']) || $sql['university_abs'] == '') {
+            $sql['university_abs'] = 0;
+        }
+        if (is_null($sql['goverment_abs']) || $sql['goverment_abs'] == '') {
+            $sql['goverment_abs'] = 0;
+        }
+        if (is_null($sql['business_abs']) || $sql['business_abs'] == '') {
+            $sql['business_abs'] = 0;
+        }
+        if (is_null($sql['media_abs']) || $sql['media_abs'] == '') {
+            $sql['media_abs'] = 0;
+        }
+        if (is_null($sql['comunity_abs']) || $sql['comunity_abs'] == '') {
+            $sql['comunity_abs'] = 0;
+        }
+        if (is_null($sql['anonym_abs']) || $sql['anonym_abs'] == '') {
+            $sql['anonym_abs'] = 0;
+        }
+        if (is_null($sql['total_abs']) || $sql['total_abs'] == '') {
+            $sql['total_abs'] = 0;
+        }
+        if (is_null($sql['total_download']) || $sql['total_download'] == '') {
+            $sql['total_download'] = 0;
+        }
+        $this->data['artikel'] = $sql;
+        $this->data['breadcumb'] = 'Report Download';
+        $this->data['view'] = 'list';
+        $this->ciparser->new_parse('template_admin_journal','modules_journal', 'detail_report_download_layout',$this->data);
     }
 
     public function ajax_list($id=null)
@@ -1115,6 +1217,80 @@ class Admin extends MX_Controller
         echo json_encode($output);
     }
 
+    public function ajax_list_journal_download()
+    {
+        $this->load->model('journal_model');
+        $list = $this->journal_model->get_datatables_journal_download();
+        $data = array();
+        $no = $_POST['start'];
+        // $aktif = 'Pending';
+        $button = '';
+        $btn = '';
+        foreach ($list as $news) {
+            $no++;
+            $button = '<a href="'.site_url('journal/admin/report_download_journal').'/'.$news->id_journal.'" class="btn btn-success btn-sm"><i class="fa fa-link"></i>Detail</a>';
+            $row = array();
+            $row[] = $no;
+            $row[] = '<div class="detail">'.word_limiter($news->judul,10).'</div>';
+            $row[] = '<div class="detail">'.$news->issn.'</div>';
+            if ($news->total_download == '' || is_null($news->total_download)) { $total = 0; }else{ $total = $news->total_download;}
+            $row[] = $total;
+            if ($news->id_role_ref == 0) {
+                $nama = $this->db->get_where('tb_mahasiswa',array('id_pengguna_ref'=>$news->id_pengguna))->row_array()['nama'];
+            }else{
+                $nama = $this->db->get_where('tb_dosen',array('id_pengguna_ref'=>$news->id_pengguna))->row_array()['nama'];
+            }
+            $row[] = $nama;
+            $row[] = $button;
+ 
+            $data[] = $row;
+        }
+ 
+        $output = array(
+                        "draw" => $_POST['draw'],
+                        "recordsTotal" => $this->journal_model->count_all_journal_download(),
+                        "recordsFiltered" => $this->journal_model->count_filtered_journal_download(),
+                        "data" => $data,
+                );
+        //output to json format
+        echo json_encode($output);
+    }
+
+    public function ajax_list_artikel($id=null)
+    {
+        $this->load->model('journal_model');
+        $list = $this->journal_model->get_datatables($id);
+        $data = array();
+        $no = $_POST['start'];
+        $aktif = '';
+        foreach ($list as $news) {
+        $button = '';
+        $btn_ign = '';
+            $no++;
+            $row = array();
+            $row[] = $no;
+            $row[] = '<div class="btn-detail" id="'.$news->id_artikel.'" style="cursor:pointer;"><u>'.word_limiter($news->judul,10).' <i class="fa fa-external-link" aria-hidden="true"></i></u></div>';
+            $row[] = $news->volume;
+            $row[] = $news->nomor;
+            if ($news->total_download == '' || is_null($news->total_download)) { $total = 0; }else{ $total = $news->total_download;}
+            $row[] = $total;
+            $button = '<a href="'.site_url('journal/admin/report_download_artikel').'/'.$news->id_artikel.'" class="btn btn-success btn-sm"><i class="fa fa-link"></i>Detail</a>';
+            $row[] = $button;
+            // $row[] = $btn_ign.$button;
+ 
+            $data[] = $row;
+        }
+ 
+        $output = array(
+                        "draw" => $_POST['draw'],
+                        "recordsTotal" => $this->journal_model->count_all(),
+                        "recordsFiltered" => $this->journal_model->count_filtered($id),
+                        "data" => $data,
+                );
+        //output to json format
+        echo json_encode($output);
+    }
+
     public function upload_file_abstract($file){
         $imagename = $file['name'];
         ini_set('max_file_uploads', 3);
@@ -1255,6 +1431,14 @@ class Admin extends MX_Controller
     public function create_novolume(){
     
         $this->ciparser->new_parse('template_admin_journal','modules_journal', 'create_no_volume_layout');
+    }
+     public function detail_download(){
+    
+        $this->ciparser->new_parse('template_admin_journal','modules_journal', 'detail_download_layout');
+    }
+     public function detail_report_download(){
+    
+        $this->ciparser->new_parse('template_admin_journal','modules_journal', 'detail_report_download_layout');
     }
 
     public function add_slug(){

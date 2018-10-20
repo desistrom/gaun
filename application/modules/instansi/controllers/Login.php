@@ -38,11 +38,8 @@ class Login extends MX_Controller
                     $this->session->set_userdata('data_user', $data_user);
                     // $this->session->set_userdata('previlage', $data_user['id_role_ref']);
                     $this->session->set_userdata('instansi_login', true);
-                    $data_token['username'] = $username;
-                    $data_token['password'] = $password;
-                    $url = URL_GET_TOKEN;
-                    $method = 'POST';
-                    $token = "";
+                    $a = generate_token_jwt($data_user);
+                    setcookie('data_instansi',$a,time() + (3600 * 30), "/");
                     $ret['url'] = site_url('instansi');
 
                 }else{

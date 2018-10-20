@@ -6,20 +6,23 @@ class User_model extends CI_Model
     var $column_order = array(null, 'username','status'); //set column field database for datatable orderable
     var $column_search = array('username','status'); //set column field database for datatable searchable 
     var $order = array('id_journal_user' => 'asc'); // default order 
+
+    var $user = array();
  
     public function __construct()
     {
         parent::__construct();
         // $this->load->database();
+        $this->user = data_jwt($_COOKIE['data_instansi']);
     }
  
     private function _get_datatables_query()
     {
-        $user = $this->session->userdata('data_user');
+        $user = $this->user->user;
          // $sql = "SELECT * FROM tb_news n join tb_kategori_news k on n.id_kategori_ref = k.id_kategori_news";
         $this->db->from($this->table);
         // $this->db->join('tb_kategori_news', 'id_kategori_news = id_kategori_ref');
-        $this->db->where('id_instansi', $user['id_instansi']);
+        $this->db->where('id_instansi', $user->id_instansi);
  
         $i = 0;
      

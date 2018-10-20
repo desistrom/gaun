@@ -33,34 +33,159 @@
   .fa-upload{
     padding-right: 10px;
   }
+   .box-thumbnail .header-box-thumbnail{
+    height: 190px;
+    overflow: hidden;
+    padding: 6px;
+    position: relative;
+    background-color: white;
+   }
+    
+     .box-thumbnail .header-box-thumbnail .filter-button-action{
+      
+
+       top: 0;
+       width: 100%;
+       text-align: right;
+     }
+  
+   .box-thumbnail .header-box-thumbnail .btn-action{
+    height: 30px;
+    width: 30px;
+    background-color: #5AA7DF;
+    box-shadow: 2px 2px 3px 0 #000000;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    right: -4em;
+    margin:7px;
+    transition: 0.4s;
+    animation-delay: 0.2s;
+    text-align: center;
+   }
+  
+   .box-thumbnail .header-box-thumbnail .btn-action{
+    padding-top: 6px;
+    display: inline-block;
+    color: white;
+   }
+   
+    .box-thumbnail:hover .header-box-thumbnail .btn-action{
+      right: 0;
+      
+    }
+  /* 
+    .box-thumbnail:hover{
+         box-shadow: 1px 1px 2px 0 #000000;
+    }
+  */
+   .box-thumbnail .header-box-thumbnail .btn-action a i{
+    color: white;
+   }
+  
+   .box-thumbnail .header-box-thumbnail .btn-action:hover{
+    background-color: #247AB8;
+   }
+ 
+  .box-thumbnail .thumbnail-cover{
+    width: 100%;
+  }
+  
+   .box-thumbnail .body-box-thumbnail{
+    padding: 10px 10px;
+    background-color: white;
+margin-top: -11px;
+   }
+  
+   .box-thumbnail .footer-box-thumbnail{
+    padding: 5px 10px;
+    background-color: #F7F7F7;
+
+   }
+    .box-thumbnail  .title-thumbnail a{
+  text-decoration: none;
+  text-align: center;
+  color: #7B7B7B;
+  font-size: 14px;
+  font-weight: 600;
+}
+ .box-thumbnail .body-box-thumbnail{
+  color: #A2A2A2;
+  font-size: 10px;
+  font-weight: 400;
+}
+ .box-thumbnail{
+   background-color: #F7F7F7
+}
+.sub-footer-box-thumbnail{
+  display: inline-block;
+}
+.sub-footer-box-thumbnail .btn{
+  padding-top: 2px;
+  padding-bottom: 0;
+  margin-top: 5px;
+}
+.float-right{
+  float: right;
+}
+.btn-upload{
+  display: none;
+}
 </style>
 
 <?php if ($view == 'list') { ?>
 <link rel="stylesheet" href="<?=base_url();?>assets/datatables/css/dataTables.bootstrap.min.css">
+<div class="col col-md-12 col-sm-12 col-s-12">
+  <div class="filter-box-thumbnail col-md-3 col-sm-3 col-xs-3 " style="padding-bottom: 2em;">
+        <div class="box-thumbnail" style="border:solid 1px #CBCBCB;">
+          <div class="header-box-thumbnail">
+            <img class="thumbnail-cover" src="<?=base_url();?>assets/media/<?=$journal['futured_image'];?>">
+          </div>
+          <div class="body-box-thumbnail">
+            <h4 class="title-thumbnail"><a href="#"><?php echo $journal['judul'];?></a></h4>
+
+          </div>
+
+        </div>
+      </div>
+</div>
 <div class="col col-md-12 col-sm-12 col-xs-12">
-  
+ 
 <div class="box">
-	<div class="box-body">
-		<div class="col col-md-12 col-sm-12 col-xs-12" style="padding-left: 0; margin-bottom: 15px;">
-			<!-- <a href="<?=site_url('instansi/add_berita');?>" class="btn btn-success">Tambah News</a> -->
-		</div>
-		<div class="col col-md-12 col-xs-12 table-responsive">
-			<table class="table table-bordered  dataTable" id="table">
-				<thead>
-					<th>No.</th>
+  <div class="box-body">
+    <div class="col col-md-12 col-sm-12 col-xs-12" style="padding-left: 0; margin-bottom: 15px;">
+    </div>
+    <div class="col col-md-12 col-xs-12 table-responsive">
+      <table class="table table-bordered  dataTable" id="table">
+        <thead>
+          <th>No.</th>
           <th>Judul Artikel</th>
           <th>Volume</th>
           <th>No. Journal</th>
-          <!-- <th>Journal</th> -->
-          <th>Status</th>
-          <th>Action</th>
-				</thead>
-				<tbody>
-				</tbody>
-			</table>
-		</div>
-	</div>
+          <th>Jumlah Download</th>
+          <th>Detail</th>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
+</div>
+<div class="col col-md-12 col-sm-12 col-xs-12">
+            <!-- Donut chart -->
+      <div class="box box-success">
+        <div class="box-header with-border">
+          <i class="fa fa-bar-chart-o"></i>
+
+          <h3 class="box-title">Detail Download</h3>
+
+        </div>
+        <div class="box-body">
+          <div id="donut-chart" style="height: 300px;"></div>
+        </div>
+        <!-- /.box-body-->
+      </div>
 </div>
   <?php if ($this->session->flashdata('notif') != '') { ?>
     <div class="modal" tabindex="-1" role="dialog" id="modalSuccess">
@@ -158,7 +283,25 @@
     </div>
   </div>
 </div>
-
+<div class="modal" tabindex="-1" role="dialog" id="modalReason">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Reason</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p></p>
+      </div>
+      <div class="modal-footer">
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="modal fade" id="progresLoading" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="vertical-alignment-helper">
         <div class="modal-dialog vertical-align-center">
@@ -182,56 +325,73 @@
 <!-- <script src="<?=base_url().'assets/js/jquery-3.2.1.min.js';?>"></script> -->
 <script src="<?=base_url();?>assets/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?=base_url();?>assets/datatables/js/dataTables.bootstrap.min.js"></script>
+       <script src="<?=base_url();?>assets/admin-jur/plugins/flot/jquery.flot.min.js"></script>
+<!-- FLOT RESIZE PLUGIN - allows the chart to redraw when the window is resized -->
+<script src="<?=base_url();?>assets/admin-jur/plugins/flot/jquery.flot.resize.min.js"></script>
+<!-- FLOT PIE PLUGIN - also used to draw donut charts -->
+<script src="<?=base_url();?>assets/admin-jur/plugins/flot/jquery.flot.pie.min.js"></script>
+<!-- FLOT CATEGORIES PLUGIN - Used to draw bar charts -->
+<script src="<?=base_url();?>assets/admin-jur/plugins/flot/jquery.flot.categories.min.js"></script>
+<script>
+  $(function () {
+
+    /*
+     * DONUT CHART
+     * -----------
+     */
+
+    var donutData = [
+      {label: "University", data: <?php echo $journal['university']; ?>, color: "#3c8dbc"},
+      {label: "Business", data: <?php echo $journal['business']; ?>, color: "#0073b7"},
+      {label: "Goverment", data: <?php echo $journal['goverment']; ?>, color: "#00c0ef"},
+      {label: "Media", data: <?php echo $journal['media']; ?>, color: "#00c0ef"},
+      {label: "Comunity", data: <?php echo $journal['comunity']; ?>, color: "#00c0ef"},
+    ];
+    $.plot("#donut-chart", donutData, {
+      series: {
+        pie: {
+          show: true,
+          radius: 1,
+          innerRadius: 0.5,
+          label: {
+            show: true,
+            radius: 2 / 3,
+            formatter: labelFormatter,
+            threshold: 0.1
+          }
+
+        }
+      },
+      legend: {
+        show: true
+      }
+    });
+    /*
+     * END DONUT CHART
+     */
+
+  });
+
+  /*
+   * Custom Label formatter
+   * ----------------------
+   */
+  function labelFormatter(label, series) {
+    return '<div style="font-size:13px; text-align:center; padding:2px; color: #fff; font-weight: 600;">'
+        + label
+        + "<br>"
+        + Math.round(series.percent) + "%</div>";
+  }
+</script>
 <script type="text/javascript">
   $(document).ready(function () {
-    $('body').on('click','.btn-acc', function(){
-      var id = $(this).attr('id');
-      $('#modalacc #id').val(id);
-      $('#modalacc').modal('show');
-    });
-
-    $('body').on('click','.btn-ign', function(){
-      var id = $(this).attr('id');
-      $('#modalign #id').val(id);
-      $('#modalign').modal('show');
-    });
-
-    $('body').on('click','.btn-acc_action', function(){
-      var id = $('#modalacc #id').val();
-      var status = 1;
-      // console.log(id);
-      $.ajax({
-        url : base_url+'instansi/journal/response_artikel/'+'<?=$id;?>',
-        data : {'id' : id, 'status' : status},
-        dataType: 'json',
-        type : 'POST'
-      }).done(function(data){
-        window.location.href = data.url;
-      });
-    });
-
-
-    $('body').on('click','.btn-ign_action', function(){
-      var id = $('#modalign #id').val();
-      var status = 2;
-      var reason = $('#reason').val();
-      // console.log(id);
-      $.ajax({
-        url : base_url+'instansi/journal/response_artikel/'+'<?=$id;?>',
-        data : {'id' : id, 'status' : status, 'reason' : reason},
-        dataType: 'json',
-        type : 'POST'
-      }).done(function(data){
-        window.location.href = data.url;
-      });
-      // $('#modalign').modal('show');
-    });
+    
     $('body').on('click','.btn-detail', function(){
       var id = $(this).attr('id');
       // var status = 1;
       // console.log(id);
       $.ajax({
-        url : base_url+'instansi/journal/detail_artikel/'+id,
+        url : base_url+'journal/admin/detail_artikel/'+id,
         data : {'id' : id},
         dataType: 'json',
         type : 'POST'
@@ -266,7 +426,7 @@ $(document).ready(function() {
  
         // Load data for the table's content from an Ajax source
         "ajax": {
-            "url": "<?php echo site_url('instansi/journal/ajax_list/'.$id)?>",
+            "url": "<?php echo site_url('admin/journal/ajax_list_artikel/'.$id)?>",
             "type": "POST"
         },
  

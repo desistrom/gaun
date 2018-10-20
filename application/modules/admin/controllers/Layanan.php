@@ -10,12 +10,14 @@
 class Layanan extends CI_Controller  {
 
 	var $data = array();
+	var $user = array();
     function __construct() {
         parent::__construct();
-        $this->load->helper(array('form', 'url'));
-        if ($this->session->userdata('is_login') == false) {
+        if(!isset($_COOKIE['data_admin']) || decode_token_jwt($_COOKIE['data_admin']) != true){
         	redirect(site_url('login'));
         }
+        $this->load->helper(array('form', 'url'));
+		$this->user = data_jwt($_COOKIE['data_admin']);
     }
 
     public function index()
@@ -204,7 +206,7 @@ class Layanan extends CI_Controller  {
 				$media['deskripsi'] = $this->input->post('deskripsi');
 				$media['tgl_upload'] = date('Y-m-d');
 				$media['type'] = 'video';
-				$media['id_user_ref'] = $this->session->userdata('data_user')['id_user'];
+				$media['id_user_ref'] = $this->user->user->id_user;
 				$media['file_name'] = $this->input->post('file_name');
 				if ($this->db->insert('tb_tube',$media) == true) {
             		$ret['status'] = 1;

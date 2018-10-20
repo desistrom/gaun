@@ -9,8 +9,13 @@
  */
 class News extends MX_Controller  {
 	var $data = array();
+	var $user = array();
 	function __construct(){
+		if(!isset($_COOKIE['data_admin']) || decode_token_jwt($_COOKIE['data_admin']) != true){
+        	redirect(site_url('login'));
+        }
 		$this->load->model('news_model');
+		$this->user = data_jwt($_COOKIE['data_admin']);
 	}
 	public function index(){
 		// $rss = file_get_contents('https://rss.kontan.co.id/news/analisis');
@@ -38,7 +43,7 @@ class News extends MX_Controller  {
 				$data_news['content'] = $this->input->post('content');
 				$data_news['is_aktif'] = $this->input->post('status');
 				$data_news['id_kategori_ref'] = $this->input->post('kategori');
-				$data_news['id_user_ref'] = $this->session->userdata('data_user')['id_user'];
+				$data_news['id_user_ref'] = $this->user->user->id_user;
 				$data_news['link'] = url_title($this->input->post('judul'), 'dash', true);
 				if (isset($_FILES['file_name'])) {
 					$image = $this->upload_logo($_FILES);
@@ -104,7 +109,7 @@ class News extends MX_Controller  {
 				$data_news['judul'] = $this->input->post('judul');
 				$data_news['content'] = $this->input->post('content');
 				$data_news['id_kategori_ref'] = $this->input->post('kategori');
-				$data_news['id_user_ref'] = $this->session->userdata('data_user')['id_user'];
+				$data_news['id_user_ref'] = $this->user->user->id_user;
 				$data_news['link'] = url_title($this->input->post('judul'), 'dash', true);
 				if (isset($_FILES['file_name'])) {
 					$image = $this->upload_logo($_FILES);
@@ -195,7 +200,7 @@ class News extends MX_Controller  {
 				$data_news['judul'] =  $value['title'];
 				$data_news['img'] =  $this->get_img($value['description']);
 				$data_news['id_kategori_ref'] =  3;
-				$data_news['id_user_ref'] = $this->session->userdata('data_user')['id_user'];
+				$data_news['id_user_ref'] = $this->user->user->id_user;
 				$data_news['kategori_rss'] = $value['category'];
 				$data_news['link'] = url_title($value['title'], 'dash', true);
 				$data_news['content'] = $this->get_detail($value['link'])."<br> Sumber : ".$value['link'];;

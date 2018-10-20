@@ -11,6 +11,9 @@ class About extends MX_Controller  {
 	var $data = array();
 	function __construct(){
 		$this->load->module('login');
+		if(!isset($_COOKIE['data_admin']) || decode_token_jwt($_COOKIE['data_admin']) != true){
+        	redirect(site_url('login'));
+        }
 		// if ($this->login->token_check() == 0) {
 		// 	// redirect('login');
 		// }

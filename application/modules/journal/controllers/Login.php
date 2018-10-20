@@ -35,14 +35,11 @@ class Login extends MX_Controller
                 if ($data->num_rows() == 1) {
                     $ret['status'] = 1;
                     $data_user = $data->row_array();
-                    $this->session->set_userdata('data_user_journal', $data_user);
+                    // $this->session->set_userdata('data_user_journal', $data_user);
                     // $this->session->set_userdata('previlage', $data_user['id_role_ref']);
-                    $this->session->set_userdata('journal_login', true);
-                    $data_token['username'] = $username;
-                    $data_token['password'] = $password;
-                    $url = URL_GET_TOKEN;
-                    $method = 'POST';
-                    $token = "";
+                    // $this->session->set_userdata('journal_login', true);
+                    $a = generate_token_jwt($data_user);
+                    setcookie('data_journal',$a,time() + (3600 * 30), "/");
                     $ret['url'] = site_url('journal/admin');
 
                 }else{

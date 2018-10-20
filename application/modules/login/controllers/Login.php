@@ -40,27 +40,17 @@ class Login extends MX_Controller
                 if ($data->num_rows() == 1) {
                     $ret['status'] = 1;
                     $data_user = $data->row_array();
-                    $this->session->set_userdata('data_user', $data_user);
+                    /*$this->session->set_userdata('data_user', $data_user);
                     $this->session->set_userdata('previlage', $data_user['id_role_ref']);
-                    $this->session->set_userdata('is_login', true);
+                    $this->session->set_userdata('is_login', true);*/
                     $data_token = $username;
                     // $data_token['password'] = $password;
-                    $url = URL_GET_TOKEN;
-                    $method = 'POST';
-                    $token = "";
-                    $a = $this->generate_token($data_token);
-                    // $this->load->library('../modules/login/controllers/token');
-                    // $a modules::run('module/jwt/token_post', $data_token);
-                    // $result = api_helper(json_encode($data_token),$url,$method,$token);
-                    // $result = file_get_contents(site_url('login/token/token').'/'.$username.'/'.$password);
-                    // $token_jwt = json_decode($result,true);
-                    // $a = $this->token->token_get($username,$password);
-                    // print_r($a);
-                    // return false;
-                    // print_r($result);
-                    // print_r($data_token);
-            		// $this->session->set_userdata('token', $data_token);
-                    setcookie('token',$a,time() + (3600 * 30), "/");
+                    // $url = URL_GET_TOKEN;
+                    // $method = 'POST';
+                    // $token = "";
+                    $a = generate_token_jwt($data_user);
+                    setcookie('data_admin',$a,time() + (3600 * 30), "/");
+                    // print_r($_COOKIE['data_admin']);
             		$ret['url'] = site_url('admin');
 
             	}else{

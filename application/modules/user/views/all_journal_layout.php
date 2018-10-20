@@ -354,8 +354,8 @@ div.container-fluid.footer-bottom{
                   </ul>
                 </div>
                 <div class="artikel-body artikel-body-icedit">
-                  <a href="<?=site_url('user/journal/edit_artikel/'.$value['id_artikel']);?>" title="edit">
-                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                  <a href="#" title="edit">
+                    <i class="fa fa-download" aria-hidden="true"></i>
                   </a>
                   
                 </div>     

@@ -9,26 +9,31 @@
  */
 class Pengguna extends MX_Controller  {
 	var $data = array();
+    var $user = array();
 	function __construct(){
 		$this->load->module('login');
 		// if ($this->login->token_check() == 0) {
 		// 	// redirect('login');
 		// }
+        if(!isset($_COOKIE['data_instansi']) || decode_token_jwt($_COOKIE['data_instansi']) != true){
+            redirect(site_url('instansi/login'));
+        }
+        $this->user = data_jwt($_COOKIE['data_instansi']);
         $this->load->library('Excel');
-        $this->data['instansi'] = $this->session->userdata('data_user');
+        // $this->user->user = $this->session->userdata('data_user');
 	}
 
     public function list_dosen(){
         $this->data['breadcumb'] = 'List Dosen';
         $sql = "SELECT * FROM tb_pengguna p JOIN tb_dosen d on p.id_pengguna = d.id_pengguna_ref where id_role_ref = 1 AND status = 1 AND id_instansi_ref = ? ";
-        $this->data['user'] = $this->db->query($sql,$this->data['instansi']['id_instansi'])->result_array();
+        $this->data['user'] = $this->db->query($sql,$this->user->user->id_instansi)->result_array();
         $this->ciparser->new_parse('template_instansi','modules_instansi', 'pengguna/list_layout',$this->data);
     }
 
     public function list_mahasiswa(){
         $this->data['breadcumb'] = 'List Mahasiswa';
         $sql = "SELECT * FROM tb_pengguna p JOIN tb_mahasiswa d on p.id_pengguna = d.id_pengguna_ref where id_role_ref = 0 AND status = 1 AND status = 1 AND id_instansi_ref = ?";
-        $this->data['user'] = $this->db->query($sql,$this->data['instansi']['id_instansi'])->result_array();
+        $this->data['user'] = $this->db->query($sql,$this->user->user->id_instansi)->result_array();
         $this->ciparser->new_parse('template_instansi','modules_instansi', 'pengguna/list_layout',$this->data);
     }
 
@@ -56,14 +61,14 @@ class Pengguna extends MX_Controller  {
 	public function index(){
 		$this->data['breadcumb'] = 'Request Dosen';
 		$sql = "SELECT * FROM tb_pengguna p JOIN tb_dosen d on p.id_pengguna = d.id_pengguna_ref where id_role_ref = 1 AND status = 0 AND id_instansi_ref = ?";
-		$this->data['user'] = $this->db->query($sql,$this->data['instansi']['id_instansi'])->result_array();
+		$this->data['user'] = $this->db->query($sql,$this->user->user->id_instansi)->result_array();
 		$this->ciparser->new_parse('template_instansi','modules_instansi', 'pengguna/pengguna_layout',$this->data);
 	}
 
     public function mahasiswa(){
         $this->data['breadcumb'] = 'Request Mahasiswa';
         $sql = "SELECT * FROM tb_pengguna p JOIN tb_mahasiswa d on p.id_pengguna = d.id_pengguna_ref where id_role_ref = 0 AND status = 0 AND id_instansi_ref = ?";
-        $this->data['user'] = $this->db->query($sql,$this->data['instansi']['id_instansi'])->result_array();
+        $this->data['user'] = $this->db->query($sql,$this->user->user->id_instansi)->result_array();
         $this->ciparser->new_parse('template_instansi','modules_instansi', 'pengguna/pengguna_layout',$this->data);
     }
 

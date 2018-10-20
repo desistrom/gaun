@@ -7,7 +7,7 @@
                 <div class="row">
                   <div class="col col-md-12 col-sm-12 col-xs-12">
                         <h4 class="welcome">
-                        <?=$user['nama'];?>
+                       Selamat Datang <?=$user['nama'];?>
                       </h4>
                       <hr>
                   </div>

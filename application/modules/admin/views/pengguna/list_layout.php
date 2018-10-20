@@ -11,6 +11,7 @@
 			<th>Nama User</th>
 			<th>Email</th>
 			<th>No Hp</th>
+			<th>Instansi</th>
 			<th>Action</th>
 		<thead>
 		<tbody>
@@ -20,6 +21,7 @@
 				<td id="<?=$value['id_pengguna'];?>" class="detail"><span style="color:blue;"><u><?=$value['nama'];?></u></span></td>
 				<td><?=$value['email'];?></td>
 				<td><?=$value['no_hp'];?></td>
+				<td><?=$value['nm_instansi'];?></td>
 				<td><a class="btn btn-primary btn-sm" href="<?=site_url('admin/pengguna/reset').'/'.$value['id_pengguna'];?>">Reset</a></td>
 			</tr>
 		<?php endforeach ?>

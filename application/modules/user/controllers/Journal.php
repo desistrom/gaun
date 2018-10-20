@@ -5,17 +5,17 @@ class Journal extends MX_Controller
         var $idUser;
         var $data = array();
 
-    function __construct()
-    {
-        // $this->load->model('login_model');
-        /*$this->load->helper('api');
-        $this->load->library('Recaptcha');
-        $this->load->module('Token');*/
-        if ($this->session->userdata('user_login') != true) {
-            redirect('user/login_user');
+    var $user = array();
+    function __construct(){
+        if(!isset($_COOKIE['data_user']) || decode_token_jwt($_COOKIE['data_user']) != true){
+            redirect(site_url('user/login_user'));
         }
+        $this->user = data_jwt($_COOKIE['data_user']);
+        // if ($this->session->userdata('user_login') != true) {
+        //     redirect('user/login_user');
+        // }
         $this->load->model('journal_model');
-        $data = $this->session->userdata('user');
+        $data = $this->user->user;
         // print_r($data);
         $tb = '';
         if ($this->db->get_where('tb_pengguna',array('id_pengguna'=>$data))->row_array()['id_role_ref'] == 0) {
@@ -1251,12 +1251,44 @@ class Journal extends MX_Controller
 
     public function download_journal($id=null){
         $this->load->library('zip');
-        $sql = "SELECT *, j.judul as journal FROM tb_journal j JOIN tb_volume v ON j.id_journal = v.id_journal_ref JOIN tb_no_volume n ON v.id_volume = n.id_volume_ref JOIN tb_artikel a ON n.id_no_volume = a.id_no_volume_ref where id_journal = ?";
+        $sql = "SELECT *, j.judul as journal, j.total_download as journal_download FROM tb_journal j JOIN tb_volume v ON j.id_journal = v.id_journal_ref JOIN tb_no_volume n ON v.id_volume = n.id_volume_ref JOIN tb_artikel a ON n.id_no_volume = a.id_no_volume_ref where id_journal = ?";
         $artikel = $this->db->query($sql,$id)->result_array();
         $this->zip->read_file(FCPATH.'assets/media/'.$artikel[0]['futured_image']);
+        //mengambil data instansi
+        $downartikel = $this->db->get_where('tb_instansi',array('id_instansi'=>$this->data['user']['id_instansi_ref']))->row_array();
+        //set nilai ke jornal file abstraksi
+        /*if ($downartikel['id_jenis_instansi'] == 1) {
+            $data['university_abs'] = $artikel[0]['university_abs'] + 1;
+        }elseif ($downartikel['id_jenis_instansi'] == 2) {
+            $data['business_abs'] = $artikel[0]['business_abs'] + 1;
+        }elseif ($downartikel['id_jenis_instansi'] == 3) {
+            $data['goverment_abs'] = $artikel[0]['goverment_abs'] + 1;
+        }elseif ($downartikel['id_jenis_instansi'] == 4) {
+            $data['comunity_abs'] = $artikel[0]['comunity_abs'] + 1;
+        }else{
+            $data['media_abs'] = $artikel[0]['media_abs'] + 1;
+        }
+        $data['total_abs'] = $artikel[0]['total_abs'] + 1;*/
+        
+        //set nilai ke jornal file
+        if ($downartikel['id_jenis_instansi'] == 1) {
+            $data['university'] = $artikel[0]['university'] + 1;
+        }elseif ($downartikel['id_jenis_instansi'] == 2) {
+            $data['business'] = $artikel[0]['business'] + 1;
+        }elseif ($downartikel['id_jenis_instansi'] == 3) {
+            $data['goverment'] = $artikel[0]['goverment'] + 1;
+        }elseif ($downartikel['id_jenis_instansi'] == 4) {
+            $data['comunity'] = $artikel[0]['comunity'] + 1;
+        }else{
+            $data['media'] = $artikel[0]['media'] + 1;
+        }
+        $data['total'] = $artikel[0]['total'] + 1;
+        $data['total_download'] = $artikel[0]['journal_download'] + 1;
+        $this->db->update('tb_journal',$data,array('id_journal'=>$artikel[0]['id_journal']));
+
+        //set nilai ke artikel file
         foreach ($artikel as $key => $value) {
 
-            $downartikel = $this->db->get_where('tb_instansi',array('id_instansi'=>$this->data['user']['id_instansi_ref']))->row_array();
             $art = $this->db->get_where('tb_artikel',array('id_artikel'=>$value['id_artikel']))->row_array();
             if ($downartikel['id_jenis_instansi'] == 1) {
                 $data['university_abs'] = $art['university_abs'] + 1;
@@ -1270,10 +1302,7 @@ class Journal extends MX_Controller
                 $data['media_abs'] = $art['media_abs'] + 1;
             }
             $data['total_abs'] = $art['total_abs'] + 1;
-            $data['total_download'] = $art['total_download'] + 1;
-            $this->db->update('tb_artikel',$data,array('id_artikel'=>$value['id_artikel']));
 
-            $art = $this->db->get_where('tb_artikel',array('id_artikel'=>$value['id_artikel']))->row_array();
             if ($downartikel['id_jenis_instansi'] == 1) {
                 $data['university'] = $art['university'] + 1;
             }elseif ($downartikel['id_jenis_instansi'] == 2) {
@@ -1286,7 +1315,7 @@ class Journal extends MX_Controller
                 $data['media'] = $art['media'] + 1;
             }
             $data['total'] = $art['total'] + 1;
-            $data['total_download'] = $art['total_download'] + 1;
+            $data['total_download'] = $art['total_download'] + 2;
             $this->db->update('tb_artikel',$data,array('id_artikel'=>$value['id_artikel']));
 
             $this->zip->read_file(FCPATH.'assets/file/'.$value['file']);
@@ -1334,5 +1363,14 @@ class Journal extends MX_Controller
     }
     public function detail_myjournal(){
         $this->ciparser->new_parse('template_user','modules_user', 'detail_myjournal_layout');
+    }
+     public function report_download(){
+        $this->ciparser->new_parse('template_user','modules_user', 'download_journal_layout');
+    }
+     public function detail_report_download(){
+        $this->ciparser->new_parse('template_user','modules_user', 'report_download_layout');
+    }
+    public function detail_artikel_download(){
+        $this->ciparser->new_parse('template_user','modules_user', 'detail_report_download_layout');
     }
 }

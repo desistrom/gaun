@@ -10,6 +10,9 @@
 class Event extends MX_Controller  {
 	var $data = array();
 	function __construct(){
+        if(!isset($_COOKIE['data_admin']) || decode_token_jwt($_COOKIE['data_admin']) != true){
+            redirect(site_url('login'));
+        }
 		$this->load->model('news_model');
 	}
 	public function index(){

@@ -90,7 +90,8 @@ class General
     public function status(){
       $data = $this->CI->session->userdata('user');
       // print_r($data);
-
+      $data = data_jwt($_COOKIE['data_user']);
+      $data = $data->user;
       $user = $this->CI->db->get_where('tb_pengguna',array('id_pengguna'=>$data))->row_array()['id_instansi_ref'];
 
       return $user;
@@ -99,7 +100,6 @@ class General
     public function kategori(){
       // $data = $this->CI->session->userdata('user');
       // print_r($data);
-
       $kat = $this->CI->db->get('tb_kategori_journal')->result_array();
 
       return $kat;

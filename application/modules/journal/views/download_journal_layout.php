@@ -41,16 +41,30 @@
   <h3 class="box-title">Report Download</h3>
 
 </div>
-<div class="col col-md-12 col-sm-12 col-s-12" style="margin-bottom: 20px;">
+<div class="col col-md-6 col-sm-6 col-s-12" style="margin-bottom: 20px;">
   <div class="box box-success" >
     <div class="box-header with-border">
           <i class="fa fa-bar-chart-o"></i>
 
-          <h3 class="box-title">Detail Download</h3>
+          <h3 class="box-title">Detail Download Journal</h3>
 
         </div>
     <div class="box-body">
       <div id="donut-chart" style="height: 250px;"></div>
+    </div>
+  </div>
+
+</div>
+<div class="col col-md-6 col-sm-6 col-s-12" style="margin-bottom: 20px;">
+  <div class="box box-success" >
+    <div class="box-header with-border">
+          <i class="fa fa-bar-chart-o"></i>
+
+          <h3 class="box-title">Detail Download Artikel</h3>
+
+        </div>
+    <div class="box-body">
+      <div id="donut-chart-2" style="height: 250px;"></div>
     </div>
   </div>
 
@@ -200,6 +214,67 @@ $(document).ready(function() {
 
     ];
     $.plot("#donut-chart", donutData, {
+      series: {
+        pie: {
+          show: true,
+          radius: 1,
+          innerRadius: 0.5,
+          label: {
+            show: true,
+            radius: 2 / 3,
+            formatter: labelFormatter,
+            threshold: 0.1
+          }
+
+        }
+      },
+      legend: {
+        show: true
+      }
+    });
+    /*
+     * END DONUT CHART
+     */
+
+  });
+
+  /*
+   * Custom Label formatter
+   * ----------------------
+   */
+  function labelFormatter(label, series) {
+    return '<div style="font-size:13px; text-align:center; padding:2px; color: #fff; font-weight: 600;">'
+        + label
+        + "<br>"
+        + Math.round(series.percent) + "%</div>";
+  }
+</script>
+<script>
+  $(function () {
+    /*
+     * Flot Interactive Chart
+     * -----------------------
+
+     * DONUT CHART
+     * -----------
+     */
+     // //// warna 
+    /* BCF4B2
+      7CE969
+      238012
+      4EE135
+      35C41C
+      04598A*/
+    var donutData = [
+      {label: "<?php echo $sum_artikel['nama_1']; ?>", data: <?php echo $sum_artikel['download_1']; ?>, color: "#BCF4B2"},
+      {label: "<?php echo $sum_artikel['nama_2']; ?>", data: <?php echo $sum_artikel['download_2']; ?>, color: "#7CE969"},
+      {label: "<?php echo $sum_artikel['nama_3']; ?>", data: <?php echo $sum_artikel['download_3']; ?>, color: "#238012"},
+      {label: "<?php echo $sum_artikel['nama_4']; ?>", data: <?php echo $sum_artikel['download_4']; ?>, color: "#4EE135"},
+      {label: "<?php echo $sum_artikel['nama_5']; ?>", data: <?php echo $sum_artikel['download_5']; ?>, color: "#35C41C"},
+      {label: "Anonymus", data: <?php echo $sum_artikel['anonym']; ?>, color: "#04598A"}
+
+    ];
+    $.plot("#donut-chart-2", donutData, {
       series: {
         pie: {
           show: true,

@@ -240,6 +240,19 @@ class Journal extends MX_Controller
             $nama = $this->db->get_where('tb_jenis_instansi',array('id_jenis_instansi'=>$i))->row_array();
             $sum_journal['nama_'.$i] = $nama['nm_jenis_instansi'];
         }
+        $slq_artikel = "SELECT SUM(download_1) as download_1, SUM(download_2) as download_2, SUM(download_3) as download_3, SUM(download_4) as download_4, SUM(download_5) as download_5, SUM(anonym) as anonym FROM tb_artikel a join tb_pengguna p on a.id_user_ref = p.id_pengguna where p.id_instansi_ref = ?";
+        $sum_artikel = $this->db->query($slq_artikel,$this->user->user->id_instansi)->row_array();
+        if (is_null($sum_artikel['anonym']) || $sum_artikel['anonym'] == '') {
+            $sum_artikel['anonym'] = 0;
+        }
+        for ($i=1; $i < 6; $i++) { 
+            if (is_null($sum_artikel['download_'.$i]) || $sum_artikel['download_'.$i] == '') {
+                $sum_artikel['download_'.$i] = 0;
+            }
+            $nama = $this->db->get_where('tb_jenis_instansi',array('id_jenis_instansi'=>$i))->row_array();
+            $sum_artikel['nama_'.$i] = $nama['nm_jenis_instansi'];
+        }
+        $this->data['sum_artikel'] = $sum_artikel;
         $this->data['sum_journal'] = $sum_journal;
         $this->data['breadcumb'] = 'Report Download';
         $this->data['view'] = 'list';

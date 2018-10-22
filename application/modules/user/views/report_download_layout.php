@@ -147,21 +147,30 @@ margin-top: -11px;
 
 <?php if ($view == 'list') { ?>
 <link rel="stylesheet" href="<?=base_url();?>assets/datatables/css/dataTables.bootstrap.min.css">
-<div class="col col-md-12 col-sm-12 col-s-12">
-  <div class="filter-box-thumbnail col-md-3 col-sm-3 col-xs-3 " style="padding-bottom: 2em;">
-        <div class="box-thumbnail" style="border:solid 1px #CBCBCB;">
-          <div class="header-box-thumbnail">
-            <img class="thumbnail-cover" src="<?=base_url();?>assets/media/<?=$journal['futured_image'];?>">
-          </div>
-          <div class="body-box-thumbnail">
-            <h4 class="title-thumbnail"><a href="#"><?php echo $journal['judul'];?></a></h4>
-
-          </div>
-
+<div class="col col-md-4 col-sm-4 col-s-12">
+  <div class=" box box-warning">
+    <div class="box-header with-border">
+          <i class="fa fa-bar-chart-o"></i>
+          <h3 class="box-title">Journal</h3>
         </div>
-      </div>
+        <div class="box-body">
+           <div class="filter-box-thumbnail col-md-12 col-sm-12 col-xs-12 " style="padding-bottom: 2em;">
+              <div class="box-thumbnail" style="border:solid 1px #CBCBCB;">
+                <div class="header-box-thumbnail">
+                  <img class="thumbnail-cover" src="<?=base_url();?>assets/media/<?=$journal['futured_image'];?>">
+                </div>
+                <div class="body-box-thumbnail">
+                  <h4 class="title-thumbnail"><a href="#"><?php echo $journal['judul'];?></a></h4>
+
+                </div>
+
+              </div>
+            </div>
+        </div>
+  </div>
+ 
 </div>
-<div class="col col-md-12 col-sm-12 col-xs-12">
+<div class="col col-md-8 col-sm-8 col-xs-12">
             <!-- Donut chart -->
       <div class="box box-warning">
         <div class="box-header with-border">
@@ -361,11 +370,11 @@ margin-top: -11px;
 
     var donutData = [
       {label: "<?php echo $journal['nama_1']; ?>", data: <?php echo $journal['download_1']; ?>, color: "#FCE6D6"},
-      {label: "<?php echo $journal['nama_2']; ?>", data: <?php echo $journal['download_2']; ?>, color: "#7CE969"},
+      {label: "<?php echo $journal['nama_2']; ?>", data: <?php echo $journal['download_2']; ?>, color: "#FAD2B6"},
       {label: "<?php echo $journal['nama_3']; ?>", data: <?php echo $journal['download_3']; ?>, color: "#F3A065"},
       {label: "<?php echo $journal['nama_4']; ?>", data: <?php echo $journal['download_4']; ?>, color: "#F08940"},
       {label: "<?php echo $journal['nama_5']; ?>", data: <?php echo $journal['download_5']; ?>, color: "#E06812"},
-      {label: "Anonymus", data: <?php echo $journal['anonym']; ?>, color: "#04598A"}
+      {label: "Anonymus", data: <?php echo $journal['anonym']; ?>, color: "#C85D10"}
     ];
     $.plot("#donut-chart", donutData, {
       series: {

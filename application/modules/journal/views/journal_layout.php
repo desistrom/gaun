@@ -300,6 +300,13 @@ div.container-fluid.footer-bottom{
               </div>
               <div class="col col-md-12 col-sm-12 col-xs-12 none-padding">
                 <div class="col col-md-12 col-sm-12 col-xs-12 list-journal">
+                    <?php if (count($journal) == 0) { ?>
+                      <div class="">
+                      <div class="alert alert-success">
+                        <h2><center> Anda Tidak Memiliki Journal</center></h2>
+                      </div>
+                      </div>
+                    <?php }?>
                   <div class="owl-carousel owl-theme">
                     <?php foreach ($journal as $key => $value): ?>
                       <div class="item">
@@ -327,130 +334,10 @@ div.container-fluid.footer-bottom{
                         </div>
                       </div>
                     <?php endforeach ?>
-                      <!-- <div class="item">
-                        <div class="filter-box-thumbnail col-md-12 col-sm-12 col-xs-12 " style="">
-                          <div class="box-thumbnail">
-                            <div class="header-box-thumbnail">
-                              <img class="thumbnail-cover" src="<?=base_url();?>assets/images/3.jpg">
-                              <div class="filter-button-action">
-                                <div>
-                                  <a href="#">
-                                    <div class="btn-action">
-                                      <i class="fa fa-pencil"></i>
-                                      
-                                    </div>
-                                  </a>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="body-box-thumbnail">
-                              <h5 class="title-thumbnail"><a href="#">isue 1</a></h5>
-
-                            </div>
-
-                          </div>
-                        </div>
-                      </div>
-                      <div class="item">
-                        <div class="filter-box-thumbnail col-md-12 col-sm-12 col-xs-12 " style="">
-                          <div class="box-thumbnail">
-                            <div class="header-box-thumbnail">
-                              <img class="thumbnail-cover" src="<?=base_url();?>assets/images/3.jpg">
-                              <div class="filter-button-action">
-                                <div>
-                                  <a href="#">
-                                    <div class="btn-action">
-                                      <i class="fa fa-pencil"></i>
-                                      
-                                    </div>
-                                  </a>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="body-box-thumbnail">
-                              <h5 class="title-thumbnail"><a href="#">isue 1</a></h5>
-
-                            </div>
-
-                          </div>
-                        </div>
-                      </div>
-                      <div class="item">
-                        <div class="filter-box-thumbnail col-md-12 col-sm-12 col-xs-12 " style="">
-                          <div class="box-thumbnail">
-                            <div class="header-box-thumbnail">
-                              <img class="thumbnail-cover" src="<?=base_url();?>assets/images/3.jpg">
-                              <div class="filter-button-action">
-                                <div>
-                                  <a href="#">
-                                    <div class="btn-action">
-                                      <i class="fa fa-pencil"></i>
-                                      
-                                    </div>
-                                  </a>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="body-box-thumbnail">
-                              <h5 class="title-thumbnail"><a href="#">isue 1</a></h5>
-
-                            </div>
-
-                          </div>
-                        </div>
-                      </div>
-                      <div class="item">
-                        <div class="filter-box-thumbnail col-md-12 col-sm-12 col-xs-12 " style="">
-                          <div class="box-thumbnail">
-                            <div class="header-box-thumbnail">
-                              <img class="thumbnail-cover" src="<?=base_url();?>assets/images/3.jpg">
-                              <div class="filter-button-action">
-                                <div>
-                                  <a href="#">
-                                    <div class="btn-action">
-                                      <i class="fa fa-pencil"></i>
-                                      
-                                    </div>
-                                  </a>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="body-box-thumbnail">
-                              <h5 class="title-thumbnail"><a href="#">isue 1</a></h5>
-
-                            </div>
-
-                          </div>
-                        </div>
-                      </div>
-                      <div class="item">
-                        <div class="filter-box-thumbnail col-md-12 col-sm-12 col-xs-12 " style="">
-                          <div class="box-thumbnail">
-                            <div class="header-box-thumbnail">
-                              <img class="thumbnail-cover" src="<?=base_url();?>assets/images/3.jpg">
-                              <div class="filter-button-action">
-                                <div>
-                                  <a href="#">
-                                    <div class="btn-action">
-                                      <i class="fa fa-pencil"></i>
-                                      
-                                    </div>
-                                  </a>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="body-box-thumbnail">
-                              <h5 class="title-thumbnail"><a href="#">isue 1</a></h5>
-
-                            </div>
-
-                          </div>
-                        </div>
-                      </div> -->
-                     
-                    
                   </div>
-                  <a href="<?php echo site_url('journal/admin/detail_myjournal');?>" class="txt-seemore">see more</a>
+                  <?php if (count($journal) != 0) { ?>
+                    <a href="<?php echo site_url('journal/admin/detail_myjournal');?>" class="txt-seemore">see more</a>
+                    <?php }?>
                 </div>
               </div>
             </div>
@@ -467,6 +354,13 @@ div.container-fluid.footer-bottom{
               </div>
             </div>
             <div class="sub-content-artikel-body">
+            <?php if (count($journal) == 0) { ?>
+                      <div class="">
+                      <div class="alert alert-success">
+                        <h2><center> Anda Tidak Memiliki Artikel</center></h2>
+                      </div>
+                      </div>
+                    <?php }?>
             <?php foreach ($artikel as $key => $value): ?>
               <div class="col col-md-6 col-sm-6 col-xs-12 list-artikel">
                 <div class="artikel-body artikel-body-left">

@@ -297,11 +297,11 @@
     
 
     var donutData = [
-      {label: "<?=$daftar_instansi[0]['nm_jenis_instansi'];?>", data: <?=${$daftar_instansi[0]['nm_jenis_instansi']};?>, color: "#BBF0FD"},
-      {label: "<?=$daftar_instansi[1]['nm_jenis_instansi'];?>", data: <?=${$daftar_instansi[1]['nm_jenis_instansi']};?>, color: "#9AE8FC"},
-      {label: "<?=$daftar_instansi[2]['nm_jenis_instansi'];?>", data: <?=${$daftar_instansi[2]['nm_jenis_instansi']};?>, color: "#45D5F9"},
-      {label: "<?=$daftar_instansi[3]['nm_jenis_instansi'];?>", data: <?=${$daftar_instansi[3]['nm_jenis_instansi']};?>, color: "#15CAF7"},
-      {label: "<?=$daftar_instansi[4]['nm_jenis_instansi'];?>", data: <?=${$daftar_instansi[4]['nm_jenis_instansi']};?>, color: "#35C41C"},
+      {label: "<?=$daftar_instansi[0]['nm_jenis_instansi'];?>", data: <?=${$daftar_instansi[0]['nm_jenis_instansi']};?>, color: "#FEDEDE"},
+      {label: "<?=$daftar_instansi[1]['nm_jenis_instansi'];?>", data: <?=${$daftar_instansi[1]['nm_jenis_instansi']};?>, color: "#FDBFBF"},
+      {label: "<?=$daftar_instansi[2]['nm_jenis_instansi'];?>", data: <?=${$daftar_instansi[2]['nm_jenis_instansi']};?>, color: "#FC9898"},
+      {label: "<?=$daftar_instansi[3]['nm_jenis_instansi'];?>", data: <?=${$daftar_instansi[3]['nm_jenis_instansi']};?>, color: "#FB8585"},
+      {label: "<?=$daftar_instansi[4]['nm_jenis_instansi'];?>", data: <?=${$daftar_instansi[4]['nm_jenis_instansi']};?>, color: "#FA6666"},
       // {label: "Series6", data: 50, color: "#04598A"}
 
     ];

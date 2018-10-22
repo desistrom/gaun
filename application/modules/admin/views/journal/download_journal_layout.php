@@ -46,7 +46,7 @@
 
         </div>
     <div class="box-body">
-      <div <?php if($sum_journal['total_download'] != 0){ ?>id="donut-chart" style="height: 250px;" <?php } ?>></div>
+      <div <?php if($sum_journal['total_download'] != 0){ ?>id="donut-chart" style="height: 250px;" <?php } ?>>
         <?php if($sum_journal['total_download'] == 0){ ?>
           <div class="alert alert-danger"><h3><center>Data Not Found</center></h3></div>
         <?php } ?>
@@ -210,12 +210,12 @@ $(document).ready(function() {
      */
 
     var donutData = [
-      {label: "<?php echo $sum_journal['nama_1']; ?>", data: <?php echo $sum_journal['download_1']; ?>, color: "#BCF4B2"},
-      {label: "<?php echo $sum_journal['nama_2']; ?>", data: <?php echo $sum_journal['download_2']; ?>, color: "#7CE969"},
-      {label: "<?php echo $sum_journal['nama_3']; ?>", data: <?php echo $sum_journal['download_3']; ?>, color: "#238012"},
-      {label: "<?php echo $sum_journal['nama_4']; ?>", data: <?php echo $sum_journal['download_4']; ?>, color: "#4EE135"},
-      {label: "<?php echo $sum_journal['nama_5']; ?>", data: <?php echo $sum_journal['download_5']; ?>, color: "#35C41C"},
-      {label: "Anonymus", data: <?php echo $sum_journal['anonym']; ?>, color: "#04598A"}
+      {label: "<?php echo $sum_journal['nama_1']; ?>", data: <?php echo $sum_journal['download_1']; ?>, color: "#FEDEDE"},
+      {label: "<?php echo $sum_journal['nama_2']; ?>", data: <?php echo $sum_journal['download_2']; ?>, color: "#FDBFBF"},
+      {label: "<?php echo $sum_journal['nama_3']; ?>", data: <?php echo $sum_journal['download_3']; ?>, color: "#FC9898"},
+      {label: "<?php echo $sum_journal['nama_4']; ?>", data: <?php echo $sum_journal['download_4']; ?>, color: "#FB8585"},
+      {label: "<?php echo $sum_journal['nama_5']; ?>", data: <?php echo $sum_journal['download_5']; ?>, color: "#FA6666"},
+      {label: "Anonymus", data: <?php echo $sum_journal['anonym']; ?>, color: "#F95555"}
       // {label: "Series6", data: 50, color: "#04598A"}
 
     ];
@@ -268,12 +268,12 @@ $(document).ready(function() {
      */
 
     var donutData = [
-      {label: "<?php echo $sum_artikel['nama_1']; ?>", data: <?php echo $sum_artikel['download_1']; ?>, color: "#BCF4B2"},
-      {label: "<?php echo $sum_artikel['nama_2']; ?>", data: <?php echo $sum_artikel['download_2']; ?>, color: "#7CE969"},
-      {label: "<?php echo $sum_artikel['nama_3']; ?>", data: <?php echo $sum_artikel['download_3']; ?>, color: "#238012"},
-      {label: "<?php echo $sum_artikel['nama_4']; ?>", data: <?php echo $sum_artikel['download_4']; ?>, color: "#4EE135"},
-      {label: "<?php echo $sum_artikel['nama_5']; ?>", data: <?php echo $sum_artikel['download_5']; ?>, color: "#35C41C"},
-      {label: "Anonymus", data: <?php echo $sum_artikel['anonym']; ?>, color: "#04598A"}
+      {label: "<?php echo $sum_artikel['nama_1']; ?>", data: <?php echo $sum_artikel['download_1']; ?>, color: "#FEDEDE"},
+      {label: "<?php echo $sum_artikel['nama_2']; ?>", data: <?php echo $sum_artikel['download_2']; ?>, color: "#FDBFBF"},
+      {label: "<?php echo $sum_artikel['nama_3']; ?>", data: <?php echo $sum_artikel['download_3']; ?>, color: "#FC9898"},
+      {label: "<?php echo $sum_artikel['nama_4']; ?>", data: <?php echo $sum_artikel['download_4']; ?>, color: "#FB8585"},
+      {label: "<?php echo $sum_artikel['nama_5']; ?>", data: <?php echo $sum_artikel['download_5']; ?>, color: "#FA6666"},
+      {label: "Anonymus", data: <?php echo $sum_artikel['anonym']; ?>, color: "#F95555"}
     ];
     $.plot("#donut-chart-2", donutData, {
       series: {

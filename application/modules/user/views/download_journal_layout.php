@@ -41,17 +41,39 @@
   <h3 class="box-title">Report Download</h3>
 
 </div>
-<div class="col col-md-12 col-sm-12 col-s-12" style="margin-bottom: 20px;">
+<div class="col col-md-6 col-sm-6 col-s-6" style="margin-bottom: 20px;">
   <div class="box box-warning" >
     <div class="box-header with-border">
           <i class="fa fa-bar-chart-o"></i>
 
-          <h3 class="box-title">Detail Download</h3>
+          <h3 class="box-title">Detail Download Journal</h3>
 
         </div>
     <div class="box-body">
-      <div id="donut-chart" style="height: 250px;"></div>
+      <div <?php if($sum_journal['total_download'] != 0){ ?>id="donut-chart" style="height: 250px;" <?php } ?>>
+        <?php if($sum_journal['total_download'] == 0){ ?>
+          <div class="alert alert-danger"><h3><center>Data Not Found</center></h3></div>
+        <?php } ?>
+      </div>
     </div>
+    </div>
+  </div>
+
+</div>
+<div class="col col-md-6 col-sm-6 col-s-6" style="margin-bottom: 20px;">
+  <div class="box box-warning" >
+    <div class="box-header with-border">
+          <i class="fa fa-bar-chart-o"></i>
+
+          <h3 class="box-title">Detail Download Artikel</h3>
+
+        </div>
+    <div class="box-body">
+        <div <?php if($sum_artikel['total_download'] != 0){ ?> id="donut-chart-2" style="height: 250px;" <?php } ?>>
+          <?php if($sum_artikel['total_download'] == 0){ ?>
+          <div class="alert alert-danger"><h3><center>Data Not Found</center></h3></div>
+        <?php } ?>
+      </div>
   </div>
 
 </div>
@@ -192,14 +214,74 @@ $(document).ready(function() {
 
     var donutData = [
       {label: "<?php echo $sum_journal['nama_1']; ?>", data: <?php echo $sum_journal['download_1']; ?>, color: "#FCE6D6"},
-      {label: "<?php echo $sum_journal['nama_2']; ?>", data: <?php echo $sum_journal['download_2']; ?>, color: "#7CE969"},
+      {label: "<?php echo $sum_journal['nama_2']; ?>", data: <?php echo $sum_journal['download_2']; ?>, color: "#FAD2B6"},
       {label: "<?php echo $sum_journal['nama_3']; ?>", data: <?php echo $sum_journal['download_3']; ?>, color: "#F3A065"},
       {label: "<?php echo $sum_journal['nama_4']; ?>", data: <?php echo $sum_journal['download_4']; ?>, color: "#F08940"},
       {label: "<?php echo $sum_journal['nama_5']; ?>", data: <?php echo $sum_journal['download_5']; ?>, color: "#E06812"},
-      {label: "Anonymus", data: <?php echo $sum_journal['anonym']; ?>, color: "#04598A"}
+      {label: "Anonymus", data: <?php echo $sum_journal['anonym']; ?>, color: "#C85D10"}
 
     ];
     $.plot("#donut-chart", donutData, {
+      series: {
+        pie: {
+          show: true,
+          radius: 1,
+          innerRadius: 0.5,
+          label: {
+            show: true,
+            radius: 2 / 3,
+            formatter: labelFormatter,
+            threshold: 0.1
+          }
+
+        }
+      },
+      legend: {
+        show: true
+      }
+    });
+    /*
+     * END DONUT CHART
+     */
+
+  });
+
+  /*
+   * Custom Label formatter
+   * ----------------------
+   */
+  function labelFormatter(label, series) {
+    return '<div style="font-size:13px; text-align:center; padding:2px; color: #fff; font-weight: 600;">'
+        + label
+        + "<br>"
+        + Math.round(series.percent) + "%</div>";
+  }
+</script>
+<script>
+  $(function () {
+    /*
+     * Flot Interactive Chart
+     * -----------------------
+
+     * DONUT CHART
+     * -----------
+     */
+     // //// warna 
+    /* color: "#FCE6D6"
+      color: "#FAD2B6"
+      color: "#F3A065"
+      color: "#F08940"
+      color: "#E06812"*/
+    var donutData = [
+      {label: "<?php echo $sum_artikel['nama_1']; ?>", data: <?php echo $sum_artikel['download_1']; ?>, color: "#FCE6D6"},
+      {label: "<?php echo $sum_artikel['nama_2']; ?>", data: <?php echo $sum_artikel['download_2']; ?>, color: "#FAD2B6"},
+      {label: "<?php echo $sum_artikel['nama_3']; ?>", data: <?php echo $sum_artikel['download_3']; ?>, color: "#F3A065"},
+      {label: "<?php echo $sum_artikel['nama_4']; ?>", data: <?php echo $sum_artikel['download_4']; ?>, color: "#F08940"},
+      {label: "<?php echo $sum_artikel['nama_5']; ?>", data: <?php echo $sum_artikel['download_5']; ?>, color: "#E06812"},
+      {label: "Anonymus", data: <?php echo $sum_artikel['anonym']; ?>, color: "#C85D10"}
+
+    ];
+    $.plot("#donut-chart-2", donutData, {
       series: {
         pie: {
           show: true,

@@ -66,12 +66,12 @@
           </div>
   </div>
 </div>
-<div class="col col-md-12 col-sm-12 col-xs-12">
+<!-- <div class="col col-md-12 col-sm-12 col-xs-12">
  <div class="box">
             <div class="box-header with-border">
               <h3 class="box-title">Detail download artikel Abtrak</h3>
             </div>
-            <!-- /.box-header -->
+    
             <div class="box-body" style="padding:15px  0;">
               <div class="col col-md-6 col-sm-7 col-xs-12">
                 <table class="table " style="margin-top: 0;">
@@ -116,16 +116,16 @@
               </tbody></table>
               </div>
               <div class="col col-md-5 col-sm-5 col-xs-12">
-                      <!-- Donut chart -->
+          
                   
                       <div id="donut-chart-abs" style="height: 250px;"></div>
 
             </div>
-            <!-- /.box-body -->
+         
          
           </div>
   </div>
-</div>
+</div> -->
 
 <!-- Page script -->
        <script src="<?=base_url();?>assets/admin-jur/plugins/flot/jquery.flot.min.js"></script>
@@ -145,12 +145,12 @@
      */
 
     var donutData = [
-      {label: "<?php echo $artikel['nama_1']; ?>", data: <?php echo $artikel['download_1']; ?>, color: "#BCF4B2"},
-      {label: "<?php echo $artikel['nama_2']; ?>", data: <?php echo $artikel['download_2']; ?>, color: "#7CE969"},
-      {label: "<?php echo $artikel['nama_3']; ?>", data: <?php echo $artikel['download_3']; ?>, color: "#238012"},
-      {label: "<?php echo $artikel['nama_4']; ?>", data: <?php echo $artikel['download_4']; ?>, color: "#4EE135"},
-      {label: "<?php echo $artikel['nama_5']; ?>", data: <?php echo $artikel['download_5']; ?>, color: "#35C41C"},
-      {label: "Anonymus", data: <?php echo $artikel['anonym']; ?>, color: "#04598A"}
+      {label: "<?php echo $artikel['nama_1']; ?>", data: <?php echo $artikel['download_1']; ?>, color: "#E2E2FE"},
+      {label: "<?php echo $artikel['nama_2']; ?>", data: <?php echo $artikel['download_2']; ?>, color: "#D4D5FE"},
+      {label: "<?php echo $artikel['nama_3']; ?>", data: <?php echo $artikel['download_3']; ?>, color: "#BFC0FD"},
+      {label: "<?php echo $artikel['nama_4']; ?>", data: <?php echo $artikel['download_4']; ?>, color: "#8D8FFB"},
+      {label: "<?php echo $artikel['nama_5']; ?>", data: <?php echo $artikel['download_5']; ?>, color: "#8D8FFB"},
+      {label: "Anonymus", data: <?php echo $artikel['anonym']; ?>, color: "#7476FA"}
 
     ];
     $.plot("#donut-chart", donutData, {

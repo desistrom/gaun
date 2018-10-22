@@ -149,12 +149,12 @@
      */
 
     var donutData = [
-      {label: "<?php echo $artikel['nama_1']; ?>", data: <?php echo $artikel['download_1']; ?>, color: "#BCF4B2"},
-      {label: "<?php echo $artikel['nama_2']; ?>", data: <?php echo $artikel['download_2']; ?>, color: "#7CE969"},
-      {label: "<?php echo $artikel['nama_3']; ?>", data: <?php echo $artikel['download_3']; ?>, color: "#238012"},
-      {label: "<?php echo $artikel['nama_4']; ?>", data: <?php echo $artikel['download_4']; ?>, color: "#4EE135"},
-      {label: "<?php echo $artikel['nama_5']; ?>", data: <?php echo $artikel['download_5']; ?>, color: "#35C41C"},
-      {label: "Anonymus", data: <?php echo $artikel['anonym']; ?>, color: "#04598A"}
+      {label: "<?php echo $artikel['nama_1']; ?>", data: <?php echo $artikel['download_1']; ?>, color: "#FEDEDE"},
+      {label: "<?php echo $artikel['nama_2']; ?>", data: <?php echo $artikel['download_2']; ?>, color: "#FDBFBF"},
+      {label: "<?php echo $artikel['nama_3']; ?>", data: <?php echo $artikel['download_3']; ?>, color: "#FC9898"},
+      {label: "<?php echo $artikel['nama_4']; ?>", data: <?php echo $artikel['download_4']; ?>, color: "#FB8585"},
+      {label: "<?php echo $artikel['nama_5']; ?>", data: <?php echo $artikel['download_5']; ?>, color: "#FA6666"},
+      {label: "Anonymus", data: <?php echo $artikel['anonym']; ?>, color: "#F95555"}
 
     ];
     $.plot("#donut-chart", donutData, {

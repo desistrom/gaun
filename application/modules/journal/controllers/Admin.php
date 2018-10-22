@@ -878,6 +878,19 @@ class Admin extends MX_Controller
             $nama = $this->db->get_where('tb_jenis_instansi',array('id_jenis_instansi'=>$i))->row_array();
             $sum_journal['nama_'.$i] = $nama['nm_jenis_instansi'];
         }
+        $slq_artikel = "SELECT SUM(download_1) as download_1, SUM(download_2) as download_2, SUM(download_3) as download_3, SUM(download_4) as download_4, SUM(download_5) as download_5, SUM(anonym) as anonym FROM tb_artikel a join tb_pengguna p on a.id_user_ref = p.id_pengguna where p.id_instansi_ref = ?";
+        $sum_artikel = $this->db->query($slq_artikel,$this->user->user->id_instansi)->row_array();
+        if (is_null($sum_artikel['anonym']) || $sum_artikel['anonym'] == '') {
+            $sum_artikel['anonym'] = 0;
+        }
+        for ($i=1; $i < 6; $i++) { 
+            if (is_null($sum_artikel['download_'.$i]) || $sum_artikel['download_'.$i] == '') {
+                $sum_artikel['download_'.$i] = 0;
+            }
+            $nama = $this->db->get_where('tb_jenis_instansi',array('id_jenis_instansi'=>$i))->row_array();
+            $sum_artikel['nama_'.$i] = $nama['nm_jenis_instansi'];
+        }
+        $this->data['sum_artikel'] = $sum_artikel;
         $this->data['sum_journal'] = $sum_journal;
         $this->data['breadcumb'] = 'Report Download';
         $this->data['view'] = 'list';
@@ -1549,12 +1562,12 @@ class Admin extends MX_Controller
         $downartikel = $this->db->get_where('tb_instansi',array('id_instansi'=>$this->user->user->id_instansi))->row_array();
         
 
-        $sql_val = 'SELECT p.id_instansi_ref FROM tb_journal j join tb_pengguna p on j.id_user_ref = p.id_pengguna where j.id_journal = ?';
+        $sql_val = 'SELECT p.id_instansi_ref, j.total_download FROM tb_journal j join tb_pengguna p on j.id_user_ref = p.id_pengguna where j.id_journal = ?';
         $validasi = $this->db->query($sql_val,$id)->row_array();
         // print_r($validasi);
         if ($validasi['id_instansi_ref'] != $this->user->user->id_instansi) {
             $data['download_'.$downartikel['id_jenis_instansi']] = $artikel[0]['download_'.$downartikel['id_jenis_instansi']] + 1;
-            $data['total_download'] = $artikel[0]['journal_download'] + 1;
+            $data['total_download'] = $validasi['total_download'] + 1;
             $this->db->update('tb_journal',$data,array('id_journal'=>$artikel[0]['id_journal']));
         }
         // $data['total'] = $artikel[0]['total'] + 1;

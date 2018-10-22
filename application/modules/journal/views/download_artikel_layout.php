@@ -147,8 +147,14 @@ margin-top: -11px;
 
 <?php if ($view == 'list') { ?>
 <link rel="stylesheet" href="<?=base_url();?>assets/datatables/css/dataTables.bootstrap.min.css">
-<div class="col col-md-12 col-sm-12 col-s-12">
-  <div class="filter-box-thumbnail col-md-3 col-sm-3 col-xs-3 " style="padding-bottom: 2em;">
+<div class="col col-md-4 col-sm-4 col-s-12">
+<div class="box box-success">
+   <div class="box-header with-border">
+      <i class="fa fa-book"></i>
+      <h3 class="box-title">Journal</h3>
+    </div>
+    <div class="box-body">
+      <div class="filter-box-thumbnail col-md-12 col-sm-12 col-xs-12 " style="padding-bottom: 2em;">
         <div class="box-thumbnail" style="border:solid 1px #CBCBCB;">
           <div class="header-box-thumbnail">
             <img class="thumbnail-cover" src="<?=base_url();?>assets/media/<?=$journal['futured_image'];?>">
@@ -160,8 +166,11 @@ margin-top: -11px;
 
         </div>
       </div>
+    </div>
 </div>
-<div class="col col-md-12 col-sm-12 col-xs-12">
+  
+</div>
+<div class="col col-md-8 col-sm-8 col-xs-12">
             <!-- Donut chart -->
       <div class="box box-success">
         <div class="box-header with-border">

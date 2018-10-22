@@ -46,13 +46,13 @@
     <div class="box-header with-border">
           <i class="fa fa-bar-chart-o"></i>
 
-          <h3 class="box-title">Detail Download Journal</h3>
+          <h3 class="box-title">Grafik Download Journal</h3>
 
         </div>
     <div class="box-body">
       <div <?php if($sum_journal['total_download'] != 0){ ?>id="donut-chart" style="height: 250px;" <?php } ?>>
         <?php if($sum_journal['total_download'] == 0){ ?>
-          <div class="alert alert-danger"><h3><center>Data Not Found</center></h3></div>
+          <div class="alert alert-warning btn-bg"><h3><center>Data Not Found</center></h3></div>
         <?php } ?>
       </div>
     </div>
@@ -64,13 +64,13 @@
     <div class="box-header with-border">
           <i class="fa fa-bar-chart-o"></i>
 
-          <h3 class="box-title">Detail Download Artikel</h3>
+          <h3 class="box-title">Grafik Download Artikel</h3>
 
         </div>
     <div class="box-body">
       <div <?php if($sum_artikel['total_download'] != 0){ ?> id="donut-chart-2" style="height: 250px;" <?php } ?>>
         <?php if($sum_artikel['total_download'] == 0){ ?>
-          <div class="alert alert-danger"><h3><center>Data Not Found</center></h3></div>
+          <div class="alert alert-warning btn-bg"><h3><center>Data Not Found</center></h3></div>
         <?php } ?>
       </div>
     </div>

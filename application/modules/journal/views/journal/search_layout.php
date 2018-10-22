@@ -1,3 +1,19 @@
+<style type="text/css">
+  .btn-download-front{
+    position: absolute;
+    z-index: 100;
+    top: 10px;
+    right: 10px;
+    padding: 5px 9px;
+    border-radius: 50%;
+  }
+  .box-footer{
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    color: #787878;
+  }
+</style>
 <?php if(count($journal) == 0){
 	?> <div class="jumbotron">
 	<h2 style="color: #A8A8A8;text-align: center;">Data Not found</h2>
@@ -9,13 +25,19 @@
 	<div class="col col-md-2 col-sm-4 col-xs-12 filter-box-jurnal" >
 		<div class="box-jurnal" >
 			<div class="box-header">
-				<img class="img-responsive thumbnail-jurnal" src="<?=base_url();?>assets/media/<?=$value['futured_image'];?>">
+        <a href="<?=site_url('journal/detail_journal/'.$value['slug']);?>">
+				  <img class="img-responsive thumbnail-jurnal" src="<?=base_url();?>assets/media/<?=$value['futured_image'];?>">
+        </a>        
 			</div>
 			<div class="box-body">
 				<h5><a href="<?=site_url('journal/detail_journal/'.$value['slug']);?>"><?=$value['judul'];?></a></h5>
 				<h5>Jumlah Volume : <?=$value['jumlah'];?></h5>
 			</div>
-			<a href="<?=site_url('journal/detail_journal/'.$value['slug']);?>" class="link_detail"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></a>
+			<a href="<?php echo site_url('journal/download_journal/'.$value['id_journal']) ?>" class="link_detail"><i class="fa fa-download" aria-hidden="true"></i></a>
+      <div class="box-footer">
+        <span><i class="fa fa-download"></i>  <?php echo $value['total_download'];?> </span>
+        
+      </div>
 		</div>
 	</div>
 <?php endforeach ?>

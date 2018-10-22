@@ -174,30 +174,20 @@ class Journal extends MX_Controller
         redirect(site_url('assets/file/'.$art['abstract_file']));
     }
 
-    public function download_journal($id=null){
+    public function download_journal($id=null){ 
+        $valid = $this->db->get_where('tb_journal',array('id_journal'=>$id))->row_array();
+        $data['anonym'] = $valid['anonym_j'] + 1;
+        $data['total_download'] = $valid['total_download'] + 1;
+        $this->db->update('tb_journal',$data,array('id_journal'=>$valid['id_journal']));
+        redirect('journal/download_zip/'.$id);
+    }
+
+    public function download_zip($id=null){
         $this->load->library('zip');
         $sql = "SELECT *, j.judul as journal, j.anonym as anonym_j FROM tb_journal j JOIN tb_volume v ON j.id_journal = v.id_journal_ref JOIN tb_no_volume n ON v.id_volume = n.id_volume_ref JOIN tb_artikel a ON n.id_no_volume = a.id_no_volume_ref where id_journal = ?";
         $artikel = $this->db->query($sql,$id)->result_array();
         $this->zip->read_file(FCPATH.'assets/media/'.$artikel[0]['futured_image']);
-        // $downartikel = $this->db->get_where('tb_instansi',array('id_instansi'=>$this->data['user']['id_instansi_ref']))->row_array();
-        // $data['download_'.$downartikel['id_jenis_instansi']] = $artikel[0]['download_'.$downartikel['id_jenis_instansi']] + 1;
-        // $data['total'] = $artikel[0]['total'] + 1;
-        $data['anonym'] = $artikel[0]['anonym_j'] + 1;
-        $data['total_download'] = $artikel[0]['journal_download'] + 1;
-        $this->db->update('tb_journal',$data,array('id_journal'=>$artikel[0]['id_journal']));
         foreach ($artikel as $key => $value) {
-
-            // $art = $this->db->get_where('tb_artikel',array('id_artikel'=>$value['id_artikel']))->row_array();
-
-            /*$data['total'] = $art['total'] + 1;
-            $data['anonym'] = $art['anonym'] + 1;
-
-            $data['anonym_abs'] = $art['anonym_abs'] + 1;
-            $data['total_abs'] = $art['total_abs'] + 1;
-            $data['total_download'] = $art['total_download'] + 2;
-            $this->db->update('tb_artikel',$data,array('id_artikel'=>$id));
-            $this->db->update('tb_artikel',$data,array('id_artikel'=>$value['id_artikel']));*/
-
             $this->zip->read_file(FCPATH.'assets/file/'.$value['file']);
             $this->zip->read_file(FCPATH.'assets/file/abstract/'.$value['abstract_file']);
         }

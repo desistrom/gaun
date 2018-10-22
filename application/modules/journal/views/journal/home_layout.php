@@ -7,6 +7,12 @@
     padding: 5px 9px;
     border-radius: 50%;
   }
+  .box-footer{
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    color: #787878;
+  }
 </style>
 <?php if(count($journal) == 0){
 	?> <div class="jumbotron">
@@ -18,22 +24,25 @@
 <?php foreach ($journal as $key => $value): ?>
 	<div class="col col-md-2 col-sm-4 col-xs-12 filter-box-jurnal" >
 		<div class="box-jurnal" >
-      <a href="#" class="btn btn-warning btn-download-front" alt="download" title="download"><i class="fa fa-download"></i></a>
+      <!-- <a href="#" class="btn btn-warning btn-download-front" alt="download" title="download"><i class="fa fa-download"></i></a> -->
 			<div class="box-header">
 				<!-- <div class="filter-lighten" style="background-color: green;height: 20px;width: 100%;">
 					
 				</div> -->
-				<img class="img-responsive thumbnail-jurnal" src="<?=base_url();?>assets/media/<?=$value['futured_image'];?>">
+        <a href="<?=site_url('journal/detail_journal/'.$value['slug']);?>">        
+				  <img class="img-responsive thumbnail-jurnal" src="<?=base_url();?>assets/media/<?=$value['futured_image'];?>">
+        </a>
 			</div>
 			<div class="box-body">
 				<h5><a href="<?=site_url('journal/detail_journal/'.$value['slug']);?>"><?=$value['judul'];?></a></h5>
 				<h5>Jumlah Volume : <?=$value['jumlah'];?></h5>
 				<!-- <h5>2016 - 12</h5> -->
 			</div>
-			<a href="<?=site_url('journal/detail_journal/'.$value['slug']);?>" class="link_detail"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></a>
-      <!-- <div class="box-footer"> -->
+			<a href="<?php echo site_url('journal/download_journal/'.$value['id_journal']) ?>" class="link_detail"><i class="fa fa-download" aria-hidden="true"></i></a>
+      <div class="box-footer">
+        <span><i class="fa fa-download"></i>  <?php echo $value['total_download'];?> </span>
         
-      <!-- </div> -->
+      </div>
 		</div>
 	</div>
 <?php endforeach ?>

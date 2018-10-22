@@ -35,6 +35,7 @@
 		height: 150px;
 		padding: 15px 0;
 		overflow: hidden;
+		text-align: center;
 	}
 	.box-body{
 		padding: 0 ;
@@ -56,6 +57,8 @@
 	.img-logo{
 		border-top-left-radius: 20px;
 	    border-top-right-radius: 20px;
+	    display: inline-block;
+    width: 120px;
 	}
 	a:hover, a:active, a:focus{
 		color: #EF7314;

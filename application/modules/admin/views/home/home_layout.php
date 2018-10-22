@@ -4,7 +4,7 @@
   }
 </style>
 <div class="col col-md-12 col-sm-12 col-xs-12">
-<div class="box box-default">
+<div class="box box-danger">
   <div class="box-header with-border">
     <h3 class="box-title">Summary Report</h3>
 
@@ -199,7 +199,9 @@
 </div>
 </div>
 </div>
-<div class="box box-default">
+</div>
+<div class="col col-md-6 col-sm-6 col-xs-12">
+  <div class="box box-danger">
   <div class="box-header with-border">
     <h3 class="box-title">Data Instansi</h3>
 
@@ -212,7 +214,7 @@
   <!-- /.box-header -->
   <div class="box-body">
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-12 col-sm-12 col-xs-12">
         <!-- <div class="chart-responsive">
           <canvas id="pieChart" height="200"></canvas>
         </div> -->

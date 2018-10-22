@@ -37,26 +37,54 @@
 
 <?php if ($view == 'list') { ?>
 <link rel="stylesheet" href="<?php echo base_url();?>assets/datatables/css/dataTables.bootstrap.min.css">
-<div class="col col-md-12 col-sm-12 col-xs-12">
-  
-<div class="box">
-	<div class="box-body">
-		<div class="col col-md-12 col-sm-12 col-xs-12" style="padding-left: 0; margin-bottom: 15px;">
-		</div>
-    <div class="col col-md-12 col-sm-12 col-s-12">
-  <div class="box">
+ <div class="col col-md-6 col-sm-6 col-xs-6">
+  <div class="box box-danger">
     <div class="box-header with-border">
           <i class="fa fa-bar-chart-o"></i>
 
-          <h3 class="box-title">Detail Download</h3>
+          <h3 class="box-title">Detail Download Journal</h3>
 
         </div>
     <div class="box-body">
       <div id="donut-chart" style="height: 250px;"></div>
+        <?php if($sum_journal['total_download'] == 0){ ?>
+          <div class="alert alert-danger"><h3><center>Data Not Found</center></h3></div>
+        <?php } ?>
     </div>
   </div>
 
 </div>
+ <div class="col col-md-6 col-sm-6 col-xs-6">
+    <div class="box box-danger">
+      <div class="box-header with-border">
+        <i class="fa fa-bar-chart-o"></i>
+
+        <h3 class="box-title">Detail Download Artikel</h3>
+
+        <div class="box-tools pull-right">
+          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+          </button>
+          <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+        </div>
+      </div>
+      <div class="box-body">
+        <div id="donut-chart-2" style="height: 250px;">
+          <?php if($sum_artikel['total_download'] == 0){ ?>
+          <div class="alert alert-danger"><h3><center>Data Not Found</center></h3></div>
+        <?php } ?>
+        </div>
+      </div>
+      <!-- /.box-body-->
+    </div>
+
+</div>
+<div class="col col-md-12 col-sm-12 col-xs-12">
+  
+<div class="box box-danger">
+	<div class="box-body">
+		<div class="col col-md-12 col-sm-12 col-xs-12" style="padding-left: 0; margin-bottom: 15px;">
+		</div>
+   
 		<div class="col col-md-12 col-xs-12 table-responsive">
 			<table class="table table-bordered  dataTable" id="table">
 				<thead>
@@ -172,6 +200,7 @@ $(document).ready(function() {
  
 });
 </script>
+<?php if($sum_journal['total_download'] != 0){ ?>
 <script>
   $(function () {
     /*
@@ -226,3 +255,60 @@ $(document).ready(function() {
         + Math.round(series.percent) + "%</div>";
   }
 </script>
+<?php } ?>
+<?php if($sum_artikel['total_download'] != 0){ ?>
+<script>
+  $(function () {
+    /*
+     * Flot Interactive Chart
+     * -----------------------
+
+     * DONUT CHART
+     * -----------
+     */
+
+    var donutData = [
+      {label: "<?php echo $sum_artikel['nama_1']; ?>", data: <?php echo $sum_artikel['download_1']; ?>, color: "#BCF4B2"},
+      {label: "<?php echo $sum_artikel['nama_2']; ?>", data: <?php echo $sum_artikel['download_2']; ?>, color: "#7CE969"},
+      {label: "<?php echo $sum_artikel['nama_3']; ?>", data: <?php echo $sum_artikel['download_3']; ?>, color: "#238012"},
+      {label: "<?php echo $sum_artikel['nama_4']; ?>", data: <?php echo $sum_artikel['download_4']; ?>, color: "#4EE135"},
+      {label: "<?php echo $sum_artikel['nama_5']; ?>", data: <?php echo $sum_artikel['download_5']; ?>, color: "#35C41C"},
+      {label: "Anonymus", data: <?php echo $sum_artikel['anonym']; ?>, color: "#04598A"}
+    ];
+    $.plot("#donut-chart-2", donutData, {
+      series: {
+        pie: {
+          show: true,
+          radius: 1,
+          innerRadius: 0.5,
+          label: {
+            show: true,
+            radius: 2 / 3,
+            formatter: labelFormatter,
+            threshold: 0.1
+          }
+
+        }
+      },
+      legend: {
+        show: true
+      }
+    });
+    /*
+     * END DONUT CHART
+     */
+
+  });
+
+  /*
+   * Custom Label formatter
+   * ----------------------
+   */
+  function labelFormatter(label, series) {
+    return '<div style="font-size:13px; text-align:center; padding:2px; color: #fff; font-weight: 600;">'
+        + label
+        + "<br>"
+        + Math.round(series.percent) + "%</div>";
+  }
+</script>
+<?php } ?>

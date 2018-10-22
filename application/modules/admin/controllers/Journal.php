@@ -104,7 +104,7 @@ class Journal extends MX_Controller  {
 
 	public function report_download(){
         // print_r($this->session->userdata('data_user'));
-        $slq_journal = "SELECT SUM(download_1) as download_1, SUM(download_2) as download_2, SUM(download_3) as download_3, SUM(download_4) as download_4, SUM(download_5) as download_5, SUM(anonym) as anonym FROM tb_journal";
+        $slq_journal = "SELECT SUM(download_1) as download_1, SUM(download_2) as download_2, SUM(download_3) as download_3, SUM(download_4) as download_4, SUM(download_5) as download_5, SUM(anonym) as anonym, sum(total_download) as total_download FROM tb_journal";
         $sum_journal = $this->db->query($slq_journal)->row_array();
         if (is_null($sum_journal['anonym']) || $sum_journal['anonym'] == '') {
             $sum_journal['anonym'] = 0;
@@ -116,6 +116,20 @@ class Journal extends MX_Controller  {
             $nama = $this->db->get_where('tb_jenis_instansi',array('id_jenis_instansi'=>$i))->row_array();
             $sum_journal['nama_'.$i] = $nama['nm_jenis_instansi'];
         }
+        $slq_artikel = "SELECT SUM(download_1) as download_1, SUM(download_2) as download_2, SUM(download_3) as download_3, SUM(download_4) as download_4, SUM(download_5) as download_5, SUM(anonym) as anonym, sum(total_download) as total_download FROM tb_artikel";
+        $sum_artikel = $this->db->query($slq_artikel)->row_array();
+        if (is_null($sum_artikel['anonym']) || $sum_artikel['anonym'] == '') {
+            $sum_artikel['anonym'] = 0;
+        }
+        for ($i=1; $i < 6; $i++) { 
+            if (is_null($sum_artikel['download_'.$i]) || $sum_artikel['download_'.$i] == '') {
+                $sum_artikel['download_'.$i] = 0;
+            }
+            $nama = $this->db->get_where('tb_jenis_instansi',array('id_jenis_instansi'=>$i))->row_array();
+            $sum_artikel['nama_'.$i] = $nama['nm_jenis_instansi'];
+        }
+        $this->data['sum_artikel'] = $sum_artikel;
+        
         $this->data['sum_journal'] = $sum_journal;
         $this->data['breadcumb'] = 'Report Download';
         $this->data['view'] = 'list';
@@ -142,6 +156,9 @@ class Journal extends MX_Controller  {
         if (is_null($journal['anonym']) || $journal['anonym'] == '') {
             $journal['anonym'] = 0;
         }
+        if (is_null($journal['total_download']) || $journal['total_download'] == '') {
+            $journal['total_download'] = 0;
+        }
         for ($i=1; $i < 6; $i++) { 
             if (is_null($journal['download_'.$i]) || $journal['download_'.$i] == '') {
                 $journal['download_'.$i] = 0;
@@ -149,6 +166,7 @@ class Journal extends MX_Controller  {
             $nama = $this->db->get_where('tb_jenis_instansi',array('id_jenis_instansi'=>$i))->row_array();
             $journal['nama_'.$i] = $nama['nm_jenis_instansi'];
         }
+        // print_r($journal['total_download']);
         $this->data['journal'] = $journal;
         $this->data['breadcumb'] = 'Report Download';
         $this->data['view'] = 'list';

@@ -58,7 +58,11 @@
               <div class="col col-md-5 col-sm-5 col-xs-12">
                       <!-- Donut chart -->
                   
-                      <div id="donut-chart" style="height: 250px;"></div>
+                      <div id="donut-chart" style="height: 250px;">
+                        <?php if($artikel['total_download'] == 0){ ?>
+                          <div class="alert alert-danger"><h3><center>Data Not Found</center></h3></div>
+                        <?php } ?>
+                      </div>
 
             </div>
             <!-- /.box-body -->
@@ -66,12 +70,12 @@
           </div>
   </div>
 </div>
-<div class="col col-md-12 col-sm-12 col-xs-12">
+<!-- <div class="col col-md-12 col-sm-12 col-xs-12">
  <div class="box">
             <div class="box-header with-border">
               <h3 class="box-title">Detail download artikel Abtrak</h3>
             </div>
-            <!-- /.box-header -->
+      
             <div class="box-body" style="padding:15px  0;">
               <div class="col col-md-6 col-sm-7 col-xs-12">
                 <table class="table " style="margin-top: 0;">
@@ -116,16 +120,16 @@
               </tbody></table>
               </div>
               <div class="col col-md-5 col-sm-5 col-xs-12">
-                      <!-- Donut chart -->
+                  
                   
                       <div id="donut-chart-abs" style="height: 250px;"></div>
 
             </div>
-            <!-- /.box-body -->
+      
          
           </div>
   </div>
-</div>
+</div> -->
 
 <!-- Page script -->
        <script src="<?=base_url();?>assets/admin-jur/plugins/flot/jquery.flot.min.js"></script>
@@ -135,7 +139,7 @@
 <script src="<?=base_url();?>assets/admin-jur/plugins/flot/jquery.flot.pie.min.js"></script>
 <!-- FLOT CATEGORIES PLUGIN - Used to draw bar charts -->
 <script src="<?=base_url();?>assets/admin-jur/plugins/flot/jquery.flot.categories.min.js"></script>
-
+<?php if($artikel['total_download'] != 0){ ?>
 <script>
   $(function () {
     /*
@@ -224,3 +228,4 @@
         + Math.round(series.percent) + "%</div>";
   }
 </script>
+<?php } ?>

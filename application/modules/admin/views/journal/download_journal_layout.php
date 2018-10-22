@@ -46,7 +46,7 @@
 
         </div>
     <div class="box-body">
-      <div <?php if($sum_journal['total_download'] != 0){ ?>id="donut-chart" style="height: 250px;" <?php } ?>>
+      <div <?php if($sum_journal['total_download'] != 0){ ?>id="donut-chart" style="height: 250px;" <?php } ?>></div>
         <?php if($sum_journal['total_download'] == 0){ ?>
           <div class="alert alert-danger"><h3><center>Data Not Found</center></h3></div>
         <?php } ?>

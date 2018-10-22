@@ -28,6 +28,12 @@
     .material-icons{
       font-size: 18px !important;
     }
+    .pieLabel div{
+      color: black!important;
+    }
+    .box{
+      border-top-color: #dd4b39!important;
+    }
   </style>
   
     <script type="text/javascript">

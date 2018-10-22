@@ -1,3 +1,8 @@
+<style type="text/css">
+    #table_paginate{
+        text-align: right!important;
+    }
+</style>
 <div class="col col-md-12 col-sm-12 col-xs-12">
     <a href="<?=site_url('journal/admin/add_no_volume');?>" class="btn btn-success" style="margin-bottom: 15px;" ><i class="fa fa-plus"></i> Add No Volume</a>
     <div class="table-responsive">

@@ -131,6 +131,18 @@ margin-top: -11px;
 .btn-upload{
   display: none;
 }
+.form-control-static{
+  padding: 0 0 20px 0;
+}
+.modal label{
+  margin-bottom: 0;
+}
+.inline-block{
+  display: inline-block;;
+}
+.modal .modal-header.btn-bg{
+  color: white;
+}
 </style>
 
 <?php if ($view == 'list') { ?>
@@ -253,9 +265,9 @@ margin-top: -11px;
 <div class="modal" tabindex="-1" role="dialog" id="modalDetail">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
-      <div class="modal-header">
-        <h3 class="modal-title"></h3>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <div class="modal-header btn-bg">
+        <h3 class="modal-title inline-block"></h3>
+        <button type="button" class="close inline-block" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -267,14 +279,14 @@ margin-top: -11px;
       <label>Abstraksi</label>
       <div class="form-control-static" id="abs"></div>
       <label>Author</label>
-      <div id="author"></div>
+      <div class="form-control-static" id="author"></div>
       <label>Keyword</label>
-      <div id="keyword"></div>
+      <div class="form-control-static" id="keyword"></div>
       <label>File</label>
       <label>File Journal</label>
-      <div id="file"></div>
+      <div class="form-control-static" id="file"></div>
       <label>File abstract Journal</label>
-      <div id="file_abs"></div>
+      <div class="form-control-static" id="file_abs"></div>
       </div>
       <div class="modal-footer">
         <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
@@ -386,8 +398,8 @@ margin-top: -11px;
         $('#modalDetail #volume').html(data.volume);
         $('#modalDetail #nomor').html(data.nomor);
         $('#modalDetail #keyword').html(data.keyword);
-        $('#modalDetail #file').html('<a href="'+base_url+'assets/file/'+data.file+'" class="btn btn-success"><i class="fa fa-download"></i></a>');
-        $('#modalDetail #file_abs').html('<a href="'+base_url+'assets/file/abstract/'+data.abstract_file+'" class="btn btn-success"><i class="fa fa-download"></i></a>');
+        $('#modalDetail #file').html('<a href="'+base_url+'assets/file/'+data.file+'" class="btn btn-success btn-bg"><i class="fa fa-download"></i> Download File</a>');
+        $('#modalDetail #file_abs').html('<a href="'+base_url+'assets/file/abstract/'+data.abstract_file+'" class="btn btn-success btn-bg"><i class="fa fa-download"></i> Download File</a>');
         $('#modalDetail').modal('show');
         // window.location.href = data.url;
 

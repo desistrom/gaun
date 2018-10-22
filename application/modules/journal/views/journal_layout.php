@@ -450,7 +450,7 @@ div.container-fluid.footer-bottom{
                      
                     
                   </div>
-                  <span class="txt-seemore">see more</span>
+                  <a href="<?php echo site_url('journal/admin/detail_myjournal');?>" class="txt-seemore">see more</a>
                 </div>
               </div>
             </div>

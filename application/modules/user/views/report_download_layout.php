@@ -131,18 +131,30 @@ margin-top: -11px;
 .btn-upload{
   display: none;
 }
+.form-control-static{
+  padding: 0 0 20px 0;
+}
+.modal label{
+  margin-bottom: 0;
+}
+.inline-block{
+  display: inline-block;;
+}
+.modal .modal-header.btn-bg{
+  color: white;
+}
 </style>
 
-
+<?php if ($view == 'list') { ?>
 <link rel="stylesheet" href="<?=base_url();?>assets/datatables/css/dataTables.bootstrap.min.css">
 <div class="col col-md-12 col-sm-12 col-s-12">
   <div class="filter-box-thumbnail col-md-3 col-sm-3 col-xs-3 " style="padding-bottom: 2em;">
         <div class="box-thumbnail" style="border:solid 1px #CBCBCB;">
           <div class="header-box-thumbnail">
-            <img class="thumbnail-cover" src="http://192.168.88.13/idren/assets/media/15399204771.jpg">
+            <img class="thumbnail-cover" src="<?=base_url();?>assets/media/<?=$journal['futured_image'];?>">
           </div>
           <div class="body-box-thumbnail">
-            <h4 class="title-thumbnail"><a href="#">Journal ilmu faal indonesia</a></h4>
+            <h4 class="title-thumbnail"><a href="#"><?php echo $journal['judul'];?></a></h4>
 
           </div>
 
@@ -151,7 +163,7 @@ margin-top: -11px;
 </div>
 <div class="col col-md-12 col-sm-12 col-xs-12">
             <!-- Donut chart -->
-      <div class="box box-success">
+      <div class="box box-warning">
         <div class="box-header with-border">
           <i class="fa fa-bar-chart-o"></i>
 
@@ -164,9 +176,15 @@ margin-top: -11px;
         <!-- /.box-body-->
       </div>
 </div>
-<div class="col col-md-12 col-sm-12 col-xs-12 " >
+<div class="col col-md-12 col-sm-12 col-xs-12">
  
-<div class="box">
+<div class="box box-warning">
+  <div class="box-header with-border">
+          <i class="fa fa-bar-chart-o"></i>
+
+          <h3 class="box-title">Detail Artikel Download</h3>
+
+        </div>
   <div class="box-body">
     <div class="col col-md-12 col-sm-12 col-xs-12" style="padding-left: 0; margin-bottom: 15px;">
     </div>
@@ -178,16 +196,9 @@ margin-top: -11px;
           <th>Volume</th>
           <th>No. Journal</th>
           <th>Jumlah Download</th>
+          <th>Detail</th>
         </thead>
         <tbody>
-          <tr role="row" class="odd">
-            <td>1</td>
-            <td>
-              <div class="btn-detail" id="10" style="cursor:pointer;"><u><a href="<?=site_url('user/journal/detail_artikel_download');?>">artikel jurnal 1</a> <i class="fa fa-external-link" aria-hidden="true"></i></u></div>
-            </td>
-            <td>1</td>
-            <td>1</td>
-            <td>0</td></tr>
         </tbody>
       </table>
     </div>
@@ -195,7 +206,141 @@ margin-top: -11px;
 </div>
 </div>
 
- 
+  <?php if ($this->session->flashdata('notif') != '') { ?>
+    <div class="modal" tabindex="-1" role="dialog" id="modalSuccess">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title"><?=$this->session->flashdata('header');?></h3>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p><?=$this->session->flashdata('notif');?></p>
+          </div>
+          <div class="modal-footer">
+            <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  <?php } ?>
+  <div class="modal" tabindex="-1" role="dialog" id="modalacc">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title">Atention</h3>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <input type="hidden" name="id" id="id" value="">
+            <p>Do You Want To Accept This Article ?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary btn-acc_action">Yes</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" tabindex="-1" role="dialog" id="modalign">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title">Atention</h3>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <input type="hidden" name="id" id="id" value="">
+            <p>Do You Want To Ignore This Article ?</p>
+            <label>Type your reason</label>
+            <textarea class="form-control" name="reason" id="reason"></textarea>
+            <div class="error" id="ntf_reason"></div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary btn-ign_action">Yes</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+<?php } ?>
+<div class="modal" tabindex="-1" role="dialog" id="modalDetail">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header btn-bg">
+        <h3 class="modal-title inline-block"></h3>
+        <button type="button" class="close inline-block" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <label>Volume</label>
+      <div class="form-control-static" id="volume"></div>
+      <label>Nomor Volume</label>
+      <div class="form-control-static" id="nomor"></div>
+      <label>Abstraksi</label>
+      <div class="form-control-static" id="abs"></div>
+      <label>Author</label>
+      <div class="form-control-static" id="author"></div>
+      <label>Keyword</label>
+      <div class="form-control-static" id="keyword"></div>
+      <label>File</label>
+      <div class="form-control-static" id="file"></div>
+      </div>
+      <div class="modal-footer">
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" style="color: white;">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal" tabindex="-1" role="dialog" id="modalReason">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Reason</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p></p>
+      </div>
+      <div class="modal-footer">
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="progresLoading" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center">
+            <div class="modal-content">
+                <div class="modal-body">
+                  <div class="box box-danger">
+                      <div class="box-header">
+                      </div>
+                      <div class="box-body">
+                      </div>
+                      <div class="overlay">
+                        <i class="fa fa-refresh fa-spin"></i>
+                      </div>
+                  </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
 <!-- <script src="<?=base_url().'assets/js/jquery-3.2.1.min.js';?>"></script> -->
 <script src="<?=base_url();?>assets/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?=base_url();?>assets/datatables/js/dataTables.bootstrap.min.js"></script>
@@ -208,20 +353,19 @@ margin-top: -11px;
 <script src="<?=base_url();?>assets/admin-jur/plugins/flot/jquery.flot.categories.min.js"></script>
 <script>
   $(function () {
-    /*
 
+    /*
      * DONUT CHART
      * -----------
      */
 
     var donutData = [
-      {label: "Universitas", data: 10, color: "#FDECDF"},
-      {label: "Media", data: 10, color: "#FAD1B2"},
-      {label: "Community", data: 10, color: "#8172022"},
-      {label: "Goverment", data: 20, color: "#F39B57"},
-      {label: "Business", data: 20, color: "#F07E26"},
-      // {label: "Series6", data: 50, color: "#04598A"}
-
+      {label: "<?php echo $journal['nama_1']; ?>", data: <?php echo $journal['download_1']; ?>, color: "#FCE6D6"},
+      {label: "<?php echo $journal['nama_2']; ?>", data: <?php echo $journal['download_2']; ?>, color: "#7CE969"},
+      {label: "<?php echo $journal['nama_3']; ?>", data: <?php echo $journal['download_3']; ?>, color: "#F3A065"},
+      {label: "<?php echo $journal['nama_4']; ?>", data: <?php echo $journal['download_4']; ?>, color: "#F08940"},
+      {label: "<?php echo $journal['nama_5']; ?>", data: <?php echo $journal['download_5']; ?>, color: "#E06812"},
+      {label: "Anonymus", data: <?php echo $journal['anonym']; ?>, color: "#04598A"}
     ];
     $.plot("#donut-chart", donutData, {
       series: {
@@ -278,7 +422,7 @@ margin-top: -11px;
         $('#modalDetail #volume').html(data.volume);
         $('#modalDetail #nomor').html(data.nomor);
         $('#modalDetail #keyword').html(data.keyword);
-        $('#modalDetail #file').html('<a href="'+base_url+'assets/file/'+data.file+'" class="btn btn-success"><i class="fa fa-download"></i></a>');
+        $('#modalDetail #file').html('<a href="'+base_url+'assets/file/'+data.file+'" class="btn btn-success btn-bg"> <i class="fa fa-download"></i> Download file</a>');
         $('#modalDetail').modal('show');
         // window.location.href = data.url;
 
@@ -302,7 +446,7 @@ $(document).ready(function() {
  
         // Load data for the table's content from an Ajax source
         "ajax": {
-            // "url": "<?php echo site_url('journal/admin/ajax_list_artikel/'.$id)?>",
+            "url": "<?php echo site_url('user/journal/ajax_list_artikel_download/'.$id)?>",
             "type": "POST"
         },
  

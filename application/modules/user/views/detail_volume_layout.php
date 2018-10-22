@@ -151,23 +151,23 @@
 
 <div class="col col-md-10 col-sm-10 col-xs-12 right-content" style="">
     <div class=" title-box">
-		<h3 class="title">Detail Volume <?=$no_volume[0]['volume'];?></h3>
+		<h3 class="title">Detail Volume <?=$journal['volume'];?></h3>
     </div>
     <div class="box-content">
     	<div class="row">
     	     <div class="col col-md-12 col-sm-12 col-xs-2">
             <div class="col col-md-3 col-sm-4 col-xs-12 sub-left-content none-padding">
                   <div class="filter-cover-jurnal">
-                    <img src="<?=base_url();?>assets/media/<?=$no_volume[0]['futured_image']?>" class="cover-jurnal-img">
+                    <img src="<?=base_url();?>assets/media/<?=$journal['futured_image']?>" class="cover-jurnal-img">
                   </div>
                 </div>
                 <div class="col col-md-9 col-sm-8 col-xs-12 sub-right-content">
-                  <h4><?=$no_volume[0]['judul']?></h4>
+                  <h4><?=$journal['judul']?></h4>
                   <div class="line-sub-title-jurnal"></div>
                   <ul class="list-unstyled list-info-jurnal">
-                  <li>Volume : <?=$no_volume[0]['volume'];?></li>
-                    <li>Status : <?php if($no_volume[0]['status'] == 0){ echo "Disabled";}elseif($no_volume[0]['status'] == 1){ echo "Pending"; }else{ echo "Submited";} ?></li>
-                  <!--   <li>Action : <?php if($no_volume[0]['status'] == 0){ ?><a href="<?=site_url('user/journal/submit/'.$no_volume[0]['id_journal']);?>" class="btn btn-primary btn-upload"> <i class="fa fa-upload"></i> </a><?php }elseif($no_volume[0]['status'] == 1){ ?><a href="#" class="btn btn-warning btn-clock-o"> <i class="fa fa-clock-o"></i> </a><?php }else{ ?><a href="#" class="btn btn-success btn-upload"> <i class="fa fa-check"></i> </a> <?php } ?></li> -->
+                  <li>Volume : <?=$journal['volume'];?></li>
+                    <li>Status : <?php if($journal['status'] == 0){ echo "Disabled";}elseif($journal['status'] == 1){ echo "Pending"; }else{ echo "Submited";} ?></li>
+                  <!--   <li>Action : <?php if($journal['status'] == 0){ ?><a href="<?=site_url('user/journal/submit/'.$journal['id_journal']);?>" class="btn btn-primary btn-upload"> <i class="fa fa-upload"></i> </a><?php }elseif($journal['status'] == 1){ ?><a href="#" class="btn btn-warning btn-clock-o"> <i class="fa fa-clock-o"></i> </a><?php }else{ ?><a href="#" class="btn btn-success btn-upload"> <i class="fa fa-check"></i> </a> <?php } ?></li> -->
                   </ul>
                   <ul class="list-unstyled list-detail-jurnal">
                   <?php foreach ($no_volume as $key => $value): ?>

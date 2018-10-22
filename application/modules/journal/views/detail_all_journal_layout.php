@@ -1,5 +1,5 @@
 <style type="text/css">
-	.form-goup-file{
+  .form-goup-file{
     height: auto;
     overflow: hidden;
     padding: 0;
@@ -264,19 +264,21 @@ color: #D10909!important;
   display: inline-block;
 }
 .right-content .box-thumbnail .body-box-thumbnail{
-	height: auto;
-	overflow: hidden;
+  height: auto;
+  overflow: hidden;
 }
 </style>
 
 <div class="col col-md-12 col-sm-12 col-xs-12 right-content" style="">
     <div class=" title-box" style="margin-bottom: 30px;">
-		<h3 class="title"><?php echo $journal[0]['nm_instansi'];?></h3>
+    <h3 class="title">All Journal</h3>
     </div>
 
     <div class="box-content">
-    	<div class="row">
+      <div class="row">
       <div class="add-data">
+
+                <div class="add-data">
               <?php foreach ($journal as $key => $value): ?>
                 <div class="filter-box-thumbnail col-md-3 col-sm-3 col-xs-12 " style="padding: 15px;">
                     <div class="box-thumbnail">
@@ -286,7 +288,7 @@ color: #D10909!important;
                       <div class="body-box-thumbnail">
                         <h5 class="title-thumbnail"><a href="<?php echo site_url('user/journal/detail_journal/'.$value['id_journal']);?>"><?php echo $value['judul'];?></a> </h5>
                         <div class="col col-md-12 col-sm-12 col-xs-12 none-padding">
-                          <a href="<?=site_url('user/journal/download_journal/'.$value['id_journal']);?>" style="float: right;color: #EF7314;text-decoration: none;font-size: 20px;"><i class="fa fa-download"></i></a>
+                          <a href="<?=site_url('user/journal/download_journal/'.$value['id_journal']);?>" style="float: right;color: #008d4c;text-decoration: none;font-size: 20px;"><i class="fa fa-download"></i></a>
                         </div>
 
                       </div>
@@ -295,13 +297,15 @@ color: #D10909!important;
                 </div>
               <?php endforeach ?>
               </div>
+
+              </div>
               <div class="col col-md-12 col-sm-12 col-xs-12 text-center" style="padding: 20px 15px;">
-              	<button class="btn btn-warning btn-bg"> Load More</button>
+                <button class="btn btn-success btn-bg"> Load More</button>
               </div>
               <input type="hidden" name="limit" id="limit" value="8">
               <input type="hidden" name="ofset" id="ofset" value="8">
            </div>
-    		</div>
+        </div>
 
     </div>
 </div>
@@ -316,7 +320,7 @@ color: #D10909!important;
       var end = get_url(url);
       console.log(end);
       $.ajax({
-        url : base_url+'user/journal/loadmore/'+end+'/'+limit+'/'+ofset,
+        url : base_url+'journal/admin/loadmore_detail/'+limit+'/'+ofset,
         dataType : 'json'
       }).done(function(data){
         $('.add-data').append(data);

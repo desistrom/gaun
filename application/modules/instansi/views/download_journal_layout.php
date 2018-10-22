@@ -37,6 +37,20 @@
 
 <?php if ($view == 'list') { ?>
 <link rel="stylesheet" href="<?php echo base_url();?>assets/datatables/css/dataTables.bootstrap.min.css">
+<div class="col col-md-12 col-sm-12 col-s-12">
+  <div class="box">
+    <div class="box-header with-border">
+          <i class="fa fa-bar-chart-o"></i>
+
+          <h3 class="box-title">Detail Download</h3>
+
+        </div>
+    <div class="box-body">
+      <div id="donut-chart" style="height: 250px;"></div>
+    </div>
+  </div>
+
+</div>
 <div class="col col-md-12 col-sm-12 col-xs-12">
   
 <div class="box">
@@ -104,6 +118,13 @@
 <!-- <script src="<?=base_url().'assets/js/jquery-3.2.1.min.js';?>"></script> -->
 <script src="<?=base_url();?>assets/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?=base_url();?>assets/datatables/js/dataTables.bootstrap.min.js"></script>
+       <script src="<?=base_url();?>assets/admin-jur/plugins/flot/jquery.flot.min.js"></script>
+<!-- FLOT RESIZE PLUGIN - allows the chart to redraw when the window is resized -->
+<script src="<?=base_url();?>assets/admin-jur/plugins/flot/jquery.flot.resize.min.js"></script>
+<!-- FLOT PIE PLUGIN - also used to draw donut charts -->
+<script src="<?=base_url();?>assets/admin-jur/plugins/flot/jquery.flot.pie.min.js"></script>
+<!-- FLOT CATEGORIES PLUGIN - Used to draw bar charts -->
+<script src="<?=base_url();?>assets/admin-jur/plugins/flot/jquery.flot.categories.min.js"></script>
 <script type="text/javascript">
   $(document).ready(function () {
     $('body').on('click','.btn-acc', function(){
@@ -150,4 +171,57 @@ $(document).ready(function() {
     });
  
 });
+</script>
+<script>
+  $(function () {
+    /*
+
+     * DONUT CHART
+     * -----------
+     */
+
+    var donutData = [
+      {label: "<?php echo $sum_journal['nama_1']; ?>", data: <?php echo $sum_journal['download_1']; ?>, color: "#BCF4B2"},
+      {label: "<?php echo $sum_journal['nama_2']; ?>", data: <?php echo $sum_journal['download_2']; ?>, color: "#7CE969"},
+      {label: "<?php echo $sum_journal['nama_3']; ?>", data: <?php echo $sum_journal['download_3']; ?>, color: "#238012"},
+      {label: "<?php echo $sum_journal['nama_4']; ?>", data: <?php echo $sum_journal['download_4']; ?>, color: "#4EE135"},
+      {label: "<?php echo $sum_journal['nama_5']; ?>", data: <?php echo $sum_journal['download_5']; ?>, color: "#35C41C"},
+      {label: "Anonymus", data: <?php echo $sum_journal['anonym']; ?>, color: "#04598A"}
+
+    ];
+    $.plot("#donut-chart", donutData, {
+      series: {
+        pie: {
+          show: true,
+          radius: 1,
+          innerRadius: 0.5,
+          label: {
+            show: true,
+            radius: 2 / 3,
+            formatter: labelFormatter,
+            threshold: 0.1
+          }
+
+        }
+      },
+      legend: {
+        show: true
+      }
+    });
+    /*
+     * END DONUT CHART
+     */
+
+  });
+
+  /*
+   * Custom Label formatter
+   * ----------------------
+   */
+  function labelFormatter(label, series) {
+    return '<div style="font-size:13px; text-align:center; padding:2px; color: #fff; font-weight: 600;">'
+        + label
+        + "<br>"
+        + Math.round(series.percent) + "%</div>";
+  }
 </script>

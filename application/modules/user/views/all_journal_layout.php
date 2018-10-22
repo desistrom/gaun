@@ -294,7 +294,7 @@ div.container-fluid.footer-bottom{
             <div class="sub-content-journal-header">
               <div class="col col-md-12 col-sm-12 col-xs-12">
                 <div class="journal-header journal-left">
-                  <h4>My Journal#</h4>
+                  <h4>All Journal#</h4>
                 </div>
                 <div class="journal-header journal-right">
                   <!-- <a href="<?=site_url('journal/admin/add');?>" class="btn btn-warning btn-create">Create</a> -->
@@ -332,7 +332,7 @@ div.container-fluid.footer-bottom{
             <div class="sub-content-artikel-header">
               <div class="col col-md-12 col-sm-12 col-xs-12">
                 <div class="artikel-header artikel-left">
-                  <h4>My Artikel#</h4>
+                  <h4>All Artikel#</h4>
                 </div>
                 <div class="artikel-header artikel-right">
                   <!-- <a href="<?=site_url('journal/admin/add_artikel');?>" class="btn btn-warning btn-create">Create</a> -->
@@ -354,7 +354,7 @@ div.container-fluid.footer-bottom{
                   </ul>
                 </div>
                 <div class="artikel-body artikel-body-icedit">
-                  <a href="#" title="edit">
+                  <a href="<?php echo site_url('user/journal/downloads/'.$value['id_artikel']);?>" title="edit">
                     <i class="fa fa-download" aria-hidden="true"></i>
                   </a>
                   

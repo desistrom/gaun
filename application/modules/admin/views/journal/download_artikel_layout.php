@@ -341,11 +341,12 @@ margin-top: -11px;
      */
 
     var donutData = [
-      {label: "University", data: <?php echo $journal['university']; ?>, color: "#3c8dbc"},
-      {label: "Business", data: <?php echo $journal['business']; ?>, color: "#0073b7"},
-      {label: "Goverment", data: <?php echo $journal['goverment']; ?>, color: "#00c0ef"},
-      {label: "Media", data: <?php echo $journal['media']; ?>, color: "#00c0ef"},
-      {label: "Comunity", data: <?php echo $journal['comunity']; ?>, color: "#00c0ef"},
+      {label: "<?php echo $journal['nama_1']; ?>", data: <?php echo $journal['download_1']; ?>, color: "#BCF4B2"},
+      {label: "<?php echo $journal['nama_2']; ?>", data: <?php echo $journal['download_2']; ?>, color: "#7CE969"},
+      {label: "<?php echo $journal['nama_3']; ?>", data: <?php echo $journal['download_3']; ?>, color: "#238012"},
+      {label: "<?php echo $journal['nama_4']; ?>", data: <?php echo $journal['download_4']; ?>, color: "#4EE135"},
+      {label: "<?php echo $journal['nama_5']; ?>", data: <?php echo $journal['download_5']; ?>, color: "#35C41C"},
+      {label: "Anonymus", data: <?php echo $journal['anonym']; ?>, color: "#04598A"}
     ];
     $.plot("#donut-chart", donutData, {
       series: {

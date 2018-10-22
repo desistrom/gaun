@@ -471,7 +471,8 @@
             <i class="fa fa-copy"></i> <span>All Journal</span>
           </a>
         </li>
-         <li class=" treeview" style="margin-top: 5px;">
+        <?php if(!is_null($this->general->status()) || $this->general->status() != ''){ ?>
+         <li class="<?php if(current_url() == site_url('user/journal/volume')){ ?> active <?php } ?> treeview" style="margin-top: 5px;">
           <a href="#">
             <i class="fa fa-list"></i> <span>Volume</span>
             <span class="pull-right-container">
@@ -482,7 +483,7 @@
             <li class=""><a href="<?=site_url('user/journal/volume');?>"><i class="fa fa-circle-o"></i>Create & Edit Volume </a></li>
           </ul>
         </li>
-        <li class=" treeview" style="margin-top: 5px;">
+        <li class=" <?php if(current_url() == site_url('user/journal/list_nomor')){ ?> active <?php } ?> treeview" style="margin-top: 5px;">
           <a href="#">
             <i class="fa fa-list-ol"></i> <span>No Volume</span>
             <span class="pull-right-container">
@@ -493,7 +494,7 @@
             <li class=""><a href="<?=site_url('user/journal/list_nomor');?>"><i class="fa fa-circle-o"></i>Create & Edit No Volume</a></li>
           </ul>
         </li>
-       <li class=" treeview" style="margin-top: 5px;">
+       <li class=" <?php if(current_url() == site_url('user/journal')){ ?> active <?php } ?> treeview" style="margin-top: 5px;">
           <a href="#">
             <i class="fa fa-book"></i> <span>My Journal</span>
             <span class="pull-right-container">
@@ -529,7 +530,7 @@
             <li class="active"><a href="#"><i class="fa fa-circle-o"></i> Create & Edit Journal</a></li>
           </ul>
         </li> -->
-        <li class=" treeview <?php if(current_url() == site_url('journal/admin/') || current_url() == site_url('journal/admin/accepted') || current_url() == site_url('journal/admin/rejected')){ ?>  active <?php } ?>">
+        <li class="treeview <?php if(current_url() == site_url('user/journal/list_artikel') || current_url() == site_url('user/journal/list_artikel_accepted') || current_url() == site_url('user/journal/list_artikel_rejected')){ ?>  active <?php } ?>">
           <a href="#">
             <i class="fa fa-file"></i>  <span>Artikel</span>
             <span class="pull-right-container">
@@ -541,7 +542,7 @@
           	<li class=""><a href="<?=site_url('user/journal/list_artikel');?>"><i class="fa fa-circle-o"></i> List Artikel </a></li>
             <li class=""><a href="<?=site_url('user/journal/list_artikel_accepted');?>"><i class="fa fa-circle-o"></i> Accepted </a></li>
             <li class=""><a href="<?=site_url('user/journal/list_artikel_rejected');?>"><i class="fa fa-circle-o"></i> Rejected </a></li>
-            <li class=""><a href="<?=site_url('user/journal/list_download');?>"><i class="fa fa-circle-o"></i> Terdownload </a></li>
+            <!-- <li class=""><a href="<?=site_url('user/journal/list_download');?>"><i class="fa fa-circle-o"></i> Terdownload </a></li> -->
           </ul>
         </li>
         <li>
@@ -549,17 +550,13 @@
             <i class="fa fa-file-text-o"></i> <span>Report Download</span>
           </a>
         </li>
+        <?php } ?>
         <li>
           <a href="<?=site_url('user/journal/search');?>">
             <i class="fa fa-search"></i> <span>search Journal</span>
           </a>
         </li>
-        <li>
-          <a href="<?=site_url('user/journal/report_download');?>">
-            <i class="fa fa-file-text-o"></i> <span>Report Download</span>
-          </a>
-        </li>
-        <li class=" treeview" style="margin-top: 5px;">
+        <li class="<?php if(current_url() == site_url('user/dashboard/profil') || current_url() == site_url('user/dashboard/change_password')){ ?>  active <?php } ?> treeview" style="margin-top: 5px;">
           <a href="#">
             <i class="fa fa-gear"></i> <span>Setting</span>
             <span class="pull-right-container">

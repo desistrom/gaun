@@ -18,28 +18,28 @@
                 <tbody>
                 <tr>
             
-                  <td>Universitas : <?php echo $artikel['university']; ?> </td>
+                  <td><?php echo $artikel['nama_1']; ?> : <?php echo $artikel['download_1']; ?> </td>
                
                 </tr>
                 <tr>
               
-                  <td>Media : <?php echo $artikel['media']; ?></td>
+                  <td><?php echo $artikel['nama_2']; ?> : <?php echo $artikel['download_2']; ?></td>
                  
                 </tr>
                
                 <tr>
              
-                  <td>Community : <?php echo $artikel['comunity']; ?></td>
+                  <td><?php echo $artikel['nama_3']; ?> : <?php echo $artikel['download_3']; ?></td>
                   
                 </tr>
                 <tr>
              
-                  <td>Goverment : <?php echo $artikel['goverment']; ?></td>
+                  <td><?php echo $artikel['nama_4']; ?> : <?php echo $artikel['download_4']; ?></td>
                   
                 </tr>
                 <tr>
              
-                  <td>Business :<?php echo $artikel['business']; ?> </td>
+                  <td><?php echo $artikel['nama_5']; ?> :<?php echo $artikel['download_5']; ?> </td>
                   
                 </tr>
                 <tr>
@@ -78,28 +78,28 @@
                 <tbody>
                 <tr>
             
-                  <td>Universitas : <?php echo $artikel['university_abs']; ?> </td>
+                  <td><?php echo $artikel['namaabs_1']; ?> : <?php echo $artikel['downloadabs_1']; ?> </td>
                
                 </tr>
                 <tr>
               
-                  <td>Media : <?php echo $artikel['media_abs']; ?></td>
+                  <td><?php echo $artikel['namaabs_2']; ?> : <?php echo $artikel['downloadabs_2']; ?></td>
                  
                 </tr>
                
                 <tr>
              
-                  <td>Community : <?php echo $artikel['comunity_abs']; ?></td>
+                  <td><?php echo $artikel['namaabs_3']; ?> : <?php echo $artikel['downloadabs_3']; ?></td>
                   
                 </tr>
                 <tr>
              
-                  <td>Goverment : <?php echo $artikel['goverment_abs']; ?></td>
+                  <td><?php echo $artikel['namaabs_4']; ?> : <?php echo $artikel['downloadabs_4']; ?></td>
                   
                 </tr>
                 <tr>
              
-                  <td>Business :<?php echo $artikel['business_abs']; ?> </td>
+                  <td><?php echo $artikel['namaabs_5']; ?> :<?php echo $artikel['downloadabs_5']; ?> </td>
                   
                 </tr>
                 <tr>
@@ -145,11 +145,11 @@
      */
 
     var donutData = [
-      {label: "Universitas", data: <?php echo $artikel['university']; ?>, color: "#BCF4B2"},
-      {label: "Media", data: <?php echo $artikel['media']; ?>, color: "#7CE969"},
-      {label: "Community", data: <?php echo $artikel['comunity']; ?>, color: "#238012"},
-      {label: "Goverment", data: <?php echo $artikel['goverment']; ?>, color: "#4EE135"},
-      {label: "Business", data: <?php echo $artikel['business']; ?>, color: "#35C41C"},
+      {label: "<?php echo $artikel['nama_1']; ?>", data: <?php echo $artikel['download_1']; ?>, color: "#BCF4B2"},
+      {label: "<?php echo $artikel['nama_2']; ?>", data: <?php echo $artikel['download_2']; ?>, color: "#7CE969"},
+      {label: "<?php echo $artikel['nama_3']; ?>", data: <?php echo $artikel['download_3']; ?>, color: "#238012"},
+      {label: "<?php echo $artikel['nama_4']; ?>", data: <?php echo $artikel['download_4']; ?>, color: "#4EE135"},
+      {label: "<?php echo $artikel['nama_5']; ?>", data: <?php echo $artikel['download_5']; ?>, color: "#35C41C"},
       {label: "Anonymus", data: <?php echo $artikel['anonym']; ?>, color: "#04598A"}
 
     ];
@@ -176,11 +176,11 @@
      * END DONUT CHART
      */
      var donutDataAbs = [
-      {label: "Universitas", data: <?php echo $artikel['university_abs']; ?>, color: "#BCF4B2"},
-      {label: "Media", data: <?php echo $artikel['media_abs']; ?>, color: "#7CE969"},
-      {label: "Community", data: <?php echo $artikel['comunity_abs']; ?>, color: "#238012"},
-      {label: "Goverment", data: <?php echo $artikel['goverment_abs']; ?>, color: "#4EE135"},
-      {label: "Business", data: <?php echo $artikel['business_abs']; ?>, color: "#35C41C"},
+      {label: "<?php echo $artikel['namaabs_1']; ?>", data: <?php echo $artikel['downloadabs_1']; ?>, color: "#BCF4B2"},
+      {label: "<?php echo $artikel['namaabs_2']; ?>", data: <?php echo $artikel['downloadabs_2']; ?>, color: "#7CE969"},
+      {label: "<?php echo $artikel['namaabs_3']; ?>", data: <?php echo $artikel['downloadabs_3']; ?>, color: "#238012"},
+      {label: "<?php echo $artikel['namaabs_4']; ?>", data: <?php echo $artikel['downloadabs_4']; ?>, color: "#4EE135"},
+      {label: "<?php echo $artikel['namaabs_5']; ?>", data: <?php echo $artikel['downloadabs_5']; ?>, color: "#35C41C"},
       {label: "Anonymus", data: <?php echo $artikel['anonym_abs']; ?>, color: "#04598A"}
 
     ];

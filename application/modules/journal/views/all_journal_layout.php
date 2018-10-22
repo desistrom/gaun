@@ -294,7 +294,7 @@ div.container-fluid.footer-bottom{
             <div class="sub-content-journal-header">
               <div class="col col-md-12 col-sm-12 col-xs-12">
                 <div class="journal-header journal-left">
-                  <h4>My Journal#</h4>
+                  <h4>All Journal#</h4>
                 </div>
                 <div class="journal-header journal-right">
                   <!-- <a href="<?=site_url('journal/admin/add');?>" class="btn btn-warning btn-create">Create</a> -->
@@ -323,7 +323,7 @@ div.container-fluid.footer-bottom{
                             <div class="body-box-thumbnail">
                               <h5 class="title-thumbnail"><a href="#"><?=$value['judul'];?></a> </h5>
                               <div class="col col-md-12 col-sm-12 col-xs-12 none-padding">
-                                <a href="#" style="float: right;color: #2BA417;text-decoration: none;font-size: 20px;"><i class="fa fa-download"></i></a>
+                                <a href="<?php echo site_url('journal/admin/download_journal/'.$value['id_journal']);?>" style="float: right;color: #2BA417;text-decoration: none;font-size: 20px;"><i class="fa fa-download"></i></a>
                               </div>
 
                             </div>
@@ -335,7 +335,7 @@ div.container-fluid.footer-bottom{
 
               
                   </div>
-                  <a href="" class="txt-seemore">Load more</a>
+                  <a href="<?php echo site_url('journal/admin/detail_all_journal');?>" class="txt-seemore">See more</a>
                 </div>
               </div>
             </div>
@@ -344,7 +344,7 @@ div.container-fluid.footer-bottom{
             <div class="sub-content-artikel-header">
               <div class="col col-md-12 col-sm-12 col-xs-12">
                 <div class="artikel-header artikel-left">
-                  <h4>My Artikel#</h4>
+                  <h4>All Artikel#</h4>
                 </div>
                 <div class="artikel-header artikel-right">
                   <!-- <a href="<?=site_url('journal/admin/add_artikel');?>" class="btn btn-warning btn-create">Create</a> -->
@@ -353,25 +353,27 @@ div.container-fluid.footer-bottom{
             </div>
             <div class="sub-content-artikel-body">
 
+              <?php foreach ($artikel as $key => $value): ?>
               <div class="col col-md-6 col-sm-6 col-xs-12 list-artikel">
                 <div class="artikel-body artikel-body-left">
                   <i class="fa fa-files-o" aria-hidden="true"></i>
                 </div>
                 <div class="artikel-body artikel-body-right">
                   <ul class="list-unstyled">
-                    <li title="Effect of chitosan…">Artikel : Effect of chitosan…</li>
-                    <li>Author : M. Dika pratana putra...</li>
-                    <li>Date Published : 2018-10-19</li>
-                    <li>Publisher : Junaedi Junaedi</li>
+                    <li title="<?=word_limiter($value['judul'],3);?>">Artikel : <?=word_limiter($value['judul'],3);?></li>
+                    <li>Author : <?=$value['author'];?>...</li>
+                    <li>Date Published : <?=$value['publish'];?></li>
+                    <li>Publisher : <?=$value['publisher'];?></li>
                   </ul>
                 </div>
                 <div class="artikel-body artikel-body-icedit">
-                  <a href="" title="edit">
+                  <a href="<?php echo site_url('journal/admin/downloads/'.$value['id_artikel']);?>" title="edit">
                     <i class="fa fa-download" aria-hidden="true"></i>
                   </a>
                   
                 </div>     
               </div>              
+            <?php endforeach ?>       
 
     
             </div>

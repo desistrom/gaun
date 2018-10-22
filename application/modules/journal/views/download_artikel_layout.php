@@ -131,6 +131,18 @@ margin-top: -11px;
 .btn-upload{
   display: none;
 }
+.form-control-static{
+  padding: 0 0 20px 0;
+}
+.modal label{
+  margin-bottom: 0;
+}
+.inline-block{
+  display: inline-block;;
+}
+.modal .modal-header.btn-bg{
+  color: white;
+}
 </style>
 
 <?php if ($view == 'list') { ?>
@@ -166,7 +178,13 @@ margin-top: -11px;
 </div>
 <div class="col col-md-12 col-sm-12 col-xs-12">
  
-<div class="box">
+<div class="box box-success">
+  <div class="box-header with-border">
+          <i class="fa fa-bar-chart-o"></i>
+
+          <h3 class="box-title">Detail Artikel Download</h3>
+
+        </div>
   <div class="box-body">
     <div class="col col-md-12 col-sm-12 col-xs-12" style="padding-left: 0; margin-bottom: 15px;">
     </div>
@@ -257,9 +275,9 @@ margin-top: -11px;
 <div class="modal" tabindex="-1" role="dialog" id="modalDetail">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
-      <div class="modal-header">
-        <h3 class="modal-title"></h3>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <div class="modal-header btn-bg">
+        <h3 class="modal-title inline-block"></h3>
+        <button type="button" class="close inline-block" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -271,15 +289,15 @@ margin-top: -11px;
       <label>Abstraksi</label>
       <div class="form-control-static" id="abs"></div>
       <label>Author</label>
-      <div id="author"></div>
+      <div class="form-control-static" id="author"></div>
       <label>Keyword</label>
-      <div id="keyword"></div>
+      <div class="form-control-static" id="keyword"></div>
       <label>File</label>
-      <div id="file"></div>
+      <div class="form-control-static" id="file"></div>
       </div>
       <div class="modal-footer">
         <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" style="color: white;">Close</button>
       </div>
     </div>
   </div>
@@ -342,11 +360,12 @@ margin-top: -11px;
      */
 
     var donutData = [
-      {label: "University", data: <?php echo $journal['university']; ?>, color: "#BCF4B2"},
-      {label: "Business", data: <?php echo $journal['business']; ?>, color: "#7CE969"},
-      {label: "Goverment", data: <?php echo $journal['goverment']; ?>, color: "#4EE135"},
-      {label: "Media", data: <?php echo $journal['media']; ?>, color: "#35C41C"},
-      {label: "Comunity", data: <?php echo $journal['comunity']; ?>, color: "#238012"},
+      {label: "<?php echo $journal['nama_1']; ?>", data: <?php echo $journal['download_1']; ?>, color: "#BCF4B2"},
+      {label: "<?php echo $journal['nama_2']; ?>", data: <?php echo $journal['download_2']; ?>, color: "#7CE969"},
+      {label: "<?php echo $journal['nama_3']; ?>", data: <?php echo $journal['download_3']; ?>, color: "#238012"},
+      {label: "<?php echo $journal['nama_4']; ?>", data: <?php echo $journal['download_4']; ?>, color: "#4EE135"},
+      {label: "<?php echo $journal['nama_5']; ?>", data: <?php echo $journal['download_5']; ?>, color: "#35C41C"},
+      {label: "Anonymus", data: <?php echo $journal['anonym']; ?>, color: "#04598A"}
     ];
     $.plot("#donut-chart", donutData, {
       series: {
@@ -403,7 +422,7 @@ margin-top: -11px;
         $('#modalDetail #volume').html(data.volume);
         $('#modalDetail #nomor').html(data.nomor);
         $('#modalDetail #keyword').html(data.keyword);
-        $('#modalDetail #file').html('<a href="'+base_url+'assets/file/'+data.file+'" class="btn btn-success"><i class="fa fa-download"></i></a>');
+        $('#modalDetail #file').html('<a href="'+base_url+'assets/file/'+data.file+'" class="btn btn-success btn-bg"> <i class="fa fa-download"></i> Download file</a>');
         $('#modalDetail').modal('show');
         // window.location.href = data.url;
 

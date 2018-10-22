@@ -278,31 +278,68 @@ color: #D10909!important;
       <div class="row">
       <div class="add-data">
 
+                <div class="add-data">
+              <?php foreach ($journal as $key => $value): ?>
                 <div class="filter-box-thumbnail col-md-3 col-sm-3 col-xs-12 " style="padding: 15px;">
                     <div class="box-thumbnail">
                       <div class="header-box-thumbnail">
-                        <img class="thumbnail-cover" src="http://192.168.88.11/idren/assets/media/1539161415.jpg">
+                        <img class="thumbnail-cover" src="<?=base_url();?>assets/media/<?php echo $value['futured_image'];?>">
                       </div>
                       <div class="body-box-thumbnail">
-                        <h5 class="title-thumbnail"><a href="#">Majalah Ilmu Faal Indonesia</a> </h5>
+                        <h5 class="title-thumbnail"><a href="<?php echo site_url('user/journal/detail_journal/'.$value['id_journal']);?>"><?php echo $value['judul'];?></a> </h5>
                         <div class="col col-md-12 col-sm-12 col-xs-12 none-padding">
-                          <a href="#" style="float: right;color: #EF7314;text-decoration: none;font-size: 20px;"><i class="fa fa-download"></i></a>
+                          <a href="<?=site_url('user/journal/download_journal/'.$value['id_journal']);?>" style="float: right;color: #EF7314;text-decoration: none;font-size: 20px;"><i class="fa fa-download"></i></a>
                         </div>
 
                       </div>
 
                     </div>
                 </div>
+              <?php endforeach ?>
+              </div>
 
               </div>
               <div class="col col-md-12 col-sm-12 col-xs-12 text-center" style="padding: 20px 15px;">
                 <button class="btn btn-warning btn-bg"> Load More</button>
               </div>
-              <input type="hidden" name="limit" id="limit" value="4">
-              <input type="hidden" name="ofset" id="ofset" value="4">
+              <input type="hidden" name="limit" id="limit" value="8">
+              <input type="hidden" name="ofset" id="ofset" value="8">
            </div>
         </div>
 
     </div>
 </div>
 
+<script type="text/javascript">
+  $(document).ready(function () {
+    $('body').on('click','.btn-bg',function(){
+      var limit = $('#limit').val();
+      var ofset = $('#ofset').val();
+      var set = parseInt(limit) + parseInt(ofset);
+      var url = document.URL;
+      var end = get_url(url);
+      console.log(end);
+      $.ajax({
+        url : base_url+'user/journal/loadmore_detail/'+limit+'/'+ofset,
+        dataType : 'json'
+      }).done(function(data){
+        $('.add-data').append(data);
+        if (data == '') {
+          $('.btn-bg').text('No More data found');
+        }
+        $('#limit').val(set);
+      });
+    });
+
+    function get_url(url){
+      return url.split('/').pop()
+    }
+
+    //a step by step breakdown
+    function getImageDirectoryByFullURL(url){
+        url = url.split('/'); //url = ["serverName","app",...,"bb65efd50ade4b3591dcf7f4c693042b"]
+        url = url.pop();      //url = "bb65efd50ade4b3591dcf7f4c693042b"
+        return url;           //return "bb65efd50ade4b3591dcf7f4c693042b"
+    }
+  });
+</script>

@@ -364,6 +364,9 @@
           .sub-content-journal .sub-content-journal-header .list-journal{
         padding: 15px 10em;
       }
+      .sub-content-artikel .sub-content-artikel-body{
+        padding: 15px 10em;
+      }
   </style>
   <script src="<?=base_url();?>assets/js/jquery-2.2.3.min.js"></script>
   <script src="<?=base_url();?>assets/js/jquery-ui.min.js"></script>

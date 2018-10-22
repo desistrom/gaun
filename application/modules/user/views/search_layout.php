@@ -116,7 +116,8 @@
         <div class="panel-body">
         	<?php foreach ($journal as $key => $value): ?>
 	        	<div class="col col-md-4 col-sm-4 col-xs-12 filter-box">
-	        		<div class="box-header">
+	        	<div class="box-search" style="border:solid 1px #D2D2D2;border-bottom-left-radius: 20px;border-bottom-right-radius: 20px;overflow: hidden;">
+	        			<div class="box-header" >
 	        			<img src="<?=base_url();?>media/<?=$value['gambar']?>" class="img-responsive img-logo">
 	        		</div>
 	        		<div class="box-body">
@@ -127,6 +128,7 @@
 	        				<h4 class="text-center"><?=$value['jumlah'];?></h4>
 	        			</div>
 	        		</div>
+	        	</div>
 	        	</div>        		
         	<?php endforeach ?>
         </div>

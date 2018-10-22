@@ -181,11 +181,12 @@ $(document).ready(function() {
      */
 
     var donutData = [
-            {label: "Universitas", data: 10, color: "#BCF4B2"},
-      {label: "Media", data: 10, color: "#7CE969"},
-      {label: "Community", data: 10, color: "#238012"},
-      {label: "Goverment", data: 20, color: "#4EE135"},
-      {label: "Business", data: 20, color: "#35C41C"},
+      {label: "<?php echo $sum_journal['nama_1']; ?>", data: <?php echo $sum_journal['download_1']; ?>, color: "#BCF4B2"},
+      {label: "<?php echo $sum_journal['nama_2']; ?>", data: <?php echo $sum_journal['download_2']; ?>, color: "#7CE969"},
+      {label: "<?php echo $sum_journal['nama_3']; ?>", data: <?php echo $sum_journal['download_3']; ?>, color: "#238012"},
+      {label: "<?php echo $sum_journal['nama_4']; ?>", data: <?php echo $sum_journal['download_4']; ?>, color: "#4EE135"},
+      {label: "<?php echo $sum_journal['nama_5']; ?>", data: <?php echo $sum_journal['download_5']; ?>, color: "#35C41C"},
+      {label: "Anonymus", data: <?php echo $sum_journal['anonym']; ?>, color: "#04598A"}
       // {label: "Series6", data: 50, color: "#04598A"}
 
     ];

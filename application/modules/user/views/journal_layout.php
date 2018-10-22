@@ -349,7 +349,7 @@ div.container-fluid.footer-bottom{
                      
                     
                   </div>
-                  <a href="<?=site_url('user/journal/detail_myjournal');?>" class="txt-seemore">Load more</a>
+                  <a href="<?=site_url('user/journal/detail_myjournal');?>" class="txt-seemore">See more</a>
                 </div>
               </div>
             </div>

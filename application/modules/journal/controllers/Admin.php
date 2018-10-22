@@ -111,23 +111,29 @@ class Admin extends MX_Controller
         //     $journal[$key]['jumlah'] = $jumlah;
         // }
         // print_r($journal);
-        $this->db->select('tb_artikel.*,tb_volume.volume,tb_no_volume.publish,tb_journal.judul as judul_journal');
+        $this->db->select('tb_artikel.*,tb_volume.volume,tb_no_volume.publish,tb_journal.judul as judul_journal,,tb_pengguna.status as status_user,tb_pengguna.id_pengguna');
         $this->db->from('tb_artikel');
         $this->db->join('tb_no_volume', 'id_no_volume_ref = id_no_volume');
         $this->db->join('tb_volume', 'id_volume_ref = id_volume');
         $this->db->join('tb_journal', 'id_journal_ref = id_journal');
-        // $this->db->join('tb_pengguna', 'tb_journal.id_user_ref = id_pengguna');
+        $this->db->join('tb_pengguna', 'tb_journal.id_user_ref = id_pengguna');
         $this->db->where('tb_journal.status',2);
         $this->db->order_by('id_artikel', 'desc');
         $this->db->limit('4');
-       /* $a = $this->db->get()->result_array();
+        $a = $this->db->get()->result_array();
         foreach ($a as $key => $value) {
             $author = $this->db->get_where('tb_author',array('id_artikel_ref'=>$value['id_artikel']))->result_array();
             $a[$key]['author'] = $author[0]['nama'];
-                $a[$key]['publisher'] = $this->data['user']['nama'];
-        }*/
+            if ($value['status_user'] == 0) {
+                $p = $this->db->get_where('tb_mahasiswa',array('id_pengguna_ref'=>$value['id_pengguna']))->row_array();
+                $a[$key]['publisher'] = $p['nama'];
+            }else{
+                $p = $this->db->get_where('tb_dosen',array('id_pengguna_ref'=>$value['id_pengguna']))->row_array();
+                $a[$key]['publisher'] = $p['nama'];
+            }
+        }
         $this->data['view'] = 'list';
-        // $this->data['artikel'] = $a;
+        $this->data['artikel'] = $a;
         $this->data['journal'] = $journal;
         $this->ciparser->new_parse('template_admin_journal','modules_journal', 'all_journal_layout',$this->data);
     }
@@ -264,24 +270,33 @@ class Admin extends MX_Controller
     }
 
     public function detail_journal($id=null){
-        $sql = "SELECT j.*, v.id_volume, v.volume FROM tb_journal j JOIN tb_volume v ON j.id_journal = v.id_journal_ref where j.id_journal = ".$id;
+        $sql = 'SELECT * FROM tb_journal where id_journal = ?';
+        $journal = $this->db->query($sql,$id)->row_array();
+        $sql = "SELECT j.*, v.id_volume, v.volume FROM tb_journal j JOIN tb_volume v ON j.id_journal = v.id_journal_ref JOIN tb_no_volume n ON v.id_volume = n.id_volume_ref join tb_artikel a ON n.id_no_volume = a.id_no_volume_ref where j.id_journal = ".$id;
         $data = $this->db->query($sql,$id)->result_array();
+        $this->data['journal'] = $journal;
         $this->data['volume'] = $data;
         $this->ciparser->new_parse('template_admin_journal','modules_journal', 'detail_journal_layout',$this->data);
 
     }
 
     public function detail_volume($id=null){
-        $sql = 'SELECT j.*, v.id_volume, v.volume, n.* FROM tb_journal j JOIN tb_volume v ON j.id_journal = v.id_journal_ref JOIN tb_no_volume n ON v.id_volume = n.id_volume_ref where id_volume = ?';
+        $sql = 'SELECT j.*, v.volume FROM tb_journal j JOIN tb_volume v ON j.id_journal = v.id_journal_ref where id_volume = ?';
+        $journal = $this->db->query($sql,$id)->row_array();
+        $sql = 'SELECT j.*, v.id_volume, v.volume, n.* FROM tb_journal j JOIN tb_volume v ON j.id_journal = v.id_journal_ref JOIN tb_no_volume n ON v.id_volume = n.id_volume_ref join tb_artikel a ON n.id_no_volume = a.id_no_volume_ref where id_volume = ?';
         $data = $this->db->query($sql,$id)->result_array();
         $this->data['no_volume'] = $data;
+        $this->data['journal'] = $journal;
         $this->ciparser->new_parse('template_admin_journal','modules_journal', 'detail_volume_layout',$this->data);
     }
 
     public function detail_no_volume($id=null){
+        $sql = 'SELECT j.*,j.status as jstatus,v.volume,n.nomor FROM tb_journal j JOIN tb_volume v ON j.id_journal = v.id_journal_ref JOIN tb_no_volume n ON v.id_volume = n.id_volume_ref where id_no_volume = ?';
+        $journal = $this->db->query($sql,$id)->row_array();
         $sql = 'SELECT *, a.judul as artikel, j.status as jstatus FROM tb_journal j JOIN tb_volume v ON j.id_journal = v.id_journal_ref JOIN tb_no_volume n ON v.id_volume = n.id_volume_ref join tb_artikel a ON n.id_no_volume = a.id_no_volume_ref where id_no_volume = ?';
         $data = $this->db->query($sql,$id)->result_array();
         $this->data['artikel'] = $data;
+        $this->data['journal'] = $journal;
         $this->ciparser->new_parse('template_admin_journal','modules_journal', 'detail_no_volume_layout',$this->data);
     }
 
@@ -851,6 +866,19 @@ class Admin extends MX_Controller
     }
 
     public function report_download(){
+        $slq_journal = "SELECT SUM(download_1) as download_1, SUM(download_2) as download_2, SUM(download_3) as download_3, SUM(download_4) as download_4, SUM(download_5) as download_5, SUM(anonym) as anonym FROM tb_journal j join tb_pengguna p on j.id_user_ref = p.id_pengguna where p.id_instansi_ref = ?";
+        $sum_journal = $this->db->query($slq_journal,$this->user->user->id_instansi)->row_array();
+        if (is_null($sum_journal['anonym']) || $sum_journal['anonym'] == '') {
+            $sum_journal['anonym'] = 0;
+        }
+        for ($i=1; $i < 6; $i++) { 
+            if (is_null($sum_journal['download_'.$i]) || $sum_journal['download_'.$i] == '') {
+                $sum_journal['download_'.$i] = 0;
+            }
+            $nama = $this->db->get_where('tb_jenis_instansi',array('id_jenis_instansi'=>$i))->row_array();
+            $sum_journal['nama_'.$i] = $nama['nm_jenis_instansi'];
+        }
+        $this->data['sum_journal'] = $sum_journal;
         $this->data['breadcumb'] = 'Report Download';
         $this->data['view'] = 'list';
         $this->ciparser->new_parse('template_admin_journal','modules_journal', 'download_journal_layout',$this->data);
@@ -859,23 +887,15 @@ class Admin extends MX_Controller
     public function report_download_journal($id=null){
         $sql = "SELECT j.* FROM tb_journal j join tb_pengguna p on j.id_user_ref = p.id_pengguna Where id_journal = ?";
         $journal = $this->db->query($sql,$id)->row_array();
-        if (is_null($journal['university']) || $journal['university'] == '') {
-            $journal['university'] = 0;
-        }
-        if (is_null($journal['goverment']) || $journal['goverment'] == '') {
-            $journal['goverment'] = 0;
-        }
-        if (is_null($journal['business']) || $journal['business'] == '') {
-            $journal['business'] = 0;
-        }
-        if (is_null($journal['media']) || $journal['media'] == '') {
-            $journal['media'] = 0;
-        }
-        if (is_null($journal['comunity']) || $journal['comunity'] == '') {
-            $journal['comunity'] = 0;
-        }
         if (is_null($journal['anonym']) || $journal['anonym'] == '') {
             $journal['anonym'] = 0;
+        }
+        for ($i=1; $i < 6; $i++) { 
+            if (is_null($journal['download_'.$i]) || $journal['download_'.$i] == '') {
+                $journal['download_'.$i] = 0;
+            }
+            $nama = $this->db->get_where('tb_jenis_instansi',array('id_jenis_instansi'=>$i))->row_array();
+            $journal['nama_'.$i] = $nama['nm_jenis_instansi'];
         }
         $this->data['journal'] = $journal;
         $this->data['breadcumb'] = 'Report Download';
@@ -886,41 +906,11 @@ class Admin extends MX_Controller
 
     public function report_download_artikel($id=null){
         $sql = $this->db->get_where('tb_artikel',array('id_artikel'=>$id))->row_array();
-        if (is_null($sql['university']) || $sql['university'] == '') {
-            $sql['university'] = 0;
-        }
-        if (is_null($sql['goverment']) || $sql['goverment'] == '') {
-            $sql['goverment'] = 0;
-        }
-        if (is_null($sql['business']) || $sql['business'] == '') {
-            $sql['business'] = 0;
-        }
-        if (is_null($sql['media']) || $sql['media'] == '') {
-            $sql['media'] = 0;
-        }
-        if (is_null($sql['comunity']) || $sql['comunity'] == '') {
-            $sql['comunity'] = 0;
-        }
         if (is_null($sql['anonym']) || $sql['anonym'] == '') {
             $sql['anonym'] = 0;
         }
         if (is_null($sql['total']) || $sql['total'] == '') {
             $sql['total'] = 0;
-        }
-        if (is_null($sql['university_abs']) || $sql['university_abs'] == '') {
-            $sql['university_abs'] = 0;
-        }
-        if (is_null($sql['goverment_abs']) || $sql['goverment_abs'] == '') {
-            $sql['goverment_abs'] = 0;
-        }
-        if (is_null($sql['business_abs']) || $sql['business_abs'] == '') {
-            $sql['business_abs'] = 0;
-        }
-        if (is_null($sql['media_abs']) || $sql['media_abs'] == '') {
-            $sql['media_abs'] = 0;
-        }
-        if (is_null($sql['comunity_abs']) || $sql['comunity_abs'] == '') {
-            $sql['comunity_abs'] = 0;
         }
         if (is_null($sql['anonym_abs']) || $sql['anonym_abs'] == '') {
             $sql['anonym_abs'] = 0;
@@ -930,6 +920,18 @@ class Admin extends MX_Controller
         }
         if (is_null($sql['total_download']) || $sql['total_download'] == '') {
             $sql['total_download'] = 0;
+        }
+        for ($i=1; $i < 6; $i++) { 
+            if (is_null($sql['download_'.$i]) || $sql['download_'.$i] == '') {
+                $sql['download_'.$i] = 0;
+            }
+            $nama = $this->db->get_where('tb_jenis_instansi',array('id_jenis_instansi'=>$i))->row_array();
+            $sql['nama_'.$i] = $nama['nm_jenis_instansi'];
+            if (is_null($sql['downloadabs_'.$i]) || $sql['downloadabs_'.$i] == '') {
+                $sql['downloadabs_'.$i] = 0;
+            }
+            // $nama = $this->db->get_where('tb_jenis_instansi',array('id_jenis_instansi'=>$i))->row_array()
+            $sql['namaabs_'.$i] = $nama['nm_jenis_instansi'];
         }
         $this->data['artikel'] = $sql;
         $this->data['breadcumb'] = 'Report Download';
@@ -954,20 +956,20 @@ class Admin extends MX_Controller
                 if($news->status == 0){
                     if ($news->reason != '') {
                         $aktif = '<span class="text-warning"><b>Repaired</b></span>';
-                        $btn_ign = '<button class="btn btn-danger btn-sm btn-ign" id="'.$news->id_artikel.'" data-toggle="tooltip" title="Ignore"><i class="fa fa-times"></i> Ignored</button> ';
+                        $btn_ign = '<button class="btn btn-danger btn-sm btn-ign" id="'.$news->id_artikel.'" data-toggle="tooltip" title="Ignore"><i class="fa fa-times"></i></button> ';
                     }else{
                         $aktif = '<span class="text-defafult"><b>Pending</b></span>';
-                        $btn_ign = '<button class="btn btn-danger btn-sm btn-ign" id="'.$news->id_artikel.'" data-toggle="tooltip" title="Ignore"><i class="fa fa-times"></i> Ignored</button> ';
+                        $btn_ign = '<button class="btn btn-danger btn-sm btn-ign" id="'.$news->id_artikel.'" data-toggle="tooltip" title="Ignore"><i class="fa fa-times"></i></button> ';
                     }
                     
                 }else{
                     $aktif = '<span class="text-danger"><b>Ignored</b></span>';
                 }
-                $button = '<button class="btn btn-info btn-sm btn-acc" id="'.$news->id_artikel.'" data-toggle="tooltip" title="accept"><i class="fa fa-check"></i> Accepted</button>';
+                $button = '<button class="btn btn-info btn-sm btn-acc" id="'.$news->id_artikel.'" data-toggle="tooltip" title="accept"><i class="fa fa-check"></i></button> ';
             }
             // $button .= ' <button class="btn btn-success btn-sm btn-detail" id="'.$news->id_artikel.'"><i class="fa fa-eye"></i> Detail</button>';
             if (!is_null($news->reason)) {
-                $button .= ' <button class="btn btn-warning btn-sm btn-reason" id="'.$news->id_artikel.'"><i class="fa fa-comment-o"></i> Reason</button>';
+                $button .= ' <button class="btn btn-warning btn-sm btn-reason" id="'.$news->id_artikel.'"><i class="fa fa-comment-o"></i> Reason</button> ';
             }
             $row = array();
             $row[] = $no;
@@ -976,7 +978,7 @@ class Admin extends MX_Controller
             $row[] = $news->nomor;
             // $row[] = $news->judul_journal;
             $row[] = $aktif;
-            $row[] = $btn_ign.$button;
+            $row[] = $button.' '.$btn_ign;
  
             $data[] = $row;
         }
@@ -1474,5 +1476,130 @@ class Admin extends MX_Controller
       }
 
       return $text;
+    }
+
+    public function detail_all_journal(){
+        $sql = "SELECT * FROM tb_journal Where status = 2 limit 8";
+        $journal = $this->db->query($sql)->result_array();
+        $this->data['journal'] = $journal;
+        $this->ciparser->new_parse('template_admin_journal','modules_journal', 'detail_all_journal_layout',$this->data);
+    }
+    public function loadmore_detail($limit,$ofset){
+        $sql = "SELECT j.* FROM tb_journal j join tb_pengguna p on j.id_user_ref = p.id_pengguna Where j.status = 2 limit ".$limit.",".$ofset;
+        $journal = $this->db->query($sql)->result_array();
+        $html = '';
+        foreach ($journal as $key => $value) {
+            $html .= '<div class="filter-box-thumbnail col-md-3 col-sm-3 col-xs-12 " style="">
+                    <div class="box-thumbnail">
+                      <div class="header-box-thumbnail">
+                        <img class="thumbnail-cover" src="'.base_url().'assets/media/'.$value['futured_image'].'">
+                      </div>
+                      <div class="body-box-thumbnail">
+                    <h5 class="title-thumbnail"><a href="'.site_url('user/journal/detail_journal/'.$value['id_journal']).'">'.$value['judul'].'</a> </h5>
+                        <div class="col col-md-12 col-sm-12 col-xs-12 none-padding">
+                          <a href="'.site_url('user/journal/download_journal/'.$value['id_journal']).'" style="float: right;color: #EF7314;text-decoration: none;font-size: 20px;"><i class="fa fa-download"></i></a>
+                        </div>
+
+                      </div>
+
+                    </div>
+                </div>';
+        }
+
+        echo json_encode($html);
+    }
+
+    public function detail_myjournal(){
+        $sql = "SELECT * FROM tb_journal j join tb_pengguna p on j.id_user_ref = p.id_pengguna Where  p.id_instansi_ref = ? limit 8";
+        $journal = $this->db->query($sql,$this->user->user->id_instansi)->result_array();
+        $this->data['journal'] = $journal;
+        $this->ciparser->new_parse('template_admin_journal','modules_journal', 'detail_myjournal_layout',$this->data);
+    }
+
+    public function loadmore_detail_myjournal($limit,$ofset){
+        $sql = "SELECT j.* FROM tb_journal j join tb_pengguna p on j.id_user_ref = p.id_pengguna Where id_instansi_ref = ? limit ".$limit.",".$ofset;
+        $journal = $this->db->query($sql,$this->user->user->id_instansi)->result_array();
+        $html = '';
+        foreach ($journal as $key => $value) {
+            $html .= '<div class="filter-box-thumbnail col-md-3 col-sm-3 col-xs-12 " style="padding:15px">
+                    <div class="box-thumbnail">
+                      <div class="header-box-thumbnail">
+                        <img class="thumbnail-cover" src="'.base_url().'assets/media/'.$value['futured_image'].'">
+                      </div>
+                      <div class="body-box-thumbnail">
+                    <h5 class="title-thumbnail"><a href="'.site_url('user/journal/detail_journal/'.$value['id_journal']).'">'.$value['judul'].'</a> </h5>
+                        <div class="col col-md-12 col-sm-12 col-xs-12 none-padding">
+                          <a href="'.site_url('user/journal/download_journal/'.$value['id_journal']).'" style="float: right;color: #008d4c;text-decoration: none;font-size: 20px;"><i class="fa fa-download"></i></a>
+                        </div>
+
+                      </div>
+
+                    </div>
+                </div>';
+        }
+
+        echo json_encode($html);
+    }
+
+    public function download_journal($id=null){
+        $this->load->library('zip');
+        $sql = "SELECT *, j.judul as journal, j.anonym as anonym_j FROM tb_journal j JOIN tb_volume v ON j.id_journal = v.id_journal_ref JOIN tb_no_volume n ON v.id_volume = n.id_volume_ref JOIN tb_artikel a ON n.id_no_volume = a.id_no_volume_ref where id_journal = ?";
+        $artikel = $this->db->query($sql,$id)->result_array();
+        $this->zip->read_file(FCPATH.'assets/media/'.$artikel[0]['futured_image']);
+        $downartikel = $this->db->get_where('tb_instansi',array('id_instansi'=>$this->user->user->id_instansi))->row_array();
+        
+
+        $sql_val = 'SELECT p.id_instansi_ref FROM tb_journal j join tb_pengguna p on j.id_user_ref = p.id_pengguna where j.id_journal = ?';
+        $validasi = $this->db->query($sql_val,$id)->row_array();
+        // print_r($validasi);
+        if ($validasi['id_instansi_ref'] != $this->user->user->id_instansi) {
+            $data['download_'.$downartikel['id_jenis_instansi']] = $artikel[0]['download_'.$downartikel['id_jenis_instansi']] + 1;
+            $data['total_download'] = $artikel[0]['journal_download'] + 1;
+            $this->db->update('tb_journal',$data,array('id_journal'=>$artikel[0]['id_journal']));
+        }
+        // $data['total'] = $artikel[0]['total'] + 1;
+        // $data['anonym'] = $artikel[0]['anonym_j'] + 1;
+        foreach ($artikel as $key => $value) {
+
+            // $art = $this->db->get_where('tb_artikel',array('id_artikel'=>$value['id_artikel']))->row_array();
+
+            /*$data['total'] = $art['total'] + 1;
+            $data['anonym'] = $art['anonym'] + 1;
+
+            $data['anonym_abs'] = $art['anonym_abs'] + 1;
+            $data['total_abs'] = $art['total_abs'] + 1;
+            $data['total_download'] = $art['total_download'] + 2;
+            $this->db->update('tb_artikel',$data,array('id_artikel'=>$id));
+            $this->db->update('tb_artikel',$data,array('id_artikel'=>$value['id_artikel']));*/
+
+            $this->zip->read_file(FCPATH.'assets/file/'.$value['file']);
+            $this->zip->read_file(FCPATH.'assets/file/abstract/'.$value['abstract_file']);
+        }
+        $this->zip->download('journal.zip');
+    }
+
+    public function downloads($id=null){
+        $downartikel = $this->db->get_where('tb_instansi',array('id_instansi'=>$this->user->user->id_instansi))->row_array();
+        $art = $this->db->get_where('tb_artikel',array('id_artikel'=>$id))->row_array();
+        /*if ($downartikel['id_jenis_instansi'] == 1) {
+            $data['university'] = $art['university'] + 1;
+        }elseif ($downartikel['id_jenis_instansi'] == 2) {
+            $data['business'] = $art['business'] + 1;
+        }elseif ($downartikel['id_jenis_instansi'] == 3) {
+            $data['goverment'] = $art['goverment'] + 1;
+        }elseif ($downartikel['id_jenis_instansi'] == 4) {
+            $data['comunity'] = $art['comunity'] + 1;
+        }else{
+            $data['media'] = $art['media'] + 1;
+        }*/
+        $sql_val = 'SELECT p.id_instansi_ref FROM tb_artikel j join tb_pengguna p on j.id_user_ref = p.id_pengguna where j.id_artikel = ?';
+        $validasi = $this->db->query($sql_val,$id)->row_array();
+        if ($validasi['id_instansi_ref'] != $this->user->user->id_instansi) {
+            $data['download_'.$downartikel['id_jenis_instansi']] = $art['download_'.$downartikel['id_jenis_instansi']] + 1;
+            $data['total'] = $art['total'] + 1;
+            $data['total_download'] = $art['total_download'] + 1;
+            $this->db->update('tb_artikel',$data,array('id_artikel'=>$id));
+        }
+        redirect(site_url('assets/file/'.$art['file']));
     }
 }

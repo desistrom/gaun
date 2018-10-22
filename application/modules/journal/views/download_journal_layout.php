@@ -41,8 +41,8 @@
   <h3 class="box-title">Report Download</h3>
 
 </div>
-<div class="col col-md-12 col-sm-12 col-s-12">
-  <div class="box">
+<div class="col col-md-12 col-sm-12 col-s-12" style="margin-bottom: 20px;">
+  <div class="box box-success" >
     <div class="box-header with-border">
           <i class="fa fa-bar-chart-o"></i>
 
@@ -57,7 +57,13 @@
 </div>
 <div class="col col-md-12 col-sm-12 col-xs-12">
   
-<div class="box">
+<div class="box  box-success">
+  <div class="box-header with-border">
+    <i class="fa fa-bar-chart-o"></i>
+
+    <h3 class="box-title">List Journal Download</h3>
+
+  </div>
 	<div class="box-body">
 		<div class="col col-md-12 col-sm-12 col-xs-12" style="padding-left: 0; margin-bottom: 15px;">
 		</div>
@@ -119,7 +125,7 @@
         </div>
     </div>
 </div>
-<script src="<?=base_url().'assets/js/jquery-3.2.1.min.js';?>"></script>
+<!-- <script src="<?=base_url().'assets/js/jquery-3.2.1.min.js';?>"></script> -->
 <script src="<?=base_url();?>assets/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?=base_url();?>assets/datatables/js/dataTables.bootstrap.min.js"></script>
        <script src="<?=base_url();?>assets/admin-jur/plugins/flot/jquery.flot.min.js"></script>
@@ -185,12 +191,12 @@ $(document).ready(function() {
      */
 
     var donutData = [
-            {label: "Universitas", data: 10, color: "#BCF4B2"},
-      {label: "Media", data: 10, color: "#7CE969"},
-      {label: "Community", data: 10, color: "#238012"},
-      {label: "Goverment", data: 20, color: "#4EE135"},
-      {label: "Business", data: 20, color: "#35C41C"},
-      // {label: "Series6", data: 50, color: "#04598A"}
+      {label: "<?php echo $sum_journal['nama_1']; ?>", data: <?php echo $sum_journal['download_1']; ?>, color: "#BCF4B2"},
+      {label: "<?php echo $sum_journal['nama_2']; ?>", data: <?php echo $sum_journal['download_2']; ?>, color: "#7CE969"},
+      {label: "<?php echo $sum_journal['nama_3']; ?>", data: <?php echo $sum_journal['download_3']; ?>, color: "#238012"},
+      {label: "<?php echo $sum_journal['nama_4']; ?>", data: <?php echo $sum_journal['download_4']; ?>, color: "#4EE135"},
+      {label: "<?php echo $sum_journal['nama_5']; ?>", data: <?php echo $sum_journal['download_5']; ?>, color: "#35C41C"},
+      {label: "Anonymus", data: <?php echo $sum_journal['anonym']; ?>, color: "#04598A"}
 
     ];
     $.plot("#donut-chart", donutData, {

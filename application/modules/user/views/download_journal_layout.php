@@ -35,49 +35,57 @@
   }
 </style>
 
-
+<?php if ($view == 'list') { ?>
 <link rel="stylesheet" href="<?php echo base_url();?>assets/datatables/css/dataTables.bootstrap.min.css">
-<div class="col col-md-12 col-sm-12 col-s-12">
-  <div id="donut-chart" style="height: 250px;"></div>
+<div class="col col-md-12 col-sm-12 col-xs-12">
+  <h3 class="box-title">Report Download</h3>
+
+</div>
+<div class="col col-md-12 col-sm-12 col-s-12" style="margin-bottom: 20px;">
+  <div class="box box-warning" >
+    <div class="box-header with-border">
+          <i class="fa fa-bar-chart-o"></i>
+
+          <h3 class="box-title">Detail Download</h3>
+
+        </div>
+    <div class="box-body">
+      <div id="donut-chart" style="height: 250px;"></div>
+    </div>
+  </div>
 
 </div>
 <div class="col col-md-12 col-sm-12 col-xs-12">
   
-<div class="box">
-	<div class="box-body">
-		<div class="col col-md-12 col-sm-12 col-xs-12" style="padding-left: 0; margin-bottom: 15px;">
-		</div>
-		<div class="col col-md-12 col-xs-12 table-responsive">
-			<table class="table table-bordered  dataTable" id="table">
-				<thead>
-					<th>No.</th>
+<div class="box  box-warning">
+  <div class="box-header with-border">
+    <i class="fa fa-bar-chart-o"></i>
+
+    <h3 class="box-title">List Journal Download</h3>
+
+  </div>
+  <div class="box-body">
+    <div class="col col-md-12 col-sm-12 col-xs-12" style="padding-left: 0; margin-bottom: 15px;">
+    </div>
+    <div class="col col-md-12 col-xs-12 table-responsive">
+      <table class="table table-bordered  dataTable" id="table">
+        <thead>
+          <th>No.</th>
           <th>Journal</th>
           <th>ISSN</th>
           <th>Total Download</th>
           <th>Publisher</th>
           <th>Action</th>
-				</thead>
-				<tbody>
-             <tr role="row" class="odd">
-            <td>1</td>
-            <td>
-              <div class="detail">Journal 1</div>
-            </td>
-            <td>
-              <div class="detail"></div>
-            </td>
-            <td>0</td>
-            <td>Junaedi Junaedi</td>
-            <td><a href="<?=site_url('user/journal/detail_report_download');?>" class="btn btn-success btn-sm"><i class="fa fa-link"></i>Detail</a></td></tr>
-        
-				</tbody>
-			</table>
-		</div>
-	</div>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
 </div>
   
-
+<?php } ?>
 <div class="modal" tabindex="-1" role="dialog" id="modal_comment">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
@@ -88,7 +96,6 @@
         </button>
       </div>
       <div class="modal-body">
-        
       </div>
       <div class="modal-footer">
         <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
@@ -118,6 +125,7 @@
         </div>
     </div>
 </div>
+<!-- <script src="<?=base_url().'assets/js/jquery-3.2.1.min.js';?>"></script> -->
 <script src="<?=base_url();?>assets/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?=base_url();?>assets/datatables/js/dataTables.bootstrap.min.js"></script>
        <script src="<?=base_url();?>assets/admin-jur/plugins/flot/jquery.flot.min.js"></script>
@@ -147,7 +155,32 @@
  
 var table;
  
-
+$(document).ready(function() {
+ 
+    //datatables
+    table = $('#table').DataTable({ 
+ 
+        "processing": true, //Feature control the processing indicator.
+        "serverSide": true, //Feature control DataTables' server-side processing mode.
+        "order": [], //Initial no order.
+ 
+        // Load data for the table's content from an Ajax source
+        "ajax": {
+            "url": "<?php echo site_url('user/journal/ajax_list_journal_download')?>",
+            "type": "POST"
+        },
+ 
+        //Set column definition initialisation properties.
+        "columnDefs": [
+        { 
+            "targets": [ 0 ], //first column / numbering column
+            "orderable": false, //set not orderable
+        },
+        ],
+ 
+    });
+ 
+});
 </script>
 <script>
   $(function () {
@@ -158,12 +191,12 @@ var table;
      */
 
     var donutData = [
-            {label: "Universitas", data: 10, color: "#FDECDF"},
-      {label: "Media", data: 10, color: "#FAD1B2"},
-      {label: "Community", data: 10, color: "#8172022"},
-      {label: "Goverment", data: 20, color: "#F39B57"},
-      {label: "Business", data: 20, color: "#F07E26"},
-      // {label: "Series6", data: 50, color: "#04598A"}
+      {label: "<?php echo $sum_journal['nama_1']; ?>", data: <?php echo $sum_journal['download_1']; ?>, color: "#FCE6D6"},
+      {label: "<?php echo $sum_journal['nama_2']; ?>", data: <?php echo $sum_journal['download_2']; ?>, color: "#7CE969"},
+      {label: "<?php echo $sum_journal['nama_3']; ?>", data: <?php echo $sum_journal['download_3']; ?>, color: "#F3A065"},
+      {label: "<?php echo $sum_journal['nama_4']; ?>", data: <?php echo $sum_journal['download_4']; ?>, color: "#F08940"},
+      {label: "<?php echo $sum_journal['nama_5']; ?>", data: <?php echo $sum_journal['download_5']; ?>, color: "#E06812"},
+      {label: "Anonymus", data: <?php echo $sum_journal['anonym']; ?>, color: "#04598A"}
 
     ];
     $.plot("#donut-chart", donutData, {

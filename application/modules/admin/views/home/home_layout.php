@@ -250,22 +250,6 @@
       <?php if($key != 0){ echo ",";} ?>
     {
       value: <?=${$value['nm_jenis_instansi']};?>,
-      // color: "#f56954",
-      // <?php if($value['nm_jenis_instansi'] == 'University'){ ?>
-      // highlight: "#f56954",
-      // <?php } ?>
-      // <?php if($value['nm_jenis_instansi'] == 'Business'){ ?>
-      // highlight: "#00a65a",
-      // <?php } ?>
-      // <?php if($value['nm_jenis_instansi'] == 'Goverment'){ ?>
-      // highlight: "#f39c12",
-      // <?php } ?>
-      // <?php if($value['nm_jenis_instansi'] == 'Comunity'){ ?>
-      // highlight: "#00c0ef",
-      // <?php } ?>
-      // <?php if($value['nm_jenis_instansi'] == 'Media'){ ?>
-      // highlight: "#3c8dbc",
-      // <?php } ?>
       label: "<?=$value['nm_jenis_instansi'];?>"
     }
     <?php endforeach ?>
@@ -308,13 +292,14 @@
      * DONUT CHART
      * -----------
      */
+    
 
     var donutData = [
-            {label: "User", data: 1, color: "#BBF0FD"},
-      {label: "User", data: 2, color: "#9AE8FC"},
-      {label: "User", data: 3, color: "#45D5F9"},
-      {label: "User", data: 2, color: "#15CAF7"},
-      // {label: "User", data: 2, color: "#35C41C"},
+      {label: "<?=$daftar_instansi[0]['nm_jenis_instansi'];?>", data: <?=${$daftar_instansi[0]['nm_jenis_instansi']};?>, color: "#BBF0FD"},
+      {label: "<?=$daftar_instansi[1]['nm_jenis_instansi'];?>", data: <?=${$daftar_instansi[1]['nm_jenis_instansi']};?>, color: "#9AE8FC"},
+      {label: "<?=$daftar_instansi[2]['nm_jenis_instansi'];?>", data: <?=${$daftar_instansi[2]['nm_jenis_instansi']};?>, color: "#45D5F9"},
+      {label: "<?=$daftar_instansi[3]['nm_jenis_instansi'];?>", data: <?=${$daftar_instansi[3]['nm_jenis_instansi']};?>, color: "#15CAF7"},
+      {label: "<?=$daftar_instansi[4]['nm_jenis_instansi'];?>", data: <?=${$daftar_instansi[4]['nm_jenis_instansi']};?>, color: "#35C41C"},
       // {label: "Series6", data: 50, color: "#04598A"}
 
     ];

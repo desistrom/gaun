@@ -104,28 +104,50 @@ class Journal extends MX_Controller  {
 
 	public function report_download(){
         // print_r($this->session->userdata('data_user'));
+        $slq_journal = "SELECT SUM(download_1) as download_1, SUM(download_2) as download_2, SUM(download_3) as download_3, SUM(download_4) as download_4, SUM(download_5) as download_5, SUM(anonym) as anonym FROM tb_journal";
+        $sum_journal = $this->db->query($slq_journal)->row_array();
+        if (is_null($sum_journal['anonym']) || $sum_journal['anonym'] == '') {
+            $sum_journal['anonym'] = 0;
+        }
+        for ($i=1; $i < 6; $i++) { 
+            if (is_null($sum_journal['download_'.$i]) || $sum_journal['download_'.$i] == '') {
+                $sum_journal['download_'.$i] = 0;
+            }
+            $nama = $this->db->get_where('tb_jenis_instansi',array('id_jenis_instansi'=>$i))->row_array();
+            $sum_journal['nama_'.$i] = $nama['nm_jenis_instansi'];
+        }
+        $this->data['sum_journal'] = $sum_journal;
         $this->data['breadcumb'] = 'Report Download';
         $this->data['view'] = 'list';
         $this->ciparser->new_parse('template_admin','modules_admin', 'journal/download_journal_layout',$this->data);
     }
 
     public function report_download_journal($id=null){
+        
+
         $sql = "SELECT j.* FROM tb_journal j join tb_pengguna p on j.id_user_ref = p.id_pengguna Where id_journal = ?";
         $journal = $this->db->query($sql,$id)->row_array();
-        if (is_null($journal['university']) || $journal['university'] == '') {
-            $journal['university'] = 0;
+        // if (is_null($journal['university']) || $journal['university'] == '') {
+        //     $journal['university'] = 0;
+        // }
+        // if (is_null($journal['goverment']) || $journal['goverment'] == '') {
+        //     $journal['goverment'] = 0;
+        // }
+        // if (is_null($journal['business']) || $journal['business'] == '') {
+        //     $journal['business'] = 0;
+        // }
+        // if (is_null($journal['media']) || $journal['media'] == '') {
+        //     $journal['media'] = 0;
+        // }
+        if (is_null($journal['anonym']) || $journal['anonym'] == '') {
+            $journal['anonym'] = 0;
         }
-        if (is_null($journal['goverment']) || $journal['goverment'] == '') {
-            $journal['goverment'] = 0;
-        }
-        if (is_null($journal['business']) || $journal['business'] == '') {
-            $journal['business'] = 0;
-        }
-        if (is_null($journal['media']) || $journal['media'] == '') {
-            $journal['media'] = 0;
-        }
-        if (is_null($journal['comunity']) || $journal['comunity'] == '') {
-            $journal['comunity'] = 0;
+        for ($i=1; $i < 6; $i++) { 
+            if (is_null($journal['download_'.$i]) || $journal['download_'.$i] == '') {
+                $journal['download_'.$i] = 0;
+            }
+            $nama = $this->db->get_where('tb_jenis_instansi',array('id_jenis_instansi'=>$i))->row_array();
+            $journal['nama_'.$i] = $nama['nm_jenis_instansi'];
         }
         $this->data['journal'] = $journal;
         $this->data['breadcumb'] = 'Report Download';
@@ -136,41 +158,11 @@ class Journal extends MX_Controller  {
 
     public function report_download_artikel($id=null){
         $sql = $this->db->get_where('tb_artikel',array('id_artikel'=>$id))->row_array();
-        if (is_null($sql['university']) || $sql['university'] == '') {
-            $sql['university'] = 0;
-        }
-        if (is_null($sql['goverment']) || $sql['goverment'] == '') {
-            $sql['goverment'] = 0;
-        }
-        if (is_null($sql['business']) || $sql['business'] == '') {
-            $sql['business'] = 0;
-        }
-        if (is_null($sql['media']) || $sql['media'] == '') {
-            $sql['media'] = 0;
-        }
-        if (is_null($sql['comunity']) || $sql['comunity'] == '') {
-            $sql['comunity'] = 0;
-        }
         if (is_null($sql['anonym']) || $sql['anonym'] == '') {
             $sql['anonym'] = 0;
         }
         if (is_null($sql['total']) || $sql['total'] == '') {
             $sql['total'] = 0;
-        }
-        if (is_null($sql['university_abs']) || $sql['university_abs'] == '') {
-            $sql['university_abs'] = 0;
-        }
-        if (is_null($sql['goverment_abs']) || $sql['goverment_abs'] == '') {
-            $sql['goverment_abs'] = 0;
-        }
-        if (is_null($sql['business_abs']) || $sql['business_abs'] == '') {
-            $sql['business_abs'] = 0;
-        }
-        if (is_null($sql['media_abs']) || $sql['media_abs'] == '') {
-            $sql['media_abs'] = 0;
-        }
-        if (is_null($sql['comunity_abs']) || $sql['comunity_abs'] == '') {
-            $sql['comunity_abs'] = 0;
         }
         if (is_null($sql['anonym_abs']) || $sql['anonym_abs'] == '') {
             $sql['anonym_abs'] = 0;
@@ -180,6 +172,18 @@ class Journal extends MX_Controller  {
         }
         if (is_null($sql['total_download']) || $sql['total_download'] == '') {
             $sql['total_download'] = 0;
+        }
+        for ($i=1; $i < 6; $i++) { 
+            if (is_null($sql['download_'.$i]) || $sql['download_'.$i] == '') {
+                $sql['download_'.$i] = 0;
+            }
+            $nama = $this->db->get_where('tb_jenis_instansi',array('id_jenis_instansi'=>$i))->row_array();
+            $sql['nama_'.$i] = $nama['nm_jenis_instansi'];
+            if (is_null($sql['downloadabs_'.$i]) || $sql['downloadabs_'.$i] == '') {
+                $sql['downloadabs_'.$i] = 0;
+            }
+            // $nama = $this->db->get_where('tb_jenis_instansi',array('id_jenis_instansi'=>$i))->row_array()
+            $sql['namaabs_'.$i] = $nama['nm_jenis_instansi'];
         }
         $this->data['artikel'] = $sql;
         $this->data['breadcumb'] = 'Report Download';

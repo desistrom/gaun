@@ -217,11 +217,11 @@ margin-top: -11px;
      */
 
     var donutData = [
-      {label: "University", data: <?php echo $journal['university']; ?>, color: "#BCF4B2"},
+      {label: "University", data: <?php echo $journal['university']; ?>, color: "#FCE6D6"},
       {label: "Business", data: <?php echo $journal['business']; ?>, color: "#7CE969"},
-      {label: "Goverment", data: <?php echo $journal['goverment']; ?>, color: "#4EE135"},
-      {label: "Media", data: <?php echo $journal['media']; ?>, color: "#35C41C"},
-      {label: "Comunity", data: <?php echo $journal['comunity']; ?>, color: "#238012"},
+      {label: "Goverment", data: <?php echo $journal['goverment']; ?>, color: "#F3A065"},
+      {label: "Media", data: <?php echo $journal['media']; ?>, color: "#F08940"},
+      {label: "Comunity", data: <?php echo $journal['comunity']; ?>, color: "#E06812"},
     ];
     $.plot("#donut-chart", donutData, {
       series: {

@@ -158,15 +158,15 @@
     	     <div class="col col-md-12 col-sm-12 col-xs-2">
             <div class="col col-md-3 col-sm-4 col-xs-12 sub-left-content none-padding">
                   <div class="filter-cover-jurnal">
-                    <img src="<?=base_url();?>assets/media/<?=$volume[0]['futured_image']?>" class="cover-jurnal-img">
+                    <img src="<?=base_url();?>assets/media/<?=$journal['futured_image']?>" class="cover-jurnal-img">
                   </div>
                 </div>
                 <div class="col col-md-9 col-sm-8 col-xs-12 sub-right-content">
-                  <h4><?=$volume[0]['judul']?></h4>
+                  <h4><?php if(isset($journal['judul'])){ echo $journal['judul']; }?></h4>
                   <div class="line-sub-title-jurnal"></div>
                   <ul class="list-unstyled list-info-jurnal">
-                    <li>Status : <?php if($volume[0]['status'] == 0){ echo "Unsubmited";}elseif($volume[0]['status'] == 1){ echo "Pending"; }elseif($volume[0]['status'] == 2){ echo "Accepted";}else{ echo "Ignored"; } ?></li>
-                   <!--  <li>Action : <?php if($volume[0]['status'] == 0){ ?><a href="<?=site_url('journal/admin/submit/'.$volume[0]['id_journal']);?>" class="btn btn-primary btn-upload"> <i class="fa fa-upload"></i> </a><?php }elseif($volume[0]['status'] == 1){ ?><a href="#" class="btn btn-warning btn-clock-o"> <i class="fa fa-clock-o"></i> </a><?php }else{ ?><a href="#" class="btn btn-success btn-upload"> <i class="fa fa-check"></i> </a> <?php } ?></li> -->
+                    <li>Status : <?php if($journal['status'] == 0){ echo "Unsubmited";}elseif($journal['status'] == 1){ echo "Pending"; }elseif($journal['status'] == 2){ echo "Accepted";}else{ echo "Ignored"; } ?></li>
+                   <!--  <li>Action : <?php if($journal['status'] == 0){ ?><a href="<?=site_url('journal/admin/submit/'.$journal['id_journal']);?>" class="btn btn-primary btn-upload"> <i class="fa fa-upload"></i> </a><?php }elseif($journal['status'] == 1){ ?><a href="#" class="btn btn-warning btn-clock-o"> <i class="fa fa-clock-o"></i> </a><?php }else{ ?><a href="#" class="btn btn-success btn-upload"> <i class="fa fa-check"></i> </a> <?php } ?></li> -->
                   </ul>
                   <ul class="list-unstyled list-detail-jurnal">
                   <?php foreach ($volume as $key => $value): ?>

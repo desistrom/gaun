@@ -150,6 +150,19 @@ class Dashboard extends MX_Controller  {
         $this->data['instansi'] = $this->db->get_where('tb_instansi',array('id_jenis_instansi'=>5,'status'=>2))->result_array();
         $this->ciparser->new_parse('template_user','modules_user', 'profil_layout',$this->data);
     }
+
+    public function restrict(){
+        $data = $this->user->user;
+        // print_r($data);
+
+        if ($this->db->get_where('tb_pengguna',array('id_pengguna'=>$data))->row_array()['id_role_ref'] == 0) {
+            $user = $this->db->get_where('tb_mahasiswa',array('id_pengguna_ref'=>$data))->row_array();
+        }else{
+            $user = $this->db->get_where('tb_dosen',array('id_pengguna_ref'=>$data))->row_array();
+        }
+        $this->data['user'] = $user;
+        $this->ciparser->new_parse('template_user','modules_user', 'restric_layout',$this->data);
+    }
   
 
 

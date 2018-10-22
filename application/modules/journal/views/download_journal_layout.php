@@ -46,7 +46,7 @@
     <div class="box-header with-border">
           <i class="fa fa-bar-chart-o"></i>
 
-          <h3 class="box-title">Detail Download Journal</h3>
+          <h3 class="box-title">Grafik Download Journal</h3>
 
         </div>
     <div class="box-body">
@@ -64,7 +64,7 @@
     <div class="box-header with-border">
           <i class="fa fa-bar-chart-o"></i>
 
-          <h3 class="box-title">Detail Download Artikel</h3>
+          <h3 class="box-title">Grafik Download Artikel</h3>
 
         </div>
     <div class="box-body">

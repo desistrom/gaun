@@ -9,7 +9,7 @@
 <div class="col col-md-12 col-sm-12 col-xs-12">
  <div class="box">
             <div class="box-header with-border">
-              <h3 class="box-title">Detail download artikel</h3>
+              <h3 class="box-title">Grafik download artikel</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body" style="padding:15px  0;">

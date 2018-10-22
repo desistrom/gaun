@@ -176,7 +176,7 @@ margin-top: -11px;
         <div class="box-header with-border">
           <i class="fa fa-bar-chart-o"></i>
 
-          <h3 class="box-title">Detail Download</h3>
+          <h3 class="box-title">Grafik Download</h3>
 
         </div>
         <div class="box-body">
@@ -188,7 +188,7 @@ margin-top: -11px;
         </div>
         <!-- /.box-body-->
       </div>
-</div>
+
 <div class="col col-md-12 col-sm-12 col-xs-12">
  
 <div class="box box-warning">

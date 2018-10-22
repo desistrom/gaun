@@ -176,13 +176,13 @@ margin-top: -11px;
         <div class="box-header with-border">
           <i class="fa fa-bar-chart-o"></i>
 
-          <h3 class="box-title">Detail Download</h3>
+          <h3 class="box-title">Grafik Download</h3>
 
         </div>
         <div class="box-body">
           <div <?php if($journal['total_download'] != 0){ ?>id="donut-chart" style="height: 250px;" <?php } ?>></div>
             <?php if($journal['total_download'] == 0){ ?>
-              <div class="alert alert-success btn-bg"><h3><center>Data Not Found</center></h3></div>
+              <div class="alert alert-success btn-bg"><h3><center>Tidak ada journal yang didownload</center></h3></div>
             <?php } ?>
           </div>
         </div>

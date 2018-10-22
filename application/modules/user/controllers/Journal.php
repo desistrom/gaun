@@ -14,6 +14,7 @@ class Journal extends MX_Controller
         // if ($this->session->userdata('user_login') != true) {
         //     redirect('user/login_user');
         // }
+        if(is_null($this->general->status())){ redirect(site_url('user/dashboard/restrict'));}
         $this->load->model('journal_model');
         $data = $this->user->user;
         // print_r($data);

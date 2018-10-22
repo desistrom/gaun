@@ -121,8 +121,8 @@ class Dashboard extends MX_Controller  {
                     $data_user['jurusan'] = $input['jurusan'];
                 }
                 if(is_null($this->general->status())){
-                $data_pengguna['id_instansi_ref'] = $input['instansi'];
-                $this->db->update('tb_pengguna',$data_pengguna,array('id_pengguna'=>$data));
+                    $data_pengguna['id_instansi_ref'] = $input['instansi'];
+                    $this->db->update('tb_pengguna',$data_pengguna,array('id_pengguna'=>$data));
                 }
                 if ($this->db->update($role,$data_user,array('id_pengguna_ref'=>$data))) {
                     $ret['status'] = 1;

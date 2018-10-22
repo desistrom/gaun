@@ -170,7 +170,7 @@ margin-top: -11px;
         <div class="box-body">
           <div <?php if($journal['total_download'] != 0){ ?>id="donut-chart" style="height: 250px;" <?php } ?>></div>
             <?php if($journal['total_download'] == 0){ ?>
-              <div class="alert alert-info"><h3><center>Data Not Found</center></h3></div>
+              <div class="alert alert-default btn-bg"><h3><center>Data Not Found</center></h3></div>
             <?php } ?>
           </div>
         </div>

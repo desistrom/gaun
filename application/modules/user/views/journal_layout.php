@@ -312,6 +312,13 @@ div.container-fluid.footer-bottom{
               </div>
               <div class="col col-md-12 col-sm-12 col-xs-12 none-padding">
                 <div class="col col-md-12 col-sm-12 col-xs-12 list-journal">
+                <?php if (count($journal) == 0) { ?>
+                      <div class="">
+                      <div class="alert alert-warning btn-bg">
+                        <h2><center> Anda Tidak Memiliki Journal</center></h2>
+                      </div>
+                      </div>
+                    <?php }?>
                   <div class="owl-carousel owl-theme">
                     <?php foreach ($journal as $key => $value): ?>
                       <div class="item">
@@ -349,7 +356,9 @@ div.container-fluid.footer-bottom{
                      
                     
                   </div>
+                  <?php if (count($journal) != 0) { ?>
                   <a href="<?=site_url('user/journal/detail_myjournal');?>" class="txt-seemore">See more</a>
+                  <?php }?>
                 </div>
               </div>
             </div>
@@ -366,6 +375,13 @@ div.container-fluid.footer-bottom{
               </div>
             </div>
             <div class="sub-content-artikel-body">
+            <?php if (count($journal) == 0) { ?>
+                      <div class="">
+                      <div class="alert alert-warning btn-bg">
+                        <h2><center> Anda Tidak Memiliki Artikel</center></h2>
+                      </div>
+                      </div>
+                    <?php }?>
               <?php foreach ($artikel as $key => $value): ?>
               <div class="col col-md-6 col-sm-6 col-xs-12 list-artikel">
                 <div class="artikel-body artikel-body-left">

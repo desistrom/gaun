@@ -304,8 +304,8 @@ div.container-fluid.footer-bottom{
                 <div class="col col-md-12 col-sm-12 col-xs-12 list-journal">
                       <?php if (count($journal) == 0) { ?>
                           <div class="col col-md-12 col-sm-12 col-xs-12">
-                            <div class="jumbotron">
-                            <h2 style="color: #A8A8A8;text-align: center;">Data Not found</h2>
+                            <div class="alert alert-success btn-bg ">
+                            <h2 style="text-align: center;">Data Not found</h2>
                           </div>
                           </div>
                          <!--  <div class="jumbotron">
@@ -323,7 +323,7 @@ div.container-fluid.footer-bottom{
                             <div class="body-box-thumbnail">
                               <h5 class="title-thumbnail"><a href="#"><?=$value['judul'];?></a> </h5>
                               <div class="col col-md-12 col-sm-12 col-xs-12 none-padding">
-                                <a href="<?php echo site_url('journal/admin/download_journal/'.$value['id_journal']);?>" style="float: right;color: #2BA417;text-decoration: none;font-size: 20px;"><i class="fa fa-download"></i></a>
+                                <a href="<?php echo site_url('journal/admin/download_journal/'.$value['id_journal']);?>" style="float: right;color: #2BA417;text-decoration: none;font-size: 20px;" title="download"><i class="fa fa-download"></i></a>
                               </div>
 
                             </div>
@@ -352,7 +352,13 @@ div.container-fluid.footer-bottom{
               </div>
             </div>
             <div class="sub-content-artikel-body">
-
+              <?php if (count($artikel) == 0) { ?>
+                      <div class="">
+                      <div class="alert alert-success btn-bg">
+                        <h2><center> Anda Tidak Memiliki Artikel</center></h2>
+                      </div>
+                      </div>
+                    <?php }?>
               <?php foreach ($artikel as $key => $value): ?>
               <div class="col col-md-6 col-sm-6 col-xs-12 list-artikel">
                 <div class="artikel-body artikel-body-left">
@@ -367,7 +373,7 @@ div.container-fluid.footer-bottom{
                   </ul>
                 </div>
                 <div class="artikel-body artikel-body-icedit">
-                  <a href="<?php echo site_url('journal/admin/downloads/'.$value['id_artikel']);?>" title="edit">
+                  <a href="<?php echo site_url('journal/admin/downloads/'.$value['id_artikel']);?>" title="download">
                     <i class="fa fa-download" aria-hidden="true"></i>
                   </a>
                   

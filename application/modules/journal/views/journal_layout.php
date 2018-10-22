@@ -354,7 +354,7 @@ div.container-fluid.footer-bottom{
               </div>
             </div>
             <div class="sub-content-artikel-body">
-            <?php if (count($journal) == 0) { ?>
+            <?php if (count($artikel) == 0) { ?>
                       <div class="">
                       <div class="alert alert-success btn-bg">
                         <h2><center> Anda Tidak Memiliki Artikel</center></h2>

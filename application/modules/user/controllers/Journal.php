@@ -1339,14 +1339,15 @@ class Journal extends MX_Controller
     }
 
     public function download_journal($id=null){
-        $sql_val = 'SELECT * FROM tb_journal where id_user_ref = ?';
+        $sql_val = 'SELECT * FROM tb_journal where id_journal = ?';
         $validasi = $this->db->query($sql_val,$id)->row_array();
         $downartikel = $this->db->get_where('tb_instansi',array('id_instansi'=>$this->data['user']['id_instansi_ref']))->row_array();
-        if ($validasi['id_instansi_ref'] != $this->user->user->id_instansi) {
+        if ($validasi['id_user_ref'] != $this->user->user) {
             $data_j['download_'.$downartikel['id_jenis_instansi']] = $validasi['download_'.$downartikel['id_jenis_instansi']] + 1;
             $data_j['total_download'] = $validasi['total_download'] + 1;
             $this->db->update('tb_journal',$data_j,array('id_journal'=>$validasi['id_journal']));
         }
+        redirect('user/journal/download_zip/'.$id);
     }
 
     public function download_zip($id=null){

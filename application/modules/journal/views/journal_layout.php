@@ -302,7 +302,7 @@ div.container-fluid.footer-bottom{
                 <div class="col col-md-12 col-sm-12 col-xs-12 list-journal">
                     <?php if (count($journal) == 0) { ?>
                       <div class="">
-                      <div class="alert alert-success">
+                      <div class="alert alert-success btn-bg">
                         <h2><center> Anda Tidak Memiliki Journal</center></h2>
                       </div>
                       </div>
@@ -356,7 +356,7 @@ div.container-fluid.footer-bottom{
             <div class="sub-content-artikel-body">
             <?php if (count($journal) == 0) { ?>
                       <div class="">
-                      <div class="alert alert-success">
+                      <div class="alert alert-success btn-bg">
                         <h2><center> Anda Tidak Memiliki Artikel</center></h2>
                       </div>
                       </div>

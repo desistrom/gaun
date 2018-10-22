@@ -154,7 +154,7 @@
       {label: "<?php echo $artikel['nama_3']; ?>", data: <?php echo $artikel['download_3']; ?>, color: "#FC9898"},
       {label: "<?php echo $artikel['nama_4']; ?>", data: <?php echo $artikel['download_4']; ?>, color: "#FB8585"},
       {label: "<?php echo $artikel['nama_5']; ?>", data: <?php echo $artikel['download_5']; ?>, color: "#FA6666"},
-      {label: "Anonymus", data: <?php echo $artikel['anonym']; ?>, color: "#F95555"}
+      {label: "Anonymus", data: <?php echo $artikel['anonym']; ?>, color: "#CF090A"}
 
     ];
     $.plot("#donut-chart", donutData, {
@@ -185,7 +185,7 @@
       {label: "<?php echo $artikel['namaabs_3']; ?>", data: <?php echo $artikel['downloadabs_3']; ?>, color: "#238012"},
       {label: "<?php echo $artikel['namaabs_4']; ?>", data: <?php echo $artikel['downloadabs_4']; ?>, color: "#4EE135"},
       {label: "<?php echo $artikel['namaabs_5']; ?>", data: <?php echo $artikel['downloadabs_5']; ?>, color: "#35C41C"},
-      {label: "Anonymus", data: <?php echo $artikel['anonym_abs']; ?>, color: "#04598A"}
+      {label: "Anonymus", data: <?php echo $artikel['anonym_abs']; ?>, color: "#CF090A"}
 
     ];
     $.plot("#donut-chart-abs", donutData, {

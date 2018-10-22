@@ -302,7 +302,6 @@ div.container-fluid.footer-bottom{
               </div>
               <div class="col col-md-12 col-sm-12 col-xs-12 none-padding">
                 <div class="col col-md-12 col-sm-12 col-xs-12 list-journal">
-                   <div class="owl-carousel owl-theme">
                       <?php if (count($journal) == 0) { ?>
                           <div class="col col-md-12 col-sm-12 col-xs-12">
                             <div class="jumbotron">
@@ -313,6 +312,7 @@ div.container-fluid.footer-bottom{
                             <h2 style="color: #A8A8A8;text-align: center;">Data Not found</h2>
                           </div> -->
                         <?php } ?>
+                   <div class="owl-carousel owl-theme">
                         <?php foreach ($journal as $key => $value): ?>
                       <div class="item">
                         <div class="filter-box-thumbnail col-md-12 col-sm-12 col-xs-12 " style="">

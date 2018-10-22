@@ -866,7 +866,7 @@ class Admin extends MX_Controller
     }
 
     public function report_download(){
-        $slq_journal = "SELECT SUM(download_1) as download_1, SUM(download_2) as download_2, SUM(download_3) as download_3, SUM(download_4) as download_4, SUM(download_5) as download_5, SUM(anonym) as anonym FROM tb_journal j join tb_pengguna p on j.id_user_ref = p.id_pengguna where p.id_instansi_ref = ?";
+        $slq_journal = "SELECT SUM(download_1) as download_1, SUM(download_2) as download_2, SUM(download_3) as download_3, SUM(download_4) as download_4, SUM(download_5) as download_5, SUM(anonym) as anonym, sum(total_download) as total_download FROM tb_journal j join tb_pengguna p on j.id_user_ref = p.id_pengguna where p.id_instansi_ref = ?";
         $sum_journal = $this->db->query($slq_journal,$this->user->user->id_instansi)->row_array();
         if (is_null($sum_journal['anonym']) || $sum_journal['anonym'] == '') {
             $sum_journal['anonym'] = 0;
@@ -878,7 +878,7 @@ class Admin extends MX_Controller
             $nama = $this->db->get_where('tb_jenis_instansi',array('id_jenis_instansi'=>$i))->row_array();
             $sum_journal['nama_'.$i] = $nama['nm_jenis_instansi'];
         }
-        $slq_artikel = "SELECT SUM(download_1) as download_1, SUM(download_2) as download_2, SUM(download_3) as download_3, SUM(download_4) as download_4, SUM(download_5) as download_5, SUM(anonym) as anonym FROM tb_artikel a join tb_pengguna p on a.id_user_ref = p.id_pengguna where p.id_instansi_ref = ?";
+        $slq_artikel = "SELECT SUM(download_1) as download_1, SUM(download_2) as download_2, SUM(download_3) as download_3, SUM(download_4) as download_4, SUM(download_5) as download_5, SUM(anonym) as anonym, sum(total_download) as total_download FROM tb_artikel a join tb_pengguna p on a.id_user_ref = p.id_pengguna where p.id_instansi_ref = ?";
         $sum_artikel = $this->db->query($slq_artikel,$this->user->user->id_instansi)->row_array();
         if (is_null($sum_artikel['anonym']) || $sum_artikel['anonym'] == '') {
             $sum_artikel['anonym'] = 0;
@@ -1555,36 +1555,26 @@ class Admin extends MX_Controller
     }
 
     public function download_journal($id=null){
+        $sql_val = 'SELECT * FROM tb_journal j join tb_pengguna p on j.id_user_ref = p.id_pengguna where j.id_journal = ?';
+        $validasi = $this->db->query($sql_val,$id)->row_array();
+        $downartikel = $this->db->get_where('tb_instansi',array('id_instansi'=>$this->user->user->id_instansi))->row_array();
+        if ($validasi['id_instansi_ref'] != $this->user->user->id_instansi) {
+            $data_j['download_'.$downartikel['id_jenis_instansi']] = $validasi['download_'.$downartikel['id_jenis_instansi']] + 1;
+            $data_j['total_download'] = $validasi['total_download'] + 1;
+            $this->db->update('tb_journal',$data_j,array('id_journal'=>$validasi['id_journal']));
+        }
+        /*print_r($data_j);
+        return false;*/
+        // $this->download_zip($id);
+        redirect('journal/admin/download_zip/'.$id);
+       
+    }
+    public function download_zip($id=null){
         $this->load->library('zip');
-        $sql = "SELECT *, j.judul as journal, j.anonym as anonym_j FROM tb_journal j JOIN tb_volume v ON j.id_journal = v.id_journal_ref JOIN tb_no_volume n ON v.id_volume = n.id_volume_ref JOIN tb_artikel a ON n.id_no_volume = a.id_no_volume_ref where id_journal = ?";
+        $sql = "SELECT file, abstract_file, futured_image FROM tb_journal j JOIN tb_volume v ON j.id_journal = v.id_journal_ref JOIN tb_no_volume n ON v.id_volume = n.id_volume_ref JOIN tb_artikel a ON n.id_no_volume = a.id_no_volume_ref where id_journal = ?";
         $artikel = $this->db->query($sql,$id)->result_array();
         $this->zip->read_file(FCPATH.'assets/media/'.$artikel[0]['futured_image']);
-        $downartikel = $this->db->get_where('tb_instansi',array('id_instansi'=>$this->user->user->id_instansi))->row_array();
-        
-
-        $sql_val = 'SELECT p.id_instansi_ref, j.total_download FROM tb_journal j join tb_pengguna p on j.id_user_ref = p.id_pengguna where j.id_journal = ?';
-        $validasi = $this->db->query($sql_val,$id)->row_array();
-        // print_r($validasi);
-        if ($validasi['id_instansi_ref'] != $this->user->user->id_instansi) {
-            $data['download_'.$downartikel['id_jenis_instansi']] = $artikel[0]['download_'.$downartikel['id_jenis_instansi']] + 1;
-            $data['total_download'] = $validasi['total_download'] + 1;
-            $this->db->update('tb_journal',$data,array('id_journal'=>$artikel[0]['id_journal']));
-        }
-        // $data['total'] = $artikel[0]['total'] + 1;
-        // $data['anonym'] = $artikel[0]['anonym_j'] + 1;
         foreach ($artikel as $key => $value) {
-
-            // $art = $this->db->get_where('tb_artikel',array('id_artikel'=>$value['id_artikel']))->row_array();
-
-            /*$data['total'] = $art['total'] + 1;
-            $data['anonym'] = $art['anonym'] + 1;
-
-            $data['anonym_abs'] = $art['anonym_abs'] + 1;
-            $data['total_abs'] = $art['total_abs'] + 1;
-            $data['total_download'] = $art['total_download'] + 2;
-            $this->db->update('tb_artikel',$data,array('id_artikel'=>$id));
-            $this->db->update('tb_artikel',$data,array('id_artikel'=>$value['id_artikel']));*/
-
             $this->zip->read_file(FCPATH.'assets/file/'.$value['file']);
             $this->zip->read_file(FCPATH.'assets/file/abstract/'.$value['abstract_file']);
         }

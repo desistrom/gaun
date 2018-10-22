@@ -50,7 +50,11 @@
 
         </div>
     <div class="box-body">
-      <div id="donut-chart" style="height: 250px;"></div>
+      <div <?php if($sum_journal['total_download'] != 0){ ?>id="donut-chart" style="height: 250px;" <?php } ?>>
+        <?php if($sum_journal['total_download'] == 0){ ?>
+          <div class="alert alert-danger"><h3><center>Data Not Found</center></h3></div>
+        <?php } ?>
+      </div>
     </div>
   </div>
 
@@ -64,7 +68,11 @@
 
         </div>
     <div class="box-body">
-      <div id="donut-chart-2" style="height: 250px;"></div>
+      <div <?php if($sum_artikel['total_download'] != 0){ ?> id="donut-chart-2" style="height: 250px;" <?php } ?>>
+        <?php if($sum_artikel['total_download'] == 0){ ?>
+          <div class="alert alert-danger"><h3><center>Data Not Found</center></h3></div>
+        <?php } ?>
+      </div>
     </div>
   </div>
 

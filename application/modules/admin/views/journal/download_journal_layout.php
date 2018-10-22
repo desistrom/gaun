@@ -64,7 +64,7 @@
         <div class="box-tools pull-right">
           <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
           </button>
-          <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+          <!-- <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button> -->
         </div>
       </div>
       <div class="box-body">
@@ -215,7 +215,7 @@ $(document).ready(function() {
       {label: "<?php echo $sum_journal['nama_3']; ?>", data: <?php echo $sum_journal['download_3']; ?>, color: "#FC9898"},
       {label: "<?php echo $sum_journal['nama_4']; ?>", data: <?php echo $sum_journal['download_4']; ?>, color: "#FB8585"},
       {label: "<?php echo $sum_journal['nama_5']; ?>", data: <?php echo $sum_journal['download_5']; ?>, color: "#FA6666"},
-      {label: "Anonymus", data: <?php echo $sum_journal['anonym']; ?>, color: "#F95555"}
+      {label: "Anonymus", data: <?php echo $sum_journal['anonym']; ?>, color: "#CF090A"}
       // {label: "Series6", data: 50, color: "#04598A"}
 
     ];
@@ -273,7 +273,7 @@ $(document).ready(function() {
       {label: "<?php echo $sum_artikel['nama_3']; ?>", data: <?php echo $sum_artikel['download_3']; ?>, color: "#FC9898"},
       {label: "<?php echo $sum_artikel['nama_4']; ?>", data: <?php echo $sum_artikel['download_4']; ?>, color: "#FB8585"},
       {label: "<?php echo $sum_artikel['nama_5']; ?>", data: <?php echo $sum_artikel['download_5']; ?>, color: "#FA6666"},
-      {label: "Anonymus", data: <?php echo $sum_artikel['anonym']; ?>, color: "#F95555"}
+      {label: "Anonymus", data: <?php echo $sum_artikel['anonym']; ?>, color: "#CF090A"}
     ];
     $.plot("#donut-chart-2", donutData, {
       series: {

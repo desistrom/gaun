@@ -180,7 +180,11 @@ margin-top: -11px;
 
         </div>
         <div class="box-body">
-          <div id="donut-chart" style="height: 300px;"></div>
+          <div <?php if($journal['total_download'] != 0){ ?>id="donut-chart" style="height: 250px;" <?php } ?>></div>
+            <?php if($journal['total_download'] == 0){ ?>
+              <div class="alert alert-danger"><h3><center>Data Not Found</center></h3></div>
+            <?php } ?>
+          </div>
         </div>
         <!-- /.box-body-->
       </div>
@@ -360,6 +364,7 @@ margin-top: -11px;
 <script src="<?=base_url();?>assets/admin-jur/plugins/flot/jquery.flot.pie.min.js"></script>
 <!-- FLOT CATEGORIES PLUGIN - Used to draw bar charts -->
 <script src="<?=base_url();?>assets/admin-jur/plugins/flot/jquery.flot.categories.min.js"></script>
+<?php if($journal['total_download'] != 0){ ?>
 <script>
   $(function () {
 
@@ -412,6 +417,7 @@ margin-top: -11px;
         + Math.round(series.percent) + "%</div>";
   }
 </script>
+<?php } ?>
 <script type="text/javascript">
   $(document).ready(function () {
     

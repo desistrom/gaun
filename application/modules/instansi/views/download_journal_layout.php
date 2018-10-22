@@ -33,6 +33,9 @@
   .fa-upload{
     padding-right: 10px;
   }
+  .alert-danger{
+          background-image: linear-gradient(to bottom,#9496FC 0,#C3C4FD; 100%)!important;
+    }
 </style>
 
 <?php if ($view == 'list') { ?>
@@ -46,7 +49,11 @@
 
         </div>
     <div class="box-body">
-      <div id="donut-chart" style="height: 250px;"></div>
+      <div <?php if($sum_journal['total_download'] != 0){ ?>id="donut-chart" style="height: 250px;" <?php } ?>>
+        <?php if($sum_journal['total_download'] == 0){ ?>
+          <div class="alert alert-info"><h3><center>Data Not Found</center></h3></div>
+        <?php } ?>
+      </div>
     </div>
   </div>
 
@@ -60,7 +67,11 @@
 
         </div>
     <div class="box-body">
-      <div id="donut-chart-2" style="height: 250px;"></div>
+      <div <?php if($sum_artikel['total_download'] != 0){ ?> id="donut-chart-2" style="height: 250px;" <?php } ?>>
+        <?php if($sum_artikel['total_download'] == 0){ ?>
+          <div class="alert alert-info"><h3><center>Data Not Found</center></h3></div>
+        <?php } ?>
+      </div>
     </div>
   </div>
 
@@ -186,6 +197,7 @@ $(document).ready(function() {
  
 });
 </script>
+<?php if($sum_journal['total_download'] != 0){ ?>
 <script>
   $(function () {
     /*
@@ -239,6 +251,8 @@ $(document).ready(function() {
         + Math.round(series.percent) + "%</div>";
   }
 </script>
+<?php } ?>
+<?php if($sum_artikel['total_download'] != 0){ ?>
 <script>
   $(function () {
     /*
@@ -300,3 +314,4 @@ $(document).ready(function() {
         + Math.round(series.percent) + "%</div>";
   }
 </script>
+<?php } ?>

@@ -1131,7 +1131,7 @@ class Journal extends MX_Controller
             $row[] = $news->nomor;
             if ($news->total_download == '' || is_null($news->total_download)) { $total = 0; }else{ $total = $news->total_download;}
             $row[] = $total;
-            $button = '<a href="'.site_url('user/journal/report_download_artikel').'/'.$news->id_artikel.'" class="btn btn-success btn-sm"><i class="fa fa-link"></i>Detail</a>';
+            $button = '<a href="'.site_url('user/journal/report_download_artikel').'/'.$news->id_artikel.'" class="btn btn-warning btn-bg btn-sm"><i class="fa fa-link"></i>Detail</a>';
             $row[] = $button;
             // $row[] = $btn_ign.$button;
  
@@ -1277,7 +1277,11 @@ class Journal extends MX_Controller
             $data['media'] = $art['media'] + 1;
         }*/
         if ($art['id_user_ref'] != $this->user->user) {
-            $data['download_'.$downartikel['id_jenis_instansi']] = $art['download_'.$downartikel['id_jenis_instansi']] + 1;
+            if (is_null($this->data['user']['id_instansi_ref']) || $this->data['user']['id_instansi_ref'] == '') {
+                $data['anonym'] = $art['anonym'] + 1;
+            }else{
+                $data['download_'.$downartikel['id_jenis_instansi']] = $art['download_'.$downartikel['id_jenis_instansi']] + 1;
+            }
             $data['total'] = $art['total'] + 1;
             $data['total_download'] = $art['total_download'] + 1;
             $this->db->update('tb_artikel',$data,array('id_artikel'=>$id));
@@ -1300,7 +1304,12 @@ class Journal extends MX_Controller
             $data['media_abs'] = $art['media_abs'] + 1;
         }*/
         if ($art['id_user_ref'] != $this->user->user) {
-            $data['downloadabs_'.$downartikel['id_jenis_instansi']] = $art['downloadabs_'.$downartikel['id_jenis_instansi']] + 1;
+            if (is_null($this->data['user']['id_instansi_ref']) || $this->data['user']['id_instansi_ref'] == '') {
+                $data['anonym_abs'] = $art['anonym_abs'] + 1;
+            }else{
+                $data['downloadabs_'.$downartikel['id_jenis_instansi']] = $art['downloadabs_'.$downartikel['id_jenis_instansi']] + 1;
+            }
+            
             $data['total_abs'] = $art['total_abs'] + 1;
             // $data['total_download'] = $art['total_download'] + 1;
             $this->db->update('tb_artikel',$data,array('id_artikel'=>$id));
@@ -1344,7 +1353,12 @@ class Journal extends MX_Controller
         $validasi = $this->db->query($sql_val,$id)->row_array();
         $downartikel = $this->db->get_where('tb_instansi',array('id_instansi'=>$this->data['user']['id_instansi_ref']))->row_array();
         if ($validasi['id_user_ref'] != $this->user->user) {
-            $data_j['download_'.$downartikel['id_jenis_instansi']] = $validasi['download_'.$downartikel['id_jenis_instansi']] + 1;
+            if (is_null($this->data['user']['id_instansi_ref']) || $this->data['user']['id_instansi_ref'] == '') {
+                $data['anonym'] = $art['anonym'] + 1;
+            }else{
+                $data_j['download_'.$downartikel['id_jenis_instansi']] = $validasi['download_'.$downartikel['id_jenis_instansi']] + 1;
+            }
+            
             $data_j['total_download'] = $validasi['total_download'] + 1;
             $this->db->update('tb_journal',$data_j,array('id_journal'=>$validasi['id_journal']));
         }

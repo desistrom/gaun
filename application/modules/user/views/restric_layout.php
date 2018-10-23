@@ -14,8 +14,14 @@
       </div>
      <div class="row">
       <!-- ./col -->
-      <h2>Anda Tidak Bisa mengakses halaman ini. harap melengkapi Profil terlebih dahulu</h2>
-      <a href="<?php echo site_url('user/dashboard/profil');?>" class="btn btn-success"><i class="fa fa-chevron-left"> Mennuju Profil</i></a>
+      <div class="col col-md-12 col-sm-12 col-xs-12">
+        <div class="alert alert-warning btn-bg text-center">  
+        <h4>Anda Tidak Bisa mengakses halaman ini. harap melengkapi Profil terlebih dahulu</h4>
+      </div>
+      </div>
+      <div class="col col-md-12 col-sm-12 col-xs-12">
+        <a href="<?php echo site_url('user/dashboard/profil');?>" class="btn btn-success"><i class="fa fa-chevron-left"> Menuju Profil</i></a>
+      </div>
       <!-- ./col -->
       <!-- ./col -->
     </div>

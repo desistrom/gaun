@@ -287,7 +287,8 @@
     margin-top: 15px;
   }
   .btn-bg{
-    background-color: #2BA417;
+    background-color: #2BA417!important;
+    background: #2BA417!important;
   }
   .box-thumbnail{
     border:solid #CBCBCB 1px;

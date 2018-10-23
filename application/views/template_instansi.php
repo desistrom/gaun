@@ -110,13 +110,17 @@
         padding: 15px 5px 15px 15px;
       }
       .btn-bg{
-        background-color: #7F00FF;
+        background-color: #7F00FF!important;
+        background: #7F00FF!important;
         color: white;
       }
       .btn-bg:hover{
         background-color: #6B0DC9;
         color: white;
       }
+    .alert-danger{
+          background-image: linear-gradient(to bottom,red 0,green; 100%)!important;
+    }
   </style>
   
     <script type="text/javascript">

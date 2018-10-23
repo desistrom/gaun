@@ -309,8 +309,8 @@
     margin-top: 15px;
   }
   .btn-bg{
-    background-color: #EF7314;
-    background:#EF7314;
+    background-color: #EF7314!important;
+    background:#EF7314!important;
   }
   .btn-bg:hover{
     background-color: #D7660F;
@@ -471,7 +471,7 @@
             <i class="fa fa-copy"></i> <span>All Journal</span>
           </a>
         </li>
-        <?php if(!is_null($this->general->status()) || $this->general->status() != ''){ ?>
+        
          <li class="<?php if(current_url() == site_url('user/journal/volume')){ ?> active <?php } ?> treeview" style="margin-top: 5px;">
           <a href="#">
             <i class="fa fa-list"></i> <span>Volume</span>
@@ -550,7 +550,6 @@
             <i class="fa fa-file-text-o"></i> <span>Report Download</span>
           </a>
         </li>
-        <?php } ?>
         <li>
           <a href="<?=site_url('user/journal/search');?>">
             <i class="fa fa-search"></i> <span>search Journal</span>

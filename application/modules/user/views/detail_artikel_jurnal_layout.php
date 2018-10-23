@@ -43,7 +43,7 @@
 </style>
 <div class="col col-md-10 col-sm-10 col-xs-12 right-content" style="">
     <div class=" title-box">
-		<h3 class="title">Detail Artikel</h3>
+		<h3 class="title">Detail Article</h3>
     </div>
     <div class="box-content">
     	<div class="row">

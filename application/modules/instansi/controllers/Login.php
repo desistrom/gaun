@@ -91,7 +91,7 @@ class Login extends MX_Controller
                         // redirect(site_url('dashboard/reset_password'));
                     }
                 }else{
-                    $ret['notif']['login'] = 'E-mail tidak terdaftar, pastikan email yang anda masukan benar';
+                    $ret['notif']['login'] = 'E-mail tidak terdaftar sebagai admin kampus, pastikan email yang anda masukan benar';
                 }
             }
             $ret['notif']['current'] = form_error('current');

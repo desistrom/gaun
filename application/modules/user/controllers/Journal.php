@@ -1085,7 +1085,7 @@ class Journal extends MX_Controller
         $btn = '';
         foreach ($list as $news) {
             $no++;
-            $button = '<a href="'.site_url('user/journal/report_download_journal').'/'.$news->id_journal.'" class="btn btn-success btn-sm"><i class="fa fa-link"></i>Detail</a>';
+            $button = '<a href="'.site_url('user/journal/report_download_journal').'/'.$news->id_journal.'" class="btn btn-warning btn-bg btn-sm"><i class="fa fa-link"></i>Detail</a>';
             $row = array();
             $row[] = $no;
             $row[] = '<div class="detail">'.word_limiter($news->judul,10).'</div>';

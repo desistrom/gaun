@@ -40,7 +40,7 @@ class Login extends MX_Controller
                     // $this->session->set_userdata('journal_login', true);
                     $a = generate_token_jwt($data_user);
                     setcookie('data_journal',$a,time() + (3600 * 30), "/");
-                    $ret['url'] = site_url('journal/admin');
+                    $ret['url'] = site_url('journal/admin/home');
 
                 }else{
                     $ret['notif']['login'] = 'username or password wrong';
@@ -70,7 +70,7 @@ class Login extends MX_Controller
             $this->form_validation->set_rules('email','E-Mail', 'required');
             if ($this->form_validation->run() == true) {
                 $input = $this->input->post();
-                $sql = $this->db->get_where('tb_instansi',array('email'=>$input['email']));
+                $sql = $this->db->get_where('tb_journal_user',array('email'=>$input['email']));
                 if ($sql->num_rows() > 0) {
                     $ret['state'] = 1;
                     $user = $sql->row_array();
@@ -81,9 +81,9 @@ class Login extends MX_Controller
                     $data['name_from'] = 'IDREN support';
                     $data['email_to'] = $user['email'];
                     $data['subject'] = 'Request reset Password';
-                    $data['content'] = 'Ini Adalah link reset Password anda<br/>'.site_url('instansi/login/reset?data='.$reset);
+                    $data['content'] = 'Ini Adalah link reset Password anda<br/>'.site_url('journal/login/reset?data='.$reset);
                     if (email_send($data) == true) {
-                        $this->db->update('tb_instansi',array('reset'=>$reset),array('id_instansi'=>$user['id_instansi']));
+                        $this->db->update('tb_journal_user',array('reset'=>$reset),array('id_journal_user'=>$user['id_journal_user']));
                         $user_data = 'success';
                         $ret['status'] = 1;
                         $this->session->set_flashdata("header","Request Reset Password Berhasil");
@@ -91,7 +91,7 @@ class Login extends MX_Controller
                         // redirect(site_url('dashboard/reset_password'));
                     }
                 }else{
-                    $ret['notif']['login'] = 'E-mail tidak terdaftar, pastikan email yang anda masukan benar';
+                    $ret['notif']['login'] = 'E-mail tidak terdaftar sebagai admin journal, pastikan email yang anda masukan benar';
                 }
             }
             $ret['notif']['current'] = form_error('current');
@@ -105,9 +105,9 @@ class Login extends MX_Controller
 
     public function reset(){
         $input = $this->input->get('data');
-        $data = $this->db->get_where('tb_instansi',array('reset'=>$input));
+        $data = $this->db->get_where('tb_journal_user',array('reset'=>$input));
         if ($data->num_rows() == 0) {
-               redirect(site_url('instansi/login/link_expired'));
+               redirect(site_url('journal/login/link_expired'));
            }   
         if ($this->input->server('REQUEST_METHOD') == 'POST') {
             $ret['state'] = 0;
@@ -119,12 +119,12 @@ class Login extends MX_Controller
                 $input = $this->input->post();
                     $ret['state'] = 1;
                     $data_user['password'] = $input['new'];
-                    if ($this->db->update('tb_instansi',array('password'=>sha1($input['new']),'reset'=>''),array('id_instansi'=>$data->row_array()['id_instansi']))) {
+                    if ($this->db->update('tb_journal_user',array('password'=>sha1($input['new']),'reset'=>''),array('id_journal_user'=>$data->row_array()['id_journal_user']))) {
                         $ret['status'] = 1;
                         $this->session->set_flashdata("header","Reset Password Berhasil");
                         $this->session->set_flashdata("notif","Reset Password Berhasil, silahkan login untuk melanjutkan");
                         // if ($data->row_array()['id_role_ref'] == 0) {
-                        $ret['url'] = site_url('instansi/login');
+                        $ret['url'] = site_url('journal/login');
                         // }else{
                         //     $ret['url'] = site_url('user/login_user');
                         // }
@@ -140,7 +140,7 @@ class Login extends MX_Controller
     }
 
     public function link_expired(){
-        echo "<h2>Link expired</h2><h3><a href='".site_url('instansi/login/reset_password')."'>Back to Reset Password</a>";
+        echo "<h2>Link expired</h2><h3><a href='".site_url('journal/login/reset_password')."'>Back to Reset Password</a>";
     }
 
     public function logout(){

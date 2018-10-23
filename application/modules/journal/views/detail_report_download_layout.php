@@ -150,7 +150,7 @@
       {label: "<?php echo $artikel['nama_3']; ?>", data: <?php echo $artikel['download_3']; ?>, color: "#238012"},
       {label: "<?php echo $artikel['nama_4']; ?>", data: <?php echo $artikel['download_4']; ?>, color: "#4EE135"},
       {label: "<?php echo $artikel['nama_5']; ?>", data: <?php echo $artikel['download_5']; ?>, color: "#35C41C"},
-      {label: "Anonymus", data: <?php echo $artikel['anonym']; ?>, color: "#04598A"}
+      {label: "Anonymus", data: <?php echo $artikel['anonym']; ?>, color: "#2CA117"}
 
     ];
     $.plot("#donut-chart", donutData, {

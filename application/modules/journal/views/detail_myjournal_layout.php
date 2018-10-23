@@ -270,6 +270,9 @@ color: #D10909!important;
 .btn-bg{
   background-color: 
 }
+.filter-box-thumbnail{
+  padding: 15px;
+}
 </style>
 
 <div class="col col-md-12 col-sm-12 col-xs-12 right-content" style="">

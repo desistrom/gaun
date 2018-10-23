@@ -69,20 +69,20 @@
         <?php echo $captcha // tampilkan recaptcha ?>
         <div class="error" id="ntf_g-recaptcha-response"></div>
       </div>
+              <div class="error" id="ntf_login"></div>
   <!--     <div class="row">
         <div class="col-xs-8">
           <div class="checkbox icheck">
             <label>
-              <div class="error" id="ntf_login"></div>
             </label>
           </div>
         </div>
       </div> -->
       <div class="row">
         <!-- /.col -->
-        <!-- <div class="col-xs-8"> -->
-          <!-- <a href="<?=site_url('instansi/login/reset_password');?>">Forgot Password</a> -->
-        <!-- </div> -->
+        <div class="col-xs-8">
+          <a href="<?=site_url('journal/login/reset_password');?>">Forgot Password</a>
+        </div>
         <div class="col-xs-4" style="float: right;">
           <button type="button" class="btn btn-success btn-block btn-flat btn-bg" id="login">Sign In</button>
         </div>

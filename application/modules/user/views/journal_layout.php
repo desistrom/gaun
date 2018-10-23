@@ -110,7 +110,7 @@ margin-top: -11px;
  .box-thumbnail .body-box-thumbnail{
   color: #A2A2A2;
   font-size: 10px;
-  height: 100px;
+  height: 120px;
   overflow: hidden;
   font-weight: 400;
 }
@@ -325,7 +325,10 @@ div.container-fluid.footer-bottom{
                         <div class="filter-box-thumbnail col-md-12 col-sm-12 col-xs-12 " style="">
                           <div class="box-thumbnail">
                             <div class="header-box-thumbnail">
-                              <img class="thumbnail-cover" src="<?=base_url();?>assets/media/<?=$value['futured_image'];?>">
+                              <a href="<?=site_url('user/journal/detail_journal/'.$value['id_journal']);?>">
+                                <img class="thumbnail-cover" src="<?=base_url();?>assets/media/<?=$value['futured_image'];?>">
+                              </a>
+                              
                               <div class="filter-button-action">
                                 <div>
                                   <a href="<?=site_url('user/journal/edit/'.$value['id_journal']);?>">
@@ -339,9 +342,11 @@ div.container-fluid.footer-bottom{
                             </div>
                             <div class="body-box-thumbnail">
                               <h5 class="title-thumbnail"><a href="<?=site_url('user/journal/detail_journal/'.$value['id_journal']);?>"><?=$value['judul'];?></a> </h5>
+                              <h5 style="font-size: 13px;text-align: left;"><b>status : </b> <?php if($value['status'] == 0 ){ echo "Unsubmited";}elseif($value['status'] == 1){ echo "Pending"; }elseif($value['status'] == 2){echo "Accepted";}else{ echo "Ignored";} ?></h5>
                               <div class="col col-md-12 col-sm-12 col-xs-12 none-padding box-btn-info-journal">
+                                
                                 <!-- <a href="#" class="btn btn-primary btn-info-journal" style="padding:0 15px;float: right;"><i class="fa fa-upload none-padding" ></i></a> -->
-                                <?php if($value['status'] == 0 ){ ?> <a href="#"  style="padding:0 15px;float: right;" id="<?=$value['id_journal'];?>" class="btn btn-primary btn-submit"> <i class="fa fa-upload"></i> </a> <?php }elseif($value['status'] == 1){?> <a style="padding:0 15px;float: right;" href="#" class="btn btn-warning"> <i class="fa fa-clock-o"></i> </a> <?php }elseif($value['status'] == 2){ ?> <a style="padding:0 15px;float: right;" href="#" class="btn btn-success"> <i class="fa fa-check"></i> </a> <?php }else{ ?> <a style="padding:0 15px;float: right;" href="#" class="btn btn-danger"> <i class="fa fa-times"></i> </a> <?php } ?>
+                                <?php if($value['status'] == 0 ){ ?> <a href="#"  style="padding:0 15px;float: right;" id="<?=$value['id_journal'];?>" class="btn btn-primary btn-submit" title="submit" > <i class="fa fa-upload"></i> </a> <?php }elseif($value['status'] == 1){?> <a style="padding:0 15px;float: right;display: none;" href="#" class="btn btn-warning"> <i class="fa fa-clock-o"></i> </a> <?php }elseif($value['status'] == 2){ ?> <a style="padding:0 15px;float: right;display: none;" href="#" class="btn btn-success"> <i class="fa fa-check"></i> </a> <?php }else{ ?> <a style="padding:0 15px;float: right;display: none;" href="#" class="btn btn-danger"> <i class="fa fa-times"></i> </a> <?php } ?>
                         
                         <a href="#" class="btn btn-success btn-upload" style="padding:0 15px;float: right;"> <i class="fa fa-check"></i> </a>
                               </div>
@@ -367,7 +372,7 @@ div.container-fluid.footer-bottom{
             <div class="sub-content-artikel-header">
               <div class="col col-md-12 col-sm-12 col-xs-12">
                 <div class="artikel-header artikel-left">
-                  <h4>My Artikel#</h4>
+                  <h4>My Article#</h4>
                 </div>
                 <div class="artikel-header artikel-right">
                 <a href="<?=site_url('user/journal/add_artikel');?>" class="btn btn-warning btn-bg">Create</a> 
@@ -384,17 +389,23 @@ div.container-fluid.footer-bottom{
                     <?php }?>
               <?php foreach ($artikel as $key => $value): ?>
               <div class="col col-md-6 col-sm-6 col-xs-12 list-artikel">
-                <div class="artikel-body artikel-body-left">
-                  <i class="fa fa-files-o" aria-hidden="true"></i>
-                </div>
-                <div class="artikel-body artikel-body-right">
-                  <ul class="list-unstyled">
-                    <li title="<?=word_limiter($value['judul'],3);?>">Artikel : <?=word_limiter($value['judul'],3);?></li>
-                    <li>Author : <?=$value['author'];?>...</li>
-                    <li>Date Published : <?=$value['publish'];?></li>
-                    <li>Publisher : <?=$value['publisher'];?></li>
-                  </ul>
-                </div>
+                <a href="<?=site_url('user/journal/detail_artikel/'.$value['id_artikel']); ?>">
+                  <div class="artikel-body artikel-body-left">
+                    <i class="fa fa-files-o" aria-hidden="true"></i>
+                  </div>
+                  </a>
+
+                  <div class="artikel-body artikel-body-right">
+                    <ul class="list-unstyled">
+                      <a href="<?=site_url('user/journal/detail_artikel/'.$value['id_artikel']); ?>">
+                        <li style="color: #CBCBCB;font-size: 14px;" title="<?=word_limiter($value['judul'],3);?>">Artikel : <?=word_limiter($value['judul'],3);?></li>
+                      </a>
+                      <li>Author : <?=$value['author'];?>...</li>
+                      <li>Date Published : <?=$value['publish'];?></li>
+                      <li>Publisher : <?=$value['publisher'];?></li>
+                    </ul>
+                  </div>
+                
                 <div class="artikel-body artikel-body-icedit">
                   <a href="<?=site_url('user/journal/edit_artikel/'.$value['id_artikel']);?>" title="edit">
                     <i class="fa fa-pencil" aria-hidden="true"></i>

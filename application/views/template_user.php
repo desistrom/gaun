@@ -474,7 +474,7 @@
         
          <li class="<?php if(current_url() == site_url('user/journal/volume')){ ?> active <?php } ?> treeview" style="margin-top: 5px;">
           <a href="#">
-            <i class="fa fa-list"></i> <span>Volume</span>
+            <i class="fa fa-list"></i> <span>My Volume</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -485,13 +485,13 @@
         </li>
         <li class=" <?php if(current_url() == site_url('user/journal/list_nomor')){ ?> active <?php } ?> treeview" style="margin-top: 5px;">
           <a href="#">
-            <i class="fa fa-list-ol"></i> <span>No Volume</span>
+            <i class="fa fa-list-ol"></i> <span>My Volume Number</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class=""><a href="<?=site_url('user/journal/list_nomor');?>"><i class="fa fa-circle-o"></i>Create & Edit No Volume</a></li>
+            <li class=""><a href="<?=site_url('user/journal/list_nomor');?>"><i class="fa fa-circle-o"></i>Create & Edit Volume Number</a></li>
           </ul>
         </li>
        <li class=" <?php if(current_url() == site_url('user/journal')){ ?> active <?php } ?> treeview" style="margin-top: 5px;">
@@ -532,16 +532,16 @@
         </li> -->
         <li class="treeview <?php if(current_url() == site_url('user/journal/list_artikel') || current_url() == site_url('user/journal/list_artikel_accepted') || current_url() == site_url('user/journal/list_artikel_rejected')){ ?>  active <?php } ?>">
           <a href="#">
-            <i class="fa fa-file"></i>  <span>Artikel</span>
+            <i class="fa fa-file"></i>  <span>My Article</span>
             <span class="pull-right-container">
 
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-          	<li class=""><a href="<?=site_url('user/journal/list_artikel');?>"><i class="fa fa-circle-o"></i> List Artikel </a></li>
-            <li class=""><a href="<?=site_url('user/journal/list_artikel_accepted');?>"><i class="fa fa-circle-o"></i> Accepted </a></li>
-            <li class=""><a href="<?=site_url('user/journal/list_artikel_rejected');?>"><i class="fa fa-circle-o"></i> Rejected </a></li>
+          	<li class=""><a href="<?=site_url('user/journal/list_artikel');?>"><i class="fa fa-circle-o"></i> List Article </a></li>
+            <li class=""><a href="<?=site_url('user/journal/list_artikel_accepted');?>"><i class="fa fa-circle-o"></i>Article Accepted </a></li>
+            <li class=""><a href="<?=site_url('user/journal/list_artikel_rejected');?>"><i class="fa fa-circle-o"></i>Article Rejected </a></li>
             <!-- <li class=""><a href="<?=site_url('user/journal/list_download');?>"><i class="fa fa-circle-o"></i> Terdownload </a></li> -->
           </ul>
         </li>

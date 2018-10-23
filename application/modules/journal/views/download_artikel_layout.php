@@ -379,7 +379,7 @@ margin-top: -11px;
       {label: "<?php echo $journal['nama_3']; ?>", data: <?php echo $journal['download_3']; ?>, color: "#238012"},
       {label: "<?php echo $journal['nama_4']; ?>", data: <?php echo $journal['download_4']; ?>, color: "#4EE135"},
       {label: "<?php echo $journal['nama_5']; ?>", data: <?php echo $journal['download_5']; ?>, color: "#35C41C"},
-      {label: "Anonymus", data: <?php echo $journal['anonym']; ?>, color: "#04598A"}
+      {label: "Anonymus", data: <?php echo $journal['anonym']; ?>, color: "#2CA117"}
     ];
     $.plot("#donut-chart", donutData, {
       series: {

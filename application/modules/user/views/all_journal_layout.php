@@ -330,7 +330,7 @@ div.container-fluid.footer-bottom{
                       </div>
                        <?php endforeach ?>
                   </div>
-                  <a href="<?=site_url('user/journal/detail_all_journal');?>" class="txt-seemore">Load more</a>
+                  <a href="<?=site_url('user/journal/detail_all_journal');?>" class="txt-seemore">see more</a>
                 </div>
               </div>
             </div>
@@ -339,7 +339,7 @@ div.container-fluid.footer-bottom{
             <div class="sub-content-artikel-header">
               <div class="col col-md-12 col-sm-12 col-xs-12">
                 <div class="artikel-header artikel-left">
-                  <h4>All Artikel#</h4>
+                  <h4>All Article#</h4>
                 </div>
                 <div class="artikel-header artikel-right">
                   <!-- <a href="<?=site_url('journal/admin/add_artikel');?>" class="btn btn-warning btn-create">Create</a> -->
@@ -356,17 +356,22 @@ div.container-fluid.footer-bottom{
                     <?php }?>
               <?php foreach ($artikel as $key => $value): ?>
               <div class="col col-md-6 col-sm-6 col-xs-12 list-artikel">
-                <div class="artikel-body artikel-body-left">
-                  <i class="fa fa-files-o" aria-hidden="true"></i>
-                </div>
-                <div class="artikel-body artikel-body-right">
-                  <ul class="list-unstyled">
-                    <li title="<?=word_limiter($value['judul'],3);?>">Artikel : <?=word_limiter($value['judul'],3);?></li>
-                    <li>Author : <?=$value['author'];?>...</li>
-                    <li>Date Published : <?=$value['publish'];?></li>
-                    <li>Publisher : <?=$value['publisher'];?></li>
-                  </ul>
-                </div>
+                <a href="<?=site_url('user/journal/detail_artikel/'.$value['id_artikel']); ?>">
+                  <div class="artikel-body artikel-body-left">
+                    <i class="fa fa-files-o" aria-hidden="true"></i>
+                  </div>
+                </a>
+                  <div class="artikel-body artikel-body-right">
+                    <ul class="list-unstyled">
+                      <a href="<?=site_url('user/journal/detail_artikel/'.$value['id_artikel']); ?>" style="color: #CBCBCB;font-size: 14px;" >
+                        <li title="<?=word_limiter($value['judul'],3);?>">Artikel : <?=word_limiter($value['judul'],3);?></li>
+                      </a>
+                      <li>Author : <?=$value['author'];?>...</li>
+                      <li>Date Published : <?=$value['publish'];?></li>
+                      <li>Publisher : <?=$value['publisher'];?></li>
+                    </ul>
+                  </div>
+                
                 <div class="artikel-body artikel-body-icedit">
                   <a href="<?php echo site_url('user/journal/downloads/'.$value['id_artikel']);?>" title="download">
                     <i class="fa fa-download" aria-hidden="true"></i>

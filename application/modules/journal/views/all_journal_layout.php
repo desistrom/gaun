@@ -361,12 +361,16 @@ div.container-fluid.footer-bottom{
                     <?php }?>
               <?php foreach ($artikel as $key => $value): ?>
               <div class="col col-md-6 col-sm-6 col-xs-12 list-artikel">
+                 <a href="<?=site_url('journal/admin/detail_artikel_journal/'.$value['id_artikel']); ?>" >
                 <div class="artikel-body artikel-body-left">
                   <i class="fa fa-files-o" aria-hidden="true"></i>
                 </div>
+              </a>
                 <div class="artikel-body artikel-body-right">
                   <ul class="list-unstyled">
-                    <li title="<?=word_limiter($value['judul'],3);?>">Artikel : <?=word_limiter($value['judul'],3);?></li>
+                     <a href="<?=site_url('journal/admin/detail_artikel_journal/'.$value['id_artikel']); ?>" style="color: #CBCBCB;font-size: 14px;" >
+                      <li title="<?=word_limiter($value['judul'],3);?>">Artikel : <?=word_limiter($value['judul'],3);?></li>
+                    </a>
                     <li>Author : <?=$value['author'];?>...</li>
                     <li>Date Published : <?=$value['publish'];?></li>
                     <li>Publisher : <?=$value['publisher'];?></li>

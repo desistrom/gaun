@@ -267,6 +267,9 @@ color: #D10909!important;
   height: auto;
   overflow: hidden;
 }
+.filter-box-thumbnail{
+  padding: 15px;
+}
 </style>
 
 <div class="col col-md-12 col-sm-12 col-xs-12 right-content" style="">
@@ -299,12 +302,13 @@ color: #D10909!important;
               </div>
 
               </div>
-              <div class="col col-md-12 col-sm-12 col-xs-12 text-center" style="padding: 20px 15px;">
-                <button class="btn btn-success btn-bg"> Load More</button>
-              </div>
+              
               <input type="hidden" name="limit" id="limit" value="8">
               <input type="hidden" name="ofset" id="ofset" value="8">
            </div>
+           <div class="col col-md-12 col-sm-12 col-xs-12 text-center" style="padding: 20px 15px;">
+                <button class="btn btn-success btn-bg"> Load More</button>
+              </div>
         </div>
 
     </div>

@@ -314,9 +314,9 @@
         right: -2em;
         top: 40%;*/
       }
-      .sub-content-journal .sub-content-journal-header .list-journal .owl-nav .owl-prev.disabled{
+    /*  .sub-content-journal .sub-content-journal-header .list-journal .owl-nav .owl-prev.disabled{
         display: none;
-      }
+      }*/
       .sub-content-journal .sub-content-journal-header .list-journal .owl-nav .owl-next{
         font-size: 71px;
         font-weight: 600;
@@ -439,15 +439,15 @@
         </li>
         <li class="<?php if(current_url() == site_url('journal/admin/volume') || current_url() == site_url('journal/admin/novolume')){ ?> active <?php } ?> treeview" style="margin-top: 5px;">
           <a href="#">
-            <i class="fa fa-list"></i> <span>Create Volume & No Volume</span>
+            <i class="fa fa-list"></i> <span>my Volume & Volume Number</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class=""><a href="<?=site_url('journal/admin/volume');?>"><i class="fa fa-circle-o"></i> Volume </a></li>
+            <li class=""><a href="<?=site_url('journal/admin/volume');?>"><i class="fa fa-circle-o"></i>Create  Volume </a></li>
 
-            <li class=""><a href="<?=site_url('journal/admin/novolume');?>"><i class="fa fa-circle-o"></i>No Volume</a></li>
+            <li class=""><a href="<?=site_url('journal/admin/novolume');?>"><i class="fa fa-circle-o"></i>Create Volume Number</a></li>
           </ul>
         </li>
        <li class="<?php if(current_url() == site_url('journal/admin/dashboard')){ ?> active <?php } ?> treeview" style="margin-top: 5px;">

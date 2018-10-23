@@ -34,7 +34,7 @@
 <link rel="stylesheet" href="<?=base_url();?>assets/datatables/css/dataTables.bootstrap.min.css">
 <div class="col col-md-12 col-sm-12 col-xs-12 right-content" style="padding: 0 30px;">
     <div class=" title-box">
-		<h3 class="title">Artikel</h3>
+		<h3 class="title">Article</h3>
     </div>
     <div class="box-content">
     	<div class="row">

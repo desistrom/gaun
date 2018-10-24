@@ -33,6 +33,22 @@
   .fa-upload{
     padding-right: 10px;
   }
+          .flot {
+    left: 0px;
+    top: 0px;
+    width: 610px;
+    height: 250px;
+}
+#flotTip {
+    padding: 3px 5px;
+    background-color: #000;
+    z-index: 100;
+    color: #fff;
+    opacity: .80;
+    filter: alpha(opacity=85);
+}
+.pieLabel div{
+  
 </style>
 
 <?php if ($view == 'list') { ?>
@@ -48,7 +64,7 @@
     <div class="box-body">
       <div <?php if($sum_journal['total_download'] != 0){ ?>id="donut-chart" style="height: 250px;" <?php } ?>></div>
         <?php if($sum_journal['total_download'] == 0){ ?>
-          <div class="alert alert-danger"><h3><center>Data Not Found</center></h3></div>
+          <div class="alert alert-danger"><h3><center>Tidak ada journal yang didownload</center></h3></div>
         <?php } ?>
     </div>
   </div>
@@ -70,7 +86,7 @@
       <div class="box-body">
         <div <?php if($sum_artikel['total_download'] != 0){ ?> id="donut-chart-2" style="height: 250px;" <?php } ?>>
           <?php if($sum_artikel['total_download'] == 0){ ?>
-          <div class="alert alert-danger"><h3><center>Data Not Found</center></h3></div>
+          <div class="alert alert-danger"><h3><center>Tidak ada Artikel yang didownload</center></h3></div>
         <?php } ?>
         </div>
       </div>
@@ -153,6 +169,7 @@
 <script src="<?=base_url();?>assets/admin-jur/plugins/flot/jquery.flot.pie.min.js"></script>
 <!-- FLOT CATEGORIES PLUGIN - Used to draw bar charts -->
 <script src="<?=base_url();?>assets/admin-jur/plugins/flot/jquery.flot.categories.min.js"></script>
+<script src="<?=base_url();?>assets/admin-jur/plugins/flot/flot-tooltip.js"></script>
 <script type="text/javascript">
   $(document).ready(function () {
     $('body').on('click','.btn-acc', function(){
@@ -234,6 +251,15 @@ $(document).ready(function() {
 
         }
       },
+      grid: {
+        hoverable: true
+    },
+    tooltip: true,
+    tooltipOpts: {
+        cssClass: "flotTip",
+        content: "%s: %p.0%",
+        defaultTheme: false
+    },
       legend: {
         show: true
       }
@@ -290,6 +316,15 @@ $(document).ready(function() {
 
         }
       },
+      grid: {
+        hoverable: true
+    },
+    tooltip: true,
+    tooltipOpts: {
+        cssClass: "flotTip",
+        content: "%s: %p.0%",
+        defaultTheme: false
+    },
       legend: {
         show: true
       }

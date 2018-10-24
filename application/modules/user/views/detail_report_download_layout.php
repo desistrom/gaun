@@ -5,6 +5,20 @@
   .pieLabel div{
     color: black!important;
   }
+    .flot {
+    left: 0px;
+    top: 0px;
+    width: 610px;
+    height: 250px;
+}
+#flotTip {
+    padding: 3px 5px;
+    background-color: #000;
+    z-index: 100;
+    color: #fff;
+    opacity: .80;
+    filter: alpha(opacity=85);
+}
 </style>
 <div class="col col-md-12 col-sm-12 col-xs-12">
  <div class="box box-warning">
@@ -135,6 +149,7 @@
 <script src="<?=base_url();?>assets/admin-jur/plugins/flot/jquery.flot.pie.min.js"></script>
 <!-- FLOT CATEGORIES PLUGIN - Used to draw bar charts -->
 <script src="<?=base_url();?>assets/admin-jur/plugins/flot/jquery.flot.categories.min.js"></script>
+<script src="<?=base_url();?>assets/admin-jur/plugins/flot/flot-tooltip.js"></script>
 
 <script>
   $(function () {
@@ -168,6 +183,15 @@
 
         }
       },
+        grid: {
+        hoverable: true
+    },
+    tooltip: true,
+    tooltipOpts: {
+        cssClass: "flotTip",
+        content: "%s: %p.0%",
+        defaultTheme: false
+    },
       legend: {
         show: true
       }
@@ -175,34 +199,43 @@
     /*
      * END DONUT CHART
      */
-     var donutDataAbs = [
-      {label: "<?php echo $artikel['namaabs_1']; ?>", data: <?php echo $artikel['downloadabs_1']; ?>, color: "#FCE6D6"},
-      {label: "<?php echo $artikel['namaabs_2']; ?>", data: <?php echo $artikel['downloadabs_2']; ?>, color: "#7CE969"},
-      {label: "<?php echo $artikel['namaabs_3']; ?>", data: <?php echo $artikel['downloadabs_3']; ?>, color: "#F3A065"},
-      {label: "<?php echo $artikel['namaabs_4']; ?>", data: <?php echo $artikel['downloadabs_4']; ?>, color: "#F08940"},
-      {label: "<?php echo $artikel['namaabs_5']; ?>", data: <?php echo $artikel['downloadabs_5']; ?>, color: "#E06812"},
-      {label: "Anonymus", data: <?php echo $artikel['anonym_abs']; ?>, color: "#04598A"}
+    //  var donutDataAbs = [
+    //   {label: "<?php echo $artikel['namaabs_1']; ?>", data: <?php echo $artikel['downloadabs_1']; ?>, color: "#FCE6D6"},
+    //   {label: "<?php echo $artikel['namaabs_2']; ?>", data: <?php echo $artikel['downloadabs_2']; ?>, color: "#7CE969"},
+    //   {label: "<?php echo $artikel['namaabs_3']; ?>", data: <?php echo $artikel['downloadabs_3']; ?>, color: "#F3A065"},
+    //   {label: "<?php echo $artikel['namaabs_4']; ?>", data: <?php echo $artikel['downloadabs_4']; ?>, color: "#F08940"},
+    //   {label: "<?php echo $artikel['namaabs_5']; ?>", data: <?php echo $artikel['downloadabs_5']; ?>, color: "#E06812"},
+    //   {label: "Anonymus", data: <?php echo $artikel['anonym_abs']; ?>, color: "#04598A"}
 
-    ];
-    $.plot("#donut-chart-abs", donutData, {
-      series: {
-        pie: {
-          show: true,
-          radius: 1,
-          innerRadius: 0.5,
-          label: {
-            show: true,
-            radius: 2 / 3,
-            formatter: labelFormatterAbs,
-            threshold: 0.1
-          }
+    // ];
+    // $.plot("#donut-chart-abs", donutData, {
+    //   series: {
+    //     pie: {
+    //       show: true,
+    //       radius: 1,
+    //       innerRadius: 0.5,
+    //       label: {
+    //         show: true,
+    //         radius: 2 / 3,
+    //         formatter: labelFormatterAbs,
+    //         threshold: 0.1
+    //       }
 
-        }
-      },
-      legend: {
-        show: true
-      }
-    });
+    //     }
+    //   },
+    //     grid: {
+    //     hoverable: true
+    // },
+    // tooltip: true,
+    // tooltipOpts: {
+    //     cssClass: "flotTip",
+    //     content: "%s: %p.0%",
+    //     defaultTheme: false
+    // },
+    //   legend: {
+    //     show: true
+    //   }
+    // });
 
   });
 

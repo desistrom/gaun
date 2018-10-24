@@ -325,7 +325,7 @@ class Journal extends MX_Controller
         $btn = '';
         foreach ($list as $news) {
             $no++;
-            $button = '<a href="'.site_url('instansi/journal/report_download_journal').'/'.$news->id_journal.'" class="btn btn-success btn-sm"><i class="fa fa-link"></i>Detail</a>';
+            $button = '<a href="'.site_url('instansi/journal/report_download_journal').'/'.$news->id_journal.'" class="btn btn-default btn-bg"><i class="fa fa-link"></i>Detail</a>';
             $row = array();
             $row[] = $no;
             $row[] = '<div class="detail">'.word_limiter($news->judul,10).'</div>';
@@ -371,7 +371,7 @@ class Journal extends MX_Controller
             $row[] = $news->nomor;
             if ($news->total_download == '' || is_null($news->total_download)) { $total = 0; }else{ $total = $news->total_download;}
             $row[] = $total;
-            $button = '<a href="'.site_url('instansi/journal/report_download_artikel').'/'.$news->id_artikel.'" class="btn btn-success btn-sm"><i class="fa fa-link"></i>Detail</a>';
+            $button = '<a href="'.site_url('instansi/journal/report_download_artikel').'/'.$news->id_artikel.'" class="btn btn-default btn-bg"><i class="fa fa-link"></i>Detail</a>';
             $row[] = $button;
             // $row[] = $aktif;
             // $row[] = $btn_ign.$button;

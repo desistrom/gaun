@@ -143,6 +143,23 @@ margin-top: -11px;
 .modal .modal-header.btn-bg{
   color: white;
 }
+      .flot {
+    left: 0px;
+    top: 0px;
+    width: 610px;
+    height: 250px;
+}
+#flotTip {
+    padding: 3px 5px;
+    background-color: #000;
+    z-index: 100;
+    color: #fff;
+    opacity: .80;
+    filter: alpha(opacity=85);
+}
+.pieLabel div{
+  color: black!important;
+  }
 </style>
 
 <?php if ($view == 'list') { ?>
@@ -364,6 +381,7 @@ margin-top: -11px;
 <script src="<?=base_url();?>assets/admin-jur/plugins/flot/jquery.flot.pie.min.js"></script>
 <!-- FLOT CATEGORIES PLUGIN - Used to draw bar charts -->
 <script src="<?=base_url();?>assets/admin-jur/plugins/flot/jquery.flot.categories.min.js"></script>
+<script src="<?=base_url();?>assets/admin-jur/plugins/flot/flot-tooltip.js"></script>
 <?php if($journal['total_download'] != 0){ ?>
 <script>
   $(function () {
@@ -396,6 +414,15 @@ margin-top: -11px;
 
         }
       },
+        grid: {
+        hoverable: true
+    },
+    tooltip: true,
+    tooltipOpts: {
+        cssClass: "flotTip",
+        content: "%s: %p.0%",
+        defaultTheme: false
+    },
       legend: {
         show: true
       }

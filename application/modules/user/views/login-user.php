@@ -118,6 +118,26 @@
         .nav li a.active.btn-gabung:hover{
           border:none;
         }
+          @media (max-width:767px) {
+              .google{
+          display: inline-block;
+          margin-left: 5px;
+          width: 100%;
+          float: none;
+        }
+        .fb{
+          display: inline-block;
+            margin-right: 5px;
+            width: 100%;
+            float: none;
+        }
+         .fb .btn{
+          width: 100%;
+        }
+        .google .btn{
+          width: 100%;
+        }
+          }
     </style>   
     <section class="detail_news" style="background-color: #F2F2F2;">
         

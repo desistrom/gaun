@@ -92,8 +92,8 @@ $(function () {
   //- PIE CHART -
   //-------------
   // Get context with jQuery - using jQuery's .get() method.
-  var pieChartCanvas = $("#pieChart").get(0).getContext("2d");
-  var pieChart = new Chart(pieChartCanvas);
+  // var pieChartCanvas = $("#pieChart").get(0).getContext("2d");
+  // var pieChart = new Chart(pieChartCanvas);
 
   var pieOptions = {
     //Boolean - Whether we should show a stroke on each segment
@@ -123,7 +123,7 @@ $(function () {
   };
   //Create pie or douhnut chart
   // You can switch between pie and douhnut using the method below.
-  pieChart.Doughnut(PieData, pieOptions);
+  // pieChart.Doughnut(PieData, pieOptions);
   //-----------------
   //- END PIE CHART -
   //-----------------

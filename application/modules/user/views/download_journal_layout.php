@@ -66,7 +66,7 @@
     <div class="box-body">
       <div <?php if($sum_journal['total_download'] != 0){ ?>id="donut-chart" style="height: 250px;" <?php } ?>>
         <?php if($sum_journal['total_download'] == 0){ ?>
-          <div class="alert alert-warning btn-bg"><h3><center>Tidak ada journal terdownload</center></h3></div>
+          <div class="alert alert-warning btn-bg"><h3><center>Tidak ada journal yang didownload</center></h3></div>
         <?php } ?>
       </div>
     </div>
@@ -84,7 +84,7 @@
     <div class="box-body">
       <div <?php if($sum_artikel['total_download'] != 0){ ?> id="donut-chart-2" style="height: 250px;" <?php } ?>>
         <?php if($sum_artikel['total_download'] == 0){ ?>
-          <div class="alert alert-warning btn-bg"><h3><center>Tidak ada artikel terdownload</center></h3></div>
+          <div class="alert alert-warning btn-bg"><h3><center>Tidak ada artikel yang didownload</center></h3></div>
         <?php } ?>
       </div>
     </div>
@@ -171,6 +171,7 @@
 <script src="<?=base_url();?>assets/admin-jur/plugins/flot/jquery.flot.pie.min.js"></script>
 <!-- FLOT CATEGORIES PLUGIN - Used to draw bar charts -->
 <script src="<?=base_url();?>assets/admin-jur/plugins/flot/jquery.flot.categories.min.js"></script>
+<script src="<?=base_url();?>assets/admin-jur/plugins/flot/flot-tooltip.js"></script>
 <script type="text/javascript">
   $(document).ready(function () {
     $('body').on('click','.btn-acc', function(){
@@ -251,7 +252,7 @@ $(document).ready(function() {
 
         }
       },
-   /*      grid: {
+         grid: {
         hoverable: true
     },
     tooltip: true,
@@ -259,7 +260,7 @@ $(document).ready(function() {
         cssClass: "flotTip",
         content: "%s: %p.0%",
         defaultTheme: false
-    },*/
+    },
       legend: {
         show: true
       }
@@ -322,6 +323,15 @@ $(document).ready(function() {
 
         }
       },
+            grid: {
+        hoverable: true
+    },
+    tooltip: true,
+    tooltipOpts: {
+        cssClass: "flotTip",
+        content: "%s: %p.0%",
+        defaultTheme: false
+    },
       legend: {
         show: true
       }

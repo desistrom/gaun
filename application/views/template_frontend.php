@@ -47,6 +47,12 @@
                 border-radius: 4px;*/
                 left: -6em;
           }
+     #navcol-1.navbar-collapse {
+              max-height: 500px;
+          }
+          .navbar-fixed-top .navbar-collapse{
+            max-height: auto!important;
+          }
     </style>
     <include expiration=’7d’ path=’*.css’/><include expiration=’7d’ path=’*.js’/><include expiration=’3d’ path=’*.gif’/><include expiration=’3d’ path=’*.jpeg’/><include expiration=’3d’ path=’*.jpg’/><include expiration=’3d’ path=’*.png’/><meta http-equiv=”expires” content=”sat, 02 jun 2020 00:00:00 GMT”/>
 <?php 

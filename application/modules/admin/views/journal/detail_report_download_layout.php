@@ -2,10 +2,23 @@
   .table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td{
     border-top: 1px solid white;
   }  
-  .pieLabel div{
-    color: black!important;
-  }
-</style>
+        .flot {
+    left: 0px;
+    top: 0px;
+    width: 610px;
+    height: 250px;
+}
+#flotTip {
+    padding: 3px 5px;
+    background-color: #000;
+    z-index: 100;
+    color: #fff;
+    opacity: .80;
+    filter: alpha(opacity=85);
+}
+.pieLabel div{
+  color: black!important;
+}</style>
 <div class="col col-md-12 col-sm-12 col-xs-12">
  <div class="box">
             <div class="box-header with-border">
@@ -60,7 +73,7 @@
                   
                       <div id="donut-chart" style="height: 250px;">
                         <?php if($artikel['total_download'] == 0){ ?>
-                          <div class="alert alert-danger"><h3><center>Data Not Found</center></h3></div>
+                          <div class="alert alert-danger"><h3><center>Tidak ada artikel yang didownload</center></h3></div>
                         <?php } ?>
                       </div>
 
@@ -139,6 +152,7 @@
 <script src="<?=base_url();?>assets/admin-jur/plugins/flot/jquery.flot.pie.min.js"></script>
 <!-- FLOT CATEGORIES PLUGIN - Used to draw bar charts -->
 <script src="<?=base_url();?>assets/admin-jur/plugins/flot/jquery.flot.categories.min.js"></script>
+<script src="<?=base_url();?>assets/admin-jur/plugins/flot/flot-tooltip.js"></script>
 <?php if($artikel['total_download'] != 0){ ?>
 <script>
   $(function () {
@@ -172,6 +186,15 @@
 
         }
       },
+       grid: {
+        hoverable: true
+    },
+    tooltip: true,
+    tooltipOpts: {
+        cssClass: "flotTip",
+        content: "%s: %p.0%",
+        defaultTheme: false
+    },
       legend: {
         show: true
       }
@@ -179,7 +202,7 @@
     /*
      * END DONUT CHART
      */
-     var donutDataAbs = [
+     /*var donutDataAbs = [
       {label: "<?php echo $artikel['namaabs_1']; ?>", data: <?php echo $artikel['downloadabs_1']; ?>, color: "#BCF4B2"},
       {label: "<?php echo $artikel['namaabs_2']; ?>", data: <?php echo $artikel['downloadabs_2']; ?>, color: "#7CE969"},
       {label: "<?php echo $artikel['namaabs_3']; ?>", data: <?php echo $artikel['downloadabs_3']; ?>, color: "#238012"},
@@ -203,10 +226,19 @@
 
         }
       },
+        grid: {
+        hoverable: true
+    },
+    tooltip: true,
+    tooltipOpts: {
+        cssClass: "flotTip",
+        content: "%s: %p.0%",
+        defaultTheme: false
+    },
       legend: {
         show: true
       }
-    });
+    });*/
 
   });
 

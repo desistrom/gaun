@@ -58,7 +58,7 @@
             <form class="form-horizontal">
               <div class="box-body">
                 <div class="form-group">
-                  <label for="judul journal" class="  text-left">judul journal</label>
+                  <label for="judul journal" class="  text-left">judul journal*</label>
 
                   <div class="">
                     <input type="text" class="form-control new-input" id="judul" placeholder="judul journal" value="<?php $a=''; if(isset($journal)){ echo $journal['judul']; $a=$journal['deskripsi']; } ?>">
@@ -67,7 +67,7 @@
                 </div>
                 <?php if(!isset($journal)){ ?>
                 <div class="form-group">
-                  <label>User Author</label>
+                  <label>User Author*</label>
                   <select class="form-control select2" style="width: 100%;" id="user">
                     <option value="">--Pilih User--</option>
                     <?php foreach ($user as $key => $value): ?>
@@ -78,7 +78,7 @@
                 </div>
                 <?php } ?>
                 <div class="form-group">
-                  <label for="judul journal" class="  text-left">Deskripsi</label>
+                  <label for="judul journal" class="  text-left">Deskripsi*</label>
 
                   <div class="">
                     <?php echo $this->ckeditor->editor("content",$a ); ?>
@@ -104,7 +104,7 @@
                 </div>
               </div>
               <div class="form-group">
-                <label for="kategori" class="  text-left">Kategori journal</label>
+                <label for="kategori" class="  text-left">Kategori journal*</label>
 
                 <div class="">
                   <select class="form-control new-input" id="kategori" placeholder="Kategori journal">
@@ -116,11 +116,11 @@
                   <div class="error" id="ntf_kategori"></div>
                 </div>
                 <div class="form-group">
-                  <label for="gambar_journal" class="  text-left">gambar journal</label>
+                  <label for="gambar_journal" class="  text-left">gambar journal*</label>
 
                   <div class="">
                     <div class="col col-md-12 form-goup-file">
-                    <div class="input-file-right text-left"><label class="btn btn-success btn-choose-foto btn-green" style="text-align: left;" for="file_name"><i class="fa fa-film" ></i> image</label></div>
+                    <div class="input-file-right text-left"><label class="btn btn-success btn-choose-foto btn-green" style="text-align: left;" for="file_name"><i class="fa fa-film" ></i> image*</label></div>
                     <div class="input-file-left"><input type="file" class="form-control file new-input" name="file_name" id="file_name"></div> 
                     <div><i>*for best result use 450x240 px. <br> Max file size 400KB, Width 200px - 1024px. <br>Allowed file type : jpeg, jpg, png, gif.</i></div> 
         <div class="error" id="ntf_file_name"></div> 

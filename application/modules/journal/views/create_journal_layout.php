@@ -56,7 +56,7 @@
             <form class="form-horizontal">
               <div class="box-body">
                 <div class="form-group">
-                  <label for="judul journal" class="  text-left">judul journal</label>
+                  <label for="judul journal" class="  text-left">judul journal*</label>
 
                   <div class="">
                     <input type="text" class="form-control new-input" id="judul journal" placeholder="judul journal">

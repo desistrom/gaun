@@ -9,12 +9,12 @@
     <div class="panel-body col col-md-6 col-sm-6 col-xs-12">
       <!-- textarea -->
       <div class="form-group">
-        <label>No Volume</label>
+        <label>No Volume*</label>
         <input type="text" name="noro" class="form-control new-input" placeholder="No Volume" id="nomor">
         <div class="error" id="ntf_volume"></div>
       </div>
       <div class="form-group">
-        <label>Journal</label>
+        <label>Journal*</label>
         <select class="form-control new-input" name="journal" id="journal">
           <option value="">-- Pilih Journal --</option>
             <?php foreach ($journal as $key => $value): ?>
@@ -24,7 +24,7 @@
         <div class="error" id="ntf_journal"></div>
       </div>
       <div class="form-group">
-        <label>Volume</label>
+        <label>Volume*</label>
         <select class="form-control new-input" name="volume" id="volume">
           <option value="">-- Pilih Volume --</option>
         </select>

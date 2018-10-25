@@ -168,7 +168,7 @@ class Journal extends MX_Controller
             if ($this->form_validation->run() == true) {
                 $ret['state'] = 1;
                 $data_news['judul'] = $this->input->post('judul');
-                $data_news['slug'] = $this->slugify($this->input->post('judul'));
+                $data_news['slug'] = $this->slugify(word_limiter($this->input->post('judul'),10));
                 $data_news['deskripsi'] = $this->input->post('content');
                 $data_news['issn'] = $this->input->post('issn');
                 $data_news['id_kategori_ref'] = $this->input->post('kategori');
@@ -222,7 +222,7 @@ class Journal extends MX_Controller
             if ($this->form_validation->run() == true) {
                 $ret['state'] = 1;
                 $data_news['judul'] = $this->input->post('judul');
-                $data_news['slug'] = $this->slugify($this->input->post('judul'));
+                $data_news['slug'] = $this->slugify(word_limiter($this->input->post('judul')));
                 $data_news['deskripsi'] = $this->input->post('content');
                 $data_news['issn'] = $this->input->post('issn');
                 $data_news['id_kategori_ref'] = $this->input->post('kategori');
@@ -1344,6 +1344,8 @@ class Journal extends MX_Controller
       if (empty($text)) {
         return 'n-a';
       }
+
+      // word_limiter()
 
       return $text;
     }

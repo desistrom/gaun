@@ -117,12 +117,12 @@
     
       <!-- text input -->
       <div class="form-group">
-        <label>Judul Journal</label>
+        <label>Judul Journal*</label>
         <input type="text" name="judul" class="form-control new-input" id="judul" placeholder="Enter Judul Journal ..." value="">
         <div class="error" id="ntf_judul"></div>
       </div>
       <div class="form-group">
-      <label>Deskripsi Journal</label>
+      <label>Deskripsi Journal*</label>
       <?php echo $this->ckeditor->editor("content", "" ); ?>
         <input type="hidden" name="content" id="content">
         <div class="error" id="ntf_content"></div>
@@ -147,7 +147,7 @@
         <div class="error" id="ntf_issn"></div>
       </div>
       <div class="form-group">
-        <label>Kategori JOURNAL</label>
+        <label>Kategori JOURNAL*</label>
         <select class="form-control new-input" name="kategori" id="kategori">
           <option value="">-- Pilih Kategori --</option>
           <?php foreach ($kategori as $key => $value): ?>
@@ -157,7 +157,7 @@
         <div class="error" id="ntf_kategori"></div>
       </div>
       <div class="form-group">
-      <label>Journal Cover</label>
+      <label>Journal Cover*</label>
       <div class="col col-md-12 form-goup-file">
         <div class="input-file-right"><label class="btn btn-success btn-choose-foto btn-warning btn-bg" for="file_name"><i class="fa fa-upload" ></i>Choose File</label></div>
         <div class="input-file-left"><input type="file" class="form-control file new-input" name="file_name" id="file_name"></div> 
@@ -193,12 +193,12 @@
     
       <!-- text input -->
       <div class="form-group">
-        <label>Judul Journal</label>
+        <label>Judul Journal*</label>
         <input type="text" name="judul" class="form-control new-input" id="judul" placeholder="Enter Judul Journal ..." value="<?=$journal['judul'];?>">
         <div class="error" id="ntf_judul"></div>
       </div>
       <div class="form-group">
-      <label>Deskripsi Journal</label>
+      <label>Deskripsi Journal*</label>
       <?php echo $this->ckeditor->editor("content", $journal['deskripsi'] ); ?>
         <input type="hidden" name="content" id="content">
         <div class="error" id="ntf_content"></div>
@@ -223,7 +223,7 @@
         <div class="error" id="ntf_issn"></div>
       </div>
       <div class="form-group">
-        <label>Kategori JOURNAL</label>
+        <label>Kategori JOURNAL*</label>
         <select class="form-control new-input" name="kategori" id="kategori">
           <option value="">-- Pilih Kategori --</option>
           <?php foreach ($kategori as $key => $value): ?>
@@ -235,7 +235,7 @@
         <div class="error" id="ntf_kategori"></div>
       </div>
       <div class="form-group">
-      <label>Journal Cover</label>
+      <label>Journal Cover*</label>
       <div class="col col-md-12 form-goup-file">
         <div class="input-file-right"><label class="btn btn-success btn-choose-foto btn-bg btn-warning" for="file_name"><i class="fa fa-upload" ></i>Choose File</label></div>
         <div class="input-file-left"><input type="file" class="form-control file new-input" name="file_name" id="file_name"></div> 

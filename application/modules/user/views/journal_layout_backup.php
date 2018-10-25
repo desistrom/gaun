@@ -285,7 +285,7 @@
       </div>
     </div>
   <?php } ?>
-  <div class="modal fade" id="progresLoading" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="progresLoading" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="vertical-alignment-helper">
         <div class="modal-dialog vertical-align-center">
             <div class="modal-content">
@@ -304,6 +304,27 @@
                       <!-- <div class="overlay">
                         <i class="fa fa-refresh fa-spin"></i>
                       </div> -->
+                  </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="Loading" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center">
+            <div class="modal-content">
+                <div class="modal-body">
+                  <div class="box box-danger">
+                      <div class="box-header">
+                      </div>
+                      <div class="box-body">
+                      </div>
+                      <div class="overlay">
+                        <i class="fa fa-refresh fa-spin"></i>
+                      </div>
                   </div>
                 </div>
 
@@ -394,14 +415,16 @@
         }
       }
       
-      $('#progresLoading').modal('show');
+      
 
       if (er == 1) {
+        $('#Loading').modal('show');
         $('.error').show();
         $('.error').css({'color':'red', 'font-style':'italic','display':'block'});
-        $('#progresLoading').modal('hide');
+        $('#Loading').modal('hide');
         return false;
       }
+      $('#progresLoading').modal('show');
       var form_data = new FormData();
       form_data.append('judul', $('#judul').val());
       form_data.append('issn', $('#issn').val());

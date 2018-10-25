@@ -79,14 +79,14 @@
             <form class="form-horizontal">
               <div class="box-body">
                 <div class="form-group">
-                  <label for="judul journal" class="  text-left">judul Artikel</label>
+                  <label for="judul journal" class="  text-left">judul Artikel*</label>
                   <div class="">
                     <input type="text" class="form-control new-input" id="judul" placeholder="judul Artikel">
                     <div class="error" id="ntf_judul"></div>
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="judul journal" class="  text-left">Deskripsi</label>
+                  <label for="judul journal" class="  text-left">Deskripsi*</label>
                   <div class="">
                     <?php echo $this->ckeditor->editor("content","" ); ?>
                     <input type="hidden" name="content" id="content">
@@ -94,14 +94,14 @@
                   </div>
                 </div>
               <div class="form-group">
-                <label for="keyword" class="  text-left">Keyword</label>
+                <label for="keyword" class="  text-left">Keyword*</label>
                 <div class="">
                   <input type="text" class="form-control new-input" id="keyword" placeholder="Keyword">
                   <div class="error" id="ntf_keyword"></div>
                 </div>
               </div>
               <div class="form-group">
-                  <label for="judul journal" class="  text-left">references</label>
+                  <label for="judul journal" class="  text-left">references*</label>
                   <div class="">
                     <?php echo $this->ckeditor->editor("references","" ); ?>
                     <input type="hidden" name="references" id="ref">
@@ -119,7 +119,7 @@
             </div>
             <div class="box-body">
               <div class="form-group">
-                <label for="journal" class="  text-left">journal</label>
+                <label for="journal" class="  text-left">journal*</label>
 
                 <div class="">
                   <select class="form-control new-input" id="journal" placeholder="journal">
@@ -132,7 +132,7 @@
                 </div>   
               </div>
               <div class="form-group">
-                <label for="volume" class="  text-left">volume</label>
+                <label for="volume" class="  text-left">volume*</label>
                 <div class="">
                   <select class="form-control new-input" id="volume" placeholder="volume" style="margin-bottom: 10px;">
                     <option value="">--Pilih Journal--</option>
@@ -142,7 +142,7 @@
                 </div>   
               </div>
               <div class="form-group">
-                <label for="no_volume" class="  text-left">No Volume</label>
+                <label for="no_volume" class="  text-left">No Volume*</label>
 
                 <div class="">
                   <select class="form-control new-input" id="no_volume" placeholder="No Volume" style="margin-bottom: 10px;">
@@ -153,7 +153,7 @@
                 </div>   
               </div>
                 <div class="form-group form-file">
-                  <label for="gambar_journal" class="  text-left">Paper file</label>
+                  <label for="gambar_journal" class="  text-left">Paper file*</label>
                   <div class="">
                     <div class="col col-md-12 form-goup-file">
                     <div class="input-file-right text-left"><label class="btn btn-success btn-choose-foto btn-green" style="text-align: left;" for="file_name"><i class="fa fa-paperclip" ></i> Choose File</label></div>
@@ -165,10 +165,10 @@
                   </div>
                 </div>
                   <div class="form-group form-file">
-                  <label for="gambar_journal" class="  text-left">Abstrak file</label>
+                  <label for="gambar_journal" class="  text-left">Abstrak file*</label>
                   <div class="">
                     <div class="col col-md-12 form-goup-file">
-                    <div class="input-file-right text-left"><label class="btn btn-success btn-choose-foto btn-green" style="text-align: left;" for="file_name_abs"><i class="fa fa-paperclip" ></i> Choose File</label></div>
+                    <div class="input-file-right text-left"><label class="btn btn-success btn-choose-foto btn-green" style="text-align: left;" for="file_name_abs"><i class="fa fa-paperclip" ></i> Choose File*</label></div>
                     <div class="input-file-left"><input type="file" class="form-control file new-input" name="file_name_abs" id="file_name_abs"></div> 
                     <div><i>Max file size 3MB <br>Allowed file type : pdf</i></div> 
             <div class="error" id="ntf_file_name_abs"></div> 
@@ -178,14 +178,14 @@
                 </div>
                <div class="box-author" style="margin-bottom: 15px;">
                   <div class="form-group">
-                    <label for="author_name" class="text-left">Nama Author</label>
+                    <label for="author_name" class="text-left">Nama Author*</label>
                     <div class="">
                       <input type="text" class="form-control new-input nama" id="author_name" placeholder="Nama Author">
                       <div class="error" id="ntf_nama"></div>
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="jabatan" class="text-left">Jabatan Author</label>
+                    <label for="jabatan" class="text-left">Jabatan Author*</label>
                     <div class="">
                       <input type="text" class="form-control new-input jabatan" id="jabatan" placeholder="Jabatan Author">
                       <div class="error" id="ntf_jabatan"></div>

@@ -81,24 +81,24 @@
       
         <!-- text input -->
         <div class="form-group">
-          <label>Judul Artikel</label>
+          <label>Judul Artikel*</label>
           <input type="text" name="judul" class="form-control" id="judul" placeholder="Enter Judul Event ..." value="">
           <div class="error" id="ntf_judul"></div>
         </div>
         <div class="form-group">
-        <label>Abstraksi Artikel</label>
+        <label>Abstraksi Artikel*</label>
         <?php echo $this->ckeditor->editor("content", "" ); ?>
           <input type="hidden" name="content" id="content">
           <div class="error" id="ntf_content"></div>
         </div>
          <div class="form-group">
-          <label>Keyword</label>
+          <label>Keyword*</label>
           <input type="text" name="keyword" class="form-control" id="keyword" placeholder="Enter keyword Artikel ..." value="">
           <div class="error" id="ntf_keyword"></div>
         </div>
 
         <div class="form-group">
-          <label>Refernces</label>
+          <label>Refernces*</label>
           <?php
           $this->ckeditor->basePath = base_url().'assets/ckeditor/';
         $this->ckeditor->config['toolbar'] = array(
@@ -125,7 +125,7 @@
       </div>
       <div class="panel-body">
         <div class="form-group">
-          <label>Journal</label>
+          <label>Journal*</label>
           <select class="form-control" name="journal" id="journal">
             <option value="">-- Pilih Journal --</option>
             <?php foreach ($journal as $key => $value): ?>
@@ -135,7 +135,7 @@
           <div class="error" id="ntf_journal"></div>
         </div>
         <div class="form-group">
-          <label>Volume Jurnal</label>
+          <label>Volume Jurnal*</label>
           <select class="form-control" name="volume" id="volume">
             <option value="">-- Pilih Volume --</option>
             
@@ -144,7 +144,7 @@
         </div>
 
         <div class="form-group">
-          <label>No Volume Jurnal</label>
+          <label>No Volume Jurnal*</label>
           <select class="form-control" name="no_volume" id="no_volume">
             <option value="">-- Pilih No Volume --</option>
           </select>
@@ -154,7 +154,7 @@
        
 
         <div class="form-group">
-          <label>File Artikel</label>
+          <label>File Artikel*</label>
           <div class="col col-md-12 form-goup-file">
             <div class="input-file-right">
               <label class="btn btn-success btn-choose-foto" for="file_name"><i class="fa fa-upload" ></i>Choose File</label>
@@ -167,7 +167,7 @@
         </div>
 
         <div class="form-group">
-          <label>File Abstrak</label>
+          <label>File Abstrak*</label>
           <div class="col col-md-12 form-goup-file">
             <div class="input-file-right">
               <label class="btn btn-success btn-choose-foto" for="file_name_abs"><i class="fa fa-upload" ></i>Choose File</label>
@@ -181,13 +181,13 @@
 
         <div class="col col-md-12 col-sm-12 col-xs-12" style="padding: 10px;border:solid #A8A8A8 1px; margin-top:15px;">
           <div class="form-group">
-            <label>Nama Author</label>
+            <label>Nama Author*</label>
             <input type="text" name="nama" class="form-control nama" id="nama" placeholder="Enter Nama Author ..." value="">
             <div class="error" id="ntf_nama"></div>
           </div>
 
           <div class="form-group" style=" ">
-            <label>Jabatan Author</label>
+            <label>Jabatan Author*</label>
             <input type="text" name="jabatan" class="form-control jabatan" id="jabatan" placeholder="Enter Jabatan Author ..." value="">
             <div class="error" id="ntf_jabatan"></div>
           </div>
@@ -232,24 +232,24 @@
       
         <!-- text input -->
         <div class="form-group">
-          <label>Judul Artikel</label>
+          <label>Judul Artikel*</label>
           <input type="text" name="judul" class="form-control" id="judul" placeholder="Enter Judul Event ..." value="<?=$artikel['judul'];?>">
           <div class="error" id="ntf_judul"></div>
         </div>
         <div class="form-group">
-        <label>Abstraksi Artikel</label>
+        <label>Abstraksi Artikel*</label>
         <?php echo $this->ckeditor->editor("content", $artikel['abstrak'] ); ?>
           <input type="hidden" name="content" id="content">
           <div class="error" id="ntf_content"></div>
         </div>
             <div class="form-group">
-          <label>Keyword</label>
+          <label>Keyword*</label>
           <input type="text" name="keyword" class="form-control" id="keyword" placeholder="Enter keyword Artikel ..." value="<?=$artikel['keyword'];?>">
           <div class="error" id="ntf_keyword"></div>
         </div>
 
         <div class="form-group">
-          <label>References</label>
+          <label>References*</label>
           <?php
           $this->ckeditor->basePath = base_url().'assets/ckeditor/';
         $this->ckeditor->config['toolbar'] = array(
@@ -278,7 +278,7 @@
       </div>
       <div class="panel-body">
         <div class="form-group">
-          <label>Journal</label>
+          <label>Journal*</label>
           <select class="form-control" name="journal" id="journal">
             <option value="">-- Pilih Journal --</option>
             <?php foreach ($journal as $key => $value): ?>
@@ -288,7 +288,7 @@
           <div class="error" id="ntf_journal"></div>
         </div>
         <div class="form-group">
-          <label>Volume Jurnal</label>
+          <label>Volume Jurnal*</label>
           <select class="form-control" name="volume" id="volume">
             <option value="">-- Pilih Volume --</option>
             <option selected value="<?=$artikel['id_volume'];?>">Volume. <?=$artikel['volume'];?></option>
@@ -298,7 +298,7 @@
         </div>
 
         <div class="form-group">
-          <label>No Volume Jurnal</label>
+          <label>No Volume Jurnal*</label>
           <select class="form-control" name="no_volume" id="no_volume">
             <option value="">-- Pilih No Volume --</option>
             <option selected value="<?=$artikel['id_no_volume'];?>">No. <?=$artikel['nomor'];?></option>
@@ -309,7 +309,7 @@
     
 
         <div class="form-group">
-          <label>File Artikel</label>
+          <label>File Artikel*</label>
           <div class="col col-md-12 form-goup-file">
             <div class="input-file-right">
               <label class="btn btn-success btn-choose-foto" for="file_name"><i class="fa fa-upload" ></i>Choose File</label>
@@ -321,7 +321,7 @@
           </div>
         </div>
         <div class="form-group">
-          <label>File Abstrak</label>
+          <label>File Abstrak*</label>
           <div class="col col-md-12 form-goup-file">
             <div class="input-file-right">
               <label class="btn btn-success btn-choose-foto" for="file_name_abs"><i class="fa fa-upload" ></i>Choose File</label>
@@ -336,13 +336,13 @@
         <div class="card_<?=$value['id_author'];?>" style="margin-bottom: 10px">
           <div class="col col-md-12 col-sm-12 col-xs-12" style="padding: 10px;border:solid #A8A8A8 1px; margin-top:15px;">
         <div class="form-group">
-          <label>Nama Author</label>
+          <label>Nama Author*</label>
           <input type="text" name="nama" class="form-control nama_<?=$value['id_author'];?>" id="nama_<?=$value['id_author'];?>" placeholder="Enter Nama Author ..." value="<?=$value['nama'];?>" disabled="true">
           <div class="error" id="ntf_nama_<?=$value['id_author'];?>"></div>
         </div>
 
         <div class="form-group" >
-          <label>Jabatan Author</label>
+          <label>Jabatan Author*</label>
           <input type="text" name="jabatan" class="form-control jabatan_<?=$value['id_author'];?>" id="jabatan_<?=$value['id_author'];?>" placeholder="Enter Jabatan Author ..." value="<?=$value['jabatan'];?>" disabled="true">
           <div class="error" id="ntf_jabatan_<?=$value['id_author'];?>"></div>
         </div>

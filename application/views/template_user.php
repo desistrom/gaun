@@ -33,6 +33,9 @@
   <!-- bootstrap wysihtml5 - text editor -->
   <!-- <link rel="stylesheet" href="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css"> -->
   <style type="text/css">
+  .btn:focus, button{
+  outline: none!important;
+}
     .sidebar-form.form-search{
       /*width: 60%;*/
       display: inline-block;
@@ -325,6 +328,39 @@
   .pieLabel div{
     color: black!important;
   }
+form .box-body{
+    padding-top: 0;
+  }
+
+    @media(max-width:767px){
+.sub-content-artikel .sub-content-artikel-body{
+  padding: 0 15px;
+}
+.sub-content-journal .sub-content-journal-header .list-journal{
+  padding: 15px;
+}
+.sub-content-journal .sub-content-journal-header .list-journal .owl-nav .owl-next{
+  right: 0;
+}
+.sub-content-journal .sub-content-journal-header .list-journal .owl-nav .owl-prev{
+  left: 0;
+}
+.txt-seemore{
+  right: 30px;
+  margin-top: -1.1em;
+}
+.sub-content-artikel .sub-content-artikel-body .artikel-body-left i{
+  font-size: 55px;
+}
+.sub-content-artikel .sub-content-artikel-body .artikel-body-right{
+  font-size: 12px;
+}
+.sub-content-artikel .sub-content-artikel-body .artikel-body-icedit{
+  float: none;
+  right: 0;
+  position: absolute;
+}
+}
   </style>
   <script src="<?=base_url();?>assets/js/jquery-2.2.3.min.js"></script>
   <script src="<?=base_url();?>assets/js/jquery-ui.min.js"></script>

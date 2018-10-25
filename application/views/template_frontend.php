@@ -35,16 +35,7 @@
     <style type="text/css">
       .modal .ntf_err{color:red}.jsCalendar.material-theme thead{background-color:#D10909!important}.jsCalendar tbody td.jsCalendar-current{background-color:#D10909!important;border-radius:0;transition:0}.jsCalendar tbody{margin:0!important;padding:0!important}.jsCalendar thead{margin:0!important;padding:0!important}.jsCalendar thead .jsCalendar-week-days th,.jsCalendar tbody td{margin:0;height:30px;width:35px}.jsCalendar tbody td:hover{background-color:#EFDBDB;border-radius:0}.waubutton.wau.push{width:100%!important}#ifrm{display:none!important}.address-foot{font-size:14px;word-wrap:break-word}.flag-count{width:100%}.flagcounter-foot{height:auto;overflow:hidden;padding-top:20px}.sub-flagcounter-foot{margin-top:-1em;display:inline-block}.list-inline>li{display:inline!important}.nav li a.active.btn-gabung{background-color:white;color:#D10909;border-radius:5px;border:solid 2px #D10909}.nav li a.active.btn-gabung:hover{background-color:white;color:#891111;border-radius:5px;border:solid 2px #891111}ul.dropdown-menu li a{border:0}.calender_footer{width:100%}.calender_footer table{width:100%}.calender_footer table tr td{padding:6px 5px}.calender_footer .heading,.calender_footer .week{background-color:#D10909!important;color:white}.calender_footer .heading,.calender_footer .week:hover{background-color:#D10909!important;color:white}.calender_footer table tr td,.calender_footer table tr th{border:none;cursor:default}.calender_footer table tr td:hover{background-color:#EFDBDB!important}.calender_footer .highlight{background-color:#D10909!important;color:white}.heading i.fa{background-color:#D10909!important}
 
-
-       /*   ul.dropdown-menu li a:hover{
-            color: #D10909;
-            border: 0;
-            border-bottom: solid 0 #E72A2A;
-            background-color: white;
-          }*/
-           .nav li.sub-btn-gabung .dropdown-menu{
-                /*border: solid 1px #D10909;
-                border-radius: 4px;*/
+      .nav li.sub-btn-gabung .dropdown-menu{
                 left: -6em;
           }
      #navcol-1.navbar-collapse {
@@ -52,6 +43,11 @@
           }
           .navbar-fixed-top .navbar-collapse{
             max-height: auto!important;
+          }
+          @media(max-width:767px){
+            .dropdown .fa{
+              float: right;
+            }
           }
     </style>
     <include expiration=’7d’ path=’*.css’/><include expiration=’7d’ path=’*.js’/><include expiration=’3d’ path=’*.gif’/><include expiration=’3d’ path=’*.jpeg’/><include expiration=’3d’ path=’*.jpg’/><include expiration=’3d’ path=’*.png’/><meta http-equiv=”expires” content=”sat, 02 jun 2020 00:00:00 GMT”/>
@@ -209,9 +205,30 @@
     <script src="<?=base_url();?>assets/js/bootstrap.min.js"></script>
     <script src="<?=base_url();?>assets/js/owl.carousel.min.js"></script>
     <script src="<?=base_url();?>assets/share_link/js/social-share-kit.min.js"></script>
-    <script type="text/javascript">
-    
-        
+     <script type="text/javascript">
+      $(window).width(function(){
+
+           if ($(window).width() <= 767) {  
+                $(".dropdown").find(".fa").removeClass("fa-angle-down").addClass("fa-angle-right");
+                 
+                $('body').on('click','.dropdown', function(){
+                 
+      
+                    if ($(this).find(".fa").hasClass("fa-angle-right")) {
+                      $(this).find(".fa").removeClass("fa-angle-right").addClass("fa-angle-down");
+                    }else{
+                       $(this).find(".fa").addClass("fa-angle-right").removeClass("fa-angle-down");
+                    }
+                 });
+                $('body').on('click','.dropdown', function(){
+                  if ($(".dropdown").hasClass("open")) {
+                     $(".open").find(".fa").addClass("fa-angle-right").removeClass("fa-angle-down");
+                    }
+                  
+                });
+                
+           }     
+    });
     </script>
     <script type="text/javascript">
 SocialShareKit.init({

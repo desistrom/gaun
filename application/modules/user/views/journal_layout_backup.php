@@ -229,7 +229,7 @@
           <?php foreach ($kategori as $key => $value): ?>
             <option <?php if ($journal['id_kategori_ref'] == $value['id_kategori']): ?>
               selected
-            <?php endif ?> value="<?=$value['id_kategori'];?>"><?=$value['nama'];?></option>
+            <?php endif; ?> value="<?php echo $value['id_kategori'];?>"><?php echo $value['nama'];?></option>
           <?php endforeach ?>
         </select>
         <div class="error" id="ntf_kategori"></div>
@@ -240,10 +240,11 @@
         <div class="input-file-right"><label class="btn btn-success btn-choose-foto btn-bg btn-warning" for="file_name"><i class="fa fa-upload" ></i>Choose File</label></div>
         <div class="input-file-left"><input type="file" class="form-control file new-input" name="file_name" id="file_name"></div> 
         <div><i>*for best result use 450x240 px. <br> Max file size 400KB, Width 200px - 1024px. <br>Allowed file type : jpeg, jpg, png, gif.</i></div> 
+        <br>
         <div class="error" id="ntf_file_name"></div> 
         <div class="error" id="ntf_error"></div> 
       </div>
-      <img src="<?=base_url();?>assets/media/<?=$journal['futured_image'];?>" style="width: 100%;" >
+      <img src="<?php echo base_url().'assets/media/'.$journal['futured_image'];?>" style="width: 100%;">
     </div>
   <!--     <div class="form-group">
         <label>Gambar Berita</label>
@@ -293,10 +294,16 @@
                       <div class="box-header">
                       </div>
                       <div class="box-body">
+                        <div class="progress">
+                          <div class="progress-bar" role="progressbar" aria-valuenow="0"
+                          aria-valuemin="0" aria-valuemax="100" style="width:0%">
+                            0%
+                          </div>
+                        </div>
                       </div>
-                      <div class="overlay">
+                      <!-- <div class="overlay">
                         <i class="fa fa-refresh fa-spin"></i>
-                      </div>
+                      </div> -->
                   </div>
                 </div>
 
@@ -310,24 +317,109 @@
 <script type="text/javascript">
   $(document).ready(function () {
     $('body').on('click','#submit', function(){
-      $('#progresLoading').modal('show');
-      var form_data = new FormData();
+      $('.error').hide();
+      $('.error').text('');
+
       var file_data = $('#file_name').prop('files')[0];
+      var er = '';
       $('#content').val(CKEDITOR.instances.content.getData());
+      if ($('#judul').val() == '') {
+        er = 1;
+        $('#ntf_judul').html('The Judul Journal field is required.');
+      }
+      // if ($('#issn').val() == '') {
+      //   er = 1;
+      //   $('#ntf_issn').html('The Judul Journal field is required.');
+      // }
+      // console.log($('#file_name').prop('files'));
+      if ($('#content').val() == '') {
+        er = 1;
+        $('#ntf_content').html('The Content field is required.');
+      }
+      if ($('#kategori').val() == '') {
+        er = 1;
+        $('#ntf_kategori').html('The Kategori field is required.');
+      }
+      var uri = get_url(window.location.href);
+      if ($.isNumeric(uri)) {
+        if (file_data != undefined) {
+          if (file_data.size > 400000) {
+            er = 1;
+            $('#ntf_file_name').html('The file size is too large.');
+          }
+          var img = new Image();
+          img.src = window.URL.createObjectURL( file_data );
+          img.onload = function() {
+              var width = img.naturalWidth,
+                  height = img.naturalHeight;
+
+              window.URL.revokeObjectURL( img.src );
+
+              if( width > 1024) {
+                  er = 1;
+                  $('#ntf_error').html('The File Width is too large.');
+              }
+          };
+          if (file_data.type != 'image/jpg' && file_data.type != 'image/png' && file_data.type != 'image/jpeg' && file_data.type != 'image/gif') {
+            er = 1;
+            $('#ntf_error').html('File Type not Allowed.');
+          }
+        }
+      }else{
+        if (file_data == undefined) {
+          er = 1;
+          $('#ntf_file_name').html('The Journal Cover field is required.');
+        }else{
+          if (file_data.size > 400000) {
+            er = 1;
+            $('#ntf_file_name').html('The file size is too large.');
+          }
+          var img = new Image();
+          img.src = window.URL.createObjectURL( file_data );
+          img.onload = function() {
+              var width = img.naturalWidth,
+                  height = img.naturalHeight;
+
+              window.URL.revokeObjectURL( img.src );
+
+              if( width > 1024) {
+                  er = 1;
+                  $('#ntf_error').html('The File Width is too large.');
+              }
+          };
+          if (file_data.type != 'image/jpg' && file_data.type != 'image/png' && file_data.type != 'image/jpeg' && file_data.type != 'image/gif') {
+            er = 1;
+            $('#ntf_error').html('File Type not Allowed.');
+          }
+        }
+      }
+      
+      $('#progresLoading').modal('show');
+
+      if (er == 1) {
+        $('.error').show();
+        $('.error').css({'color':'red', 'font-style':'italic','display':'block'});
+        $('#progresLoading').modal('hide');
+        return false;
+      }
+      var form_data = new FormData();
       form_data.append('judul', $('#judul').val());
       form_data.append('issn', $('#issn').val());
       form_data.append('content', $('#content').val());
       form_data.append('kategori', $('#kategori').val());
-      // form_data.append('tgl_event', $('#tgl_event').val());
-      // form_data.append('start_event', $('#start_event').val());
-      // form_data.append('end_event', $('#end_event').val());
       form_data.append('file_name', file_data);
       $.ajax({
           url : window.location.href,
           dataType : 'json',
           type : 'POST',
           data : form_data,
-          async : false,
+          xhr: function() {
+                var myXhr = $.ajaxSettings.xhr();
+                if(myXhr.upload){
+                    myXhr.upload.addEventListener('progress',progress, false);
+                }
+                return myXhr;
+        },
           cache : false ,
           contentType : false , 
           processData : false
@@ -347,137 +439,164 @@
             $.each(data.notif,function(key,value){
             $('.error').show();
             $('#ntf_'+ key).html(value);
-            $('#ntf_'+ key).css({'color':'red', 'font-style':'italic'});
+            $('#ntf_'+ key).css({'color':'red', 'font-style':'italic','display':'block'});
             });
       });
 
     });
 
-    $('body').on('click','#submit_artikel', function(){
-      $('#progresLoading').modal('show');
-      var nama = [];
-      var jabatan = [];
-      var form_data = new FormData();
-      $.each($('.nama'),function(i){
-        nama.push($(this).val());
-      });
+    function progress(e){
 
-      $.each($('.jabatan'),function(i){
-        jabatan.push($(this).val());
-      });
-      var file_data = $('#file_name').prop('files')[0];
-      $('#content').val(CKEDITOR.instances.content.getData());
-      form_data.append('judul', $('#judul').val());
-      form_data.append('volume', $('#volume').val());
-      form_data.append('no_volume', $('#no_volume').val());
-      form_data.append('content', $('#content').val());
-      form_data.append('keyword', $('#keyword').val());
-      form_data.append('ref', $('#ref').val());
-      // form_data.append('tgl_event', $('#tgl_event').val());
-      // form_data.append('start_event', $('#start_event').val());
-      // form_data.append('end_event', $('#end_event').val());
-      form_data.append('file_name', file_data);
-      $.ajax({
-          url : window.location.href,
-          dataType : 'json',
-          type : 'POST',
-          data : form_data,
-          async : false,
-          cache : false ,
-          contentType : false , 
-          processData : false
-      }).done(function(data){
-          console.log(data);
-          $('#progresLoading').modal('hide');
-          if(data.state == 1){
-            if (data.status == 1) {
-              window.location.href = data.url;
-            }else{
-              $('.error_pass').show();
-              $('.error_pass').css({'color':'red', 'font-style':'italic', 'text-align':'center'});
-              console.log(data);
-              $('.error_pass').html(data.error);
-            }
-          }
-            $.each(data.notif,function(key,value){
-            $('.error').show();
-            $('#ntf_'+ key).html(value);
-            $('#ntf_'+ key).css({'color':'red', 'font-style':'italic'});
-            });
-      });
+      if(e.lengthComputable){
+        var max = e.total;
+        var current = e.loaded;
 
-    });
+        var Percentage = (current * 100)/max;
+        var st = String(Percentage);
+        var a = st.split('.');
+        Percentage = a[0];
+        $('#progresLoading .progress-bar').prop('aria-valuenow',Percentage);
+        $('#progresLoading .progress-bar').text(Percentage+'%');
+        $('#progresLoading .progress-bar').css({'width': Percentage+'%'});
+        console.log(Percentage);
 
-    $('body').on('click','.btn-add-artikel',function(){
-      var id = $(this).attr('id');
-      console.log(id);
-      console.log('id');
-      window.location.href = base_url+'user/journal/add_artikel/'+id;
-    });
 
-    $('body').on('click','.btn_more',function(){
-      var html = '<div class="form-group"> <label>Nama Author</label> <input type="text" name="nama" class="form-control nama" id="nama" placeholder="Enter Nama Author ..." value=""> <div class="error" id="ntf_nama"></div></div><div class="form-group"> <label>Jabatan Author</label> <input type="text" name="jabatan" class="form-control jabatan" id="jabatan" placeholder="Enter Jabatan Author ..." value=""> <div class="error" id="ntf_jabatan"></div></div>';
-      $('.more').append(html);
-    });
+        if(Percentage >= 100)
+        {
+           // process completed  
+        }
+      }  
+     }
 
-    $('body').on('click','.detail', function(){
-      // $('#progresLoading').modal('show');
-      var id = $(this).attr('id');
-      $.ajax({
-          url : base_url+'user/journal/detail_journal/'+id,
-          dataType : 'json',
-          async : false,
-          cache : false ,
-          contentType : false , 
-          processData : false
-      }).done(function(data){
-        console.log(data);
-        $('#modalDetail .btn-add-artikel').attr('id',data.id);
-        $('#modalDetail #issn_view').html(data.issn);
-        $('#modalDetail #visitor_view').html(data.visitor);
-        $('#modalDetail tbody').html(data.table);
-        $('#modalDetail').modal('show');
-        $('.modal-backdrop').remove();
-      });
-    });
+    function get_url(url){
+      return url.split('/').pop()
+    }
 
-    $('body').on('click','#volume', function(){
-      // $('#progresLoading').modal('show');
-      var id = $(this).val();
-      if (id == '') {
+    // $('body').on('click','#submit_artikel', function(){
+    //   $('#progresLoading').modal('show');
+    //   var nama = [];
+    //   var jabatan = [];
+    //   var form_data = new FormData();
+    //   $.each($('.nama'),function(i){
+    //     nama.push($(this).val());
+    //   });
 
-      }
-      $.ajax({
-          url : base_url+'user/journal/no_volume/'+id,
-          dataType : 'json',
-          async : false,
-          cache : false ,
-          contentType : false , 
-          processData : false
-      }).done(function(data){
-        console.log(data);
-        $('#no_volume').html(data);
-      });
-    });
+    //   $.each($('.jabatan'),function(i){
+    //     jabatan.push($(this).val());
+    //   });
+    //   var file_data = $('#file_name').prop('files')[0];
+    //   $('#content').val(CKEDITOR.instances.content.getData());
+    //   form_data.append('judul', $('#judul').val());
+    //   form_data.append('volume', $('#volume').val());
+    //   form_data.append('no_volume', $('#no_volume').val());
+    //   form_data.append('content', $('#content').val());
+    //   form_data.append('keyword', $('#keyword').val());
+    //   form_data.append('ref', $('#ref').val());
+    //   // form_data.append('tgl_event', $('#tgl_event').val());
+    //   // form_data.append('start_event', $('#start_event').val());
+    //   // form_data.append('end_event', $('#end_event').val());
+    //   form_data.append('file_name', file_data);
+    //   $.ajax({
+    //       url : window.location.href,
+    //       dataType : 'json',
+    //       type : 'POST',
+    //       data : form_data,
+    //       async : false,
+    //       cache : false ,
+    //       contentType : false , 
+    //       processData : false
+    //   }).done(function(data){
+    //       console.log(data);
+    //       $('#progresLoading').modal('hide');
+    //       if(data.state == 1){
+    //         if (data.status == 1) {
+    //           window.location.href = data.url;
+    //         }else{
+    //           $('.error_pass').show();
+    //           $('.error_pass').css({'color':'red', 'font-style':'italic', 'text-align':'center'});
+    //           console.log(data);
+    //           $('.error_pass').html(data.error);
+    //         }
+    //       }
+    //         $.each(data.notif,function(key,value){
+    //         $('.error').show();
+    //         $('#ntf_'+ key).html(value);
+    //         $('#ntf_'+ key).css({'color':'red', 'font-style':'italic'});
+    //         });
+    //   });
 
-    $('body').on('click','#volume', function(){
-      // $('#progresLoading').modal('show');
-      var id = $(this).val();
-      if (id == '') {
+    // });
 
-      }
-      $.ajax({
-          url : base_url+'user/journal/no_volume/'+id,
-          dataType : 'json',
-          async : false,
-          cache : false ,
-          contentType : false , 
-          processData : false
-      }).done(function(data){
-        console.log(data);
-        $('#no_volume').html(data);
-      });
-    });
+    // $('body').on('click','.btn-add-artikel',function(){
+    //   var id = $(this).attr('id');
+    //   console.log(id);
+    //   console.log('id');
+    //   window.location.href = base_url+'user/journal/add_artikel/'+id;
+    // });
+
+    // $('body').on('click','.btn_more',function(){
+    //   var html = '<div class="form-group"> <label>Nama Author</label> <input type="text" name="nama" class="form-control nama" id="nama" placeholder="Enter Nama Author ..." value=""> <div class="error" id="ntf_nama"></div></div><div class="form-group"> <label>Jabatan Author</label> <input type="text" name="jabatan" class="form-control jabatan" id="jabatan" placeholder="Enter Jabatan Author ..." value=""> <div class="error" id="ntf_jabatan"></div></div>';
+    //   $('.more').append(html);
+    // });
+
+    // $('body').on('click','.detail', function(){
+    //   // $('#progresLoading').modal('show');
+    //   var id = $(this).attr('id');
+    //   $.ajax({
+    //       url : base_url+'user/journal/detail_journal/'+id,
+    //       dataType : 'json',
+    //       async : false,
+    //       cache : false ,
+    //       contentType : false , 
+    //       processData : false
+    //   }).done(function(data){
+    //     console.log(data);
+    //     $('#modalDetail .btn-add-artikel').attr('id',data.id);
+    //     $('#modalDetail #issn_view').html(data.issn);
+    //     $('#modalDetail #visitor_view').html(data.visitor);
+    //     $('#modalDetail tbody').html(data.table);
+    //     $('#modalDetail').modal('show');
+    //     $('.modal-backdrop').remove();
+    //   });
+    // });
+
+    // $('body').on('click','#volume', function(){
+    //   // $('#progresLoading').modal('show');
+    //   var id = $(this).val();
+    //   if (id == '') {
+
+    //   }
+    //   $.ajax({
+    //       url : base_url+'user/journal/no_volume/'+id,
+    //       dataType : 'json',
+    //       async : false,
+    //       cache : false ,
+    //       contentType : false , 
+    //       processData : false
+    //   }).done(function(data){
+    //     console.log(data);
+    //     $('#no_volume').html(data);
+    //   });
+    // });
+
+    // $('body').on('click','#volume', function(){
+    //   // $('#progresLoading').modal('show');
+    //   var id = $(this).val();
+    //   if (id == '') {
+
+    //   }
+    //   $.ajax({
+    //       url : base_url+'user/journal/no_volume/'+id,
+    //       dataType : 'json',
+    //       async : false,
+    //       cache : false ,
+    //       contentType : false , 
+    //       processData : false
+    //   }).done(function(data){
+    //     console.log(data);
+    //     $('#no_volume').html(data);
+    //   });
+    // });
     $('#modalSuccess').modal('show');
   });
 </script>

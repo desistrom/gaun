@@ -202,7 +202,7 @@
     /*
      * END DONUT CHART
      */
-     /*var donutDataAbs = [
+     var donutDataAbs = [
       {label: "<?php echo $artikel['namaabs_1']; ?>", data: <?php echo $artikel['downloadabs_1']; ?>, color: "#BCF4B2"},
       {label: "<?php echo $artikel['namaabs_2']; ?>", data: <?php echo $artikel['downloadabs_2']; ?>, color: "#7CE969"},
       {label: "<?php echo $artikel['namaabs_3']; ?>", data: <?php echo $artikel['downloadabs_3']; ?>, color: "#238012"},
@@ -229,7 +229,7 @@
       legend: {
         show: true
       }
-    });*/
+    });
 
   });
 

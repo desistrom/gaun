@@ -295,6 +295,27 @@ div.container-fluid.footer-bottom{
   bottom: 10px;
   right: 10px;
 }
+.btn:focus{
+  outline: none;
+}
+@media(max-width:767px){
+.sub-content-artikel .sub-content-artikel-body{
+  padding: 0 15px;
+}
+.sub-content-journal .sub-content-journal-header .list-journal{
+  padding: 15px;
+}
+.sub-content-journal .sub-content-journal-header .list-journal .owl-nav .owl-next{
+  right: 0;
+}
+.sub-content-journal .sub-content-journal-header .list-journal .owl-nav .owl-prev{
+  left: 0;
+}
+.txt-seemore{
+  right: 30px;
+  margin-top: -1.1em;
+}
+}
 </style>
  <link rel="stylesheet" href="<?=base_url();?>assets/admin-jur/plugins/owlcarousel/assets/owl.carousel.min.css">
     <link rel="stylesheet" href="<?=base_url();?>assets/admin-jur/plugins/owlcarousel/assets/owl.theme.default.min.css">
@@ -478,7 +499,7 @@ div.container-fluid.footer-bottom{
                     items: 1
                   },
                   600: {
-                    items: 4
+                    items: 2
                   },
                   1000: {
                     items: 4

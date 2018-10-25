@@ -173,7 +173,7 @@
               <label class="btn btn-success btn-choose-foto btn-warning btn-bg" for="file_name"><i class="fa fa-upload" ></i>Choose File</label>
             </div>
             <div class="input-file-left"><input type="file" class="form-control file new-input" name="file_name" id="file_name"></div> 
-            <div><i>Max file size 100MB <br>Allowed file type : pdf, docx</i></div> 
+            <div><i>Max file size 3MB <br>Allowed file type : pdf, docx</i></div> 
             <div class="error" id="ntf_file_name"></div> 
             <div class="error" id="ntf_error"></div> 
           </div>
@@ -186,7 +186,7 @@
               <label class="btn btn-success btn-choose-foto btn-warning btn-bg" for="file_name_abs"><i class="fa fa-upload" ></i>Choose File</label>
             </div>
             <div class="input-file-left"><input type="file" class="form-control file new-input" name="file_name_abs" id="file_name_abs"></div> 
-            <div><i>Max file size 100MB <br>Allowed file type : pdf, docx</i></div> 
+            <div><i>Max file size 3MB <br>Allowed file type : pdf, docx</i></div> 
             <div class="error" id="ntf_file_name_abs"></div> 
             <div class="error" id="ntf_abs_error"></div> 
           </div>
@@ -330,7 +330,7 @@
               <label class="btn btn-warning btn-choose-foto btn-bg" for="file_name"><i class="fa fa-upload" ></i>Choose File</label>
             </div>
             <div class="input-file-left"><input type="file" class="form-control file new-input" name="file_name" id="file_name"></div> 
-            <div><i>Max file size 100MB <br>Allowed file type : pdf, docx</i></div> 
+            <div><i>Max file size 3MB <br>Allowed file type : pdf, docx</i></div> 
             <div class="error" id="ntf_file_name"></div> 
             <div class="error" id="ntf_error"></div> 
           </div>
@@ -342,7 +342,7 @@
               <label class="btn btn-warning btn-choose-foto btn-bg" for="file_name_abs"><i class="fa fa-upload" ></i>Choose File</label>
             </div>
             <div class="input-file-left"><input type="file" class="form-control file new-input" name="file_name_abs" id="file_name_abs"></div> 
-            <div><i>Max file size 100MB <br>Allowed file type : pdf, docx</i></div> 
+            <div><i>Max file size 3MB <br>Allowed file type : pdf, docx</i></div> 
             <div class="error" id="ntf_file_name_abs"></div> 
             <div class="error" id="ntf_abs_error"></div> 
           </div>
@@ -520,6 +520,7 @@
       $('#content').val(CKEDITOR.instances.content.getData());
       $('#ref').val(CKEDITOR.instances.references.getData());
       var er = '';
+      
       if ($('#judul').val() == '') {
         er = 1;
         $('#ntf_judul').html('The Judul Journal field is required.');
@@ -572,6 +573,12 @@
           }
         }
       }else{
+        if (nama == '') {
+          $('#ntf_nama').html('Please fill one column');
+        }
+        if (jabatan == '') {
+          $('#ntf_jabatan').html('Please fill one column.');
+        }
         if (file_data == undefined) {
           er = 1;
           $('#ntf_file_name').html('The Journal Cover field is required.');

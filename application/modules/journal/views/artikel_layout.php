@@ -158,7 +158,7 @@
                     <div class="col col-md-12 form-goup-file">
                     <div class="input-file-right text-left"><label class="btn btn-success btn-choose-foto btn-green" style="text-align: left;" for="file_name"><i class="fa fa-paperclip" ></i> Choose File</label></div>
                     <div class="input-file-left"><input type="file" class="form-control file new-input" name="file_name" id="file_name"></div> 
-                  <div><i>Max file size 100MB <br>Allowed file type : pdf, docx</i></div> 
+                  <div><i>Max file size 3MB <br>Allowed file type : pdf</i></div> 
             <div class="error" id="ntf_file_name"></div> 
             <div class="error" id="ntf_error"></div>
                   </div>
@@ -170,7 +170,7 @@
                     <div class="col col-md-12 form-goup-file">
                     <div class="input-file-right text-left"><label class="btn btn-success btn-choose-foto btn-green" style="text-align: left;" for="file_name_abs"><i class="fa fa-paperclip" ></i> Choose File</label></div>
                     <div class="input-file-left"><input type="file" class="form-control file new-input" name="file_name_abs" id="file_name_abs"></div> 
-                    <div><i>Max file size 100MB <br>Allowed file type : pdf, docx</i></div> 
+                    <div><i>Max file size 3MB <br>Allowed file type : pdf</i></div> 
             <div class="error" id="ntf_file_name_abs"></div> 
             <div class="error" id="ntf_abs_error"></div>
                   </div>

@@ -30,6 +30,9 @@
     border-radius: 0;
     padding-left: 7px;
   }
+  .error{
+    color: red;
+  }
   .logo-fav{
     width: 100px;
   }
@@ -76,9 +79,9 @@
             <form class="form-horizontal">
               <div class="box-body">
                 <div class="form-group">
-                  <label for="judul journal" class="  text-left">judul journal</label>
+                  <label for="judul journal" class="  text-left">judul Artikel</label>
                   <div class="">
-                    <input type="text" class="form-control new-input" id="judul journal" placeholder="judul journal">
+                    <input type="text" class="form-control new-input" id="judul" placeholder="judul Artikel">
                     <div class="error" id="ntf_judul"></div>
                   </div>
                 </div>
@@ -204,35 +207,67 @@
           
           <div class="error" id="ntf_agree"></div>
         </div>
-             <!--  <div class="form-group">
-                <table style="padding-top: 15px;">
-                  <tr>
-                    <td>
-                      <input type="checkbox" name="agree" id="agree" value="1" style="float: left;margin-top: -1.5em; margin-right: 5px;">
-                    </td>
-                    <td>
-                      <p class="form-control-static" style="background-color: red;color: white;padding: 0;">Saya Telah membaca dan menyetujui semua persayratan dan peraturan yang di ajukan</p>
-                    </td>
-                  </tr>
-                </table>
-                
-                
-                <div class="error" id="ntf_agree"></div>
-              </div> -->
             </div>
               <div class="box-footer">
                 <button type="button" class="btn btn-success btn-green pull-right " id="submit_artikel">Save</button>
               </div>
           </div>
         </div>
+<div class="modal fade" id="progresLoading" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center">
+            <div class="modal-content">
+                <div class="modal-body">
+                  <div class="box box-danger">
+                      <div class="box-header">
+                      </div>
+                      <div class="box-body">
+                        <div class="progress">
+                          <div class="progress-bar" role="progressbar" aria-valuenow="0"
+                          aria-valuemin="0" aria-valuemax="100" style="width:0%">
+                            0%
+                          </div>
+                        </div>
+                      </div>
+                      <!-- <div class="overlay">
+                        <i class="fa fa-refresh fa-spin"></i>
+                      </div> -->
+                  </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="Loading" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center">
+            <div class="modal-content">
+                <div class="modal-body">
+                  <div class="box box-danger">
+                      <div class="box-header">
+                      </div>
+                      <div class="box-body">
+                      </div>
+                      <div class="overlay">
+                        <i class="fa fa-refresh fa-spin"></i>
+                      </div>
+                  </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
 <script src="<?=base_url();?>assets/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?=base_url();?>assets/datatables/js/dataTables.bootstrap.min.js"></script>
 <script type="text/javascript">
   $(document).ready(function () {
     
     $('body').on('click','#submit_artikel', function(){
-      $('.error').html('');
-      $('#progresLoading').modal('show');
+      // $('.error').html('');
+      // $('#progresLoading').modal('show');
       var nama = [];
       var jabatan = [];
       var form_data = new FormData();
@@ -243,11 +278,105 @@
       $.each($('.jabatan'),function(i){
         jabatan.push($(this).val());
       });
-      console.log(nama);
+      // console.log(nama);
       var file_data = $('#file_name').prop('files')[0];
       var file_data_abs = $('#file_name_abs').prop('files')[0];
       $('#content').val(CKEDITOR.instances.content.getData());
       $('#ref').val(CKEDITOR.instances.references.getData());
+      var er = '';
+      if ($('#judul').val() == '') {
+        er = 1;
+        $('#ntf_judul').html('The Judul Journal field is required.');
+      }
+      if ($('#content').val() == '') {
+        er = 1;
+        $('#ntf_content').html('The Content field is required.');
+      }
+      if ($('#journal').val() == '') {
+        er = 1;
+        $('#ntf_journal').html('The journal field is required.');
+      }
+      if ($('#volume').val() == '') {
+        er = 1;
+        $('#ntf_volume').html('The volume field is required.');
+      }
+      if ($('#no_volume').val() == '') {
+        er = 1;
+        $('#ntf_no_volume').html('The no_volume field is required.');
+      }
+      if ($('#keyword').val() == '') {
+        er = 1;
+        $('#ntf_keyword').html('The keyword field is required.');
+      }
+      if ($('#ref').val() == '') {
+        er = 1;
+        $('#ntf_ref').html('The references field is required.');
+      }
+      var uri = get_url(window.location.href);
+      if ($.isNumeric(uri)) {
+        if (file_data != undefined) {
+          if (file_data.size > 3000000) {
+            er = 1;
+            $('#ntf_file_name').html('The file size is too large.');
+          }
+          if (file_data.type != 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' && file_data.type != 'application/pdf' ) {
+            er = 1;
+            $('#ntf_error').html('File Type not Allowed.');
+          }
+        }
+
+        if (file_data_abs != undefined) {
+          if (file_data_abs.size > 3000000) {
+            er = 1;
+            $('#ntf_file_name_abs').html('The file size is too large.');
+          }
+          if (file_data_abs.type != 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' && file_data_abs.type != 'application/pdf' ) {
+            er = 1;
+            $('#ntf_abs_error').html('File Type not Allowed.');
+          }
+        }
+      }else{
+        if (file_data == undefined) {
+          er = 1;
+          $('#ntf_file_name').html('The Journal Cover field is required.');
+        }else{
+          if (file_data.size > 3000000) {
+            er = 1;
+            $('#ntf_file_name').html('The file size is too large.');
+          }
+          if (file_data.type != 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' && file_data.type != 'application/pdf' ) {
+            er = 1;
+            console.log('asasdd');
+            $('#ntf_error').html('File Type not Allowed.');
+          }
+        }
+        if (file_data_abs == undefined) {
+          er = 1;
+          $('#ntf_file_name_abs').html('The Journal Cover field is required.');
+        }else{
+          if (file_data_abs.size > 3000000) {
+            er = 1;
+            $('#ntf_file_name_abs').html('The file size is too large.');
+          }
+          if (file_data_abs.type != 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' && file_data_abs.type != 'application/pdf' ) {
+            er = 1;
+            console.log('asd');
+            $('#ntf_abs_error').html('File Type not Allowed.');
+          }
+        }
+      }
+      if ($('#agree').is(':checked') != true) {
+        er = 1;
+        $('#ntf_agree').html('The Agreement field is required.');
+      }
+      if (er == 1) {
+        // console.log(file_data);
+        $('.error').show();
+        $('.error').css({'color':'red', 'font-style':'italic', 'display':'block'});
+        $('#progresLoading').modal('hide');
+        return false;
+      }
+      $('#progresLoading').modal('show');
       form_data.append('judul', $('#judul').val());
       form_data.append('journal', $('#journal').val());
       form_data.append('volume', $('#volume').val());
@@ -297,6 +426,32 @@
       });
 
     });
+    function progress(e){
+
+      if(e.lengthComputable){
+        var max = e.total;
+        var current = e.loaded;
+
+        var Percentage = (current * 100)/max;
+        var st = String(Percentage);
+        var a = st.split('.');
+        Percentage = a[0];
+        $('#progresLoading .progress-bar').prop('aria-valuenow',Percentage);
+        $('#progresLoading .progress-bar').text(Percentage+'%');
+        $('#progresLoading .progress-bar').css({'width': Percentage+'%'});
+        console.log(Percentage);
+
+
+        if(Percentage >= 100)
+        {
+           // process completed  
+        }
+      }  
+     }
+
+    function get_url(url){
+      return url.split('/').pop()
+    }
 
     $('body').on('click','.btn-delete',function(){
       var id = $(this).attr('id');

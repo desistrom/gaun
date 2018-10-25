@@ -138,15 +138,153 @@
               </div>
           </div>
         </div>
+<div class="modal fade" id="progresLoading" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center">
+            <div class="modal-content">
+                <div class="modal-body">
+                  <div class="box box-danger">
+                      <div class="box-header">
+                      </div>
+                      <div class="box-body">
+                        <div class="progress">
+                          <div class="progress-bar" role="progressbar" aria-valuenow="0"
+                          aria-valuemin="0" aria-valuemax="100" style="width:0%">
+                            0%
+                          </div>
+                        </div>
+                      </div>
+                      <!-- <div class="overlay">
+                        <i class="fa fa-refresh fa-spin"></i>
+                      </div> -->
+                  </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="Loading" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center">
+            <div class="modal-content">
+                <div class="modal-body">
+                  <div class="box box-danger">
+                      <div class="box-header">
+                      </div>
+                      <div class="box-body">
+                      </div>
+                      <div class="overlay">
+                        <i class="fa fa-refresh fa-spin"></i>
+                      </div>
+                  </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
 <script src="<?=base_url();?>assets/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?=base_url();?>assets/datatables/js/dataTables.bootstrap.min.js"></script>
 <script type="text/javascript">
   $(document).ready(function () {
     $('body').on('click','#submit', function(){
-      $('#progresLoading').modal('show');
+      // $('#progresLoading').modal('show');
       var form_data = new FormData();
       var file_data = $('#file_name').prop('files')[0];
       $('#content').val(CKEDITOR.instances.content.getData());
+      $('.error').hide();
+      $('.error').text('');
+
+      var file_data = $('#file_name').prop('files')[0];
+      var er = '';
+      $('#content').val(CKEDITOR.instances.content.getData());
+      if ($('#judul').val() == '') {
+        er = 1;
+        $('#ntf_judul').html('The Judul Journal field is required.');
+      }
+      // if ($('#issn').val() == '') {
+      //   er = 1;
+      //   $('#ntf_issn').html('The Judul Journal field is required.');
+      // }
+      // console.log($('#file_name').prop('files'));
+      if ($('#content').val() == '') {
+        er = 1;
+        $('#ntf_content').html('The Content field is required.');
+      }
+      if ($('#kategori').val() == '') {
+        er = 1;
+        $('#ntf_kategori').html('The Kategori field is required.');
+      }
+      if ($('#user').val() == '') {
+        er = 1;
+        $('#ntf_user').html('The user field is required.');
+      }
+      var uri = get_url(window.location.href);
+      if ($.isNumeric(uri)) {
+        if (file_data != undefined) {
+          if (file_data.size > 400000) {
+            er = 1;
+            $('#ntf_file_name').html('The file size is too large.');
+          }
+          var img = new Image();
+          img.src = window.URL.createObjectURL( file_data );
+          img.onload = function() {
+              var width = img.naturalWidth,
+                  height = img.naturalHeight;
+
+              window.URL.revokeObjectURL( img.src );
+
+              if( width > 1024) {
+                  er = 1;
+                  $('#ntf_error').html('The File Width is too large.');
+              }
+          };
+          if (file_data.type != 'image/jpg' && file_data.type != 'image/png' && file_data.type != 'image/jpeg' && file_data.type != 'image/gif') {
+            er = 1;
+            $('#ntf_error').html('File Type not Allowed.');
+          }
+        }
+      }else{
+        if (file_data == undefined) {
+          er = 1;
+          $('#ntf_file_name').html('The Journal Cover field is required.');
+        }else{
+          if (file_data.size > 400000) {
+            er = 1;
+            $('#ntf_file_name').html('The file size is too large.');
+          }
+          var img = new Image();
+          img.src = window.URL.createObjectURL( file_data );
+          img.onload = function() {
+              var width = img.naturalWidth,
+                  height = img.naturalHeight;
+
+              window.URL.revokeObjectURL( img.src );
+
+              if( width > 1024) {
+                  er = 1;
+                  $('#ntf_error').html('The File Width is too large.');
+              }
+          };
+          if (file_data.type != 'image/jpg' && file_data.type != 'image/png' && file_data.type != 'image/jpeg' && file_data.type != 'image/gif') {
+            er = 1;
+            $('#ntf_error').html('File Type not Allowed.');
+          }
+        }
+      }
+      
+      
+
+      if (er == 1) {
+        $('#Loading').modal('show');
+        $('.error').show();
+        $('.error').css({'color':'red', 'font-style':'italic','display':'block'});
+        $('#Loading').modal('hide');
+        return false;
+      }
+      $('#progresLoading').modal('show');
       form_data.append('judul', $('#judul').val());
       form_data.append('issn', $('#issn').val());
       form_data.append('content', $('#content').val());
@@ -183,6 +321,33 @@
       });
 
     });
+
+    function progress(e){
+
+      if(e.lengthComputable){
+        var max = e.total;
+        var current = e.loaded;
+
+        var Percentage = (current * 100)/max;
+        var st = String(Percentage);
+        var a = st.split('.');
+        Percentage = a[0];
+        $('#progresLoading .progress-bar').prop('aria-valuenow',Percentage);
+        $('#progresLoading .progress-bar').text(Percentage+'%');
+        $('#progresLoading .progress-bar').css({'width': Percentage+'%'});
+        console.log(Percentage);
+
+
+        if(Percentage >= 100)
+        {
+           // process completed  
+        }
+      }  
+     }
+
+    function get_url(url){
+      return url.split('/').pop()
+    }
 
     $('#modalSuccess').modal('show');
   });

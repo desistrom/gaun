@@ -84,7 +84,7 @@ class Journal extends MX_Controller
     }
 
     public function kategori($param=null){
-        $sql = "SELECT * FROM tb_kategori_journal k join tb_journal j on k.id_kategori = j.id_kategori_ref WHERE j.status = 2 AND k.nama = '".$param."'";
+        $sql = "SELECT * FROM tb_kategori_journal k join tb_journal j on k.id_kategori = j.id_kategori_ref WHERE j.status = 2 AND k.nama = '".$param."' limit 12";
         $journal = $this->db->query($sql)->result_array();
         foreach ($journal as $key => $value) {
             $jumlah = $this->db->get_where('tb_volume',array('id_journal_ref'=>$value['id_journal']))->num_rows();

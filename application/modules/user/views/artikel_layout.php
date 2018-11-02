@@ -639,6 +639,13 @@
           dataType : 'json',
           type : 'POST',
           data : form_data,
+          xhr: function() {
+                var myXhr = $.ajaxSettings.xhr();
+                if(myXhr.upload){
+                    myXhr.upload.addEventListener('progress',progress, false);
+                }
+                return myXhr;
+          },
           async : false,
           cache : false ,
           contentType : false , 

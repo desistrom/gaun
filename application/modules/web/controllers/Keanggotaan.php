@@ -143,7 +143,7 @@ class Keanggotaan extends MX_Controller  {
             $this->form_validation->set_rules('phone','Phone','trim|required');
             $this->form_validation->set_rules('website','Website','trim|required');
             $this->form_validation->set_rules('username','Username','trim|required|is_unique[tb_instansi.username]');
-            // $this->form_validation->set_rules('password','Passowrd','trim|required');
+            $this->form_validation->set_rules('jinstansi','Instansi','trim|required');
             // $this->form_validation->set_rules('repassword','Re - Passowrd','trim|required|matches[password]');
             $this->form_validation->set_rules('g-recaptcha-response','Pleas Insert Captcha', 'required');
             $recaptcha = $this->input->post('g-recaptcha-response');
@@ -160,6 +160,7 @@ class Keanggotaan extends MX_Controller  {
                 $data_user['phone'] = $data_input['phone'];
                 $data_user['website'] = $data_input['website'];
                 $data_user['username'] = $data_input['username'];
+                $data_user['id_jenis_instansi'] = $data_input['jinstansi'];
                 $data_user['password'] = sha1('password'.$data_input['username']);
             
                 $url = URL_REGISTER ;
@@ -178,44 +179,46 @@ class Keanggotaan extends MX_Controller  {
                     $ret['code'] = "500";
                     $ret['status'] = 'Failed';
                     $ret['data'] = "Can't add user";
-                }
-                $template = $this->db->get_where('tb_template_email',array('id_kategori_email_ref'=>1,'status'=>1))->row_array()['source_code'];
-                $final = str_replace("Email_User", $data_input['username'], $template);
-                // $final = str_replace("subject_email", "Registrasi", $final);
-                $sender = $this->db->get('tb_setting_email')->row_array();
-                $this->load->helper('email_send_helper');
-                $data_email['email_from'] = $sender['email'];
-                $data_email['name_from'] = $sender['nama_user'];
-                $data_email['email_to'] = $data_input['email'];
-                $data_email['subject'] = "Registerasi";
-                $content = '';
-                $content .= "<tr><td>Username </td><td>:</td> ".$data_input['username']."</td></tr>";
-                // $content .= "<tr><td>Password </td><td>:</td> ".$data_input['password']."</td></tr>";
-                $content .= "<tr><td>Email </td><td>:</td> ".$data_input['email']."</td></tr>";
-                $content .= "<tr><td>Website </td><td>:</td> ".$data_input['website']."</td></tr>";
-                $content .= "<tr><td>Alamat </td><td>:</td> ".$data_input['address']."</td></tr>";
-                $data_email['content'] = str_replace("content_email", $content, $final);
-                if (email_send($data_email) == true) {
-                    $ret['cek']['code'] = '200';
-                    $ret['status'] = 'Success';
-                    $ret['data'] = 'User Has been inserted';
-                    $ret['data'] = $template;
                 }else{
-                    $ret['cek']['code'] = '500';
-                    $ret['status'] = 'failed';
-                    $ret['data'] = 'Email Not Send';
-                }
-                 if ($ret['cek']['code']=='200') {
-                       if (api_helper(json_encode($data_user),$url,$methode,'')) {
-                        $ret['status'] = 1;
-                        $ret['url'] = site_url('admin/keanggotaan');
+                    $template = $this->db->get_where('tb_template_email',array('id_kategori_email_ref'=>1,'status'=>1))->row_array()['source_code'];
+                    $final = str_replace("Email_User", $data_input['username'], $template);
+                    // $final = str_replace("subject_email", "Registrasi", $final);
+                    $sender = $this->db->get('tb_setting_email')->row_array();
+                    $this->load->helper('email_send_helper');
+                    $data_email['email_from'] = $sender['email'];
+                    $data_email['name_from'] = $sender['nama_user'];
+                    $data_email['email_to'] = $data_input['email'];
+                    $data_email['subject'] = "Registerasi";
+                    $content = '';
+                    $content .= "<tr><td>Username </td><td>:</td> ".$data_input['username']."</td></tr>";
+                    $content .= "<tr><td>Instansi </td><td>:</td> ".$data_input['instansi']."</td></tr>";
+                    $content .= "<tr><td>Email </td><td>:</td> ".$data_input['email']."</td></tr>";
+                    $content .= "<tr><td>Website </td><td>:</td> ".$data_input['website']."</td></tr>";
+                    $content .= "<tr><td>Alamat </td><td>:</td> ".$data_input['address']."</td></tr>";
+                    $data_email['content'] = str_replace("content_email", $content, $final);
+                    if (email_send($data_email) == true) {
+                        $ret['cek']['code'] = '200';
+                        $ret['status'] = 'Success';
+                        $ret['data'] = 'User Has been inserted';
+                        $ret['data'] = $template;
+                    }else{
+                        $ret['cek']['code'] = '500';
+                        $ret['status'] = 'failed';
+                        $ret['data'] = 'Email Not Send';
+                    }
+                    if ($ret['cek']['code']=='200') {
+                           if (1==1) {
+                            $ret['status'] = 1;
+                            $ret['url'] = site_url('admin/keanggotaan');
 
-                        $this->session->set_flashdata("notif","Data Berhasil di Masukan");
+                            $this->session->set_flashdata("notif","Data Berhasil di Masukan");
+                        }
+                        else{
+                            $ret['notif']['username-already']='username already exist, please change your username';
+                        }
                     }
-                    else{
-                        $ret['notif']['username-already']='username already exist, please change your username';
-                    }
-                 }
+                    
+                }
               
             }else{
                 if ($response['success'] == '') {
@@ -228,7 +231,7 @@ class Keanggotaan extends MX_Controller  {
             $ret['notif']['phone'] = form_error('phone');
             $ret['notif']['website'] = form_error('website');
             $ret['notif']['username'] = form_error('username');
-            // $ret['notif']['password'] = form_error('password');
+            $ret['notif']['jinstansi'] = form_error('jinstansi');
             // $ret['notif']['repassword'] = form_error('repassword');
             $ret['notif']['g-recaptcha-response'] = form_error('g-recaptcha-response');
     
@@ -251,6 +254,7 @@ class Keanggotaan extends MX_Controller  {
             'script_captcha' => $this->recaptcha->getScriptTag(), // javascript recaptcha ditaruh di head
         );
         $this->data['step']=$profit;
+        $this->data['instansi'] = $this->db->get('tb_jenis_instansi')->result_array();
         $this->ciparser->new_parse('template_frontend','modules_web', 'pendaftaran_layout',$this->data);
      }
      public function search()

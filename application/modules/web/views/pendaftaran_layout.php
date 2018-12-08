@@ -3,7 +3,12 @@
 <meta name="author" content="Codrops" />
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
 <link rel="stylesheet" href="<?=base_url();?>assets/css/style_register.min.css?t=<?=time();?>">
-<link rel="stylesheet" href="<?=base_url();?>assets/css/style_register_2.min.css?t=<?=time();?>"> 
+<link rel="stylesheet" href="<?=base_url();?>assets/css/style_register_2.min.css?t=<?=time();?>">
+<style type="text/css">
+  option{
+    color: black;
+  }
+</style>
 <section class="detail_news" style="">
         <div class="container-fluid none-padding filter-title-page-news">
             <div class="col-md-12 col-sm-12 col-xs-12 none-padding title-page-news">
@@ -66,13 +71,19 @@
                                     </label>
                                     <span class="error" id="ntf_username"></span>
                                 </span>
-                                <!-- <span class="input input--hoshi">
-                                    <input class="input__field input__field--hoshi" type="password" id="input-4 password" name="password" />
+                                <span class="input input--hoshi">
+                                    <!-- <input class="input__field input__field--hoshi" type="password" id="input-4 password" name="password" /> -->
+                                    <select class="input__field input__field--hoshi" id="input-4 jinstansi" name="jinstansi">
+                                      <option value="">-- Select Instansi --</option>
+                                      <?php foreach ($instansi as $key => $value) : ?>
+                                        <option value="<?php echo $value['id_jenis_instansi']; ?>"><?php echo $value['nm_jenis_instansi']; ?></option>
+                                      <?php endforeach; ?>
+                                    </select>
                                     <label class="input__label input__label--hoshi input__label--hoshi-color-1" for="input-4">
-                                        <span class="input__label-content input__label-content--hoshi">Password</span>
+                                        <!-- <span class="input__label-content input__label-content--hoshi">Instansi</span> -->
                                     </label>
-                                    <span class="error" id="ntf_password"></span>
-                                </span> -->
+                                    <span class="error" id="ntf_jinstansi"></span>
+                                </span>
                                 <!-- <span class="input input--hoshi">
                                     <input class="input__field input__field--hoshi" type="password" id="input-4 repassword" name="repassword" />
                                     <label class="input__label input__label--hoshi input__label--hoshi-color-1" for="input-4">

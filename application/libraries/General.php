@@ -105,5 +105,9 @@ class General
       return $kat;
     }
 
+    public function instansi(){
+      return $this->CI->db->get('tb_jenis_instansi')->result_array();
+    }
+
 
 }

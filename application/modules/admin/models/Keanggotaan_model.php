@@ -13,12 +13,13 @@ class Keanggotaan_model extends CI_Model
         // $this->load->database();
     }
  
-    private function _get_datatables_query()
+    private function _get_datatables_query($id)
     {
          // $sql = "SELECT * FROM tb_instansi i LEFT join tb_jenis_instansi j on i.id_jenis_instansi = j.id_jenis_instansi";
         $this->db->from($this->table);
         $this->db->join('tb_jenis_instansi', 'tb_instansi.id_jenis_instansi = tb_jenis_instansi.id_jenis_instansi','left');
         $this->db->where('status = ', 2);
+        $this->db->where('tb_jenis_instansi.id_jenis_instansi = ',$id);
  
         $i = 0;
      
@@ -54,35 +55,36 @@ class Keanggotaan_model extends CI_Model
         }
     }
  
-    function get_datatables()
+    function get_datatables($id)
     {
-        $this->_get_datatables_query();
+        $this->_get_datatables_query($id);
         if($_POST['length'] != -1)
         $this->db->limit($_POST['length'], $_POST['start']);
         $query = $this->db->get();
         return $query->result();
     }
  
-    function count_filtered()
+    function count_filtered($id)
     {
-        $this->_get_datatables_query();
+        $this->_get_datatables_query($id);
         $query = $this->db->get();
         $this->db->where('status = ', 2);
         return $query->num_rows();
     }
  
-    public function count_all()
+    public function count_all($id)
     {
         $this->db->from($this->table);
         return $this->db->count_all_results();
     }
 
-    private function _get_datatables_query_request()
+    private function _get_datatables_query_request($id)
     {
          // $sql = "SELECT * FROM tb_instansi i LEFT join tb_jenis_instansi j on i.id_jenis_instansi = j.id_jenis_instansi";
         $this->db->from($this->table);
         $this->db->join('tb_jenis_instansi', 'tb_instansi.id_jenis_instansi = tb_jenis_instansi.id_jenis_instansi','left');
         $this->db->where('status != ', 2);
+        $this->db->where('tb_jenis_instansi.id_jenis_instansi = ',$id);
  
         $i = 0;
      
@@ -118,18 +120,18 @@ class Keanggotaan_model extends CI_Model
         }
     }
  
-    function get_datatables_request()
+    function get_datatables_request($id)
     {
-        $this->_get_datatables_query_request();
+        $this->_get_datatables_query_request($id);
         if($_POST['length'] != -1)
         $this->db->limit($_POST['length'], $_POST['start']);
         $query = $this->db->get();
         return $query->result();
     }
  
-    function count_filtered_request()
+    function count_filtered_request($id)
     {
-        $this->_get_datatables_query_request();
+        $this->_get_datatables_query_request($id);
         $query = $this->db->get();
         return $query->num_rows();
     }

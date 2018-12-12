@@ -34,7 +34,10 @@
 	.nav li a.btn-gabung:hover{
 		 box-shadow: 3px 3px 1px 0 #bdbdbd;
 	}
+	
 </style>
+   <script src="<?=base_url();?>mockup_statis/assets/js/jquery.min.js"></script>
+    <script src="<?=base_url();?>mockup_statis/assets/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 	var base_url = '<?=base_url();?>';
 </script>
@@ -54,8 +57,8 @@
 
                   <ul class="nav navbar-nav navbar-right">
                       <li role="presentation" class="active"><a href="<?=site_url('journal');?>"> <i class="fa fa-home"></i> Home</a></li>
-                      <li class="dropdown"><a data-toggle="dropdown" aria-expanded="false" href="#" class="dropdown-toggle"><span class="fa fa-list-ul"></span> Kategori <span class="fa fa-angle-down"></span></a>
-                          <ul class="dropdown-menu" role="menu">
+                      <li class="dropdown"><a data-toggle="dropdown" aria-expanded="false" href="#" class="dropdown-toggle"><span class="fa fa-list-ul"></span> Kategori <span class="fa fa-angle-down fa-right" style=""></span></a>
+                          <ul class="dropdown-menu menu-kategori" role="menu">
                           <?php foreach ($this->general->kategori() as $key => $value): ?>
                               <li><a href="<?=site_url('journal/kategori/'.$value['nama']);?>"><?=$value['nama'];?></a></li>
                           	
@@ -64,7 +67,7 @@
 
                           </ul>
                         </li>
-                        <li class="dropdown  sub-btn-gabung"><a data-toggle="dropdown" aria-expanded="false" href="#" class="dropdown-toggle active btn-gabung">Login <span class="fa fa-angle-down"></span></a>
+                        <li class="dropdown  sub-btn-gabung"><a data-toggle="dropdown" aria-expanded="false" href="#" class="dropdown-toggle active btn-gabung">Login <span class="fa fa-angle-down fa-right" style=""></span></a>
                           <ul class="dropdown-menu" role="menu">
                               <li><a href="#" class="journal_log" id="1">Dosen</a></li>
                               <li><a href="#" class="journal_log" id="2">Mahasiswa</a></li>
@@ -246,8 +249,32 @@
 			</div>
 		</section>
 	</div>
-    <script src="<?=base_url();?>mockup_statis/assets/js/jquery.min.js"></script>
-    <script src="<?=base_url();?>mockup_statis/assets/bootstrap/js/bootstrap.min.js"></script>
+ 
+    <script type="text/javascript">
+      $(window).width(function(){
+
+           if ($(window).width() <= 767) {  
+                $(".dropdown").find(".fa").removeClass("fa-angle-down").addClass("fa-angle-right");
+                 
+                $('body').on('click','.dropdown', function(){
+                 
+      
+                    if ($(this).find(".fa").hasClass("fa-angle-right")) {
+                      $(this).find(".fa").removeClass("fa-angle-right").addClass("fa-angle-down");
+                    }else{
+                       $(this).find(".fa").addClass("fa-angle-right").removeClass("fa-angle-down");
+                    }
+                 });
+                $('body').on('click','.dropdown', function(){
+                  if ($(".dropdown").hasClass("open")) {
+                     $(".open").find(".fa").addClass("fa-angle-right").removeClass("fa-angle-down");
+                    }
+                  
+                });
+                
+           }     
+    });
+    </script>
     <script type="text/javascript">
     	$(document).ready(function() {
     		$('body').on('click','.btn-search',function(){

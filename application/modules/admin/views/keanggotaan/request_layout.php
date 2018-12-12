@@ -166,7 +166,7 @@ $(document).ready(function() {
  
         // Load data for the table's content from an Ajax source
         "ajax": {
-            "url": "<?php echo site_url('admin/keanggotaan/ajax_list_request')?>",
+            "url": "<?php echo site_url('admin/keanggotaan/ajax_list_request/'.$id)?>",
             "type": "POST"
         },
  

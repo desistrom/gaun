@@ -357,10 +357,11 @@ class Keanggotaan extends MX_Controller  {
 		$this->ciparser->new_parse('template_admin','modules_admin', 'keanggotaan/setting_layout',$this->data);
 	}
 
-	public function instansi(){
+	public function instansi($id=null){
 		$this->data['view'] = 'list';
+		$this->data['id'] = $id;
 		$this->data['breadcumb'] = 'List Instansi';
-		$sql = 'SELECT * FROM tb_instansi i LEFT join tb_jenis_instansi j on i.id_jenis_instansi = j.id_jenis_instansi';
+		$sql = 'SELECT * FROM tb_instansi i LEFT join tb_jenis_instansi j on i.id_jenis_instansi = j.id_jenis_instansi where j.id_jenis_instansi = '.$id;
 		$this->data['instansi'] = $this->db->query($sql)->result_array();
 		$this->ciparser->new_parse('template_admin','modules_admin', 'keanggotaan/master_instansi_layout',$this->data);
 	}
@@ -923,10 +924,10 @@ class Keanggotaan extends MX_Controller  {
             return $ext;
     }
 
-    public function ajax_list()
+    public function ajax_list($id=null)
     {
     	$this->load->model('keanggotaan_model');
-        $list = $this->keanggotaan_model->get_datatables();
+        $list = $this->keanggotaan_model->get_datatables($id);
         $data = array();
         $no = $_POST['start'];
         $aktif = '';
@@ -961,24 +962,25 @@ class Keanggotaan extends MX_Controller  {
  
         $output = array(
                         "draw" => $_POST['draw'],
-                        "recordsTotal" => $this->keanggotaan_model->count_all(),
-                        "recordsFiltered" => $this->keanggotaan_model->count_filtered(),
+                        "recordsTotal" => $this->keanggotaan_model->count_all($id),
+                        "recordsFiltered" => $this->keanggotaan_model->count_filtered($id),
                         "data" => $data,
                 );
         //output to json format
         echo json_encode($output);
     }
 
-    public function instansi_request(){
+    public function instansi_request($id=null){
+		$this->data['id'] = $id;
 		$this->data['view'] = 'list';
 		$this->data['breadcumb'] = 'List Request Join Instansi';
 		$this->ciparser->new_parse('template_admin','modules_admin', 'keanggotaan/request_layout',$this->data);
 	}
 
-    public function ajax_list_request()
+    public function ajax_list_request($id=null)
     {
     	$this->load->model('keanggotaan_model');
-        $list = $this->keanggotaan_model->get_datatables_request();
+        $list = $this->keanggotaan_model->get_datatables_request($id);
         $data = array();
         $no = $_POST['start'];
         $aktif = '';
@@ -1012,8 +1014,8 @@ class Keanggotaan extends MX_Controller  {
  
         $output = array(
                         "draw" => $_POST['draw'],
-                        "recordsTotal" => $this->keanggotaan_model->count_all_request(),
-                        "recordsFiltered" => $this->keanggotaan_model->count_filtered_request(),
+                        "recordsTotal" => $this->keanggotaan_model->count_all_request($id),
+                        "recordsFiltered" => $this->keanggotaan_model->count_filtered_request($id),
                         "data" => $data,
                 );
         //output to json format

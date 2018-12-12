@@ -34,6 +34,7 @@
     .box{
       border-top-color: #dd4b39!important;
     }
+    
   </style>
   
     <script type="text/javascript">
@@ -257,8 +258,8 @@
             </span>
           </a>
         </li>
-
-        <li class=" treeview <?php if(current_url() == site_url('admin/keanggotaan/setting') || current_url() == site_url('admin/keanggotaan/index') || current_url() == site_url('admin/keanggotaan/instansi') || current_url() == site_url('admin/keanggotaan/setting_reg') || current_url() == site_url('admin/keanggotaan/index') || current_url() == site_url('admin/keanggotaan/instansi') || current_url() == site_url('admin/keanggotaan/instansi_request')){ ?> active <?php } ?>">
+        <?php $url = $this->uri->segment_array(); ?>
+        <li class=" treeview <?php if(current_url() == site_url('admin/keanggotaan/setting') || current_url() == site_url('admin/keanggotaan/index') || current_url() == site_url('admin/keanggotaan/instansi') || current_url() == site_url('admin/keanggotaan/setting_reg') || current_url() == site_url('admin/keanggotaan/index') || isset($url[3]) && $url[3] == 'instansi_request' || $url[3] == 'instansi'){ ?> active <?php } ?>">
           <a href="#">
             <i class="fa fa-users"></i>  <span>Keanggotaan</span>
             <span class="pull-right-container">
@@ -268,8 +269,36 @@
           </a>
           <ul class="treeview-menu">
             <!-- <li <?php if(current_url() == site_url('admin/keanggotaan/index')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/keanggotaan/index');?>"><i class="fa fa-users"></i> List Anggota</a></li> -->
-            <li <?php if(current_url() == site_url('admin/keanggotaan/instansi_request')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/keanggotaan/instansi_request');?>"><i class="material-icons">group_add</i> Request Joined Instansi</a></li>
-            <li <?php if(current_url() == site_url('admin/keanggotaan/instansi')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/keanggotaan/instansi');?>"><i class="material-icons">group </i>  Joined Instansi</a></li>
+            <!-- <li <?php if(current_url() == site_url('admin/keanggotaan/instansi_request')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/keanggotaan/instansi_request');?>"><i class="material-icons">group_add</i> Request Joined Instansi</a></li> -->
+            <li class="treeview <?php if(isset($url[3]) && $url[3] == 'instansi_request'){ ?> active <?php } ?>">
+              <a href="#">
+                <i class="material-icons">group_add </i>  <span>Request Joined Instansi</span>
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+                <ul class="treeview-menu">
+                  <?php foreach ($this->general->instansi() as $key => $value) : ?>
+                    <li><a href="<?php echo site_url('admin/keanggotaan/instansi_request/'.$value['id_jenis_instansi']); ?>"><?php echo $value['nm_jenis_instansi'] ?></a></li>
+                  <?php endforeach; ?>
+                  
+                </ul>
+              </a>
+            </li>
+            <!-- <li <?php if(current_url() == site_url('admin/keanggotaan/instansi')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/keanggotaan/instansi');?>"><i class="material-icons">group </i>  Joined Instansi</a></li> -->
+            <li class="treeview <?php if(isset($url[3]) && $url[3] == 'instansi'){ ?> active <?php } ?>">
+              <a href="#">
+                <i class="material-icons">group </i>  <span>Joined Instansi</span>
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+                <ul class="treeview-menu">
+                  <?php foreach ($this->general->instansi() as $key => $value) : ?>
+                    <li><a href="<?php echo site_url('admin/keanggotaan/instansi/'.$value['id_jenis_instansi']); ?>"><?php echo $value['nm_jenis_instansi'] ?></a></li>
+                  <?php endforeach; ?>
+                  
+                </ul>
+              </a>
+            </li>
             <!-- <li <?php if(current_url() == site_url('admin/keanggotaan/kategori_instansi')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/keanggotaan/kategori_instansi');?>"><i class="fa fa-black-tie"></i>Jenis Instansi</a></li> -->
             <li <?php if(current_url() == site_url('admin/keanggotaan/setting')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/keanggotaan/setting');?>"><i class="material-icons">rss_feed</i> Benefit</a></li>
             <li <?php if(current_url() == site_url('admin/keanggotaan/setting_reg')){ ?> class="active" <?php } ?>><a href="<?=site_url('admin/keanggotaan/setting_reg');?>"><i class="material-icons">assignment</i> Registrasi</a></li>

@@ -258,8 +258,8 @@
             </span>
           </a>
         </li>
-        <?php $url = $this->uri->segment_array(); ?>
-        <li class=" treeview <?php if(current_url() == site_url('admin/keanggotaan/setting') || current_url() == site_url('admin/keanggotaan/index') || current_url() == site_url('admin/keanggotaan/instansi') || current_url() == site_url('admin/keanggotaan/setting_reg') || current_url() == site_url('admin/keanggotaan/index') || isset($url[3]) && $url[3] == 'instansi_request' || $url[3] == 'instansi'){ ?> active <?php } ?>">
+        <?php $url = $this->uri->segment_array(); if (!isset($url[3])) { $url[3] = 'kosong'; } ?>
+        <li class=" treeview <?php if(current_url() == site_url('admin/keanggotaan/setting') || current_url() == site_url('admin/keanggotaan/index') || current_url() == site_url('admin/keanggotaan/instansi') || current_url() == site_url('admin/keanggotaan/setting_reg') || current_url() == site_url('admin/keanggotaan/index') || $url[3] == 'instansi_request' || $url[3] == 'instansi'){ ?> active <?php } ?>">
           <a href="#">
             <i class="fa fa-users"></i>  <span>Keanggotaan</span>
             <span class="pull-right-container">

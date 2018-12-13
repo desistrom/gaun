@@ -62,19 +62,28 @@ class Home extends CI_Controller  {
 	    	}
     	}
     	// print_r($jdosen);
-    	$this->data['dosen'] = $this->db->get_where('tb_pengguna',array('is_login'=>1,'id_role_ref'=>1))->num_rows();
+    	$sql_dosen = 'SELECT p.id_pengguna from tb_pengguna p join tb_dosen d on p.id_pengguna = d.id_pengguna_ref join tb_instansi i on p.id_instansi_ref = i.id_instansi where p.is_login = 1 AND p.id_role_ref = 1 and p.status = 1';
+    	$this->data['dosen'] = $this->db->query($sql_dosen)->num_rows();
+    	// $this->data['dosen'] = $this->db->get_where('tb_pengguna',array('is_login'=>1,'id_role_ref'=>1,'status'=>1))->num_rows();
     	$jmahasiswa = $this->db->get_where('tb_pengguna',array('is_login'=>1,'id_role_ref'=>0))->result_array();
     	foreach ($jmahasiswa as $key => $value) {
 	    	$last = $value['last_login'];
 	    	$endtime = strtotime("+30 minutes", strtotime($last));
+	    	$times = date('Y-m-d H:i:s', strtotime($endtime));
 	    	$now = date('H:i:s');
-	    	if ($endtime < $now) {
+	    	if ($times < $now) {
 	    		$this->db->update('tb_pengguna',array('is_login'=>0),array('id_pengguna'=>$value['id_pengguna']));
 	    	}
     	}
-    	$this->data['mahasiswa'] = $this->db->get_where('tb_pengguna',array('is_login'=>1,'id_role_ref'=>0))->num_rows();
-    	$this->data['jdosen'] = $this->db->get_where('tb_pengguna',array('status'=>1,'id_role_ref'=>1))->num_rows();
-    	$this->data['jmahasiswa'] = $this->db->get_where('tb_pengguna',array('status'=>1,'id_role_ref'=>0))->num_rows();
+    	$sql_mahasiswa = 'SELECT p.id_pengguna from tb_pengguna p join tb_mahasiswa d on p.id_pengguna = d.id_pengguna_ref join tb_instansi i on p.id_instansi_ref = i.id_instansi where p.is_login = 1 AND p.id_role_ref = 0 and p.status = 1';
+    	$this->data['mahasiswa'] = $this->db->query($sql_mahasiswa)->num_rows();
+    	// $this->data['mahasiswa'] = $this->db->get_where('tb_pengguna',array('is_login'=>1,'id_role_ref'=>0,'status'=>1))->num_rows();
+    	$sql_jdosen = 'SELECT p.id_pengguna from tb_pengguna p join tb_dosen d on p.id_pengguna = d.id_pengguna_ref join tb_instansi i on p.id_instansi_ref = i.id_instansi where  p.id_role_ref = 1 and p.status = 1';
+    	// $this->data['jdosen'] = $this->db->get_where('tb_pengguna',array('status'=>1,'id_role_ref'=>1))->num_rows();
+    	$this->data['jdosen'] = $this->db->query($sql_jdosen)->num_rows();
+    	$sql_jmahasiswa = 'SELECT p.id_pengguna from tb_pengguna p join tb_mahasiswa d on p.id_pengguna = d.id_pengguna_ref join tb_instansi i on p.id_instansi_ref = i.id_instansi where  p.id_role_ref = 0 and p.status = 1';
+    	// $this->data['jmahasiswa'] = $this->db->get_where('tb_pengguna',array('status'=>1,'id_role_ref'=>0))->num_rows();
+    	$this->data['jmahasiswa'] = $this->db->query($sql_jmahasiswa)->num_rows();
     	$this->data['picture'] = $this->db->get_where('tb_galery',array('type'=>'image'))->num_rows();
     	$sql = "SELECT sum(total_download) as total from tb_journal where status = 2";
     	$total_journal = $this->db->query($sql)->row_array();

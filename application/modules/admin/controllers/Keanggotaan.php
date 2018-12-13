@@ -360,9 +360,9 @@ class Keanggotaan extends MX_Controller  {
 	public function instansi($id=null){
 		$this->data['view'] = 'list';
 		$this->data['id'] = $id;
-		$this->data['breadcumb'] = 'List Instansi';
-		$sql = 'SELECT * FROM tb_instansi i LEFT join tb_jenis_instansi j on i.id_jenis_instansi = j.id_jenis_instansi where j.id_jenis_instansi = '.$id;
-		$this->data['instansi'] = $this->db->query($sql)->result_array();
+		$sql = 'SELECT * FROM tb_jenis_instansi where id_jenis_instansi = '.$id;
+		$instansi = $this->db->query($sql)->row_array();
+		$this->data['breadcumb'] = 'List Instansi '.$instansi['nm_jenis_instansi'];
 		$this->ciparser->new_parse('template_admin','modules_admin', 'keanggotaan/master_instansi_layout',$this->data);
 	}
 
@@ -973,7 +973,10 @@ class Keanggotaan extends MX_Controller  {
     public function instansi_request($id=null){
 		$this->data['id'] = $id;
 		$this->data['view'] = 'list';
-		$this->data['breadcumb'] = 'List Request Join Instansi';
+		$sql = 'SELECT * FROM tb_jenis_instansi where id_jenis_instansi = '.$id;
+		$instansi = $this->db->query($sql)->row_array();
+		// $this->data['breadcumb'] = 'List Instansi '.$instansi['nm_jenis_instansi'];
+		$this->data['breadcumb'] = 'List Request Join Instansi '.$instansi['nm_jenis_instansi'];
 		$this->ciparser->new_parse('template_admin','modules_admin', 'keanggotaan/request_layout',$this->data);
 	}
 

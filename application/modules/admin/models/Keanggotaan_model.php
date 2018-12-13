@@ -138,7 +138,7 @@ class Keanggotaan_model extends CI_Model
         return $query->num_rows();
     }
  
-    public function count_all_request()
+    public function count_all_request($id)
     {
         $this->db->from($this->table);
         $this->db->where('status != ', 2);

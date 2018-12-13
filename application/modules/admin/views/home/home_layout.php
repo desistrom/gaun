@@ -43,7 +43,7 @@
     <div class="icon">
       <i class="<?=$value['icon'];?>"></i>
     </div>
-    <a href="<?=site_url('admin/keanggotaan/instansi');?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+    <a href="<?=site_url('admin/keanggotaan/instansi/'.$value['id_jenis_instansi']);?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
   </div>
 </div> 
 <?php endforeach ?>

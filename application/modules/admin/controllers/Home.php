@@ -43,7 +43,7 @@ class Home extends CI_Controller  {
     	$this->data['user'] = $this->db->get('tb_instansi')->num_rows();
     	$instansi = $this->db->get('tb_jenis_instansi')->result_array();
     	foreach ($instansi as $key => $value) {
-    		$this->data[$value['nm_jenis_instansi']] = $this->db->get_where('tb_instansi',array('id_jenis_instansi'=>$value['id_jenis_instansi']))->num_rows();
+    		$this->data[$value['nm_jenis_instansi']] = $this->db->get_where('tb_instansi',array('id_jenis_instansi'=>$value['id_jenis_instansi'],'is_aktif'=>1))->num_rows();
     	}
     	$this->data['daftar_instansi'] = $instansi;
     	// print_r($this->data);

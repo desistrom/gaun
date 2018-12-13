@@ -75,6 +75,8 @@ class Keanggotaan_model extends CI_Model
     public function count_all($id)
     {
         $this->db->from($this->table);
+        $this->db->where('status = ', 2);
+        $this->db->where('id_jenis_instansi = ',$id);
         return $this->db->count_all_results();
     }
 
@@ -140,6 +142,7 @@ class Keanggotaan_model extends CI_Model
     {
         $this->db->from($this->table);
         $this->db->where('status != ', 2);
+        $this->db->where('id_jenis_instansi = ',$id);
         return $this->db->count_all_results();
     }
    

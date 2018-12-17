@@ -243,6 +243,15 @@ SocialShareKit.init({
     }
 });
 </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-129750360-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-129750360-1');
+</script>
     <script src="<?=base_url();?>assets/js/main-owl.min.js"></script>
       <script src="<?=base_url();?>assets/js/scrolling-nav.min.js"></script>
       <script id="_wau4yv">var _wau = _wau || []; _wau.push(["dynamic", "tmevyyvsq3", "4yv", "c4302bffffff", "big"]);</script><script async src="//waust.at/d.js"></script>

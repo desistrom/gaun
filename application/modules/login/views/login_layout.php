@@ -57,8 +57,8 @@
         <div class="error" id="ntf_password"></div>
       </div>
       <div class="form-group has-feedback">
-        <?php echo $captcha // tampilkan recaptcha ?>
-        <div class="error" id="ntf_g-recaptcha-response"></div>
+        <?php //echo $captcha // tampilkan recaptcha ?>
+        <!-- <div class="error" id="ntf_g-recaptcha-response"></div> -->
       </div>
       <div class="row">
         <div class="col-xs-8">
@@ -114,7 +114,7 @@
                         $('#ntf_'+ key).html(value);
                         $('#ntf_'+ key).css({'color':'red', 'font-style':'italic'});
                         });
-                        grecaptcha.reset();
+                        // grecaptcha.reset();
                 }).fail(function(xhr, status, error){
                     alert(xhr.responseText);
                 });
@@ -153,7 +153,7 @@
             });
         });
     </script>
-<script>
+<!-- <script>
   $(function () {
     $('input').iCheck({
       checkboxClass: 'icheckbox_square-blue',
@@ -162,6 +162,6 @@
     });
   });
 </script>
-<script src='https://www.google.com/recaptcha/api.js'></script>
+<script src='https://www.google.com/recaptcha/api.js'></script> -->
 </body>
 </html>

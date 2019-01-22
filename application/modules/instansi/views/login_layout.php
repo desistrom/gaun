@@ -73,7 +73,7 @@
         <div class="error" id="ntf_password"></div>
       </div>
       <div class="form-group has-feedback">
-        <?php echo $captcha // tampilkan recaptcha ?>
+        <?php //echo $captcha // tampilkan recaptcha ?>
         <div class="error" id="ntf_g-recaptcha-response"></div>
       </div>
  <!--      <div class="row">
@@ -175,7 +175,7 @@
             });
         });
     </script>
-<script>
+<!-- <script>
   $(function () {
     $('input').iCheck({
       checkboxClass: 'icheckbox_square-blue',
@@ -183,7 +183,7 @@
       increaseArea: '20%' // optional
     });
   });
-</script>
-<script src='https://www.google.com/recaptcha/api.js'></script>
+</script> -->
+<!-- <script src='https://www.google.com/recaptcha/api.js'></script> -->
 </body>
 </html>

@@ -183,10 +183,10 @@
                                       </div>
                                       
                                       
-                                      <div class="text-input">
-                                        <?php echo $captcha // tampilkan recaptcha ?>
+                                      <!-- <div class="text-input">
+                                        <?php //echo $captcha // tampilkan recaptcha ?>
                                         <div class="error" id="ntf_g-recaptcha-response" style="position: relative;"></div>
-                                      </div>
+                                      </div> -->
                                       </form>
                                       <div><a style="color: white; font-style: italic;" href="<?=site_url('user/login_user/reset_password')?>"><u>Forgot Password</u></a></div>
                                       <div class="text-right" style="padding-top: 10px;">
@@ -275,7 +275,7 @@
 <!-- <script src="<?=base_url();?>assets/js/bootstrap.min.js"></script> -->
  <script src="<?=base_url();?>assets/js/classie.min.js"></script>
  <script src="<?=base_url();?>assets/js/custom_pendaftaran.min.js"></script>
- <script src='https://www.google.com/recaptcha/api.js'></script>
+ <!-- <script src='https://www.google.com/recaptcha/api.js'></script> -->
 <script type="text/javascript">
    var base_url = "<?=base_url();?>"
     $(document).ready(function(){
@@ -304,7 +304,7 @@
             $('#ntf_'+ key).html(value);
             $('#ntf_'+ key).css({'color':'white', 'font-style':'italic'});
             });
-            grecaptcha.reset();
+            // grecaptcha.reset();
       });
     });
       <?php if($this->session->flashdata("notif") != ''){ ?>

@@ -19,7 +19,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 | Please see the user guide for complete details:
 |
-|	http://codeigniter.com/user_guide/general/routing.html
+|	https://codeigniter.com/user_guide/general/routing.html
 |
 | -------------------------------------------------------------------------
 | RESERVED ROUTES
@@ -49,27 +49,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'web/home';
-$route['404_override'] = 'web/page/not_found';
+$route['default_controller'] = 'Welcome/index';
+$route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
-$route['admin'] = 'admin/home/index';
-$route['page/(:any)'] = 'web/page/index/$1';
-$route['berita/(:any)'] = 'web/news/get_news/$1';
-$route['berita'] = 'web/news/index';
-$route['tentang'] = 'web/tentang/index';
-$route['topologi/konektivitas'] = 'web/konektivitas/index';
-$route['layanan/id_tube'] = 'web/layanan/id_tube';
-$route['keanggotaan/pendaftaran'] = 'web/keanggotaan/pendaftaran';
-$route['keanggotaan/benefit'] = 'web/keanggotaan/benefit';
-$route['keanggotaan'] = 'web/keanggotaan';
-$route['keanggotaan/(:any)'] = 'web/keanggotaan/$1';
-$route['event/(:any)'] = 'web/event/detail_event/$1';
-$route['event'] = 'web/event';
-
-$route['api/invoice'] = 'admin/check_module/getInvoiceById';
-$route['api/invoice/(:any)'] = 'admin/check_module/getInvoiceById?id=2';
-// $route['sitemap\.xml'] = "sitemap";
-
-
-
-
+$route['image-upload'] = 'ImageUpload';
+$route['image-upload/post']['post'] = "uploads/images";
